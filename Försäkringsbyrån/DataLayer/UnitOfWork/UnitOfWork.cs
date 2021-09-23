@@ -14,7 +14,7 @@ namespace DataLayer.UnitOfWork
         {
             _context = context;
         }
-
+        public void Init() => _context.Reset();
         public int Complete()
         {
             return _context.SaveChanges();
