@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BussinessLayer
 {
-    public class BusinessLayer
+    public class BusinessController
     {
         ///
         /// DataLayer -- Database

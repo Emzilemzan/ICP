@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace DataLayer.GenericRepository
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
    public interface IGenericRepository<T> where T : class 
     {
 

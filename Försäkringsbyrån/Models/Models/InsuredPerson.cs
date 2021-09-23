@@ -13,7 +13,7 @@ namespace Models.Models
     {
         public int InsuredID { get; set; }
         public string SocialSecurityNumber { get; set; }
-        public string SurName { get; set; }
+        public string LastName { get; set; }
         public string FirstName { get; set; }
 
 
