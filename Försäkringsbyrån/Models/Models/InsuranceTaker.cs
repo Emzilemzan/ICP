@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Models.Models
 {
+    /// <summary>
+    /// Försäkringstagare 
+    /// </summary>
    public class InsuranceTaker
     {
 

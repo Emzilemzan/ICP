@@ -6,13 +6,10 @@ using System.Threading.Tasks;
 
 namespace Models.Models
 {
-    /// <summary>
-    /// Kanske ej nödvändig.
-    /// </summary>
-    public class SalesMen : Employee
+  public class CustomerProspect
     {
-        public int AgentNumber { get; set; }
+        public int CustomerProspectID { get; set; }
+        public bool Printed { get; set; }
 
-        
     }
 }

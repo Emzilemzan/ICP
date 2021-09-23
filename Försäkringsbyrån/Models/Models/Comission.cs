@@ -13,10 +13,11 @@ namespace Models.Models
     {
         public int ComissionID { get; set; }
         public DateTime Date { get; set; }
-      
-        //AgenturNummer
-        //PAid
-        //SEId
+        public SalesMen AgentNumber { get; set; }
+        public ComissionShare PaId { get; set; }
+        public VacationPay SEId { get; set; }
+
+
         //Försäkringsnummer
         //LÖpnummer
 

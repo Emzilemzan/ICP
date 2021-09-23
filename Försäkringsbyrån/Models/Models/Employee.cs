@@ -8,13 +8,28 @@ namespace Models.Models
 {
     public class Employee
     {
-        public int EmployeeID { get; set; }
-        public string SurName { get; set; }
-        public string FirstName { get; set; }
-        public string PostalCode { get; set; }
-        public string StreetAdress  { get; set; }
-        public string City { get; set; }
-        public int TaxRate { get; set; }
+        public int EmploymentNo { get; set; }
+        public string Password { get; set; }
+        public string Username { get; set; }
+        public string Firstnamne { get; set; }
+        public string Lastname { get; set; }
+        public RoleType Role { get; set; }
 
+        public string City { get; set; }
+        public string StreetAddress { get; set; }
+        public string Postalcode { get; set; }
+        public double TaxRate { get; set; }
+        public double FormOfEmployment { get; set; }
+        public int AgentNumber { get; set; }
+
+    }
+    public enum RoleType
+    {
+        Försäljningsassistent,
+        Innesäljare,
+        Utesäljare,
+        Ekonomiassistent,
+        Försäljningschef,
+        VD
     }
 }
