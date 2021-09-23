@@ -1,0 +1,188 @@
+﻿<Window x:Class="GUILayer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GUILayer"
+        Title="MainWindow" 
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Height="690" 
+        Width="950"
+        MinHeight="690"
+        MinWidth="850"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ResizeMode="CanResizeWithGrip">
+
+    <Grid  Background="LightGray">
+        <Grid.Effect>
+            <DropShadowEffect BlurRadius="30" ShadowDepth="2"
+                              Direction="-90" Color="#FF9A9B9C"/>
+        </Grid.Effect>
+
+        <DockPanel VerticalAlignment="Stretch">
+
+            <!--#region:  mainmenu-->
+            <Grid Height="100"
+                  DockPanel.Dock="Top"
+                  Background="DarkSeaGreen">
+
+                <DockPanel>
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center">
+                        <Button Margin="90,68,0,0" HorizontalAlignment="Left"
+                                Content="Sökregister"
+                                Width="100"
+                                Height="32"
+                                Background="Transparent"
+                                FontSize="15"
+                                Command="">
+                            <Button.Resources>
+
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="0,15,0,0"
+                                        />
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+
+                        <Button Margin="0,68,0,0"
+                                Content="Försäkring"
+                                Width="100"
+                                Background="Transparent"
+                                FontSize="15"
+                                Height="32"
+                                Command="" >
+                            <Button.Resources>
+
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="0,15,0,0"
+                                        />
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+
+                        <Button Margin="0,68,0,0" 
+                                Content="Provision"
+                                Width="100"
+                                Height="32"
+                                FontSize="15"
+                                Background="Transparent"
+                                Command="">
+                            <Button.Resources>
+
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="0,15,0,0"
+                                        />
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+
+                        <Button Margin="0,68,0,0" HorizontalAlignment="Right"
+                                Content="Statistik &amp; prospekt"
+                                Width="140"
+                                Height="32"
+                                FontSize="15"
+                                Background="Transparent"
+                                Command="">
+                            <Button.Resources>
+
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="0,15,0,0"
+                                        />
+                                </Style>
+                            </Button.Resources>
+                        </Button>
+
+                        <Button Margin="0,68,0,0" HorizontalAlignment="Right"
+                                Content="Personalhantering" 
+                                Width="125"
+                                FontSize="15"
+                                Height="32"
+                                Background="Transparent"
+                                Command="">
+
+                            <Button.Resources>
+
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="0,15,0,0"
+                                        />
+                                </Style>
+                            </Button.Resources>
+
+                        </Button>
+                        <Button Margin="0,68,0,0" HorizontalAlignment="Right"
+                                Content="Grunddata" 
+                                Width="90"
+                                FontSize="15"
+                                Height="32"
+                                Background="Transparent"
+                                Command="">
+
+                            <Button.Resources>
+
+                                <Style TargetType="{x:Type Border}">
+                                    <Setter Property="CornerRadius" Value="0,15,0,0"
+                                        />
+                                </Style>
+                            </Button.Resources>
+
+                        </Button>
+                    </StackPanel>
+                    <Button Margin="0,0,0,68" DockPanel.Dock="Right"
+                            HorizontalAlignment="Right" Click="Exit"
+                            Content="Avsluta"
+                            FontSize="15"
+                            Width="100"
+                            Height="32"
+                            Background="Transparent"/>
+                    <Button Margin="0,0,0,68" DockPanel.Dock="Right"
+                            HorizontalAlignment="Right" 
+                            Content="Logga ut"
+                            FontSize="15"
+                            Width="100"
+                            Height="32"
+                            Background="Transparent">
+
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Border}">
+                                <Setter Property="CornerRadius" Value="0,0,0,15"/>
+                            </Style>
+                        </Button.Resources>
+
+                    </Button>
+                </DockPanel>
+            </Grid>
+            <!--#endregion-->
+
+            <!--#region  Left Tab-->
+            <Grid Width="80" DockPanel.Dock="Left"
+                  Background="DarkSeaGreen">
+
+                <Button FontSize="20" Width="270" Content="Insurance Consulting Program"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        Foreground="Black"
+                        Command="{Binding Home_Btn}">
+
+                    <Button.LayoutTransform>
+                        <RotateTransform Angle="270"/>
+                    </Button.LayoutTransform>
+                </Button>
+            </Grid>
+            <!--#endregion-->
+
+            <!--#region Content-->
+            <DockPanel HorizontalAlignment="Center">
+                <ContentControl Content="{Binding Tools}"
+                                Visibility="{Binding ToolsVisibility}"
+                                DockPanel.Dock="Top"/>
+                <ContentControl Content="{Binding SelectedViewModel}"
+                                DockPanel.Dock="Bottom"/>
+            </DockPanel>
+            <!--#endregion-->
+
+        </DockPanel>
+    </Grid>
+</Window>

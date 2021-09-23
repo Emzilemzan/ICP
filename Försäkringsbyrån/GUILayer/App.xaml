@@ -1,0 +1,16 @@
+﻿<Application x:Class="GUILayer.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:GUILayer"
+             xmlns:vm="clr-namespace:GUILayer.ViewModels"
+             xmlns:uc="clr-namespace:GUILayer.Views"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <DataTemplate DataType="{x:Type vm:LogInViewModel}">
+            <uc:LogInView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:HomeViewModel}">
+            <uc:HomeView/>
+        </DataTemplate>
+    </Application.Resources>
+</Application>
