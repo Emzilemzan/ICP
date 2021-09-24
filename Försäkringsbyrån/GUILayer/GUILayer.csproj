@@ -55,17 +55,55 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\BasicDataCommands\BasicDataBtn.cs" />
+    <Compile Include="Commands\CommissionCommands\CommissionBtn.cs" />
+    <Compile Include="Commands\EmployeeManagementCommands\EmployeeManagementBtn.cs" />
     <Compile Include="Commands\HomeBtn.cs" />
+    <Compile Include="Commands\InsuranceCommands\InsuranceBtn.cs" />
+    <Compile Include="Commands\InsuranceCommands\RegisterApplicationBtn.cs" />
+    <Compile Include="Commands\InsuranceCommands\RegisterSignedInsuranceBtn.cs" />
     <Compile Include="Commands\LogInBtn.cs" />
+    <Compile Include="Commands\LogOutBtn.cs" />
+    <Compile Include="Commands\SearchIndexCommands\SearchApplicationBtn.cs" />
+    <Compile Include="Commands\SearchIndexCommands\SearchCompanyBtn.cs" />
+    <Compile Include="Commands\SearchIndexCommands\SearchEmployeeBtn.cs" />
+    <Compile Include="Commands\SearchIndexCommands\SearchValueBtn.cs" />
+    <Compile Include="Commands\SearchIndexCommands\SearchPersonBtn.cs" />
+    <Compile Include="Commands\SearchIndexCommands\SearchSignedInsuranceBtn.cs" />
+    <Compile Include="Commands\StatisticsAndProspectusCommands\StatisticsAndProspectusBtn.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\BasicDataViewModels\BasicDataViewModel.cs" />
+    <Compile Include="ViewModels\CommissionViewModels\CommissionViewModel.cs" />
+    <Compile Include="ViewModels\EmployeeManagementViewModels\EmployeeManagementViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
+    <Compile Include="ViewModels\InsuranceViewModels\InsuranceViewModel.cs" />
     <Compile Include="ViewModels\LogInViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\SearchViewModels\SearchValueViewModel.cs" />
+    <Compile Include="ViewModels\StatisticsAndProspectusViewModels\StatisticsAndProspectusViewModel.cs" />
+    <Compile Include="Views\BasicDataViews\BasicDataView.xaml.cs">
+      <DependentUpon>BasicDataView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CommissionViews\CommissionView.xaml.cs">
+      <DependentUpon>CommissionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EmployeeManagementViews\EmployeeManagementView.xaml.cs">
+      <DependentUpon>EmployeeManagementView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\InsuranceViews\InsuranceView.xaml.cs">
+      <DependentUpon>InsuranceView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\LogInView.xaml.cs">
       <DependentUpon>LogInView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchViews\SearchValueView.xaml.cs">
+      <DependentUpon>SearchValueView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StatisticsAndProspectusViews\StatisticsAndProspectusView.xaml.cs">
+      <DependentUpon>StatisticsAndProspectusView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -80,11 +118,35 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\BasicDataViews\BasicDataView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CommissionViews\CommissionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EmployeeManagementViews\EmployeeManagementView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\HomeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\InsuranceViews\InsuranceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\LogInView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SearchViews\SearchValueView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StatisticsAndProspectusViews\StatisticsAndProspectusView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

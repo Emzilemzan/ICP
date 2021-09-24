@@ -3,14 +3,114 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:GUILayer"
              xmlns:vm="clr-namespace:GUILayer.ViewModels"
-             xmlns:uc="clr-namespace:GUILayer.Views"
+             xmlns:svm="clr-namespace:GUILayer.ViewModels.SearchViewModels"
+             xmlns:ivm="clr-namespace:GUILayer.ViewModels.InsuranceViewModels"
+             xmlns:spvm="clr-namespace:GUILayer.ViewModels.StatisticsAndProspectusViewModels"
+             xmlns:emvm="clr-namespace:GUILayer.ViewModels.EmployeeManagementViewModels"
+             xmlns:bdvm="clr-namespace:GUILayer.ViewModels.BasicDataViewModels"
+             xmlns:cvm="clr-namespace:GUILayer.ViewModels.CommissionViewModels"
+             xmlns:v="clr-namespace:GUILayer.Views"
+             xmlns:sv="clr-namespace:GUILayer.Views.SearchViews"
+             xmlns:spv="clr-namespace:GUILayer.Views.StatisticsAndProspectusViews"
+             xmlns:emv="clr-namespace:GUILayer.Views.EmployeeManagementViews"
+             xmlns:bdv="clr-namespace:GUILayer.Views.BasicDataViews"
+             xmlns:cv="clr-namespace:GUILayer.Views.CommissionViews"
+             xmlns:iv="clr-namespace:GUILayer.Views.InsuranceViews"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <DataTemplate DataType="{x:Type vm:LogInViewModel}">
-            <uc:LogInView/>
+            <v:LogInView/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type vm:HomeViewModel}">
-            <uc:HomeView/>
+            <v:HomeView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type svm:SearchValueViewModel}">
+            <sv:SearchValueView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ivm:InsuranceViewModel}">
+            <iv:InsuranceView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type spvm:StatisticsAndProspectusViewModel }">
+            <spv:StatisticsAndProspectusView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type emvm:EmployeeManagementViewModel}">
+            <emv:EmployeeManagementView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type bdvm:BasicDataViewModel }">
+            <bdv:BasicDataView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type cvm:CommissionViewModel}">
+            <cv:CommissionView/>
+        </DataTemplate>
+        <!--#region Home Button Style-->
+        <Style x:Key="HomeBtnStyle" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" 
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                Background="{TemplateBinding Background}" 
+                                SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="Green"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="Green"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Visibility" TargetName="border" Value="Hidden"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!--#endregion-->
+        <!--#region Main Menu Button Style-->
+        <Style x:Key="MainMenuButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" 
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                Background="{TemplateBinding Background}" 
+                                SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="Green"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="Green"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Visibility" TargetName="border" Value="Hidden"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!--#endregion-->
     </Application.Resources>
 </Application>

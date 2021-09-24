@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace GUILayer.ViewModels
 {
+    /// <summary>
+    /// LogInViewModel for the loginview. 
+    /// </summary>
     public class LogInViewModel : BaseViewModel
     {
         public static readonly LogInViewModel Instance = new LogInViewModel();

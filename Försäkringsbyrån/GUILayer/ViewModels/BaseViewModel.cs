@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace GUILayer.ViewModels
 {
+    /// <summary>
+    /// Main ViewModel that Creates the fundation for all viewModels
+    /// </summary>
     public class BaseViewModel : INotifyPropertyChanged
     {
-        /// <summary>
-        /// Main ViewModel that Creates the fundation for all viewModels
-        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
         public BaseViewModel()
         {

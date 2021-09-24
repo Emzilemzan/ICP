@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace GUILayer.Commands
 {
+    /// <summary>
+    /// command for login btn. 
+    /// </summary>
     public class LogInBtn : BaseCommand
     {
         public override bool CanExecute(object parameter = null) =>

@@ -1,24 +1,47 @@
 ﻿using GUILayer.Commands;
+using GUILayer.Commands.CommissionCommands;
+using GUILayer.Commands.InsuranceCommands;
+using GUILayer.Commands.EmployeeManagementCommands;
+using GUILayer.Commands.SearchIndexCommands;
+using GUILayer.Commands.StatisticsAndProspectusCommands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using GUILayer.Commands.BasicDataCommands;
 
 namespace GUILayer.ViewModels
 {
+    /// <summary>
+    /// mainviewmodel for mainview, handels which view to see. 
+    /// </summary>
     public class MainViewModel : BaseViewModel
     {
         public static readonly MainViewModel Instance = new MainViewModel();
 
         public HomeBtn Home_Btn { get; }
+        public BasicDataBtn BasicData_Btn { get; }
+        public CommissionBtn Commission_Btn { get; }
+        public InsuranceBtn Insurance_Btn { get; }
+        public LogOutBtn LogOut_Btn { get; }
+        public EmployeeManagementBtn EM_Btn { get; }
+        public SearchValueBtn SearchIndex_Btn { get; }
+        public StatisticsAndProspectusBtn SAP_Btn { get; }
 
         private MainViewModel()
         {
             _selectedViewModel = LogInViewModel.Instance;
             _toolsVisibility = Visibility.Hidden;
             Home_Btn = new HomeBtn();
+            BasicData_Btn = new BasicDataBtn();
+            Commission_Btn = new CommissionBtn();
+            Insurance_Btn = new InsuranceBtn();
+            LogOut_Btn = new LogOutBtn();
+            EM_Btn = new EmployeeManagementBtn();
+            SearchIndex_Btn = new SearchValueBtn();
+            SAP_Btn = new StatisticsAndProspectusBtn();
 
         }
 
@@ -32,13 +55,19 @@ namespace GUILayer.ViewModels
         public void DisplayHomeView()
         {
             SelectedViewModel = HomeViewModel.Instance;
-            //HomeViewModel.Instance.UpdateFlow(); */
             UpdateBtns();
         }
 
         private void UpdateBtns()
         {
             Home_Btn.RaiseCanExecuteChanged();
+            BasicData_Btn.RaiseCanExecuteChanged();
+            Commission_Btn.RaiseCanExecuteChanged();
+            Insurance_Btn.RaiseCanExecuteChanged();
+            LogOut_Btn.RaiseCanExecuteChanged();
+            EM_Btn.RaiseCanExecuteChanged();
+            SearchIndex_Btn.RaiseCanExecuteChanged();
+            SAP_Btn.RaiseCanExecuteChanged();
         }
 
         public string CurrentTool { get; set; } = "";
