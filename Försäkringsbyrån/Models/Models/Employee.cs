@@ -17,10 +17,10 @@ namespace Models.Models
 
         public string City { get; set; }
         public string StreetAddress { get; set; }
-        public string Postalcode { get; set; }
+        public int Postalcode { get; set; }
         public double TaxRate { get; set; }
         public double FormOfEmployment { get; set; }
-        public int AgentNumber { get; set; }
+        public SalesMen SalesMen { get; set; }
 
     }
     public enum RoleType

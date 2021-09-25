@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BussinessLayer;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -7,16 +8,18 @@ using System.Threading.Tasks;
 
 namespace GUILayer.ViewModels
 {
+    /// <summary>
+    /// Main ViewModel that Creates the fundation for all viewModels
+    /// </summary>
     public class BaseViewModel : INotifyPropertyChanged
     {
-        /// <summary>
-        /// Main ViewModel that Creates the fundation for all viewModels
-        /// </summary>
+        public BusinessController Context { get; }
         public event PropertyChangedEventHandler PropertyChanged;
         public BaseViewModel()
         {
-
+            //Context = BusinessController.Instance;
         }
+
         /// <summary>
         /// Informs everyone that is subscribed to a property that the property has uppdated its value
         /// </summary>

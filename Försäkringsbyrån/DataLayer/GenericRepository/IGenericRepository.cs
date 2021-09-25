@@ -7,22 +7,26 @@ using System.Threading.Tasks;
 
 namespace DataLayer.GenericRepository
 {
-   public interface IGenericRepository<T> where T : class 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+   public interface IGenericRepository<TEntity> where TEntity : class 
     {
+        TEntity GetById(object id);
+        IEnumerable<TEntity> GetAll();
 
-        IEnumerable<T> GetAll();
-        IEnumerable<T> Find(Expression<Func<T, bool>> predicate);   //kan använda en lambda-expression för att filtrera en list, på samma sätt som vi gjort i MSQL = från Mosh youtube
-        T Get(object id);
+        /// <summary>
+        /// lamdaexpression(linq) can be used. 
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
 
-        void Insert(T obj);
-
-        void InsertRange(IEnumerable<T> entitet);
-
-        void Delete(T id);
-        void DeleteRange(IEnumerable<T> entitet);
-
-        void Save();
-        void Update(T obj);
+        void Add(TEntity entity);
+        void AddRange(IEnumerable<TEntity> entities);
+        void Remove(TEntity entity);
+        void RemoveRange(IEnumerable<TEntity> entities);
 
 
     }

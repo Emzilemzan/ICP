@@ -6,13 +6,9 @@ using System.Threading.Tasks;
 
 namespace Models.Models
 {
-    /// <summary>
-    /// Kanske ej nödvändig.
-    /// </summary>
     public class SalesMen : Employee
     {
         public int AgentNumber { get; set; }
 
-        
     }
 }

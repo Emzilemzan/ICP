@@ -10,6 +10,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{A385D272-FBBE-4ADE-84B1-85D2113A958A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GUILayer", "GUILayer\GUILayer.csproj", "{ECAC8CC3-6D29-43B2-AD9F-036BA2906740}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CA3EA41B-FEEA-4A1C-B041-EBF7AA8D9E6E} = {CA3EA41B-FEEA-4A1C-B041-EBF7AA8D9E6E}
+		{A385D272-FBBE-4ADE-84B1-85D2113A958A} = {A385D272-FBBE-4ADE-84B1-85D2113A958A}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

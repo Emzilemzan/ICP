@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Models.Models
 {
     /// <summary>
-    /// Companies that takes an insruance is also a InsuranceTaker. 
+    /// Companies that takes an insurance is also a InsuranceTaker. 
     /// </summary>
    public class Company : InsuranceTaker
     {
@@ -19,8 +19,7 @@ namespace Models.Models
         public string TelephoneNbr { get; set; }
         public string FaxNumber { get; set; }
         public string Email { get; set; }
-
-        
+        public string ContactPerson { get; set;}
 
     }
 }

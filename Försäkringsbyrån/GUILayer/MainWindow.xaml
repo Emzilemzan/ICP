@@ -8,7 +8,7 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         Height="690" 
-        Width="950"
+        Width="1000"
         MinHeight="690"
         MinWidth="850"
         AllowsTransparency="True"
@@ -37,7 +37,9 @@
                                 Height="32"
                                 Background="Transparent"
                                 FontSize="15"
-                                Command="">
+                                Command="{Binding SearchIndex_Btn}"
+                                >
+                            <!--Style="{DynamicResource MainMenuButtonStyle}"-->
                             <Button.Resources>
 
                                 <Style TargetType="{x:Type Border}">
@@ -53,7 +55,9 @@
                                 Background="Transparent"
                                 FontSize="15"
                                 Height="32"
-                                Command="" >
+                                Command="{Binding Insurance_Btn}" 
+                                >
+                            <!--Style="{DynamicResource MainMenuButtonStyle}"-->
                             <Button.Resources>
 
                                 <Style TargetType="{x:Type Border}">
@@ -69,7 +73,9 @@
                                 Height="32"
                                 FontSize="15"
                                 Background="Transparent"
-                                Command="">
+                                Command="{Binding Commission_Btn}"
+                                >
+                            <!--Style="{DynamicResource MainMenuButtonStyle}"-->
                             <Button.Resources>
 
                                 <Style TargetType="{x:Type Border}">
@@ -85,7 +91,9 @@
                                 Height="32"
                                 FontSize="15"
                                 Background="Transparent"
-                                Command="">
+                                Command="{Binding SAP_Btn}"
+                                >
+                            <!--Style="{DynamicResource MainMenuButtonStyle}"-->
                             <Button.Resources>
 
                                 <Style TargetType="{x:Type Border}">
@@ -101,7 +109,9 @@
                                 FontSize="15"
                                 Height="32"
                                 Background="Transparent"
-                                Command="">
+                                Command="{Binding EM_Btn}"
+                                >
+                            <!--Style="{DynamicResource MainMenuButtonStyle}"-->
 
                             <Button.Resources>
 
@@ -118,7 +128,9 @@
                                 FontSize="15"
                                 Height="32"
                                 Background="Transparent"
-                                Command="">
+                                Command="{Binding BasicData_Btn}"
+                                >
+                            <!--Style="{DynamicResource MainMenuButtonStyle}"-->
 
                             <Button.Resources>
 
@@ -143,7 +155,9 @@
                             FontSize="15"
                             Width="100"
                             Height="32"
-                            Background="Transparent">
+                            Background="Transparent"
+                            Command="{Binding LogOut_Btn}">
+                        <!--Style="{DynamicResource MainMenuButtonStyle}"-->
 
                         <Button.Resources>
                             <Style TargetType="{x:Type Border}">
@@ -165,7 +179,7 @@
                         BorderBrush="Transparent"
                         Foreground="Black"
                         Command="{Binding Home_Btn}">
-
+                    <!--Style="{DynamicResource HomeBtnStyle}"-->
                     <Button.LayoutTransform>
                         <RotateTransform Angle="270"/>
                     </Button.LayoutTransform>

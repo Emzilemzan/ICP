@@ -7,6 +7,9 @@ using System.Windows.Input;
 
 namespace GUILayer.Commands
 {
+    /// <summary>
+    /// base class for all commands in program
+    /// </summary>
     public class BaseCommand : ICommand
     {
         public virtual event EventHandler CanExecuteChanged;
