@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace GUILayer.ViewModels.SearchViewModels
 {
     /// <summary>
     /// viewmodel for searchvalueview
     /// </summary>
-    public class SearchValueViewModel : BaseViewModel
+    class SearchValueViewModel : BaseViewModel
     {
         public static readonly SearchValueViewModel Instance = new SearchValueViewModel();
 
@@ -29,5 +30,9 @@ namespace GUILayer.ViewModels.SearchViewModels
             SearchApplication_Btn = new SearchApplicationBtn();
             SearchSignedI_Btn = new SearchSignedInsuranceBtn();
         }
+       
     }
+
+   
 }
+

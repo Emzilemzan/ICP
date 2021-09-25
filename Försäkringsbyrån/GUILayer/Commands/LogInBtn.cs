@@ -14,7 +14,7 @@ namespace GUILayer.Commands
     {
         public override bool CanExecute(object parameter = null) =>
            !string.IsNullOrWhiteSpace(LogInViewModel.Instance.Username) && !string.IsNullOrWhiteSpace(LogInViewModel.Instance.Password);
-        /*
+        
         public override void Execute(object parameter)
         {
             if (!string.IsNullOrWhiteSpace(LogInViewModel.Instance.Username) && !string.IsNullOrWhiteSpace(LogInViewModel.Instance.Password)
@@ -23,6 +23,5 @@ namespace GUILayer.Commands
                 MainViewModel.Instance.DisplayHomeView();
 
         }
-        */
     }
 }
