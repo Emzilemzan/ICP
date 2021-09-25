@@ -18,6 +18,6 @@ namespace Models.Models
         public int CommissionShareChildren { get; set; }
         public int ComissionShareAdults { get; set; }
 
-
+         
     }
 }

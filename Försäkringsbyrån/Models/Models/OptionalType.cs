@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 namespace Models.Models
 {
     /// <summary>
-    /// Försäkringstagare 
+    /// TillvalsTyp
     /// </summary>
-   public class InsuranceTaker
+    public class OptionalType
     {
-        public int InsuranceTakerId { get; set; }
-        public string InsuranceTakerName { get; set; }
+        public int OptionalTypeId { get; set; }
+        public string OptionalName { get; set; } //TillvalsNamn
 
     }
 }

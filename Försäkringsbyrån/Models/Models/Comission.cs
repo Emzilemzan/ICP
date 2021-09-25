@@ -16,10 +16,8 @@ namespace Models.Models
         public SalesMen AgentNumber { get; set; }
         public ComissionShare PaId { get; set; }
         public VacationPay SEId { get; set; }
-
-
-        //Försäkringsnummer
-        //LÖpnummer
+        public SignedInsurance InsuranceNumber { get; set; }
+        public InsuranceApplication SerialNumber { get; set; }
 
     }
 }
