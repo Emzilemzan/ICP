@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="BusinessController.cs" />
     <Compile Include="EmployeeController.cs" />
+    <Compile Include="InsuranceTakerController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

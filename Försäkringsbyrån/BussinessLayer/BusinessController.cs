@@ -16,12 +16,14 @@ namespace BussinessLayer
         public static readonly BusinessController Instance = new BusinessController();
         internal IUnitOfWork Context { get; }
         public EmployeeController EController { get; }
+        public InsuranceTakerController ITController { get; }
         public Employee CurrentEmployee { get; set; } = null;
 
         private BusinessController()
         {
             Context = new UnitOfWork();
             EController = new EmployeeController();
+            ITController = new InsuranceTakerController();
         }
 
         public void Save() => Context.Complete();
