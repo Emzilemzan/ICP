@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Models.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,5 +12,22 @@ namespace BussinessLayer
     /// </summary>
     public class InsuredPersonController
     {
+        public List<InsuredPerson> GetInsuranceTakerIA(InsuranceTaker insuranceTaker) => insuranceTaker.InsuredPersons?.OrderByDescending(i => i.InsuredID).ToList();
+        public List<InsuredPerson> GetInsuranceTakerIAS(InsuranceTaker insuranceTaker)
+        {
+            List<InsuredPerson> insuredPeople = new List<InsuredPerson>();
+            GetInsuranceTakerIA(insuranceTaker)?.ForEach(p => insuredPeople.Add(p));
+            return insuredPeople.OrderByDescending(i => i.InsuredID).ToList();
+        }
+        public void AddInsuredPerson(InsuredPerson insuredPerson)
+        {
+            insuredPerson.Taker.InsuredPersons.Add(insuredPerson);
+            BusinessController.Instance.Save();
+        }
+        public void RemoveInsuredPerson(InsuredPerson insuredPerson)
+        {
+            insuredPerson.Taker.InsuredPersons.Remove(insuredPerson);
+            BusinessController.Instance.Save();
+        }
     }
 }

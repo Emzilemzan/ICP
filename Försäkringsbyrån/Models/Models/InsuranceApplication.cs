@@ -15,6 +15,6 @@ namespace Models.Models
         public InsuranceType InsuranceTypeId { get; set; }
         public SignedInsurance InsuranceNumber { get; set; }
         //public SalesMen AgentNumber { get; set; }
-        public virtual InsuranceTaker Owner { get; set; }
+        public virtual InsuranceTaker Taker { get; set; }
     }
 }
