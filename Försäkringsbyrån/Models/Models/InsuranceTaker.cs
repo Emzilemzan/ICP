@@ -17,5 +17,7 @@ namespace Models.Models
 
         public virtual ICollection<InsuranceApplication> InsuranceApplications { get; set; }
 
+        public virtual ICollection<SignedInsurance> SignedInsurances { get; set; }
+
     }
 }
