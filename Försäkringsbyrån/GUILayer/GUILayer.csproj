@@ -95,6 +95,8 @@
     <Compile Include="ViewModels\LogInViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModels\SearchEmployeeViewModel.cs" />
+    <Compile Include="ViewModels\SearchViewModels\SearchInsuranceTakerCompanyViewModel.cs" />
+    <Compile Include="ViewModels\SearchViewModels\SearchInsuranceTakerPersonViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModels\SearchValueViewModel.cs" />
     <Compile Include="ViewModels\StatisticsAndProspectusViewModels\StatisticsAndProspectusViewModel.cs" />
     <Compile Include="Views\BasicDataViews\BasicDataView.xaml.cs">
@@ -117,6 +119,12 @@
     </Compile>
     <Compile Include="Views\SearchViews\SearchEmployeeView.xaml.cs">
       <DependentUpon>SearchEmployeeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchViews\SearchInsuranceTakerCompanyView.xaml.cs">
+      <DependentUpon>SearchInsuranceTakerCompanyView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchViews\SearchInsuranceTakerPersonView.xaml.cs">
+      <DependentUpon>SearchInsuranceTakerPersonView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SearchViews\SearchValueView.xaml.cs">
       <DependentUpon>SearchValueView.xaml</DependentUpon>
@@ -162,6 +170,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SearchViews\SearchEmployeeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SearchViews\SearchInsuranceTakerCompanyView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SearchViews\SearchInsuranceTakerPersonView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

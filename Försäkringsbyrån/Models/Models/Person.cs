@@ -18,7 +18,12 @@ namespace Models.Models
         public int PostalCode { get; set; }
         public string City { get; set; }
 
-
+        public string DiallingCodeHome { get; set; }
+        public string DiallingCodeWork { get; set; }
+        public string TelephoneNbrHome { get; set; }
+        public string TelephoneNbrWork { get; set; }
+        public string EmailOne { get; set; }
+        public string EmailTwo { get; set; }
 
     }
 }

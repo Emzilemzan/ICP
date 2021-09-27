@@ -11,11 +11,12 @@ namespace Models.Models
     /// </summary>
    public class Company : InsuranceTaker
     {
-        public int OrganizationNumber { get; set; }
+        public string OrganizationNumber { get; set; }
         public string CompanyName { get; set; }
         public string StreetAddress { get; set; }
         public int PostalCode { get; set; }
         public string City { get; set; }
+        public string DiallingCode { get; set; }
         public string TelephoneNbr { get; set; }
         public string FaxNumber { get; set; }
         public string Email { get; set; }
