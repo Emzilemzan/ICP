@@ -21,13 +21,13 @@ namespace BussinessLayer
             return BusinessController.Instance.CurrentEmployee != null;
         }
 
-        public void AddUser(Employee employee)
+        public void AddEmployee(Employee employee)
         {
             BusinessController.Instance.Context.Employees.Add(employee);
             BusinessController.Instance.Save();
         }
 
-        public void RemoveUser(Employee employee)
+        public void RemoveEmployee(Employee employee)
         {
             BusinessController.Instance.Context.Employees.Remove(employee);
             BusinessController.Instance.Save();

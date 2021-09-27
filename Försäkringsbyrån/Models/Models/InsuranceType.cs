@@ -14,9 +14,9 @@ namespace Models.Models
         public int InsuranceTypeId { get; set; }
 
         public string PaymentForm { get; set; }
-        
 
-        
+
+       
 
 
     }
