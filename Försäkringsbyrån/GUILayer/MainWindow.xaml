@@ -10,7 +10,7 @@
         Height="690" 
         Width="1000"
         MinHeight="690"
-        MinWidth="850"
+        MinWidth="1280"
         AllowsTransparency="True"
         Background="Transparent"
         ResizeMode="CanResizeWithGrip">
