@@ -37,6 +37,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -91,6 +93,7 @@
     <Compile Include="ViewModels\CommissionViewModels\CommissionViewModel.cs" />
     <Compile Include="ViewModels\EmployeeManagementViewModels\EmployeeManagementViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
+    <Compile Include="ViewModels\InsuranceViewModels\InsuranceApplicationChoiceViewModel.cs" />
     <Compile Include="ViewModels\InsuranceViewModels\InsuranceViewModel.cs" />
     <Compile Include="ViewModels\LogInViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
@@ -110,6 +113,9 @@
     </Compile>
     <Compile Include="Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InsuranceViews\InsuranceApplicationChoiceView.xaml.cs">
+      <DependentUpon>InsuranceApplicationChoiceView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\InsuranceViews\InsuranceView.xaml.cs">
       <DependentUpon>InsuranceView.xaml</DependentUpon>
@@ -158,6 +164,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\HomeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InsuranceViews\InsuranceApplicationChoiceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
