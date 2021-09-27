@@ -12,9 +12,9 @@ namespace Models.Models
     public class Person : InsuranceTaker
     {
         public string SocialSecurityNumber { get; set; }
-        public  string Surnamne { get; set; }
+        public  string Lastname { get; set; }
         public string Firstname { get; set; }
-        public string StreetAdress { get; set; }
+        public string StreetAddress { get; set; }
         public int PostalCode { get; set; }
         public string City { get; set; }
 

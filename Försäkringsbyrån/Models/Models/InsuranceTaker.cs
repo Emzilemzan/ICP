@@ -12,7 +12,6 @@ namespace Models.Models
    public class InsuranceTaker
     {
         public int InsuranceTakerId { get; set; }
-        public string InsuranceTakerName { get; set; }
 
         public virtual ICollection <InsuredPerson> InsuredPersons { get; set; }
 
