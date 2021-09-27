@@ -65,7 +65,9 @@
     <Compile Include="GenericRepository\InsuranceTakerRepository.cs" />
     <Compile Include="GenericRepository\InsuredPersonRepository.cs" />
     <Compile Include="GenericRepository\IPersonRepository.cs" />
+    <Compile Include="GenericRepository\ISignedInsuranceRepository.cs" />
     <Compile Include="GenericRepository\PersonRepository.cs" />
+    <Compile Include="GenericRepository\SignedInsuranceRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitOfWork\IUnitOfWork.cs" />
     <Compile Include="UnitOfWork\UnitOfWork.cs" />
