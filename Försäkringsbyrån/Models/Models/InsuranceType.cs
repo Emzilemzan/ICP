@@ -15,9 +15,5 @@ namespace Models.Models
 
         public string PaymentForm { get; set; }
         
-
-        
-
-
     }
 }
