@@ -15,7 +15,7 @@ namespace Models.Models
         public DateTime PayDate { get; set; }
         public int PossibleBaseAmount { get; set; }
         public int PossibleComisson { get; set; }
-        public InsuranceApplication SerialNumber { get; set; }
-        public CustomerProspect CustomerProspectId { get; set; }
+        public virtual InsuranceApplication SerialNumber { get; set; }
+        public virtual CustomerProspect CustomerProspectId { get; set; }
     }
 }
