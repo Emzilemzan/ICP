@@ -26,24 +26,27 @@
                          FontSize="20"
                          Height="106"
                          Background="Transparent" 
-                         Margin="32,0,35.667,0"
-                         Command="">
-                    <TextBlock>Hämta &amp; exportera<LineBreak/> trendstatistik</TextBlock> 
+                         Margin="41,0,31.667,0"
+                         Command=""
+                         Style="{DynamicResource OtherButtonStyle}" Width="Auto">
+                    <TextBlock>Hämta &amp; exportera<LineBreak/> trendstatistik</TextBlock>
                 </Button>
                 <Button     Grid.Column="1"
                             FontSize="20"
                             Height="106"
                             Background="Transparent" 
-                            Margin="32,0,35.667,0"
-                            Command="">
-                    <TextBlock>Hämta<LineBreak/> försäljningsstatistik</TextBlock>
+                            Margin="41.333,0,10.333,0"
+                            Command=""
+                            Style="{DynamicResource OtherButtonStyle}" Width="Auto">
+                    <TextBlock Width="175">Hämta<LineBreak/> försäljningsstatistik</TextBlock>
                 </Button>
                 <Button  Grid.Column="2"
                          FontSize="20"
                          Height="106"
                          Background="Transparent" 
-                         Margin="32,0,35.667,0"
-                         Command="">
+                         Margin="29.667,0,24,0"
+                         Command=""
+                         Style="{DynamicResource OtherButtonStyle}" Width="Auto">
                     <TextBlock>Hämta &amp; exportera<LineBreak/> kundprospekt</TextBlock>
                 </Button>
             </Grid>

@@ -76,7 +76,11 @@
     <Compile Include="Commands\CommissionCommands\CommissionBtn.cs" />
     <Compile Include="Commands\EmployeeManagementCommands\EmployeeManagementBtn.cs" />
     <Compile Include="Commands\HomeBtn.cs" />
+    <Compile Include="Commands\InsuranceCommands\CIBtn.cs" />
     <Compile Include="Commands\InsuranceCommands\InsuranceBtn.cs" />
+    <Compile Include="Commands\InsuranceCommands\OPICompanyBtn.cs" />
+    <Compile Include="Commands\InsuranceCommands\OPIPersonBtn.cs" />
+    <Compile Include="Commands\InsuranceCommands\PIBtn.cs" />
     <Compile Include="Commands\InsuranceCommands\RegisterApplicationBtn.cs" />
     <Compile Include="Commands\InsuranceCommands\RegisterSignedInsuranceBtn.cs" />
     <Compile Include="Commands\LogInBtn.cs" />

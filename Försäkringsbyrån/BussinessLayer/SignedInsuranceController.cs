@@ -11,7 +11,7 @@ namespace BussinessLayer
     {
         public void AddSignedInsurance(SignedInsurance signedInsurance)
         {
-            signedInsurance.SignedInsurances.Add(signedInsurance);
+            signedInsurance.Taker.SignedInsurances.Add(signedInsurance);
             BusinessController.Instance.Save();
         }
     }
