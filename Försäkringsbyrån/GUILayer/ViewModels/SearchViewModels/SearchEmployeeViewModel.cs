@@ -78,12 +78,12 @@ namespace GUILayer.ViewModels.SearchViewModels
 
         }
 
-        readonly SalesMen _salesMen;
-        public SalesMen SaleMen
-        {
-            get => _salesMen;
+        //readonly SalesMen _salesMen;
+        //public SalesMen SaleMen
+        //{
+        //    get => _salesMen;
 
-        }
+        //}
         readonly string _username;
         public string Username
         {

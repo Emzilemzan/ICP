@@ -45,6 +45,11 @@
         <DataTemplate DataType="{x:Type cvm:CommissionViewModel}">
             <cv:CommissionView/>
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type ivm:RegisterApplicationViewModel}">
+            <iv:RegisterApplicationView/>
+        </DataTemplate>
+
         <!--#region Home Button Style-->
         <Style x:Key="HomeBtnStyle" TargetType="{x:Type Button}">
             <Setter Property="Background" Value="Transparent"/>
