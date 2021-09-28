@@ -11,7 +11,7 @@ namespace Models.Models
         public int EmploymentNo { get; set; }
         public string Password { get; set; }
         public string Username { get; set; }
-        public string Firstnamne { get; set; }
+        public string Firstname { get; set; }
         public string Lastname { get; set; }
         public RoleType Role { get; set; }
 
@@ -20,8 +20,13 @@ namespace Models.Models
         public int Postalcode { get; set; }
         public double TaxRate { get; set; }
         public double FormOfEmployment { get; set; }
-        public SalesMen SalesMen { get; set; }
+        //public SalesMen SalesMen { get; set; }
 
+
+
+        public Employee()
+        {
+        }
     }
     public enum RoleType
     {

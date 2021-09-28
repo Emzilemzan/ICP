@@ -43,6 +43,9 @@
   <ItemGroup>
     <Compile Include="BusinessController.cs" />
     <Compile Include="EmployeeController.cs" />
+    <Compile Include="InsuranceApplicationController.cs" />
+    <Compile Include="InsuranceTakerController.cs" />
+    <Compile Include="InsuredPersonController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
