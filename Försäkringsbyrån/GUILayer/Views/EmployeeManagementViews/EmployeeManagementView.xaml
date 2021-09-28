@@ -26,24 +26,27 @@
                          FontSize="20"
                          Height="106"
                          Background="Transparent" 
-                         Margin="32,0,35.667,0"
-                         Command="">
+                         Margin="50,0,22.667,0"
+                         Command=""
+                         Style="{DynamicResource OtherButtonStyle}" Width="Auto">
                 </Button>
                 <Button     Grid.Column="1"
                             FontSize="20"
                             Content="Skapa inlogg"
                             Height="106"
                             Background="Transparent" 
-                            Margin="32,0,35.667,0"
-                            Command="">
+                            Margin="37.333,0,38.333,0"
+                            Command=""
+                            Style="{DynamicResource OtherButtonStyle}" Width="Auto">
                 </Button>
                 <Button  Grid.Column="2"
                          FontSize="20"
                          Height="106"
                          Content="Hantera anställd"
                          Background="Transparent" 
-                         Margin="32,0,35.667,0"
-                         Command="">
+                         Margin="40.667,0,37,0"
+                         Command=""
+                         Style="{DynamicResource OtherButtonStyle}" Width="Auto">
                 </Button>
             </Grid>
         </StackPanel>

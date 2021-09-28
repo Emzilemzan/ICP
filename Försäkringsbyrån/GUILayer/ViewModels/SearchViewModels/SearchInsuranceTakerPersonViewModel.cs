@@ -18,12 +18,16 @@ namespace GUILayer.ViewModels.SearchViewModels
         {
             Persons = new ObservableCollection<Person>
             {
-                new Person(){InsuranceTakerId=1, SocialSecurityNumber="991204-1222", Firstname="Emma", Lastname="Gunnarsson", City="Ulricehamn", PostalCode=52335, StreetAddress="Källgatan 10", InsuranceApplications= new List<InsuranceApplication>(), InsuredPersons=new List<InsuredPerson>()},
-                new Person(){InsuranceTakerId=2, SocialSecurityNumber="991204-1213", Firstname="Karl", Lastname="Gunnarsson", City="Ulricehamn", PostalCode=52335, StreetAddress="Källgatan 10", InsuranceApplications= new List<InsuranceApplication>(), InsuredPersons=new List<InsuredPerson>()},
+                new Person(){InsuranceTakerId=1, SocialSecurityNumber="991204-1222", Firstname="Emma", Lastname="Gunnarsson", City="Ulricehamn", PostalCode=52335, StreetAddress="Källgatan 10", DiallingCodeHome= "073", DiallingCodeWork="037", TelephoneNbrHome="7747733", TelephoneNbrWork="89675", EmailOne="hej@hotmail.com", EmailTwo=null},
+                new Person(){InsuranceTakerId=2, SocialSecurityNumber="991204-1213", Firstname="Karl", Lastname="Gunnarsson", City="Ulricehamn", PostalCode=52335, StreetAddress="Källgatan 10", DiallingCodeHome= "077", DiallingCodeWork="047", TelephoneNbrHome="7787733", TelephoneNbrWork="349675", EmailOne="heja@hotmail.com", EmailTwo="cool.1@live.se"},
             };
+
             PersonGrid = CollectionViewSource.GetDefaultView(Persons);
             PersonGrid.Filter = new Predicate<object>(o => Filter(o as Person));
         }
+
+        public Person CurrentPerson { get;}
+
         #region Specific Porperties and methods for search in collection
 
         private ICollectionView _personCollection;
@@ -56,6 +60,11 @@ namespace GUILayer.ViewModels.SearchViewModels
         #region Properties
 
         public ObservableCollection<Person> Persons { get; set; }
+        public ObservableCollection<InsuranceApplication> InsuranceApplications { get; set; }
+        /*
+        public ObservableCollection<InsuranceApplicationViewModel> InsuranceApplications { get; set; } = new ObservableCollection<InsuranceApplicationViewModel>();
+        public ObservableCollection<InsuredPersonViewModel> InsuredPersons { get; set; } = new ObservableCollection<InsuredPersonViewModel>();
+        */
 
         #endregion
     }
