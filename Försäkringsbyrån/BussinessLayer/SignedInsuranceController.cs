@@ -9,10 +9,20 @@ namespace BussinessLayer
 {
     public class SignedInsuranceController
     {
+
+        public IEnumerable<SignedInsurance> GetAllSignedInsurances() => BusinessController.Instance.Context.SignedInsurances.GetAll();
+
         public void AddSignedInsurance(SignedInsurance signedInsurance)
         {
-            signedInsurance.SignedInsurances.Add(signedInsurance);
+            signedInsurance.Taker.SignedInsurances.Add(signedInsurance);
             BusinessController.Instance.Save();
         }
+
+        public void RemoveSignedInsurance(SignedInsurance signedInsurance)
+        {
+            signedInsurance.Taker.SignedInsurances.Remove(signedInsurance);
+            BusinessController.Instance.Save();
+        }
+
     }
 }

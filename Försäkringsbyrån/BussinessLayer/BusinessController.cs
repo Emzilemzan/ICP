@@ -22,6 +22,7 @@ namespace BussinessLayer
         public InsuranceApplicationController IAController {get;}
         public InsuredPersonController IPController { get; }
         public Employee CurrentEmployee { get; set; } = null;
+        public SignedInsuranceController SIController { get; }
 
         private BusinessController()
         {
@@ -30,6 +31,7 @@ namespace BussinessLayer
             ITController = new InsuranceTakerController();
             IAController = new InsuranceApplicationController();
             IPController = new InsuredPersonController();
+            SIController = new SignedInsuranceController();
         }
 
         public void Save() => Context.Complete();
