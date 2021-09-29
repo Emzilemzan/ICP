@@ -14,11 +14,11 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Label Content="Register Anställda" FontSize="26" Grid.Row="0" Grid.Column="0"/>
-        <xctk1:WatermarkTextBox Margin="20" Grid.Row="1" MaxHeight="50"
+        <xctk1:WatermarkTextBox Margin="20,10" Grid.Row="1" MaxHeight="50"
                                 HorizontalContentAlignment="Center"
                                 VerticalContentAlignment="Center"
                                 TextWrapping="WrapWithOverflow"
@@ -26,40 +26,26 @@
                                 Foreground="Black"
                                 Grid.Column="0"
                                 Background="Transparent" BorderBrush="Transparent"
-                                Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
-        <!--ItemsSource="{Binding Employees}"-->
-        <DataGrid x:Name="employeeGrid" 
-                  AutoGenerateColumns="False" Grid.Row="2" Grid.Column="0"
+                                Text="{Binding SearchInput, UpdateSourceTrigger=PropertyChanged}"/>
+        <DataGrid x:Name ="employeeGrid" Grid.Row="2" AutoGenerateColumns="False" ItemsSource="{Binding EmployeeGrid}"
                   RowDetailsVisibilityMode="VisibleWhenSelected" 
                   IsReadOnly="True" 
                   IsSynchronizedWithCurrentItem="True"
                   ScrollViewer.CanContentScroll="True" 
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
-                  ScrollViewer.HorizontalScrollBarVisibility="Auto" Margin="0,0,0,42">>
-                <DataGrid.Columns>
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <ListBox ItemsSource="{Binding Employees}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTextColumn Header="AnställningsNr" Binding="{Binding EmploymentNo}"/>
-                    <DataGridTextColumn Header="Förnamn" Binding="{Binding FirstName}" />
-                    <DataGridTextColumn Header="Efternamn" Binding="{Binding LastName}" />
-                    <DataGridTextColumn Header="Gatuadress" Binding="{Binding StreetAdress}" />
-                    <DataGridTextColumn Header="Postnummer" Binding="{Binding PostalCode}" />
-                    <DataGridTextColumn Header="Postort" Binding="{Binding City}" />
-                    <DataGridTextColumn Header="Befattning" Binding="{Binding Role}" />
-                    <DataGridTextColumn Header="Skattesats" Binding="{Binding TaxRate}" />
-                    <DataGridTextColumn Header="Anställningsform" Binding="{Binding FormOFEmployment}" />
-                    <DataGridTextColumn Header="AgenturNr" Binding="{Binding SalesMen}" />
-                    <DataGridTextColumn Header="Användarnamn" Binding="{Binding Username}" />
-                    <DataGridTextColumn Header="Lösenord" Binding="{Binding Password}" />
+                  ScrollViewer.HorizontalScrollBarVisibility="Auto" Margin="0,0,0,42">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="AnställningsNr" Binding="{Binding Path=EmploymentNo}"/>
+                <DataGridTextColumn Header="Förnamn" Binding="{Binding Path=Firstname}" />
+                <DataGridTextColumn Header="Efternamn" Binding="{Binding Path=Lastname}" />
+                <DataGridTextColumn Header="Gatuadress" Binding="{Binding Path=StreetAddress}" />
+                <DataGridTextColumn Header="Postnummer" Binding="{Binding Path=Postalcode}" />
+                <DataGridTextColumn Header="Postort" Binding="{Binding Path=City}" />
+                <DataGridTextColumn Header="Befattning" Binding="{Binding Path=Role}" />
+                <DataGridTextColumn Header="Skattesats" Binding="{Binding Path=TaxRate}" />
+                <DataGridTextColumn Header="Anställningsform" Binding="{Binding Path=FormOfEmployment}" />
+                <DataGridTextColumn Header="AgenturNr" Binding="{Binding Path=AgentNo}" />
             </DataGrid.Columns>
-        
-       
-        
         </DataGrid>
         <StackPanel Grid.Column="1" Grid.Row="2" Margin="10">
             <Grid>
@@ -87,27 +73,23 @@
                 <Label Content="AnställningsNr" Grid.Column="0" Grid.Row="1"/>
                 <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.EmploymentNo}"/>
                 <Label Content="Förnamn" Grid.Column="0" Grid.Row="2"/>
-                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.FirstName}"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.Firstname}"/>
                 <Label Content="Efternamn" Grid.Column="0" Grid.Row="3"/>
-                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.LastName}"/>
+                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.Lastname}"/>
                 <Label Content="Gatuadress" Grid.Column="0" Grid.Row="4"/>
-                <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.StreetAdress}"/>
+                <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.StreetAddress}"/>
                 <Label Content="Postnummer" Grid.Column="0" Grid.Row="5"/>
-                <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.PostalCode}"/>
+                <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.Postalcode}"/>
                 <Label Content="Postort" Grid.Column="0" Grid.Row="6"/>
                 <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.City}"/>
                 <Label Content="Befattning" Grid.Column="0" Grid.Row="7"/>
-                <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.RoleType}"/>
+                <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.Role}"/>
                 <Label Content="Skattesats" Grid.Column="0" Grid.Row="8"/>
                 <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.TaxRate}"/>
                 <Label Content="Anställningsform" Grid.Column="0" Grid.Row="9"/>
-                <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.FormOFEmployment}"/>
-                <Label Content="Användarnamn" Grid.Column="0" Grid.Row="10"/>
-                <TextBox Grid.Row="10" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.Username}"/>
-                <Label Content="Lösenord" Grid.Column="0" Grid.Row="11"/>
-                <TextBox Grid.Row="11" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.Password}"/>
-                <Label Content="Agentnummer" Grid.Column="0" Grid.Row="12"/>
-                <TextBox Grid.Row="12" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.SaleMen}"/>
+                <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.FormOfEmployment}"/>
+                <Label Content="Agentnummer" Grid.Column="0" Grid.Row="10"/>
+                <TextBox Grid.Row="10" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.AgentNo}"/>
 
             </Grid>
 

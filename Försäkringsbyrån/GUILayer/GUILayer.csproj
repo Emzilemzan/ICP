@@ -37,6 +37,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -74,7 +76,11 @@
     <Compile Include="Commands\CommissionCommands\CommissionBtn.cs" />
     <Compile Include="Commands\EmployeeManagementCommands\EmployeeManagementBtn.cs" />
     <Compile Include="Commands\HomeBtn.cs" />
+    <Compile Include="Commands\InsuranceCommands\CIBtn.cs" />
     <Compile Include="Commands\InsuranceCommands\InsuranceBtn.cs" />
+    <Compile Include="Commands\InsuranceCommands\OPICompanyBtn.cs" />
+    <Compile Include="Commands\InsuranceCommands\OPIPersonBtn.cs" />
+    <Compile Include="Commands\InsuranceCommands\PIBtn.cs" />
     <Compile Include="Commands\InsuranceCommands\RegisterApplicationBtn.cs" />
     <Compile Include="Commands\InsuranceCommands\RegisterSignedInsuranceBtn.cs" />
     <Compile Include="Commands\LogInBtn.cs" />
@@ -91,11 +97,14 @@
     <Compile Include="ViewModels\CommissionViewModels\CommissionViewModel.cs" />
     <Compile Include="ViewModels\EmployeeManagementViewModels\EmployeeManagementViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
+    <Compile Include="ViewModels\InsuranceViewModels\InsuranceApplicationChoiceViewModel.cs" />
     <Compile Include="ViewModels\InsuranceViewModels\InsuranceViewModel.cs" />
     <Compile Include="ViewModels\InsuranceViewModels\RegisterApplicationViewModel.cs" />
     <Compile Include="ViewModels\LogInViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModels\SearchEmployeeViewModel.cs" />
+    <Compile Include="ViewModels\SearchViewModels\SearchInsuranceTakerCompanyViewModel.cs" />
+    <Compile Include="ViewModels\SearchViewModels\SearchInsuranceTakerPersonViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModels\SearchValueViewModel.cs" />
     <Compile Include="ViewModels\StatisticsAndProspectusViewModels\StatisticsAndProspectusViewModel.cs" />
     <Compile Include="Views\BasicDataViews\BasicDataView.xaml.cs">
@@ -110,6 +119,9 @@
     <Compile Include="Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\InsuranceViews\InsuranceApplicationChoiceView.xaml.cs">
+      <DependentUpon>InsuranceApplicationChoiceView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\InsuranceViews\InsuranceView.xaml.cs">
       <DependentUpon>InsuranceView.xaml</DependentUpon>
     </Compile>
@@ -121,6 +133,12 @@
     </Compile>
     <Compile Include="Views\SearchViews\SearchEmployeeView.xaml.cs">
       <DependentUpon>SearchEmployeeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchViews\SearchInsuranceTakerCompanyView.xaml.cs">
+      <DependentUpon>SearchInsuranceTakerCompanyView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchViews\SearchInsuranceTakerPersonView.xaml.cs">
+      <DependentUpon>SearchInsuranceTakerPersonView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SearchViews\SearchValueView.xaml.cs">
       <DependentUpon>SearchValueView.xaml</DependentUpon>
@@ -157,6 +175,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\InsuranceViews\InsuranceApplicationChoiceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\InsuranceViews\InsuranceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -170,6 +192,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SearchViews\SearchEmployeeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SearchViews\SearchInsuranceTakerCompanyView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SearchViews\SearchInsuranceTakerPersonView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

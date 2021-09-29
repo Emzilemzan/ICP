@@ -20,6 +20,7 @@ namespace Models.Models
         public int Postalcode { get; set; }
         public double TaxRate { get; set; }
         public double FormOfEmployment { get; set; }
+        public int AgentNo { get; set; }
         //public SalesMen SalesMen { get; set; }
 
 

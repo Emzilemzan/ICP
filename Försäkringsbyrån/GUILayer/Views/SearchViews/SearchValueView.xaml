@@ -21,18 +21,18 @@
                     <ColumnDefinition Width="*"/>
 
                 </Grid.ColumnDefinitions>
-                <Button  Margin ="162,10,37,10" Grid.Column="0"
+                <Button  Margin ="150,10,41,10" Grid.Column="0"
                             FontSize="20"
                             Height="106"
                             Background="Transparent"
-                         Command="{Binding SearchPerson_Btn}">
+                         Command="{Binding SearchPerson_Btn}" Style="{DynamicResource OtherButtonStyle}" Width="Auto">
                     <TextBlock>Försäkringstagare<LineBreak/>Person</TextBlock>
                 </Button>
                 <Button  Grid.Column="1"
                             FontSize="20"
                             Height="106"
-                            Background="Transparent" Margin="34,10,156,10"
-                            Command="{Binding SearchCompany_Btn}">
+                            Background="Transparent" Margin="89,10,130,10"
+                            Command="{Binding SearchCompany_Btn}" Style="{DynamicResource OtherButtonStyle}" Width="Auto">
                     <TextBlock>Försäkringstagare<LineBreak/>Företag</TextBlock>
                 </Button>
             </Grid>
@@ -49,15 +49,15 @@
                          FontSize="20"
                          Height="106"
                          Background="Transparent" 
-                         Margin="32,0,35.667,0"
-                         Command="{Binding SearchApplication_Btn}">
+                         Margin="81,0,50.667,0"
+                         Command="{Binding SearchApplication_Btn}" Style="{DynamicResource OtherButtonStyle}" Width="Auto">
                 </Button>
                 <Button     Grid.Column="1"
                             FontSize="20"
                             Height="106"
                             Background="Transparent" 
-                            Margin="32,0,35.667,0"
-                            Command="{Binding SearchSignedI_Btn}">
+                            Margin="50.333,0,37.333,0"
+                            Command="{Binding SearchSignedI_Btn}" Style="{DynamicResource OtherButtonStyle}" Width="Auto">
                     <TextBlock>Tecknade<LineBreak/>Försäkringar</TextBlock>
                 </Button>
                 <Button  Grid.Column="2"
@@ -66,7 +66,7 @@
                          Content="Anställda"
                          Background="Transparent" 
                          Margin="32,0,35.667,0"
-                         Command="{Binding SearchEmployee_Btn}">
+                         Command="{Binding SearchEmployee_Btn}" Style="{DynamicResource OtherButtonStyle}">
                 </Button>
             </Grid>
         </StackPanel>

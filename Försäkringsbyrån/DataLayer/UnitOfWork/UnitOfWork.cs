@@ -19,7 +19,9 @@ namespace DataLayer.UnitOfWork
         public IInsuranceApplicationRepository Applications { get; }
         public IInsuranceTakerRepository InsuranceTakers { get; }
         public IInsuredPersonRepository InsuredPersons { get; }
-
+        public IPersonRepository Persons { get; }
+        public ICompanyRepository Companies { get; }
+        public ISignedInsuranceRepository SignedInsurances { get; }
         public UnitOfWork()
         {
             _context = new ApplicationContext();
@@ -27,6 +29,9 @@ namespace DataLayer.UnitOfWork
             Applications = new InsuranceApplicationRepository(_context);
             InsuranceTakers = new InsuranceTakerRepository(_context); 
             InsuredPersons = new InsuredPersonRepository(_context);
+            Persons = new PersonRepository(_context);
+            Companies = new CompanyRepository(_context);
+            SignedInsurances = new SignedInsuranceRepository(_context);
             Init();
         }
         public void Init() => _context.Reset();

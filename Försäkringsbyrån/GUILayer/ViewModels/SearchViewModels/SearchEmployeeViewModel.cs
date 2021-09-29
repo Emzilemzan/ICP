@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 using Models.Models;
 
 namespace GUILayer.ViewModels.SearchViewModels
@@ -14,115 +16,56 @@ namespace GUILayer.ViewModels.SearchViewModels
 
         public SearchEmployeeViewModel()
         {
-            
+            Employees = new ObservableCollection<Employee>()
+            {
+                new Employee() { EmploymentNo = 1, Firstname = "Bill", Lastname = "Andersson", StreetAddress = "Vägen 12", Postalcode = 52335, City = "Borås", FormOfEmployment = 100, Role = RoleType.VD, TaxRate = 25, Username = "BA", Password = "x" },
+                new Employee() { EmploymentNo = 2, Firstname = "Bertil", Lastname = "Andersson", StreetAddress = "XVägen 5", Postalcode = 52435, City = "Borås", FormOfEmployment = 70, Role = RoleType.Innesäljare, TaxRate = 25, Username = "BX", Password = "x" },
+            };
+            EmployeeGrid = CollectionViewSource.GetDefaultView(Employees);
+            EmployeeGrid.Filter = new Predicate<object>(o => Filter(o as Employee));
         }
-        #region Properties
-        public ObservableCollection<Employee> Employees { get; set; } = new ObservableCollection<Employee>();
 
-        readonly int _employmentNo;
-        public int EmploymentMo
+
+        #region Specific Porperties and methods for search in collection
+
+        private ICollectionView _employeeCollection;
+        public ICollectionView EmployeeGrid
         {
-            get => _employmentNo;
+            get { return _employeeCollection; }
+            set { _employeeCollection = value; OnPropertyChanged("employeeGrid"); }
         }
+        private bool Filter(Employee employee)
+        {
+            return SearchInput == null
+                || employee.EmploymentNo.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
+                || employee.Firstname.IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
+                || employee.Lastname.IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
+                || employee.StreetAddress.IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
+                || employee.City.IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
+                || employee.Postalcode.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
+                || employee.FormOfEmployment.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
+                || employee.AgentNo.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
+                || employee.TaxRate.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
+                || employee.Role.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1;
+        }
+        private string _searchInput;
+
+        public string SearchInput
+        {
+            get =>_searchInput;
+            set
+            {
+                _searchInput = value;
+                OnPropertyChanged("SearchInput");
+                EmployeeGrid.Refresh();   
+            }
+        }
+        #endregion
+
+        #region Properties 
+        public ObservableCollection<Employee> Employees { get; set; }
+       
         
-        readonly string _firstName;
-        public string FirstName
-        {
-            get => _firstName;
-        }
-
-        readonly string _lastName;
-        public string LastName
-        {
-            get => _lastName;
-        }
-
-        readonly  RoleType _role;
-        public RoleType Role
-        {
-            get => _role;
-        }
-
-        readonly string _streetadress;
-        public string StreetAdress
-        {
-            get => _streetadress;
-
-        }
-
-        readonly string _city;
-        public string City
-        {
-            get => _city;
-
-        }
-
-        readonly int _postalcode;
-        public int PostalCode
-        {
-            get => _postalcode;
-
-        }
-
-        readonly string _taxRate;
-        public string TaxRate
-        {
-            get => _taxRate;
-
-        }
-
-        readonly string _formOfEmployment;
-        public string FormOfEmployment
-        {
-            get => _formOfEmployment;
-
-        }
-
-        //readonly SalesMen _salesMen;
-        //public SalesMen SaleMen
-        //{
-        //    get => _salesMen;
-
-        //}
-        readonly string _username;
-        public string Username
-        {
-            get => _username;
-        }
-
-        readonly string _password;
-        public string Password
-        {
-            get => _password;
-        }
-
-        private object _selectedDataGridRow;
-        public object SelectedDataGridRow
-        {
-            get => _selectedDataGridRow;
-            set
-            {
-                if (_selectedDataGridRow != value)
-                {
-                    _selectedDataGridRow = value;
-                    OnPropertyChanged("SelectedDataGridCell");
-                }
-            }
-        }
-
-        private string _textBoxContent;
-        public string TextBoxContent
-        {
-            get => _textBoxContent;
-            set
-            {
-                if (_textBoxContent != value)
-                {
-                    _textBoxContent = value;
-                    OnPropertyChanged("TextBoxContent");
-                }
-            }
-        }
         #endregion
     }
 }

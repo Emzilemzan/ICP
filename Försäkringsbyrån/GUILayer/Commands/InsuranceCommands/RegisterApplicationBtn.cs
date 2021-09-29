@@ -18,11 +18,19 @@ namespace GUILayer.Commands.InsuranceCommands
 
         public override void Execute(object parameter)
         {
-
-            MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
-            MainViewModel.Instance.CurrentTool = "";
-            MainViewModel.Instance.SelectedViewModel = RegisterApplicationViewModel.Instance; 
+            if (MainViewModel.Instance.CurrentTool != "InsuranceChoices")
+            {
+                MainViewModel.Instance.ToolsVisibility = Visibility.Visible;
+                MainViewModel.Instance.Tools = InsuranceViewModel.Instance;
+                MainViewModel.Instance.CurrentTool = "InsuranceChoices";
+                MainViewModel.Instance.SelectedViewModel = InsuranceApplicationChoiceViewModel.Instance;
+            }
+            else
+            {
+                MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
+                MainViewModel.Instance.CurrentTool = "";
+                MainViewModel.Instance.SelectedViewModel = InsuranceViewModel.Instance;
+            }
         }
-     
     }
 }
