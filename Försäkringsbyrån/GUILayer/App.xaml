@@ -51,6 +51,9 @@
         <DataTemplate DataType="{x:Type bdvm:BasicDataViewModel }">
             <bdv:BasicDataView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type bdvm:BaseAmountTableViewModel }">
+            <bdv:BaseAmountTableView/>
+        </DataTemplate>
         <DataTemplate DataType="{x:Type cvm:CommissionViewModel}">
             <cv:CommissionView/>
         </DataTemplate>
