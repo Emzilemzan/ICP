@@ -32,26 +32,26 @@
         <DataGrid x:Name ="PersonGrid" Grid.Row="2" AutoGenerateColumns="False" ItemsSource="{Binding Path = PersonGrid}"
                   RowDetailsVisibilityMode="VisibleWhenSelected" 
                   IsReadOnly="True"
-                  SelectedItem="{Binding Path = SelectedPerson, Mode=TwoWay}"
+                  SelectedItem="{Binding Path = SelectedPerson, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                   AlternatingRowBackground="Gainsboro"  AlternationCount="2"
                   IsSynchronizedWithCurrentItem="False"
                   ScrollViewer.CanContentScroll="True" 
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
                   ScrollViewer.HorizontalScrollBarVisibility="Auto" Margin="10,0,9.667,10">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="FörsäkringstagarId" Binding="{Binding Path= InsuranceTakerId}"/>
-                <DataGridTextColumn Header="Personnummer" Binding="{Binding Path=SocialSecurityNumber}" />
-                <DataGridTextColumn Header="Förnamn" Binding="{Binding Path=Firstname}" />
-                <DataGridTextColumn Header="Efternamn" Binding="{Binding Path=Lastname}" />
-                <DataGridTextColumn Header="Gatuadress" Binding="{Binding Path=StreetAddress}" />
-                <DataGridTextColumn Header="Postnummer" Binding="{Binding Path=PostalCode}" />
-                <DataGridTextColumn Header="Postort" Binding="{Binding Path=City}" />
-                <DataGridTextColumn Header="Riktnummer Bostad" Binding="{Binding Path=DiallingCodeHome}"/>
-                <DataGridTextColumn Header="Telefonnummer Bostad" Binding="{Binding Path=TelephoneNbrHome}"/>
-                <DataGridTextColumn Header="Riktnummer Arbete" Binding="{Binding Path=DiallingCodeWork}"/>
-                <DataGridTextColumn Header="Telefonnummer Arbete" Binding="{Binding Path=TelephoneNbrWork}"/>
-                <DataGridTextColumn Header="Email 1" Binding="{Binding Path=EmailOne}"/>
-                <DataGridTextColumn Header="Email 2" Binding="{Binding Path=EmailTwo}"/>
+                <DataGridTextColumn Header="FörsäkringstagarId" Binding="{Binding Path= InsuranceTakerId, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Personnummer" Binding="{Binding Path=SocialSecurityNumber, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Förnamn" Binding="{Binding Path=Firstname, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Efternamn" Binding="{Binding Path=Lastname, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Gatuadress" Binding="{Binding Path=StreetAddress, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Postnummer" Binding="{Binding Path=PostalCode, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Postort" Binding="{Binding Path=City, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Riktnummer Bostad" Binding="{Binding Path=DiallingCodeHome, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Telefonnummer Bostad" Binding="{Binding Path=TelephoneNbrHome, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Riktnummer Arbete" Binding="{Binding Path=DiallingCodeWork, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Telefonnummer Arbete" Binding="{Binding Path=TelephoneNbrWork, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Email 1" Binding="{Binding Path=EmailOne, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Email 2" Binding="{Binding Path=EmailTwo, UpdateSourceTrigger=PropertyChanged}"/>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Column="1" Grid.Row="2" Margin="42.333,10,36,10">

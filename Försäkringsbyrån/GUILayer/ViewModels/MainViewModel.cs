@@ -48,7 +48,7 @@ namespace GUILayer.ViewModels
         private ICommand _homeBtn;
         public ICommand HomeBtn
         {
-            get { return _homeBtn ?? (_homeBtn = new RelayCommand(x => { Home();  })); }
+            get => _homeBtn ?? (_homeBtn = new RelayCommand(x => { Home();  })); 
         }
 
         private static void Home()
