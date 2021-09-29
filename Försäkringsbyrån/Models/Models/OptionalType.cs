@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Models.Models
 {
     /// <summary>
-    /// TillvalsTyp
+    /// TillvalsTyp. 
     /// </summary>
     public class OptionalType
     {

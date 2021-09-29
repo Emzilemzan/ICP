@@ -11,9 +11,8 @@ namespace Models.Models
         public int BaseAmountId { get; set; }
         public DateTime Date { get; set; }
         public double Baseamount{ get; set; }
-        
-        // Tillvalstyp! :) :) :) :) 
+        public OptionalType OptionalTypeId { get; set; }
 
-      
+   
     }
 }

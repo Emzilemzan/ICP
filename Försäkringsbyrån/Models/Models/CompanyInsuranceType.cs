@@ -8,7 +8,7 @@ namespace Models.Models
 {
     public class CompanyInsuranceType
     {
-        public int FFTypId { get; set; } // FFTypID
+        public int FFTypeId { get; set; } // FFTypID
         public string CompanyInsuranceTypeName { get; set; }
 
     }

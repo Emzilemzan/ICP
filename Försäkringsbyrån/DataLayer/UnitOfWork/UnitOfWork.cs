@@ -16,21 +16,28 @@ namespace DataLayer.UnitOfWork
 
         public IEmployeeRepository Employees { get; }
 
+        public IInsuranceApplicationRepository Applications { get; }
+        public IInsuranceTakerRepository InsuranceTakers { get; }
+        public IInsuredPersonRepository InsuredPersons { get; }
+        public IPersonRepository Persons { get; }
+        public ICompanyRepository Companies { get; }
+        public ISignedInsuranceRepository SignedInsurances { get; }
         public UnitOfWork()
         {
             _context = new ApplicationContext();
             Employees = new EmployeeRepository(_context);
+            Applications = new InsuranceApplicationRepository(_context);
+            InsuranceTakers = new InsuranceTakerRepository(_context); 
+            InsuredPersons = new InsuredPersonRepository(_context);
+            Persons = new PersonRepository(_context);
+            Companies = new CompanyRepository(_context);
+            SignedInsurances = new SignedInsuranceRepository(_context);
             Init();
         }
         public void Init() => _context.Reset();
-        public int Complete()
-        {
-            return _context.SaveChanges();
-        }
+        public int Complete() => _context.SaveChanges();
 
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
+        public void Dispose() => _context.Dispose();
+        
     }
 }

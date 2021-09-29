@@ -1,4 +1,5 @@
-﻿using DataLayer.UnitOfWork;
+﻿using DataLayer;
+using DataLayer.UnitOfWork;
 using Models.Models;
 using System;
 using System.Collections.Generic;
@@ -16,12 +17,19 @@ namespace BussinessLayer
         public static readonly BusinessController Instance = new BusinessController();
         internal IUnitOfWork Context { get; }
         public EmployeeController EController { get; }
+        public InsuranceTakerController ITController { get; }
+
+        public InsuranceApplicationController IAController {get;}
+        public InsuredPersonController IPController { get; }
         public Employee CurrentEmployee { get; set; } = null;
 
         private BusinessController()
         {
             Context = new UnitOfWork();
             EController = new EmployeeController();
+            ITController = new InsuranceTakerController();
+            IAController = new InsuranceApplicationController();
+            IPController = new InsuredPersonController();
         }
 
         public void Save() => Context.Complete();

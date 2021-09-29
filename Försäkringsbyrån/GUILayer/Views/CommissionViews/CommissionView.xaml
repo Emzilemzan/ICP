@@ -14,13 +14,13 @@
         <Label Content="Vad vill du göra?" FontWeight="Light" FontSize="60"
                    Foreground="Black" HorizontalAlignment="Center" Margin="188,45,188,78.333"></Label>
         <StackPanel Grid.Row="1">
-            <Button  Margin ="250,10,250,10" 
+            <Button  Margin ="306,10,282,10" 
                             FontSize="20"
                             Height="106"
                          Content="Hämta provision"
                             Background="Transparent"
-                         Command="">
-            </Button>
+                         Command=""
+                     Style="{DynamicResource OtherButtonStyle}" Width="Auto"/>
         </StackPanel>
     </Grid>
 </UserControl>

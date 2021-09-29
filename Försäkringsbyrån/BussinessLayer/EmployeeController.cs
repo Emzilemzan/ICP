@@ -21,15 +21,33 @@ namespace BussinessLayer
             return BusinessController.Instance.CurrentEmployee != null;
         }
 
-        public void AddUser(Employee employee)
+        public void AddEmployee(Employee employee)
         {
             BusinessController.Instance.Context.Employees.Add(employee);
             BusinessController.Instance.Save();
         }
 
-        public void RemoveUser(Employee employee)
+        public void RemoveEmployee(Employee employee)
         {
             BusinessController.Instance.Context.Employees.Remove(employee);
+            BusinessController.Instance.Save();
+        }
+
+        public void Edit(Employee employee)
+        {
+            Employee edit = BusinessController.Instance.Context.Employees.GetById(employee.EmploymentNo);
+            edit.Lastname = employee.Lastname;
+            edit.Firstname = employee.Firstname;
+            edit.TaxRate = employee.TaxRate;
+            edit.StreetAddress = employee.StreetAddress;
+            edit.City = employee.City; 
+            edit.Postalcode = employee.Postalcode;
+            edit.AgentNo= employee.AgentNo;
+            edit.FormOfEmployment = employee.FormOfEmployment;
+            edit.Password = employee.Password;
+            edit.Username = employee.Username;
+            edit.Role = employee.Role;
+
             BusinessController.Instance.Save();
         }
     }

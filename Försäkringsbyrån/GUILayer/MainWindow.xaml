@@ -10,7 +10,7 @@
         Height="690" 
         Width="1000"
         MinHeight="690"
-        MinWidth="850"
+        MinWidth="1280"
         AllowsTransparency="True"
         Background="Transparent"
         ResizeMode="CanResizeWithGrip">
@@ -38,8 +38,8 @@
                                 Background="Transparent"
                                 FontSize="15"
                                 Command="{Binding SearchIndex_Btn}"
+                                Style="{DynamicResource MainMenuButtonStyle}"
                                 >
-                            <!--Style="{DynamicResource MainMenuButtonStyle}"-->
                             <Button.Resources>
 
                                 <Style TargetType="{x:Type Border}">
@@ -56,8 +56,8 @@
                                 FontSize="15"
                                 Height="32"
                                 Command="{Binding Insurance_Btn}" 
+                                Style="{DynamicResource MainMenuButtonStyle}"
                                 >
-                            <!--Style="{DynamicResource MainMenuButtonStyle}"-->
                             <Button.Resources>
 
                                 <Style TargetType="{x:Type Border}">
@@ -74,8 +74,8 @@
                                 FontSize="15"
                                 Background="Transparent"
                                 Command="{Binding Commission_Btn}"
+                                Style="{DynamicResource MainMenuButtonStyle}"
                                 >
-                            <!--Style="{DynamicResource MainMenuButtonStyle}"-->
                             <Button.Resources>
 
                                 <Style TargetType="{x:Type Border}">
@@ -92,8 +92,8 @@
                                 FontSize="15"
                                 Background="Transparent"
                                 Command="{Binding SAP_Btn}"
+                                Style="{DynamicResource MainMenuButtonStyle}"
                                 >
-                            <!--Style="{DynamicResource MainMenuButtonStyle}"-->
                             <Button.Resources>
 
                                 <Style TargetType="{x:Type Border}">
@@ -110,9 +110,8 @@
                                 Height="32"
                                 Background="Transparent"
                                 Command="{Binding EM_Btn}"
+                                Style="{DynamicResource MainMenuButtonStyle}"
                                 >
-                            <!--Style="{DynamicResource MainMenuButtonStyle}"-->
-
                             <Button.Resources>
 
                                 <Style TargetType="{x:Type Border}">
@@ -129,8 +128,8 @@
                                 Height="32"
                                 Background="Transparent"
                                 Command="{Binding BasicData_Btn}"
+                                Style="{DynamicResource MainMenuButtonStyle}"
                                 >
-                            <!--Style="{DynamicResource MainMenuButtonStyle}"-->
 
                             <Button.Resources>
 
@@ -148,7 +147,8 @@
                             FontSize="15"
                             Width="100"
                             Height="32"
-                            Background="Transparent"/>
+                            Background="Transparent"
+                            Style="{DynamicResource ExitBtnStyle}"/>
                     <Button Margin="0,0,0,68" DockPanel.Dock="Right"
                             HorizontalAlignment="Right" 
                             Content="Logga ut"
@@ -156,8 +156,8 @@
                             Width="100"
                             Height="32"
                             Background="Transparent"
-                            Command="{Binding LogOut_Btn}">
-                        <!--Style="{DynamicResource MainMenuButtonStyle}"-->
+                            Command="{Binding LogOut_Btn}"
+                            Style="{DynamicResource MainMenuButtonStyle}">
 
                         <Button.Resources>
                             <Style TargetType="{x:Type Border}">
@@ -178,8 +178,8 @@
                         Background="Transparent"
                         BorderBrush="Transparent"
                         Foreground="Black"
-                        Command="{Binding Home_Btn}">
-                    <!--Style="{DynamicResource HomeBtnStyle}"-->
+                        Command="{Binding HomeBtn}"
+                        Style="{DynamicResource HomeBtnStyle}">
                     <Button.LayoutTransform>
                         <RotateTransform Angle="270"/>
                     </Button.LayoutTransform>

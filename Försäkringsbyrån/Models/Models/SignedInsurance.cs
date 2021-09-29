@@ -17,5 +17,6 @@ namespace Models.Models
         public int PossibleComisson { get; set; }
         public InsuranceApplication SerialNumber { get; set; }
         public CustomerProspect CustomerProspectId { get; set; }
+        public InsuranceTaker Taker { get; set; }
     }
 }

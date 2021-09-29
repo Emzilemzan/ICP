@@ -16,6 +16,6 @@ namespace Models.Models
         public string LastName { get; set; }
         public string FirstName { get; set; }
 
-
+        public virtual InsuranceTaker Taker { get; set; }
     }
 }

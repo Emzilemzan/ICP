@@ -1,8 +1,11 @@
-﻿using System;
+﻿using GUILayer.ViewModels;
+using GUILayer.ViewModels.InsuranceViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace GUILayer.Commands.InsuranceCommands
 {
@@ -15,8 +18,19 @@ namespace GUILayer.Commands.InsuranceCommands
 
         public override void Execute(object parameter)
         {
-           
-
+            if (MainViewModel.Instance.CurrentTool != "InsuranceChoices")
+            {
+                MainViewModel.Instance.ToolsVisibility = Visibility.Visible;
+                MainViewModel.Instance.Tools = InsuranceViewModel.Instance;
+                MainViewModel.Instance.CurrentTool = "InsuranceChoices";
+                MainViewModel.Instance.SelectedViewModel = InsuranceApplicationChoiceViewModel.Instance;
+            }
+            else
+            {
+                MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
+                MainViewModel.Instance.CurrentTool = "";
+                MainViewModel.Instance.SelectedViewModel = InsuranceViewModel.Instance;
+            }
         }
     }
 }

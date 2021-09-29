@@ -21,18 +21,20 @@
                     <ColumnDefinition Width="*"/>
 
                 </Grid.ColumnDefinitions>
-                <Button  Margin ="162,10,37,10" Grid.Column="0"
+                <Button  Margin ="130,10,69,10" Grid.Column="0"
                             FontSize="20"
                             Height="106"
                             Background="Transparent"
-                         Command="">
+                         Command=""
+                         Style="{DynamicResource OtherButtonStyle}" Width="Auto">
                     <TextBlock>Provisionsandels-<LineBreak/>tabell</TextBlock>
                 </Button>
                 <Button  Grid.Column="1"
                             FontSize="20"
                             Height="106"
-                            Background="Transparent" Margin="34,10,156,10"
-                            Command="">
+                            Background="Transparent" Margin="57,10,95,10"
+                            Command="{Binding AmountTable_Btn}"
+                         Style="{DynamicResource OtherButtonStyle}" Width="Auto">
                     <TextBlock>Grundbeloppstabell<LineBreak/>(Försäkringstyp)</TextBlock>
                 </Button>
             </Grid>
@@ -48,25 +50,28 @@
                          FontSize="20"
                          Height="106"
                          Background="Transparent" 
-                         Margin="32,0,35.667,0"
-                         Command="">
+                         Margin="41,0,31.667,0"
+                         Command=""
+                         Style="{DynamicResource OtherButtonStyle}" Width="Auto">
                     <TextBlock>Grundbelopp<LineBreak/>(Tillvalstyp)</TextBlock>
                 </Button>
                 <Button     Grid.Column="1"
                             FontSize="20"
                             Height="106"
                             Background="Transparent" 
-                            Margin="32,0,35.667,0"
-                            Command="">
-                    <TextBlock>Ack.Värde Variabel<LineBreak/>(Försäkrings-/tillvalstyp)</TextBlock>
+                            Margin="10.333,0"
+                            Command=""
+                            Style="{DynamicResource OtherButtonStyle}" Width="Auto">
+                    <TextBlock Width="216" Height="66">Ack.Värde Variabel<LineBreak/>(Försäkrings-/tillvalstyp)</TextBlock>
                 </Button>
                 <Button  Grid.Column="2"
                          FontSize="20"
                          Height="106"
                          Content="Semesterersättning"
                          Background="Transparent" 
-                         Margin="32,0,35.667,0"
-                         Command="">
+                         Margin="22.667,0,26,0"
+                         Command=""
+                         Style="{DynamicResource OtherButtonStyle}" Width="Auto">
                 </Button>
             </Grid>
         </StackPanel>

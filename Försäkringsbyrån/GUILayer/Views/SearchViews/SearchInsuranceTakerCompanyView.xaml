@@ -1,0 +1,83 @@
+﻿<UserControl x:Class="GUILayer.Views.SearchViews.SearchInsuranceTakerCompanyView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GUILayer.Views.SearchViews"
+              xmlns:xctk1="http://schemas.xceed.com/wpf/xaml/toolkit"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="1000">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label Content="Register Försäkringstagare --> Företag" FontSize="26" Grid.Row="0"/>
+        <xctk1:WatermarkTextBox Margin="20,10" Grid.Row="1" MaxHeight="50"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                TextWrapping="WrapWithOverflow"
+                                Watermark="Skriv ditt sök ord här..."
+                                Foreground="Black"
+                                Grid.Column="0"
+                                Background="Transparent" BorderBrush="Transparent"
+                                Text="{Binding SearchInput, UpdateSourceTrigger=PropertyChanged}"/>
+        <DataGrid x:Name ="CompanyGrid" Grid.Row="2" AutoGenerateColumns="False" ItemsSource="{Binding CompanyGrid}"
+                  RowDetailsVisibilityMode="VisibleWhenSelected" 
+                  CanUserAddRows="False"
+                  AlternatingRowBackground="Gainsboro"  AlternationCount="2"
+                  IsSynchronizedWithCurrentItem="True"
+                  ScrollViewer.CanContentScroll="True" 
+                  ScrollViewer.VerticalScrollBarVisibility="Auto"
+                  ScrollViewer.HorizontalScrollBarVisibility="Auto" Margin="10,0,10,42">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="FörsäkringstagarId" Binding="{Binding Path=InsuranceTakerId}"/>
+                <DataGridTextColumn Header="Organisationsnummer" Binding="{Binding Path=OrganizationNumber}" />
+                <DataGridTextColumn Header="Företagsnamn" Binding="{Binding Path=CompanyName}" />
+                <DataGridTextColumn Header="Gatuadress" Binding="{Binding Path=StreetAddress}" />
+                <DataGridTextColumn Header="Postnummer" Binding="{Binding Path=PostalCode}" />
+                <DataGridTextColumn Header="Postort" Binding="{Binding Path=City}" />
+                <DataGridTextColumn Header="Riktnummer" Binding="{Binding Path= DiallingCode}"/>
+                <DataGridTextColumn Header="Telefonnummer" Binding="{Binding Path= TelephoneNbr}"/>
+                <DataGridTextColumn Header="Faxnummer" Binding="{Binding Path=FaxNumber}"/>
+                <DataGridTextColumn Header="Email" Binding="{Binding Path=Email}"/>
+                <DataGridTextColumn Header="Kontakt person" Binding="{Binding Path=ContactPerson}" />
+                <DataGridTemplateColumn Header="Försäkringstagarens ansökningar" >
+                    <DataGridTemplateColumn.CellTemplate >
+                        <DataTemplate>
+                            <DataGrid Margin="10" AutoGenerateColumns="False" ItemsSource="{Binding InsuranceApplications}">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Löpnummer" Binding="{Binding Path=SerialNumber}"/>
+                                    <DataGridTextColumn Header="FörsäkradId" Binding="{Binding Path=InsuredID}"/>
+                                    <DataGridTextColumn Header="Försäkringstyp" Binding="{Binding Path=InsuranceTypeId}"/>
+                                    <DataGridTextColumn Header="Agentnummer" Binding="{Binding Path=AgentNo}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn  Header="Försäkringstagarens försäkrade"  >
+                    <DataGridTemplateColumn.CellTemplate >
+                        <DataTemplate>
+                            <DataGrid Margin="10" AutoGenerateColumns="False" ItemsSource="{Binding InsuredPeople}">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="FörsäkradId" Binding="{Binding Path=InsuredID}"/>
+                                    <DataGridTextColumn Header="Personnummer" Binding="{Binding Path=SocialSecurityNumber}"/>
+                                    <DataGridTextColumn Header="Förnamn" Binding="{Binding Path=FirstName}"/>
+                                    <DataGridTextColumn Header="Efternamn" Binding="{Binding Path=LastName}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
+        </DataGrid>
+        
+    </Grid>
+</UserControl>
