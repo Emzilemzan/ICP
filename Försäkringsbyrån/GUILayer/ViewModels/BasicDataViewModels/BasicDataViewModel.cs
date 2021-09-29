@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GUILayer.Commands.BasicDataCommands;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,10 +14,10 @@ namespace GUILayer.ViewModels.BasicDataViewModels
     {
         public static readonly BasicDataViewModel Instance = new BasicDataViewModel();
 
-
+        public BaseAmountTableBtn AmountTable_Btn { get; }
         private BasicDataViewModel()
         {
-
+            AmountTable_Btn = new BaseAmountTableBtn();
         }
     }
 }

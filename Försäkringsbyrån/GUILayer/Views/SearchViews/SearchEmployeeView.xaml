@@ -30,6 +30,7 @@
         <DataGrid x:Name ="employeeGrid" Grid.Row="2" AutoGenerateColumns="False" ItemsSource="{Binding EmployeeGrid}"
                   RowDetailsVisibilityMode="VisibleWhenSelected" 
                   IsReadOnly="True" 
+                  AlternatingRowBackground="Gainsboro"  AlternationCount="2"
                   IsSynchronizedWithCurrentItem="True"
                   ScrollViewer.CanContentScroll="True" 
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
@@ -71,25 +72,25 @@
                 </Grid.RowDefinitions>
                 <Label Content="Markerad anställd" Grid.Column="0"/>
                 <Label Content="AnställningsNr" Grid.Column="0" Grid.Row="1"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.EmploymentNo}"/>
+                <TextBox Grid.Row="1" IsReadOnly="true" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.EmploymentNo}"/>
                 <Label Content="Förnamn" Grid.Column="0" Grid.Row="2"/>
-                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.Firstname}"/>
+                <TextBox Grid.Row="2" IsReadOnly="true" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.Firstname}"/>
                 <Label Content="Efternamn" Grid.Column="0" Grid.Row="3"/>
-                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.Lastname}"/>
+                <TextBox Grid.Row="3" IsReadOnly="true" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.Lastname}"/>
                 <Label Content="Gatuadress" Grid.Column="0" Grid.Row="4"/>
-                <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.StreetAddress}"/>
+                <TextBox Grid.Row="4" IsReadOnly="true" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.StreetAddress}"/>
                 <Label Content="Postnummer" Grid.Column="0" Grid.Row="5"/>
-                <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.Postalcode}"/>
+                <TextBox Grid.Row="5" IsReadOnly="true" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.Postalcode}"/>
                 <Label Content="Postort" Grid.Column="0" Grid.Row="6"/>
-                <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.City}"/>
+                <TextBox Grid.Row="6" IsReadOnly="true" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.City}"/>
                 <Label Content="Befattning" Grid.Column="0" Grid.Row="7"/>
-                <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.Role}"/>
+                <TextBox Grid.Row="7" IsReadOnly="true" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.Role}"/>
                 <Label Content="Skattesats" Grid.Column="0" Grid.Row="8"/>
-                <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.TaxRate}"/>
+                <TextBox Grid.Row="8" IsReadOnly="true" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.TaxRate}"/>
                 <Label Content="Anställningsform" Grid.Column="0" Grid.Row="9"/>
-                <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.FormOfEmployment}"/>
+                <TextBox Grid.Row="9" IsReadOnly="true" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.FormOfEmployment}"/>
                 <Label Content="Agentnummer" Grid.Column="0" Grid.Row="10"/>
-                <TextBox Grid.Row="10" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.AgentNo}"/>
+                <TextBox Grid.Row="10" IsReadOnly="true" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.AgentNo}"/>
 
             </Grid>
 

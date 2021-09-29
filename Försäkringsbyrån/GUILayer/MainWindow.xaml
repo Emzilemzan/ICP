@@ -178,7 +178,7 @@
                         Background="Transparent"
                         BorderBrush="Transparent"
                         Foreground="Black"
-                        Command="{Binding Home_Btn}"
+                        Command="{Binding HomeBtn}"
                         Style="{DynamicResource HomeBtnStyle}">
                     <Button.LayoutTransform>
                         <RotateTransform Angle="270"/>

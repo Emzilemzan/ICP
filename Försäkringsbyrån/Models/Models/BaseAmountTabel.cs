@@ -15,7 +15,7 @@ namespace Models.Models
         public double BaseAmount { get; set; }
         public double AckValue { get; set; }
 
-        // SOID
+        public PersonInsuranceType insuranceType { get; set; }
 
     }
 }
