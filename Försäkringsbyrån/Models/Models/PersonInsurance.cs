@@ -13,10 +13,4 @@ namespace Models.Models
    
         
     }
-    public enum PersonInsuranceType
-    {
-        SOB,
-        SOV,
-        LIV
-    }
 }
