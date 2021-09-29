@@ -54,6 +54,20 @@
         <DataTemplate DataType="{x:Type cvm:CommissionViewModel}">
             <cv:CommissionView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type ivm:RegisterApplicationViewModel}">
+            <iv:RegisterApplicationView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ivm:RegisterPersonApplicationViewModel}">
+            <iv:RegisterPersonApplicationView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ivm:RegisterOPIPApplicationViewModel}">
+            <iv:RegisterOPIPApplicationView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type ivm:RegisterOPICApplicationViewModel}">
+            <iv:RegisterOPICApplicationView/>
+        </DataTemplate>
+
+
         <!--#region Exit Button Style-->
         <Style x:Key="ExitBtnStyle" TargetType="{x:Type Button}">
             <Setter Property="Background" Value="Transparent"/>

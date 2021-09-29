@@ -100,6 +100,9 @@
     <Compile Include="ViewModels\InsuranceViewModels\InsuranceApplicationChoiceViewModel.cs" />
     <Compile Include="ViewModels\InsuranceViewModels\InsuranceViewModel.cs" />
     <Compile Include="ViewModels\InsuranceViewModels\RegisterApplicationViewModel.cs" />
+    <Compile Include="ViewModels\InsuranceViewModels\RegisterOPICApplicationViewModel.cs" />
+    <Compile Include="ViewModels\InsuranceViewModels\RegisterOPIPApplicationViewModel.cs" />
+    <Compile Include="ViewModels\InsuranceViewModels\RegisterPersonApplicationViewModel.cs" />
     <Compile Include="ViewModels\LogInViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModels\SearchEmployeeViewModel.cs" />
@@ -127,6 +130,15 @@
     </Compile>
     <Compile Include="Views\InsuranceViews\RegisterApplicationView.xaml.cs">
       <DependentUpon>RegisterApplicationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InsuranceViews\RegisterOPICApplicationView.xaml.cs">
+      <DependentUpon>RegisterOPICApplicationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InsuranceViews\RegisterOPIPApplicationView.xaml.cs">
+      <DependentUpon>RegisterOPIPApplicationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InsuranceViews\RegisterPersonApplicationView.xaml.cs">
+      <DependentUpon>RegisterPersonApplicationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LogInView.xaml.cs">
       <DependentUpon>LogInView.xaml</DependentUpon>
@@ -184,6 +196,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\InsuranceViews\RegisterApplicationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InsuranceViews\RegisterOPICApplicationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InsuranceViews\RegisterOPIPApplicationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InsuranceViews\RegisterPersonApplicationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

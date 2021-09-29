@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Models.Models
 { /// <summary>
-/// Grundbeloppstabell
+ /// Grundbeloppstabell.
 /// </summary>
     public class BaseAmountTabel
     {
@@ -15,7 +15,8 @@ namespace Models.Models
         public double BaseAmount { get; set; }
         public double AckValue { get; set; }
 
-        // SOID
+        public SAInsurance SAID { get; set; } // SOID
+   
 
     }
 }
