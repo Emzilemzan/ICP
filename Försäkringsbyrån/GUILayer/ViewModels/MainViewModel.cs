@@ -55,7 +55,7 @@ namespace GUILayer.ViewModels
         {
 
             MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
-            MainViewModel.Instance.DisplayHomeView();
+            MainViewModel.Instance.DisplayHomeView(); 
         }
 
         public void DisplayLogInView()
