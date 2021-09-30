@@ -20,6 +20,13 @@ namespace GUILayer.ViewModels
         {
             HomeButton = new HomeBtn();
         }
-        //public string Firstname=> _employee.Firstname;
+        public string Fullname
+        {
+
+            get
+            {
+                return $"{MainViewModel.Instance.Context.CurrentEmployee.Firstname} {MainViewModel.Instance.Context.CurrentEmployee.Lastname}";
+            }
+        }
     }
 }

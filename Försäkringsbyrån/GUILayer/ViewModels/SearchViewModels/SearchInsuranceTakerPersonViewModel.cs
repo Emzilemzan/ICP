@@ -18,12 +18,7 @@ namespace GUILayer.ViewModels.SearchViewModels
         public RemovePersonBtn RemoveBtn { get; }
         public SearchInsuranceTakerPersonViewModel()
         {
-            Persons = new ObservableCollection<Person>
-            {
-                new Person(){InsuranceTakerId=1, SocialSecurityNumber="991204-1222", Firstname="Emma", Lastname="Gunnarsson", City="Ulricehamn", PostalCode=52335, StreetAddress="Källgatan 10", DiallingCodeHome= "073", DiallingCodeWork="037", TelephoneNbrHome="7747733", TelephoneNbrWork="89675", EmailOne="hej@hotmail.com", EmailTwo=null},
-                new Person(){InsuranceTakerId=2, SocialSecurityNumber="991204-1213", Firstname="Karl", Lastname="Gunnarsson", City="Ulricehamn", PostalCode=52335, StreetAddress="Källgatan 10", DiallingCodeHome= "077", DiallingCodeWork="047", TelephoneNbrHome="7787733", TelephoneNbrWork="349675", EmailOne="heja@hotmail.com", EmailTwo="cool.1@live.se"},
-            };
-
+            Persons = UpdatePersons();
             PersonGrid = CollectionViewSource.GetDefaultView(Persons);
             PersonGrid.Filter = new Predicate<object>(o => Filter(o as Person));
         }
@@ -59,9 +54,23 @@ namespace GUILayer.ViewModels.SearchViewModels
         }
         #endregion
 
+        #region
+        public ObservableCollection<Person> UpdatePersons()
+        {
+            ObservableCollection<Person> x = new ObservableCollection<Person>();
+            foreach (var p in Context.ITController.GetAllPersons())
+            {
+                x?.Add(p);
+            }
+            Persons = x;
+            return Persons;
+        }
+        #endregion
+
         #region Properties
 
         public ObservableCollection<Person> Persons { get; set; }
+
         public ObservableCollection<InsuranceApplication> InsuranceApplications { get; set; }
         public ObservableCollection<InsuredPerson> InsuredPersons { get; set; } = new ObservableCollection<InsuredPerson>();
 

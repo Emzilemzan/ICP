@@ -16,15 +16,22 @@ namespace GUILayer.ViewModels.SearchViewModels
 
         public SearchEmployeeViewModel()
         {
-            Employees = new ObservableCollection<Employee>()
-            {
-                new Employee() { EmploymentNo = 1, Firstname = "Bill", Lastname = "Andersson", StreetAddress = "Vägen 12", Postalcode = 52335, City = "Borås", FormOfEmployment = 100, Role = RoleType.VD, TaxRate = 25, Username = "BA", Password = "x" },
-                new Employee() { EmploymentNo = 2, Firstname = "Bertil", Lastname = "Andersson", StreetAddress = "XVägen 5", Postalcode = 52435, City = "Borås", FormOfEmployment = 70, Role = RoleType.Innesäljare, TaxRate = 25, Username = "BX", Password = "x" },
-            };
+            Employees = UpdateEmployee();
             EmployeeGrid = CollectionViewSource.GetDefaultView(Employees);
             EmployeeGrid.Filter = new Predicate<object>(o => Filter(o as Employee));
         }
-
+        #region
+        public ObservableCollection<Employee> UpdateEmployee()
+        {
+            ObservableCollection<Employee> x = new ObservableCollection<Employee>();
+            foreach (var e in Context.EController.GetAllEmployees())
+            {
+                x?.Add(e);
+            }
+            Employees = x;
+            return Employees;
+        }
+        #endregion
 
         #region Specific Porperties and methods for search in collection
 

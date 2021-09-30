@@ -13,8 +13,7 @@ namespace GUILayer.Commands
     /// </summary>
     public class HomeBtn : BaseCommand
     {
-        public override bool CanExecute(object parameter) => true;
-        // {MainViewModel.Instance.Context.CurrentEmployee != null;}
+        public override bool CanExecute(object parameter) => MainViewModel.Instance.Context.CurrentEmployee != null;
         public override void Execute(object parameter)
         {
             MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
