@@ -14,18 +14,17 @@ namespace GUILayer.ViewModels
     {
         public static readonly HomeViewModel Instance = new HomeViewModel();
 
-        public HomeBtn HomeButton { get; }
-
         private HomeViewModel()
         {
-            HomeButton = new HomeBtn();
+            
         }
+
         public string Fullname
         {
 
             get
             {
-                return $"{MainViewModel.Instance.Context.CurrentEmployee.Firstname} {MainViewModel.Instance.Context.CurrentEmployee.Lastname}";
+                return $"{MainViewModel.Instance.Context.CurrentEmployee?.Firstname} {MainViewModel.Instance.Context.CurrentEmployee?.Lastname}";
             }
         }
     }
