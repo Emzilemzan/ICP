@@ -18,9 +18,12 @@ namespace GUILayer.ViewModels.SearchViewModels
         public RemovePersonBtn RemoveBtn { get; }
         public SearchInsuranceTakerPersonViewModel()
         {
+
             Persons = UpdatePersons();
             PersonGrid = CollectionViewSource.GetDefaultView(Persons);
             PersonGrid.Filter = new Predicate<object>(o => Filter(o as Person));
+            Insurances = UpdatePersonInsurance();
+            InsuredPersons = UpdateInsuredPersons();
         }
 
         #region Specific Porperties and methods for search in collection
@@ -54,7 +57,7 @@ namespace GUILayer.ViewModels.SearchViewModels
         }
         #endregion
 
-        #region
+        #region Methods
         public ObservableCollection<Person> UpdatePersons()
         {
             ObservableCollection<Person> x = new ObservableCollection<Person>();
@@ -65,6 +68,37 @@ namespace GUILayer.ViewModels.SearchViewModels
             Persons = x;
             return Persons;
         }
+
+        public ObservableCollection<Insurance> UpdatePersonInsurance()
+        {
+
+            ObservableCollection<Insurance> x = new ObservableCollection<Insurance>();
+            if (SelectedPerson != null)
+            {
+                foreach (var ia in Context.IController.GetInsuranceTakerIAS(SelectedPerson))
+                {
+                    x?.Add(ia);
+                }
+            }
+            Insurances = x;
+            return Insurances;
+        }
+
+        public ObservableCollection<InsuredPerson> UpdateInsuredPersons()
+        {
+
+            ObservableCollection<InsuredPerson> x = new ObservableCollection<InsuredPerson>();
+            if (SelectedPerson != null)
+            {
+                foreach (var ip in Context.IPController.GetInsuranceTakerIPS(SelectedPerson))
+                {
+                    x?.Add(ip);
+                }
+            }
+            InsuredPersons = x;
+            return InsuredPersons;
+        }
+
         #endregion
 
         #region Properties
@@ -75,7 +109,7 @@ namespace GUILayer.ViewModels.SearchViewModels
 
         private Person _selectedPerson;
 
-        public Person SelectedPeron
+        public Person SelectedPerson
         {
             get => _selectedPerson;
             set

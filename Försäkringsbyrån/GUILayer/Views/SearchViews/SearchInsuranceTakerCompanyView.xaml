@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:GUILayer.Views.SearchViews"
               xmlns:xctk1="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
-              d:DesignHeight="500" Width="1323.35">
+             d:DesignHeight="500" Width="1323.35">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
