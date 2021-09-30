@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -41,17 +42,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Access.cs" />
     <Compile Include="Models\AckValueVariable.cs" />
     <Compile Include="Models\BaseAmount.cs" />
     <Compile Include="Models\BaseAmountTabel.cs" />
-    <Compile Include="Models\Comission.cs" />
     <Compile Include="Models\ComissionShare.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\CompanyInsurance.cs" />
     <Compile Include="Models\CompanyInsuranceType.cs" />
     <Compile Include="Models\CustomerProspect.cs" />
     <Compile Include="Models\Employee.cs" />
-    <Compile Include="Models\InsuranceApplication.cs" />
+    <Compile Include="Models\Insurance.cs" />
     <Compile Include="Models\InsuranceTaker.cs" />
     <Compile Include="Models\InsuranceType.cs" />
     <Compile Include="Models\InsuredPerson.cs" />
@@ -60,9 +61,9 @@
     <Compile Include="Models\OtherPersonInsurance.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\PersonInsurance.cs" />
+    <Compile Include="Models\Role.cs" />
     <Compile Include="Models\SAInsurance.cs" />
     <Compile Include="Models\SalesMen.cs" />
-    <Compile Include="Models\SignedInsurance.cs" />
     <Compile Include="Models\VacationPay.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

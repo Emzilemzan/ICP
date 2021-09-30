@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GUILayer.Commands;
 using Models.Models;
 
 namespace GUILayer.ViewModels.InsuranceViewModels
@@ -15,12 +16,22 @@ namespace GUILayer.ViewModels.InsuranceViewModels
     {
         public static readonly RegisterApplicationViewModel Instance = new RegisterApplicationViewModel();
 
-        /// Vad behövs här. properties för textboxarna...
-        /// SSök möjlighet, skriver man i ett organisationummer som finns skall detta leveraeras och resultera i att textboxarna fylls i för försäkringstagerens uppgifter
-        /// 
-        /// Gör det int det ska användaren ha möjlighet att lägga till en ny. Alltså en Add InsuranceApplication metod som tar in alla ifyllda properties. 
+        public RegisterApplicationViewModel()
+        {
+            AddCompanyApplication = new RelayCommand(RegisterCompanyApplication, CanAddCompanyApplication);
+        }
+       
 
+        public RelayCommand AddCompanyApplication { get; set; }
 
+        public bool CanAddCompanyApplication(object parameter)
+        {
+            return true;
+        }
 
+        public void RegisterCompanyApplication(object parameter)
+        {
+
+        }
     }
 }

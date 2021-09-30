@@ -51,9 +51,8 @@ namespace GUILayer.ViewModels.SearchViewModels
                 || employee.City.IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
                 || employee.Postalcode.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
                 || employee.FormOfEmployment.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
-                || employee.AgentNo.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
-                || employee.TaxRate.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
-                || employee.Role.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1;
+                || employee.TaxRate.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1;
+                
         }
         private string _searchInput;
 

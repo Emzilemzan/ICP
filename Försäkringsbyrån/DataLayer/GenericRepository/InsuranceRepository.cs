@@ -7,12 +7,14 @@ using System.Threading.Tasks;
 
 namespace DataLayer.GenericRepository
 {
-    public class SignedInsuranceRepository : GenericRepository<SignedInsurance>, ISignedInsuranceRepository
+    class InsuranceRepository : GenericRepository<Insurance>, IInsuranceRepository
     {
-        public SignedInsuranceRepository(ApplicationContext context) : base(context) { }
+
+        public InsuranceRepository(ApplicationContext context) : base(context) { }
         public ApplicationContext ApplicationContext
         {
             get { return _context; }
         }
     }
 }
+

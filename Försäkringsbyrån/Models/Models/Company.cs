@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,8 @@ namespace Models.Models
     /// <summary>
     /// Companies that takes an insurance is also a InsuranceTaker. 
     /// </summary>
-   public class Company : InsuranceTaker
+    [Table("Företag", Schema = "dbo")]
+    public class Company : InsuranceTaker
     {
         public string OrganizationNumber { get; set; }
         public string CompanyName { get; set; }
