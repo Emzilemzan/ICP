@@ -16,11 +16,7 @@ namespace GUILayer.ViewModels.SearchViewModels
 
         public SearchInsuranceTakerCompanyViewModel()
         {
-            Companies = new ObservableCollection<Company>
-            {
-                new Company(){InsuranceTakerId=3, OrganizationNumber="991204-1222", CompanyName="IKEA AB", City="Ulricehamn", PostalCode=52335, StreetAddress="Källgatan 10", DiallingCode="xx", TelephoneNbr="0765566899", FaxNumber="334", Email="a@häst.se", ContactPerson="Emma",InsuranceApplications= new List<InsuranceApplication>(), InsuredPersons=new List<InsuredPerson>()},
-                new Company(){InsuranceTakerId=4, OrganizationNumber="991204-1213", CompanyName="Häst AB", City="Ulricehamn", PostalCode=52335, StreetAddress="Källgatan 10",DiallingCode="xx", TelephoneNbr="0765566899",FaxNumber="334", Email="a@häst.se", ContactPerson="Emma", InsuranceApplications= new List<InsuranceApplication>(), InsuredPersons=new List<InsuredPerson>()},
-            };
+            
             CompanyGrid = CollectionViewSource.GetDefaultView(Companies);
             CompanyGrid.Filter = new Predicate<object>(o => Filter(o as Company));
         }

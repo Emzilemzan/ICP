@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Models.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.SqlClient;
@@ -11,7 +12,32 @@ namespace DataLayer
    public class ApplicationContext : DbContext
     {
 
-        public ApplicationContext() : base ("ICP")
+        public DbSet<Person> Persons { get; set; }
+        public DbSet<Company> Companies { get; set; }
+        public DbSet<Employee> Employees { get; set; }
+        public DbSet<InsuranceTaker> InsuranceTakers { get; set; }
+        public DbSet<InsuredPerson> InsuredPersons { get; set; }
+        public DbSet<Insurance> Insurances { get; set; }
+        public DbSet<InsuranceType> InsuranceTypes { get; set; }
+        public DbSet<BaseAmount> BaseAmounts { get; set; }
+        public DbSet<CustomerProspect> Prospects { get; set; }
+        public DbSet<BaseAmountTabel> BaseAmountTables { get; set; }
+        public DbSet<AckValueVariable> AckValueVariables { get; set; }
+        public DbSet<Access> Accesses { get; set; }
+        public DbSet<ComissionShare> ComissionShares { get; set; }
+        public DbSet<CompanyInsurance> CompanyInsurances { get; set; }
+        public DbSet<CompanyInsuranceType> CompanyInsuranceTypes { get; set; }
+        public DbSet<LifeInsurance> LifeInsurances { get; set; }
+        public DbSet<OptionalType> OptionalTypes { get; set; }
+        public DbSet<OtherPersonInsurance> OtherPersonInsurances { get; set; }
+        public DbSet<PersonInsurance> PersonInsurances { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<SAInsurance> SAInsurances { get; set; }
+        public DbSet<SalesMen> SalesMens { get; set; }
+        public DbSet<VacationPay> VacationPays { get; set; }
+     
+
+        public ApplicationContext() : base ("ICPDB")
         {   }
 
         /// <summary>

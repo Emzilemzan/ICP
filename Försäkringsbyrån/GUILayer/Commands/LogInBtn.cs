@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace GUILayer.Commands
 {
@@ -21,6 +22,7 @@ namespace GUILayer.Commands
                 && LogInViewModel.Instance.Context.EController.ValidateEmployee(LogInViewModel.Instance.Username, LogInViewModel.Instance.Password))
                 
                 MainViewModel.Instance.DisplayHomeView();
+       
 
         }
     }

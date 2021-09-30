@@ -62,7 +62,7 @@ namespace GUILayer.ViewModels.SearchViewModels
         #region Properties
 
         public ObservableCollection<Person> Persons { get; set; }
-        public ObservableCollection<InsuranceApplication> InsuranceApplications { get; set; }
+        public ObservableCollection<Insurance> Insurances { get; set; }
         public ObservableCollection<InsuredPerson> InsuredPersons { get; set; } = new ObservableCollection<InsuredPerson>();
 
         private Person _selectedPerson;

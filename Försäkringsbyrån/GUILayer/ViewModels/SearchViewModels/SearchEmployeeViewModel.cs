@@ -16,11 +16,7 @@ namespace GUILayer.ViewModels.SearchViewModels
 
         public SearchEmployeeViewModel()
         {
-            Employees = new ObservableCollection<Employee>()
-            {
-                new Employee() { EmploymentNo = 1, Firstname = "Bill", Lastname = "Andersson", StreetAddress = "Vägen 12", Postalcode = 52335, City = "Borås", FormOfEmployment = 100, Role = RoleType.VD, TaxRate = 25, Username = "BA", Password = "x" },
-                new Employee() { EmploymentNo = 2, Firstname = "Bertil", Lastname = "Andersson", StreetAddress = "XVägen 5", Postalcode = 52435, City = "Borås", FormOfEmployment = 70, Role = RoleType.Innesäljare, TaxRate = 25, Username = "BX", Password = "x" },
-            };
+            
             EmployeeGrid = CollectionViewSource.GetDefaultView(Employees);
             EmployeeGrid.Filter = new Predicate<object>(o => Filter(o as Employee));
         }
@@ -44,9 +40,8 @@ namespace GUILayer.ViewModels.SearchViewModels
                 || employee.City.IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
                 || employee.Postalcode.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
                 || employee.FormOfEmployment.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
-                || employee.AgentNo.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
-                || employee.TaxRate.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
-                || employee.Role.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1;
+                || employee.TaxRate.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1;
+                
         }
         private string _searchInput;
 

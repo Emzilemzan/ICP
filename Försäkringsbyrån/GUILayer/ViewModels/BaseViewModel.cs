@@ -17,7 +17,7 @@ namespace GUILayer.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
         public BaseViewModel()
         {
-            //Context = BusinessController.Instance;
+            Context = BusinessController.Instance;
         }
 
         /// <summary>
