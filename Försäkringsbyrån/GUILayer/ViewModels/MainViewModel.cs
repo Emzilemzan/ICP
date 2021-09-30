@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using GUILayer.Commands.BasicDataCommands;
+using System.Windows.Input;
 
 namespace GUILayer.ViewModels
 {
@@ -21,7 +22,6 @@ namespace GUILayer.ViewModels
     {
         public static readonly MainViewModel Instance = new MainViewModel();
 
-        public HomeBtn Home_Btn { get; }
         public BasicDataBtn BasicData_Btn { get; }
         public CommissionBtn Commission_Btn { get; }
         public InsuranceBtn Insurance_Btn { get; }
@@ -34,7 +34,7 @@ namespace GUILayer.ViewModels
         {
             _selectedViewModel = LogInViewModel.Instance;
             _toolsVisibility = Visibility.Hidden;
-            Home_Btn = new HomeBtn();
+          
             BasicData_Btn = new BasicDataBtn();
             Commission_Btn = new CommissionBtn();
             Insurance_Btn = new InsuranceBtn();
@@ -43,6 +43,19 @@ namespace GUILayer.ViewModels
             SearchIndex_Btn = new SearchValueBtn();
             SAP_Btn = new StatisticsAndProspectusBtn();
 
+        }
+
+        private ICommand _homeBtn;
+        public ICommand HomeBtn
+        {
+            get => _homeBtn ?? (_homeBtn = new RelayCommand(x => { Home();  })); 
+        }
+
+        private static void Home()
+        {
+
+            MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
+            MainViewModel.Instance.DisplayHomeView();
         }
 
         public void DisplayLogInView()
@@ -60,7 +73,6 @@ namespace GUILayer.ViewModels
 
         private void UpdateBtns()
         {
-            Home_Btn.RaiseCanExecuteChanged();
             BasicData_Btn.RaiseCanExecuteChanged();
             Commission_Btn.RaiseCanExecuteChanged();
             Insurance_Btn.RaiseCanExecuteChanged();

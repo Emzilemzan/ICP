@@ -14,7 +14,7 @@ namespace Models.Models
         public string FFName { get; set; }
         public DateTime EndDate { get; set; }
         public string Notes { get; set; }
-        
+        public CompanyInsuranceType FFTpyeId { get; set; }
 
     }
 }

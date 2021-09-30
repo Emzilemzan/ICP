@@ -1,4 +1,5 @@
 ﻿using GUILayer.ViewModels;
+using GUILayer.ViewModels.InsuranceViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Windows;
 namespace GUILayer.Commands.InsuranceCommands
 {
     /// <summary>
-    /// command for CIBtn, CI = companyinsurance 
+    /// command for CIBtn, CI = companyinsurance . Opens RegisterApplicationView which is bad named but stands for the Company Application View :(
     /// </summary>
     public class CIBtn : BaseCommand
     {
@@ -17,7 +18,10 @@ namespace GUILayer.Commands.InsuranceCommands
 
         public override void Execute(object parameter)
         {
-            
+            MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
+            MainViewModel.Instance.CurrentTool = "";
+            MainViewModel.Instance.SelectedViewModel = RegisterApplicationViewModel.Instance; 
+
         }
     }
 }

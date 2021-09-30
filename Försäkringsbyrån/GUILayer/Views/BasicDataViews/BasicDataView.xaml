@@ -33,7 +33,7 @@
                             FontSize="20"
                             Height="106"
                             Background="Transparent" Margin="57,10,95,10"
-                            Command=""
+                            Command="{Binding AmountTable_Btn}"
                          Style="{DynamicResource OtherButtonStyle}" Width="Auto">
                     <TextBlock>Grundbeloppstabell<LineBreak/>(Försäkringstyp)</TextBlock>
                 </Button>

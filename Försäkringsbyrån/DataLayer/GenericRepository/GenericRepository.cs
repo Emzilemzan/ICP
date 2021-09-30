@@ -26,4 +26,4 @@ namespace DataLayer.GenericRepository
         public void Update(TEntity entityToUpdate) => _context.Entry(entityToUpdate).State = EntityState.Modified;
 
     }
-}
+} 

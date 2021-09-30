@@ -18,7 +18,9 @@ namespace GUILayer.Commands.InsuranceCommands
 
         public override void Execute(object parameter)
         {
-           
+            MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
+            MainViewModel.Instance.CurrentTool = "";
+            MainViewModel.Instance.SelectedViewModel = RegisterPersonApplicationViewModel.Instance;
         }
     }
 }

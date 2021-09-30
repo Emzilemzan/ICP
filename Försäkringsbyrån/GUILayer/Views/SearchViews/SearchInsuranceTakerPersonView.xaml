@@ -6,15 +6,20 @@
              xmlns:local="clr-namespace:GUILayer.Views.SearchViews"
               xmlns:xctk1="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="900">
+             d:DesignHeight="500" Width="1323.35">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="590"/>
+            <ColumnDefinition Width="279.333"/>
+            <ColumnDefinition Width="453.333"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Label Content="Register Försäkringstagare --> Person" FontSize="26" Grid.Row="0" />
-        <xctk1:WatermarkTextBox Margin="20,10" Grid.Row="1" MaxHeight="50"
+        <Label Content="Register Försäkringstagare --> Person" FontSize="26" Grid.Row="0" Margin="0,0,7.667,0" />
+        <xctk1:WatermarkTextBox Margin="20,10,19.667,10" Grid.Row="1" MaxHeight="50"
                                 HorizontalContentAlignment="Center"
                                 VerticalContentAlignment="Center"
                                 TextWrapping="WrapWithOverflow"
@@ -23,42 +28,122 @@
                                 Grid.Column="0"
                                 Background="Transparent" BorderBrush="Transparent"
                                 Text="{Binding SearchInput, UpdateSourceTrigger=PropertyChanged}"/>
-        <DataGrid x:Name ="PersonGrid" Grid.Row="2" AutoGenerateColumns="False" ItemsSource="{Binding PersonGrid}"
+        <Label Content="Markerad försäkringstagare:" Grid.Column="1" Grid.Row="1" FontSize="20" Margin="10.333,10,10,0"/>
+        <DataGrid x:Name ="PersonGrid" Grid.Row="2" AutoGenerateColumns="False" ItemsSource="{Binding Path = PersonGrid}"
                   RowDetailsVisibilityMode="VisibleWhenSelected" 
-                  IsReadOnly="True" 
+                  IsReadOnly="True"
+                  SelectedItem="{Binding Path = SelectedPerson, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  AlternatingRowBackground="Gainsboro"  AlternationCount="2"
                   IsSynchronizedWithCurrentItem="False"
                   ScrollViewer.CanContentScroll="True" 
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
-                  ScrollViewer.HorizontalScrollBarVisibility="Auto" Margin="10,0,10,10">
+                  ScrollViewer.HorizontalScrollBarVisibility="Auto" Margin="10,0,9.667,10">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="FörsäkringstagarId" Binding="{Binding Path=InsuranceTakerId}"/>
-                <DataGridTextColumn Header="Personnummer" Binding="{Binding Path=SocialSecurityNumber}" />
-                <DataGridTextColumn Header="Förnamn" Binding="{Binding Path=Firstname}" />
-                <DataGridTextColumn Header="Efternamn" Binding="{Binding Path=Lastname}" />
-                <DataGridTextColumn Header="Gatuadress" Binding="{Binding Path=StreetAddress}" />
-                <DataGridTextColumn Header="Postnummer" Binding="{Binding Path=PostalCode}" />
-                <DataGridTextColumn Header="Postort" Binding="{Binding Path=City}" />
-                <DataGridTextColumn Header="Riktnummer Bostad" Binding="{Binding Path=DiallingCodeHome}"/>
-                <DataGridTextColumn Header="Telefonnummer Bostad" Binding="{Binding Path=TelephoneNbrHome}"/>
-                <DataGridTextColumn Header="Riktnummer Arbete" Binding="{Binding Path=DiallingCodeWork}"/>
-                <DataGridTextColumn Header="Telefonnummer Arbete" Binding="{Binding Path=TelephoneNbrWork}"/>
-                <DataGridTextColumn Header="Email 1" Binding="{Binding Path=EmailOne}"/>
-                <DataGridTextColumn Header="Email 2" Binding="{Binding Path=EmailTwo}"/>
+                <DataGridTextColumn Header="FörsäkringstagarId" Binding="{Binding Path= InsuranceTakerId, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Personnummer" Binding="{Binding Path=SocialSecurityNumber, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Förnamn" Binding="{Binding Path=Firstname, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Efternamn" Binding="{Binding Path=Lastname, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Gatuadress" Binding="{Binding Path=StreetAddress, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Postnummer" Binding="{Binding Path=PostalCode, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Postort" Binding="{Binding Path=City, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Riktnummer Bostad" Binding="{Binding Path=DiallingCodeHome, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Telefonnummer Bostad" Binding="{Binding Path=TelephoneNbrHome, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Riktnummer Arbete" Binding="{Binding Path=DiallingCodeWork, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Telefonnummer Arbete" Binding="{Binding Path=TelephoneNbrWork, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Email 1" Binding="{Binding Path=EmailOne, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Email 2" Binding="{Binding Path=EmailTwo, UpdateSourceTrigger=PropertyChanged}"/>
             </DataGrid.Columns>
-            <DataGrid.RowDetailsTemplate>
-                <DataTemplate>
-                    <DataGrid Margin="10" AutoGenerateColumns="False" ItemsSource="{Binding InsuranceApplications}">
+        </DataGrid>
+        <StackPanel Grid.Column="1" Grid.Row="2" Margin="42.333,10,36,10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Label Content="FörsäkringstagarId" Grid.Column="0" Grid.Row="1"  Margin="-35,0,0,0"/>
+                <TextBox Grid.Row="1" Grid.Column="1" IsReadOnly="true" Text="{Binding ElementName=PersonGrid, Path=SelectedItem.InsuranceTakerId}" Margin="0,0,-17.667,0" Height="26" VerticalAlignment="Top"/>
+                <Label Content="Personnummer" Grid.Column="0" Grid.Row="2"  Margin="-35,0,0,0"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding  ElementName=PersonGrid, Path=SelectedItem.SocialSecurityNumber}" Margin="0,0,-17.667,0"/>
+                <Label Content="Förnamn" Grid.Column="0" Grid.Row="3"  Margin="-35,0,0,0"/>
+                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding ElementName=PersonGrid, Path= SelectedItem.Firstname}" Margin="0,0,-17.667,0"/>
+                <Label Content="Efternamn" Grid.Column="0" Grid.Row="4" Margin="-35,0,0,0"/>
+                <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding ElementName=PersonGrid, Path=SelectedItem.Lastname}" Margin="0,0,-17.667,0"/>
+                <Label Content="StreetAddress" Grid.Column="0" Grid.Row="5"  Margin="-35,0,0,0"/>
+                <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding ElementName=PersonGrid, Path=SelectedItem.StreetAddress}" Margin="0,0,-17.667,0"/>
+                <Label Content="Postnummer" Grid.Column="0" Grid.Row="6" Margin="-35,0,0,0"/>
+                <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding ElementName = PersonGrid, Path=SelectedItem.PostalCode}" Margin="0,0,-17.667,0"/>
+                <Label Content="Postort" Grid.Column="0" Grid.Row="7" Margin="-35,0,0,0"/>
+                <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding ElementName=PersonGrid, Path=SelectedItem.City}" Margin="0,0,-17.667,0"/>
+                <Label Content="Riktnummer Bostad" Grid.Column="0" Grid.Row="8"  Margin="-35,0,0,0"/>
+                <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding ElementName=PersonGrid, Path=SelectedItem.DiallingCodeHome}" Margin="0,0,-17.667,0"/>
+                <Label Content="Telefonnummer Bostad" Grid.Column="0" Grid.Row="9"  Margin="-35,0,0,0"/>
+                <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding ElementName=PersonGrid, Path=SelectedItem.TelephoneNbrHome}" Margin="0,0,-17.667,0"/>
+                <Label Content="Riktnummer Arbete" Grid.Column="0" Grid.Row="10"  Margin="-35,0,0,0" />
+                <TextBox Grid.Row="10" Grid.Column="1" Text="{Binding ElementName=PersonGrid, Path=SelectedItem.DiallingCodeWork}" Margin="0,0,-17.667,0"/>
+                <Label Content="Telefonnummer Arbete" Grid.Column="0" Grid.Row="11"  Margin="-35,0,0,0"/>
+                <TextBox Grid.Row="11" Grid.Column="1" Text="{Binding ElementName=PersonGrid, Path=SelectedItem.TelephoneNbrWork}" Margin="0,0,-17.667,0"/>
+                <Label Content="Email 1" Grid.Column="0" Grid.Row="12"  Margin="-35,0,0,0"/>
+                <TextBox Grid.Row="12" Grid.Column="1" Text="{Binding ElementName=PersonGrid, Path=SelectedItem.EmailOne}" Margin="0,0,-17.667,0"/>
+                <Label Content="Email 2" Grid.Column="0" Grid.Row="13"  Margin="-35,0,0,0"/>
+                <TextBox Grid.Row="13" Grid.Column="1" Text="{Binding ElementName=PersonGrid, Path=SelectedItem.EmailTwo}" Margin="0,0,-17.667,0"/>
+                <Button Grid.Row ="14" Grid.Column="1" Margin="28,10,-17.667,-30" Grid.RowSpan="3"  Content="Uppdatera"></Button>
+            </Grid>
+
+        </StackPanel>
+        <StackPanel Grid.Column="2" Grid.Row="2" Margin="1,0,4.333,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="200"/>
+                    <RowDefinition Height="200"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0">
+                    <Label Content="Försäkrade" Grid.Column="0" Grid.Row="14"  Margin="-0,0,0,0"/>
+                    <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding InsuredPersons}" Margin="0,0,159,0" ScrollViewer.CanContentScroll="True" 
+                  ScrollViewer.VerticalScrollBarVisibility="Auto"
+                  ScrollViewer.HorizontalScrollBarVisibility="Auto">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="FörsäkradId" Binding="{Binding Path=InsuredID}"/>
+                            <DataGridTextColumn Header="Personnummer" Binding="{Binding Path=SocialSecurityNumber}"/>
+                            <DataGridTextColumn Header="Förnamn" Binding="{Binding Path=FirstName}"/>
+                            <DataGridTextColumn Header="Efternamn" Binding="{Binding Path=LastName}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+                <StackPanel Grid.Row="1" >
+                    <Label Content="Ansökningar" Grid.Column="0" Grid.Row="15"  Margin="0,0,0,0"/>
+
+                    <DataGrid  AutoGenerateColumns="False" ItemsSource="{Binding InsuranceApplications}" Margin="0,0,123,0" ScrollViewer.CanContentScroll="True" 
+                  ScrollViewer.VerticalScrollBarVisibility="Auto"
+                  ScrollViewer.HorizontalScrollBarVisibility="Auto" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Löpnummer" Binding="{Binding Path=SerialNumber}"/>
                             <DataGridTextColumn Header="FörsäkradId" Binding="{Binding Path=InsuredID}"/>
                             <DataGridTextColumn Header="Försäkringstyp" Binding="{Binding Path=InsuranceTypeId}"/>
                             <DataGridTextColumn Header="Agentnummer" Binding="{Binding Path=AgentNo}"/>
-                            <DataGridTextColumn Header="Försäkringstagare" Binding="{Binding Path=Taker}"/>
                         </DataGrid.Columns>
                     </DataGrid>
-                </DataTemplate>
-            </DataGrid.RowDetailsTemplate>
-        </DataGrid>
-    
+                </StackPanel>
+            </Grid>
+        </StackPanel>
     </Grid>
 </UserControl>

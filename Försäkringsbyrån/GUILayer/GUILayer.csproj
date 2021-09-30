@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -14,6 +15,8 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -35,7 +38,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
@@ -72,9 +82,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Commands\BasicDataCommands\AddBaseAmountTableValueBtn.cs" />
+    <Compile Include="Commands\BasicDataCommands\BaseAmountTableBtn.cs" />
     <Compile Include="Commands\BasicDataCommands\BasicDataBtn.cs" />
+    <Compile Include="Commands\BasicDataCommands\RemoveBaseAmountTableValueBtn.cs" />
     <Compile Include="Commands\CommissionCommands\CommissionBtn.cs" />
     <Compile Include="Commands\EmployeeManagementCommands\EmployeeManagementBtn.cs" />
+    <Compile Include="Commands\EventArgs.cs" />
+    <Compile Include="Commands\EventRaiser.cs" />
     <Compile Include="Commands\HomeBtn.cs" />
     <Compile Include="Commands\InsuranceCommands\CIBtn.cs" />
     <Compile Include="Commands\InsuranceCommands\InsuranceBtn.cs" />
@@ -85,6 +100,8 @@
     <Compile Include="Commands\InsuranceCommands\RegisterSignedInsuranceBtn.cs" />
     <Compile Include="Commands\LogInBtn.cs" />
     <Compile Include="Commands\LogOutBtn.cs" />
+    <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Commands\SearchIndexCommands\RemovePersonBtn.cs" />
     <Compile Include="Commands\SearchIndexCommands\SearchApplicationBtn.cs" />
     <Compile Include="Commands\SearchIndexCommands\SearchCompanyBtn.cs" />
     <Compile Include="Commands\SearchIndexCommands\SearchEmployeeBtn.cs" />
@@ -93,12 +110,17 @@
     <Compile Include="Commands\SearchIndexCommands\SearchSignedInsuranceBtn.cs" />
     <Compile Include="Commands\StatisticsAndProspectusCommands\StatisticsAndProspectusBtn.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\BasicDataViewModels\BaseAmountTableViewModel.cs" />
     <Compile Include="ViewModels\BasicDataViewModels\BasicDataViewModel.cs" />
     <Compile Include="ViewModels\CommissionViewModels\CommissionViewModel.cs" />
     <Compile Include="ViewModels\EmployeeManagementViewModels\EmployeeManagementViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\InsuranceViewModels\InsuranceApplicationChoiceViewModel.cs" />
     <Compile Include="ViewModels\InsuranceViewModels\InsuranceViewModel.cs" />
+    <Compile Include="ViewModels\InsuranceViewModels\RegisterApplicationViewModel.cs" />
+    <Compile Include="ViewModels\InsuranceViewModels\RegisterOPICApplicationViewModel.cs" />
+    <Compile Include="ViewModels\InsuranceViewModels\RegisterOPIPApplicationViewModel.cs" />
+    <Compile Include="ViewModels\InsuranceViewModels\RegisterPersonApplicationViewModel.cs" />
     <Compile Include="ViewModels\LogInViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModels\SearchEmployeeViewModel.cs" />
@@ -106,11 +128,17 @@
     <Compile Include="ViewModels\SearchViewModels\SearchInsuranceTakerPersonViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModels\SearchValueViewModel.cs" />
     <Compile Include="ViewModels\StatisticsAndProspectusViewModels\StatisticsAndProspectusViewModel.cs" />
+    <Compile Include="Views\BasicDataViews\BaseAmountTableView.xaml.cs">
+      <DependentUpon>BaseAmountTableView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\BasicDataViews\BasicDataView.xaml.cs">
       <DependentUpon>BasicDataView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CommissionViews\CommissionView.xaml.cs">
       <DependentUpon>CommissionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EmployeeManagementViews\AddEmployee.xaml.cs">
+      <DependentUpon>AddEmployee.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EmployeeManagementViews\EmployeeManagementView.xaml.cs">
       <DependentUpon>EmployeeManagementView.xaml</DependentUpon>
@@ -123,6 +151,18 @@
     </Compile>
     <Compile Include="Views\InsuranceViews\InsuranceView.xaml.cs">
       <DependentUpon>InsuranceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InsuranceViews\RegisterApplicationView.xaml.cs">
+      <DependentUpon>RegisterApplicationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InsuranceViews\RegisterOPICApplicationView.xaml.cs">
+      <DependentUpon>RegisterOPICApplicationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InsuranceViews\RegisterOPIPApplicationView.xaml.cs">
+      <DependentUpon>RegisterOPIPApplicationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InsuranceViews\RegisterPersonApplicationView.xaml.cs">
+      <DependentUpon>RegisterPersonApplicationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LogInView.xaml.cs">
       <DependentUpon>LogInView.xaml</DependentUpon>
@@ -155,11 +195,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\BasicDataViews\BaseAmountTableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\BasicDataViews\BasicDataView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CommissionViews\CommissionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EmployeeManagementViews\AddEmployee.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -176,6 +224,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\InsuranceViews\InsuranceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InsuranceViews\RegisterApplicationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InsuranceViews\RegisterOPICApplicationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InsuranceViews\RegisterOPIPApplicationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InsuranceViews\RegisterPersonApplicationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -242,4 +306,12 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
 </Project>
