@@ -1,5 +1,4 @@
 ﻿using GUILayer.Commands;
-using GUILayer.Commands.SearchIndexCommands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,24 +16,14 @@ namespace GUILayer.ViewModels.SearchViewModels
     {
         public static readonly SearchValueViewModel Instance = new SearchValueViewModel();
 
-        //public SearchCompanyBtn SearchCompany_Btn { get; }
-        //public SearchPersonBtn SearchPerson_Btn { get; }
-        //public SearchSignedInsuranceBtn SearchSignedI_Btn { get; }
-        //public SearchEmployeeBtn SearchEmployee_Btn { get; }
-        //public SearchApplicationBtn SearchApplication_Btn { get; }
-
+     
 
         private SearchValueViewModel()
         {
-            //SearchCompany_Btn = new SearchCompanyBtn();
-            //SearchPerson_Btn = new SearchPersonBtn();
-            //SearchEmployee_Btn = new SearchEmployeeBtn();
-            //SearchApplication_Btn = new SearchApplicationBtn();
-            //SearchSignedI_Btn = new SearchSignedInsuranceBtn();
+           
         }
-        /// <summary>
-        /// Search Companie commad.
-        /// </summary>
+       
+    #region  Commands
         private ICommand searchCompany_Btn;
         public ICommand SearchCompany_Btn
         {
@@ -79,7 +68,7 @@ namespace GUILayer.ViewModels.SearchViewModels
             MainViewModel.Instance.SelectedViewModel = SearchEmployeeViewModel.Instance;
         }
 
-        //SearchApplication_Btn = new SearchApplicationBtn();
+       
         private ICommand searchApplication_Btn;
         public ICommand SearchApplicationBtn
         {
@@ -91,7 +80,7 @@ namespace GUILayer.ViewModels.SearchViewModels
         {
             // no code yet.
         }
-        //SearchSignedI_Btn = new SearchSignedInsuranceBtn();
+       
 
         private ICommand searchSignedInsurance_Btn;
         public ICommand SearchSignedInsuranceBtn
@@ -103,7 +92,7 @@ namespace GUILayer.ViewModels.SearchViewModels
         {
             // no code yet.
         }
-
+        #endregion
 
     }
 

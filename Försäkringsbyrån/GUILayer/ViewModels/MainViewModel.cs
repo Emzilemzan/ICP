@@ -1,16 +1,10 @@
 ﻿using GUILayer.Commands;
-using GUILayer.Commands.CommissionCommands;
-using GUILayer.Commands.InsuranceCommands;
-using GUILayer.Commands.EmployeeManagementCommands;
-using GUILayer.Commands.SearchIndexCommands;
-using GUILayer.Commands.StatisticsAndProspectusCommands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using GUILayer.Commands.BasicDataCommands;
 using System.Windows.Input;
 using GUILayer.ViewModels.BasicDataViewModels;
 using GUILayer.ViewModels.CommissionViewModels;

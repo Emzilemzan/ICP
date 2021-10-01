@@ -82,32 +82,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Commands\BasicDataCommands\AddBaseAmountTableValueBtn.cs" />
-    <Compile Include="Commands\BasicDataCommands\BaseAmountTableBtn.cs" />
-    <Compile Include="Commands\BasicDataCommands\BasicDataBtn.cs" />
-    <Compile Include="Commands\BasicDataCommands\RemoveBaseAmountTableValueBtn.cs" />
-    <Compile Include="Commands\CommissionCommands\CommissionBtn.cs" />
-    <Compile Include="Commands\EmployeeManagementCommands\EmployeeManagementBtn.cs" />
     <Compile Include="Commands\EventArgs.cs" />
     <Compile Include="Commands\EventRaiser.cs" />
-    <Compile Include="Commands\InsuranceCommands\CIBtn.cs" />
-    <Compile Include="Commands\InsuranceCommands\InsuranceBtn.cs" />
-    <Compile Include="Commands\InsuranceCommands\OPICompanyBtn.cs" />
-    <Compile Include="Commands\InsuranceCommands\OPIPersonBtn.cs" />
-    <Compile Include="Commands\InsuranceCommands\PIBtn.cs" />
-    <Compile Include="Commands\InsuranceCommands\RegisterApplicationBtn.cs" />
-    <Compile Include="Commands\InsuranceCommands\RegisterSignedInsuranceBtn.cs" />
-    <Compile Include="Commands\LogInBtn.cs" />
-    <Compile Include="Commands\LogOutBtn.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
-    <Compile Include="Commands\SearchIndexCommands\RemovePersonBtn.cs" />
-    <Compile Include="Commands\SearchIndexCommands\SearchApplicationBtn.cs" />
-    <Compile Include="Commands\SearchIndexCommands\SearchCompanyBtn.cs" />
-    <Compile Include="Commands\SearchIndexCommands\SearchEmployeeBtn.cs" />
-    <Compile Include="Commands\SearchIndexCommands\SearchValueBtn.cs" />
-    <Compile Include="Commands\SearchIndexCommands\SearchPersonBtn.cs" />
-    <Compile Include="Commands\SearchIndexCommands\SearchSignedInsuranceBtn.cs" />
-    <Compile Include="Commands\StatisticsAndProspectusCommands\StatisticsAndProspectusBtn.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\BasicDataViewModels\BaseAmountTableViewModel.cs" />
     <Compile Include="ViewModels\BasicDataViewModels\BasicDataViewModel.cs" />
@@ -189,7 +166,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Commands\BaseCommand.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

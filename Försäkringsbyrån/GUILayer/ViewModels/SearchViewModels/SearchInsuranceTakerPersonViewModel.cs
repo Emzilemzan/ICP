@@ -7,7 +7,6 @@ using System.Collections.ObjectModel;
 using Models.Models;
 using System.ComponentModel;
 using System.Windows.Data;
-using GUILayer.Commands.SearchIndexCommands;
 using System.Windows.Input;
 
 namespace GUILayer.ViewModels.SearchViewModels
@@ -16,7 +15,7 @@ namespace GUILayer.ViewModels.SearchViewModels
     {
         public static readonly SearchInsuranceTakerPersonViewModel Instance = new SearchInsuranceTakerPersonViewModel();
 
-        public RemovePersonBtn RemoveBtn { get; }
+       
         public SearchInsuranceTakerPersonViewModel()
         {
 
