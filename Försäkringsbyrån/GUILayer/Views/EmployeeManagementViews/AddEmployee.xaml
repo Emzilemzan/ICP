@@ -10,7 +10,6 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="350"/>
             <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -44,7 +43,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <Label Content="Grunduppgifter" FontWeight="Bold" Grid.Row="1" Grid.Column="0" FontSize="18"/>
+                <Label Content="Grunduppgifter:" FontWeight="Bold" Grid.Row="1" Grid.Column="0" FontSize="18"/>
                 <Label Grid.Row="2" Grid.Column="0" Content="AnställningsNr:"/>
                 <TextBox Grid.Row="2" Width="160" Height="20"></TextBox>
                 <Label Grid.Row="3" Grid.Column="0" Content="Efternamn:"/>
@@ -57,18 +56,41 @@
                 <TextBox Grid.Row="6" Width="160" Height="20"></TextBox>
                 <Label Grid.Row="7" Grid.Column="0" Content="Postort:"/>
                 <TextBox Grid.Row="7" Width="160" Height="20"></TextBox>
-                <Label Grid.Row="8" Grid.Column="0" Content="Skattesats:"/>
+                <Label Grid.Row="8" Grid.Column="0" Content="Skattesats %:"/>
                 <TextBox Grid.Row="8" Width="160" Height="20"></TextBox>
                 <Label Grid.Row="9" Grid.Column="0" Content="Anställningsform:"/>
                 <ComboBox Grid.Row="9" Width="160" Height="20"></ComboBox>
                 <Label Grid.Row="10" Grid.Column="0" Content="Befattning:"/>
                 <ComboBox Grid.Row="10" Width="160" Height="20"></ComboBox>
-                <Label Grid.Row="11" Grid.Column="0" Content="Agenturnummer:"/>
-                <TextBox Grid.Row="11" Width="160" Height="20"></TextBox>
             </Grid>
+          
+        </StackPanel>
+
+        <StackPanel Grid.Column="2" Grid.Row="2" Grid.RowSpan="10">
             <Grid>
-                <Button Content="Lägg till anställd" Width="100" Margin="114,10,86,10"></Button>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Label Content=" Inlogg:" FontSize="18" Margin="-4,0,0,0" FontWeight="Bold"/>
+                <Label Grid.Row="1" Grid.Column="0" Content="Användarnamn:"/>
+                <TextBox Grid.Row="1" Width="160" Height="20" Margin="0.333,6,-60.333,0" Grid.Column="1"></TextBox>
+                <Label Grid.Row="2" Grid.Column="0" Content="Lösenord:"/>
+                <TextBox Grid.Row="1" Width="160" Height="20" Margin="0.333,37,-60.333,-31" Grid.Column="1"></TextBox>
+
+            </Grid>
+
+            <Grid>
+                <Button Content="Lägg till anställd" Width="100" Margin="99,173,1.667,-152.333"></Button>
             </Grid>
         </StackPanel>
-    </Grid> 
+       
+    </Grid>
 </UserControl>
