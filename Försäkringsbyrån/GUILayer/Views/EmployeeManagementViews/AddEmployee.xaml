@@ -22,7 +22,7 @@
         </Grid.RowDefinitions>
         <Label Content="Lägg till anställd" FontSize="20" Grid.Row="0" Grid.Column="0"/>
 
-        <StackPanel Grid.Column="0" Grid.Row="1" Grid.RowSpan="4">
+        <StackPanel Grid.Column="0" Grid.Row="1" Grid.RowSpan="8">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="350"/>
@@ -70,5 +70,5 @@
                 <Button Content="Lägg till anställd" Width="100" Margin="114,10,86,10"></Button>
             </Grid>
         </StackPanel>
-    </Grid>
+    </Grid> 
 </UserControl>
