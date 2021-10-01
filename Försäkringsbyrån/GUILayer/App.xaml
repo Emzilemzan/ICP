@@ -25,7 +25,7 @@
             <v:HomeView/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type svm:SearchValueViewModel}">
-            <sv:SearchValueView/>
+            <sv:SearchValueView/> 
         </DataTemplate>
         <DataTemplate DataType="{x:Type svm:SearchEmployeeViewModel}">
             <sv:SearchEmployeeView/>
