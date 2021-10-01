@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataLayer.GenericRepository
 {
-    public interface ISignedInsuranceRepository : IGenericRepository<SignedInsurance>
+    public interface IInsuranceRepository : IGenericRepository<Insurance>
     {
-
     }
 }

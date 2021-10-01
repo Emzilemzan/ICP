@@ -14,11 +14,11 @@ namespace GUILayer.ViewModels
     {
         public static readonly HomeViewModel Instance = new HomeViewModel();
 
-        public HomeBtn HomeButton { get; }
+       
 
         private HomeViewModel()
         {
-            HomeButton = new HomeBtn();
+          
         }
         //public string Firstname=> _employee.Firstname;
     }

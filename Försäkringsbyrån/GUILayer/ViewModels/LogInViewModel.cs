@@ -15,11 +15,11 @@ namespace GUILayer.ViewModels
     {
         public static readonly LogInViewModel Instance = new LogInViewModel();
 
-        public LogInBtn LogIn { get; }
+       
 
         private LogInViewModel()
         {
-            LogIn = new LogInBtn();
+            
         }
 
         private string _username;
@@ -29,7 +29,7 @@ namespace GUILayer.ViewModels
             set
             {
                 _username = value;
-                LogIn.RaiseCanExecuteChanged();
+               
                 OnPropertyChanged("Username");
             }
         }
@@ -41,7 +41,7 @@ namespace GUILayer.ViewModels
             set
             {
                 _password = value;
-                LogIn.RaiseCanExecuteChanged();
+               
                 OnPropertyChanged("Password");
             }
         }

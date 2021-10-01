@@ -42,11 +42,10 @@ namespace BussinessLayer
             edit.StreetAddress = employee.StreetAddress;
             edit.City = employee.City; 
             edit.Postalcode = employee.Postalcode;
-            edit.AgentNo= employee.AgentNo;
             edit.FormOfEmployment = employee.FormOfEmployment;
             edit.Password = employee.Password;
             edit.Username = employee.Username;
-            edit.Role = employee.Role;
+           
 
             BusinessController.Instance.Save();
         }

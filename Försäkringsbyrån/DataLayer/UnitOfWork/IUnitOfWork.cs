@@ -13,12 +13,12 @@ namespace DataLayer.UnitOfWork
   public interface IUnitOfWork : IDisposable
     {
         IEmployeeRepository Employees { get; }
-        IInsuranceApplicationRepository Applications { get; }
+        IInsuranceRepository Insurances { get; }
         IInsuranceTakerRepository InsuranceTakers { get; }
         IInsuredPersonRepository InsuredPersons { get; }
         ICompanyRepository Companies { get; }
         IPersonRepository Persons { get; }
-        ISignedInsuranceRepository SignedInsurances { get; }
+        
         int Complete();
 
     }
