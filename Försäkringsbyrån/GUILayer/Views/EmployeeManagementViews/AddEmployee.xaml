@@ -5,8 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUILayer.Views.EmployeeManagementViews"
         mc:Ignorable="d"
-        Title="AddEmployee" Height="450" Width="800">
+        Title="AddEmployee" Height="450" Width="700">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="500"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Lägg till anställd" FontSize="20" Grid.Row="0" Grid.Column="0"/>
+
+        <StackPanel>
+            <Grid>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+
+                </Grid.RowDefinitions>
+
+                <Label Content="Grunduppgifter" FontWeight="Bold" Grid.Row="1" FontSize="18" Grid.ColumnSpan="2" Margin="2,44,248,-44" />
+            </Grid>
+
+        </StackPanel>
+
+
+
+
     </Grid>
 </Window>
