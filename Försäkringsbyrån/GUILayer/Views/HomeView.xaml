@@ -12,11 +12,12 @@
                    Foreground="Black"/>
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="6*"/>
+                    <ColumnDefinition Width="270*"/>
+                    <ColumnDefinition Width="275*"/>
                 </Grid.ColumnDefinitions>
-                <Label Content="Välkommen" FontSize="40" FontStyle="Italic" Grid.Column="0" />
-                <Label Content="{Binding Firstname}" FontSize="40" FontStyle="Italic" Grid.Column="1" />
+                <Label Content="Välkommen" FontSize="40" FontStyle="Italic" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0.333,0.333" />
+                <Label Content="{Binding Fullname}" FontSize="40" FontStyle="Italic" Margin="222.333,0,-107.667,0.333" HorizontalAlignment="Left" Width="430" Grid.ColumnSpan="2" Grid.Column="1" />
             </Grid>
         </StackPanel>
     </Grid>

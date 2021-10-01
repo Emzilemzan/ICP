@@ -16,11 +16,22 @@ namespace GUILayer.ViewModels.SearchViewModels
 
         public SearchEmployeeViewModel()
         {
-            
+            Employees = UpdateEmployee();
             EmployeeGrid = CollectionViewSource.GetDefaultView(Employees);
             EmployeeGrid.Filter = new Predicate<object>(o => Filter(o as Employee));
         }
-
+        #region
+        public ObservableCollection<Employee> UpdateEmployee()
+        {
+            ObservableCollection<Employee> x = new ObservableCollection<Employee>();
+            foreach (var e in Context.EController.GetAllEmployees())
+            {
+                x?.Add(e);
+            }
+            Employees = x;
+            return Employees;
+        }
+        #endregion
 
         #region Specific Porperties and methods for search in collection
 

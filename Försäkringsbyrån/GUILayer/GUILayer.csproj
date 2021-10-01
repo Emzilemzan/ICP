@@ -90,7 +90,6 @@
     <Compile Include="Commands\EmployeeManagementCommands\EmployeeManagementBtn.cs" />
     <Compile Include="Commands\EventArgs.cs" />
     <Compile Include="Commands\EventRaiser.cs" />
-    <Compile Include="Commands\HomeBtn.cs" />
     <Compile Include="Commands\InsuranceCommands\CIBtn.cs" />
     <Compile Include="Commands\InsuranceCommands\InsuranceBtn.cs" />
     <Compile Include="Commands\InsuranceCommands\OPICompanyBtn.cs" />

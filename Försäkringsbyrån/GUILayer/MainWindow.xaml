@@ -37,7 +37,7 @@
                                 Height="32"
                                 Background="Transparent"
                                 FontSize="15"
-                                Command="{Binding SearchIndex_Btn}"
+                                Command="{Binding SearchBtn}"
                                 Style="{DynamicResource MainMenuButtonStyle}"
                                 >
                             <Button.Resources>
@@ -55,7 +55,7 @@
                                 Background="Transparent"
                                 FontSize="15"
                                 Height="32"
-                                Command="{Binding Insurance_Btn}" 
+                                Command="{Binding InsuranceBtn}" 
                                 Style="{DynamicResource MainMenuButtonStyle}"
                                 >
                             <Button.Resources>
@@ -73,7 +73,7 @@
                                 Height="32"
                                 FontSize="15"
                                 Background="Transparent"
-                                Command="{Binding Commission_Btn}"
+                                Command="{Binding CommissionBtn}"
                                 Style="{DynamicResource MainMenuButtonStyle}"
                                 >
                             <Button.Resources>
@@ -91,7 +91,7 @@
                                 Height="32"
                                 FontSize="15"
                                 Background="Transparent"
-                                Command="{Binding SAP_Btn}"
+                                Command="{Binding SapBtn}"
                                 Style="{DynamicResource MainMenuButtonStyle}"
                                 >
                             <Button.Resources>
@@ -109,7 +109,7 @@
                                 FontSize="15"
                                 Height="32"
                                 Background="Transparent"
-                                Command="{Binding EM_Btn}"
+                                Command="{Binding EMBtn}"
                                 Style="{DynamicResource MainMenuButtonStyle}"
                                 >
                             <Button.Resources>
@@ -127,7 +127,7 @@
                                 FontSize="15"
                                 Height="32"
                                 Background="Transparent"
-                                Command="{Binding BasicData_Btn}"
+                                Command="{Binding BasicDataBtn}"
                                 Style="{DynamicResource MainMenuButtonStyle}"
                                 >
 
@@ -156,7 +156,7 @@
                             Width="100"
                             Height="32"
                             Background="Transparent"
-                            Command="{Binding LogOut_Btn}"
+                            Command="{Binding LogOutBtn}"
                             Style="{DynamicResource MainMenuButtonStyle}">
 
                         <Button.Resources>

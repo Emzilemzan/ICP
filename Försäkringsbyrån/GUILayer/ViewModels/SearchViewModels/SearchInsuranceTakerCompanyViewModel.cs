@@ -16,16 +16,30 @@ namespace GUILayer.ViewModels.SearchViewModels
 
         public SearchInsuranceTakerCompanyViewModel()
         {
-            
+            Companies = UpdateCompanies();
             CompanyGrid = CollectionViewSource.GetDefaultView(Companies);
             CompanyGrid.Filter = new Predicate<object>(o => Filter(o as Company));
         }
+        
+        #region
+        public ObservableCollection<Company> UpdateCompanies()
+        {
+            ObservableCollection<Company> x = new ObservableCollection<Company>();
+            foreach (var c in Context.ITController.GetAllCompanies())
+            {
+                x?.Add(c);
+            }
+            Companies = x;
+            return Companies;
+        }
+        #endregion
+
         #region Specific Porperties and methods for search in collection
 
         private ICollectionView _companyCollection;
         public ICollectionView CompanyGrid
         {
-            get { return _companyCollection; }
+            get => _companyCollection; 
             set { _companyCollection = value; OnPropertyChanged("CompanyGrid"); }
         }
         private bool Filter(Company company)

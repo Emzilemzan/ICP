@@ -12,11 +12,11 @@ namespace BussinessLayer
     /// </summary>
     public class InsuredPersonController
     {
-        public List<InsuredPerson> GetInsuranceTakerIA(InsuranceTaker insuranceTaker) => insuranceTaker.InsuredPersons?.OrderByDescending(i => i.InsuredID).ToList();
-        public List<InsuredPerson> GetInsuranceTakerIAS(InsuranceTaker insuranceTaker)
+        public List<InsuredPerson> GetInsuranceTakerIP(InsuranceTaker insuranceTaker) => insuranceTaker.InsuredPersons?.OrderByDescending(i => i.InsuredID).ToList();
+        public List<InsuredPerson> GetInsuranceTakerIPS(InsuranceTaker insuranceTaker)
         {
             List<InsuredPerson> insuredPeople = new List<InsuredPerson>();
-            GetInsuranceTakerIA(insuranceTaker)?.ForEach(p => insuredPeople.Add(p));
+            GetInsuranceTakerIP(insuranceTaker)?.ForEach(p => insuredPeople.Add(p));
             return insuredPeople.OrderByDescending(i => i.InsuredID).ToList();
         }
         public void AddInsuredPerson(InsuredPerson insuredPerson)
