@@ -7,7 +7,7 @@ using System.Collections.ObjectModel;
 using Models.Models;
 using System.ComponentModel;
 using System.Windows.Data;
-using GUILayer.Commands.SearchIndexCommands;
+using System.Windows.Input;
 
 namespace GUILayer.ViewModels.SearchViewModels
 {
@@ -15,7 +15,7 @@ namespace GUILayer.ViewModels.SearchViewModels
     {
         public static readonly SearchInsuranceTakerPersonViewModel Instance = new SearchInsuranceTakerPersonViewModel();
 
-        public RemovePersonBtn RemoveBtn { get; }
+       
         public SearchInsuranceTakerPersonViewModel()
         {
 
@@ -103,6 +103,7 @@ namespace GUILayer.ViewModels.SearchViewModels
 
         #region Properties
 
+    
         public ObservableCollection<Person> Persons { get; set; }
         public ObservableCollection<Insurance> Insurances { get; set; }
         public ObservableCollection<InsuredPerson> InsuredPersons { get; set; } = new ObservableCollection<InsuredPerson>();
