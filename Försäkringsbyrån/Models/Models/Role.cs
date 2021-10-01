@@ -9,11 +9,11 @@ namespace Models.Models
     /// <summary>
     /// Befattning
     /// </summary>
-  public  class Role
+  public class Role
     {
         public int RoleId { get; set; }
         public string RoleName { get; set; }
         public Employee EmployeeId { get; set; }
-
+         
     }
 }

@@ -21,6 +21,7 @@ namespace Models.Models
         public bool StatisticsAndProspects { get; set; }
         public bool EmployeeManagement { get; set; }
         public bool BasicData { get; set; }
+        public bool ComissionData { get; set; }
 
     }
 }
