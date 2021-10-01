@@ -18,7 +18,6 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
 
                 </Grid.ColumnDefinitions>
                 <Button  Grid.Column="0"
@@ -26,25 +25,17 @@
                          FontSize="20"
                          Height="106"
                          Background="Transparent" 
-                         Margin="50,0,22.667,0"
+                         Margin="98,0,52,0"
                          Command=""
                          Style="{DynamicResource OtherButtonStyle}" Width="Auto">
                 </Button>
-                <Button     Grid.Column="1"
-                            FontSize="20"
-                            Content="Skapa inlogg"
-                            Height="106"
-                            Background="Transparent" 
-                            Margin="37.333,0,38.333,0"
-                            Command=""
-                            Style="{DynamicResource OtherButtonStyle}" Width="Auto">
-                </Button>
-                <Button  Grid.Column="2"
+
+                <Button  Grid.Column="1"
                          FontSize="20"
                          Height="106"
                          Content="Hantera anställd"
                          Background="Transparent" 
-                         Margin="40.667,0,37,0"
+                         Margin="52,0,108,0"
                          Command=""
                          Style="{DynamicResource OtherButtonStyle}" Width="Auto">
                 </Button>

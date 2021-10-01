@@ -12,8 +12,18 @@ namespace Models.Models
   public  class Role
     {
         public int RoleId { get; set; }
-        public string RoleName { get; set; }
         public Employee EmployeeId { get; set; }
 
+        public bool CEO { get; set; }
+
+        public bool SalesAssistent { get; set; }
+
+        public bool SalesManager { get; set; }
+
+        public bool FieldSalesMen { get; set; }
+
+        public bool OfficeSalesMen { get; set; }
+
+        public bool EconomyAssistent { get; set; }
     }
 }
