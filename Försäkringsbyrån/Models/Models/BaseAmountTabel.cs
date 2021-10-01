@@ -19,7 +19,7 @@ namespace Models.Models
         public DateTime Date { get; set; } 
         public double BaseAmount { get; set; }
         public double AckValue { get; set; } 
-        public SAInsurance insuranceType { get; set; } 
+        public SAInsurance InsuranceType { get; set; } 
 
     }
 }
