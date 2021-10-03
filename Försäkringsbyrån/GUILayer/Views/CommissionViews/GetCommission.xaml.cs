@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GUILayer.Views.EmployeeManagementViews
+namespace GUILayer.Views.CommissionViews
 {
     /// <summary>
-    /// Interaction logic for AddEmployee.xaml
+    /// Interaction logic for GetCommission.xaml
     /// </summary>
-    public partial class AddEmployee : UserControl
+    public partial class GetCommission : UserControl
     {
-        public AddEmployee()
+        public GetCommission()
         {
             InitializeComponent();
         }
