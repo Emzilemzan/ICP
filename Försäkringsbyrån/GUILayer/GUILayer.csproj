@@ -113,6 +113,9 @@
     <Compile Include="Views\CommissionViews\CommissionView.xaml.cs">
       <DependentUpon>CommissionView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\CommissionViews\GetCommission.xaml.cs">
+      <DependentUpon>GetCommission.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\EmployeeManagementViews\AddEmployee.xaml.cs">
       <DependentUpon>AddEmployee.xaml</DependentUpon>
     </Compile>
@@ -185,6 +188,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CommissionViews\CommissionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CommissionViews\GetCommission.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
