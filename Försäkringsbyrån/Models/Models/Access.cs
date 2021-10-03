@@ -13,8 +13,8 @@ namespace Models.Models
     [Table("Behörighet", Schema = "dbo")]
     public class Access
     {
-        [Key, Column(Order = 0)]
-        public int EmployeeId { get; set; }
+        [Key, DatabaseGenerat‌ed(DatabaseGeneratedOp‌​tion.None)]
+        public string EmployeeId { get; set; }
        
         public bool Search { get; set; }
         public bool Insurances { get; set; }

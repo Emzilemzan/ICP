@@ -46,10 +46,11 @@ namespace BussinessLayer
             edit.FormOfEmployment = employee.FormOfEmployment;
             edit.Password = employee.Password;
             edit.Username = employee.Username;
-           
-
+            edit.Accesses = employee.Accesses;
+            edit.Roles = employee.Roles;
             BusinessController.Instance.Save();
         }
+
 
     }
 

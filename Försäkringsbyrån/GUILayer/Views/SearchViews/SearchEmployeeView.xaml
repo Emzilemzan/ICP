@@ -91,7 +91,26 @@
                 <TextBox Grid.Row="9" IsReadOnly="true" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.FormOfEmployment}"/>
                 <Label Content="Agentnummer" Grid.Column="0" Grid.Row="10"/>
                 <TextBox Grid.Row="10" IsReadOnly="true" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.AgentNo}"/>
-
+                <GroupBox Header="Befattning" Grid.Row="13" Margin="5,29,-1,-145.333" Grid.Column="1">
+                    <StackPanel>
+                        <CheckBox Content="Innesäljare" IsHitTestVisible="False" IsChecked="{Binding  OfficesalesMen}"/>
+                        <CheckBox Content="Utesäljare" IsHitTestVisible="False" IsChecked="{Binding  FieldsalesMen}"/>
+                        <CheckBox Content="Ekonomiassistent" IsHitTestVisible="False" IsChecked="{Binding  Economyassistent}"/>
+                        <CheckBox Content="Försäljningsassisent" IsHitTestVisible="False" IsChecked="{Binding Salesassistent}"/>
+                        <CheckBox Content="Försäljningschef" IsHitTestVisible="False" IsChecked="{Binding Salesmanager}"/>
+                        <CheckBox Content="VD" IsHitTestVisible="False" IsChecked="{Binding Ceo}"/>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Behörighet" Margin="10,29,0,-145.667" Grid.Row="13">
+                    <StackPanel>
+                        <CheckBox Content="Hantera sök" IsHitTestVisible="False" IsChecked="{Binding Search}"/>
+                        <CheckBox Content="Hantera försäkringar" IsHitTestVisible="False" IsChecked="{Binding Insurances}"/>
+                        <CheckBox Content="Hantera statistik &amp; prospekt" IsHitTestVisible="False" IsChecked="{Binding StatisticsAndProspects}"/>
+                        <CheckBox Content="Personalhantering" IsHitTestVisible="False" IsChecked="{Binding EmployeeManagement}"/>
+                        <CheckBox Content="Hantera grunddata" IsHitTestVisible="False" IsChecked="{Binding BasicData}"/>
+                        <CheckBox Content="Hantera provision" IsHitTestVisible="False" IsChecked="{Binding Commission}"/>
+                    </StackPanel>
+                </GroupBox>
             </Grid>
 
         </StackPanel>

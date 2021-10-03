@@ -72,6 +72,9 @@
         <DataTemplate DataType="{x:Type ivm:RegisterOPICApplicationViewModel}">
             <iv:RegisterOPICApplicationView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type emvm:HandleEmployeeViewModel}">
+            <emv:HandleEmployeeView/>
+        </DataTemplate>
 
 
         <!--#region Exit Button Style-->

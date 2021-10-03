@@ -14,8 +14,8 @@ namespace Models.Models
    // [Table("Befattning", Schema = "dbo")]
     public class Role
     {
-        [Key, Column(Order = 0)]
-        public int EmployeeId { get; set; }
+        [Key, DatabaseGenerat‌ed(DatabaseGeneratedOp‌​tion.None)]
+        public string EmployeeId { get; set; }
 
         public bool CEO { get; set; }
 

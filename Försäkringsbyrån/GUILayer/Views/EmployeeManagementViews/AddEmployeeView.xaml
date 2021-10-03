@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:GUILayer.Views.EmployeeManagementViews"
         xmlns:xctk1="http://schemas.xceed.com/wpf/xaml/toolkit"
          mc:Ignorable="d"     d:DesignHeight="500" Width="900.35">
-
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="350"/>
@@ -46,26 +48,29 @@
 
                 <Label Content="Grunduppgifter" FontWeight="Bold" Grid.Row="1" Grid.Column="0" FontSize="18"/>
                 <Label Grid.Row="2" Grid.Column="0" Content="AnställningsNr:"  />
-                <TextBox Grid.Row="2" Width="160" Height="20" Text="{Binding Path = EmploymentNo}"  ></TextBox>
-                <Label Grid.Row="3" Grid.Column="0" Content="Efternamn:"/>
-                <TextBox Grid.Row="3" Width="160" Height="20" Text="{Binding Path= Lastname}"></TextBox>
-                <Label Grid.Row="4" Grid.Column="0" Content="Förnamn:"/>
-                <TextBox Grid.Row="4" Width="160" Height="20" Text="{Binding Path =Firstname}"></TextBox>
+                <TextBox Grid.Row="2" Height="20" Text="{Binding Path = EmploymentNo}" Margin="128,3,61,3"  />
+                <Label Grid.Row="3" Grid.Column="0" Content="Förnamn:"/>
+                <TextBox Grid.Row="3" Height="20" Text="{Binding Path= Firstname}" Margin="128,3,61,3"/>
+                <Label Grid.Row="4" Grid.Column="0" Content="Efternamn:"/>
+                <TextBox Grid.Row="4" Height="20" Text="{Binding Path =Lastname}" Margin="128,3,61,3"/>
                 <Label Grid.Row="5" Grid.Column="0" Content="Gatuadress:"/>
-                <TextBox Grid.Row="5" Width="160" Height="20" Text="{Binding Path= StreetAddress}"></TextBox>
+                <TextBox Grid.Row="5" Height="20" Text="{Binding Path= StreetAddress}" Margin="128,3,61,3"/>
                 <Label Grid.Row="6" Grid.Column="0" Content="Postnummer:"/>
-                <TextBox Grid.Row="6" Width="160" Height="20" Text="{Binding Path= Postalcode}"></TextBox>
+                <TextBox Grid.Row="6" Height="20" Text="{Binding Path= Postalcode}" Margin="128,3,61,3"/>
                 <Label Grid.Row="7" Grid.Column="0" Content="Postort:"/>
-                <TextBox Grid.Row="7" Width="160" Height="20" Text="{Binding Path= City}"></TextBox>
+                <TextBox Grid.Row="7" Height="20" Text="{Binding Path= City}" Margin="128,3,61,3"/>
                 <Label Grid.Row="8" Grid.Column="0" Content="Skattesats(%):"/>
-                <TextBox Grid.Row="8" Width="160" Height="20" Text="{Binding Path= TaxRate}"></TextBox>
+                <TextBox Grid.Row="8" Height="20" Text="{Binding Path= TaxRate}" Margin="128,3,61,3"/>
                 <Label Grid.Row="9" Grid.Column="0" Content="Anställningsform(%):"/>
-                <TextBox Grid.Row="9" Width="160" Height="20" Text="{Binding Path= FormOfEmployment}"></TextBox>
+                <TextBox Grid.Row="9" Height="20" Text="{Binding Path= FormOfEmployment}" Margin="128,3,61,3"/>
                 <Label Grid.Row="10" Grid.Column="0" Content="Användarnamn:"/>
-                <TextBox Grid.Row="10" Width="160" Height="20" Text="{Binding Path= Username}"></TextBox>
+                <TextBox Grid.Row="10" Height="20" Text="{Binding Path= Username}" Margin="128,3,61,3"/>
                 <Label Grid.Row="11" Grid.Column="0" Content="Lösenord:"/>
-                <TextBox Grid.Row="11" Width="160" Height="20" Text="{Binding Path= Password}"></TextBox>
-
+                <TextBox Grid.Row="11" Height="20" Text="{Binding Path= Password}" Margin="128,3,61,3"/>
+                <Label Grid.Row="12" Grid.Column="0" Content="Agentnummer:" Visibility="{Binding ElementName=OSM, Path=IsChecked,Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                <Label Grid.Row="12" Grid.Column="0" Content="Agentnummer:" Visibility="{Binding ElementName=FSM, Path=IsChecked,Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                <TextBox Grid.Row="12" Width="160" Margin="128,3,61,3" Height="20" Text="{Binding Path= AgentNumber}" Visibility="{Binding ElementName=OSM, Path=IsChecked,Converter={StaticResource BooleanToVisibilityConverter}}" ></TextBox>
+                <TextBox Grid.Row="12" Width="160" Margin="128,3,61,3" Height="20" Text="{Binding Path= AgentNumber}" Visibility="{Binding ElementName=FSM, Path=IsChecked,Converter={StaticResource BooleanToVisibilityConverter}}" ></TextBox>
             </Grid>
 
         </StackPanel>
@@ -82,8 +87,8 @@
             </Grid.RowDefinitions>
             <GroupBox Header="Befattning" Grid.Column="0" Margin="0,0,0,-32" Grid.RowSpan="4">
                 <StackPanel>
-                    <CheckBox Content="Innesäljare" IsChecked="{Binding  OfficesalesMen}"/>
-                    <CheckBox Content="Utesäljare" IsChecked="{Binding  FieldsalesMen}"/>
+                    <CheckBox Content="Innesäljare" Name="OSM" IsChecked="{Binding  OfficesalesMen}"/>
+                    <CheckBox Content="Utesäljare" Name="FSM" IsChecked="{Binding  FieldsalesMen}"/>
                     <CheckBox Content="Ekonomiassistent" IsChecked="{Binding  Economyassistent}"/>
                     <CheckBox Content="Försäljningsassisent" IsChecked="{Binding Salesassistent}"/>
                     <CheckBox Content="Försäljningschef" IsChecked="{Binding Salesmanager}"/>
@@ -100,11 +105,6 @@
                     <CheckBox Content="Hantera provision" IsChecked="{Binding Commission}"/>
                 </StackPanel>
             </GroupBox>
-            <!--<ListBox  SelectionMode ="Multiple" Grid.Column="0" Margin="0,-10,36,0" ItemsSource="{Binding RoleTypes}" Grid.RowSpan="4"/>
-            <TextBlock Name="Access" Text="Befattning" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="0,-70,16,73.333" Height="22" />-->
-            <!--<ListBox SelectionMode ="Multiple" Margin="1,-10,5.667,0" Grid.RowSpan="4" RenderTransformOrigin="0.5,0.5" ItemsSource="{Binding AccessTypes}" Grid.Column="1"/>
-            <TextBlock IsHitTestVisible="False" Name="Accesses" Text="Behörighet" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="6,-73,5.667,82.333" Height="16" />-->
-
             <Button Content="Lägg till anställd" Grid.Column="1" Margin="6,62.667,20.667,-63" Grid.Row="3" Command="{Binding AddEmployeeBtn}"/>
         </Grid>
     </Grid>

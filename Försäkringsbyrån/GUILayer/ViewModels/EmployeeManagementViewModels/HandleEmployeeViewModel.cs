@@ -1,5 +1,4 @@
 ﻿using GUILayer.Commands;
-using GUILayer.ViewModels.SearchViewModels;
 using Models.Models;
 using System;
 using System.Collections.Generic;
@@ -8,130 +7,104 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace GUILayer.ViewModels.EmployeeManagementViewModels
 {
-    public class AddEmployeeViewModel : BaseViewModel
+    public class HandleEmployeeViewModel : BaseViewModel
     {
-        public static readonly AddEmployeeViewModel Instance = new AddEmployeeViewModel();
+        public static readonly HandleEmployeeViewModel Instance = new HandleEmployeeViewModel();
 
-        public AddEmployeeViewModel()
+        public HandleEmployeeViewModel()
         {
-        
+            Employees = UpdateEmployees();
+            EmployeeGrid = CollectionViewSource.GetDefaultView(Employees);
+            EmployeeGrid.Filter = new Predicate<object>(o => Filter(o as Employee));
         }
-
-        #region commands
-
-        private ICommand _addEmployeeBtn;
-        public ICommand AddEmployeeBtn
-        {
-            get => _addEmployeeBtn ?? (_addEmployeeBtn = new RelayCommand(x => { InsertEmployee(); CanCommand(); }));
-        }
-
-        public bool CanCommand() => !string.IsNullOrEmpty(Instance._employmentNo) && !string.IsNullOrWhiteSpace(Instance._username) && !string.IsNullOrWhiteSpace(Instance._password)
-            && !string.IsNullOrWhiteSpace(Instance.City) && !string.IsNullOrWhiteSpace(Instance._firstname)
-            && !string.IsNullOrWhiteSpace(Instance._lastname) && !string.IsNullOrWhiteSpace(Instance._streetAddress) && !string.IsNullOrWhiteSpace(Instance._postalCode)
-           && !string.IsNullOrWhiteSpace(Instance._foe) && !string.IsNullOrWhiteSpace(Instance._taxRate);
-
-        #endregion
 
         #region methods
-        private void InsertEmployee()
+        public ObservableCollection<Employee> UpdateEmployees()
         {
-            Employee employee = new Employee()
+            ObservableCollection<Employee> x = new ObservableCollection<Employee>();
+            foreach (var e in Context.EController.GetAllEmployees())
             {
-                EmploymentNo = Instance._employmentNo,
-                Username = Instance._username,
-                Password = Instance._password,
-                Firstname = Instance._firstname,
-                Lastname = Instance._lastname,
-                StreetAddress = Instance._streetAddress,
-                City = Instance._city,
-                Postalcode = Instance._postalCode,
-                FormOfEmployment = TryParseFoe(Instance._foe),
-                TaxRate = TryParseTR(Instance._taxRate),
-                Accesses = Createaccess(),
-                Roles = Createrole(),
-                SalesMen = InsertSalesMen(),
-            };
-            Context.EController.AddEmployee(employee);
-            MessageBox.Show("En ny anställd har lagts till");
-            MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
-            MainViewModel.Instance.CurrentTool = "";
-            HandleEmployeeViewModel.Instance.UpdateEmployees();
-            MainViewModel.Instance.SelectedViewModel = HandleEmployeeViewModel.Instance;
+                x?.Add(e);
+            }
+            Employees = x;
+            return Employees;
         }
-        private SalesMen InsertSalesMen()
+
+        #endregion
+
+        private ICommand _updateEmployeeBtn;
+        public ICommand UpdateEmployeeBtn
         {
-            SalesMen salesMen = new SalesMen()
+            get => _updateEmployeeBtn ?? (_updateEmployeeBtn = new RelayCommand(x => { UpdateEmployee(); CanCommand(); }));
+        }
+
+        private void UpdateEmployee()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool CanCommand() => true;
+
+        #region search
+        private ICollectionView _employeeCollection;
+        public ICollectionView EmployeeGrid
+        {
+            get { return _employeeCollection; }
+            set { _employeeCollection = value; OnPropertyChanged("EmployeeGrid"); }
+        }
+        private bool Filter(Employee employee)
+        {
+            return SearchInput == null
+                || employee.EmploymentNo.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
+                || employee.Firstname.IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
+                || employee.Lastname.IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
+                || employee.StreetAddress.IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
+                || employee.City.IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
+                || employee.Postalcode.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
+                || employee.FormOfEmployment.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
+                || employee.TaxRate.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1;
+
+        }
+        private string _searchInput;
+
+        public string SearchInput
+        {
+            get => _searchInput;
+            set
             {
-                AgentNumber = Instance.AgentNumber,
-            };
-            return salesMen;
-        }
-        
-
-
-
-        /// <summary>
-        /// if the user write in a text or doesn't fill in a number the formofemployment its automaticly 100. 
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        private int TryParseFoe(string value)
-        {
-            int nNumber = int.TryParse(value, out nNumber) ? nNumber : 100;
-            return nNumber;
-        }
-        /// <summary>
-        /// if the user write in a text or doesn't fill in a number the taxrate its automaticly 29. 
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        private int TryParseTR(string value)
-        {
-            int nNumber = int.TryParse(value, out nNumber) ? nNumber : 29;
-            return nNumber;
-        }
-
-        private Access Createaccess()
-        {
-            Access a = new Access()
-            {
-                EmployeeId = Instance._employmentNo,
-                BasicData = Instance.BasicData,
-                Commission =Instance.Commission,
-                Insurances =Instance.Insurances,
-                EmployeeManagement = Instance.EmployeeManagement,
-                Search = Instance.Search,
-                StatisticsAndProspects = Instance.StatisticsAndProspects,
-            };
-            return a;
-        }
-
-        private Role Createrole()
-        {
-            Role r = new Role()
-            {
-                EmployeeId = Instance._employmentNo,
-                CEO = Instance.Ceo,
-                EconomyAssistent = Instance.Economyassistent,
-                FieldSalesMen = Instance.FieldsalesMen,
-                OfficeSalesMen =Instance.OfficesalesMen,
-                SalesAssistent = Instance.Salesassistent,
-                SalesManager = Instance.Salesmanager,
-            };
-            return r;
+                _searchInput = value;
+                OnPropertyChanged("SearchInput");
+                EmployeeGrid.Refresh();
+            }
         }
         #endregion
+
 
         #region properties
 
+        private Employee _selectedPerson;
+
+        public Employee SelectedPerson
+        {
+            get => _selectedPerson;
+            set
+            {
+                _selectedPerson = value;
+                OnPropertyChanged("SelectedPerson");
+            }
+        }
+
+        public ObservableCollection<Employee> Employees { get; set; }
+
         private string _agentNumber;
-        public string AgentNumber 
-        { get => _agentNumber;
+        public string AgentNumber
+        {
+            get => _agentNumber;
             set
             {
                 _agentNumber = value;
@@ -247,9 +220,10 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
                 OnPropertyChanged("FormOfEmployment");
             }
         }
+
         private bool _ceo;
 
-        public bool Ceo 
+        public bool Ceo
         {
             get => _ceo;
             set
@@ -260,7 +234,7 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
         }
         private bool _salesAssistent;
 
-        public bool Salesassistent 
+        public bool Salesassistent
         {
             get => _salesAssistent;
             set
@@ -275,7 +249,7 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             get => _salesM;
             set
             {
-                _salesM= value;
+                _salesM = value;
                 OnPropertyChanged("Salesmanager");
             }
         }
@@ -375,12 +349,6 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
                 OnPropertyChanged("BasicData");
             }
         }
-
-
         #endregion
-
-
-
     }
-
 }

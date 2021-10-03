@@ -13,7 +13,7 @@ namespace Models.Models
     public class Employee
     {
         [Key, DatabaseGenerat‌ed(DatabaseGeneratedOp‌​tion.None)]
-        public int EmploymentNo { get; set; }
+        public string EmploymentNo { get; set; }
         public string Password { get; set; }
         public string Username { get; set; }
         public string Firstname { get; set; }
@@ -21,10 +21,11 @@ namespace Models.Models
         public Role Roles { get; set; }
         public string City { get; set; }
         public string StreetAddress { get; set; }
-        public int Postalcode { get; set; }
+        public string Postalcode { get; set; }
         public double TaxRate { get; set; }
-        public int FormOfEmployment { get; set; }
+        public double FormOfEmployment { get; set; }
         public Access Accesses { get; set; } 
+        public SalesMen SalesMen { get; set; }
     }
   
 }
