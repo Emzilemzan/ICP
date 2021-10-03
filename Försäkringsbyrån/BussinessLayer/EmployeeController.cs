@@ -27,6 +27,7 @@ namespace BussinessLayer
             BusinessController.Instance.Save();
         }
 
+
         public void RemoveEmployee(Employee employee)
         {
             BusinessController.Instance.Context.Employees.Remove(employee);
@@ -49,5 +50,8 @@ namespace BussinessLayer
 
             BusinessController.Instance.Save();
         }
+
     }
+
+
 }

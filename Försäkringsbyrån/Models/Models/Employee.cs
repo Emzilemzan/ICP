@@ -12,23 +12,19 @@ namespace Models.Models
     [Table("Anställd", Schema = "dbo")]
     public class Employee
     {
-        [Key]
+        [Key, DatabaseGenerat‌ed(DatabaseGeneratedOp‌​tion.None)]
         public int EmploymentNo { get; set; }
         public string Password { get; set; }
         public string Username { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }
-        public virtual ICollection<Role> Roles { get; set; }
+        public Role Roles { get; set; }
         public string City { get; set; }
         public string StreetAddress { get; set; }
         public int Postalcode { get; set; }
         public double TaxRate { get; set; }
-        public double FormOfEmployment { get; set; }
-        public virtual ICollection <Access> Accesses { get; set; } // is used to modified and alowed to be overriden by another class who is inheriting. 
-
-        public Employee()
-        {
-        }
+        public int FormOfEmployment { get; set; }
+        public Access Accesses { get; set; } 
     }
   
 }

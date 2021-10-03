@@ -21,31 +21,69 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
         
         }
 
+
         private ICommand _addEmployeeBtn;
         public ICommand AddEmployeeBtn
         {
-            get => _addEmployeeBtn ?? (_addEmployeeBtn = new RelayCommand(x => { InsertEmployee(); }));
+            get => _addEmployeeBtn ?? (_addEmployeeBtn = new RelayCommand(x => { InsertEmployee(); CanCommand(); }));
         }
 
+        public bool CanCommand() => true;
+
+        #region methods
         private void InsertEmployee()
         {
             Employee employee = new Employee()
-            { 
-                EmploymentNo = Instance.EmploymentNo, 
-                Username = Instance.Username,
-                Password = Instance.Password,
-                Firstname = Instance.Firstname,
-                Lastname = Instance.Lastname,
-                StreetAddress = Instance.StreetAddress,
-                City = Instance.City,
-                Postalcode = Instance.Postalcode,
-                FormOfEmployment = Instance.FormOfEmployment,
-                TaxRate = Instance.TaxRate,
-
+            {
+                EmploymentNo = Instance._employmentNo,
+                Username = Instance._username,
+                Password = Instance._password,
+                Firstname = Instance._firstname,
+                Lastname = Instance._lastname,
+                StreetAddress = Instance._streetAddress,
+                City = Instance._city,
+                Postalcode = Instance._postalCode,
+                FormOfEmployment = Instance._foe,
+                TaxRate = Instance._taxRate,
+                Accesses = Createaccess(),
+                Roles = Createrole(),
             };
             Context.EController.AddEmployee(employee);
 
         }
+
+        private Access Createaccess()
+        {
+            Access a = new Access()
+            {
+                EmployeeId = Instance._employmentNo,
+                BasicData = Instance.BasicData,
+                Commission =Instance.Commission,
+                Insurances =Instance.Insurances,
+                EmployeeManagement = Instance.EmployeeManagement,
+                Search = Instance.Search,
+                StatisticsAndProspects = Instance.StatisticsAndProspects,
+            };
+            return a;
+        }
+
+        private Role Createrole()
+        {
+            Role r = new Role()
+            {
+                EmployeeId = Instance._employmentNo,
+                CEO = Instance.Ceo,
+                EconomyAssistent = Instance.Economyassistent,
+                FieldSalesMen = Instance.FieldsalesMen,
+                OfficeSalesMen =Instance.OfficesalesMen,
+                SalesAssistent = Instance.Salesassistent,
+                SalesManager = Instance.Salesmanager,
+            };
+            return r;
+        }
+        #endregion
+
+        #region properties
 
         private string _username;
         public string Username
@@ -156,12 +194,137 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
                 OnPropertyChanged("FormOfEmployment");
             }
         }
+        private bool _ceo;
+
+        public bool Ceo 
+        {
+            get => _ceo;
+            set
+            {
+                _ceo = value;
+                OnPropertyChanged("Ceo");
+            }
+        }
+        private bool _salesAssistent;
+
+        public bool Salesassistent 
+        {
+            get => _salesAssistent;
+            set
+            {
+                _salesAssistent = value;
+                OnPropertyChanged("Salesassistent");
+            }
+        }
+        private bool _salesM;
+        public bool Salesmanager
+        {
+            get => _salesM;
+            set
+            {
+                _salesM= value;
+                OnPropertyChanged("Salesmanager");
+            }
+        }
+        private bool _fieldSalesMen;
+        public bool FieldsalesMen
+        {
+            get => _fieldSalesMen;
+            set
+            {
+                _fieldSalesMen = value;
+                OnPropertyChanged("FieldsalesMen");
+            }
+        }
+        private bool _officeSalesMen;
+        public bool OfficesalesMen
+        {
+            get => _officeSalesMen;
+            set
+            {
+                _officeSalesMen = value;
+                OnPropertyChanged("OfficesalesMen");
+            }
+        }
+        private bool _economyA;
+        public bool Economyassistent
+        {
+            get => _economyA;
+            set
+            {
+                _economyA = value;
+                OnPropertyChanged("Economyassistent");
+            }
+        }
+
+        private bool _search;
+        public bool Search
+        {
+            get => _search;
+            set
+            {
+                _search = value;
+                OnPropertyChanged("Search");
+            }
+        }
+
+        private bool _sap;
+        public bool StatisticsAndProspects
+        {
+            get => _sap;
+            set
+            {
+                _sap = value;
+                OnPropertyChanged("StatisticsAndProspects");
+            }
+        }
+
+        private bool _employeeManagement;
+        public bool EmployeeManagement
+        {
+            get => _employeeManagement;
+            set
+            {
+                _employeeManagement = value;
+                OnPropertyChanged("EmployeeManagement");
+            }
+        }
+
+        private bool _insurances;
+        public bool Insurances
+        {
+            get => _insurances;
+            set
+            {
+                _insurances = value;
+                OnPropertyChanged("Insurances");
+            }
+        }
+
+        private bool _basicData;
+        public bool BasicData
+        {
+            get => _basicData;
+            set
+            {
+                _basicData = value;
+                OnPropertyChanged("BasicData");
+            }
+        }
+
+        private bool _commission;
+        public bool Commission
+        {
+            get => _commission;
+            set
+            {
+                _commission = value;
+                OnPropertyChanged("BasicData");
+            }
+        }
 
 
-        public ObservableCollection<Role> Roles { get; set; } = new ObservableCollection<Role>();
-       
-
-        public ObservableCollection<Access> Accesses { get; set; } = new ObservableCollection<Access>();
+        #endregion
 
 
 

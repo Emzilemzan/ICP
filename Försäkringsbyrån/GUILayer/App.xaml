@@ -48,9 +48,9 @@
         <DataTemplate DataType="{x:Type emvm:EmployeeManagementViewModel}">
             <emv:EmployeeManagementView/>
         </DataTemplate>
-        <!--<DataTemplate DataType="{x:Type emvm:AddEmployeeViewModel}">
-            <emv:AddEmployee/>
-        </DataTemplate>-->
+        <DataTemplate DataType="{x:Type emvm:AddEmployeeViewModel}">
+            <emv:AddEmployeeView/>
+        </DataTemplate>
         <DataTemplate DataType="{x:Type bdvm:BasicDataViewModel }">
             <bdv:BasicDataView/>
         </DataTemplate>

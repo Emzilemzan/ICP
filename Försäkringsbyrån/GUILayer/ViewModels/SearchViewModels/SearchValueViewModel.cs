@@ -58,7 +58,7 @@ namespace GUILayer.ViewModels.SearchViewModels
         private ICommand searchEmployee_Btn; 
         public ICommand SearchEmployeeBtn
         {
-            get => searchEmployee_Btn ?? (searchEmployee_Btn = new RelayCommand(x => { SearchPersonHome(); CanCreate(); }));
+            get => searchEmployee_Btn ?? (searchEmployee_Btn = new RelayCommand(x => { SearchEmployeeHome(); CanCreate(); }));
 
         }
         public static void SearchEmployeeHome()

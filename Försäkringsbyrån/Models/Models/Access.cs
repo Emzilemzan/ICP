@@ -13,14 +13,15 @@ namespace Models.Models
     [Table("Behörighet", Schema = "dbo")]
     public class Access
     {
-        [Key]
-        public int AccessId { get; set; }
-        public Employee EmpId { get; set; }
+        [Key, Column(Order = 0)]
+        public int EmployeeId { get; set; }
+       
         public bool Search { get; set; }
         public bool Insurances { get; set; }
         public bool StatisticsAndProspects { get; set; }
         public bool EmployeeManagement { get; set; }
         public bool BasicData { get; set; }
+        public bool Commission { get; set; }
 
     }
 }

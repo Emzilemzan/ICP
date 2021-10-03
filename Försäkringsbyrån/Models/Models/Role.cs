@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,10 +11,11 @@ namespace Models.Models
     /// <summary>
     /// Befattning
     /// </summary>
-  public  class Role
+   // [Table("Befattning", Schema = "dbo")]
+    public class Role
     {
-        public int RoleId { get; set; }
-        public Employee EmployeeId { get; set; }
+        [Key, Column(Order = 0)]
+        public int EmployeeId { get; set; }
 
         public bool CEO { get; set; }
 

@@ -26,7 +26,7 @@
                          Height="106"
                          Background="Transparent" 
                          Margin="98,0,52,0"
-                         Command=""
+                         Command="{Binding AEVBtn}"
                          Style="{DynamicResource OtherButtonStyle}" Width="Auto">
                 </Button>
 
