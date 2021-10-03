@@ -17,7 +17,7 @@ namespace GUILayer.Views.EmployeeManagementViews
     /// <summary>
     /// Interaction logic for AddEmployee.xaml
     /// </summary>
-    public partial class AddEmployee : Window
+    public partial class AddEmployee : UserControl
     {
         public AddEmployee()
         {
