@@ -75,7 +75,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Label Content="Markerad anställd" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,277,0"/>
+                <Label Content="Markerad anställd" Grid.Column="0" Grid.ColumnSpan="2" FontWeight="Bold" FontSize="15" Margin="0,0,277,0"/>
                 <Label Content="AnställningsNr" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,277,0"/>
                 <TextBox Grid.Row="1" IsReadOnly="true" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.EmploymentNo}" Margin="0.667,0,102.333,0"/>
                 <Label Content="Förnamn" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Margin="0,0,277,0"/>
