@@ -31,7 +31,34 @@ namespace GUILayer.ViewModels.InsuranceViewModels
 
         public void RegisterCompanyApplication(object parameter)
         {
-
         }
+
+        #region 
+        public ObservableCollection<Company> Companies { get; set; }
+
+        private string _searchFrase;
+        public string SearchFrase
+        {
+            get => _searchFrase;
+            set
+            {
+                _searchFrase = value;
+                OnPropertyChanged("SearchFrase");
+            }
+        }
+        public ObservableCollection<Company> UpdateCompanies()
+        {
+            ObservableCollection<Company> x = new ObservableCollection<Company>();
+            foreach (var c in Context.ITController.GetAllCompanies())
+            {
+                x?.Add(c);
+            }
+            Companies = x;
+            return Companies;
+        }
+       
     }
+   
+    #endregion
 }
+
