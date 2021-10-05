@@ -18,7 +18,7 @@ namespace GUILayer.ViewModels.SearchViewModels
         {
             Employees = UpdateEmployee();
             EmployeeGrid = CollectionViewSource.GetDefaultView(Employees);
-            EmployeeGrid.Filter = new Predicate<object>(o => Filter(o as Employee));
+            EmployeeGrid.Filter = new Predicate<object>(o => Filter(o as Employee)); 
         }
         #region methods
         public ObservableCollection<Employee> UpdateEmployee()
