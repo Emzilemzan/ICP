@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AckVariableController.cs" />
     <Compile Include="BusinessController.cs" />
     <Compile Include="InsuranceController.cs" />
     <Compile Include="InsuranceTakerController.cs" />
