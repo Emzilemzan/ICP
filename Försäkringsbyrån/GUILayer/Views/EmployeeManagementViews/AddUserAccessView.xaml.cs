@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,22 +16,13 @@ using System.Windows.Shapes;
 namespace GUILayer.Views.EmployeeManagementViews
 {
     /// <summary>
-    /// Interaction logic for AddEmployeeView.xaml
+    /// Interaction logic for AddUserAccessView.xaml
     /// </summary>
-    public partial class AddEmployeeView : UserControl
+    public partial class AddUserAccessView : UserControl
     {
-        public AddEmployeeView()
+        public AddUserAccessView()
         {
             InitializeComponent();
         }
-
-
-
-
-        //private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
-        //{
-        //    Regex regex = new Regex("{^[0 - 9]+");
-        //    e.Handled = regex.IsMatch(e.Text);
-        //}
     }
 }

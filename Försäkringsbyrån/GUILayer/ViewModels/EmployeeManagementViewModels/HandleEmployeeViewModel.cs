@@ -7,46 +7,54 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 
 namespace GUILayer.ViewModels.EmployeeManagementViewModels
 {
+    /// <summary>
+    /// handle salesmen. 
+    /// </summary>
     public class HandleEmployeeViewModel : BaseViewModel
     {
         public static readonly HandleEmployeeViewModel Instance = new HandleEmployeeViewModel();
 
         public HandleEmployeeViewModel()
         {
-            Employees = UpdateEmployees();
-            EmployeeGrid = CollectionViewSource.GetDefaultView(Employees);
-            EmployeeGrid.Filter = new Predicate<object>(o => Filter(o as Employee));
+            SalesMens = UpdateSM();
+            EmployeeGrid = CollectionViewSource.GetDefaultView(SalesMens);
+            EmployeeGrid.Filter = new Predicate<object>(o => Filter(o as SalesMen));
+            
         }
 
         #region methods
-        public ObservableCollection<Employee> UpdateEmployees()
+        public ObservableCollection<SalesMen> UpdateSM()
         {
-            ObservableCollection<Employee> x = new ObservableCollection<Employee>();
-            foreach (var e in Context.EController.GetAllEmployees())
+            ObservableCollection<SalesMen> x = new ObservableCollection<SalesMen>();
+            foreach (var e in Context.SMController.GetAllSalesMen())
             {
                 x?.Add(e);
             }
-            Employees = x;
-            return Employees;
+            SalesMens = x;
+            return SalesMens;
         }
-
+              
         #endregion
 
         private ICommand _updateEmployeeBtn;
         public ICommand UpdateEmployeeBtn
         {
-            get => _updateEmployeeBtn ?? (_updateEmployeeBtn = new RelayCommand(x => { UpdateEmployee(); CanCommand(); }));
+            get => _updateEmployeeBtn ?? (_updateEmployeeBtn = new RelayCommand(x => { UpdateSalesMen(); CanCommand(); }));
         }
 
-        private void UpdateEmployee()
+        private void UpdateSalesMen()
         {
-            throw new NotImplementedException();
+          
         }
+
+
+       
 
         public bool CanCommand() => true;
 
@@ -57,16 +65,15 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             get { return _employeeCollection; }
             set { _employeeCollection = value; OnPropertyChanged("EmployeeGrid"); }
         }
-        private bool Filter(Employee employee)
+        private bool Filter(SalesMen employee)
         {
             return SearchInput == null
-                || employee.EmploymentNo.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
+                || employee.AgentNumber.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
                 || employee.Firstname.IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
                 || employee.Lastname.IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
                 || employee.StreetAddress.IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
                 || employee.City.IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
                 || employee.Postalcode.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
-                || employee.FormOfEmployment.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
                 || employee.TaxRate.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1;
 
         }
@@ -85,11 +92,12 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
         #endregion
 
 
+
+
         #region properties
+        private SalesMen _selectedPerson;
 
-        private Employee _selectedPerson;
-
-        public Employee SelectedPerson
+        public SalesMen SelectedPerson
         {
             get => _selectedPerson;
             set
@@ -99,41 +107,8 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             }
         }
 
-        public ObservableCollection<Employee> Employees { get; set; }
+        public ObservableCollection<SalesMen> SalesMens { get; set; }
 
-        private string _agentNumber;
-        public string AgentNumber
-        {
-            get => _agentNumber;
-            set
-            {
-                _agentNumber = value;
-                OnPropertyChanged("AgentNumber");
-            }
-
-        }
-
-        private string _username;
-        public string Username
-        {
-            get => _username;
-            set
-            {
-                _username = value;
-                OnPropertyChanged("Username");
-            }
-        }
-
-        private string _password;
-        public string Password
-        {
-            get => _password;
-            set
-            {
-                _password = value;
-                OnPropertyChanged("Password");
-            }
-        }
 
         private string _lastname;
         public string Lastname
@@ -167,14 +142,20 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             }
         }
 
-        private string _postalCode;
+        private int _postalCode;
         public string Postalcode
         {
-            get => _postalCode;
+            get => _postalCode > 0 ? _postalCode.ToString() : "";
             set
             {
-                _postalCode = value;
-                OnPropertyChanged("PostalCode");
+                if (int.TryParse(value, out _postalCode) && _postalCode.ToString().Length < 6 && _postalCode != 0)
+                {
+                    OnPropertyChanged("PostalCode");
+                }
+                else
+                {
+                    MessageBox.Show("Postnummer måste bestå av 5 siffror och kan inte vara en text");
+                }
             }
         }
         private string _city;
@@ -188,167 +169,41 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             }
         }
 
-        private string _employmentNo;
-        public string EmploymentNo
+        private int _agentNumber;
+        public string AgentNumber
         {
-            get => _employmentNo;
+            get => _agentNumber > 0 ? _agentNumber.ToString() : "";
             set
             {
-                _employmentNo = value;
-                OnPropertyChanged("EmploymentNo");
+                if (int.TryParse(value, out _agentNumber) && _agentNumber > 0 && _agentNumber != 0)
+                {
+                    OnPropertyChanged("AgentNumber");
+                }
+                else
+                {
+                    MessageBox.Show("Anställningsnummer måste vara ett nummer och får inte heller sättas till 0");
+                }
             }
         }
 
-        private string _taxRate;
+        private double _taxRate;
         public string TaxRate
         {
-            get => _taxRate;
+            get => _taxRate > 0 ? _taxRate.ToString() : "";
             set
             {
-                _taxRate = value;
-                OnPropertyChanged("TaxRate");
+                if (double.TryParse(value, out _taxRate) && _taxRate > 0 && _taxRate <= 100)
+                {
+                    OnPropertyChanged("TaxRate");
+                }
+                else
+                {
+                    MessageBox.Show("Skattesatsen måste vara ett nummer mellan 0 & 100");
+                }
             }
         }
 
-        private string _foe;
-        public string FormOfEmployment
-        {
-            get => _foe;
-            set
-            {
-                _foe = value;
-                OnPropertyChanged("FormOfEmployment");
-            }
-        }
 
-        private bool _ceo;
-
-        public bool Ceo
-        {
-            get => _ceo;
-            set
-            {
-                _ceo = value;
-                OnPropertyChanged("Ceo");
-            }
-        }
-        private bool _salesAssistent;
-
-        public bool Salesassistent
-        {
-            get => _salesAssistent;
-            set
-            {
-                _salesAssistent = value;
-                OnPropertyChanged("Salesassistent");
-            }
-        }
-        private bool _salesM;
-        public bool Salesmanager
-        {
-            get => _salesM;
-            set
-            {
-                _salesM = value;
-                OnPropertyChanged("Salesmanager");
-            }
-        }
-        private bool _fieldSalesMen;
-        public bool FieldsalesMen
-        {
-            get => _fieldSalesMen;
-            set
-            {
-                _fieldSalesMen = value;
-                OnPropertyChanged("FieldsalesMen");
-            }
-        }
-        private bool _officeSalesMen;
-        public bool OfficesalesMen
-        {
-            get => _officeSalesMen;
-            set
-            {
-                _officeSalesMen = value;
-                OnPropertyChanged("OfficesalesMen");
-            }
-        }
-        private bool _economyA;
-        public bool Economyassistent
-        {
-            get => _economyA;
-            set
-            {
-                _economyA = value;
-                OnPropertyChanged("Economyassistent");
-            }
-        }
-
-        private bool _search;
-        public bool Search
-        {
-            get => _search;
-            set
-            {
-                _search = value;
-                OnPropertyChanged("Search");
-            }
-        }
-
-        private bool _sap;
-        public bool StatisticsAndProspects
-        {
-            get => _sap;
-            set
-            {
-                _sap = value;
-                OnPropertyChanged("StatisticsAndProspects");
-            }
-        }
-
-        private bool _employeeManagement;
-        public bool EmployeeManagement
-        {
-            get => _employeeManagement;
-            set
-            {
-                _employeeManagement = value;
-                OnPropertyChanged("EmployeeManagement");
-            }
-        }
-
-        private bool _insurances;
-        public bool Insurances
-        {
-            get => _insurances;
-            set
-            {
-                _insurances = value;
-                OnPropertyChanged("Insurances");
-            }
-        }
-
-        private bool _basicData;
-        public bool BasicData
-        {
-            get => _basicData;
-            set
-            {
-                _basicData = value;
-                OnPropertyChanged("BasicData");
-            }
-        }
-
-        private bool _commission;
-        public bool Commission
-        {
-            get => _commission;
-            set
-            {
-                _commission = value;
-                OnPropertyChanged("BasicData");
-            }
-        }
         #endregion
     }
 }

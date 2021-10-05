@@ -16,7 +16,7 @@ namespace Models.Models
         public int SerialNumber { get; set; }
         public InsuredPerson InsuredID { get; set; }
         public InsuranceType InsuranceTypeId { get; set; }
-        public Employee AgentNo { get; set; }
+        public SalesMen AgentNo { get; set; }
         public virtual InsuranceTaker Taker { get; set; }
         public Nullable<int> InsuranceNumber { get; set; }
         public Nullable<DateTime> PayDate { get; set; }
