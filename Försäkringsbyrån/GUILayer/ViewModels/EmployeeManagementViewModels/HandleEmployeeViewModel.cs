@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 
@@ -21,6 +22,7 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             Employees = UpdateEmployees();
             EmployeeGrid = CollectionViewSource.GetDefaultView(Employees);
             EmployeeGrid.Filter = new Predicate<object>(o => Filter(o as Employee));
+            
         }
 
         #region methods
@@ -34,7 +36,7 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             Employees = x;
             return Employees;
         }
-
+              
         #endregion
 
         private ICommand _updateEmployeeBtn;
@@ -45,8 +47,67 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
 
         private void UpdateEmployee()
         {
-            throw new NotImplementedException();
+          
+                Employee employee = new Employee()
+                {
+                    EmploymentNo = Instance._employmentNo,
+                    Username = Instance._username,
+                    Password = Instance._password,
+                    Firstname = Instance._firstname,
+                    Lastname = Instance._lastname,
+                    StreetAddress = Instance._streetAddress,
+                    City = Instance._city,
+                    Postalcode = Instance._postalCode,
+                    FormOfEmployment = TryParseFoe(Instance._foe),
+                    TaxRate = TryParseTR(Instance._taxRate),
+                    BasicData = Instance.BasicData,
+                    Commission = Instance.Commission,
+                    Insurances = Instance.Insurances,
+                    EmployeeManagement = Instance.EmployeeManagement,
+                    Search = Instance.Search,
+                    StatisticsAndProspects = Instance.StatisticsAndProspects,
+                    CEO = Instance.Ceo,
+                    EconomyAssistent = Instance.Economyassistent,
+                    FieldSalesMen = Instance.FieldsalesMen,
+                    OfficeSalesMen = Instance.OfficesalesMen,
+                    SalesAssistent = Instance.Salesassistent,
+                    SalesManager = Instance.Salesmanager,
+                    AgentNumber = Instance.AgentNumber,
+                    //Accesses = Createaccess(),
+                    //Roles = Createrole(),
+                    //SalesMen = InsertSalesMen(),
+                };
+                Context.EController.Edit(employee);
+                MessageBox.Show("En ny anställd har lagts till");
+                MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
+                MainViewModel.Instance.CurrentTool = "";
+                HandleEmployeeViewModel.Instance.UpdateEmployees();
+                MainViewModel.Instance.SelectedViewModel = HandleEmployeeViewModel.Instance;
+            
         }
+
+
+        /// <summary>
+        /// if the user write in a text or doesn't fill in a number the formofemployment its automaticly 100. 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        private int TryParseFoe(string value)
+        {
+            int nNumber = int.TryParse(value, out nNumber) ? nNumber : 100;
+            return nNumber;
+        }
+        /// <summary>
+        /// if the user write in a text or doesn't fill in a number the taxrate its automaticly 29. 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        private int TryParseTR(string value)
+        {
+            int nNumber = int.TryParse(value, out nNumber) ? nNumber : 29;
+            return nNumber;
+        }
+
 
         public bool CanCommand() => true;
 
@@ -188,8 +249,8 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             }
         }
 
-        private string _employmentNo;
-        public string EmploymentNo
+        private int _employmentNo;
+        public int EmploymentNo
         {
             get => _employmentNo;
             set

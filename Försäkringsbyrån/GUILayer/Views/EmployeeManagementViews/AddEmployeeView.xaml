@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GUILayer.Views.EmployeeManagementViews"
-        xmlns:xctk1="http://schemas.xceed.com/wpf/xaml/toolkit"
-         mc:Ignorable="d"     d:DesignHeight="500" Width="900.35">
+        xmlns:xctk1="http://schemas.xceed.com/wpf/xaml/toolkit" 
+        xmlns:employeemanagementviewmodels="clr-namespace:GUILayer.ViewModels.EmployeeManagementViewModels" d:DataContext="{d:DesignInstance Type=employeemanagementviewmodels:AddEmployeeViewModel}"
+             mc:Ignorable="d"     d:DesignHeight="500" Width="900.35">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     </UserControl.Resources>
@@ -48,7 +49,9 @@
 
                 <Label Content="Grunduppgifter" FontWeight="Bold" Grid.Row="1" Grid.Column="0" FontSize="18"/>
                 <Label Grid.Row="2" Grid.Column="0" Content="AnställningsNr:"  />
-                <TextBox Grid.Row="2" Height="20" Text="{Binding Path = EmploymentNo}" Margin="128,3,61,3"  />
+                <TextBox Name="EmploymentNoTb" Grid.Row="2" Height="20" Margin="128,0,61,3" Text="{Binding Path = EmploymentNo, UpdateSourceTrigger=PropertyChanged,
+                        ValidatesOnExceptions=True}"  VerticalAlignment="Bottom"  >
+                </TextBox>
                 <Label Grid.Row="3" Grid.Column="0" Content="Förnamn:"/>
                 <TextBox Grid.Row="3" Height="20" Text="{Binding Path= Firstname}" Margin="128,3,61,3"/>
                 <Label Grid.Row="4" Grid.Column="0" Content="Efternamn:"/>

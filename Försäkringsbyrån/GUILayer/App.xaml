@@ -212,7 +212,8 @@
                                 <Setter Property="Background" TargetName="border" Value="DarkSeaGreen"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
-                                <Setter Property="Visibility" TargetName="border" Value="Hidden"/>
+                                <Setter Property="Background" TargetName="border" Value="#66242526"/>
+                                <Setter Property="TextElement.Foreground" TargetName="border" Value="#66E4E6EB"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>

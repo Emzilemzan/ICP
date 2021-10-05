@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Models.Models
 {
     [Table("Säljare", Schema = "dbo")] // anses klar.
-    public class SalesMen 
+    public class SalesMen : Employee
     {
         [Key, DatabaseGenerat‌ed(DatabaseGeneratedOp‌​tion.None)]
         public string AgentNumber { get; set; }

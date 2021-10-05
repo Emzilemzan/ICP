@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace BussinessLayer
 {
@@ -20,6 +21,25 @@ namespace BussinessLayer
                 BusinessController.Instance.CurrentEmployee = GetEmployee(username);
             return BusinessController.Instance.CurrentEmployee != null;
         }
+
+        public void CheckExistingEmployee(int id, Employee employee)
+        {
+            Employee e = BusinessController.Instance.Context.Employees.GetById(id);
+            if (e == null)
+            {
+                
+                    var msg = $"Anställningsnummer: {employee.EmploymentNo} - Efternamn: {employee.Lastname} - Förnamn: {employee.Firstname}";
+                    MessageBox.Show(msg, "Ny anställd att lägga till", MessageBoxButton.OK, MessageBoxImage.Information);
+                    AddEmployee(employee);
+            }
+            else
+            {
+                MessageBox.Show("Går ej lägga till ny anställd då anställningsnumret redan finns");
+            }
+        }
+
+        public Access GetAccess(string id) => BusinessController.Instance.Context.Accesses.Find(x => x.EmployeeId == id).FirstOrDefault();
+
 
         public void AddEmployee(Employee employee)
         {
@@ -46,8 +66,8 @@ namespace BussinessLayer
             edit.FormOfEmployment = employee.FormOfEmployment;
             edit.Password = employee.Password;
             edit.Username = employee.Username;
-            edit.Accesses = employee.Accesses;
-            edit.Roles = employee.Roles;
+            //edit.Accesses = employee.Accesses;
+            //edit.Roles = employee.Roles;
             BusinessController.Instance.Save();
         }
 

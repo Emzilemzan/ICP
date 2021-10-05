@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace GUILayer.ViewModels.EmployeeManagementViewModels
@@ -19,50 +20,12 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
 
         public AddEmployeeViewModel()
         {
-        
+            
         }
 
         #region commands
 
-        private ICommand _addEmployeeBtn;
-        public ICommand AddEmployeeBtn
-        {
-            get => _addEmployeeBtn ?? (_addEmployeeBtn = new RelayCommand(x => { InsertEmployee(); CanCommand(); }));
-        }
-
-        public bool CanCommand() => !string.IsNullOrEmpty(Instance._employmentNo) && !string.IsNullOrWhiteSpace(Instance._username) && !string.IsNullOrWhiteSpace(Instance._password)
-            && !string.IsNullOrWhiteSpace(Instance.City) && !string.IsNullOrWhiteSpace(Instance._firstname)
-            && !string.IsNullOrWhiteSpace(Instance._lastname) && !string.IsNullOrWhiteSpace(Instance._streetAddress) && !string.IsNullOrWhiteSpace(Instance._postalCode)
-           && !string.IsNullOrWhiteSpace(Instance._foe) && !string.IsNullOrWhiteSpace(Instance._taxRate);
-
-        #endregion
-
-        #region methods
-        private void InsertEmployee()
-        {
-            Employee employee = new Employee()
-            {
-                EmploymentNo = Instance._employmentNo,
-                Username = Instance._username,
-                Password = Instance._password,
-                Firstname = Instance._firstname,
-                Lastname = Instance._lastname,
-                StreetAddress = Instance._streetAddress,
-                City = Instance._city,
-                Postalcode = Instance._postalCode,
-                FormOfEmployment = TryParseFoe(Instance._foe),
-                TaxRate = TryParseTR(Instance._taxRate),
-                Accesses = Createaccess(),
-                Roles = Createrole(),
-                SalesMen = InsertSalesMen(),
-            };
-            Context.EController.AddEmployee(employee);
-            MessageBox.Show("En ny anställd har lagts till");
-            MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
-            MainViewModel.Instance.CurrentTool = "";
-            HandleEmployeeViewModel.Instance.UpdateEmployees();
-            MainViewModel.Instance.SelectedViewModel = HandleEmployeeViewModel.Instance;
-        }
+        
         private SalesMen InsertSalesMen()
         {
             SalesMen salesMen = new SalesMen()
@@ -71,66 +34,12 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             };
             return salesMen;
         }
-        
 
-
-
-        /// <summary>
-        /// if the user write in a text or doesn't fill in a number the formofemployment its automaticly 100. 
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        private int TryParseFoe(string value)
-        {
-            int nNumber = int.TryParse(value, out nNumber) ? nNumber : 100;
-            return nNumber;
-        }
-        /// <summary>
-        /// if the user write in a text or doesn't fill in a number the taxrate its automaticly 29. 
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        private int TryParseTR(string value)
-        {
-            int nNumber = int.TryParse(value, out nNumber) ? nNumber : 29;
-            return nNumber;
-        }
-
-        private Access Createaccess()
-        {
-            Access a = new Access()
-            {
-                EmployeeId = Instance._employmentNo,
-                BasicData = Instance.BasicData,
-                Commission =Instance.Commission,
-                Insurances =Instance.Insurances,
-                EmployeeManagement = Instance.EmployeeManagement,
-                Search = Instance.Search,
-                StatisticsAndProspects = Instance.StatisticsAndProspects,
-            };
-            return a;
-        }
-
-        private Role Createrole()
-        {
-            Role r = new Role()
-            {
-                EmployeeId = Instance._employmentNo,
-                CEO = Instance.Ceo,
-                EconomyAssistent = Instance.Economyassistent,
-                FieldSalesMen = Instance.FieldsalesMen,
-                OfficeSalesMen =Instance.OfficesalesMen,
-                SalesAssistent = Instance.Salesassistent,
-                SalesManager = Instance.Salesmanager,
-            };
-            return r;
-        }
-        #endregion
 
         #region properties
 
         private string _agentNumber;
-        public string AgentNumber 
+        public string AgentNumber
         { get => _agentNumber;
             set
             {
@@ -215,41 +124,62 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             }
         }
 
-        private string _employmentNo;
+        private int _employmentNo;
         public string EmploymentNo
         {
-            get => _employmentNo;
+            get => _employmentNo > 0 ? _employmentNo.ToString() : "";
             set
             {
-                _employmentNo = value;
-                OnPropertyChanged("EmploymentNo");
+                if (int.TryParse(value, out _employmentNo) && _employmentNo > 0 && _employmentNo != 0)
+                {
+                    OnPropertyChanged("EmploymentNo");
+                }
+                else
+                {
+                    MessageBox.Show("Anställningsnummer måste vara ett nummer och får inte heller sättas till 0");
+                }
             }
         }
 
-        private string _taxRate;
+
+        private double _taxRate;
         public string TaxRate
         {
-            get => _taxRate;
+            get => _taxRate > 0 ? _taxRate.ToString() : "";
             set
             {
-                _taxRate = value;
-                OnPropertyChanged("TaxRate");
+                if (double.TryParse(value, out _taxRate) && _taxRate > 0 && _taxRate < 101)
+                {
+                    OnPropertyChanged("TaxRate");
+                }
+                else
+                {
+                    MessageBox.Show("Skattesatsen måste vara ett nummer mellan 0 & 100");
+                }
             }
         }
 
-        private string _foe;
+        private double _foe;
         public string FormOfEmployment
         {
-            get => _foe;
+            get => _foe > 0 ? _foe.ToString() : "";
             set
             {
-                _foe = value;
-                OnPropertyChanged("FormOfEmployment");
+                if (double.TryParse(value, out _foe) && _foe > 0 && _foe < 101)
+                {
+                    OnPropertyChanged("TaxRate");
+                }
+                else
+                {
+                    MessageBox.Show("Skattesatsen måste vara ett nummer mellan 0 & 100");
+                }
             }
         }
+        #endregion
+        #region roles bools properties
         private bool _ceo;
 
-        public bool Ceo 
+        public bool Ceo
         {
             get => _ceo;
             set
@@ -260,7 +190,7 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
         }
         private bool _salesAssistent;
 
-        public bool Salesassistent 
+        public bool Salesassistent
         {
             get => _salesAssistent;
             set
@@ -275,7 +205,7 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             get => _salesM;
             set
             {
-                _salesM= value;
+                _salesM = value;
                 OnPropertyChanged("Salesmanager");
             }
         }
@@ -309,7 +239,8 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
                 OnPropertyChanged("Economyassistent");
             }
         }
-
+        #endregion
+        #region bools for access
         private bool _search;
         public bool Search
         {
@@ -375,12 +306,69 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
                 OnPropertyChanged("BasicData");
             }
         }
-
-
         #endregion
 
 
 
+        #region Manages GUI happenings. 
+        
+        private RelayCommand _addEmployeeBtn;
+        public RelayCommand AddEmployeeBtn
+        {
+            get => _addEmployeeBtn ?? (_addEmployeeBtn = new RelayCommand(x => { InsertEmployee(); CanCommand(); }));
+        }
+
+        public bool CanCommand()
+        {
+            return !string.IsNullOrWhiteSpace(Instance.EmploymentNo);
+
+        }
+
+
+
+        
+        private void InsertEmployee()
+        {
+            if (Instance._employmentNo != 0)
+            {
+                Employee employee = new Employee()
+                {
+                    EmploymentNo = Instance._employmentNo,
+                    Username = Instance._username,
+                    Password = Instance._password,
+                    Firstname = Instance._firstname,
+                    Lastname = Instance._lastname,
+                    StreetAddress = Instance._streetAddress,
+                    City = Instance._city,
+                    Postalcode = Instance._postalCode,
+                    FormOfEmployment = Instance._foe,
+                    TaxRate = Instance._taxRate,
+                    BasicData = Instance.BasicData,
+                    Commission = Instance.Commission,
+                    Insurances = Instance.Insurances,
+                    EmployeeManagement = Instance.EmployeeManagement,
+                    Search = Instance.Search,
+                    StatisticsAndProspects = Instance.StatisticsAndProspects,
+                    CEO = Instance.Ceo,
+                    EconomyAssistent = Instance.Economyassistent,
+                    FieldSalesMen = Instance.FieldsalesMen,
+                    OfficeSalesMen = Instance.OfficesalesMen,
+                    SalesAssistent = Instance.Salesassistent,
+                    SalesManager = Instance.Salesmanager,
+                };
+                Context.EController.CheckExistingEmployee(Instance._employmentNo, employee);
+                MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
+                MainViewModel.Instance.CurrentTool = "";
+                HandleEmployeeViewModel.Instance.UpdateEmployees();
+                MainViewModel.Instance.SelectedViewModel = HandleEmployeeViewModel.Instance;
+            }
+            else
+            {
+                MessageBox.Show("Anställningsnummer får inte lämnas tomt");
+            }
+        }
+
+        #endregion 
     }
 
 }
