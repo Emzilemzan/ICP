@@ -86,6 +86,7 @@
     <Compile Include="Commands\EventRaiser.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\BasicDataViewModels\AckValueVariableTableViewModel.cs" />
     <Compile Include="ViewModels\BasicDataViewModels\BaseAmountTableViewModel.cs" />
     <Compile Include="ViewModels\BasicDataViewModels\BasicDataViewModel.cs" />
     <Compile Include="ViewModels\CommissionViewModels\CommissionViewModel.cs" />
@@ -109,6 +110,9 @@
     <Compile Include="ViewModels\SearchViewModels\SearchInsuranceTakerPersonViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModels\SearchValueViewModel.cs" />
     <Compile Include="ViewModels\StatisticsAndProspectusViewModels\StatisticsAndProspectusViewModel.cs" />
+    <Compile Include="Views\BasicDataViews\AckValueVariableTable.xaml.cs">
+      <DependentUpon>AckValueVariableTable.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\BasicDataViews\BaseAmountTableView.xaml.cs">
       <DependentUpon>BaseAmountTableView.xaml</DependentUpon>
     </Compile>
@@ -190,6 +194,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\BasicDataViews\AckValueVariableTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\BasicDataViews\BaseAmountTableView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
