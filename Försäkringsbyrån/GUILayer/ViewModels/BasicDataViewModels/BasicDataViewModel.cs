@@ -35,5 +35,18 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             MainViewModel.Instance.CurrentTool = "";
             MainViewModel.Instance.SelectedViewModel = BaseAmountTableViewModel.Instance;
         }
+
+        private ICommand ackvaluevariableTable_Btn;
+        public ICommand AckvaluevariableTable_Btn
+        {
+            get => ackvaluevariableTable_Btn ?? (ackvaluevariableTable_Btn = new RelayCommand(x => { AddAckValueVariableTable(); CanCreate(); }));
+        }
+
+        public static void AddAckValueVariableTable()
+        {
+            MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
+            MainViewModel.Instance.CurrentTool = "";
+            MainViewModel.Instance.SelectedViewModel = AckValueVariableTableViewModel.Instance;
+        }
     }
 }

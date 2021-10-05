@@ -2,9 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace GUILayer.ViewModels
 {
@@ -24,5 +26,7 @@ namespace GUILayer.ViewModels
         /// Informs everyone that is subscribed to a property that the property has uppdated its value
         /// </summary>
         protected void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+
+
     }
 }

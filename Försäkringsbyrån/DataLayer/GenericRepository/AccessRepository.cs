@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Models.Models;
 using System.Threading.Tasks;
+using Models.Models;
 
 namespace DataLayer.GenericRepository
 {
-    public class EmployeeRepository: GenericRepository<SalesMen>, IEmployeeRepository
+    class AccessRepository: GenericRepository<UserAccess>, IAccessRepository
     {
-        public EmployeeRepository(ApplicationContext context) : base(context) { }
+        public AccessRepository(ApplicationContext context) : base(context) { }
         public ApplicationContext ApplicationContext
         {
-            get { return _context; }
+           get { return _context; }
         }
     }
 }

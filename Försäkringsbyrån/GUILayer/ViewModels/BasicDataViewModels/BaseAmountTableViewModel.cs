@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace GUILayer.ViewModels.BasicDataViewModels
 {
-    public class BaseAmountTableViewModel: BaseViewModel
+    public class BaseAmountTableViewModel: BaseViewModel 
     {
         public static readonly BaseAmountTableViewModel Instance = new BaseAmountTableViewModel();
 
@@ -19,7 +19,7 @@ namespace GUILayer.ViewModels.BasicDataViewModels
         {
             //_removeBtn = new RemoveBaseAmountTableValueBtn();
             //_addBtn = new AddBaseAmountTableValueBtn();
-        }
+        } 
 
         private ICommand _addBtn;
         public ICommand AddBaseAmountTableValue_Btn

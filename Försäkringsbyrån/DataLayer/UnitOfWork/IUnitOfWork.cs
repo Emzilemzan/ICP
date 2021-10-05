@@ -18,7 +18,7 @@ namespace DataLayer.UnitOfWork
         IInsuredPersonRepository InsuredPersons { get; }
         ICompanyRepository Companies { get; }
         IPersonRepository Persons { get; }
-        
+        IAccessRepository Accesses { get; }
         int Complete();
 
     }

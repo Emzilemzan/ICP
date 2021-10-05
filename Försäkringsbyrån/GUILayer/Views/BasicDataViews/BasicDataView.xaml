@@ -60,7 +60,7 @@
                             Height="106"
                             Background="Transparent" 
                             Margin="10.333,0"
-                            Command=""
+                            Command="{Binding AckvaluevariableTable_Btn}"
                             Style="{DynamicResource OtherButtonStyle}" Width="Auto">
                     <TextBlock Width="216" Height="66">Ack.Värde Variabel<LineBreak/>(Försäkrings-/tillvalstyp)</TextBlock>
                 </Button>

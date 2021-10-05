@@ -16,21 +16,20 @@ namespace BussinessLayer
     {
         public static readonly BusinessController Instance = new BusinessController();
         internal IUnitOfWork Context { get; }
-        public EmployeeController EController { get; }
+        public SalesMenController SMController { get; }
         public InsuranceTakerController ITController { get; }
         public InsuranceController IController { get; }
         public InsuredPersonController IPController { get; }
         public Employee CurrentEmployee { get; set; } = null;
-        public SignedInsuranceController SIController { get; }
 
         private BusinessController()
         {
             Context = new UnitOfWork();
-            EController = new EmployeeController();
+            SMController = new SalesMenController();
+            UAController = new UserAccessController();
             ITController = new InsuranceTakerController();
             IController = new InsuranceController();
             IPController = new InsuredPersonController();
-            SIController = new SignedInsuranceController();
         }
 
         public void Save() => Context.Complete();
