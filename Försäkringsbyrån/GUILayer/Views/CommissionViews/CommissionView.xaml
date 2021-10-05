@@ -19,7 +19,7 @@
                             Height="106"
                          Content="Hämta provision"
                             Background="Transparent"
-                         Command=""
+                         Command="{Binding GetCommssion_Btn}"
                      Style="{DynamicResource OtherButtonStyle}" Width="Auto"/>
         </StackPanel>
     </Grid>
