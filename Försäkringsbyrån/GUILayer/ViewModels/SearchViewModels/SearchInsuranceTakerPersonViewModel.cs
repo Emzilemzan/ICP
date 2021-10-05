@@ -105,7 +105,7 @@ namespace GUILayer.ViewModels.SearchViewModels
 
     
         public ObservableCollection<Person> Persons { get; set; }
-        public ObservableCollection<Insurance> Insurances { get; set; }
+        public ObservableCollection<Insurance> Insurances { get; set; } = new ObservableCollection<Insurance>();
         public ObservableCollection<InsuredPerson> InsuredPersons { get; set; } = new ObservableCollection<InsuredPerson>();
 
         private Person _selectedPerson;
@@ -174,8 +174,8 @@ namespace GUILayer.ViewModels.SearchViewModels
             }
         }
 
-        private string _postalCode;
-        public string PostalCode
+        private int _postalCode;
+        public int PostalCode
         {
             get => _postalCode;
             set

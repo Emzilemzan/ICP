@@ -58,9 +58,9 @@
                             <DataGrid ItemsSource="{Binding Path=InsuredPersons}" CanUserAddRows="False" AutoGenerateColumns="false">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="FörsäkradId" Binding="{Binding Path= InsuredID}"/>
-                                    <DataGridTextColumn Header="Förnamn" Binding="{Binding Path = Förnamn}"/>
-                                    <DataGridTextColumn Header="Försäkringstyp" Binding="{Binding Path = InsuranceTypeId}"/>
-                                    <DataGridTextColumn Header="Agentnummer" Binding="{Binding Path=AgentNo}"/>
+                                    <DataGridTextColumn Header="Förnamn" Binding="{Binding Path = FirstName}"/>
+                                    <DataGridTextColumn Header="Efternamn" Binding="{Binding Path = LastName}"/>
+                                    <DataGridTextColumn Header="Personnummer" Binding="{Binding Path=SocialSecurityNumber}"/>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </DataTemplate>
@@ -148,9 +148,9 @@
                               CanUserAddRows="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="FörsäkradId" Binding="{Binding Path= InsuredID}"/>
-                            <DataGridTextColumn Header="Förnamn" Binding="{Binding Path = SelectedItem.Förnamn}"/>
-                            <DataGridTextColumn Header="Försäkringstyp" Binding="{Binding Path = SelectedItem.InsuranceTypeId}"/>
-                            <DataGridTextColumn Header="Agentnummer" Binding="{Binding Path=SelectedItem.AgentNo}"/>
+                            <DataGridTextColumn Header="Förnamn" Binding="{Binding Path = FirstName}"/>
+                            <DataGridTextColumn Header="Efternamn" Binding="{Binding Path = LastName}"/>
+                            <DataGridTextColumn Header="Personnummer" Binding="{Binding Path=SocialSecurityNumber}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>
@@ -161,10 +161,10 @@
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
                   ScrollViewer.HorizontalScrollBarVisibility="Auto" >
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Löpnummer" Binding="{Binding Path=SelectedPerson.SerialNumber}"/>
-                            <DataGridTextColumn Header="FörsäkradId" Binding="{Binding Path=SelectedPerson.InsuredID}"/>
-                            <DataGridTextColumn Header="Försäkringstyp" Binding="{Binding Path=SelectedPerson.InsuranceTypeId}"/>
-                            <DataGridTextColumn Header="Agentnummer" Binding="{Binding Path=SelectedPerson.AgentNo}"/>
+                            <DataGridTextColumn Header="Löpnummer" Binding="{Binding Path=SerialNumber}"/>
+                            <DataGridTextColumn Header="FörsäkradId" Binding="{Binding Path=InsuredID}"/>
+                            <DataGridTextColumn Header="Försäkringstyp" Binding="{Binding Path=InsuranceTypeId}"/>
+                            <DataGridTextColumn Header="Agentnummer" Binding="{Binding Path=AgentNo}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>

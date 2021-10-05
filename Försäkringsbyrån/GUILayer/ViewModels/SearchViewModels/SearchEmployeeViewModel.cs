@@ -20,7 +20,7 @@ namespace GUILayer.ViewModels.SearchViewModels
             EmployeeGrid = CollectionViewSource.GetDefaultView(Employees);
             EmployeeGrid.Filter = new Predicate<object>(o => Filter(o as Employee));
         }
-        #region
+        #region methods
         public ObservableCollection<Employee> UpdateEmployee()
         {
             ObservableCollection<Employee> x = new ObservableCollection<Employee>();
@@ -39,7 +39,7 @@ namespace GUILayer.ViewModels.SearchViewModels
         public ICollectionView EmployeeGrid
         {
             get { return _employeeCollection; }
-            set { _employeeCollection = value; OnPropertyChanged("employeeGrid"); }
+            set { _employeeCollection = value; OnPropertyChanged("EmployeeGrid"); }
         }
         private bool Filter(Employee employee)
         {

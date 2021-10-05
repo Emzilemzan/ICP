@@ -201,25 +201,15 @@ namespace GUILayer.ViewModels
         {
             SelectedViewModel = LogInViewModel.Instance;
             ToolsVisibility = Visibility.Collapsed;
-            //UpdateBtns();
+            
         }
 
         public void DisplayHomeView()
         {
             SelectedViewModel = HomeViewModel.Instance;
-            //UpdateBtns();
+            
         }
-        /*
-        private void UpdateBtns()
-        {
-            Commission_Btn.RaiseCanExecuteChanged();
-            Insurance_Btn.RaiseCanExecuteChanged();
-            LogOut_Btn.RaiseCanExecuteChanged();
-            EM_Btn.RaiseCanExecuteChanged();
-            SearchIndex_Btn.RaiseCanExecuteChanged();
-            SAP_Btn.RaiseCanExecuteChanged();
-        }
-        */
+    
         public string CurrentTool { get; set; } = "";
 
         private BaseViewModel _tools;

@@ -89,7 +89,9 @@
     <Compile Include="ViewModels\BasicDataViewModels\BaseAmountTableViewModel.cs" />
     <Compile Include="ViewModels\BasicDataViewModels\BasicDataViewModel.cs" />
     <Compile Include="ViewModels\CommissionViewModels\CommissionViewModel.cs" />
+    <Compile Include="ViewModels\EmployeeManagementViewModels\AddEmployeeViewModel.cs" />
     <Compile Include="ViewModels\EmployeeManagementViewModels\EmployeeManagementViewModel.cs" />
+    <Compile Include="ViewModels\EmployeeManagementViewModels\HandleEmployeeViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\InsuranceViewModels\InsuranceApplicationChoiceViewModel.cs" />
     <Compile Include="ViewModels\InsuranceViewModels\InsuranceViewModel.cs" />
@@ -113,11 +115,14 @@
     <Compile Include="Views\CommissionViews\CommissionView.xaml.cs">
       <DependentUpon>CommissionView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\EmployeeManagementViews\AddEmployee.xaml.cs">
-      <DependentUpon>AddEmployee.xaml</DependentUpon>
+    <Compile Include="Views\EmployeeManagementViews\AddEmployeeView.xaml.cs">
+      <DependentUpon>AddEmployeeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EmployeeManagementViews\EmployeeManagementView.xaml.cs">
       <DependentUpon>EmployeeManagementView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EmployeeManagementViews\HandleEmployeeView.xaml.cs">
+      <DependentUpon>HandleEmployeeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
@@ -142,6 +147,9 @@
     </Compile>
     <Compile Include="Views\LogInView.xaml.cs">
       <DependentUpon>LogInView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\overviewapplication.xaml.cs">
+      <DependentUpon>overviewapplication.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SearchViews\SearchEmployeeView.xaml.cs">
       <DependentUpon>SearchEmployeeView.xaml</DependentUpon>
@@ -182,11 +190,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\EmployeeManagementViews\AddEmployee.xaml">
+    <Page Include="Views\EmployeeManagementViews\AddEmployeeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\EmployeeManagementViews\EmployeeManagementView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EmployeeManagementViews\HandleEmployeeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -219,6 +231,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\LogInView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\overviewapplication.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -27,6 +27,7 @@ namespace BussinessLayer
             BusinessController.Instance.Save();
         }
 
+
         public void RemoveEmployee(Employee employee)
         {
             BusinessController.Instance.Context.Employees.Remove(employee);
@@ -45,9 +46,13 @@ namespace BussinessLayer
             edit.FormOfEmployment = employee.FormOfEmployment;
             edit.Password = employee.Password;
             edit.Username = employee.Username;
-           
-
+            edit.Accesses = employee.Accesses;
+            edit.Roles = employee.Roles;
             BusinessController.Instance.Save();
         }
+
+
     }
+
+
 }
