@@ -12,7 +12,7 @@ namespace GUILayer.ViewModels.SearchViewModels
     /// <summary>
     /// viewmodel for searchvalueview
     /// </summary>
-    class SearchValueViewModel : BaseViewModel
+    public class SearchValueViewModel : BaseViewModel
     {
         public static readonly SearchValueViewModel Instance = new SearchValueViewModel();
 

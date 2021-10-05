@@ -75,8 +75,12 @@
         <DataTemplate DataType="{x:Type emvm:HandleEmployeeViewModel}">
             <emv:HandleEmployeeView/>
         </DataTemplate>
-
-
+        <DataTemplate DataType="{x:Type emvm:AddUserAccessViewModel}">
+            <emv:AddUserAccessView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type emvm:ManageUserAccessViewModel}">
+            <emv:ManageUserAccessView/>
+        </DataTemplate>
         <!--#region Exit Button Style-->
         <Style x:Key="ExitBtnStyle" TargetType="{x:Type Button}">
             <Setter Property="Background" Value="Transparent"/>

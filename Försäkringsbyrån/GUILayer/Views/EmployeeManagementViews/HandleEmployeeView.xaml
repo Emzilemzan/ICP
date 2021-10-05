@@ -7,9 +7,6 @@
               xmlns:xctk1="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
             d:DesignHeight="650" d:DesignWidth="900">
-    <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-    </UserControl.Resources>
     <Grid Margin="20 0 20 0">
 
         <Grid.ColumnDefinitions>
@@ -105,10 +102,7 @@
                 <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.Username}" Margin="0.667,0,102.333,0"/>
                 <Label Content="Lösenord" Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="2" Margin="0,0,277,0"/>
                 <TextBox Grid.Row="10"  Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.Password}" Margin="0.667,0,102.333,0"/>
-                <Label Grid.Row="11" Grid.Column="0" Content="Agentnummer:" Visibility="{Binding ElementName=OSM, Path=IsChecked,Converter={StaticResource BooleanToVisibilityConverter}}"/>
-                <Label Grid.Row="11" Grid.Column="0" Content="Agentnummer:" Visibility="{Binding ElementName=FSM, Path=IsChecked,Converter={StaticResource BooleanToVisibilityConverter}}"/>
-                <TextBox Grid.Row="11" Grid.Column="1" Margin="53.667,0,102.333,0" Height="20" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.AgentNumber}" Visibility="{Binding ElementName=OSM, Path=IsChecked,Converter={StaticResource BooleanToVisibilityConverter}}" />
-                <TextBox Grid.Row="11" Margin="53.667,0,102.333,0" Height="20" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.AgentNumber}" Grid.Column="1" Visibility="{Binding ElementName=FSM, Path=IsChecked,Converter={StaticResource BooleanToVisibilityConverter}}" />
+      
                 <GroupBox Header="Befattning" Grid.Row="13" Margin="145.667,7,-0.667,-121.667" Grid.Column="1">
                     <StackPanel>
                         <CheckBox Content="Innesäljare" Name="OSM" IsChecked="{Binding ElementName=employeeGrid, Path= SelectedItem.OfficeSalesMen}"/>

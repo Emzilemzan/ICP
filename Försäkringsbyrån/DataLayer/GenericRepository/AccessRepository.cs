@@ -7,7 +7,7 @@ using Models.Models;
 
 namespace DataLayer.GenericRepository
 {
-    class AccessRepository: GenericRepository<Access>, IAccessRepository
+    class AccessRepository: GenericRepository<UserAccess>, IAccessRepository
     {
         public AccessRepository(ApplicationContext context) : base(context) { }
         public ApplicationContext ApplicationContext

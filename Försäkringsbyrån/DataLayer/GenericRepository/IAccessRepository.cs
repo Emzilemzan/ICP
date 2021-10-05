@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataLayer.GenericRepository
 {
-    public interface IAccessRepository : IGenericRepository<Access>
+    public interface IAccessRepository : IGenericRepository<UserAccess>
     {
     }
 }
