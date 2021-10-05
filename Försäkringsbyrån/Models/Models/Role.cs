@@ -11,12 +11,23 @@ namespace Models.Models
     /// <summary>
     /// Befattning
     /// </summary>
-   // [Table("Befattning", Schema = "dbo")]
-    public class Role
+  public class Role
     {
-        public int RoleId { get; set; }
-        public string RoleName { get; set; }
-        public Employee EmployeeId { get; set; }
+       
+        [Key, DatabaseGenerat‌ed(DatabaseGeneratedOp‌​tion.None)]
+        public string EmployeeId { get; set; }
+
+        public bool CEO { get; set; }
+
+        public bool SalesAssistent { get; set; }
+
+        public bool SalesManager { get; set; }
+
+        public bool FieldSalesMen { get; set; }
+
+        public bool OfficeSalesMen { get; set; }
+
+        public bool EconomyAssistent { get; set; }
 
     }
 }
