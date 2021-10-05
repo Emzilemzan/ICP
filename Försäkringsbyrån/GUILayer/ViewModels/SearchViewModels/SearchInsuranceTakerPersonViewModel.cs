@@ -7,7 +7,7 @@ using System.Collections.ObjectModel;
 using Models.Models;
 using System.ComponentModel;
 using System.Windows.Data;
-using GUILayer.Commands.SearchIndexCommands;
+using System.Windows.Input;
 
 namespace GUILayer.ViewModels.SearchViewModels
 {
@@ -15,17 +15,15 @@ namespace GUILayer.ViewModels.SearchViewModels
     {
         public static readonly SearchInsuranceTakerPersonViewModel Instance = new SearchInsuranceTakerPersonViewModel();
 
-        public RemovePersonBtn RemoveBtn { get; }
+       
         public SearchInsuranceTakerPersonViewModel()
         {
-            Persons = new ObservableCollection<Person>
-            {
-                new Person(){InsuranceTakerId=1, SocialSecurityNumber="991204-1222", Firstname="Emma", Lastname="Gunnarsson", City="Ulricehamn", PostalCode=52335, StreetAddress="Källgatan 10", DiallingCodeHome= "073", DiallingCodeWork="037", TelephoneNbrHome="7747733", TelephoneNbrWork="89675", EmailOne="hej@hotmail.com", EmailTwo=null},
-                new Person(){InsuranceTakerId=2, SocialSecurityNumber="991204-1213", Firstname="Karl", Lastname="Gunnarsson", City="Ulricehamn", PostalCode=52335, StreetAddress="Källgatan 10", DiallingCodeHome= "077", DiallingCodeWork="047", TelephoneNbrHome="7787733", TelephoneNbrWork="349675", EmailOne="heja@hotmail.com", EmailTwo="cool.1@live.se"},
-            };
 
+            Persons = UpdatePersons();
             PersonGrid = CollectionViewSource.GetDefaultView(Persons);
             PersonGrid.Filter = new Predicate<object>(o => Filter(o as Person));
+            Insurances = UpdatePersonInsurance();
+            InsuredPersons = UpdateInsuredPersons();
         }
 
         #region Specific Porperties and methods for search in collection
@@ -59,15 +57,60 @@ namespace GUILayer.ViewModels.SearchViewModels
         }
         #endregion
 
+        #region Methods
+        public ObservableCollection<Person> UpdatePersons()
+        {
+            ObservableCollection<Person> x = new ObservableCollection<Person>();
+            foreach (var p in Context.ITController.GetAllPersons())
+            {
+                x?.Add(p);
+            }
+            Persons = x;
+            return Persons;
+        }
+
+        public ObservableCollection<Insurance> UpdatePersonInsurance()
+        {
+
+            ObservableCollection<Insurance> x = new ObservableCollection<Insurance>();
+            if (SelectedPerson != null)
+            {
+                foreach (var ia in Context.IController.GetInsuranceTakerIAS(SelectedPerson))
+                {
+                    x?.Add(ia);
+                }
+            }
+            Insurances = x;
+            return Insurances;
+        }
+
+        public ObservableCollection<InsuredPerson> UpdateInsuredPersons()
+        {
+
+            ObservableCollection<InsuredPerson> x = new ObservableCollection<InsuredPerson>();
+            if (SelectedPerson != null)
+            {
+                foreach (var ip in Context.IPController.GetInsuranceTakerIPS(SelectedPerson))
+                {
+                    x?.Add(ip);
+                }
+            }
+            InsuredPersons = x;
+            return InsuredPersons;
+        }
+
+        #endregion
+
         #region Properties
 
+    
         public ObservableCollection<Person> Persons { get; set; }
-        public ObservableCollection<InsuranceApplication> InsuranceApplications { get; set; }
+        public ObservableCollection<Insurance> Insurances { get; set; } = new ObservableCollection<Insurance>();
         public ObservableCollection<InsuredPerson> InsuredPersons { get; set; } = new ObservableCollection<InsuredPerson>();
 
         private Person _selectedPerson;
 
-        public Person SelectedPeron
+        public Person SelectedPerson
         {
             get => _selectedPerson;
             set
@@ -131,8 +174,8 @@ namespace GUILayer.ViewModels.SearchViewModels
             }
         }
 
-        private string _postalCode;
-        public string PostalCode
+        private int _postalCode;
+        public int PostalCode
         {
             get => _postalCode;
             set

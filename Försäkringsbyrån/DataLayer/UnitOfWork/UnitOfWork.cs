@@ -15,23 +15,21 @@ namespace DataLayer.UnitOfWork
         private readonly ApplicationContext _context;
 
         public IEmployeeRepository Employees { get; }
-
-        public IInsuranceApplicationRepository Applications { get; }
+        public IInsuranceRepository Insurances { get; }
         public IInsuranceTakerRepository InsuranceTakers { get; }
         public IInsuredPersonRepository InsuredPersons { get; }
         public IPersonRepository Persons { get; }
         public ICompanyRepository Companies { get; }
-        public ISignedInsuranceRepository SignedInsurances { get; }
+       
         public UnitOfWork()
         {
             _context = new ApplicationContext();
             Employees = new EmployeeRepository(_context);
-            Applications = new InsuranceApplicationRepository(_context);
+            Insurances = new InsuranceRepository(_context);
             InsuranceTakers = new InsuranceTakerRepository(_context); 
             InsuredPersons = new InsuredPersonRepository(_context);
             Persons = new PersonRepository(_context);
             Companies = new CompanyRepository(_context);
-            SignedInsurances = new SignedInsuranceRepository(_context);
             Init();
         }
         public void Init() => _context.Reset();

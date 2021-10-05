@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Models.Models
 {
-   public class OtherPersonInsurance : InsuranceType
+    [Table("ÖFPFörsäkring", Schema = "dbo")]
+    public class OtherPersonInsurance : InsuranceType
     {
-        public int OPIId { get; set; } // ÖFPID!!!!! 
+        [Key]
+        public int OPIId { get; set; } 
         public string Table { get; set; }
         public int Premie { get; set; }
 

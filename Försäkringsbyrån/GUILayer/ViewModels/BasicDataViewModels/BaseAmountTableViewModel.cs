@@ -1,9 +1,10 @@
-﻿using GUILayer.Commands.BasicDataCommands;
+﻿using GUILayer.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace GUILayer.ViewModels.BasicDataViewModels
 {
@@ -11,15 +12,38 @@ namespace GUILayer.ViewModels.BasicDataViewModels
     {
         public static readonly BaseAmountTableViewModel Instance = new BaseAmountTableViewModel();
 
-        public AddBaseAmountTableValueBtn _addBtn { get; }
-        public RemoveBaseAmountTableValueBtn _removeBtn { get; }
+        //public AddBaseAmountTableValueBtn _addBtn { get; }
+        //public RemoveBaseAmountTableValueBtn _removeBtn { get; }
 
         private BaseAmountTableViewModel()
         {
-            _removeBtn = new RemoveBaseAmountTableValueBtn();
-            _addBtn = new AddBaseAmountTableValueBtn();
+            //_removeBtn = new RemoveBaseAmountTableValueBtn();
+            //_addBtn = new AddBaseAmountTableValueBtn();
         }
 
+        private ICommand _addBtn;
+        public ICommand AddBaseAmountTableValue_Btn
+        {
+            get => _addBtn ?? (_addBtn = new RelayCommand(x => { AddBaseAmountTable(); CanCreate(); }));
+        }
+
+        public bool CanCreate() => true;
+
+        public static void AddBaseAmountTable()
+        {
+            // Code to actualy add baseamount to the database.
+        }
+
+        private ICommand remove_Btn;
+        public ICommand RemoveBaseAmountTableValue_Btn
+        {
+            get => remove_Btn ?? (remove_Btn = new RelayCommand(x => { RemoveBaseAmount(); CanCreate(); }));
+        }
+
+        public static void RemoveBaseAmount()
+        {
+            // Code to actualy add baseamount to the database.
+        }
 
         #region Properties
 

@@ -18,8 +18,7 @@ namespace BussinessLayer
         internal IUnitOfWork Context { get; }
         public EmployeeController EController { get; }
         public InsuranceTakerController ITController { get; }
-
-        public InsuranceApplicationController IAController {get;}
+        public InsuranceController IController { get; }
         public InsuredPersonController IPController { get; }
         public Employee CurrentEmployee { get; set; } = null;
         public SignedInsuranceController SIController { get; }
@@ -29,7 +28,7 @@ namespace BussinessLayer
             Context = new UnitOfWork();
             EController = new EmployeeController();
             ITController = new InsuranceTakerController();
-            IAController = new InsuranceApplicationController();
+            IController = new InsuranceController();
             IPController = new InsuredPersonController();
             SIController = new SignedInsuranceController();
         }
