@@ -32,6 +32,7 @@ namespace GUILayer.ViewModels.BasicDataViewModels
         public static void RemoveAckValue()
         {
            
+
         }
     }
 }
