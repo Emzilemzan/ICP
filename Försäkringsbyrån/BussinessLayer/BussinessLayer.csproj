@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="AckVariableController.cs" />
     <Compile Include="BusinessController.cs" />
+    <Compile Include="CommissionController.cs" />
     <Compile Include="InsuranceController.cs" />
     <Compile Include="InsuranceTakerController.cs" />
     <Compile Include="InsuredPersonController.cs" />

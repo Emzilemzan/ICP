@@ -10,7 +10,7 @@ namespace GUILayer.ViewModels.CommissionViewModels
     {
         public static readonly GetCommissionViewModel Instance = new GetCommissionViewModel();
 
-        public GetCommissionViewModel()
+        private GetCommissionViewModel()
         {
 
         }

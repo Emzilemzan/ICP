@@ -113,6 +113,9 @@
     <Compile Include="Views\BasicDataViews\AckValueVariableTable.xaml.cs">
       <DependentUpon>AckValueVariableTable.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\BasicDataViews\BaseAmountOptionView.xaml.cs">
+      <DependentUpon>BaseAmountOptionView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\BasicDataViews\BaseAmountTableView.xaml.cs">
       <DependentUpon>BaseAmountTableView.xaml</DependentUpon>
     </Compile>
@@ -198,6 +201,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\BasicDataViews\AckValueVariableTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BasicDataViews\BaseAmountOptionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
