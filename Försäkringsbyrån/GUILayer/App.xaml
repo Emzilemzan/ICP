@@ -60,6 +60,9 @@
         <DataTemplate DataType="{x:Type cvm:CommissionViewModel}">
             <cv:CommissionView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type cvm:GetCommissionViewModel}">
+            <cv:GetCommissionView/>
+        </DataTemplate>
         <DataTemplate DataType="{x:Type ivm:RegisterApplicationViewModel}">
             <iv:RegisterApplicationView/>
         </DataTemplate>
@@ -81,6 +84,7 @@
         <DataTemplate DataType="{x:Type emvm:ManageUserAccessViewModel}">
             <emv:ManageUserAccessView/>
         </DataTemplate>
+        
         <!--#region Exit Button Style-->
         <Style x:Key="ExitBtnStyle" TargetType="{x:Type Button}">
             <Setter Property="Background" Value="Transparent"/>

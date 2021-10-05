@@ -89,6 +89,7 @@
     <Compile Include="ViewModels\BasicDataViewModels\BaseAmountTableViewModel.cs" />
     <Compile Include="ViewModels\BasicDataViewModels\BasicDataViewModel.cs" />
     <Compile Include="ViewModels\CommissionViewModels\CommissionViewModel.cs" />
+    <Compile Include="ViewModels\CommissionViewModels\GetCommissionViewModel.cs" />
     <Compile Include="ViewModels\EmployeeManagementViewModels\AddEmployeeViewModel.cs" />
     <Compile Include="ViewModels\EmployeeManagementViewModels\AddUserAccessViewModel.cs" />
     <Compile Include="ViewModels\EmployeeManagementViewModels\EmployeeManagementViewModel.cs" />

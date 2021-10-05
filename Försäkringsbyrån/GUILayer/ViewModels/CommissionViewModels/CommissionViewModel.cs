@@ -1,8 +1,11 @@
-﻿using System;
+﻿using GUILayer.Commands;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 
 namespace GUILayer.ViewModels.CommissionViewModels
 {
@@ -17,6 +20,21 @@ namespace GUILayer.ViewModels.CommissionViewModels
         private CommissionViewModel()
         {
 
+        }
+
+        private ICommand getCommission_Btn;
+        public ICommand GetCommssion_Btn
+        {
+            get => getCommission_Btn ?? (getCommission_Btn = new RelayCommand(x => { GetCommssion(); CanCreate(); }));
+        }
+
+        public bool CanCreate() => true;
+
+        public static void GetCommssion()
+        {
+            MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
+            MainViewModel.Instance.CurrentTool = "";
+            MainViewModel.Instance.SelectedViewModel = GetCommissionViewModel.Instance;
         }
     }
 }
