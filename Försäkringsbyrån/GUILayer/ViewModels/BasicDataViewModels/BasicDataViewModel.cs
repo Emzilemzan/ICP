@@ -48,5 +48,22 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             MainViewModel.Instance.CurrentTool = "";
             MainViewModel.Instance.SelectedViewModel = AckValueVariableTableViewModel.Instance;
         }
+
+
+        private ICommand permissionValueTable_Btn;
+        public ICommand PermissionValueTable_Btn
+        {
+            get => permissionValueTable_Btn ?? (permissionValueTable_Btn = new RelayCommand(x => { AddPermissionValue(); CanCreate(); }));
+        }
+
+        public static void AddPermissionValue()
+        {
+            MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
+            MainViewModel.Instance.CurrentTool = ""; 
+            MainViewModel.Instance.SelectedViewModel = PermissionValueTableViewModel.Instance;
+        }
+
+
+
     }
 }
