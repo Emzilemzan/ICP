@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GUILayer.Views.InsuranceViews
+namespace GUILayer.Views.SearchViews
 {
     /// <summary>
-    /// Interaction logic for ApplicationOverviewView.xaml
+    /// Interaction logic for ApplicationOverviewViews.xaml
     /// </summary>
-    public partial class ApplicationOverviewView : UserControl
+    public partial class ApplicationOverviewViews : UserControl
     {
-        public ApplicationOverviewView()
+        public ApplicationOverviewViews()
         {
             InitializeComponent();
         }

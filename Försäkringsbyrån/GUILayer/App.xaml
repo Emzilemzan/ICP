@@ -87,6 +87,8 @@
         <DataTemplate DataType="{x:Type emvm:ManageUserAccessViewModel}">
             <emv:ManageUserAccessView/>
         </DataTemplate>
+    
+            
         
         <!--#region Exit Button Style-->
         <Style x:Key="ExitBtnStyle" TargetType="{x:Type Button}">

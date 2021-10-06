@@ -97,7 +97,6 @@
     <Compile Include="ViewModels\EmployeeManagementViewModels\HandleEmployeeViewModel.cs" />
     <Compile Include="ViewModels\EmployeeManagementViewModels\ManageUserAccessViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
-    <Compile Include="ViewModels\InsuranceViewModels\ApplicationOverviewViewModel.cs" />
     <Compile Include="ViewModels\InsuranceViewModels\InsuranceApplicationChoiceViewModel.cs" />
     <Compile Include="ViewModels\InsuranceViewModels\InsuranceViewModel.cs" />
     <Compile Include="ViewModels\InsuranceViewModels\RegisterApplicationViewModel.cs" />
@@ -106,6 +105,7 @@
     <Compile Include="ViewModels\InsuranceViewModels\RegisterPersonApplicationViewModel.cs" />
     <Compile Include="ViewModels\LogInViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\SearchViewModels\ApplicationOverviewViewmodels.cs" />
     <Compile Include="ViewModels\SearchViewModels\SearchEmployeeViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModels\SearchInsuranceTakerCompanyViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModels\SearchInsuranceTakerPersonViewModel.cs" />
@@ -150,9 +150,6 @@
     <Compile Include="Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\InsuranceViews\ApplicationOverviewView.xaml.cs">
-      <DependentUpon>ApplicationOverviewView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\InsuranceViews\InsuranceApplicationChoiceView.xaml.cs">
       <DependentUpon>InsuranceApplicationChoiceView.xaml</DependentUpon>
     </Compile>
@@ -173,6 +170,9 @@
     </Compile>
     <Compile Include="Views\LogInView.xaml.cs">
       <DependentUpon>LogInView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchViews\ApplicationOverviewViews.xaml.cs">
+      <DependentUpon>ApplicationOverviewViews.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SearchViews\SearchEmployeeView.xaml.cs">
       <DependentUpon>SearchEmployeeView.xaml</DependentUpon>
@@ -253,10 +253,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\InsuranceViews\ApplicationOverviewView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\InsuranceViews\InsuranceApplicationChoiceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -282,6 +278,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\LogInView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SearchViews\ApplicationOverviewViews.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

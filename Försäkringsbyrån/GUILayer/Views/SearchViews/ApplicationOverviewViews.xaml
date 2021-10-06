@@ -1,18 +1,16 @@
-﻿<UserControl x:Class="GUILayer.Views.InsuranceViews.ApplicationOverviewView"
+﻿<UserControl x:Class="GUILayer.Views.SearchViews.ApplicationOverviewViews"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:GUILayer.Views.InsuranceViews"
+             xmlns:local="clr-namespace:GUILayer.Views.SearchViews"
              mc:Ignorable="d" 
              d:DesignHeight="1100" d:DesignWidth="900">
     <Grid>
         <Grid.ColumnDefinitions>
-
             <ColumnDefinition Width="300"/>
             <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="300"/>
-
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
@@ -84,7 +82,6 @@
         <Button Grid.Row="15" Grid.Column="2" Width="150" Height="50" Margin="37,5.667,113,0.333" Content="Exportera Information" FontSize="15"></Button>
         <Button Grid.Row="17" Grid.Column="2" Width="150" Height="50" Margin="37,5.667,113,0.333" Content="Uppdatera" FontSize="15" ></Button>
         <Button Grid.Row="19" Grid.Column="2" Width="150" Height="50" Margin="37,5.667,113,0.333" Content="Ta bort i registret" FontSize="15" ></Button>
-
 
 
     </Grid>
