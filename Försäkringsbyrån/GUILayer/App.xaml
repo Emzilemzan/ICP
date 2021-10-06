@@ -60,6 +60,9 @@
         <DataTemplate DataType="{x:Type bdvm:AckValueVariableTableViewModel}">
             <bdv:AckValueVariableTable/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type bdvm:BaseAmountOptionViewModel}">
+            <bdv:BaseAmountOptionView/>
+        </DataTemplate>
         <DataTemplate DataType="{x:Type cvm:CommissionViewModel}">
             <cv:CommissionView/>
         </DataTemplate>

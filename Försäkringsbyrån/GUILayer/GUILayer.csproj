@@ -87,6 +87,7 @@
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\BasicDataViewModels\AckValueVariableTableViewModel.cs" />
+    <Compile Include="ViewModels\BasicDataViewModels\BaseAmountOptionViewModel.cs" />
     <Compile Include="ViewModels\BasicDataViewModels\BaseAmountTableViewModel.cs" />
     <Compile Include="ViewModels\BasicDataViewModels\BasicDataViewModel.cs" />
     <Compile Include="ViewModels\CommissionViewModels\CommissionViewModel.cs" />
