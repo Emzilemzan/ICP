@@ -102,17 +102,6 @@
                 <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.Username}" Margin="0.667,0,102.333,0"/>
                 <Label Content="Lösenord" Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="2" Margin="0,0,277,0"/>
                 <TextBox Grid.Row="10"  Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.Password}" Margin="0.667,0,102.333,0"/>
-      
-                <GroupBox Header="Befattning" Grid.Row="13" Margin="145.667,7,-0.667,-121.667" Grid.Column="1">
-                    <StackPanel>
-                        <CheckBox Content="Innesäljare" Name="OSM" IsChecked="{Binding ElementName=employeeGrid, Path= SelectedItem.OfficeSalesMen}"/>
-                        <CheckBox Content="Utesäljare" Name="FSM" IsChecked="{Binding ElementName=employeeGrid, Path= SelectedItem.FieldSalesMen}"/>
-                        <CheckBox Content="Ekonomiassistent" IsChecked="{Binding ElementName=employeeGrid, Path= SelectedItem.EconomyAssistent}"/>
-                        <CheckBox Content="Försäljningsassisent" IsChecked="{Binding ElementName=employeeGrid, Path= SelectedItem.SalesAssistent}"/>
-                        <CheckBox Content="Försäljningschef" IsChecked="{Binding ElementName=employeeGrid, Path= SelectedItem.SalesManager}"/>
-                        <CheckBox Content="VD" IsChecked="{Binding ElementName=employeeGrid, Path= SelectedItem.CEO}"/>
-                    </StackPanel>
-                </GroupBox>
                 <GroupBox Header="Behörighet" Margin="10,10,277.333,-121.667" Grid.ColumnSpan="2" Grid.Row="13">
                     <StackPanel>
                         <CheckBox Content="Hantera sök" IsChecked="{Binding ElementName=employeeGrid, Path= SelectedItem.Search}"/>
