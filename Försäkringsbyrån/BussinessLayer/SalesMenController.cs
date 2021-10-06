@@ -16,7 +16,7 @@ namespace BussinessLayer
         public void AddSalesMen(SalesMen sm)
         {
             BusinessController.Instance.Context.Employees.Add(sm);
-            BusinessController.Instance.Save();
+            BusinessController.Instance.Save(); 
         }
 
 

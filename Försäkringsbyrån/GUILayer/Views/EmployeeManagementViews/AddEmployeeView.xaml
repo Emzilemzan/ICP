@@ -10,7 +10,6 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="350"/>
-            <ColumnDefinition Width="550"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -68,9 +67,9 @@
             </Grid>
 
         </StackPanel>
-       
-            <Button Content="Lägg till anställd" Grid.Column="1" Margin="6,62.667,20.667,-63" Grid.Row="3" Command="{Binding AddEmployeeBtn}"/>
-      
+
+        <Button Content="Lägg till anställd" Grid.Column="0" Margin="170,63,69.667,35.333" Grid.Row="4" Command="{Binding AddEmployeeBtn}"/>
+
     </Grid>
 </UserControl>
 

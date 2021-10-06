@@ -1,6 +1,4 @@
-﻿using BussinessLayer;
-using Models.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,17 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GUILayer.Views.EmployeeManagementViews
+namespace GUILayer.Views.BasicDataViews
 {
     /// <summary>
-    /// Interaction logic for ManageUserAccessView.xaml
+    /// Interaction logic for PermissionValueTableView.xaml
     /// </summary>
-    public partial class ManageUserAccessView : UserControl
+    public partial class PermissionValueTableView : UserControl
     {
-        public ManageUserAccessView()
+        public PermissionValueTableView()
         {
             InitializeComponent();
         }
-        
     }
 }

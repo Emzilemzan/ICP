@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GUILayer.Views.EmployeeManagementViews"
-             xmlns:xctk1="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:xctk1="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:employeemanagementviewmodels="clr-namespace:GUILayer.ViewModels.EmployeeManagementViewModels" d:DataContext="{d:DesignInstance Type=employeemanagementviewmodels:ManageUserAccessViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Margin="20 0 20 0">
@@ -20,7 +20,7 @@
 
         </Grid.RowDefinitions>
         <Label Content="Hantera behörig" FontSize="20" Grid.Row="0" Grid.Column="0"/>
-        <xctk1:WatermarkTextBox Margin="20,10" Grid.Row="1" MaxHeight="50"
+        <!--<xctk1:WatermarkTextBox Margin="20,10" Grid.Row="1" MaxHeight="50"
                                 HorizontalContentAlignment="Center"
                                 VerticalContentAlignment="Center"
                                 TextWrapping="WrapWithOverflow"
@@ -28,21 +28,22 @@
                                 Foreground="Black"
                                 Grid.Column="0"
                                 Background="Transparent" BorderBrush="Transparent"
-                                Text="{Binding SearchInput, UpdateSourceTrigger=PropertyChanged}"/>
-        <DataGrid x:Name ="userGrid" Grid.Row="2" AutoGenerateColumns="False" ItemsSource="{Binding Users}"
+                                Text="{Binding SearchInput, UpdateSourceTrigger=PropertyChanged}"/>-->
+        <DataGrid Grid.Row="2" AutoGenerateColumns="False" ItemsSource="{Binding Users}"
                   RowDetailsVisibilityMode="VisibleWhenSelected" 
                   IsReadOnly="True" 
+                  x:Name="dgUsers"
+                  SelectedItem="{Binding SelectedPerson}"
                   AlternatingRowBackground="Gainsboro"  AlternationCount="2"
                   IsSynchronizedWithCurrentItem="True"
                   ScrollViewer.CanContentScroll="True" 
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
                   ScrollViewer.HorizontalScrollBarVisibility="Auto" Margin="0,0,0,203">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Användarnamn" Binding="{Binding Path=Username}"/>
-                <DataGridTextColumn Header="Lösenord" Binding="{Binding Path=Password}" />
-                <DataGridTextColumn Header="Förnamn" Binding="{Binding Path=Firstname}" />
-                <DataGridTextColumn Header="Efternamn" Binding="{Binding Path=Lastname}" />
-
+                <DataGridTextColumn Header="Användarnamn" Binding="{Binding Username}"/>
+                <DataGridTextColumn Header="Lösenord" Binding="{Binding Password}" />
+                <DataGridTextColumn Header="Förnamn" Binding="{Binding Firstname}" />
+                <DataGridTextColumn Header="Efternamn" Binding="{Binding Lastname}" />
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Column="1" Grid.Row="2" Margin="10,9.667,10,155">
@@ -68,26 +69,25 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Label Content="Markerad behörig" Grid.Column="0" Grid.ColumnSpan="2" FontWeight="Bold" FontSize="15" Margin="0,-17,214.333,0.333"/>
-                <Label Content="Username" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,21,260.333,0" Grid.RowSpan="2"/>
-                <TextBox Grid.Row="1" IsReadOnly="true" Grid.Column="1" Text="{Binding ElementName=userGrid,Path=SelectedItem.Username}" Margin="0.667,0,102.333,0"/>
+                <Label Content="Användarnamn" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,21,260.333,0" Grid.RowSpan="2"/>
+                <TextBox Grid.Row="1" x:Name="tbUsername"  Grid.Column="1" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="0.667,0,102.333,0"/>
                 <Label Content="Lösenord" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Margin="0,0,277.333,0.333"/>
-                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding ElementName=userGrid,Path=SelectedItem.Password}" Margin="0.667,0,102.333,0"/>
+                <TextBox Grid.Row="2" x:Name="tbPassword" Grid.Column="1" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged,  Mode=TwoWay}" Margin="0.667,0,102.333,0"/>
                 <Label Content="Förnamn" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Margin="0,0,277,0"/>
-                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding ElementName=userGrid,Path=SelectedItem.Firstname}" Margin="0.667,0,102.333,0"/>
+                <TextBox Grid.Row="3" x:Name="tbFirstname" Grid.Column="1" Text="{Binding Firstname, UpdateSourceTrigger=PropertyChanged,  Mode=TwoWay}" Margin="0.667,0,102.333,0"/>
                 <Label Content="Efternamn" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" Margin="0,0,277,0"/>
-                <TextBox Grid.Row="4"  Grid.Column="1" Text="{Binding ElementName=userGrid,Path=SelectedItem.Lastname}" Margin="0.667,0,102.333,0"/>
-
+                <TextBox Grid.Row="4" x:Name="tbLastname" Grid.Column="1" Text="{Binding  Lastname, UpdateSourceTrigger=PropertyChanged,  Mode=TwoWay}" Margin="0.667,0,102.333,0"/>
                 <GroupBox Header="Behörighet"  Grid.ColumnSpan="2" Grid.Row="4" Margin="0,25,102.333,0.333" Grid.RowSpan="7">
                     <StackPanel Margin="0,0,45,-0.333">
-                        <CheckBox Content="Hantera sök" IsChecked="{Binding ElementName=userGrid, Path= SelectedItem.Search}"/>
-                        <CheckBox Content="Hantera försäkringar" IsChecked="{Binding ElementName=userGrid, Path= SelectedItem.Insurances}"/>
-                        <CheckBox Content="Hantera statistik &amp; prospekt" IsChecked="{Binding ElementName=userGrid, Path= SelectedItem.StatisticsAndProspects}" />
-                        <CheckBox Content="Personalhantering" IsChecked="{Binding ElementName=userGrid, Path= SelectedItem.EmployeeManagement}"/>
-                        <CheckBox Content="Hantera grunddata" IsChecked="{Binding ElementName=userGrid, Path= SelectedItem.BasicData}" />
-                        <CheckBox Content="Hantera provision" IsChecked="{Binding ElementName=userGrid, Path= SelectedItem.Commission}" />
+                        <CheckBox Content="Hantera sök" x:Name="cbSearch" IsChecked="{Binding SelectedPerson.Search, UpdateSourceTrigger=PropertyChanged,  Mode=TwoWay}"/>
+                        <CheckBox Content="Hantera försäkringar" x:Name="cbInsurance" IsChecked="{Binding SelectedPerson.Insurances, UpdateSourceTrigger=PropertyChanged,  Mode=TwoWay}"/>
+                        <CheckBox Content="Hantera statistik &amp; prospekt" x:Name="cbSap" IsChecked="{Binding SelectedPerson.StatisticsAndProspects, UpdateSourceTrigger=PropertyChanged,  Mode=TwoWay}" />
+                        <CheckBox Content="Personalhantering" x:Name="cbEm" IsChecked="{Binding  SelectedPerson.EmployeeManagement, UpdateSourceTrigger=PropertyChanged,  Mode=TwoWay}"/>
+                        <CheckBox Content="Hantera grunddata" x:Name="cbBd" IsChecked="{Binding SelectedPerson.BasicData, UpdateSourceTrigger=PropertyChanged,  Mode=TwoWay}" />
+                        <CheckBox Content="Hantera provision" x:Name="cbCommission" IsChecked="{Binding SelectedPerson.Commission, UpdateSourceTrigger=PropertyChanged,  Mode=TwoWay}" />
                     </StackPanel>
                 </GroupBox>
-                <Button Content="Uppdatera" Grid.Column="1" Grid.Row="11" Command="" Grid.RowSpan="2" Margin="99,10,102.333,10"></Button>
+                <Button Content="Uppdatera" Grid.Column="1" Grid.Row="11" Command="{Binding UpdateUserBtn}" Grid.RowSpan="2" Margin="99,10,102.333,10" ></Button>
             </Grid>
         </StackPanel>
 

@@ -1,11 +1,11 @@
-﻿<UserControl x:Class="GUILayer.Views.BasicDataViews.BaseAmountTableView"
+﻿<UserControl x:Class="GUILayer.Views.BasicDataViews.BaseAmountOptionView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GUILayer.Views.BasicDataViews"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"> 
+             d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -15,7 +15,7 @@
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Label Content="Grundbeloppstabeller (Försäkringstyp)" FontSize="26" Grid.Row="0" Margin="0,0,7.667,0" />
+        <Label Content="Grundbelopp (Tillval)" FontSize="26" Grid.Row="0" Margin="0,0,7.667,0" />
         <Grid Grid.Row="1" Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
@@ -36,14 +36,10 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Label Content="Lägg till ny data" Grid.Column="0" FontSize="20" FontWeight="Bold"/>
-                    <Label Content="Försäkringstyp SO" Grid.Column="0" Grid.Row="1"  FontSize="15" Margin="120,0,0,0"/>
-                    <Label Content="Datum" Grid.Column="0" Grid.Row="2"  FontSize="15" Margin="120,0,0,0"/>
-                    <Label Content="Grundbelopp" Grid.Column="0" Grid.Row="3"  FontSize="15" Margin="120,0,0,0"/>
-                    <Label Content="Ackvisitionsvärde" Grid.Column="0" Grid.Row="4"  FontSize="15" Margin="120,0,0,0"/>
+                    <Label Content="Tillvalstyp" Grid.Column="0" Grid.Row="1"  FontSize="15" Margin="120,0,0,0"/>
+                    <Label Content="Grundbelopp" Grid.Column="0" Grid.Row="2"  FontSize="15" Margin="120,0,0,0"/>
                     <ComboBox Grid.Row="1" Grid.Column="1"/>
                     <DatePicker IsTodayHighlighted="True" Grid.Row="2" Grid.Column="1" DisplayDateStart="1900-01-01"/>
-                    <TextBox Grid.Row="3" Grid.Column="1"/>
-                    <TextBox Grid.Row="4" Grid.Column="1"/>
                     <Button Grid.Column="1" Grid.Row="5" Margin="58,0,0,0" Content="Lägg till" FontSize="15"></Button>
                 </Grid>
             </Border>
@@ -76,11 +72,10 @@
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
                   ScrollViewer.HorizontalScrollBarVisibility="Auto">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding Path=EmploymentNo}"/>
-                <DataGridTextColumn Header="Datum" Binding="{Binding Path=Firstname}" />
-                <DataGridTextColumn Header="Grundbelopp" Binding="{Binding Path=Lastname}" />
-                <DataGridTextColumn Header="Ack.värde" Binding="{Binding Path=StreetAddress}" />
-                <DataGridTextColumn Header="Försäkringstyp" Binding="{Binding Path=Postalcode}" />
+                <DataGridTextColumn Header="Id" Width="80" Binding="{Binding }"/>
+                <DataGridTextColumn Header="Datum" Width="80" Binding="{Binding}" />
+                <DataGridTextColumn Header="Grundbelopp" Width="100" Binding="{Binding}" />
+                <DataGridTextColumn Header="Tillvalstyp" Width="100" Binding="{Binding}" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

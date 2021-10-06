@@ -23,8 +23,6 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
         public HandleEmployeeViewModel()
         {
             SalesMens = UpdateSM();
-            EmployeeGrid = CollectionViewSource.GetDefaultView(SalesMens);
-            EmployeeGrid.Filter = new Predicate<object>(o => Filter(o as SalesMen));
             
         }
 
@@ -48,51 +46,13 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             get => _updateEmployeeBtn ?? (_updateEmployeeBtn = new RelayCommand(x => { UpdateSalesMen(); CanCommand(); }));
         }
 
-        private void UpdateSalesMen()
-        {
-          
-        }
-
-
-       
 
         public bool CanCommand() => true;
 
-        #region search
-        private ICollectionView _employeeCollection;
-        public ICollectionView EmployeeGrid
+        private void UpdateSalesMen()
         {
-            get { return _employeeCollection; }
-            set { _employeeCollection = value; OnPropertyChanged("EmployeeGrid"); }
+            
         }
-        private bool Filter(SalesMen employee)
-        {
-            return SearchInput == null
-                || employee.AgentNumber.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
-                || employee.Firstname.IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
-                || employee.Lastname.IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
-                || employee.StreetAddress.IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
-                || employee.City.IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
-                || employee.Postalcode.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
-                || employee.TaxRate.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1;
-
-        }
-        private string _searchInput;
-
-        public string SearchInput
-        {
-            get => _searchInput;
-            set
-            {
-                _searchInput = value;
-                OnPropertyChanged("SearchInput");
-                EmployeeGrid.Refresh();
-            }
-        }
-        #endregion
-
-
-
 
         #region properties
         private SalesMen _selectedPerson;
@@ -116,8 +76,15 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             get => _lastname;
             set
             {
-                _lastname = value;
-                OnPropertyChanged("Lastname");
+                if (_lastname.Length > 0)
+                {
+                    _lastname = value;
+                    OnPropertyChanged("Lasttname");
+                }
+                else
+                {
+                    MessageBox.Show("Ett efternamn måste skrivas in");
+                }
             }
         }
 
@@ -127,8 +94,15 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             get => _firstname;
             set
             {
-                _firstname = value;
-                OnPropertyChanged("Firstname");
+                if (_firstname.Length > 0)
+                {
+                    _firstname = value;
+                    OnPropertyChanged("Firstname");
+                }
+                else
+                {
+                    MessageBox.Show("Ett förnamn måste skrivas in");
+                }
             }
         }
         private string _streetAddress;
@@ -137,11 +111,17 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             get => _streetAddress;
             set
             {
-                _streetAddress = value;
-                OnPropertyChanged("StreetAddress");
+                if (_streetAddress.Length > 0)
+                {
+                    _streetAddress = value;
+                    OnPropertyChanged("StreetAddress");
+                }
+                else
+                {
+                    MessageBox.Show("En gatuadress måste skrivas in");
+                }
             }
         }
-
         private int _postalCode;
         public string Postalcode
         {
@@ -164,8 +144,15 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             get => _city;
             set
             {
-                _city = value;
-                OnPropertyChanged("City");
+                if (_city.Length > 0)
+                {
+                    _city = value;
+                    OnPropertyChanged("City");
+                }
+                else
+                {
+                    MessageBox.Show("En postort måste skrivas in");
+                }
             }
         }
 

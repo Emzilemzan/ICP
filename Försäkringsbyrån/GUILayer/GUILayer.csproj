@@ -90,6 +90,7 @@
     <Compile Include="ViewModels\BasicDataViewModels\BaseAmountTableViewModel.cs" />
     <Compile Include="ViewModels\BasicDataViewModels\BasicDataViewModel.cs" />
     <Compile Include="ViewModels\CommissionViewModels\CommissionViewModel.cs" />
+    <Compile Include="ViewModels\CommissionViewModels\GetCommissionViewModel.cs" />
     <Compile Include="ViewModels\EmployeeManagementViewModels\AddEmployeeViewModel.cs" />
     <Compile Include="ViewModels\EmployeeManagementViewModels\AddUserAccessViewModel.cs" />
     <Compile Include="ViewModels\EmployeeManagementViewModels\EmployeeManagementViewModel.cs" />
@@ -113,11 +114,17 @@
     <Compile Include="Views\BasicDataViews\AckValueVariableTable.xaml.cs">
       <DependentUpon>AckValueVariableTable.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\BasicDataViews\BaseAmountOptionView.xaml.cs">
+      <DependentUpon>BaseAmountOptionView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\BasicDataViews\BaseAmountTableView.xaml.cs">
       <DependentUpon>BaseAmountTableView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\BasicDataViews\BasicDataView.xaml.cs">
       <DependentUpon>BasicDataView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BasicDataViews\PermissionValueTableView.xaml.cs">
+      <DependentUpon>PermissionValueTableView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CommissionViews\CommissionView.xaml.cs">
       <DependentUpon>CommissionView.xaml</DependentUpon>
@@ -198,11 +205,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\BasicDataViews\BaseAmountOptionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\BasicDataViews\BaseAmountTableView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\BasicDataViews\BasicDataView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BasicDataViews\PermissionValueTableView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
