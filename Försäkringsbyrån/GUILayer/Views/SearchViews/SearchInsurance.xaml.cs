@@ -16,14 +16,13 @@ using System.Windows.Shapes;
 namespace GUILayer.Views.SearchViews
 {
     /// <summary>
-    /// Interaction logic for SearchValueView.xaml
+    /// Interaction logic for SearchInsurance.xaml
     /// </summary>
-    public partial class SearchValueView : UserControl
+    public partial class SearchInsurance : UserControl
     {
-        public SearchValueView()
+        public SearchInsurance()
         {
             InitializeComponent();
         }
-
     }
 }
