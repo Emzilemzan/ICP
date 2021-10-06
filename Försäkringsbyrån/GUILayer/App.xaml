@@ -1,5 +1,5 @@
 ﻿<Application x:Class="GUILayer.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:GUILayer"
              xmlns:vm="clr-namespace:GUILayer.ViewModels"
@@ -60,6 +60,9 @@
         <DataTemplate DataType="{x:Type bdvm:AckValueVariableTableViewModel}">
             <bdv:AckValueVariableTable/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type bdvm:BaseAmountOptionViewModel}">
+            <bdv:BaseAmountOptionView/>
+        </DataTemplate>
         <DataTemplate DataType="{x:Type cvm:CommissionViewModel}">
             <cv:CommissionView/>
         </DataTemplate>
@@ -87,6 +90,8 @@
         <DataTemplate DataType="{x:Type emvm:ManageUserAccessViewModel}">
             <emv:ManageUserAccessView/>
         </DataTemplate>
+    
+            
         
         <!--#region Exit Button Style-->
         <Style x:Key="ExitBtnStyle" TargetType="{x:Type Button}">

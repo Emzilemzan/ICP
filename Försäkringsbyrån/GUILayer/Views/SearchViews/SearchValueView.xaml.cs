@@ -25,5 +25,12 @@ namespace GUILayer.Views.SearchViews
             InitializeComponent();
         }
 
+<<<<<<< HEAD
+=======
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+>>>>>>> e1cca3f885244ba17d99401e6d2a2c0687b5c640
     }
 }

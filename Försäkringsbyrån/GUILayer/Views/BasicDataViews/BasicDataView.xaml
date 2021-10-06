@@ -51,7 +51,7 @@
                          Height="106"
                          Background="Transparent" 
                          Margin="41,0,31.667,0"
-                         Command=""
+                         Command="{Binding AmountOption_Btn}"
                          Style="{DynamicResource OtherButtonStyle}" Width="Auto">
                     <TextBlock>Grundbelopp<LineBreak/>(Tillvalstyp)</TextBlock>
                 </Button>
