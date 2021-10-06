@@ -87,6 +87,7 @@
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\BasicDataViewModels\AckValueVariableTableViewModel.cs" />
+    <Compile Include="ViewModels\BasicDataViewModels\BaseAmountOptionViewModel.cs" />
     <Compile Include="ViewModels\BasicDataViewModels\BaseAmountTableViewModel.cs" />
     <Compile Include="ViewModels\BasicDataViewModels\BasicDataViewModel.cs" />
     <Compile Include="ViewModels\BasicDataViewModels\PermissionValueTableViewModel.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="ViewModels\InsuranceViewModels\RegisterPersonApplicationViewModel.cs" />
     <Compile Include="ViewModels\LogInViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\SearchViewModels\ApplicationOverviewViewmodels.cs" />
     <Compile Include="ViewModels\SearchViewModels\SearchEmployeeViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModels\SearchInsuranceTakerCompanyViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModels\SearchInsuranceTakerPersonViewModel.cs" />
@@ -171,8 +173,8 @@
     <Compile Include="Views\LogInView.xaml.cs">
       <DependentUpon>LogInView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\overviewapplication.xaml.cs">
-      <DependentUpon>overviewapplication.xaml</DependentUpon>
+    <Compile Include="Views\SearchViews\ApplicationOverviewViews.xaml.cs">
+      <DependentUpon>ApplicationOverviewViews.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SearchViews\SearchEmployeeView.xaml.cs">
       <DependentUpon>SearchEmployeeView.xaml</DependentUpon>
@@ -281,7 +283,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\overviewapplication.xaml">
+    <Page Include="Views\SearchViews\ApplicationOverviewViews.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
