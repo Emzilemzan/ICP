@@ -87,7 +87,7 @@
                         <CheckBox Content="Hantera provision" x:Name="cbCommission" IsChecked="{Binding SelectedPerson.Commission, UpdateSourceTrigger=PropertyChanged,  Mode=TwoWay}" />
                     </StackPanel>
                 </GroupBox>
-                <Button Content="Uppdatera" Grid.Column="1" Grid.Row="11" Command="{Binding UpdateUserBtn}" Grid.RowSpan="2" Margin="99,10,102.333,10" Click="Button_Click" ></Button>
+                <Button Content="Uppdatera" Grid.Column="1" Grid.Row="11" Command="{Binding UpdateUserBtn}" Grid.RowSpan="2" Margin="99,10,102.333,10" ></Button>
             </Grid>
         </StackPanel>
 
