@@ -96,6 +96,7 @@
     <Compile Include="ViewModels\EmployeeManagementViewModels\HandleEmployeeViewModel.cs" />
     <Compile Include="ViewModels\EmployeeManagementViewModels\ManageUserAccessViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
+    <Compile Include="ViewModels\InsuranceViewModels\ApplicationOverviewViewModel.cs" />
     <Compile Include="ViewModels\InsuranceViewModels\InsuranceApplicationChoiceViewModel.cs" />
     <Compile Include="ViewModels\InsuranceViewModels\InsuranceViewModel.cs" />
     <Compile Include="ViewModels\InsuranceViewModels\RegisterApplicationViewModel.cs" />
@@ -142,6 +143,9 @@
     <Compile Include="Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\InsuranceViews\ApplicationOverviewView.xaml.cs">
+      <DependentUpon>ApplicationOverviewView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\InsuranceViews\InsuranceApplicationChoiceView.xaml.cs">
       <DependentUpon>InsuranceApplicationChoiceView.xaml</DependentUpon>
     </Compile>
@@ -162,9 +166,6 @@
     </Compile>
     <Compile Include="Views\LogInView.xaml.cs">
       <DependentUpon>LogInView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\overviewapplication.xaml.cs">
-      <DependentUpon>overviewapplication.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SearchViews\SearchEmployeeView.xaml.cs">
       <DependentUpon>SearchEmployeeView.xaml</DependentUpon>
@@ -237,6 +238,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\InsuranceViews\ApplicationOverviewView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\InsuranceViews\InsuranceApplicationChoiceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -262,10 +267,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\LogInView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\overviewapplication.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
