@@ -20,7 +20,7 @@
 
         </Grid.RowDefinitions>
         <Label Content="Hantera anställd" FontSize="20" Grid.Row="0" Grid.Column="0"/>
-        <xctk1:WatermarkTextBox Margin="20,10" Grid.Row="1" MaxHeight="50"
+        <!--<xctk1:WatermarkTextBox Margin="20,10" Grid.Row="1" MaxHeight="50"
                                 HorizontalContentAlignment="Center"
                                 VerticalContentAlignment="Center"
                                 TextWrapping="WrapWithOverflow"
@@ -28,7 +28,7 @@
                                 Foreground="Black"
                                 Grid.Column="0"
                                 Background="Transparent" BorderBrush="Transparent"
-                                Text="{Binding SearchInput, UpdateSourceTrigger=PropertyChanged}"/>
+                                Text="{Binding SearchInput, UpdateSourceTrigger=PropertyChanged}"/>-->
         <DataGrid x:Name ="employeeGrid" Grid.Row="2" AutoGenerateColumns="False" ItemsSource="{Binding Employees}"
                   RowDetailsVisibilityMode="VisibleWhenSelected" 
                   IsReadOnly="True" 

@@ -35,8 +35,10 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             get => _lastname;
             set
             {
-                _lastname = value;
-                OnPropertyChanged("Lastname");
+               
+                    _lastname = value;
+                    OnPropertyChanged("Lasttname");
+                
             }
         }
 
@@ -46,8 +48,12 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             get => _firstname;
             set
             {
-                _firstname = value;
-                OnPropertyChanged("Firstname");
+                
+                    _firstname = value;
+                    OnPropertyChanged("Firstname");
+                
+                    
+                
             }
         }
         private string _streetAddress;
@@ -56,8 +62,11 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             get => _streetAddress;
             set
             {
-                _streetAddress = value;
-                OnPropertyChanged("StreetAddress");
+                
+                    _streetAddress = value;
+                    OnPropertyChanged("StreetAddress");
+                
+                  
             }
         }
 
@@ -83,8 +92,11 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             get => _city;
             set
             {
-                _city = value;
-                OnPropertyChanged("City");
+                
+                    _city = value;
+                    OnPropertyChanged("City");
+                
+                
             }
         }
 

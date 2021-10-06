@@ -2,10 +2,13 @@
 using Models.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace GUILayer.ViewModels.EmployeeManagementViewModels
@@ -16,17 +19,22 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
 
         public ManageUserAccessViewModel()
         {
-
+            Users = UpdateUA();
         }
 
+        #region properties
         private string _username;
         public string Username
         {
             get => _username;
             set
             {
-                _username = value;
-                OnPropertyChanged("Username");
+                
+                    _username = value;
+                    OnPropertyChanged("Username");
+                
+                    
+                
             }
         }
 
@@ -36,8 +44,12 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             get => _password;
             set
             {
-                _password = value;
-                OnPropertyChanged("Password");
+                
+                    _password = value;
+                    OnPropertyChanged("Password");
+                
+                    
+                
             }
         }
         private string _lastname;
@@ -46,8 +58,11 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             get => _lastname;
             set
             {
-                _lastname = value;
-                OnPropertyChanged("Lastname");
+                
+                    _lastname = value;
+                    OnPropertyChanged("Lasttname");
+                
+                  
             }
         }
 
@@ -57,11 +72,27 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             get => _firstname;
             set
             {
-                _firstname = value;
-                OnPropertyChanged("Firstname");
+                
+                    _firstname = value;
+                    OnPropertyChanged("Firstname");
+
+                
+            }
+        }
+        private object _selectedPerson;
+        public object SelectedPerson
+        {
+            get => _selectedPerson;
+            set
+            {
+                _selectedPerson = value;
+                OnPropertyChanged("SelectedPerson");
             }
         }
 
+        public ObservableCollection<UserAccess> Users { get; set; }
+       
+        #endregion
         #region bools for access
         private bool _search;
         public bool Search
@@ -129,26 +160,28 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             }
         }
         #endregion
-        private ICommand _addUserBtn;
-        public ICommand AddUserBtn
+        #region methods and commands
+        private ICommand _uUserBtn;
+        public ICommand UpdateUserBtn
         {
-            get => _addUserBtn ?? (_addUserBtn = new RelayCommand(x => { InsertUser(); CanCommand(); }));
+            get => _uUserBtn ?? (_uUserBtn = new RelayCommand(x => { UpdateUser(); CanCommand(); }));
         }
 
         public bool CanCommand()
         {
-            return !string.IsNullOrWhiteSpace(Instance.Username) && !string.IsNullOrWhiteSpace(Instance.Password);
+            return !string.IsNullOrWhiteSpace(Instance.Username) && !string.IsNullOrWhiteSpace(Instance.Password) && !string.IsNullOrWhiteSpace(Instance.Firstname) && !string.IsNullOrWhiteSpace(Instance.Lastname);
         }
 
-
-        private void InsertUser()
+        private void UpdateUser()
         {
             if (Instance._username != null)
             {
                 UserAccess a = new UserAccess()
                 {
-                    Username = Instance.Username,
+                   Username = Username,
                     Password = Instance.Password,
+                    Firstname = Instance.Firstname,
+                    Lastname = Instance.Lastname,
                     Search = Instance.Search,
                     StatisticsAndProspects = Instance.StatisticsAndProspects,
                     Insurances = Instance.Insurances,
@@ -156,17 +189,30 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
                     Commission = Instance.Commission,
                     BasicData = Instance.BasicData
                 };
-                Context.UAController.CheckExistingUser(Instance._username, a);
+
+                Context.UAController.EditUser(a);
                 MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
                 MainViewModel.Instance.CurrentTool = "";
-                //HandleEmployeeViewModel.Instance.UpdateSM();
-                //MainViewModel.Instance.SelectedViewModel = HandleEmployeeViewModel.Instance;
+                Instance.UpdateUA();
             }
             else
             {
-                MessageBox.Show("Anställningsnummer får inte lämnas tomt");
+                MessageBox.Show("Användarnamn får inte lämnas tomt");
             }
         }
+        
+        public ObservableCollection<UserAccess> UpdateUA()
+        {
+            ObservableCollection<UserAccess> x = new ObservableCollection<UserAccess>();
+            foreach (var u in Context.UAController.GetAllUsers())
+            {
+                x?.Add(u);
+            }
+            Users = x;
+            return Users;
+        }
+
+        #endregion
 
     }
 

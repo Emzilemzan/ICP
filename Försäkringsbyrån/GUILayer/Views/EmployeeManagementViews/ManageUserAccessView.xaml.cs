@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BussinessLayer;
+using Models.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,5 +26,6 @@ namespace GUILayer.Views.EmployeeManagementViews
         {
             InitializeComponent();
         }
+        
     }
 }
