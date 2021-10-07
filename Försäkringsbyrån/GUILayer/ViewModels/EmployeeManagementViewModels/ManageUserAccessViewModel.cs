@@ -23,64 +23,47 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
         }
 
         #region properties
-        private string _username;
         public string Username
         {
-            get => _username;
+            get => SelectedPerson.Username;
             set
             {
-                
-                    _username = value;
+                SelectedPerson.Username = value;
                     OnPropertyChanged("Username");
-                
-                    
-                
             }
         }
 
-        private string _password;
         public string Password
         {
-            get => _password;
+            get => SelectedPerson.Password;
             set
             {
-                
-                    _password = value;
+                SelectedPerson.Password = value;
                     OnPropertyChanged("Password");
-                
-                    
-                
             }
         }
-        private string _lastname;
         public string Lastname
         {
-            get => _lastname;
+            get => SelectedPerson.Lastname;
             set
             {
-                
-                    _lastname = value;
+                SelectedPerson.Lastname = value;
                     OnPropertyChanged("Lasttname");
-                
-                  
             }
         }
 
-        private string _firstname;
         public string Firstname
         {
-            get => _firstname;
+            get => SelectedPerson.Firstname;
             set
             {
-                
-                    _firstname = value;
+                SelectedPerson.Firstname = value;
                     OnPropertyChanged("Firstname");
-
-                
             }
         }
-        private object _selectedPerson;
-        public object SelectedPerson
+        //SelectedPerson is used to select rowdata in datagrid. 
+        private UserAccess _selectedPerson;
+        public UserAccess SelectedPerson
         {
             get => _selectedPerson;
             set
@@ -93,69 +76,63 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
         public ObservableCollection<UserAccess> Users { get; set; }
        
         #endregion
-        #region bools for access
-        private bool _search;
+        #region properties bools for access
         public bool Search
         {
-            get => _search;
+            get => SelectedPerson.Search;
             set
             {
-                _search = value;
+                SelectedPerson.Search = value;
                 OnPropertyChanged("Search");
             }
         }
 
-        private bool _sap;
         public bool StatisticsAndProspects
         {
-            get => _sap;
+            get => SelectedPerson.StatisticsAndProspects;
             set
             {
-                _sap = value;
+                SelectedPerson.StatisticsAndProspects = value;
                 OnPropertyChanged("StatisticsAndProspects");
             }
         }
 
-        private bool _employeeManagement;
         public bool EmployeeManagement
         {
-            get => _employeeManagement;
+            get => SelectedPerson.EmployeeManagement;
             set
             {
-                _employeeManagement = value;
+                SelectedPerson.EmployeeManagement = value;
                 OnPropertyChanged("EmployeeManagement");
             }
         }
 
-        private bool _insurances;
         public bool Insurances
         {
-            get => _insurances;
+            get => SelectedPerson.Insurances;
             set
             {
-                _insurances = value;
+                SelectedPerson.Insurances = value;
                 OnPropertyChanged("Insurances");
             }
         }
 
-        private bool _basicData;
         public bool BasicData
         {
-            get => _basicData;
+            get => SelectedPerson.BasicData;
             set
             {
-                _basicData = value;
+                SelectedPerson.BasicData = value;
                 OnPropertyChanged("BasicData");
             }
         }
 
-        private bool _commission;
         public bool Commission
         {
-            get => _commission;
+            get => SelectedPerson.Commission;
             set
             {
-                _commission = value;
+                SelectedPerson.Commission = value;
                 OnPropertyChanged("BasicData");
             }
         }
@@ -167,40 +144,41 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             get => _uUserBtn ?? (_uUserBtn = new RelayCommand(x => { UpdateUser(); CanCommand(); }));
         }
 
-        public bool CanCommand()
-        {
-            return !string.IsNullOrWhiteSpace(Instance.Username) && !string.IsNullOrWhiteSpace(Instance.Password) && !string.IsNullOrWhiteSpace(Instance.Firstname) && !string.IsNullOrWhiteSpace(Instance.Lastname);
-        }
-
+        public bool CanCommand() => true;
+            
+        //method for update existing user
         private void UpdateUser()
         {
-            if (Instance._username != null)
+            if (SelectedPerson != null && Instance.Password != null && Instance.Firstname != null && Instance.Lastname != null &&
+                (Instance.StatisticsAndProspects != false || Instance.Commission != false || Instance.Insurances != false
+                || Instance.EmployeeManagement != false || Instance.BasicData != false || Instance.Search != false))
             {
-                UserAccess a = new UserAccess()
-                {
-                   Username = Username,
-                    Password = Instance.Password,
-                    Firstname = Instance.Firstname,
-                    Lastname = Instance.Lastname,
-                    Search = Instance.Search,
-                    StatisticsAndProspects = Instance.StatisticsAndProspects,
-                    Insurances = Instance.Insurances,
-                    EmployeeManagement = Instance.EmployeeManagement,
-                    Commission = Instance.Commission,
-                    BasicData = Instance.BasicData
-                };
+                SelectedPerson.Username = Username;
+                SelectedPerson.Password = Password;
+                SelectedPerson.Firstname = Firstname;
+                SelectedPerson.Lastname = Lastname;
+                SelectedPerson.Search = Search;
+                SelectedPerson.StatisticsAndProspects = StatisticsAndProspects;
+                SelectedPerson.Insurances = Insurances;
+                SelectedPerson.EmployeeManagement = EmployeeManagement;
+                SelectedPerson.Commission = Commission;
+                SelectedPerson.BasicData = BasicData;
 
-                Context.UAController.EditUser(a);
-                MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
-                MainViewModel.Instance.CurrentTool = "";
-                Instance.UpdateUA();
+                Context.UAController.EditUser(SelectedPerson);
+                
+                MessageBox.Show($"Uppdateringen lyckades av användarnamet: {SelectedPerson.Username}", "Lyckad uppdatering", MessageBoxButton.OK, MessageBoxImage.Information);
+                Users.Clear();
+                foreach (var u in Context.UAController.GetAllUsers())
+                {
+                    Users?.Add(u);
+                }
             }
             else
             {
-                MessageBox.Show("Användarnamn får inte lämnas tomt");
+                MessageBox.Show("Du måste markera en behörig i registret, alla fält måste vara ifyllda och minst en behörighet ska ha valts","Fel", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        
+        //method to get all useraccesses in db. 
         public ObservableCollection<UserAccess> UpdateUA()
         {
             ObservableCollection<UserAccess> x = new ObservableCollection<UserAccess>();
@@ -210,6 +188,48 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             }
             Users = x;
             return Users;
+        }
+
+        private ICommand _deleteUserBtn;
+        public ICommand DeleteUserBtn
+        {
+            get => _deleteUserBtn ?? (_deleteUserBtn = new RelayCommand(x => { DeleteSalesMen(); CanCommand(); }));
+        }
+        //Method for deleting a salesmen
+        //Om säljaren är registrerad på någon ansökan, ska denne ej gå att ta bort!
+        private void DeleteSalesMen()
+        {
+            if (SelectedPerson != null)
+            {
+                MessageBoxResult result = MessageBox.Show("Vill du ta bort säljaren?", "Varning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    SelectedPerson.Username = Username;
+                    SelectedPerson.Password = Password;
+                    SelectedPerson.Firstname = Firstname;
+                    SelectedPerson.Lastname = Lastname;
+                    SelectedPerson.Search = Search;
+                    SelectedPerson.StatisticsAndProspects = StatisticsAndProspects;
+                    SelectedPerson.Insurances = Insurances;
+                    SelectedPerson.EmployeeManagement = EmployeeManagement;
+                    SelectedPerson.Commission = Commission;
+                    SelectedPerson.BasicData = BasicData;
+
+                    Context.UAController.RemoveUser(SelectedPerson);
+                    Users.Remove(SelectedPerson);
+                    MessageBox.Show("Borttagningen lyckades:", "Lyckad borttagning", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    MessageBox.Show($"{SelectedPerson.Username} är inte borttagen");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Du måste markera en behörig i registret", "Fel", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
         }
 
         #endregion

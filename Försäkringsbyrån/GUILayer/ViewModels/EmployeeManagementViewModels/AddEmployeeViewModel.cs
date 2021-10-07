@@ -32,13 +32,12 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
         private string _lastname;
         public string Lastname
         {
-            get => _lastname;
+            get => _lastname = "";
             set
             {
-               
                     _lastname = value;
                     OnPropertyChanged("Lasttname");
-                
+               
             }
         }
 
@@ -136,10 +135,8 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
 
         
         #endregion
-       
-      
 
-        #region Manages GUI happenings. 
+        #region Commands and methods. 
         
         private ICommand _addEmployeeBtn;
         public ICommand AddEmployeeBtn
@@ -155,7 +152,7 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
 
         private void InsertSalesMen()
         {
-            if (Instance._agentNumber != 0)
+            if (Instance._agentNumber != 0 && Instance.City != null && Instance.Firstname != null && Instance.Lastname != null && Instance._postalCode != 0 && Instance._taxRate != 0 && Instance.StreetAddress != null)
             {
                 SalesMen salesMen = new SalesMen()
                 {
@@ -170,12 +167,19 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
                 Context.SMController.CheckExistingSalesMen(Instance._agentNumber, salesMen);
                 MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
                 MainViewModel.Instance.CurrentTool = "";
+                Instance.AgentNumber = string.Empty;
+                Instance.Firstname = string.Empty;
+                Instance.StreetAddress = string.Empty;
+                Instance.City = string.Empty;
+                Instance.Lastname = string.Empty;
+                Instance.Postalcode = string.Empty;
+                Instance.TaxRate = string.Empty;
                 HandleEmployeeViewModel.Instance.UpdateSM();
                 MainViewModel.Instance.SelectedViewModel = HandleEmployeeViewModel.Instance;
             }
             else
             {
-                MessageBox.Show("Anställningsnummer får inte lämnas tomt");
+                MessageBox.Show("Inget fält får lämnas tomt!");
             }
         }
         #endregion

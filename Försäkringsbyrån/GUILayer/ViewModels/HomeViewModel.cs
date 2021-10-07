@@ -14,7 +14,6 @@ namespace GUILayer.ViewModels
     {
         public static readonly HomeViewModel Instance = new HomeViewModel();
 
-       
 
         private HomeViewModel()
         {

@@ -18,18 +18,15 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
         {
 
         }
+        #region properties
         private string _lastname;
         public string Lastname
         {
             get => _lastname;
             set
             {
-                
                     _lastname = value;
                     OnPropertyChanged("Lasttname");
-                
-                    
-                
             }
         }
 
@@ -39,11 +36,8 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             get => _firstname;
             set
             {
-                
                     _firstname = value;
                     OnPropertyChanged("Firstname");
-                
-                
             }
         }
         private string _username;
@@ -52,12 +46,8 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             get => _username;
             set
             {
-                
                     _username = value;
                     OnPropertyChanged("Username");
-              
-                    
-               
             }
         }
 
@@ -67,15 +57,11 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             get => _password;
             set
             {
-                
                     _password = value;
                     OnPropertyChanged("Password");
-                
-                    
-                
             }
         }
-
+        #endregion
         #region bools for access
         private bool _search;
         public bool Search
@@ -143,6 +129,7 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             }
         }
         #endregion
+        #region command
         private ICommand _addUserBtn;
         public ICommand AddUserBtn
         {
@@ -157,7 +144,9 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
 
         private void InsertUser()
         {
-            if (Instance._username != null)
+            if (Instance._username != null && Instance.Password != null && Instance.Firstname != null && Instance.Lastname != null && 
+                (Instance.StatisticsAndProspects != false || Instance.Commission != false || Instance.Insurances != false
+                || Instance.EmployeeManagement != false || Instance.BasicData != false || Instance.Search != false))
             {
                 UserAccess a = new UserAccess()
                 {
@@ -175,13 +164,24 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
                 Context.UAController.CheckExistingUser(Instance._username, a);
                 MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
                 MainViewModel.Instance.CurrentTool = "";
+                Instance.Username = string.Empty;
+                Instance.Password = string.Empty;
+                Instance.Lastname = string.Empty;
+                Instance.Firstname = string.Empty;
+                Instance.Search = false;
+                Instance.StatisticsAndProspects = false;
+                Instance.BasicData = false;
+                Instance.Commission = false;
+                Instance.EmployeeManagement = false;
+                Instance.Insurances = false;
                 ManageUserAccessViewModel.Instance.UpdateUA();
                 MainViewModel.Instance.SelectedViewModel = ManageUserAccessViewModel.Instance;
             }
             else
             {
-                MessageBox.Show("Användarnamn får inte lämnas tomt");
+                MessageBox.Show("Inget fält får lämnas tomt och minst en behörighet måste väljas","Felinmatning", MessageBoxButton.OK, MessageBoxImage.Hand);
             }
         }
+        #endregion
     }
 }

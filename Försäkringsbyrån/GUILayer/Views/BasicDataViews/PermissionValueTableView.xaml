@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:GUILayer.Views.BasicDataViews"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="800">
-    <Grid>
+    <!--CommissionShareTable-->
+    <Grid> 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
