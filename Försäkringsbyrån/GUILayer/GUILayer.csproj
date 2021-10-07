@@ -107,11 +107,8 @@
     <Compile Include="ViewModels\InsuranceViewModels\RegisterPersonApplicationViewModel.cs" />
     <Compile Include="ViewModels\LogInViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
-<<<<<<< HEAD
     <Compile Include="ViewModels\SearchViewModels\SearchApplicationViewModel.cs" />
-=======
     <Compile Include="ViewModels\SearchViewModels\ApplicationOverviewViewmodels.cs" />
->>>>>>> e1cca3f885244ba17d99401e6d2a2c0687b5c640
     <Compile Include="ViewModels\SearchViewModels\SearchEmployeeViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModels\SearchInsuranceTakerCompanyViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModels\SearchInsuranceTakerPersonViewModel.cs" />
