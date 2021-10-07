@@ -9,7 +9,6 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
@@ -24,13 +23,5 @@ namespace GUILayer.Views.SearchViews
         {
             InitializeComponent();
         }
-
-<<<<<<< HEAD
-=======
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
->>>>>>> e1cca3f885244ba17d99401e6d2a2c0687b5c640
     }
 }

@@ -16,7 +16,6 @@ namespace GUILayer.ViewModels.SearchViewModels
     {
         public static readonly SearchValueViewModel Instance = new SearchValueViewModel();
 
-     
 
         private SearchValueViewModel()
         {

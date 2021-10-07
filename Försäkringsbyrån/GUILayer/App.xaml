@@ -90,13 +90,9 @@
         <DataTemplate DataType="{x:Type emvm:ManageUserAccessViewModel}">
             <emv:ManageUserAccessView/>
         </DataTemplate>
-    
-            
-        
         <DataTemplate DataType="{x:Type bdvm:PermissionValueTableViewModel}">
             <bdv:PermissionValueTableView></bdv:PermissionValueTableView>
         </DataTemplate>
-        
         <!--#region Exit Button Style-->
         <Style x:Key="ExitBtnStyle" TargetType="{x:Type Button}">
             <Setter Property="Background" Value="Transparent"/>

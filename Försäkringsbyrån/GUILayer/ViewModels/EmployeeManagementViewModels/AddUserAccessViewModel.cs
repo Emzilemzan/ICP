@@ -13,7 +13,6 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
     public class AddUserAccessViewModel: BaseViewModel
     {
         public static readonly AddUserAccessViewModel Instance = new AddUserAccessViewModel();
-
         public AddUserAccessViewModel()
         {
 

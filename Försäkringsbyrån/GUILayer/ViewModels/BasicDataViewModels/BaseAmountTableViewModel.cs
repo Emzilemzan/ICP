@@ -11,16 +11,10 @@ namespace GUILayer.ViewModels.BasicDataViewModels
     public class BaseAmountTableViewModel: BaseViewModel 
     {
         public static readonly BaseAmountTableViewModel Instance = new BaseAmountTableViewModel();
-
-        //public AddBaseAmountTableValueBtn _addBtn { get; }
-        //public RemoveBaseAmountTableValueBtn _removeBtn { get; }
-
         private BaseAmountTableViewModel()
         {
-            //_removeBtn = new RemoveBaseAmountTableValueBtn();
-            //_addBtn = new AddBaseAmountTableValueBtn();
-        } 
-
+        }
+        #region commands
         private ICommand _addBtn;
         public ICommand AddBaseAmountTableValue_Btn
         {
@@ -29,9 +23,9 @@ namespace GUILayer.ViewModels.BasicDataViewModels
 
         public bool CanCreate() => true;
 
-        public static void AddBaseAmountTable()
+        private void AddBaseAmountTable()
         {
-            // Code to actualy add baseamount to the database.
+            // Code to actually add baseamount to the database.
         }
 
         private ICommand remove_Btn;
@@ -40,11 +34,11 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             get => remove_Btn ?? (remove_Btn = new RelayCommand(x => { RemoveBaseAmount(); CanCreate(); }));
         }
 
-        public static void RemoveBaseAmount()
+        private void RemoveBaseAmount()
         {
-            // Code to actualy add baseamount to the database.
+            // Code to actually add baseamount to the database.
         }
-
+        #endregion
         #region Properties
 
         private int _baseAmountId;
