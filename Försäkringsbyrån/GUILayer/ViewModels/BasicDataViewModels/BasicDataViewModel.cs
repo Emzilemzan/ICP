@@ -16,10 +16,8 @@ namespace GUILayer.ViewModels.BasicDataViewModels
     {
         public static readonly BasicDataViewModel Instance = new BasicDataViewModel();
 
-        //public BaseAmountTableBtn AmountTable_Btn { get; }
         private BasicDataViewModel()
         {
-            //AmountTable_Btn = new BaseAmountTableBtn();
         }
 
         private ICommand amountTable_Btn;
@@ -47,6 +45,19 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
             MainViewModel.Instance.CurrentTool = "";
             MainViewModel.Instance.SelectedViewModel = AckValueVariableTableViewModel.Instance;
+        }
+
+        private ICommand amountOption_Btn;
+        public ICommand AmountOption_Btn
+        {
+            get => amountOption_Btn ?? (amountOption_Btn = new RelayCommand(x => { AddBaseAmountOption(); CanCreate(); }));
+        }
+
+        public static void AddBaseAmountOption()
+        {
+            MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
+            MainViewModel.Instance.CurrentTool = "";
+            MainViewModel.Instance.SelectedViewModel = BaseAmountOptionViewModel.Instance;
         }
     }
 }

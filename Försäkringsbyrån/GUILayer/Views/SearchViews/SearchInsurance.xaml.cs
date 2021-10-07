@@ -9,29 +9,20 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace GUILayer.Views.SearchViews
 {
     /// <summary>
-    /// Interaction logic for SearchValueView.xaml
+    /// Interaction logic for SearchInsurance.xaml
     /// </summary>
-    public partial class SearchValueView : UserControl
+    public partial class SearchInsurance : UserControl
     {
-        public SearchValueView()
+        public SearchInsurance()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click()
-        {
-
-        }
-
-        private void Button_Click()
-        {
-
         }
     }
 }

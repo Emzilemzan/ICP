@@ -21,7 +21,7 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
               
         }
 
-
+        #region commands
         private ICommand _addEmployeeBtn;
         public ICommand AEVBtn
         {
@@ -110,6 +110,6 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
                 MainViewModel.Instance.SelectedViewModel = HomeViewModel.Instance;
             }
         }
-
+        #endregion
     }
 }

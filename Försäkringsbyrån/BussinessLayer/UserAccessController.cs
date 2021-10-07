@@ -41,26 +41,15 @@ namespace BussinessLayer
             BusinessController.Instance.Save();
         }
 
-
         public void RemoveUser(UserAccess a)
         {
             BusinessController.Instance.Context.Accesses.Remove(a);
             BusinessController.Instance.Save();
         }
 
-        public void Edit(UserAccess a)
+        public void EditUser(UserAccess a)
         {
-            UserAccess edit = BusinessController.Instance.Context.Accesses.GetById(a.Username);
-            
-            edit.Password = a.Password;
-            edit.Username = a.Username;
-            edit.Search = a.Search;
-            edit.StatisticsAndProspects = a.StatisticsAndProspects;
-            edit.Insurances = a.Insurances;
-            edit.EmployeeManagement = a.EmployeeManagement;
-            edit.Commission = a.Commission;
-            edit.BasicData = a.BasicData;
-
+            BusinessController.Instance.Context.Accesses.Update(a);
             BusinessController.Instance.Save();
         }
     }

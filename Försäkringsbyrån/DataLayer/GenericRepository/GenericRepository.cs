@@ -23,7 +23,11 @@ namespace DataLayer.GenericRepository
         public void AddRange(IEnumerable<TEntity> entities) => _context.Set<TEntity>().AddRange(entities);
         public void Remove(TEntity entity) => _context.Set<TEntity>().Remove(entity);
         public void RemoveRange(IEnumerable<TEntity> entities) => _context.Set<TEntity>().RemoveRange(entities);
-        public void Update(TEntity entityToUpdate) => _context.Entry(entityToUpdate).State = EntityState.Modified;
 
+        public void Update(TEntity entity)
+        {
+            _context.Set<TEntity>().Attach(entity);
+            _context.Entry(entity).State = EntityState.Modified;
+        }
     }
 } 

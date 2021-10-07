@@ -9,5 +9,7 @@ namespace DataLayer.GenericRepository
 {
     public interface IInsuranceRepository : IGenericRepository<Insurance>
     {
+
+
     }
 }

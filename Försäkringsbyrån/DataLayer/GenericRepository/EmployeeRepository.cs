@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace DataLayer.GenericRepository
 {
+    /// <summary>
+    /// Employee = SalesMen, 
+    /// </summary>
     public class EmployeeRepository: GenericRepository<SalesMen>, IEmployeeRepository
     {
         public EmployeeRepository(ApplicationContext context) : base(context) { }

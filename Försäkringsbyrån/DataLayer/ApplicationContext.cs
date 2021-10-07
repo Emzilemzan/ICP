@@ -11,7 +11,6 @@ namespace DataLayer
 {
    public class ApplicationContext : DbContext
     {
-
         public DbSet<Person> Persons { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<InsuranceTaker> InsuranceTakers { get; set; }
@@ -34,7 +33,6 @@ namespace DataLayer
         public DbSet<SalesMen> SalesMens { get; set; }
         public DbSet<VacationPay> VacationPays { get; set; }
      
-
         public ApplicationContext() : base ("ICPDB")
         {   }
 
