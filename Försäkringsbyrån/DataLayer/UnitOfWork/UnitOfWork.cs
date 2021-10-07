@@ -22,6 +22,10 @@ namespace DataLayer.UnitOfWork
         public ICompanyRepository Companies { get; }
 
         public IAccessRepository Accesses { get; }
+
+        public IBaseAmountRepository BaseAmounts { get; }
+        public IOptionalTypeRepository OptionalTypes { get; }
+
        
         public UnitOfWork()
         {
@@ -33,6 +37,8 @@ namespace DataLayer.UnitOfWork
             Persons = new PersonRepository(_context);
             Companies = new CompanyRepository(_context);
             Accesses = new AccessRepository(_context);
+            BaseAmounts = new BaseAmountRepository(_context);
+            OptionalTypes = new OptionalTypeRepository(_context);
             Init();
         }
         public void Init() => _context.Reset();
