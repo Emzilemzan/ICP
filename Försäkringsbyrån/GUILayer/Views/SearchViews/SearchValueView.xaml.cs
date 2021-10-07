@@ -24,5 +24,15 @@ namespace GUILayer.Views.SearchViews
         {
             InitializeComponent();
         }
+
+        private void Button_Click()
+        {
+
+        }
+
+        private void Button_Click()
+        {
+
+        }
     }
 }
