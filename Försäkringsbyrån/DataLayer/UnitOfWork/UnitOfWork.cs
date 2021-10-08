@@ -25,9 +25,11 @@ namespace DataLayer.UnitOfWork
 
         public IBaseAmountTableRepository Tables { get; }
 
+
         public IBaseAmountRepository BaseAmounts { get; }
         public IOptionalTypeRepository OptionalTypes { get; }
 
+       
         public UnitOfWork()
         {
             _context = new ApplicationContext();

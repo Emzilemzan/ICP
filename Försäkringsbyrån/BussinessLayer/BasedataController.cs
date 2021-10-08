@@ -24,7 +24,6 @@ namespace BussinessLayer
             BusinessController.Instance.Save();
         }
         #endregion
-
         //public OptionalType GetOptionalType(int id) => BusinessController.Instance.Context.OptionalTypes.GetById(id);
         //public IEnumerable<OptionalType> GetAllOptionalTypes() => BusinessController.Instance.Context.OptionalTypes.GetAll();
 
