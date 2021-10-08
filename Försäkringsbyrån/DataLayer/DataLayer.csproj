@@ -53,20 +53,14 @@
   <ItemGroup>
     <Compile Include="ApplicationContext.cs" />
     <Compile Include="GenericRepository\AccessRepository.cs" />
-<<<<<<< HEAD
     <Compile Include="GenericRepository\BaseAmountTableRepository.cs" />
-=======
     <Compile Include="GenericRepository\BaseAmountRepository.cs" />
->>>>>>> 47e5c7287f62c6b47373f1be8f6ce98bf184d8c8
     <Compile Include="GenericRepository\CompanyRepository.cs" />
     <Compile Include="GenericRepository\EmployeeRepository.cs" />
     <Compile Include="GenericRepository\GenericRepository.cs" />
     <Compile Include="GenericRepository\IAccessRepository.cs" />
-<<<<<<< HEAD
     <Compile Include="GenericRepository\IBaseAmountTableRepository.cs" />
-=======
     <Compile Include="GenericRepository\IBaseAmountRepository.cs" />
->>>>>>> 47e5c7287f62c6b47373f1be8f6ce98bf184d8c8
     <Compile Include="GenericRepository\ICompanyRepository.cs" />
     <Compile Include="GenericRepository\IEmployeeRepository.cs" />
     <Compile Include="GenericRepository\IGenericRepository.cs" />
