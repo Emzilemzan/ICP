@@ -69,7 +69,17 @@ namespace GUILayer.ViewModels.SearchViewModels
 
         #region Properties 
         public ObservableCollection<SalesMen> SalesMens { get; set; }
-       
+
+        private SalesMen _salesMen;
+        public SalesMen SelectedPerson
+        {
+            get => _salesMen;
+            set
+            {
+                _salesMen = value;
+                OnPropertyChanged("SelectedPerson");
+            }
+        }
         
         #endregion
     }

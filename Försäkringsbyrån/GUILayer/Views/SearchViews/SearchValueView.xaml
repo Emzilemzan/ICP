@@ -61,7 +61,7 @@
                 <Button  Grid.Column="2"
                          FontSize="20"
                          Height="106"
-                         Content="Anställda"
+                         Content="Säljare"
                          Background="Transparent" 
                          Margin="32,0,35.667,0"
                          Command="{Binding SearchEmployeeBtn}" Style="{DynamicResource OtherButtonStyle}"/>
