@@ -1,6 +1,9 @@
-﻿using GUILayer.Commands;
+﻿using BussinessLayer;
+using GUILayer.Commands;
+using Models.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,10 +15,14 @@ namespace GUILayer.ViewModels.BasicDataViewModels
     {
         public static readonly BaseAmountOptionViewModel Instance = new BaseAmountOptionViewModel();
 
-        private BaseAmountOptionViewModel()
-        {
+        BasedataController controller = new BasedataController();
 
+        public BaseAmountOptionViewModel()
+        {
+            //AllOptionTypes = new ObservableCollection<OptionalType>();
         }
+
+        //public ObservableCollection<OptionalType> AllOptionTypes { get; set; }
 
         private ICommand _addBtn;
         public ICommand AddBaseAmountOption_Btn

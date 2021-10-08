@@ -18,5 +18,6 @@ namespace Models.Models
         [Key]
         public int OptionalTypeId { get; set; }
         public string OptionalName { get; set; } 
+        public virtual ICollection<BaseAmount> BaseAmounts { get; set; }
     } 
 }
