@@ -202,7 +202,6 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             if (SelectedPerson != null)
             {
                 MessageBoxResult result = MessageBox.Show("Vill du ta bort säljaren?", "Varning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-
                 if (result == MessageBoxResult.Yes)
                 {
                     SelectedPerson.Username = Username;
@@ -229,7 +228,6 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             {
                 MessageBox.Show("Du måste markera en behörig i registret", "Fel", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            
         }
 
         #endregion

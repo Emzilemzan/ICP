@@ -11,7 +11,7 @@ namespace GUILayer.ViewModels.BasicDataViewModels
    public class PermissionValueTableViewModel: BaseViewModel
     {
         public static readonly PermissionValueTableViewModel Instance = new PermissionValueTableViewModel();
-
+        
         private PermissionValueTableViewModel()
         { 
             

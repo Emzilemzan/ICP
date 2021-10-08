@@ -1,9 +1,14 @@
 ﻿using GUILayer.Commands;
+using Models.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace GUILayer.ViewModels.BasicDataViewModels
@@ -13,6 +18,9 @@ namespace GUILayer.ViewModels.BasicDataViewModels
         public static readonly BaseAmountTableViewModel Instance = new BaseAmountTableViewModel();
         private BaseAmountTableViewModel()
         {
+            Tabels = UpdateTabels();
+            Date = DateTime.Today;
+            SAInsuranceTypes = new List<SAInsurance>() { new SAInsurance(1, "Sjuk- och olycksfallsförsäkring för barn"), new SAInsurance(2, "Sjuk- och olycksfallsförsäkring för vuxen") };
         }
         #region commands
         private ICommand _addBtn;
@@ -25,64 +33,137 @@ namespace GUILayer.ViewModels.BasicDataViewModels
 
         private void AddBaseAmountTable()
         {
-            // Code to actually add baseamount to the database.
+            if (Instance._baseAmount != 0 && Instance._ackValue != 0 && Instance.Date != null && Instance.SAID != null)
+            {
+                BaseAmountTabel baseAmountTabel = new BaseAmountTabel()
+                {
+                    BaseAmount = Instance._baseAmount,
+                    AckValue = Instance._ackValue,
+                    Date = Instance._date,
+                    SAID = Instance.SAID,
+                };
+                Context.BDController.AddBaseAmountTable(baseAmountTabel);
+ 
+                MessageBox.Show("Grunddatan är uppdaterad");
+                Tabels.Clear();
+                foreach (var t in Context.BDController.GetAllTables())
+                {
+                    Tabels?.Add(t);
+                }
+                MainViewModel.Instance.SelectedViewModel = null;
+                MainViewModel.Instance.SelectedViewModel = Instance;
+                AckValue = string.Empty;
+                BaseAmount = string.Empty;
+                Date = DateTime.Now;
+            }
+            else
+            {
+                MessageBox.Show("Inget fält får lämnas tomt!");
+            }
+        }
+        //Method that removes baseamounttabel based on what id it has in database. 
+        //Needs a control here, if it exists in insurance you can't delete it. 
+        private void RemoveBaseAmountTable()
+        {
+            if (Instance._baseAmountId != 0)
+            {
+                BaseAmountTabel bdt = Context.BDController.GetBaseAmountTable(_baseAmountId);
+                MessageBoxResult result = MessageBox.Show("Vill du ta bort grunddatan?", "Varning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    Context.BDController.RemoveBaseAmountTable(bdt);
+                    Tabels.Remove(bdt);
+                    MessageBox.Show("Grunddatan togs bort");
+                    Instance.BaseAmountId = string.Empty;
+                }
+                else
+                {
+                    MessageBox.Show("Grunddatan togs inte bort.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Ett id måste fyllas i");
+            }
         }
 
         private ICommand remove_Btn;
         public ICommand RemoveBaseAmountTableValue_Btn
         {
-            get => remove_Btn ?? (remove_Btn = new RelayCommand(x => { RemoveBaseAmount(); CanCreate(); }));
+            get => remove_Btn ?? (remove_Btn = new RelayCommand(x => { RemoveBaseAmountTable(); CanCreate(); }));
         }
 
-        private void RemoveBaseAmount()
-        {
-            // Code to actually add baseamount to the database.
-        }
+
         #endregion
+
+        private ObservableCollection<BaseAmountTabel> UpdateTabels()
+        {
+            ObservableCollection<BaseAmountTabel> x = new ObservableCollection<BaseAmountTabel>();
+            foreach (var t in Context.BDController.GetAllTables())
+            {
+                x?.Add(t);
+            }
+            Tabels = x;
+            return Tabels;
+        }
+
         #region Properties
 
+        public ObservableCollection<BaseAmountTabel> Tabels { get; set; }
+
         private int _baseAmountId;
-        public int BaseAmountId
+        public string BaseAmountId
         {
-            get => _baseAmountId;
+            get => _baseAmountId > 0 ? _baseAmountId.ToString() : "";
             set
             {
-                _baseAmountId = value;
-                OnPropertyChanged("BaseAmountId");
+                if (int.TryParse(value, out _baseAmountId))
+                {
+                    OnPropertyChanged("BaseAmountId");
+                }
+                else
+                {
+                    MessageBox.Show("Id måste vara en siffra");
+                }
             }
         }
+     
 
         private double _baseAmount;
-        public double BaseAmount
+        public string BaseAmount
         {
-            get => _baseAmount;
+            get => _baseAmount > 0 ? _baseAmount.ToString() : "";
             set
             {
-                _baseAmount= value;
-                OnPropertyChanged("BaseAmount");
+                if (double.TryParse(value, out _baseAmount))
+                { OnPropertyChanged("BaseAmount"); }
+                else
+                {
+                    MessageBox.Show("Grundbeloppet måste vara ett nummer");
+                }
             }
         }
+        
         private double _ackValue;
-        public double AckValue
+        public string AckValue
         {
-            get => _ackValue;
+            get => _ackValue > 0 ? _ackValue.ToString() : "";
             set
             {
-                _ackValue = value;
-                OnPropertyChanged("AckValue");
+                if (double.TryParse(value, out _ackValue))
+                { OnPropertyChanged("AckValue"); }
+                else
+                {
+                    MessageBox.Show("Grundbeloppet måste vara ett nummer");
+                }
             }
         }
 
         private DateTime _date;
         public DateTime Date
         {
-            get
-            {
-                if (_date != null)
-                    return _date;
-                else return DateTime.Now;
-            }
-
+            get => _date != null ? _date : DateTime.Now;
             set
             {
                 _date = value;
@@ -90,6 +171,22 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             }
         }
 
+        public DateTime Today => DateTime.Today.Date;
+
+        private SAInsurance _sAInsurance;
+        public SAInsurance SAID
+        {
+            get =>  _sAInsurance;
+            set
+            {
+                _sAInsurance = value;
+                
+                OnPropertyChanged("SAInsurance");
+            }
+        }
+
+
+        public List<SAInsurance> SAInsuranceTypes { get; set; }
 
         #endregion
     }

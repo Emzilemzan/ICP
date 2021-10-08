@@ -19,6 +19,8 @@ namespace DataLayer.UnitOfWork
         ICompanyRepository Companies { get; }
         IPersonRepository Persons { get; }
         IAccessRepository Accesses { get; }
+
+        IBaseAmountTableRepository Tables { get; }
         int Complete();
 
     }

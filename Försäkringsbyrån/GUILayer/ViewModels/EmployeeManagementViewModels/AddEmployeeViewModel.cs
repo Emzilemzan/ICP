@@ -32,11 +32,11 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
         private string _lastname;
         public string Lastname
         {
-            get => _lastname = "";
+            get => _lastname;
             set
             {
                     _lastname = value;
-                    OnPropertyChanged("Lasttname");
+                    OnPropertyChanged("Lastname");
                
             }
         }

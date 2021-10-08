@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:GUILayer.Views.BasicDataViews"
+             xmlns:local="clr-namespace:GUILayer.Views.BasicDataViews" xmlns:basicdataviewmodels="clr-namespace:GUILayer.ViewModels.BasicDataViewModels" d:DataContext="{d:DesignInstance Type=basicdataviewmodels:BaseAmountTableViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"> 
     <Grid>
@@ -40,11 +40,25 @@
                     <Label Content="Datum" Grid.Column="0" Grid.Row="2"  FontSize="15" Margin="120,0,0,0"/>
                     <Label Content="Grundbelopp" Grid.Column="0" Grid.Row="3"  FontSize="15" Margin="120,0,0,0"/>
                     <Label Content="Ackvisitionsvärde" Grid.Column="0" Grid.Row="4"  FontSize="15" Margin="120,0,0,0"/>
-                    <ComboBox Grid.Row="1" Grid.Column="1"/>
-                    <DatePicker IsTodayHighlighted="True" Grid.Row="2" Grid.Column="1" DisplayDateStart="1900-01-01"/>
-                    <TextBox Grid.Row="3" Grid.Column="1"/>
-                    <TextBox Grid.Row="4" Grid.Column="1"/>
-                    <Button Grid.Column="1" Grid.Row="5" Margin="58,0,0,0" Content="Lägg till" FontSize="15"></Button>
+                    <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding SAInsuranceTypes}" SelectedItem="{Binding SAID}">
+                        <ComboBox.Resources>
+                        <DataTemplate x:Key="DataTemplateSAInsurance">
+                            <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding Path= SAInsuranceType}" Grid.Column="1" />
+                            </Grid>
+                        </DataTemplate>
+                        </ComboBox.Resources>
+                        <ComboBox.ItemTemplate>
+                            <StaticResource ResourceKey="DataTemplateSAInsurance"/>
+                        </ComboBox.ItemTemplate> 
+                    </ComboBox>
+                    <DatePicker Grid.Row="2" Grid.Column="1" SelectedDate="{Binding Date}"  DisplayDateStart="2000-01-01" DisplayDateEnd="{Binding Today, Mode=OneWay}" FirstDayOfWeek="Monday"  IsTodayHighlighted="True"/>
+                    <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding BaseAmount}"/>
+                    <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding AckValue}"/>
+                    <Button Grid.Column="1" Grid.Row="5" Margin="58,0,0,0" Content="Lägg till" FontSize="15" Command="{Binding AddBaseAmountTableValue_Btn}"></Button>
                 </Grid>
             </Border>
             <Border BorderBrush="Red" BorderThickness="2" Grid.Row="1" Margin="10">
@@ -62,12 +76,12 @@
                     </Grid.RowDefinitions>
                     <Label Content="Ta bort data" Grid.Column="0" FontSize="20" FontWeight="Bold"/>
                     <Label Content="Id" Grid.Column="0" Grid.Row="2"  FontSize="15" Margin="150,0,0,0"/>
-                    <TextBox Grid.Row="2" Grid.Column="1"/>
-                    <Button Grid.Column="1" Grid.Row="3" Margin="130,10.333,0,0" Content="Ta bort" FontSize="15"></Button>
+                    <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding BaseAmountId}"/>
+                    <Button Grid.Column="1" Grid.Row="3" Margin="130,10.333,0,0" Content="Ta bort" FontSize="15" Command="{Binding RemoveBaseAmountTableValue_Btn}"></Button>
                 </Grid>
             </Border>
         </Grid>
-        <DataGrid Grid.Column="1" Grid.Row="1" Margin="5,5,40,90" AutoGenerateColumns="False" ItemsSource="{Binding }"
+        <DataGrid Grid.Column="1" Grid.Row="1" Margin="5,5,40,90" AutoGenerateColumns="False" ItemsSource="{Binding Tabels}"
                   RowDetailsVisibilityMode="VisibleWhenSelected" 
                   IsReadOnly="True" 
                   AlternatingRowBackground="Gainsboro"  AlternationCount="2"
@@ -76,11 +90,11 @@
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
                   ScrollViewer.HorizontalScrollBarVisibility="Auto">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding Path=EmploymentNo}"/>
-                <DataGridTextColumn Header="Datum" Binding="{Binding Path=Firstname}" />
-                <DataGridTextColumn Header="Grundbelopp" Binding="{Binding Path=Lastname}" />
-                <DataGridTextColumn Header="Ack.värde" Binding="{Binding Path=StreetAddress}" />
-                <DataGridTextColumn Header="Försäkringstyp" Binding="{Binding Path=Postalcode}" />
+                <DataGridTextColumn Header="Id" Binding="{Binding Path=BaseAmountTId}"/>
+                <DataGridTextColumn Header="Datum" Binding="{Binding Date}" />
+                <DataGridTextColumn Header="Grundbelopp" Binding="{Binding BaseAmount}" />
+                <DataGridTextColumn Header="Ack.värde" Binding="{Binding AckValue}" />
+                <DataGridTextColumn Header="Försäkringstyp" Binding="{Binding SAID.SAInsuranceType}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
