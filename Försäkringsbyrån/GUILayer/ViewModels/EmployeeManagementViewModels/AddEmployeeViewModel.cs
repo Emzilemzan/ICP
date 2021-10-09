@@ -79,10 +79,6 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
                 {
                     OnPropertyChanged("PostalCode");
                 }
-                else
-                {
-                    MessageBox.Show("Postnummer måste bestå av 5 siffror och kan inte vara en text");
-                }
             }
         }
         private string _city;
@@ -109,10 +105,6 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
                 {
                     OnPropertyChanged("AgentNumber");
                 }
-                else
-                {
-                    MessageBox.Show("Anställningsnummer måste vara ett nummer och får inte heller sättas till 0");
-                }
             }
         }
 
@@ -128,7 +120,7 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
                 }
                 else
                 {
-                    MessageBox.Show("Skattesatsen måste vara ett nummer mellan 0 & 100");
+                    MessageBox.Show("Måste vara en siffra mellan 0-100. ");
                 }
             }
         }

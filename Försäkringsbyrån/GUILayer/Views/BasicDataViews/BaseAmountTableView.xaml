@@ -56,8 +56,8 @@
                         </ComboBox.ItemTemplate> 
                     </ComboBox>
                     <DatePicker Grid.Row="2" Grid.Column="1" SelectedDate="{Binding Date}"  DisplayDateStart="2000-01-01" DisplayDateEnd="{Binding Today, Mode=OneWay}" FirstDayOfWeek="Monday"  IsTodayHighlighted="True"/>
-                    <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding BaseAmount}"/>
-                    <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding AckValue}"/>
+                    <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding BaseAmount}" PreviewTextInput="NumberValidationTextBox"/>
+                    <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding AckValue}" PreviewTextInput="NumberValidationTextBox"/>
                     <Button Grid.Column="1" Grid.Row="5" Margin="58,0,0,0" Content="Lägg till" FontSize="15" Command="{Binding AddBaseAmountTableValue_Btn}"></Button>
                 </Grid>
             </Border>
@@ -76,7 +76,7 @@
                     </Grid.RowDefinitions>
                     <Label Content="Ta bort data" Grid.Column="0" FontSize="20" FontWeight="Bold"/>
                     <Label Content="Id" Grid.Column="0" Grid.Row="2"  FontSize="15" Margin="150,0,0,0"/>
-                    <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding BaseAmountId}"/>
+                    <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding BaseAmountId}" PreviewTextInput="NumberValidationTextBox"/>
                     <Button Grid.Column="1" Grid.Row="3" Margin="130,10.333,0,0" Content="Ta bort" FontSize="15" Command="{Binding RemoveBaseAmountTableValue_Btn}"></Button>
                 </Grid>
             </Border>

@@ -25,7 +25,7 @@ namespace DataLayer.UnitOfWork
 
         public IBaseAmountTableRepository Tables { get; }
 
-
+        public IVacationPayRepository VPays { get; }
         public IBaseAmountRepository BaseAmounts { get; }
         public IOptionalTypeRepository OptionalTypes { get; }
 
@@ -43,6 +43,7 @@ namespace DataLayer.UnitOfWork
             Tables = new BaseAmountTableRepository(_context);
             BaseAmounts = new BaseAmountRepository(_context);
             OptionalTypes = new OptionalTypeRepository(_context);
+            VPays = new VacationPayRepository(_context);
             Init();
         }
         public void Init() => _context.Reset();

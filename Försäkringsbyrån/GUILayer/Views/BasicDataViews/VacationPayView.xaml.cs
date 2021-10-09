@@ -17,11 +17,11 @@ using System.Windows.Shapes;
 namespace GUILayer.Views.BasicDataViews
 {
     /// <summary>
-    /// Interaction logic for BaseAmountTableView.xaml
+    /// Interaction logic for VacationPayView.xaml
     /// </summary>
-    public partial class BaseAmountTableView : UserControl
+    public partial class VacationPayView : UserControl
     {
-        public BaseAmountTableView()
+        public VacationPayView()
         {
             InitializeComponent();
         }
@@ -36,12 +36,12 @@ namespace GUILayer.Views.BasicDataViews
             if (!IsAlphabetic(e.Text))
             {
                 foreach (char ch in e.Text)
-                    if (!char.IsDigit(ch))
+                    if (!char.IsDigit(ch) && ch.Equals('.'))
                         e.Handled = true;
             }
             else
             {
-                MessageBox.Show("Måste vara en siffra");
+                MessageBox.Show("Påläggsmarginalen måste vara en siffra med eller utan decimal");
             }
         }
     }

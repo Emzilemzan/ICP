@@ -19,7 +19,7 @@ namespace DataLayer.UnitOfWork
         ICompanyRepository Companies { get; }
         IPersonRepository Persons { get; }
         IAccessRepository Accesses { get; }
-
+        IVacationPayRepository VPays { get; }
         IBaseAmountTableRepository Tables { get; }
         IBaseAmountRepository BaseAmounts { get; }
         IOptionalTypeRepository OptionalTypes { get; }

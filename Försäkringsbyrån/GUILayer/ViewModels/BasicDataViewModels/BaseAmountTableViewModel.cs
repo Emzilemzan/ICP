@@ -50,8 +50,6 @@ namespace GUILayer.ViewModels.BasicDataViewModels
                 {
                     Tabels?.Add(t);
                 }
-                MainViewModel.Instance.SelectedViewModel = null;
-                MainViewModel.Instance.SelectedViewModel = Instance;
                 AckValue = string.Empty;
                 BaseAmount = string.Empty;
                 Date = DateTime.Now;
@@ -72,10 +70,12 @@ namespace GUILayer.ViewModels.BasicDataViewModels
 
                 if (result == MessageBoxResult.Yes)
                 {
-                    Context.BDController.RemoveBaseAmountTable(bdt);
-                    Tabels.Remove(bdt);
-                    MessageBox.Show("Grunddatan togs bort");
-                    Instance.BaseAmountId = string.Empty;
+                    Context.BDController.CheckExistingTable(Instance._baseAmountId, bdt);
+                    Tabels.Clear();
+                    foreach (var t in Context.BDController.GetAllTables())
+                    {
+                        Tabels?.Add(t);
+                    }
                 }
                 else
                 {
@@ -122,10 +122,6 @@ namespace GUILayer.ViewModels.BasicDataViewModels
                 {
                     OnPropertyChanged("BaseAmountId");
                 }
-                else
-                {
-                    MessageBox.Show("Id måste vara en siffra");
-                }
             }
         }
      
@@ -138,10 +134,6 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             {
                 if (double.TryParse(value, out _baseAmount))
                 { OnPropertyChanged("BaseAmount"); }
-                else
-                {
-                    MessageBox.Show("Grundbeloppet måste vara ett nummer");
-                }
             }
         }
         
@@ -153,10 +145,6 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             {
                 if (double.TryParse(value, out _ackValue))
                 { OnPropertyChanged("AckValue"); }
-                else
-                {
-                    MessageBox.Show("Grundbeloppet måste vara ett nummer");
-                }
             }
         }
 

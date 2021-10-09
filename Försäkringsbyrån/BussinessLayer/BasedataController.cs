@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace BussinessLayer
 {
@@ -23,9 +24,58 @@ namespace BussinessLayer
             BusinessController.Instance.Context.Tables.Remove(baseAmountTabel);
             BusinessController.Instance.Save();
         }
+
+        public void CheckExistingTable(int id, BaseAmountTabel a)
+        {
+            BaseAmountTabel x = BusinessController.Instance.Context.Tables.GetById(id);
+            if (x != null)
+            {
+                RemoveBaseAmountTable(a);
+                MessageBox.Show("Grunddatan togs bort");
+            }
+            else
+            {
+                MessageBox.Show("Finns ingen grunddata med det id.t att ta bort");
+            }
+        }
+
+
         #endregion
         //public OptionalType GetOptionalType(int id) => BusinessController.Instance.Context.OptionalTypes.GetById(id);
         //public IEnumerable<OptionalType> GetAllOptionalTypes() => BusinessController.Instance.Context.OptionalTypes.GetAll();
 
+        #region Controls for VacationPay
+
+        public VacationPay GetVacationPay(int id) => BusinessController.Instance.Context.VPays.Find(x => x.SEId == id).FirstOrDefault();
+
+        public IEnumerable<VacationPay> GetAllVPays() => BusinessController.Instance.Context.VPays.GetAll();
+
+        public void AddVPay(VacationPay vPay)
+        {
+            BusinessController.Instance.Context.VPays.Add(vPay);
+            BusinessController.Instance.Save();
+        }
+
+        public void RemoveVPay(VacationPay vPay)
+        {
+            BusinessController.Instance.Context.VPays.Remove(vPay);
+            BusinessController.Instance.Save();
+        }
+
+        public void CheckExistingVPay(int id, VacationPay a)
+        {
+            VacationPay x = BusinessController.Instance.Context.VPays.GetById(id);
+            if (x != null)
+            {
+                AddVPay(a);
+                MessageBox.Show("Grunddatan togs bort");
+            }
+            else
+            {
+                MessageBox.Show("Finns ingen grunddata med det id.t att ta bort");
+            }
+        }
+
+        #endregion
     }
 }
