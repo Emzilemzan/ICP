@@ -53,12 +53,14 @@
   <ItemGroup>
     <Compile Include="ApplicationContext.cs" />
     <Compile Include="GenericRepository\AccessRepository.cs" />
+    <Compile Include="GenericRepository\AckValueVariableRepository.cs" />
     <Compile Include="GenericRepository\BaseAmountTableRepository.cs" />
     <Compile Include="GenericRepository\BaseAmountRepository.cs" />
     <Compile Include="GenericRepository\CompanyRepository.cs" />
     <Compile Include="GenericRepository\EmployeeRepository.cs" />
     <Compile Include="GenericRepository\GenericRepository.cs" />
     <Compile Include="GenericRepository\IAccessRepository.cs" />
+    <Compile Include="GenericRepository\IAckValueVariableRepository.cs" />
     <Compile Include="GenericRepository\IBaseAmountTableRepository.cs" />
     <Compile Include="GenericRepository\IBaseAmountRepository.cs" />
     <Compile Include="GenericRepository\ICompanyRepository.cs" />

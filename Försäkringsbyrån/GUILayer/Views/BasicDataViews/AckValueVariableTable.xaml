@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:GUILayer.Views.BasicDataViews"
+             xmlns:local="clr-namespace:GUILayer.Views.BasicDataViews" 
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -39,7 +39,19 @@
                     </Grid.RowDefinitions>
                     <Label Content="Lägg till ny data" Grid.Column="0" FontSize="20" FontWeight="Bold"/>
                     <Label Content="Försäkringstyp/tillvalstyp" Grid.Column="0" Grid.Row="1"  FontSize="15" Margin="5,0,0,0"/>
-                    <ComboBox Grid.Row="1" Grid.Column="1" Height="20"/>
+                    <ComboBox Grid.Row="1" Grid.Column="1" Height="20" ItemsSource="{Binding }" SelectedItem="{Binding }">
+                        <ComboBox.Resources>
+                            <DataTemplate x:Key="DataTemplateAckValue">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding }" Grid.Column="1" />
+                                </Grid>
+                            </DataTemplate>
+                        </ComboBox.Resources>
+                        <ComboBox.ItemTemplate>                            <StaticResource ResourceKey="DataTemplateAckValue"/>                        </ComboBox.ItemTemplate>
+                    </ComboBox>
                     <Label Content="Datum" Grid.Column="0" Grid.Row="2"  FontSize="15" Margin="120,0,0,0"/>
                     <DatePicker IsTodayHighlighted="True" Grid.Row="2" Grid.Column="1" DisplayDateStart="1900-01-01"/>
                     <Label Content="Ack.värdevariabel" Grid.Column="0" Grid.Row="3"  FontSize="15" Margin="45,0,0,0"/>

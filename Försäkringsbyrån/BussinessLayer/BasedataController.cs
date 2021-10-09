@@ -107,5 +107,36 @@ namespace BussinessLayer
             }
         }
         #endregion
+
+        #region Controls for AckValueVariable
+        public AckValueVariable GetAckValue(int id) => BusinessController.Instance.Context.AckValues.Find(x => x.AckValueID == id).FirstOrDefault();
+        public IEnumerable<AckValueVariable> GetAllAckValues() => BusinessController.Instance.Context.AckValues.GetAll();
+
+        public void AddAckValue (AckValueVariable av)
+        {
+            BusinessController.Instance.Context.AckValues.Add(av);
+            BusinessController.Instance.Save();
+        }
+
+        public void RemoveAckValue (AckValueVariable av)
+        {
+            BusinessController.Instance.Context.AckValues.Remove(av);
+            BusinessController.Instance.Save();
+        }
+
+        public void CheckExistingAckValue(int id, AckValueVariable a)
+        {
+            AckValueVariable x = BusinessController.Instance.Context.AckValues.GetById(id);
+            if (x !=null)
+            {
+                RemoveAckValue(a);
+                MessageBox.Show("Grunddatan togs bort");
+            }
+            else
+            {
+                MessageBox.Show("Finns ingen grunddata med det id.t att ta bort");
+            }
+        }
+        #endregion
     }
 }
