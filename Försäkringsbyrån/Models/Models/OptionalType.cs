@@ -17,7 +17,14 @@ namespace Models.Models
     {
         [Key]
         public int OptionalTypeId { get; set; }
-        public string OptionalName { get; set; } 
-        public virtual ICollection<BaseAmount> BaseAmounts { get; set; }
+        public string OptionalName { get; set; }
+        public double BaseAmount { get; set; }
+        public DateTime Date { get; set; }
+
+        public OptionalType(int optionaltypeid, string optionalname)
+        {
+            this.OptionalTypeId = optionaltypeid;
+            this.OptionalName = optionalname;
+        }
     } 
 }

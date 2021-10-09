@@ -41,8 +41,6 @@ namespace BussinessLayer
 
 
         #endregion
-        //public OptionalType GetOptionalType(int id) => BusinessController.Instance.Context.OptionalTypes.GetById(id);
-        //public IEnumerable<OptionalType> GetAllOptionalTypes() => BusinessController.Instance.Context.OptionalTypes.GetAll();
 
         #region Controls for VacationPay
 
@@ -76,6 +74,38 @@ namespace BussinessLayer
             }
         }
 
+        #endregion
+
+        #region Controls for BaseAmountOption
+        public OptionalType GetOptionalType(int id) => BusinessController.Instance.Context.OptionalTypes.Find(x => x.OptionalTypeId == id).FirstOrDefault();
+
+        public IEnumerable<OptionalType> GetAllOptionalTypes() => BusinessController.Instance.Context.OptionalTypes.GetAll();
+
+        public void AddBaseAmountOption (OptionalType optionalType)
+        {
+            BusinessController.Instance.Context.OptionalTypes.Add(optionalType);
+            BusinessController.Instance.Save();
+        }
+
+        public void RemoveBaseAmountOption (OptionalType optionalType)
+        {
+            BusinessController.Instance.Context.OptionalTypes.Remove(optionalType);
+            BusinessController.Instance.Save();
+        }
+
+        public void CheckExistingBaseAmountOption(int id, OptionalType o)
+        {
+            OptionalType x = BusinessController.Instance.Context.OptionalTypes.GetById(id);
+            if (x != null)
+            {
+                AddBaseAmountOption(o);
+                MessageBox.Show("Grunddatan togs bort");
+            }
+            else
+            {
+                MessageBox.Show("Finns ingen grunddata med det id.t att ta bort");
+            }
+        }
         #endregion
     }
 }
