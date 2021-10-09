@@ -77,28 +77,28 @@ namespace BussinessLayer
         #endregion
 
         #region Controls for BaseAmountOption
-        public OptionalType GetOptionalType(int id) => BusinessController.Instance.Context.OptionalTypes.Find(x => x.OptionalTypeId == id).FirstOrDefault();
+        public BaseAmount GetBaseAmount(int id) => BusinessController.Instance.Context.BaseAmounts.Find(x => x.BaseAmountId == id).FirstOrDefault();
 
-        public IEnumerable<OptionalType> GetAllOptionalTypes() => BusinessController.Instance.Context.OptionalTypes.GetAll();
+        public IEnumerable<BaseAmount> GetAllBaseAmount() => BusinessController.Instance.Context.BaseAmounts.GetAll();
 
-        public void AddBaseAmountOption (OptionalType optionalType)
+        public void AddBaseAmountOption (BaseAmount optionalType)
         {
-            BusinessController.Instance.Context.OptionalTypes.Add(optionalType);
+            BusinessController.Instance.Context.BaseAmounts.Add(optionalType);
             BusinessController.Instance.Save();
         }
 
-        public void RemoveBaseAmountOption (OptionalType optionalType)
+        public void RemoveBaseAmountOption (BaseAmount optionalType)
         {
-            BusinessController.Instance.Context.OptionalTypes.Remove(optionalType);
+            BusinessController.Instance.Context.BaseAmounts.Remove(optionalType);
             BusinessController.Instance.Save();
         }
 
-        public void CheckExistingBaseAmountOption(int id, OptionalType o)
+        public void CheckExistingBaseAmountOption(int id, BaseAmount o)
         {
-            OptionalType x = BusinessController.Instance.Context.OptionalTypes.GetById(id);
+            BaseAmount x = BusinessController.Instance.Context.BaseAmounts.GetById(id);
             if (x != null)
             {
-                AddBaseAmountOption(o);
+                RemoveBaseAmountOption(o);
                 MessageBox.Show("Grunddatan togs bort");
             }
             else
