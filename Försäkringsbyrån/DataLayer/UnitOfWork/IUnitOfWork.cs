@@ -24,6 +24,7 @@ namespace DataLayer.UnitOfWork
         IBaseAmountRepository BaseAmounts { get; }
         IOptionalTypeRepository OptionalTypes { get; }
         IAckValueVariableRepository AckValues { get; }
+        ICommissionRepository CommissionShares { get; }
         int Complete();
 
     }

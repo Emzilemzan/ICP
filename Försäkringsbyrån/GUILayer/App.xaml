@@ -91,7 +91,7 @@
             <emv:ManageUserAccessView/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type bdvm:PermissionValueTableViewModel}">
-            <bdv:PermissionValueTableView></bdv:PermissionValueTableView>
+            <bdv:PermissionValueTableView/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type bdvm:VacationPayViewModel}">
             <bdv:VacationPayView/>

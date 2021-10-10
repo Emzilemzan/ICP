@@ -138,5 +138,38 @@ namespace BussinessLayer
             }
         }
         #endregion
+
+        #region Controls for Commission
+        public ComissionShare GetCommissionShare(int id) => BusinessController.Instance.Context.CommissionShares.Find(x => x.PAId == id).FirstOrDefault();
+        public IEnumerable<ComissionShare> GetAllCommissionShares() => BusinessController.Instance.Context.CommissionShares.GetAll();
+
+        public void AddCommissionShare (ComissionShare cs)
+        {
+            BusinessController.Instance.Context.CommissionShares.Add(cs);
+            BusinessController.Instance.Save();
+        }
+
+        public void RemoveCommissionShare (ComissionShare cs)
+        {
+            BusinessController.Instance.Context.CommissionShares.Remove(cs);
+            BusinessController.Instance.Save();
+
+        }
+
+        public void CheckExistingCommissionShare (int id, ComissionShare cs)
+        {
+            ComissionShare x = BusinessController.Instance.Context.CommissionShares.GetById(id);
+            if (x !=null)
+            {
+                RemoveCommissionShare(cs);
+                MessageBox.Show("Grunddatan togs bort");
+            }
+            else
+            {
+                MessageBox.Show("Finns ingen grunddata med det id.t att ta bort");
+            }
+        }
+        
+        #endregion
     }
 }
