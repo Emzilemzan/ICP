@@ -18,6 +18,7 @@ namespace GUILayer.ViewModels.BasicDataViewModels
         private PermissionValueTableViewModel()
         {
             CommissionShares = UpdateCS();
+            Years = GetYears();
         }
 
         private ObservableCollection<ComissionShare> UpdateCS()
@@ -30,6 +31,13 @@ namespace GUILayer.ViewModels.BasicDataViewModels
 
             CommissionShares = cs;
             return CommissionShares;
+        }
+
+
+        public List<int> Years { get; set; }
+        public List<int> GetYears()
+        {
+            return Enumerable.Range(1950, DateTime.UtcNow.Year - 1949).Reverse().ToList();
         }
 
         #region Commands
