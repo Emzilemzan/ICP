@@ -12,14 +12,12 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Label Content="Vilket register vill du se?" FontWeight="Light" FontSize="60"
-                   Foreground="Black" HorizontalAlignment="Center" Margin="97,45,97,10"></Label>
+        <Label Content="Vilket register vill du se?" FontWeight="Light" FontSize="60" Foreground="Black" HorizontalAlignment="Center" Margin="97,45,97,10"></Label>
         <StackPanel Grid.Row="1">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
-
                 </Grid.ColumnDefinitions>
                 <Button  Margin ="150,10,41,10" Grid.Column="0"
                             FontSize="20"
@@ -50,24 +48,23 @@
                          Height="106"
                          Background="Transparent" 
                          Margin="81,0,50.667,0"
-                         Command="{Binding SearchApplicationBtn}" Style="{DynamicResource OtherButtonStyle}" Width="Auto" Click="Button_Click">
-                </Button>
+                         Command="{Binding SearchApplicationBtn}" Style="{DynamicResource OtherButtonStyle}" Width="Auto"/>
                 <Button     Grid.Column="1"
                             FontSize="20"
                             Height="106"
                             Background="Transparent" 
                             Margin="50.333,0,37.333,0"
                             Command="{Binding SearchSignedInsuranceBtn}" Style="{DynamicResource OtherButtonStyle}" Width="Auto">
-                    <TextBlock>Tecknade<LineBreak/>Försäkringar</TextBlock>
+                    <TextBlock>Tecknade<LineBreak/> Försäkringar</TextBlock> 
+                    
                 </Button>
                 <Button  Grid.Column="2"
                          FontSize="20"
                          Height="106"
-                         Content="Anställda"
+                         Content="Säljare"
                          Background="Transparent" 
                          Margin="32,0,35.667,0"
-                         Command="{Binding SearchEmployeeBtn}" Style="{DynamicResource OtherButtonStyle}">
-                </Button>
+                         Command="{Binding SearchEmployeeBtn}" Style="{DynamicResource OtherButtonStyle}"/>
             </Grid>
         </StackPanel>
     </Grid>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,6 +24,25 @@ namespace GUILayer.Views.BasicDataViews
         public BaseAmountTableView()
         {
             InitializeComponent();
+        }
+        private bool IsAlphabetic(string s)
+        {
+            Regex r = new Regex(@"^[a-zA-Z]+$");
+
+            return r.IsMatch(s);
+        }
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            if (!IsAlphabetic(e.Text))
+            {
+                foreach (char ch in e.Text)
+                    if (!char.IsDigit(ch))
+                        e.Handled = true;
+            }
+            else
+            {
+                MessageBox.Show("Måste vara en siffra");
+            }
         }
     }
 }

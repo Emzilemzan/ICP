@@ -35,10 +35,9 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             get => _lastname;
             set
             {
-               
                     _lastname = value;
-                    OnPropertyChanged("Lasttname");
-                
+                    OnPropertyChanged("Lastname");
+               
             }
         }
 
@@ -80,10 +79,6 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
                 {
                     OnPropertyChanged("PostalCode");
                 }
-                else
-                {
-                    MessageBox.Show("Postnummer måste bestå av 5 siffror och kan inte vara en text");
-                }
             }
         }
         private string _city;
@@ -110,10 +105,6 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
                 {
                     OnPropertyChanged("AgentNumber");
                 }
-                else
-                {
-                    MessageBox.Show("Anställningsnummer måste vara ett nummer och får inte heller sättas till 0");
-                }
             }
         }
 
@@ -129,17 +120,15 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
                 }
                 else
                 {
-                    MessageBox.Show("Skattesatsen måste vara ett nummer mellan 0 & 100");
+                    MessageBox.Show("Måste vara en siffra mellan 0-100. ");
                 }
             }
         }
 
         
         #endregion
-       
-      
 
-        #region Manages GUI happenings. 
+        #region Commands and methods. 
         
         private ICommand _addEmployeeBtn;
         public ICommand AddEmployeeBtn
@@ -155,7 +144,7 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
 
         private void InsertSalesMen()
         {
-            if (Instance._agentNumber != 0)
+            if (Instance._agentNumber != 0 && Instance.City != null && Instance.Firstname != null && Instance.Lastname != null && Instance._postalCode != 0 && Instance._taxRate != 0 && Instance.StreetAddress != null)
             {
                 SalesMen salesMen = new SalesMen()
                 {
@@ -170,12 +159,19 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
                 Context.SMController.CheckExistingSalesMen(Instance._agentNumber, salesMen);
                 MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
                 MainViewModel.Instance.CurrentTool = "";
+                Instance.AgentNumber = string.Empty;
+                Instance.Firstname = string.Empty;
+                Instance.StreetAddress = string.Empty;
+                Instance.City = string.Empty;
+                Instance.Lastname = string.Empty;
+                Instance.Postalcode = string.Empty;
+                Instance.TaxRate = string.Empty;
                 HandleEmployeeViewModel.Instance.UpdateSM();
                 MainViewModel.Instance.SelectedViewModel = HandleEmployeeViewModel.Instance;
             }
             else
             {
-                MessageBox.Show("Anställningsnummer får inte lämnas tomt");
+                MessageBox.Show("Inget fält får lämnas tomt!");
             }
         }
         #endregion

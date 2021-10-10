@@ -22,7 +22,7 @@
             <RowDefinition Height="500"/>
 
         </Grid.RowDefinitions>
-        <Label Content="Register anställd" FontSize="20" Grid.Row="0" Grid.Column="0"/>
+        <Label Content="Register säljare" FontSize="20" Grid.Row="0" Grid.Column="0"/>
         <xctk1:WatermarkTextBox Margin="20,10" Grid.Row="1" MaxHeight="50"
                                 HorizontalContentAlignment="Center"
                                 VerticalContentAlignment="Center"
@@ -34,23 +34,21 @@
                                 Text="{Binding SearchInput, UpdateSourceTrigger=PropertyChanged}"/>
         <DataGrid x:Name ="employeeGrid" Grid.Row="2" AutoGenerateColumns="False" ItemsSource="{Binding EmployeeGrid}"
                   RowDetailsVisibilityMode="VisibleWhenSelected" 
-                  IsReadOnly="True" 
+                  IsReadOnly="True"
+                  SelectedItem="{Binding SelectedPerson}"
                   AlternatingRowBackground="Gainsboro"  AlternationCount="2"
                   IsSynchronizedWithCurrentItem="True"
                   ScrollViewer.CanContentScroll="True" 
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
                   ScrollViewer.HorizontalScrollBarVisibility="Auto" Margin="0,0,0,203">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="AnställningsNr" Binding="{Binding Path=EmploymentNo}"/>
-                <DataGridTextColumn Header="Förnamn" Binding="{Binding Path=Firstname}" />
-                <DataGridTextColumn Header="Efternamn" Binding="{Binding Path=Lastname}" />
-                <DataGridTextColumn Header="Gatuadress" Binding="{Binding Path=StreetAddress}" />
-                <DataGridTextColumn Header="Postnummer" Binding="{Binding Path=Postalcode}" />
-                <DataGridTextColumn Header="Postort" Binding="{Binding Path=City}" />
-                <DataGridTextColumn Header="Befattning" Binding="{Binding Path=Role}" />
-                <DataGridTextColumn Header="Skattesats" Binding="{Binding Path=TaxRate}" />
-                <DataGridTextColumn Header="Anställningsform" Binding="{Binding Path=FormOfEmployment}" />
-                <DataGridTextColumn Header="AgenturNr" Binding="{Binding Path=AgentNumber}" />
+                <DataGridTextColumn Header="Agenturnummer" Binding="{Binding Path= AgentNumber}"/>
+                <DataGridTextColumn Header="Förnamn" Binding="{Binding Path= Firstname}" />
+                <DataGridTextColumn Header="Efternamn" Binding="{Binding Path= Lastname}" />
+                <DataGridTextColumn Header="Gatuadress" Binding="{Binding Path= StreetAddress}" />
+                <DataGridTextColumn Header="Postnummer" Binding="{Binding Path= Postalcode}" />
+                <DataGridTextColumn Header="Postort" Binding="{Binding Path= City}" />
+                <DataGridTextColumn Header="Skattesats" Binding="{Binding Path= TaxRate}" />
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Column="1" Grid.Row="2" Margin="10,9.667,10,155">
@@ -75,52 +73,21 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Label Content="Markerad anställd" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,277,0"/>
-                <Label Content="AnställningsNr" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,277,0"/>
-                <TextBox Grid.Row="1" IsReadOnly="True" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.EmploymentNo}" Margin="0.667,0,102.333,0"/>
+                <Label Content="Markerad säljare" Grid.Column="0" Grid.ColumnSpan="2" FontWeight="Bold" FontSize="15" Margin="0,0,277,0"/>
+                <Label Content="Agentnummer" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,277,0"/>
+                <TextBox Grid.Row="1" IsReadOnly="true" Grid.Column="1" Text="{Binding SelectedPerson.AgentNumber}" Margin="0.667,0,102.333,0"/>
                 <Label Content="Förnamn" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Margin="0,0,277,0"/>
-                <TextBox Grid.Row="2" IsReadOnly="True" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.Firstname}" Margin="0.667,0,102.333,0"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding SelectedPerson.Firstname}"  Margin="0.667,0,102.333,0"/>
                 <Label Content="Efternamn" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Margin="0,0,277,0"/>
-                <TextBox Grid.Row="3" IsReadOnly="True" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.Lastname}" Margin="0.667,0,102.333,0"/>
+                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding SelectedPerson.Lastname}" Margin="0.667,0,102.333,0"/>
                 <Label Content="Gatuadress" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" Margin="0,0,277,0"/>
-                <TextBox Grid.Row="4" IsReadOnly="True" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.StreetAddress}" Margin="0.667,0,102.333,0"/>
+                <TextBox Grid.Row="4"  Grid.Column="1" Text="{Binding SelectedPerson.StreetAddress}" Margin="0.667,0,102.333,0"/>
                 <Label Content="Postnummer" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Margin="0,0,277,0"/>
-                <TextBox Grid.Row="5" IsReadOnly="True" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.Postalcode}" Margin="0.667,0,102.333,0"/>
+                <TextBox Grid.Row="5"  Grid.Column="1" Text="{Binding SelectedPerson.Postalcode}" Margin="0.667,0,102.333,0"/>
                 <Label Content="Postort" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Margin="0,0,277,0"/>
-                <TextBox Grid.Row="6" IsReadOnly="True" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.City}" Margin="0.667,0,102.333,0" >
-                </TextBox>
+                <TextBox Grid.Row="6"  Grid.Column="1" Text="{Binding SelectedPerson.City}" Margin="0.667,0,0,0" HorizontalAlignment="Left" Width="102"></TextBox>
                 <Label Content="Skattesats(%)" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" Margin="0,0,277,0"/>
-                <TextBox Grid.Row="7" IsReadOnly="True" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.TaxRate}" Margin="0.667,0,102.333,0"/>
-                <Label Content="Anställningsform(%)" Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="2" Margin="0,0,277,0"/>
-                <TextBox Grid.Row="8" IsReadOnly="True" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.FormOfEmployment}" Margin="0.667,0,102.333,0"/>
-                <Label Content="Användarnamn" Grid.Column="0" Grid.Row="9" Grid.ColumnSpan="2" Margin="0,0,277,0"/>
-                <TextBox Grid.Row="9" IsReadOnly="True" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.Username}" Margin="0.667,0,102.333,0"/>
-                <Label Content="Lösenord" Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="2" Margin="0,0,277,0"/>
-                <TextBox Grid.Row="10" IsReadOnly="True" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.Password}" Margin="0.667,0,102.333,0"/>
-                <Label Grid.Row="11" Grid.Column="0" Content="Agentnummer:" Visibility="{Binding ElementName=OSM, Path=IsChecked,Converter={StaticResource BooleanToVisibilityConverter}}"/>
-                <Label Grid.Row="11" Grid.Column="0" Content="Agentnummer:" Visibility="{Binding ElementName=FSM, Path=IsChecked,Converter={StaticResource BooleanToVisibilityConverter}}"/>
-                <TextBox Grid.Row="11" IsReadOnly="True" Grid.Column="1" Margin="53.667,0,102.333,0" Height="20" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.AgentNumber}" Visibility="{Binding ElementName=OSM, Path=IsChecked,Converter={StaticResource BooleanToVisibilityConverter}}" />
-                <TextBox Grid.Row="11" IsReadOnly="True" Margin="53.667,0,102.333,0" Height="20" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.AgentNumber}" Grid.Column="1" Visibility="{Binding ElementName=FSM, Path=IsChecked,Converter={StaticResource BooleanToVisibilityConverter}}" />
-                <GroupBox Header="Befattning" Grid.Row="13" Margin="145.667,7,-0.667,-121.667" Grid.Column="1">
-                    <StackPanel>
-                        <CheckBox Content="Innesäljare" Name="OSM" IsHitTestVisible="false" IsChecked="{Binding ElementName=employeeGrid, Path= SelectedItem.OfficeSalesMen}"/>
-                        <CheckBox Content="Utesäljare" Name="FSM" IsHitTestVisible="false" IsChecked="{Binding ElementName=employeeGrid, Path= SelectedItem.FieldSalesMen}"/>
-                        <CheckBox Content="Ekonomiassistent" IsHitTestVisible="false" IsChecked="{Binding ElementName=employeeGrid, Path= SelectedItem.EconomyAssistent}"/>
-                        <CheckBox Content="Försäljningsassisent" IsHitTestVisible="false" IsChecked="{Binding ElementName=employeeGrid, Path= SelectedItem.SalesAssistent}"/>
-                        <CheckBox Content="Försäljningschef" IsHitTestVisible="false" IsChecked="{Binding ElementName=employeeGrid, Path= SelectedItem.SalesManager}"/>
-                        <CheckBox Content="VD" IsHitTestVisible="false" IsChecked="{Binding ElementName=employeeGrid, Path= SelectedItem.CEO}"/>
-                    </StackPanel>
-                </GroupBox>
-                <GroupBox Header="Behörighet" Margin="10,10,277.333,-121.667" Grid.ColumnSpan="2" Grid.Row="13">
-                    <StackPanel>
-                        <CheckBox Content="Hantera sök" IsHitTestVisible="false" IsChecked="{Binding ElementName=employeeGrid, Path= SelectedItem.Search}"/>
-                        <CheckBox Content="Hantera försäkringar" IsHitTestVisible="false" IsChecked="{Binding ElementName=employeeGrid, Path= SelectedItem.Insurances}"/>
-                        <CheckBox Content="Hantera statistik &amp; prospekt" IsHitTestVisible="false" IsChecked="{Binding ElementName=employeeGrid, Path= SelectedItem.StatisticsAndProspects}"/>
-                        <CheckBox Content="Personalhantering" IsHitTestVisible="false" IsChecked="{Binding ElementName=employeeGrid, Path= SelectedItem.EmployeeManagement}"/>
-                        <CheckBox Content="Hantera grunddata" IsHitTestVisible="false" IsChecked="{Binding ElementName=employeeGrid, Path= SelectedItem.BasicData}"/>
-                        <CheckBox Content="Hantera provision" IsChecked="{Binding ElementName=employeeGrid, Path= SelectedItem.Commission}"/>
-                    </StackPanel>
-                </GroupBox>
+                <TextBox Grid.Row="7" x:Name="tbTR" Grid.Column="1" Text="{Binding SelectedPerson.TaxRate}" Margin="0.667,0,102.333,0"/>
             </Grid>
         </StackPanel>
 

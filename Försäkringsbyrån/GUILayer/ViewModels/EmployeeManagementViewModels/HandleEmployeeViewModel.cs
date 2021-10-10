@@ -26,7 +26,8 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             
         }
 
-        #region methods
+        #region methods and commands
+        //Method for filling datagrid with all existing salesmen in db. 
         public ObservableCollection<SalesMen> UpdateSM()
         {
             ObservableCollection<SalesMen> x = new ObservableCollection<SalesMen>();
@@ -37,26 +38,83 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             SalesMens = x;
             return SalesMens;
         }
-              
-        #endregion
 
-        private ICommand _updateEmployeeBtn;
-        public ICommand UpdateEmployeeBtn
+        private ICommand _updateSMBtn;
+        public ICommand UpdateSMBtn
         {
-            get => _updateEmployeeBtn ?? (_updateEmployeeBtn = new RelayCommand(x => { UpdateSalesMen(); CanCommand(); }));
+            get => _updateSMBtn ?? (_updateSMBtn = new RelayCommand(x => { UpdateSalesMen(); CanCommand(); }));
         }
-
 
         public bool CanCommand() => true;
-
+        //Method for updating a salesmen
         private void UpdateSalesMen()
         {
-            
+            if (SelectedPerson != null && SelectedPerson.AgentNumber != 0 && SelectedPerson.City != null && SelectedPerson.Firstname != null && SelectedPerson.Lastname != null && SelectedPerson.StreetAddress != null
+                && SelectedPerson.TaxRate != 0 && SelectedPerson.Postalcode != 0)
+            {
+                SelectedPerson.AgentNumber = AgentNumber;
+                SelectedPerson.StreetAddress = StreetAddress;
+                SelectedPerson.Firstname = Firstname;
+                SelectedPerson.Lastname = Lastname;
+                SelectedPerson.Postalcode = Postalcode;
+                SelectedPerson.TaxRate = TaxRate;
+                SelectedPerson.City = City;
+
+                Context.SMController.Edit(SelectedPerson);
+                Instance.UpdateSM();
+                MessageBox.Show($"Uppdateringen lyckades av agenturnumret: {SelectedPerson.AgentNumber}", "Lyckad uppdatering", MessageBoxButton.OK, MessageBoxImage.Information);
+                SalesMens.Clear();
+                foreach (var salesMen in Context.SMController.GetAllSalesMen())
+                {
+                    SalesMens?.Add(salesMen);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Du måste markera en säljare i registret eller ha fyllt i alla fält", "Fel", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
+        private ICommand _deleteSMBtn;
+        public ICommand DeleteSMBtn
+        {
+            get => _deleteSMBtn ?? (_deleteSMBtn = new RelayCommand(x => { DeleteSalesMen(); CanCommand(); }));
+        }
+        //Method for deleting a salesmen
+        private void DeleteSalesMen()
+        {
+            if (SelectedPerson != null && SelectedPerson.AgentNumber != 0 && SelectedPerson.City != null && SelectedPerson.Firstname != null && SelectedPerson.Lastname != null && SelectedPerson.StreetAddress != null
+                && SelectedPerson.TaxRate != 0 && SelectedPerson.Postalcode != 0)
+            {
+                MessageBoxResult result = MessageBox.Show("Vill du ta bort säljaren?", "Varning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
+                if (result == MessageBoxResult.Yes)
+                {
+                    SelectedPerson.AgentNumber = AgentNumber;
+                    SelectedPerson.StreetAddress = StreetAddress;
+                    SelectedPerson.Firstname = Firstname;
+                    SelectedPerson.Lastname = Lastname;
+                    SelectedPerson.Postalcode = Postalcode;
+                    SelectedPerson.TaxRate = TaxRate;
+                    SelectedPerson.City = City;
+
+                    Context.SMController.RemoveSalesMen(SelectedPerson);
+                    MessageBox.Show("Säljaren togs bort", "Lyckad borttagning", MessageBoxButton.OK, MessageBoxImage.Information);
+                    SalesMens.Remove(SelectedPerson);
+                }
+                else
+                {
+                    MessageBox.Show($"{SelectedPerson.AgentNumber} är inte borttaget");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Antingen har inegn säljare markets i registret eller så har du lämnat något fält tomt! ", "Fel", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        #endregion
         #region properties
+        // SelectedPerson is used to select rowdata in datagrid. 
         private SalesMen _selectedPerson;
-
         public SalesMen SelectedPerson
         {
             get => _selectedPerson;
@@ -69,17 +127,15 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
 
         public ObservableCollection<SalesMen> SalesMens { get; set; }
 
-
-        private string _lastname;
         public string Lastname
         {
-            get => _lastname;
+            get => SelectedPerson.Lastname;
             set
             {
-                if (_lastname.Length > 0)
+                if (SelectedPerson.Lastname != null)
                 {
-                    _lastname = value;
-                    OnPropertyChanged("Lasttname");
+                    SelectedPerson.Lastname = value;
+                    OnPropertyChanged("Lastname");
                 }
                 else
                 {
@@ -87,16 +143,14 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
                 }
             }
         }
-
-        private string _firstname;
         public string Firstname
         {
-            get => _firstname;
+            get => SelectedPerson.Firstname;
             set
             {
-                if (_firstname.Length > 0)
+                if (SelectedPerson.Firstname != null)
                 {
-                    _firstname = value;
+                    SelectedPerson.Firstname = value;
                     OnPropertyChanged("Firstname");
                 }
                 else
@@ -105,15 +159,14 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
                 }
             }
         }
-        private string _streetAddress;
         public string StreetAddress
         {
-            get => _streetAddress;
+            get => SelectedPerson.StreetAddress;
             set
             {
-                if (_streetAddress.Length > 0)
+                if (SelectedPerson.StreetAddress.Length > 0)
                 {
-                    _streetAddress = value;
+                    SelectedPerson.StreetAddress = value;
                     OnPropertyChanged("StreetAddress");
                 }
                 else
@@ -122,31 +175,23 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
                 }
             }
         }
-        private int _postalCode;
-        public string Postalcode
+        public int Postalcode
         {
-            get => _postalCode > 0 ? _postalCode.ToString() : "";
+            get => SelectedPerson.Postalcode;
             set
             {
-                if (int.TryParse(value, out _postalCode) && _postalCode.ToString().Length < 6 && _postalCode != 0)
-                {
+                    SelectedPerson.Postalcode = value;
                     OnPropertyChanged("PostalCode");
-                }
-                else
-                {
-                    MessageBox.Show("Postnummer måste bestå av 5 siffror och kan inte vara en text");
-                }
             }
         }
-        private string _city;
         public string City
         {
-            get => _city;
+            get => SelectedPerson.City;
             set
             {
-                if (_city.Length > 0)
+                if (SelectedPerson.City != null)
                 {
-                    _city = value;
+                    SelectedPerson.City = value;
                     OnPropertyChanged("City");
                 }
                 else
@@ -156,37 +201,23 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             }
         }
 
-        private int _agentNumber;
-        public string AgentNumber
+        public int AgentNumber
         {
-            get => _agentNumber > 0 ? _agentNumber.ToString() : "";
+            get => SelectedPerson.AgentNumber;
             set
             {
-                if (int.TryParse(value, out _agentNumber) && _agentNumber > 0 && _agentNumber != 0)
-                {
+                    SelectedPerson.AgentNumber = value;
                     OnPropertyChanged("AgentNumber");
-                }
-                else
-                {
-                    MessageBox.Show("Anställningsnummer måste vara ett nummer och får inte heller sättas till 0");
-                }
             }
         }
 
-        private double _taxRate;
-        public string TaxRate
+        public double TaxRate
         {
-            get => _taxRate > 0 ? _taxRate.ToString() : "";
+            get => SelectedPerson.TaxRate;
             set
             {
-                if (double.TryParse(value, out _taxRate) && _taxRate > 0 && _taxRate <= 100)
-                {
+                    SelectedPerson.TaxRate = value;
                     OnPropertyChanged("TaxRate");
-                }
-                else
-                {
-                    MessageBox.Show("Skattesatsen måste vara ett nummer mellan 0 & 100");
-                }
             }
         }
 

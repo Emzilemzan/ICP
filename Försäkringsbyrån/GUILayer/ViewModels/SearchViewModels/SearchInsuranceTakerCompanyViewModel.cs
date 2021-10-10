@@ -67,6 +67,18 @@ namespace GUILayer.ViewModels.SearchViewModels
 
         public ObservableCollection<Company> Companies { get; set; }
 
+        private Company _selectedCompany;
+
+        public Company SelectedCompany
+        {
+            get => _selectedCompany;
+            set
+            {
+                _selectedCompany = value;
+                OnPropertyChanged("SelectedCompany");
+            }
+        }
+
         #endregion
     }
 }

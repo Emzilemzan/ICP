@@ -32,6 +32,7 @@
         <DataGrid x:Name ="CompanyGrid" Grid.Row="2" AutoGenerateColumns="False" ItemsSource="{Binding CompanyGrid}"
                   RowDetailsVisibilityMode="VisibleWhenSelected" 
                   CanUserAddRows="False"
+                  SelectedItem="{Binding SelectedCompany, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                   AlternatingRowBackground="Gainsboro"  AlternationCount="2"
                   IsSynchronizedWithCurrentItem="True"
                   ScrollViewer.CanContentScroll="True" 
@@ -101,7 +102,9 @@
                 <Label Content="Email 1" Grid.Column="0" Grid.Row="11"  Margin="-35,0,0,0"/>
                 <TextBox Grid.Row="11" Grid.Column="1" Text="{Binding ElementName=CompanyGrid, Path=SelectedItem.ContactPerson}" Margin="0,0,-17.667,0"/>
 
-                <Button Grid.Row ="14" Grid.Column="1" Margin="28,10,-17.667,-30" Grid.RowSpan="3"  Content="Uppdatera"></Button>
+                <Button Grid.Row ="14" Grid.Column="1" Margin="46,10,-17.667,-30.333" Grid.RowSpan="3"  Content="Uppdatera"></Button>
+                <Button Grid.Row ="14" Margin="36,10,60.333,-30.333" Grid.RowSpan="2"  Content="Exportera till excel" Grid.ColumnSpan="2"/>
+                <Button Grid.Row ="14" Grid.Column="0" Margin="-35,10,69,-30.333" Grid.RowSpan="3"  Content="Ta bort"/>
             </Grid>
 
         </StackPanel>

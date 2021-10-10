@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GUILayer.Views.EmployeeManagementViews"
-              xmlns:xctk1="http://schemas.xceed.com/wpf/xaml/toolkit"
+              xmlns:xctk1="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:employeemanagementviewmodels="clr-namespace:GUILayer.ViewModels.EmployeeManagementViewModels" d:DataContext="{d:DesignInstance Type=employeemanagementviewmodels:HandleEmployeeViewModel}"
              mc:Ignorable="d" 
             d:DesignHeight="650" d:DesignWidth="900">
     <Grid Margin="20 0 20 0">
@@ -19,35 +19,24 @@
             <RowDefinition Height="500"/>
 
         </Grid.RowDefinitions>
-        <Label Content="Hantera anställd" FontSize="20" Grid.Row="0" Grid.Column="0"/>
-        <!--<xctk1:WatermarkTextBox Margin="20,10" Grid.Row="1" MaxHeight="50"
-                                HorizontalContentAlignment="Center"
-                                VerticalContentAlignment="Center"
-                                TextWrapping="WrapWithOverflow"
-                                Watermark="Skriv ditt sök ord här..."
-                                Foreground="Black"
-                                Grid.Column="0"
-                                Background="Transparent" BorderBrush="Transparent"
-                                Text="{Binding SearchInput, UpdateSourceTrigger=PropertyChanged}"/>-->
-        <DataGrid x:Name ="employeeGrid" Grid.Row="2" AutoGenerateColumns="False" ItemsSource="{Binding Employees}"
+        <Label Content="Hantera säljare" FontSize="20" Grid.Row="0" Grid.Column="0"/>
+        <DataGrid x:Name ="employeeGrid" Grid.Row="2" AutoGenerateColumns="False" ItemsSource="{Binding SalesMens}"
                   RowDetailsVisibilityMode="VisibleWhenSelected" 
                   IsReadOnly="True" 
+                  SelectedItem="{Binding SelectedPerson}"
                   AlternatingRowBackground="Gainsboro"  AlternationCount="2"
                   IsSynchronizedWithCurrentItem="True"
                   ScrollViewer.CanContentScroll="True" 
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
                   ScrollViewer.HorizontalScrollBarVisibility="Auto" Margin="0,0,0,203">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="AnställningsNr" Binding="{Binding Path=EmploymentNo}"/>
-                <DataGridTextColumn Header="Förnamn" Binding="{Binding Path=Firstname}" />
-                <DataGridTextColumn Header="Efternamn" Binding="{Binding Path=Lastname}" />
-                <DataGridTextColumn Header="Gatuadress" Binding="{Binding Path=StreetAddress}" />
-                <DataGridTextColumn Header="Postnummer" Binding="{Binding Path=Postalcode}" />
-                <DataGridTextColumn Header="Postort" Binding="{Binding Path=City}" />
-                <DataGridTextColumn Header="Befattning" Binding="{Binding Path=Role}" />
-                <DataGridTextColumn Header="Skattesats" Binding="{Binding Path=TaxRate}" />
-                <DataGridTextColumn Header="Anställningsform" Binding="{Binding Path=FormOfEmployment}" />
-                <DataGridTextColumn Header="AgenturNr" Binding="{Binding Path=AgentNumber}" />
+                <DataGridTextColumn Header="Agenturnummer" Binding="{Binding AgentNumber}"/>
+                <DataGridTextColumn Header="Förnamn" Binding="{Binding Firstname}" />
+                <DataGridTextColumn Header="Efternamn" Binding="{Binding Lastname}" />
+                <DataGridTextColumn Header="Gatuadress" Binding="{Binding StreetAddress}" />
+                <DataGridTextColumn Header="Postnummer" Binding="{Binding Postalcode}" />
+                <DataGridTextColumn Header="Postort" Binding="{Binding City}" />
+                <DataGridTextColumn Header="Skattesats" Binding="{Binding TaxRate}" />
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Column="1" Grid.Row="2" Margin="10,9.667,10,155">
@@ -72,47 +61,23 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Label Content="Markerad anställd" Grid.Column="0" Grid.ColumnSpan="2" FontWeight="Bold" FontSize="15" Margin="0,0,277,0"/>
-                <Label Content="AnställningsNr" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,277,0"/>
-                <TextBox Grid.Row="1" IsReadOnly="true" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.EmploymentNo}" Margin="0.667,0,102.333,0"/>
+                <Label Content="Markerad säljare" Grid.Column="0" Grid.ColumnSpan="2" FontWeight="Bold" FontSize="15" Margin="0,0,277,0"/>
+                <Label Content="Agentnummer" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,277,0"/>
+                <TextBox Grid.Row="1" IsReadOnly="true" Grid.Column="1" Text="{Binding SelectedPerson.AgentNumber}" PreviewTextInput="NumberValidationTextBox" Margin="0.667,0,102.333,0"/>
                 <Label Content="Förnamn" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Margin="0,0,277,0"/>
-                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.Firstname}" Margin="0.667,0,102.333,0"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding SelectedPerson.Firstname}"  Margin="0.667,0,102.333,0"/>
                 <Label Content="Efternamn" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Margin="0,0,277,0"/>
-                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.Lastname}" Margin="0.667,0,102.333,0"/>
+                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding SelectedPerson.Lastname}" Margin="0.667,0,102.333,0"/>
                 <Label Content="Gatuadress" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" Margin="0,0,277,0"/>
-                <TextBox Grid.Row="4"  Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.StreetAddress}" Margin="0.667,0,102.333,0"/>
+                <TextBox Grid.Row="4"  Grid.Column="1" Text="{Binding SelectedPerson.StreetAddress}" Margin="0.667,0,102.333,0"/>
                 <Label Content="Postnummer" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="2" Margin="0,0,277,0"/>
-                <TextBox Grid.Row="5"  Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.Postalcode}" Margin="0.667,0,102.333,0"/>
+                <TextBox Grid.Row="5"  Grid.Column="1" Text="{Binding SelectedPerson.Postalcode}" PreviewTextInput="NumberValidationTextBox" Margin="0.667,0,102.333,0"/>
                 <Label Content="Postort" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Margin="0,0,277,0"/>
-                <TextBox Grid.Row="6"  Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.City}" Margin="0.667,0,0,0" HorizontalAlignment="Left" Width="258" RenderTransformOrigin="0.5,0.5">
-                    <TextBox.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="0.017"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </TextBox.RenderTransform>
-                </TextBox>
+                <TextBox Grid.Row="6"  Grid.Column="1" Text="{Binding SelectedPerson.City}" Margin="0.667,0,0,0" HorizontalAlignment="Left" Width="258" RenderTransformOrigin="0.5,0.5"></TextBox>
                 <Label Content="Skattesats(%)" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" Margin="0,0,277,0"/>
-                <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.TaxRate}" Margin="0.667,0,102.333,0"/>
-                <Label Content="Anställningsform(%)" Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="2" Margin="0,0,277,0"/>
-                <TextBox Grid.Row="8"  Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.FormOfEmployment}" Margin="0.667,0,102.333,0"/>
-                <Label Content="Användarnamn" Grid.Column="0" Grid.Row="9" Grid.ColumnSpan="2" Margin="0,0,277,0"/>
-                <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.Username}" Margin="0.667,0,102.333,0"/>
-                <Label Content="Lösenord" Grid.Column="0" Grid.Row="10" Grid.ColumnSpan="2" Margin="0,0,277,0"/>
-                <TextBox Grid.Row="10"  Grid.Column="1" Text="{Binding ElementName=employeeGrid,Path=SelectedItem.Password}" Margin="0.667,0,102.333,0"/>
-                <GroupBox Header="Behörighet" Margin="10,10,277.333,-121.667" Grid.ColumnSpan="2" Grid.Row="13">
-                    <StackPanel>
-                        <CheckBox Content="Hantera sök" IsChecked="{Binding ElementName=employeeGrid, Path= SelectedItem.Search}"/>
-                        <CheckBox Content="Hantera försäkringar" IsChecked="{Binding ElementName=employeeGrid, Path= SelectedItem.Insurances}"/>
-                        <CheckBox Content="Hantera statistik &amp; prospekt" IsChecked="{Binding ElementName=employeeGrid, Path= SelectedItem.StatisticsAndProspects}"/>
-                        <CheckBox Content="Personalhantering" IsChecked="{Binding ElementName=employeeGrid, Path= SelectedItem.EmployeeManagement}"/>
-                        <CheckBox Content="Hantera grunddata" IsChecked="{Binding ElementName=employeeGrid, Path= SelectedItem.BasicData}"/>
-                        <CheckBox Content="Hantera provision" IsChecked="{Binding ElementName=employeeGrid, Path= SelectedItem.Commission}"/>
-                    </StackPanel>
-                </GroupBox>
-                <Button Content="Uppdatera" Grid.Column="1" Margin="300.667,134,-0.667,-147.667" Grid.Row="13" Command=""></Button>
+                <TextBox Grid.Row="7" x:Name="tbTR" Grid.Column="1" Text="{Binding SelectedPerson.TaxRate}" PreviewTextInput="NumberTaxValidationTextBox" Margin="0.667,0,102.333,0"/>
+                <Button Content="Uppdatera" Grid.Column="1" Margin="199.667,4,102.333,-44" Grid.Row="13" Command="{Binding UpdateSMBtn}"></Button>
+                <Button Content="Ta bort" Grid.Column="1" Margin="117.667,4,185.333,-44" Grid.Row="13" Command="{Binding DeleteSMBtn}"></Button>
             </Grid>
         </StackPanel>
 

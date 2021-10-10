@@ -90,17 +90,12 @@
         <DataTemplate DataType="{x:Type emvm:ManageUserAccessViewModel}">
             <emv:ManageUserAccessView/>
         </DataTemplate>
-        <DataTemplate DataType="{ x:Type spvm:GetandexportSalesstatisticsViewModel}">
-            <spv:GetandexportSalesstatisticsView/>
+        <DataTemplate DataType="{x:Type bdvm:PermissionValueTableViewModel}">
+            <bdv:PermissionValueTableView/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type spvm:GetandexportCustomerLeadsViewModel}">
-            <spv:GetandexportCustomerLeads/>
+        <DataTemplate DataType="{x:Type bdvm:VacationPayViewModel}">
+            <bdv:VacationPayView/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type spvm:GetTrendstatitcsViewModel}">
-            <spv:GetTrendstatitics/>
-        </DataTemplate>
-            
-        
         <!--#region Exit Button Style-->
         <Style x:Key="ExitBtnStyle" TargetType="{x:Type Button}">
             <Setter Property="Background" Value="Transparent"/>
