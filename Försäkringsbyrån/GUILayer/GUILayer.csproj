@@ -111,6 +111,9 @@
     <Compile Include="ViewModels\SearchViewModels\SearchInsuranceTakerCompanyViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModels\SearchInsuranceTakerPersonViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModels\SearchValueViewModel.cs" />
+    <Compile Include="ViewModels\StatisticsAndProspectusViewModels\GetandexportCustomerLeadsViewModel.cs" />
+    <Compile Include="ViewModels\StatisticsAndProspectusViewModels\GetandexportSalesstatisticsViewModel.cs" />
+    <Compile Include="ViewModels\StatisticsAndProspectusViewModels\GetTrendstatitcsViewModel.cs" />
     <Compile Include="ViewModels\StatisticsAndProspectusViewModels\StatisticsAndProspectusViewModel.cs" />
     <Compile Include="Views\BasicDataViews\AckValueVariableTable.xaml.cs">
       <DependentUpon>AckValueVariableTable.xaml</DependentUpon>
@@ -186,6 +189,15 @@
     </Compile>
     <Compile Include="Views\SearchViews\SearchValueView.xaml.cs">
       <DependentUpon>SearchValueView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StatisticsAndProspectusViews\GetandexportCustomerLeads.xaml.cs">
+      <DependentUpon>GetandexportCustomerLeads.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StatisticsAndProspectusViews\GetandexportSalesstatisticsView.xaml.cs">
+      <DependentUpon>GetandexportSalesstatisticsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StatisticsAndProspectusViews\GetTrendstatitics.xaml.cs">
+      <DependentUpon>GetTrendstatitics.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\StatisticsAndProspectusViews\StatisticsAndProspectusView.xaml.cs">
       <DependentUpon>StatisticsAndProspectusView.xaml</DependentUpon>
@@ -299,6 +311,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SearchViews\SearchValueView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StatisticsAndProspectusViews\GetandexportCustomerLeads.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StatisticsAndProspectusViews\GetandexportSalesstatisticsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StatisticsAndProspectusViews\GetTrendstatitics.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
