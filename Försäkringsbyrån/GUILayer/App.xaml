@@ -96,6 +96,15 @@
         <DataTemplate DataType="{x:Type bdvm:VacationPayViewModel}">
             <bdv:VacationPayView/>
         </DataTemplate>
+        <DataTemplate DataType="{ x:Type spvm:GetandexportSalesstatisticsViewModel}">
+            <spv:GetandexportSalesstatisticsView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type spvm:GetandexportCustomerLeadsViewModel}">
+            <spv:GetandexportCustomerLeads/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type spvm:GetTrendstatitcsViewModel}">
+            <spv:GetTrendstatitics/>
+        </DataTemplate>
         <!--#region Exit Button Style-->
         <Style x:Key="ExitBtnStyle" TargetType="{x:Type Button}">
             <Setter Property="Background" Value="Transparent"/>
