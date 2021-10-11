@@ -12,6 +12,7 @@ namespace BussinessLayer
     /// </summary>
     public class InsuredPersonController
     {
+        #region InsurancePerson that belongs to a InsuranceTaker. 
         public List<InsuredPerson> GetInsuranceTakerIP(InsuranceTaker insuranceTaker) => insuranceTaker.InsuredPersons?.OrderByDescending(i => i.InsuredID).ToList();
         public List<InsuredPerson> GetInsuranceTakerIPS(InsuranceTaker insuranceTaker)
         {
@@ -29,5 +30,7 @@ namespace BussinessLayer
             insuredPerson.Taker.InsuredPersons.Remove(insuredPerson);
             BusinessController.Instance.Save();
         }
+        #endregion
+
     }
 }

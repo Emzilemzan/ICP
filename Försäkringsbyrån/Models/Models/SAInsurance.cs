@@ -26,10 +26,6 @@ namespace Models.Models
             this.SAID = id;
             this.SAInsuranceType = s;
         }
-
-        public virtual ICollection<OptionalType> OptionalTypes { get; set; }
-        
-
     }
    
 }

@@ -51,7 +51,9 @@
                             </Grid>
                             </DataTemplate>
                         </ComboBox.Resources>
-                        <ComboBox.ItemTemplate>                            <StaticResource ResourceKey="DataTemplateOptionType"/>                        </ComboBox.ItemTemplate>
+                        <ComboBox.ItemTemplate>
+                            <StaticResource ResourceKey="DataTemplateOptionType"/>
+                        </ComboBox.ItemTemplate>
                     </ComboBox>
 
                     <ComboBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding LifeInsurances }" SelectedItem="{Binding LifeInsurance}">
@@ -65,7 +67,9 @@
                                 </Grid>
                             </DataTemplate>
                         </ComboBox.Resources>
-                        <ComboBox.ItemTemplate>                            <StaticResource ResourceKey="DataTemplateLifeInsurance"/>                        </ComboBox.ItemTemplate>
+                        <ComboBox.ItemTemplate>
+                            <StaticResource ResourceKey="DataTemplateLifeInsurance"/>
+                        </ComboBox.ItemTemplate>
 
                     </ComboBox>
 

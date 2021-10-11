@@ -12,7 +12,7 @@ namespace Models.Models
     public class LifeInsurance : PersonInsurance
     {
         [Key]
-        public int LifeID { get; set; }
+        public int LifeID { get; set; } 
         public string LifeName { get; set; }
 
         public LifeInsurance(int id, string name)
