@@ -140,7 +140,6 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             return !string.IsNullOrWhiteSpace(Instance.Username) && !string.IsNullOrWhiteSpace(Instance.Password);
         }
 
-
         private void InsertUser()
         {
             if (Instance._username != null)

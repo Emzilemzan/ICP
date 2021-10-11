@@ -19,6 +19,8 @@ namespace BussinessLayer
 
         public IEnumerable<Company> GetAllCompanies() => BusinessController.Instance.Context.Companies.GetAll();
 
+        public Company GetCompany(int id) => BusinessController.Instance.Context.Companies.GetById(id);
+
 
         public void AddInsuranceTaker(InsuranceTaker insuranceTaker)
         {
