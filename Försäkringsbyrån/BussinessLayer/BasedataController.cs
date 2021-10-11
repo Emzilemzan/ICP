@@ -50,7 +50,7 @@ namespace BussinessLayer
 
         public void AddVPay(VacationPay vPay)
         {
-            BusinessController.Instance.Context.VPays.Add(vPay);
+            BusinessController.Instance.Context.VPays.Add(vPay); 
             BusinessController.Instance.Save();
         }
 
@@ -70,7 +70,7 @@ namespace BussinessLayer
             }
             else
             {
-                MessageBox.Show("Finns ingen grunddata med det id.t att ta bort");
+                MessageBox.Show("Finns ingen grunddata med det id.t att ta bort"); 
             }
         }
 

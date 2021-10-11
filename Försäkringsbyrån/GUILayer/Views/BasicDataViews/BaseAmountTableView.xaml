@@ -91,10 +91,10 @@
                   ScrollViewer.HorizontalScrollBarVisibility="Auto">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" Binding="{Binding Path=BaseAmountTId}"/>
-                <DataGridTextColumn Header="Datum" Binding="{Binding Date}" />
-                <DataGridTextColumn Header="Grundbelopp" Binding="{Binding BaseAmount}" />
-                <DataGridTextColumn Header="Ack.värde" Binding="{Binding AckValue}" />
-                <DataGridTextColumn Header="Försäkringstyp" Binding="{Binding Path= InsuranceTypeId}"/>
+                <DataGridTextColumn Header="Datum" Binding="{Binding Path= Date}" />
+                <DataGridTextColumn Header="Grundbelopp" Binding="{Binding Path=BaseAmount }" />
+                <DataGridTextColumn Header="Ack.värde" Binding="{Binding Path =AckValue}" />
+                <DataGridTextColumn Header="Försäkringstyp" Binding="{Binding Path= SAID.SAInsuranceType}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
