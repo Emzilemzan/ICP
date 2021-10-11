@@ -17,15 +17,17 @@ namespace Models.Models
         public InsuredPerson InsuredID { get; set; }
         public InsuranceType InsuranceTypeId { get; set; }
         public SalesMen AgentNo { get; set; }
-        public virtual InsuranceTaker Taker { get; set; }
-        public Nullable<int> InsuranceNumber { get; set; }
-        public Nullable<DateTime> PayDate { get; set; }
-        public Nullable<int> PossibleBaseAmount { get; set; }
-        public Nullable<int> PossibleComisson { get; set; }
-        public Status Signed { get; set; }
+        public InsuranceTaker Taker { get; set; }
+        public int? InsuranceNumber { get; set; }
+        public DateTime? PayDate { get; set; }
+        public int? PossibleBaseAmount { get; set; }
+        public int? PossibleComisson { get; set; }
+        public Status InsuranceStatus { get; set; }
         public CustomerProspect CustomerProspectId { get; set; }
 
+        public OptionalType OptionalTypes { get; set; }
 
+        public DateTime DeliveryDate { get; set; }
     }
     public enum Status
     {

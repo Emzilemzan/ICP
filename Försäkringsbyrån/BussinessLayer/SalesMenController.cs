@@ -16,25 +16,13 @@ namespace BussinessLayer
         public void AddSalesMen(SalesMen sm)
         {
             BusinessController.Instance.Context.Employees.Add(sm);
-            BusinessController.Instance.Save();
+            BusinessController.Instance.Save(); 
         }
 
 
         public void RemoveSalesMen(SalesMen sm)
         {
             BusinessController.Instance.Context.Employees.Remove(sm);
-            BusinessController.Instance.Save();
-        }
-
-        public void EditSalesMen(SalesMen sm)
-        {
-            SalesMen edit = BusinessController.Instance.Context.Employees.GetById(sm.AgentNumber);
-            edit.Lastname = sm.Lastname;
-            edit.Firstname = sm.Firstname;
-            edit.TaxRate = sm.TaxRate;
-            edit.StreetAddress = sm.StreetAddress;
-            edit.City = sm.City;
-            edit.Postalcode = sm.Postalcode;
             BusinessController.Instance.Save();
         }
 
@@ -52,6 +40,11 @@ namespace BussinessLayer
             {
                 MessageBox.Show("Går ej lägga till ny anställd då anställningsnumret redan finns");
             }
+        }
+        public void Edit(SalesMen sm)
+        {
+            BusinessController.Instance.Context.Employees.Update(sm);
+            BusinessController.Instance.Save();
         }
     }
 }

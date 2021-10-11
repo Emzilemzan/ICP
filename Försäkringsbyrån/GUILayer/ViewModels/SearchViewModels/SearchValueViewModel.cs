@@ -16,7 +16,6 @@ namespace GUILayer.ViewModels.SearchViewModels
     {
         public static readonly SearchValueViewModel Instance = new SearchValueViewModel();
 
-     
 
         private SearchValueViewModel()
         {
@@ -78,7 +77,9 @@ namespace GUILayer.ViewModels.SearchViewModels
 
         public static void SearchApplicationHome()
         {
-            // no code yet.
+            //MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
+            //MainViewModel.Instance.CurrentTool = "";
+            //MainViewModel.Instance.SelectedViewModel = SearchApplicationViewModel.Instance;
         }
        
 

@@ -11,7 +11,6 @@ namespace DataLayer
 {
    public class ApplicationContext : DbContext
     {
-
         public DbSet<Person> Persons { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<InsuranceTaker> InsuranceTakers { get; set; }
@@ -33,8 +32,8 @@ namespace DataLayer
         public DbSet<SAInsurance> SAInsurances { get; set; }
         public DbSet<SalesMen> SalesMens { get; set; }
         public DbSet<VacationPay> VacationPays { get; set; }
+        
      
-
         public ApplicationContext() : base ("ICPDB")
         {   }
 
@@ -67,8 +66,7 @@ namespace DataLayer
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
+            modelBuilder.Properties<DateTime>().Configure(c => c.HasColumnType("datetime2"));
         }
-
     }
 }

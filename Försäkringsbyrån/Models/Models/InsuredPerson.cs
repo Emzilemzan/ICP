@@ -21,7 +21,7 @@ namespace Models.Models
         public string SocialSecurityNumber { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
-
+        public string PersonType { get; set; }
         public virtual InsuranceTaker Taker { get; set; }
     }
 }

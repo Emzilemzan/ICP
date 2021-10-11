@@ -27,7 +27,7 @@
                          Height="106"
                          Background="Transparent" 
                          Margin="41,0,31.667,0"
-                         Command=""
+                         Command="{Binding Trendstatic_btn}"
                          Style="{DynamicResource OtherButtonStyle}" Width="Auto">
                     <TextBlock>Hämta &amp; exportera<LineBreak/> trendstatistik</TextBlock>
                 </Button>
@@ -36,7 +36,7 @@
                             Height="106"
                             Background="Transparent" 
                             Margin="41.333,0,10.333,0"
-                            Command=""
+                            Command="{Binding GetStatics_Btn}"
                             Style="{DynamicResource OtherButtonStyle}" Width="Auto">
                     <TextBlock Width="175">Hämta<LineBreak/> försäljningsstatistik</TextBlock>
                 </Button>
@@ -45,8 +45,8 @@
                          Height="106"
                          Background="Transparent" 
                          Margin="29.667,0,24,0"
-                         Command=""
-                         Style="{DynamicResource OtherButtonStyle}" Width="Auto">
+                         Command="{Binding Searchleads_Btn}" 
+                Style="{DynamicResource OtherButtonStyle}" Width="Auto">
                     <TextBlock>Hämta &amp; exportera<LineBreak/> kundprospekt</TextBlock>
                 </Button>
             </Grid>

@@ -8,6 +8,7 @@ using Models.Models;
 using System.ComponentModel;
 using System.Windows.Data;
 using System.Windows.Input;
+using GUILayer.Commands;
 
 namespace GUILayer.ViewModels.SearchViewModels
 {
@@ -254,6 +255,34 @@ namespace GUILayer.ViewModels.SearchViewModels
                 _emailTwo = value;
                 OnPropertyChanged("EmailTwo");
             }
+        }
+        #endregion
+
+        #region commands
+
+        private ICommand _updateIT;
+        public ICommand UpdateIT
+        {
+            get => _updateIT ?? (_updateIT = new RelayCommand(x => { UpdatePerson(); CanCommand(); }));
+        }
+
+        private bool CanCommand() => true;
+
+        private void UpdatePerson()
+        {
+            throw new NotImplementedException();
+        }
+
+        private ICommand _deleteIT;
+        public ICommand DeleteIT
+        {
+            get => _deleteIT ?? (_deleteIT = new RelayCommand(x => { DeletePerson(); CanCommand(); }));
+        }
+
+
+        private void DeletePerson()
+        {
+            throw new NotImplementedException();
         }
         #endregion
     }

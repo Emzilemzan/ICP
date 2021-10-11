@@ -2,10 +2,13 @@
 using Models.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace GUILayer.ViewModels.EmployeeManagementViewModels
@@ -16,156 +19,218 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
 
         public ManageUserAccessViewModel()
         {
-
+            Users = UpdateUA();
         }
 
-        private string _username;
+        #region properties
         public string Username
         {
-            get => _username;
+            get => SelectedPerson.Username;
             set
             {
-                _username = value;
-                OnPropertyChanged("Username");
+                SelectedPerson.Username = value;
+                    OnPropertyChanged("Username");
             }
         }
 
-        private string _password;
         public string Password
         {
-            get => _password;
+            get => SelectedPerson.Password;
             set
             {
-                _password = value;
-                OnPropertyChanged("Password");
+                SelectedPerson.Password = value;
+                    OnPropertyChanged("Password");
             }
         }
-        private string _lastname;
         public string Lastname
         {
-            get => _lastname;
+            get => SelectedPerson.Lastname;
             set
             {
-                _lastname = value;
-                OnPropertyChanged("Lastname");
+                SelectedPerson.Lastname = value;
+                    OnPropertyChanged("Lasttname");
             }
         }
 
-        private string _firstname;
         public string Firstname
         {
-            get => _firstname;
+            get => SelectedPerson.Firstname;
             set
             {
-                _firstname = value;
-                OnPropertyChanged("Firstname");
+                SelectedPerson.Firstname = value;
+                    OnPropertyChanged("Firstname");
+            }
+        }
+        //SelectedPerson is used to select rowdata in datagrid. 
+        private UserAccess _selectedPerson;
+        public UserAccess SelectedPerson
+        {
+            get => _selectedPerson;
+            set
+            {
+                _selectedPerson = value;
+                OnPropertyChanged("SelectedPerson");
             }
         }
 
-        #region bools for access
-        private bool _search;
+        public ObservableCollection<UserAccess> Users { get; set; }
+       
+        #endregion
+        #region properties bools for access
         public bool Search
         {
-            get => _search;
+            get => SelectedPerson.Search;
             set
             {
-                _search = value;
+                SelectedPerson.Search = value;
                 OnPropertyChanged("Search");
             }
         }
 
-        private bool _sap;
         public bool StatisticsAndProspects
         {
-            get => _sap;
+            get => SelectedPerson.StatisticsAndProspects;
             set
             {
-                _sap = value;
+                SelectedPerson.StatisticsAndProspects = value;
                 OnPropertyChanged("StatisticsAndProspects");
             }
         }
 
-        private bool _employeeManagement;
         public bool EmployeeManagement
         {
-            get => _employeeManagement;
+            get => SelectedPerson.EmployeeManagement;
             set
             {
-                _employeeManagement = value;
+                SelectedPerson.EmployeeManagement = value;
                 OnPropertyChanged("EmployeeManagement");
             }
         }
 
-        private bool _insurances;
         public bool Insurances
         {
-            get => _insurances;
+            get => SelectedPerson.Insurances;
             set
             {
-                _insurances = value;
+                SelectedPerson.Insurances = value;
                 OnPropertyChanged("Insurances");
             }
         }
 
-        private bool _basicData;
         public bool BasicData
         {
-            get => _basicData;
+            get => SelectedPerson.BasicData;
             set
             {
-                _basicData = value;
+                SelectedPerson.BasicData = value;
                 OnPropertyChanged("BasicData");
             }
         }
 
-        private bool _commission;
         public bool Commission
         {
-            get => _commission;
+            get => SelectedPerson.Commission;
             set
             {
-                _commission = value;
+                SelectedPerson.Commission = value;
                 OnPropertyChanged("BasicData");
             }
         }
         #endregion
-        private ICommand _addUserBtn;
-        public ICommand AddUserBtn
+        #region methods and commands
+        private ICommand _uUserBtn;
+        public ICommand UpdateUserBtn
         {
-            get => _addUserBtn ?? (_addUserBtn = new RelayCommand(x => { InsertUser(); CanCommand(); }));
+            get => _uUserBtn ?? (_uUserBtn = new RelayCommand(x => { UpdateUser(); CanCommand(); }));
         }
 
-        public bool CanCommand()
+        public bool CanCommand() => true;
+            
+        //method for update existing user
+        private void UpdateUser()
         {
-            return !string.IsNullOrWhiteSpace(Instance.Username) && !string.IsNullOrWhiteSpace(Instance.Password);
-        }
-
-        private void InsertUser()
-        {
-            if (Instance._username != null)
+            if (SelectedPerson != null && Instance.Password != null && Instance.Firstname != null && Instance.Lastname != null &&
+                (Instance.StatisticsAndProspects != false || Instance.Commission != false || Instance.Insurances != false
+                || Instance.EmployeeManagement != false || Instance.BasicData != false || Instance.Search != false))
             {
-                UserAccess a = new UserAccess()
+                SelectedPerson.Username = Username;
+                SelectedPerson.Password = Password;
+                SelectedPerson.Firstname = Firstname;
+                SelectedPerson.Lastname = Lastname;
+                SelectedPerson.Search = Search;
+                SelectedPerson.StatisticsAndProspects = StatisticsAndProspects;
+                SelectedPerson.Insurances = Insurances;
+                SelectedPerson.EmployeeManagement = EmployeeManagement;
+                SelectedPerson.Commission = Commission;
+                SelectedPerson.BasicData = BasicData;
+
+                Context.UAController.EditUser(SelectedPerson);
+                
+                MessageBox.Show($"Uppdateringen lyckades av användarnamet: {SelectedPerson.Username}", "Lyckad uppdatering", MessageBoxButton.OK, MessageBoxImage.Information);
+                Users.Clear();
+                foreach (var u in Context.UAController.GetAllUsers())
                 {
-                    Username = Instance.Username,
-                    Password = Instance.Password,
-                    Search = Instance.Search,
-                    StatisticsAndProspects = Instance.StatisticsAndProspects,
-                    Insurances = Instance.Insurances,
-                    EmployeeManagement = Instance.EmployeeManagement,
-                    Commission = Instance.Commission,
-                    BasicData = Instance.BasicData
-                };
-                Context.UAController.CheckExistingUser(Instance._username, a);
-                MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
-                MainViewModel.Instance.CurrentTool = "";
-                //HandleEmployeeViewModel.Instance.UpdateSM();
-                //MainViewModel.Instance.SelectedViewModel = HandleEmployeeViewModel.Instance;
+                    Users?.Add(u);
+                }
             }
             else
             {
-                MessageBox.Show("Anställningsnummer får inte lämnas tomt");
+                MessageBox.Show("Du måste markera en behörig i registret, alla fält måste vara ifyllda och minst en behörighet ska ha valts","Fel", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        //method to get all useraccesses in db. 
+        public ObservableCollection<UserAccess> UpdateUA()
+        {
+            ObservableCollection<UserAccess> x = new ObservableCollection<UserAccess>();
+            foreach (var u in Context.UAController.GetAllUsers())
+            {
+                x?.Add(u);
+            }
+            Users = x;
+            return Users;
+        }
+
+        private ICommand _deleteUserBtn;
+        public ICommand DeleteUserBtn
+        {
+            get => _deleteUserBtn ?? (_deleteUserBtn = new RelayCommand(x => { DeleteSalesMen(); CanCommand(); }));
+        }
+        //Method for deleting a salesmen
+        //Om säljaren är registrerad på någon ansökan, ska denne ej gå att ta bort!
+        private void DeleteSalesMen()
+        {
+            if (SelectedPerson != null)
+            {
+                MessageBoxResult result = MessageBox.Show("Vill du ta bort säljaren?", "Varning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.Yes)
+                {
+                    SelectedPerson.Username = Username;
+                    SelectedPerson.Password = Password;
+                    SelectedPerson.Firstname = Firstname;
+                    SelectedPerson.Lastname = Lastname;
+                    SelectedPerson.Search = Search;
+                    SelectedPerson.StatisticsAndProspects = StatisticsAndProspects;
+                    SelectedPerson.Insurances = Insurances;
+                    SelectedPerson.EmployeeManagement = EmployeeManagement;
+                    SelectedPerson.Commission = Commission;
+                    SelectedPerson.BasicData = BasicData;
+
+                    Context.UAController.RemoveUser(SelectedPerson);
+                    Users.Remove(SelectedPerson);
+                    MessageBox.Show("Borttagningen lyckades:", "Lyckad borttagning", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    MessageBox.Show($"{SelectedPerson.Username} är inte borttagen");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Du måste markera en behörig i registret", "Fel", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        #endregion
 
     }
 

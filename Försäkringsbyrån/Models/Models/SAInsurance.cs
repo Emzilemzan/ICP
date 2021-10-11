@@ -18,10 +18,14 @@ namespace Models.Models
     {
         [Key]
         public int SAID { get; set; } // SOID
-        public string PersonType { get; set; }
-        public virtual ICollection<OptionalType> OptionalTypes { get; set; }
-        
 
+        public string SAInsuranceType { get; set; }
+
+        public SAInsurance(int id, string s)
+        {
+            this.SAID = id;
+            this.SAInsuranceType = s;
+        }
     }
    
 }

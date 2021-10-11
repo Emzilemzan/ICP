@@ -102,6 +102,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
+
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
@@ -131,7 +132,9 @@
                 <TextBox Grid.Row="12" Grid.Column="1" Text="{Binding ElementName=PersonGrid, Path=SelectedItem.EmailOne}" Margin="0,0,-17.667,0"/>
                 <Label Content="Email 2" Grid.Column="0" Grid.Row="13"  Margin="-35,0,0,0"/>
                 <TextBox Grid.Row="13" Grid.Column="1" Text="{Binding ElementName=PersonGrid, Path=SelectedItem.EmailTwo}" Margin="0,0,-17.667,0"/>
-                <Button Grid.Row ="14" Grid.Column="1" Margin="28,10,-17.667,-30" Grid.RowSpan="3"  Content="Uppdatera"></Button>
+                <Button Grid.Row ="14" Grid.Column="1" Margin="46,10,-17.667,-30.333" Grid.RowSpan="3"  Content="Uppdatera"></Button>
+                <Button Grid.Row ="15" Margin="36,10,60.333,-30.333" Grid.RowSpan="2"  Content="Exportera till excel" Grid.ColumnSpan="2"/>
+                <Button Grid.Row ="14" Grid.Column="0" Margin="-35,10,69,-30.333" Grid.RowSpan="3"  Content="Ta bort"/>
             </Grid>
         </StackPanel>
         <StackPanel Grid.Column="2" Grid.Row="2" Margin="1,0,4.333,0">

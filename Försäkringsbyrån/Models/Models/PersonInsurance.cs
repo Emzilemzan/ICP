@@ -13,7 +13,5 @@ namespace Models.Models
     {
         [Key]
         public int PFId { get; set; }
-        public DateTime DeliveryDate { get; set; }
-   
     }
 }
