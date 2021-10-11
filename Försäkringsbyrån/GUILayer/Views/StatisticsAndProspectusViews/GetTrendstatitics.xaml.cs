@@ -16,14 +16,13 @@ using System.Windows.Shapes;
 namespace GUILayer.Views.StatisticsAndProspectusViews
 {
     /// <summary>
-    /// Interaction logic for StatisticsAndProspectusView.xaml
+    /// Interaction logic for GetTrendstatitics.xaml
     /// </summary>
-    public partial class StatisticsAndProspectusView : UserControl
+    public partial class GetTrendstatitics : UserControl
     {
-        public StatisticsAndProspectusView()
+        public GetTrendstatitics()
         {
             InitializeComponent();
         }
-
     }
 }

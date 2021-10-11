@@ -25,7 +25,7 @@
                             FontSize="20"
                             Height="106"
                             Background="Transparent"
-                         Command="{Binding PermissionValueTable_Btn}"
+                         Command="{Binding CommissionShare_Btn}"
                          Style="{DynamicResource OtherButtonStyle}" Width="Auto">
                     <TextBlock>Provisionsandels-<LineBreak/>tabell</TextBlock>
                 </Button>

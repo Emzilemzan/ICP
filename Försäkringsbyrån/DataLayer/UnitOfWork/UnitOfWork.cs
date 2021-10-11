@@ -29,6 +29,7 @@ namespace DataLayer.UnitOfWork
         public IBaseAmountRepository BaseAmounts { get; }
         public IOptionalTypeRepository OptionalTypes { get; }
         public IAckValueVariableRepository AckValues { get; }
+        public ICommissionRepository CommissionShares { get; }
 
         public IInsuranceTypeRepository InsuranceTypes { get; }
        
@@ -47,6 +48,7 @@ namespace DataLayer.UnitOfWork
             OptionalTypes = new OptionalTypeRepository(_context);
             VPays = new VacationPayRepository(_context);
             AckValues = new AckValueVariableRepository(_context);
+            CommissionShares = new CommissionRepository(_context);
             InsuranceTypes = new InsuranceTypeRepository(_context);
             Init();
         }

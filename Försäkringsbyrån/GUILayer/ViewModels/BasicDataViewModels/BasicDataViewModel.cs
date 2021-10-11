@@ -72,5 +72,18 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             MainViewModel.Instance.CurrentTool = "";
             MainViewModel.Instance.SelectedViewModel = VacationPayViewModel.Instance;
         }
+
+        private ICommand commissionShare_Btn;
+        public ICommand CommissionShare_Btn
+        {
+            get => commissionShare_Btn ?? (commissionShare_Btn = new RelayCommand(x => { CommissionShare(); CanCreate(); }));
+        }
+
+        public static void CommissionShare()
+        {
+            MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
+            MainViewModel.Instance.CurrentTool = "";
+            MainViewModel.Instance.SelectedViewModel = PermissionValueTableViewModel.Instance;
+        }
     }
 }

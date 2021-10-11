@@ -32,6 +32,7 @@ namespace DataLayer
         public DbSet<SAInsurance> SAInsurances { get; set; }
         public DbSet<SalesMen> SalesMens { get; set; }
         public DbSet<VacationPay> VacationPays { get; set; }
+        
      
         public ApplicationContext() : base ("ICPDB")
         {   }
