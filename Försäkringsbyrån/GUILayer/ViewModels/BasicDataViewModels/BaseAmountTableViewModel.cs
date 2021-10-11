@@ -107,7 +107,6 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             Tabels = x;
             return Tabels;
         }
-
         #region Properties
 
         public ObservableCollection<BaseAmountTabel> Tabels { get; set; }
