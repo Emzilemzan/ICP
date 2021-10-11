@@ -9,12 +9,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Models.Models
 {
     [Table("ÖFPFörsäkring", Schema = "dbo")]
-    public class OtherPersonInsurance : InsuranceType
-    {
+    public class OtherPersonInsurance
+    { 
         [Key]
         public int OPIId { get; set; } 
-        public string Table { get; set; }
-        public int Premie { get; set; }
+   
 
 
     }

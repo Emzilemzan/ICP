@@ -13,7 +13,6 @@ namespace DataLayer
     {
         public DbSet<Person> Persons { get; set; }
         public DbSet<Company> Companies { get; set; }
-        public DbSet<InsuranceTaker> InsuranceTakers { get; set; }
         public DbSet<InsuredPerson> InsuredPersons { get; set; }
         public DbSet<Insurance> Insurances { get; set; }
         public DbSet<InsuranceType> InsuranceTypes { get; set; }
@@ -24,11 +23,10 @@ namespace DataLayer
         public DbSet<UserAccess> UserAccesses { get; set; }
         public DbSet<ComissionShare> ComissionShares { get; set; }
         public DbSet<CompanyInsurance> CompanyInsurances { get; set; }
-        public DbSet<CompanyInsuranceType> CompanyInsuranceTypes { get; set; }
+     
         public DbSet<LifeInsurance> LifeInsurances { get; set; }
         public DbSet<OptionalType> OptionalTypes { get; set; }
         public DbSet<OtherPersonInsurance> OtherPersonInsurances { get; set; }
-        public DbSet<PersonInsurance> PersonInsurances { get; set; }
         public DbSet<SAInsurance> SAInsurances { get; set; }
         public DbSet<SalesMen> SalesMens { get; set; }
         public DbSet<VacationPay> VacationPays { get; set; }

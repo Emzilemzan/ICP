@@ -100,6 +100,11 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
                     Context.SMController.RemoveSalesMen(SelectedPerson);
                     MessageBox.Show("Säljaren togs bort", "Lyckad borttagning", MessageBoxButton.OK, MessageBoxImage.Information);
                     SalesMens.Remove(SelectedPerson);
+                    SalesMens.Clear();
+                    foreach (var salesMen in Context.SMController.GetAllSalesMen())
+                    {
+                        SalesMens?.Add(salesMen);
+                    }
                 }
                 else
                 {

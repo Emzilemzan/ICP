@@ -14,7 +14,6 @@ namespace DataLayer.UnitOfWork
     {
         IEmployeeRepository Employees { get; }
         IInsuranceRepository Insurances { get; }
-        IInsuranceTakerRepository InsuranceTakers { get; }
         IInsuredPersonRepository InsuredPersons { get; }
         ICompanyRepository Companies { get; }
         IPersonRepository Persons { get; }

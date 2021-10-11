@@ -35,11 +35,12 @@ namespace BussinessLayer
             IPController = new InsuredPersonController();
             CMController = new CommissionController();
             BDController = new BasedataController();
+           
         }
 
         public void Save() => Context.Complete();
 
 
-
+       
     }
 }

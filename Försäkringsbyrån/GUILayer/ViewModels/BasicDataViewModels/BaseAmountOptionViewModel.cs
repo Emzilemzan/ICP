@@ -20,7 +20,7 @@ namespace GUILayer.ViewModels.BasicDataViewModels
         {
             BaseAmounts = UpdateBA();
             Date = DateTime.Today;
-            OptionalTypes = new List<OptionalType>() { new OptionalType (1, "Invaliditet vid olycksfall"), new OptionalType(2, "Höjning av livförsäkring"), new OptionalType(3, "Månadsersättning vid långvarig sjukskrivning") };
+            //OptionalTypes = new List<OptionalType>() { new OptionalType(1, "Invaliditet vid olycksfall"), new OptionalType(2, "Höjning av livförsäkring"), new OptionalType(3, "Månadsersättning vid långvarig sjukskrivning") };
             LifeInsurances = new List<LifeInsurance>() { new LifeInsurance (1, "Livförsäkring för vuxen") };
         }
 
@@ -111,8 +111,7 @@ namespace GUILayer.ViewModels.BasicDataViewModels
 
         #region Properties
 
-        public ObservableCollection<BaseAmount> BaseAmounts { get; set; } 
-
+        public ObservableCollection<BaseAmount> BaseAmounts { get; set; }
         public List<OptionalType> OptionalTypes { get; set; }
         public List<LifeInsurance> LifeInsurances { get; set; }
 

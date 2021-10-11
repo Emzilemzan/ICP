@@ -45,7 +45,7 @@
                         <DataTemplate x:Key="DataTemplateSAInsurance">
                             <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Text="{Binding Path= SAInsuranceType}" Grid.Column="1" />
                             </Grid>
@@ -94,7 +94,7 @@
                 <DataGridTextColumn Header="Datum" Binding="{Binding Date}" />
                 <DataGridTextColumn Header="Grundbelopp" Binding="{Binding BaseAmount}" />
                 <DataGridTextColumn Header="Ack.värde" Binding="{Binding AckValue}" />
-                <DataGridTextColumn Header="Försäkringstyp" Binding="{Binding SAID.SAInsuranceType}"/>
+                <DataGridTextColumn Header="Försäkringstyp" Binding="{Binding Path= InsuranceTypeId}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

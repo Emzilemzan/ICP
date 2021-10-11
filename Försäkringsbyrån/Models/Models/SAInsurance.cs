@@ -14,10 +14,10 @@ namespace Models.Models
     /// </summary>
     /// 
     [Table("SOförsäkring", Schema = "dbo")]
-    public class SAInsurance : PersonInsurance
+    public class SAInsurance 
     {
         [Key]
-        public int SAID { get; set; } // SOID
+        public int SAID { get; set; } 
 
         public string SAInsuranceType { get; set; }
 

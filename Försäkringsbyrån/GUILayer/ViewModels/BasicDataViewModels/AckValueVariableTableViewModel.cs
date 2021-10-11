@@ -23,8 +23,8 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             AckValues = UpdateAV();
             Date = DateTime.Today;
             SAInsuranceTypes = new List<SAInsurance>() { new SAInsurance(1, "Sjuk- och olycksfallsförsäkring för barn"), new SAInsurance(2, "Sjuk- och olycksfallsförsäkring för vuxen") };
-            OptionalTypes = new List<OptionalType>() { new OptionalType(1, "Invaliditet vid olycksfall"), new OptionalType(2, "Höjning av livförsäkring"), new OptionalType(3, "Månadsersättning vid långvarig sjukskrivning") };
-            
+            //OptionalTypes = new List<OptionalType>() { new OptionalType(1, "Invaliditet vid olycksfall"), new OptionalType(2, "Höjning av livförsäkring"), new OptionalType(3, "Månadsersättning vid långvarig sjukskrivning") };
+
             //Ska Livförsäkring vara med här också? Se BaseAmountOptionViewModel
         }
 

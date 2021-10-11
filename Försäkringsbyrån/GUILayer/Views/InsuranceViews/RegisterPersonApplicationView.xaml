@@ -6,6 +6,10 @@
              xmlns:local="clr-namespace:GUILayer.Views.InsuranceViews" xmlns:insuranceviewmodels="clr-namespace:GUILayer.ViewModels.InsuranceViewModels" d:DataContext="{d:DesignInstance Type=insuranceviewmodels:RegisterPersonApplicationViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight=" 700" d:DesignWidth="900">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="VisibleIfTrueConverter" />
+    </UserControl.Resources>
+    
     <ScrollViewer Margin="10" CanContentScroll="False" VerticalScrollBarVisibility="Auto" >
         <Grid>
             <Grid.ColumnDefinitions>
@@ -115,14 +119,28 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Label Content=" Försäkringstyp: " FontSize="18" Margin="15,0,0,0" FontWeight="Bold"/>
-                    <ComboBox Grid.Row="1" Grid.Column="0" Margin="0,0,10,0" Width="200" ItemsSource="{Binding Types}" SelectedItem="{Binding InsuranceType}"/>
+                    <ComboBox Grid.Row="1" Grid.Column="0" Margin="0,0,10,0" Width="200" ItemsSource="{Binding SAInsuranceTypes}" SelectedItem="{Binding Type}">
+                    <ComboBox.Resources>
+                        <DataTemplate x:Key="DataTemplateSalesMen">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="{Binding Path= SAInsuranceType}" Grid.Column="1" />
+                            </Grid>
+                        </DataTemplate>
+                    </ComboBox.Resources>
+                    <ComboBox.ItemTemplate>
+                        <StaticResource ResourceKey="DataTemplateSalesMen"/>
+                    </ComboBox.ItemTemplate>
+                    </ComboBox>
                     <Label Content="Grundbelopp" FontSize="15" Grid.Row="2" Grid.Column="0" Margin="20,10,0,0"/>
                     <ComboBox Grid.Row="2" Grid.Column="1" Margin="0,0,120,0" Width="130" Height="30"/>
                     <Label Content="Övriga försäkringsuppgifter" Grid.Row="3" Grid.Column="0" FontSize="18" Margin="0,30,0,0" FontWeight="Bold"/>
                     <Label Content="Betalform:" FontSize="15" Grid.Row="4" Grid.Column="0"/>
-                    <ComboBox Grid.Row="4" Grid.Column="1" Text="" Margin="0,0,120,0" Width="130" Height="30"/>
+                    <ComboBox Grid.Row="4" Grid.Column="1" Text="" Margin="0,0,120,0" Width="130" Height="30" ItemsSource="{Binding PayMentForms}" SelectedItem="{Binding PaymentForm}"/>
                     <Label Content="Ankomstdatum" FontSize="15" Grid.Row="5" Grid.Column="0" Margin="0,10,0,0"/>
-                    <DatePicker Grid.Row="5" Grid.Column="1" Text="" Margin="0,10,120,0" Width="130" Height="30"/>
+                    <DatePicker Grid.Row="5" Grid.Column="1" Text="" Margin="0,10,120,0" Width="130" Height="30" SelectedDate="{Binding DeliveryDate}" />
                     <Label Content="Agenturnummer" FontSize="15" Grid.Row="6" Grid.Column="0" Margin="0,10,0,0"/>
                     <ComboBox Grid.Row="6" Grid.Column="1" Text="" Margin="0,10,120,0" Width="130" Height="30" ItemsSource="{Binding SalesMens}" SelectedItem="{Binding AgentNo}">
                         <ComboBox.Resources>
@@ -141,26 +159,88 @@
                     </ComboBox>
 
 
-
                     <Label Content="Tillval: " FontSize="18" FontWeight="Bold" Grid.Row="7" Grid.Column="0" Margin="0,30,0,0"/>
 
-                    <Label Content="Tillvals typ 1::" FontSize="15" Grid.Row="8" Grid.Column="0" Margin="0,10,0,0"/>
-                    <ComboBox Grid.Row="8" Grid.Column="1" Text="" Margin="0,10,120,0" Width="130" Height="30"/>
+                    <Label Content="Tillvals typ 1:" FontSize="15" Grid.Row="8" Grid.Column="0" Margin="0,10,0,0"/>
+                    <ComboBox Grid.Row="8" Grid.Column="1" Text="" Margin="0,10,120,0" Width="130" Height="30" ItemsSource="{Binding OptionalTypes}" SelectedItem="{Binding OptionalType, UpdateSourceTrigger=PropertyChanged}">
+                    <ComboBox.Resources>
+                        <DataTemplate x:Key="DataTemplateSalesMen">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="{Binding Path= OptionalName}" Grid.Column="1" />
+                            </Grid>
+                        </DataTemplate>
+                    </ComboBox.Resources>
+                    <ComboBox.ItemTemplate>
+                        <StaticResource ResourceKey="DataTemplateSalesMen"/>
+                    </ComboBox.ItemTemplate>
+                    </ComboBox>
+
+
+
                     <Label Content="*Grundbelopp:" FontSize="15" Grid.Row="9" Grid.Column="0" Margin="0,10,0,0"/>
                     <ComboBox Grid.Row="9" Grid.Column="1" Text="" Margin="0,10,120,0" Width="130" Height="30"/>
+                    <CheckBox x:Name="Optional1" Grid.Row="10" Content=" Ska tillval 2 göras? Klicka i mig!"/>
+
+                    <Label Content="Tillvals typ 2:" FontSize="15" Grid.Row="10" Grid.Column="0" Margin="0,30,0,0" Visibility="{Binding Path=IsChecked,ElementName=Optional1, Converter={StaticResource VisibleIfTrueConverter}}"
+/>
+                    <ComboBox Grid.Row="10" Grid.Column="1" Text="" Margin="0,30,120,0" Width="130" Height="30" ItemsSource="{Binding OptionalTypes1}" SelectedItem="{Binding OptionalType1, UpdateSourceTrigger=PropertyChanged}" Visibility="{Binding Path=IsChecked,ElementName=Optional1, Converter={StaticResource VisibleIfTrueConverter}}">
+                        <ComboBox.Resources>
+                        <DataTemplate x:Key="DataTemplateSalesMen">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding Path= OptionalName}" Grid.Column="1" />
+                            </Grid>
+                        </DataTemplate>
+                        </ComboBox.Resources>
+                        <ComboBox.ItemTemplate>
+                            <StaticResource ResourceKey="DataTemplateSalesMen"/>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+
+                   
+                    <Label Content="*Grundbelopp:" FontSize="15" Grid.Row="11" Grid.Column="0" Visibility="{Binding Path=IsChecked,ElementName=Optional1, Converter={StaticResource VisibleIfTrueConverter}}"
+/>
+                    <ComboBox Grid.Row="11" Grid.Column="1" Margin="0,10,120,0" Width="130" Height="30" Visibility="{Binding Path=IsChecked,ElementName=Optional1, Converter={StaticResource VisibleIfTrueConverter}}" 
+                              >
+
+                       
+
+                    </ComboBox>
 
 
-                    <Label Content="Tillvals typ 2:" FontSize="15" Grid.Row="10" Grid.Column="0" Margin="0,30,0,0"/>
-                    <ComboBox Grid.Row="10" Grid.Column="1" Text="" Margin="0,30,120,0" Width="130" Height="30" />
-                    <Label Content="*Grundbelopp:" FontSize="15" Grid.Row="11" Grid.Column="0"/>
-                    <ComboBox Grid.Row="11" Grid.Column="1" Margin="0,10,120,0" Width="130" Height="30"/>
+                    <CheckBox x:Name="Optional2" Grid.Row="12" Content=" Ska tillval 3 göras? Klicka i mig!" Visibility="{Binding Path=IsChecked,ElementName=Optional1, Converter={StaticResource VisibleIfTrueConverter}}"/>
+                    
+                    <Label Content="Tillvals typ 3: " FontSize="15" Grid.Row="12" Grid.Column="0" Margin="0,30,0,0" Visibility="{Binding Path=IsChecked,ElementName=Optional2, Converter={StaticResource VisibleIfTrueConverter}}"
+/>
+                    <ComboBox Grid.Row="12" Grid.Column="1" Margin="0,30,120,0" Height="30"  Visibility="{Binding Path=IsChecked,ElementName=Optional2, Converter={StaticResource VisibleIfTrueConverter}}" ItemsSource="{Binding OptionalTypes}" SelectedItem="{Binding OptionalType2}">
+                        <ComboBox.Resources>
+                        <DataTemplate x:Key="DataTemplateSalesMen">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="{Binding Path= OptionalName}" Grid.Column="1" />
+                            </Grid>
+                        </DataTemplate>
+                        </ComboBox.Resources>
+                        <ComboBox.ItemTemplate>
+                            <StaticResource ResourceKey="DataTemplateSalesMen"/>
+                        </ComboBox.ItemTemplate>
 
-                    <Label Content="Tillvals typ 3: " FontSize="15" Grid.Row="12" Grid.Column="0" Margin="0,30,0,0"/>
-                    <ComboBox Grid.Row="12" Grid.Column="1" Margin="0,30,120,0" Height="30"/>
-                    <Label Content="* Grundbelopp:" FontSize="15" Grid.Row="13" Margin="0,10,0,0"/>
-                    <ComboBox Grid.Row="13" Grid.Column="1" Margin="0,10,120,0" Height="30"/>
+                    </ComboBox>
 
-                    <Button Grid.Row="14" Grid.Column="1" Content="Registrera ansökan" Height="25" Margin="0,10,130,0"/>
+                   
+                    <Label Content="* Grundbelopp:" FontSize="15" Grid.Row="13" Margin="0,10,0,0" Visibility="{Binding Path=IsChecked,ElementName=Optional2, Converter={StaticResource VisibleIfTrueConverter}}"
+/>
+                    <ComboBox Grid.Row="13" Grid.Column="1" Margin="0,10,120,0" Height="30" Visibility="{Binding Path=IsChecked,ElementName=Optional2, Converter={StaticResource VisibleIfTrueConverter}}"
+/>
+
+                    <Button Grid.Row="14" Grid.Column="1" Content="Registrera ansökan" Height="25" Margin="0,10,130,0" Command="{Binding AddInsuranceBtn}"/>
 
                 </Grid>
             </StackPanel>

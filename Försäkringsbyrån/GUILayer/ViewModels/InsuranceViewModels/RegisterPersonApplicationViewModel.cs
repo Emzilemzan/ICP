@@ -1,10 +1,12 @@
-﻿using Models.Models;
+﻿using GUILayer.Commands;
+using Models.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace GUILayer.ViewModels.InsuranceViewModels
 {
@@ -14,10 +16,12 @@ namespace GUILayer.ViewModels.InsuranceViewModels
 
         public RegisterPersonApplicationViewModel()
         {
-            //Types = UpdateInsuranceTypes();
             SalesMens = UpdateSM();
             PersonTypes = new List<string>() {"Vuxen","Barn"};
-
+            PayMentForms = new List<string>() { "Helår", "Halvår", "Kvartal", "Månad"};
+            SAInsuranceTypes = new List<SAInsurance>() { new SAInsurance(1, "Sjuk- och olycksfallsförsäkring för barn"), new SAInsurance(2, "Sjuk- och olycksfallsförsäkring för vuxen") };
+            OptionalTypes = UpdateS();
+            OptionalTypes1 = UpdateOptionalType();
         }
 
         #region commands
@@ -29,31 +33,40 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             //add application. 
         }
 
-        #endregion 
+        private bool CanCreate() => true;
 
+        private ICommand _addInsuranceBtn;
+        public ICommand AddInsuranceBtn
+        {
+            get => _addInsuranceBtn ?? (_addInsuranceBtn = new RelayCommand(x => { RegisterApplication(); CanCreate(); }));
+        }
+
+
+        private ObservableCollection<OptionalType> UpdateOptionalType()
+        {
+            ObservableCollection<OptionalType> x = new ObservableCollection<OptionalType>();
+
+            foreach (var e in Context.IController.GetAllOPT())
+            {
+                
+                x?.Add(e);
+            }
+            if (OptionalType != null)
+            {
+                int index = OptionalTypes.IndexOf(OptionalType);
+            x.RemoveAt(index);
+
+            }
+
+            OptionalTypes1 = x;
+            return OptionalTypes1;
+        }
+
+
+
+        #endregion
 
         #region update of collections and lists. 
-        private ObservableCollection<InsuranceType> UpdateInsuranceTypes()
-        {
-            ObservableCollection<InsuranceType> x = new ObservableCollection<InsuranceType>();
-            foreach (var t in Context.IController.GetAllIT())
-            {
-                x?.Add(t);
-            }
-            Types = x;
-            return Types;
-        }
-
-        private InsuranceType _insuranceType;
-        public InsuranceType InsuranceType
-        {
-            get => _insuranceType;
-            set
-            {
-                _insuranceType = value;
-                OnPropertyChanged("InsuranceType");
-            }
-        }
 
         public ObservableCollection<SalesMen> UpdateSM()
         {
@@ -66,8 +79,25 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             return SalesMens;
         }
 
+        public ObservableCollection<OptionalType> UpdateS()
+        {
+            ObservableCollection<OptionalType> x = new ObservableCollection<OptionalType>();
+            foreach (var e in Context.IController.GetAllOPT())
+            {
+                x?.Add(e);
+            }
+            OptionalTypes = x;
+            return OptionalTypes;
+        }
+
+        public ObservableCollection<OptionalType> OptionalTypes1 { get; set; }
+        public ObservableCollection<OptionalType> OptionalTypes2 { get; set; }
+
         public List<string> PersonTypes { get; set; }
-        public ObservableCollection<InsuranceType> Types { get; set; }
+        public List<SAInsurance> SAInsuranceTypes { get; set; }
+
+        public ObservableCollection<OptionalType> OptionalTypes { get; set; }
+        public List<string> PayMentForms { get; set; }
         public ObservableCollection<SalesMen> SalesMens { get; set; }
         #endregion
         #region properties for person
@@ -253,16 +283,53 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         #endregion
 
         #region properties for insurance
-        private InsuranceTaker _taker;
-        public InsuranceTaker Taker
+
+        private InsuranceType _type;
+        public InsuranceType Type
         {
-            get => _taker;
+            get => _type;
             set
             {
-                _taker = value;
-                OnPropertyChanged("Taker");
+                _type = value;
+                OnPropertyChanged("Type");
+            }
+
+        }
+        private OptionalType _opType;
+        public OptionalType OptionalType
+        {
+            get => _opType;
+            set
+            {
+                _opType = value;
+                OnPropertyChanged("OptionalType");
+            }
+
+        }
+
+        private OptionalType _opType1;
+        public OptionalType OptionalType1
+        {
+            get => _opType1;
+            set
+            {
+                _opType1 = value;
+                OnPropertyChanged("OptionalType1");
+            }
+
+        }
+
+        private OptionalType _opType2;
+        public OptionalType OptionalType2
+        {
+            get => _opType2;
+            set
+            {
+                _opType2 = value;
+                OnPropertyChanged("OptionalType2");
             }
         }
+
         private SalesMen _an;
         public SalesMen AgentNo
         {
@@ -310,6 +377,28 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             {
                 _status= value;
                 OnPropertyChanged("InsuranceStatus");
+            }
+        }
+
+        private string _payMent;
+        public string PaymentForm
+        {
+            get => _payMent;
+            set
+            {
+                _payMent = value;
+                OnPropertyChanged("PaymentForm");
+            }
+        }
+
+        private DateTime _dd;
+        public DateTime DeliveryDate
+        {
+            get => _dd;
+            set
+            {
+                _dd = value;
+                OnPropertyChanged("DeliveryDate");
             }
         }
         #endregion

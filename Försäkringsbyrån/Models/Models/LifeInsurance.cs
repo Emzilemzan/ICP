@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Models.Models
 {
     [Table("Livförsäkring", Schema = "dbo")]
-    public class LifeInsurance : PersonInsurance
+    public class LifeInsurance
     {
         [Key]
         public int LifeID { get; set; } 

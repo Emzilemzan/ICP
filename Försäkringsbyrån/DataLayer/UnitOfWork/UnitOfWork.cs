@@ -16,7 +16,6 @@ namespace DataLayer.UnitOfWork
 
         public IEmployeeRepository Employees { get; }
         public IInsuranceRepository Insurances { get; }
-        public IInsuranceTakerRepository InsuranceTakers { get; }
         public IInsuredPersonRepository InsuredPersons { get; }
         public IPersonRepository Persons { get; }
         public ICompanyRepository Companies { get; }
@@ -38,7 +37,6 @@ namespace DataLayer.UnitOfWork
             _context = new ApplicationContext();
             Employees = new EmployeeRepository(_context);
             Insurances = new InsuranceRepository(_context);
-            InsuranceTakers = new InsuranceTakerRepository(_context); 
             InsuredPersons = new InsuredPersonRepository(_context);
             Persons = new PersonRepository(_context);
             Companies = new CompanyRepository(_context);

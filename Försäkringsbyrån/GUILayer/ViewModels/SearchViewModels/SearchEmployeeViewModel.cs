@@ -16,21 +16,20 @@ namespace GUILayer.ViewModels.SearchViewModels
 
         public SearchEmployeeViewModel()
         {
-            Employees = UpdateEmployee();
-            EmployeeGrid = CollectionViewSource.GetDefaultView(Employees);
-            EmployeeGrid.Filter = new Predicate<object>(o => Filter(o as Employee));
-        } 
-
+            SalesMens = UpdateSM();
+            EmployeeGrid = CollectionViewSource.GetDefaultView(SalesMens);
+            EmployeeGrid.Filter = new Predicate<object>(o => Filter(o as SalesMen));
+        }
         #region methods
-        public ObservableCollection<SalesMen> UpdateEmployee()
+        public ObservableCollection<SalesMen> UpdateSM()
         {
             ObservableCollection<SalesMen> x = new ObservableCollection<SalesMen>();
-            foreach (var e in Context.EController.GetAllEmployees())
+            foreach (var e in Context.SMController.GetAllSalesMen())
             {
                 x?.Add(e);
             }
-            Employees = x;
-            return Employees;
+            SalesMens = x;
+            return SalesMens;
         }
         #endregion
 
@@ -45,16 +44,15 @@ namespace GUILayer.ViewModels.SearchViewModels
         private bool Filter(SalesMen employee)
         {
             return SearchInput == null
-                || employee.EmploymentNo.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
-                || employee.Firstname.IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
-                || employee.Lastname.IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
-                || employee.StreetAddress.IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
-                || employee.City.IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
-                || employee.Postalcode.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
-                || employee.FormOfEmployment.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
-                || employee.TaxRate.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1;
-                
+                 || employee.AgentNumber.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
+                 || employee.Firstname.IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
+                 || employee.Lastname.IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
+                 || employee.StreetAddress.IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
+                 || employee.City.IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
+                 || employee.Postalcode.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
+                 || employee.TaxRate.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1;
         }
+
         private string _searchInput;
 
         public string SearchInput

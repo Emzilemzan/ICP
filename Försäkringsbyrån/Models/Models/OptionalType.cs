@@ -19,11 +19,11 @@ namespace Models.Models
         public int OptionalTypeId { get; set; }
         public string OptionalName { get; set; }
 
-        public OptionalType(int id, string name)
-        {
-            this.OptionalTypeId = id;
-            this.OptionalName = name;
-        }
+        //public OptionalType(int id, string name)
+        //{
+        //    this.OptionalTypeId = id;
+        //    this.OptionalName = name;
+        //}
 
     } 
 }

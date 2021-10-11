@@ -65,7 +65,7 @@ namespace BussinessLayer
             VacationPay x = BusinessController.Instance.Context.VPays.GetById(id);
             if (x != null)
             {
-                AddVPay(a);
+                RemoveVPay(a);
                 MessageBox.Show("Grunddatan togs bort");
             }
             else

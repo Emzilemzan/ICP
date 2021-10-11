@@ -13,8 +13,8 @@ namespace BussinessLayer
     public class InsuredPersonController
     {
         #region InsurancePerson that belongs to a InsuranceTaker. 
-        public List<InsuredPerson> GetInsuranceTakerIP(InsuranceTaker insuranceTaker) => insuranceTaker.InsuredPersons?.OrderByDescending(i => i.InsuredID).ToList();
-        public List<InsuredPerson> GetInsuranceTakerIPS(InsuranceTaker insuranceTaker)
+        public List<InsuredPerson> GetInsuranceTakerIP(Person insuranceTaker) => insuranceTaker.InsuredPersons?.OrderByDescending(i => i.InsuredID).ToList();
+        public List<InsuredPerson> GetInsuranceTakerIPS(Person insuranceTaker)
         {
             List<InsuredPerson> insuredPeople = new List<InsuredPerson>();
             GetInsuranceTakerIP(insuranceTaker)?.ForEach(p => insuredPeople.Add(p));
@@ -22,14 +22,16 @@ namespace BussinessLayer
         }
         public void AddInsuredPerson(InsuredPerson insuredPerson)
         {
-            insuredPerson.Taker.InsuredPersons.Add(insuredPerson);
+            insuredPerson.PersonTaker.InsuredPersons.Add(insuredPerson);
             BusinessController.Instance.Save();
         }
         public void RemoveInsuredPerson(InsuredPerson insuredPerson)
         {
-            insuredPerson.Taker.InsuredPersons.Remove(insuredPerson);
+            insuredPerson.PersonTaker.InsuredPersons.Remove(insuredPerson);
             BusinessController.Instance.Save();
         }
+
+
         #endregion
 
     }
