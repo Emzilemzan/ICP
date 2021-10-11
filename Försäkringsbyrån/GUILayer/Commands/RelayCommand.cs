@@ -86,9 +86,7 @@ namespace GUILayer.Commands
 
         private event EventHandler CanExecuteChangedInternal;
 
-        public void RaiseCanExecuteChanged()
-        {
-            CanExecuteChangedInternal.Raise(this);
-        }
+       
+        public void RaiseCanExecuteChanged() => CanExecuteChangedInternal?.Invoke(this, EventArgs.Empty);
     }
 }

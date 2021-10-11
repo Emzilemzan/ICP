@@ -50,7 +50,50 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
                 MainViewModel.Instance.SelectedViewModel = HomeViewModel.Instance;
             }
         }
+        private ICommand _addUserBtn;
+        public ICommand AUABtn
+        {
+            get => _addUserBtn ?? (_addUserBtn = new RelayCommand(x => { AddUserAccessView(); }));
+        }
 
+        private void AddUserAccessView()
+        {
+            if (MainViewModel.Instance.CurrentTool != "AddUserAccess")
+            {
+                MainViewModel.Instance.ToolsVisibility = Visibility.Visible;
+                MainViewModel.Instance.Tools = AddUserAccessViewModel.Instance;
+                MainViewModel.Instance.CurrentTool = "AddUserAccess";
+                MainViewModel.Instance.SelectedViewModel = null;
+            }
+            else
+            {
+                MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
+                MainViewModel.Instance.CurrentTool = "";
+                MainViewModel.Instance.SelectedViewModel = HomeViewModel.Instance;
+            }
+        }
+        private ICommand _manageUserBtn;
+        public ICommand HBBtn
+        {
+            get => _manageUserBtn ?? (_manageUserBtn = new RelayCommand(x => { ManageUserView(); }));
+        }
+
+        private void ManageUserView()
+        {
+            if (MainViewModel.Instance.CurrentTool != "ManageUser")
+            {
+                MainViewModel.Instance.ToolsVisibility = Visibility.Visible;
+                MainViewModel.Instance.Tools = ManageUserAccessViewModel.Instance;
+                MainViewModel.Instance.CurrentTool = "ManageUser";
+                MainViewModel.Instance.SelectedViewModel = null;
+            }
+            else
+            {
+                MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
+                MainViewModel.Instance.CurrentTool = "";
+                MainViewModel.Instance.SelectedViewModel = HomeViewModel.Instance;
+            }
+        }
         public void AddEmployeeView()
         {
             if (MainViewModel.Instance.CurrentTool != "AddEmployee")

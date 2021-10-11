@@ -18,10 +18,14 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
-
                 </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
                 <Button  Grid.Column="0"
-                         Content="Lägg till anställd"
+                         Grid.Row="0"
+                         Content="Lägg till säljare"
                          FontSize="20"
                          Height="106"
                          Background="Transparent" 
@@ -32,11 +36,33 @@
 
                 <Button  Grid.Column="1"
                          FontSize="20"
+                         Grid.Row="0"
                          Height="106"
-                         Content="Hantera anställd"
+                         Content="Hantera säljare"
                          Background="Transparent" 
                          Margin="52,0,108,0"
                          Command="{Binding HEVBtn}"
+                         Style="{DynamicResource OtherButtonStyle}" Width="Auto">
+                </Button>
+                <Button  Grid.Column="0"
+                         Grid.Row="1"
+                         Content="Lägg till behörig"
+                         FontSize="20"
+                         Height="106"
+                         Background="Transparent" 
+                         Margin="98,0,52,0"
+                         Command="{Binding AUABtn}"
+                         Style="{DynamicResource OtherButtonStyle}" Width="Auto">
+                </Button>
+
+                <Button  Grid.Column="1"
+                         FontSize="20"
+                         Grid.Row="1"
+                         Height="106"
+                         Content="Hantera behörig"
+                         Background="Transparent" 
+                         Margin="52,0,108,0"
+                         Command="{Binding HBBtn}"
                          Style="{DynamicResource OtherButtonStyle}" Width="Auto">
                 </Button>
             </Grid>

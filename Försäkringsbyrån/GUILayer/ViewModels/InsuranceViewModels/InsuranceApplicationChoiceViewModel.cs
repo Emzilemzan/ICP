@@ -31,7 +31,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         public bool CanCreate() => true;
         private static void PersonApplicationHome()
         {
-            MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
+            MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed; 
             MainViewModel.Instance.CurrentTool = "";
             MainViewModel.Instance.SelectedViewModel = RegisterPersonApplicationViewModel.Instance;
         }
@@ -42,7 +42,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         private ICommand opic_Btn;
         public ICommand OPIC_Btn
         {
-            get => opic_Btn ?? (opic_Btn = new RelayCommand(x => { OPICAHome(); CanCreate(); }));
+            get => opic_Btn ?? (opic_Btn = new RelayCommand(x => { OPICAHome(); CanCreate(); })); 
         }
 
         public static void OPICAHome()

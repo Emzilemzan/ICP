@@ -20,6 +20,8 @@ namespace DataLayer.UnitOfWork
         public IInsuredPersonRepository InsuredPersons { get; }
         public IPersonRepository Persons { get; }
         public ICompanyRepository Companies { get; }
+
+        public IAccessRepository Accesses { get; }
        
         public UnitOfWork()
         {
@@ -30,6 +32,7 @@ namespace DataLayer.UnitOfWork
             InsuredPersons = new InsuredPersonRepository(_context);
             Persons = new PersonRepository(_context);
             Companies = new CompanyRepository(_context);
+            Accesses = new AccessRepository(_context);
             Init();
         }
         public void Init() => _context.Reset();
