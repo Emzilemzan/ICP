@@ -79,7 +79,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             SalesMens = x;
             return SalesMens;
         }
-        
+
         public ObservableCollection<OptionalType> UpdateS()
         {
             ObservableCollection<OptionalType> x = new ObservableCollection<OptionalType>();
