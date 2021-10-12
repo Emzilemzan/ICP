@@ -46,8 +46,7 @@
 
                 <Label Content="Grunduppgifter" FontWeight="Bold" Grid.Row="1" Grid.Column="0" FontSize="18"/>
                 <Label Grid.Row="2" Grid.Column="0" Content="Agenturnummer:"  />
-                <TextBox Name="EmploymentNoTb" Grid.Row="2" Height="20" Margin="128,0,61,3" Text="{Binding Path = AgentNumber, UpdateSourceTrigger=PropertyChanged,
-                        ValidatesOnExceptions=True}"  VerticalAlignment="Bottom"  >
+                <TextBox Name="EmploymentNoTb" Grid.Row="2" Height="20" Margin="128,0,61,3" Text="{Binding Path = AgentNumber, UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberValidationTextBox"  VerticalAlignment="Bottom"  >
                 </TextBox>
                 <Label Grid.Row="3" Grid.Column="0" Content="Förnamn:"/>
                 <TextBox Grid.Row="3" Height="20" Text="{Binding Path= Firstname}" Margin="128,3,61,3"/>
@@ -56,13 +55,11 @@
                 <Label Grid.Row="5" Grid.Column="0" Content="Gatuadress:"/>
                 <TextBox Grid.Row="5" Height="20" Text="{Binding Path= StreetAddress}" Margin="128,3,61,3"/>
                 <Label Grid.Row="6" Grid.Column="0" Content="Postnummer:"/>
-                <TextBox Grid.Row="6" Height="20" Text="{Binding Path= Postalcode, UpdateSourceTrigger=PropertyChanged,
-                        ValidatesOnExceptions=True}" Margin="128,3,61,3"/>
+                <TextBox Grid.Row="6" Height="20" Text="{Binding Path= Postalcode, UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="PostalCodeValidationTextBox" Margin="128,3,61,3"/>
                 <Label Grid.Row="7" Grid.Column="0" Content="Postort:"/>
                 <TextBox Grid.Row="7" Height="20" Text="{Binding Path= City}" Margin="128,3,61,3"/>
                 <Label Grid.Row="8" Grid.Column="0" Content="Skattesats(%):"/>
-                <TextBox Grid.Row="8" Height="20" Text="{Binding Path= TaxRate, UpdateSourceTrigger=PropertyChanged,
-                        ValidatesOnExceptions=True}" Margin="128,3,61,3"/>
+                <TextBox Grid.Row="8" Height="20" Text="{Binding Path= TaxRate, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}" Margin="128,3,61,3"/>
 
             </Grid>
 

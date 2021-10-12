@@ -43,8 +43,8 @@ namespace GUILayer.ViewModels.SearchViewModels
         {
             return SearchInput == null
                 || application.SerialNumber.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
-                || application.InsuredID.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
-                || application.InsuranceTypeId.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1;
+                || application.InsuredID.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1;
+                
 
         }
         private string _searchInput;

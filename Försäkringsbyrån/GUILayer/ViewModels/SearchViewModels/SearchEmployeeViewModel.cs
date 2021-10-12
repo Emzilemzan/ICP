@@ -44,15 +44,15 @@ namespace GUILayer.ViewModels.SearchViewModels
         private bool Filter(SalesMen employee)
         {
             return SearchInput == null
-                || employee.AgentNumber.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
-                || employee.Firstname.IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
-                || employee.Lastname.IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
-                || employee.StreetAddress.IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
-                || employee.City.IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
-                || employee.Postalcode.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
-                || employee.TaxRate.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1;
-
+                 || employee.AgentNumber.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
+                 || employee.Firstname.IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
+                 || employee.Lastname.IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
+                 || employee.StreetAddress.IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
+                 || employee.City.IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
+                 || employee.Postalcode.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
+                 || employee.TaxRate.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1;
         }
+
         private string _searchInput;
 
         public string SearchInput
@@ -69,7 +69,17 @@ namespace GUILayer.ViewModels.SearchViewModels
 
         #region Properties 
         public ObservableCollection<SalesMen> SalesMens { get; set; }
-       
+
+        private SalesMen _salesMen;
+        public SalesMen SelectedPerson
+        {
+            get => _salesMen;
+            set
+            {
+                _salesMen = value;
+                OnPropertyChanged("SelectedPerson");
+            }
+        }
         
         #endregion
     }

@@ -41,7 +41,7 @@
                             FontSize="15"
                             Height="106"
                             Background="Transparent"
-                         Command="{Binding OPIC_Btn}"
+                         Command="{Binding OPIP_Btn}"
                          Style="{DynamicResource OtherButtonStyle}" Width="Auto">
                     <TextBlock Width="194" Height="43" RenderTransformOrigin="0.579,0.889">Övrig personförsäkring<LineBreak/>för vuxen - Person</TextBlock>
                 </Button>
@@ -49,7 +49,7 @@
                             FontSize="15"
                             Height="106"
                             Background="Transparent" Margin="9.333,10,10,10"
-                            Command="{Binding OPIP_Btn}"
+                            Command="{Binding OPIC_Btn}"
                          Style="{DynamicResource OtherButtonStyle}" Width="Auto">
                     <TextBlock>Övrig personförsäkring<LineBreak/>för vuxen - Företag</TextBlock>
                 </Button>

@@ -12,6 +12,7 @@ using GUILayer.ViewModels.EmployeeManagementViewModels;
 using GUILayer.ViewModels.InsuranceViewModels;
 using GUILayer.ViewModels.SearchViewModels;
 using GUILayer.ViewModels.StatisticsAndProspectusViewModels;
+using Models.Models;
 
 namespace GUILayer.ViewModels
 {
@@ -26,6 +27,7 @@ namespace GUILayer.ViewModels
         {
             _selectedViewModel = LogInViewModel.Instance;
             _toolsVisibility = Visibility.Hidden;
+            CreateOptionalTypes();
         }
         #region commands
         private ICommand _homeBtn;
@@ -243,6 +245,19 @@ namespace GUILayer.ViewModels
                 _selectedViewModel = value;
 
                 OnPropertyChanged("SelectedViewModel");
+            }
+        }
+        private void CreateOptionalTypes()
+        {
+            List<OptionalType> OptionList = new List<OptionalType>();
+
+
+            OptionList.Add(new OptionalType { OptionalTypeId = 1, OptionalName = "Invaliditet vid olycksfall" });
+            OptionList.Add(new OptionalType { OptionalTypeId = 2, OptionalName = "Höjning av livförsäkring" });
+            OptionList.Add(new OptionalType { OptionalTypeId = 3, OptionalName = "Månadsersättning vid långvarig sjukskrivning" });
+            foreach (var item in OptionList)
+            {
+                Context.IController.AddOptionalTypes(item);
             }
         }
     }

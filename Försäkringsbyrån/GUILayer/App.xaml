@@ -25,7 +25,7 @@
             <v:HomeView/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type svm:SearchValueViewModel}">
-            <sv:SearchValueView/>
+            <sv:SearchValueView/> 
         </DataTemplate>
         <DataTemplate DataType="{x:Type svm:SearchEmployeeViewModel}">
             <sv:SearchEmployeeView/>
@@ -91,7 +91,19 @@
             <emv:ManageUserAccessView/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type bdvm:PermissionValueTableViewModel}">
-            <bdv:PermissionValueTableView></bdv:PermissionValueTableView>
+            <bdv:PermissionValueTableView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type bdvm:VacationPayViewModel}">
+            <bdv:VacationPayView/>
+        </DataTemplate>
+        <DataTemplate DataType="{ x:Type spvm:GetandexportSalesstatisticsViewModel}">
+            <spv:GetandexportSalesstatisticsView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type spvm:GetandexportCustomerLeadsViewModel}">
+            <spv:GetandexportCustomerLeads/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type spvm:GetTrendstatitcsViewModel}">
+            <spv:GetTrendstatitics/>
         </DataTemplate>
         <!--#region Exit Button Style-->
         <Style x:Key="ExitBtnStyle" TargetType="{x:Type Button}">

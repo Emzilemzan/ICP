@@ -24,5 +24,6 @@ namespace GUILayer.Views.StatisticsAndProspectusViews
         {
             InitializeComponent();
         }
+
     }
 }

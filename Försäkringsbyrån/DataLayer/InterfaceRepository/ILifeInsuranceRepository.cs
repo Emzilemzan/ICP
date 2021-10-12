@@ -5,9 +5,9 @@ using Models.Models;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataLayer.GenericRepository
+namespace DataLayer.InterfaceRepository
 {
-    public interface IAccessRepository : IGenericRepository<UserAccess>
+    public interface ILifeInsuranceRepository: IGenericRepository<LifeInsurance>
     {
     }
 }

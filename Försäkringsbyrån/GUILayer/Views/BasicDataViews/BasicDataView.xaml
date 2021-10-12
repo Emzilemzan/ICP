@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:GUILayer.Views.BasicDataViews"
+             xmlns:local="clr-namespace:GUILayer.Views.BasicDataViews" xmlns:basicdataviewmodels="clr-namespace:GUILayer.ViewModels.BasicDataViewModels" d:DataContext="{d:DesignInstance Type=basicdataviewmodels:BasicDataViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -25,7 +25,7 @@
                             FontSize="20"
                             Height="106"
                             Background="Transparent"
-                         Command="{Binding PermissionValueTable_Btn}"
+                         Command="{Binding CommissionShare_Btn}"
                          Style="{DynamicResource OtherButtonStyle}" Width="Auto">
                     <TextBlock>Provisionsandels-<LineBreak/>tabell</TextBlock>
                 </Button>
@@ -53,7 +53,7 @@
                          Margin="41,0,31.667,0"
                          Command="{Binding AmountOption_Btn}"
                          Style="{DynamicResource OtherButtonStyle}" Width="Auto">
-                    <TextBlock>Grundbelopp<LineBreak/>(Tillvalstyp)</TextBlock>
+                    <TextBlock>Grundbelopp<LineBreak/>(Tillvalstyp<LineBreak/>/Livförsäkring)</TextBlock>
                 </Button>
                 <Button     Grid.Column="1"
                             FontSize="20"
@@ -62,7 +62,7 @@
                             Margin="10.333,0"
                             Command="{Binding AckvaluevariableTable_Btn}" 
                             Style="{DynamicResource OtherButtonStyle}" Width="Auto">
-                    <TextBlock Width="216" Height="66">Ack.Värde Variabel<LineBreak/>(Försäkrings-/tillvalstyp)</TextBlock>
+                    <TextBlock Width="206" Height="86">Ack.Värde Variabel<LineBreak/>(Livförsäkring<LineBreak/>/tillvalstyp)</TextBlock>
                 </Button>
                 <Button  Grid.Column="2"
                          FontSize="20"
@@ -70,7 +70,7 @@
                          Content="Semesterersättning"
                          Background="Transparent" 
                          Margin="22.667,0,26,0"
-                         Command=""
+                         Command="{Binding VPayBtn}"
                          Style="{DynamicResource OtherButtonStyle}" Width="Auto">
                 </Button>
             </Grid>

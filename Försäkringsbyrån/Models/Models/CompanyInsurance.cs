@@ -10,16 +10,11 @@ using System.ComponentModel;
 namespace Models.Models
 {
     [Table("Företagsförsäkring", Schema = "dbo")]
-    public class CompanyInsurance : InsuranceType
+    public class CompanyInsurance 
     {
         [Key]
         public int FFId { get; set; } 
-        public DateTime StartDate { get; set; }
-        public int Premie { get; set; }
-        public string FFName { get; set; }
-        public DateTime EndDate { get; set; }
-        public string Notes { get; set; }
-        public CompanyInsuranceType CIType { get; set; }
+        public string COIName { get; set; }
         
     }
  

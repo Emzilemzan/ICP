@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataLayer.GenericRepository
+namespace DataLayer.InterfaceRepository
 {
     /// <summary>
     /// 
@@ -27,7 +27,7 @@ namespace DataLayer.GenericRepository
         void AddRange(IEnumerable<TEntity> entities);
         void Remove(TEntity entity);
         void RemoveRange(IEnumerable<TEntity> entities);
-        void Update(TEntity entity);
+        void Update(TEntity entity); 
 
     }
 }

@@ -1,4 +1,4 @@
-﻿using DataLayer.GenericRepository;
+﻿using DataLayer.InterfaceRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,11 +14,22 @@ namespace DataLayer.UnitOfWork
     {
         IEmployeeRepository Employees { get; }
         IInsuranceRepository Insurances { get; }
-        IInsuranceTakerRepository InsuranceTakers { get; }
         IInsuredPersonRepository InsuredPersons { get; }
         ICompanyRepository Companies { get; }
         IPersonRepository Persons { get; }
         IAccessRepository Accesses { get; }
+        IVacationPayRepository VPays { get; }
+        IBaseAmountTableRepository Tables { get; }
+        IBaseAmountRepository BaseAmounts { get; }
+        IOptionalTypeRepository OptionalTypes { get; }
+        IAckValueVariableRepository AckValues { get; }
+        ICommissionRepository CommissionShares { get; }
+        ILifeInsuranceRepository LifeInsurances { get; }
+        IOtherPersonInsuranceRepository OPInsurances { get; }
+        ICompanyInsuranceRepository CIInsurances { get; }
+        IInsuranceTypeRepository InsuranceTypes { get; }
+
+        ISAInsuranceRepository SAInsurances { get; }
         int Complete();
 
     }
