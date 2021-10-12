@@ -20,7 +20,8 @@ namespace GUILayer.ViewModels.BasicDataViewModels
         {
             Tabels = UpdateTabels();
             Date = DateTime.Today;
-            
+            SAInsuranceTypes = UpdateSA();
+            SAID = SAInsuranceTypes[0];
         }
         #region commands
         private ICommand _addBtn;
@@ -108,6 +109,21 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             Tabels = x;
             return Tabels;
         }
+
+        public ObservableCollection<SAInsurance> UpdateSA()
+        {
+            ObservableCollection<SAInsurance> x = new ObservableCollection<SAInsurance>();
+
+            x.Add(new SAInsurance() { SAID= 0, SAInsuranceType = "inget" });
+            foreach (var e in Context.IController.GetAllSAI())
+            {
+                x?.Add(e);
+            }
+
+            SAInsuranceTypes = x;
+
+            return SAInsuranceTypes;
+        }
         #region Properties
 
         public ObservableCollection<BaseAmountTabel> Tabels { get; set; }
@@ -174,7 +190,7 @@ namespace GUILayer.ViewModels.BasicDataViewModels
         }
 
 
-        public List<SAInsurance> SAInsuranceTypes { get; set; }
+        public ObservableCollection<SAInsurance> SAInsuranceTypes { get; set; }
 
         #endregion
     }

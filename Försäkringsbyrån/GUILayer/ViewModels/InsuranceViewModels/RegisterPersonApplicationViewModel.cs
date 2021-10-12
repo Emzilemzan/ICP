@@ -22,6 +22,8 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             OptionalTypes = UpdateS();
             OptionalTypes1 = UpdateOptionalType();
             OptionalType = OptionalTypes[0];
+            SAInsuranceTypes = UpdateSA();
+            SAIType = SAInsuranceTypes[0];
         }
 
         #region commands
@@ -79,7 +81,24 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             SalesMens = x;
             return SalesMens;
         }
-        
+
+        public ObservableCollection<SAInsurance> UpdateSA()
+        {
+            ObservableCollection<SAInsurance> x = new ObservableCollection<SAInsurance>();
+
+            x.Add(new SAInsurance() { SAID = 0, SAInsuranceType = "inget" });
+            foreach (var e in Context.IController.GetAllSAI())
+            {
+                x?.Add(e);
+            }
+
+            SAInsuranceTypes = x;
+
+            return SAInsuranceTypes;
+        }
+
+
+
         public ObservableCollection<OptionalType> UpdateS()
         {
             ObservableCollection<OptionalType> x = new ObservableCollection<OptionalType>();
@@ -92,7 +111,6 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             OptionalTypes = x;
             OnPropertyChanged("OptionalTypes1");
             return OptionalTypes;
-
         }
 
         // Second list
@@ -102,7 +120,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         public ObservableCollection<OptionalType> OptionalTypes2 { get; set; }
 
         public List<string> PersonTypes { get; set; }
-        public List<SAInsurance> SAInsuranceTypes { get; set; }
+        public ObservableCollection<SAInsurance> SAInsuranceTypes { get; set; }
 
         public ObservableCollection<OptionalType> OptionalTypes { get; set; } 
         public List<string> PayMentForms { get; set; }
@@ -292,17 +310,18 @@ namespace GUILayer.ViewModels.InsuranceViewModels
 
         #region properties for insurance
 
-        private InsuranceType _type;
-        public InsuranceType Type
+        private SAInsurance _Stype;
+        public SAInsurance SAIType
         {
-            get => _type;
+            get => _Stype;
             set
             {
-                _type = value;
-                OnPropertyChanged("Type");
+                _Stype = value;
+                OnPropertyChanged("SAIType");
             }
 
         }
+
         private OptionalType _opType;
         public OptionalType OptionalType
         {
