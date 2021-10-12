@@ -31,6 +31,20 @@ namespace BussinessLayer
             BusinessController.Instance.Save();
         }
 
+         public void CheckExistingIP(string id, InsuredPerson p)
+        {
+            InsuredPerson x = BusinessController.Instance.Context.InsuredPersons.GetById(id);
+            if (x == null)
+            {
+                AddInsuredPerson(p);
+            }
+           
+        }
+        public void Edit(Person sm)
+        {
+            BusinessController.Instance.Context.Persons.Update(sm);
+            BusinessController.Instance.Save();
+        }
 
         #endregion
 

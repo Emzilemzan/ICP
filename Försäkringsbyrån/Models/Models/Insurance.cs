@@ -20,12 +20,14 @@ namespace Models.Models
         public Status InsuranceStatus { get; set; }
         public ICollection<OptionalType> OptionalTypes { get; set; }
         public DateTime DeliveryDate { get; set; }
-        public string PaymentForm { get; set; }
+        public string PaymentForm { get; set; } 
         public string Table { get; set; }
-        public int Premie { get; set; }
+        public int Premie { get; set; } 
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public string Notes { get; set; }
+        public int BaseAmount { get; set; }
+        public int Ackvalue { get; set; }
         public string CompanyInsuranceType { get; set; }
 
 
