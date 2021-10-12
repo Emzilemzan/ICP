@@ -1,4 +1,5 @@
 ﻿using DataLayer.GenericRepository;
+using DataLayer.InterfaceRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace DataLayer.UnitOfWork
         public IAccessRepository Accesses { get; }
 
         public IBaseAmountTableRepository Tables { get; }
-
+        public ISAInsuranceRepository SAInsurances { get; }
         public IVacationPayRepository VPays { get; }
         public IBaseAmountRepository BaseAmounts { get; }
         public IOptionalTypeRepository OptionalTypes { get; }
@@ -31,7 +32,12 @@ namespace DataLayer.UnitOfWork
         public ICommissionRepository CommissionShares { get; }
 
         public IInsuranceTypeRepository InsuranceTypes { get; }
-       
+
+        public ILifeInsuranceRepository LifeInsurances { get; }
+        public IOtherPersonInsuranceRepository OPInsurances { get; }
+
+        public ICompanyInsuranceRepository CIInsurances { get; }
+
         public UnitOfWork()
         {
             _context = new ApplicationContext();
@@ -48,6 +54,10 @@ namespace DataLayer.UnitOfWork
             AckValues = new AckValueVariableRepository(_context);
             CommissionShares = new CommissionRepository(_context);
             InsuranceTypes = new InsuranceTypeRepository(_context);
+            SAInsurances = new SAInsuranceRepository(_context);
+            LifeInsurances = new LifeInsuranceRepository(_context);
+            OPInsurances = new OtherPersonInsuranceRepository(_context);
+            CIInsurances = new CompanyInsuranceRepository(_context);
             Init();
         }
         public void Init() => _context.Reset();

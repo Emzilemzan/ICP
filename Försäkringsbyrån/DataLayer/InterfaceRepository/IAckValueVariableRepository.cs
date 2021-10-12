@@ -5,10 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataLayer.GenericRepository
+namespace DataLayer.InterfaceRepository
 {
-   public interface IBaseAmountRepository: IGenericRepository<BaseAmount>
+    public interface IAckValueVariableRepository: IGenericRepository<AckValueVariable>
     {
-
     }
 }

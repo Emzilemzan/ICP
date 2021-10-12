@@ -5,9 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataLayer.GenericRepository
+namespace DataLayer.InterfaceRepository
 {
-    public interface IVacationPayRepository: IGenericRepository<VacationPay>
+    public interface IInsuranceRepository : IGenericRepository<Insurance>
     {
+
+
     }
 }

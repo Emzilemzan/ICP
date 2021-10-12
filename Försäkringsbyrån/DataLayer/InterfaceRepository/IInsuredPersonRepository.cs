@@ -5,11 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataLayer.GenericRepository
+namespace DataLayer.InterfaceRepository
 {
-    public interface IInsuranceRepository : IGenericRepository<Insurance>
+    public interface IInsuredPersonRepository : IGenericRepository<InsuredPerson>
     {
-
-
     }
 }
