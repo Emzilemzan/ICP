@@ -89,7 +89,7 @@
                     <TextBox Grid.Row="16" Grid.Column="1" Text="{Binding LastName}"/>
                     <Label Grid.Column="0" Grid.Row="17" Content="*Förnamn:" FontSize="15"/>
                     <TextBox Grid.Row="17" Grid.Column="1" Text="{Binding FirstName}"/>
-                    <Label Content="Persontyp:" FontSize="15" Grid.Row="18" Grid.Column="0" Margin="0,10,0,0"/>
+                    <Label Content="*Persontyp:" FontSize="15" Grid.Row="18" Grid.Column="0" Margin="0,10,0,0"/>
                     <ComboBox Grid.Row="18" Grid.Column="1" Text="" Margin="0,10,120,0" Width="130" Height="30" ItemsSource="{Binding PersonTypes}" SelectedItem="{Binding PersonType}"/>
 
                 </Grid>
@@ -119,7 +119,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Label Content=" Försäkringstyp: " FontSize="18" Margin="15,0,0,0" FontWeight="Bold"/>
-                    <ComboBox Grid.Row="1" Grid.Column="0" Margin="0,0,10,0" Width="200" ItemsSource="{Binding SAInsuranceTypes}" SelectedItem="{Binding SAIType}">
+                    <ComboBox Grid.Row="1" Grid.Column="0" Margin="0,0,10,0" Width="200" ItemsSource="{Binding SAInsuranceTypes}" SelectedItem="{Binding SAIType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
                     <ComboBox.Resources>
                         <DataTemplate x:Key="DataTemplateSalesMen">
                             <Grid>
@@ -134,14 +134,28 @@
                         <StaticResource ResourceKey="DataTemplateSalesMen"/>
                     </ComboBox.ItemTemplate>
                     </ComboBox>
-                    <Label Content="Grundbelopp" FontSize="15" Grid.Row="2" Grid.Column="0" Margin="20,10,0,0"/>
-                    <ComboBox Grid.Row="2" Grid.Column="1" Margin="0,0,120,0" Width="130" Height="30"/>
+                    <Label Content="*Grundbelopp" FontSize="15" Grid.Row="2" Grid.Column="0" Margin="20,10,0,0"/>
+                    <ComboBox Grid.Row="2" Grid.Column="1" Margin="0,0,120,0" Width="130" Height="30" ItemsSource="{Binding BaseAmountTabell, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedItem="{Binding BaseTabel, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                        <ComboBox.Resources>
+                            <DataTemplate x:Key="DataTemplateBaseAmountT">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding Path= BaseAmount}" Grid.Column="1" />
+                                </Grid>
+                            </DataTemplate>
+                        </ComboBox.Resources>
+                        <ComboBox.ItemTemplate>
+                            <StaticResource ResourceKey="DataTemplateBaseAmountT"/>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
                     <Label Content="Övriga försäkringsuppgifter" Grid.Row="3" Grid.Column="0" FontSize="18" Margin="0,30,0,0" FontWeight="Bold"/>
-                    <Label Content="Betalform:" FontSize="15" Grid.Row="4" Grid.Column="0"/>
+                    <Label Content="*Betalform:" FontSize="15" Grid.Row="4" Grid.Column="0"/>
                     <ComboBox Grid.Row="4" Grid.Column="1" Text="" Margin="0,0,120,0" Width="130" Height="30" ItemsSource="{Binding PayMentForms}" SelectedItem="{Binding PaymentForm}"/>
-                    <Label Content="Ankomstdatum" FontSize="15" Grid.Row="5" Grid.Column="0" Margin="0,10,0,0"/>
+                    <Label Content="*Ankomstdatum" FontSize="15" Grid.Row="5" Grid.Column="0" Margin="0,10,0,0"/>
                     <DatePicker Grid.Row="5" Grid.Column="1" Text="" Margin="0,10,120,0" Width="130" Height="30" SelectedDate="{Binding DeliveryDate}" />
-                    <Label Content="Agenturnummer" FontSize="15" Grid.Row="6" Grid.Column="0" Margin="0,10,0,0"/>
+                    <Label Content="*Agenturnummer" FontSize="15" Grid.Row="6" Grid.Column="0" Margin="0,10,0,0"/>
                     <ComboBox Grid.Row="6" Grid.Column="1" Text="" Margin="0,10,120,0" Width="130" Height="30" ItemsSource="{Binding SalesMens, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding AgentNo}">
                         <ComboBox.Resources>
                         <DataTemplate x:Key="DataTemplateSalesMen">

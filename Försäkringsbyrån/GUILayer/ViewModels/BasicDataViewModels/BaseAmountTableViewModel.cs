@@ -54,7 +54,7 @@ namespace GUILayer.ViewModels.BasicDataViewModels
                 AckValue = string.Empty;
                 BaseAmount = string.Empty;
                 SAID = null;
-                Date = DateTime.Now;
+                Date = DateTime.Now; 
             }
             else
             {
