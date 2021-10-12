@@ -41,7 +41,7 @@
                     <Label Content="Försäkringstyp:" Grid.Column="0" Grid.Row="2"  FontSize="15" Margin="120,0,0,0"/>
                     <Label Content="Datum:" Grid.Column="0" Grid.Row="3"  FontSize="15" Margin="120,0,0,0"/>
                     <Label Content="Grundbelopp" Grid.Column="0" Grid.Row="4"  FontSize="15" Margin="120,0,0,0"/>
-                    <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding OptionalTypes }" SelectedItem="{Binding OptionalTypeId}">
+                    <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding BoxComboOption}" SelectedItem="{Binding OptionalTypeId}">
                         <ComboBox.Resources>
                             <DataTemplate x:Key="DataTemplateOptionType">
                             <Grid>
