@@ -20,8 +20,6 @@ namespace GUILayer.ViewModels.BasicDataViewModels
         {
             BaseAmounts = UpdateBA();
             Date = DateTime.Today;
-            //OptionalTypes = new List<OptionalType>() { new OptionalType(1, "Invaliditet vid olycksfall"), new OptionalType(2, "Höjning av livförsäkring"), new OptionalType(3, "Månadsersättning vid långvarig sjukskrivning") };
-            LifeInsurances = new List<LifeInsurance>() { new LifeInsurance (1, "Livförsäkring för vuxen") };
         }
 
         private ObservableCollection<BaseAmount> UpdateBA()
@@ -36,7 +34,15 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             return BaseAmounts;
         }
 
+        public class BoxComboOption
+        {
+           public OptionalType optiontype { get; set; }  
+           public LifeInsurance lifeinsurance { get; set;}
+           
+        }
+            
 
+    
         #region Commands
         private ICommand _addBtn;
         public ICommand AddBaseAmountOption_Btn
@@ -184,4 +190,5 @@ namespace GUILayer.ViewModels.BasicDataViewModels
         #endregion
 
     }
+
 }
