@@ -19,9 +19,9 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             SalesMens = UpdateSM();
             PersonTypes = new List<string>() {"Vuxen","Barn"};
             PayMentForms = new List<string>() { "Helår", "Halvår", "Kvartal", "Månad"};
-            SAInsuranceTypes = new List<SAInsurance>() { new SAInsurance(1, "Sjuk- och olycksfallsförsäkring för barn"), new SAInsurance(2, "Sjuk- och olycksfallsförsäkring för vuxen") };
             OptionalTypes = UpdateS();
             OptionalTypes1 = UpdateOptionalType();
+            OptionalType = OptionalTypes[0];
         }
 
         #region commands
@@ -41,31 +41,32 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             get => _addInsuranceBtn ?? (_addInsuranceBtn = new RelayCommand(x => { RegisterApplication(); CanCreate(); }));
         }
 
-
+         /// <summary>
+         /// Alternativ lösning. Lägga in kontroller i ADDmetoden senare att det inte går att lägga till en optionaltype som redan är vald i ett tidigare skede. 
+         /// Inte heller gå att lägga till typen Inget. 
+         /// </summary>
+         /// <returns></returns>
         private ObservableCollection<OptionalType> UpdateOptionalType()
         {
+
             ObservableCollection<OptionalType> x = new ObservableCollection<OptionalType>();
 
+            x.Add(new OptionalType() { OptionalTypeId = 0, OptionalName = "inget" });
             foreach (var e in Context.IController.GetAllOPT())
             {
-                
                 x?.Add(e);
             }
-            if (OptionalType != null)
+            if(x.Contains(OptionalType))
             {
-                int index = OptionalTypes.IndexOf(OptionalType);
-            x.RemoveAt(index);
-
+                x.Remove(OptionalType);
             }
 
             OptionalTypes1 = x;
+            
             return OptionalTypes1;
         }
 
-
-
         #endregion
-
         #region update of collections and lists. 
 
         public ObservableCollection<SalesMen> UpdateSM()
@@ -78,25 +79,32 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             SalesMens = x;
             return SalesMens;
         }
-
+        
         public ObservableCollection<OptionalType> UpdateS()
         {
             ObservableCollection<OptionalType> x = new ObservableCollection<OptionalType>();
+            x.Add(new OptionalType() { OptionalTypeId = 0, OptionalName = "inget" });
             foreach (var e in Context.IController.GetAllOPT())
             {
                 x?.Add(e);
             }
+ 
             OptionalTypes = x;
+            OnPropertyChanged("OptionalTypes1");
             return OptionalTypes;
+
         }
 
+        // Second list
         public ObservableCollection<OptionalType> OptionalTypes1 { get; set; }
+
+        // Third list
         public ObservableCollection<OptionalType> OptionalTypes2 { get; set; }
 
         public List<string> PersonTypes { get; set; }
         public List<SAInsurance> SAInsuranceTypes { get; set; }
 
-        public ObservableCollection<OptionalType> OptionalTypes { get; set; }
+        public ObservableCollection<OptionalType> OptionalTypes { get; set; } 
         public List<string> PayMentForms { get; set; }
         public ObservableCollection<SalesMen> SalesMens { get; set; }
         #endregion

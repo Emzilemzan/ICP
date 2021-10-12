@@ -15,11 +15,7 @@ namespace Models.Models
         public int LifeID { get; set; } 
         public string LifeName { get; set; }
 
-        public LifeInsurance(int id, string name)
-        {
-            this.LifeID = id;
-            this.LifeName = name;
-        }
+     
 
     }
 }

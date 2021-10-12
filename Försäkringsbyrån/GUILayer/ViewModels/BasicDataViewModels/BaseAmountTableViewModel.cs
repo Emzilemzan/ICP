@@ -20,7 +20,7 @@ namespace GUILayer.ViewModels.BasicDataViewModels
         {
             Tabels = UpdateTabels();
             Date = DateTime.Today;
-            SAInsuranceTypes = new List<SAInsurance>() { new SAInsurance(1, "Sjuk- och olycksfallsförsäkring för barn"), new SAInsurance(2, "Sjuk- och olycksfallsförsäkring för vuxen") };
+            
         }
         #region commands
         private ICommand _addBtn;

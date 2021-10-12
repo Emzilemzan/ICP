@@ -21,11 +21,7 @@ namespace Models.Models
 
         public string SAInsuranceType { get; set; }
 
-        public SAInsurance(int id, string s)
-        {
-            this.SAID = id;
-            this.SAInsuranceType = s;
-        }
+       
     }
    
 }
