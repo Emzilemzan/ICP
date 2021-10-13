@@ -20,12 +20,19 @@ namespace BussinessLayer
             GetInsuranceTakerIP(insuranceTaker)?.ForEach(p => insuredPeople.Add(p));
             return insuredPeople.OrderByDescending(i => i.InsuredID).ToList();
         }
-        public void AddInsuredPerson(InsuredPerson insuredPerson)
+        public void AddInsuredPersonOnPersontaker(InsuredPerson insuredPerson, Person p)
         {
-            insuredPerson.PersonTaker.InsuredPersons.Add(insuredPerson);
+            p.InsuredPersons.Add(insuredPerson);
             BusinessController.Instance.Save();
         }
-        public void RemoveInsuredPerson(InsuredPerson insuredPerson)
+
+        public void AddInsuredPerson(InsuredPerson insuredPerson)
+        {
+            BusinessController.Instance.Context.InsuredPersons.Add(insuredPerson);
+            BusinessController.Instance.Save();
+        }
+
+        public void RemoveInsuredPerson(InsuredPerson insuredPerson, Person p)
         {
             insuredPerson.PersonTaker.InsuredPersons.Remove(insuredPerson);
             BusinessController.Instance.Save();

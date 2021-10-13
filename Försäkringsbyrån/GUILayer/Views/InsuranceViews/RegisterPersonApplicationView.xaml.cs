@@ -26,6 +26,5 @@ namespace GUILayer.Views.InsuranceViews
             InitializeComponent();
         }
 
-       
     }
 }

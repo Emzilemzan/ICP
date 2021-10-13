@@ -75,15 +75,14 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             get => _postalCode > 0 ? _postalCode.ToString() : "";
             set
             {
-                if (int.TryParse(value, out _postalCode) && _postalCode.ToString().Length > 0 && _postalCode.ToString().Length < 6 && _postalCode != 0)
+                if (int.TryParse(value, out _postalCode) && Postalcode.Length == 5)
                 {
-                    OnPropertyChanged("PostalCode");
+                    OnPropertyChanged("Postalcode");
                 }
                 else if (Check == false)
                 {
-                    MessageBox.Show("Postnumret måste vara 5siffrigt!");
+                    MessageBox.Show("Måste vara fem siffror");
                 }
-
             }
         }
         private string _city;

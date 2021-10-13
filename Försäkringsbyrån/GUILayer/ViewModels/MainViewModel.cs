@@ -279,10 +279,8 @@ namespace GUILayer.ViewModels
         private void CreateSAInsurances()
         {
             List<SAInsurance> SAList = new List<SAInsurance>();
-
-
             SAList.Add(new SAInsurance { SAID = 1, SAInsuranceType = "Sjuk- och olycksfallsförsäkring för barn" });
-            SAList.Add(new SAInsurance { SAID = 2, SAInsuranceType = "Sjuk- och olycksfallsförsäkring för vuxen" });
+            SAList.Add(new SAInsurance { SAID = 2, SAInsuranceType = "Sjuk- och olycksfallsförsäkring för vuxen"});
 
             List<SAInsurance> NewList = new List<SAInsurance>();
             foreach (var i in Context.IController.GetAllSAI())
