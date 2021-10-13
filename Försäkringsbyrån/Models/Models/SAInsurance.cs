@@ -18,14 +18,8 @@ namespace Models.Models
     {
         [Key]
         public int SAID { get; set; } 
-
         public string SAInsuranceType { get; set; }
-
-        public SAInsurance(int id, string s)
-        {
-            this.SAID = id;
-            this.SAInsuranceType = s;
-        }
+        public ICollection<BaseAmountTabel> Tabels { get; set; }
     }
    
 }

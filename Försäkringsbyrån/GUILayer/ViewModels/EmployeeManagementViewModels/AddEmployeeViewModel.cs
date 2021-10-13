@@ -75,9 +75,13 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             get => _postalCode > 0 ? _postalCode.ToString() : "";
             set
             {
-                if (int.TryParse(value, out _postalCode) && _postalCode.ToString().Length < 6 && _postalCode != 0)
+                if (int.TryParse(value, out _postalCode) && Postalcode.Length == 5)
                 {
-                    OnPropertyChanged("PostalCode");
+                    OnPropertyChanged("Postalcode");
+                }
+                else if (Check == false)
+                {
+                    MessageBox.Show("Måste vara fem siffror");
                 }
             }
         }
@@ -87,7 +91,6 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             get => _city;
             set
             {
-                
                     _city = value;
                     OnPropertyChanged("City");
                 
@@ -118,7 +121,7 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
                 {
                     OnPropertyChanged("TaxRate");
                 }
-                else
+                else if(Check == false)
                 {
                     MessageBox.Show("Måste vara en siffra mellan 0-100. ");
                 }
@@ -141,6 +144,15 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             return !string.IsNullOrWhiteSpace(Instance.AgentNumber);
         }
 
+        private bool check;
+        public bool Check
+        {
+            get => check;
+            private set
+            {
+                check = value;
+            }
+        }
 
         private void InsertSalesMen()
         {
@@ -159,6 +171,8 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
                 Context.SMController.CheckExistingSalesMen(Instance._agentNumber, salesMen);
                 MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
                 MainViewModel.Instance.CurrentTool = "";
+                HandleEmployeeViewModel.Instance.UpdateSM();
+                Check = true;
                 Instance.AgentNumber = string.Empty;
                 Instance.Firstname = string.Empty;
                 Instance.StreetAddress = string.Empty;
@@ -166,7 +180,6 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
                 Instance.Lastname = string.Empty;
                 Instance.Postalcode = string.Empty;
                 Instance.TaxRate = string.Empty;
-                HandleEmployeeViewModel.Instance.UpdateSM();
                 MainViewModel.Instance.SelectedViewModel = HandleEmployeeViewModel.Instance;
             }
             else

@@ -20,7 +20,8 @@ namespace GUILayer.ViewModels.BasicDataViewModels
         {
             Tabels = UpdateTabels();
             Date = DateTime.Today;
-            SAInsuranceTypes = new List<SAInsurance>() { new SAInsurance(1, "Sjuk- och olycksfallsförsäkring för barn"), new SAInsurance(2, "Sjuk- och olycksfallsförsäkring för vuxen") };
+            SAInsuranceTypes = UpdateSA();
+            SAID = SAInsuranceTypes[0];
         }
         #region commands
         private ICommand _addBtn;
@@ -53,7 +54,7 @@ namespace GUILayer.ViewModels.BasicDataViewModels
                 AckValue = string.Empty;
                 BaseAmount = string.Empty;
                 SAID = null;
-                Date = DateTime.Now;
+                Date = DateTime.Now; 
             }
             else
             {
@@ -107,6 +108,21 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             }
             Tabels = x;
             return Tabels;
+        }
+
+        public ObservableCollection<SAInsurance> UpdateSA()
+        {
+            ObservableCollection<SAInsurance> x = new ObservableCollection<SAInsurance>();
+
+            x.Add(new SAInsurance() { SAID= 0, SAInsuranceType = "inget" });
+            foreach (var e in Context.IController.GetAllSAI())
+            {
+                x?.Add(e);
+            }
+
+            SAInsuranceTypes = x;
+
+            return SAInsuranceTypes;
         }
         #region Properties
 
@@ -174,7 +190,7 @@ namespace GUILayer.ViewModels.BasicDataViewModels
         }
 
 
-        public List<SAInsurance> SAInsuranceTypes { get; set; }
+        public ObservableCollection<SAInsurance> SAInsuranceTypes { get; set; }
 
         #endregion
     }

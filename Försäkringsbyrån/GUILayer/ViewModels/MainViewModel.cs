@@ -28,12 +28,17 @@ namespace GUILayer.ViewModels
             _selectedViewModel = LogInViewModel.Instance;
             _toolsVisibility = Visibility.Hidden;
             CreateOptionalTypes();
+            CreateSAInsurances();
+            CreateOtherPersonInsurance();
+            CreateCompanyInsurance();
+            CreateLifeInsurance();
+
         }
         #region commands
         private ICommand _homeBtn;
         public ICommand HomeBtn
         {
-            get => _homeBtn ?? (_homeBtn = new RelayCommand(x => { Home(); CanCommandHome(); })); 
+            get => _homeBtn ?? (_homeBtn = new RelayCommand(x => { Home(); CanCommandHome(); }));
         }
 
         public bool CanCommandHome() => true;  //Ska ändras till --> MainViewModel.Instance.Context.CurrentEmployee != null;
@@ -203,15 +208,15 @@ namespace GUILayer.ViewModels
         {
             SelectedViewModel = LogInViewModel.Instance;
             ToolsVisibility = Visibility.Collapsed;
-            
+
         }
 
         public void DisplayHomeView()
         {
             SelectedViewModel = HomeViewModel.Instance;
-            
+
         }
-    
+
         public string CurrentTool { get; set; } = "";
 
         private BaseViewModel _tools;
@@ -247,6 +252,7 @@ namespace GUILayer.ViewModels
                 OnPropertyChanged("SelectedViewModel");
             }
         }
+
         private void CreateOptionalTypes()
         {
             List<OptionalType> OptionList = new List<OptionalType>();
@@ -255,11 +261,110 @@ namespace GUILayer.ViewModels
             OptionList.Add(new OptionalType { OptionalTypeId = 1, OptionalName = "Invaliditet vid olycksfall" });
             OptionList.Add(new OptionalType { OptionalTypeId = 2, OptionalName = "Höjning av livförsäkring" });
             OptionList.Add(new OptionalType { OptionalTypeId = 3, OptionalName = "Månadsersättning vid långvarig sjukskrivning" });
-            foreach (var item in OptionList)
+
+            List<OptionalType> NewOptionList = new List<OptionalType>();
+
+            foreach(var i in Context.IController.GetAllOPT())
             {
-                Context.IController.AddOptionalTypes(item);
+                NewOptionList.Add(i);
+            }
+            if(NewOptionList.Count == 0)
+            {
+                foreach (var item in OptionList)
+                {
+                    Context.IController.AddOptionalTypes(item);
+                }
             }
         }
+        private void CreateSAInsurances()
+        {
+            List<SAInsurance> SAList = new List<SAInsurance>();
+            SAList.Add(new SAInsurance { SAID = 1, SAInsuranceType = "Sjuk- och olycksfallsförsäkring för barn" });
+            SAList.Add(new SAInsurance { SAID = 2, SAInsuranceType = "Sjuk- och olycksfallsförsäkring för vuxen"});
+
+            List<SAInsurance> NewList = new List<SAInsurance>();
+            foreach (var i in Context.IController.GetAllSAI())
+            {
+                NewList.Add(i);
+            }
+            if (NewList.Count == 0)
+            {
+                foreach (var item in SAList)
+                {
+                    Context.IController.AddSaInsurances(item);
+                }
+            }
+        }
+
+        private void CreateLifeInsurance()
+        {
+            List<LifeInsurance> LifeList = new List<LifeInsurance>();
+
+
+            LifeList.Add(new LifeInsurance {LifeID = 1, LifeName = "Livförsäkring för vuxen" });
+
+            List<LifeInsurance> NewList = new List<LifeInsurance>();
+            foreach (var i in Context.IController.GetAllLIFE())
+            {
+                NewList.Add(i);
+            }
+            if (NewList.Count == 0)
+            {
+                foreach (var item in LifeList)
+                {
+                    Context.IController.AddLifeInsurance(item);
+                }
+            }
+
+        }
+
+        private void CreateCompanyInsurance()
+        {
+            List<CompanyInsurance> CompList = new List<CompanyInsurance>();
+
+
+            CompList.Add(new CompanyInsurance {FFId = 1, COIName = "Företagsförsäkring" });
+
+
+            List<CompanyInsurance> NewList = new List<CompanyInsurance>();
+
+            foreach (var i in Context.IController.GetAllCAI())
+            {
+                NewList.Add(i);
+            }
+            if (NewList.Count == 0)
+            {
+                foreach (var item in CompList)
+                {
+                    Context.IController.AddCompanyInsurance(item);
+                }
+            }
+
+        }
+
+        private void CreateOtherPersonInsurance()
+        {
+            List<OtherPersonInsurance> OPList = new List<OtherPersonInsurance>();
+
+
+            OPList.Add(new OtherPersonInsurance { OPIId = 1, OPIName ="Övrig personförsäkring"  });
+
+            List<OtherPersonInsurance> NewList = new List<OtherPersonInsurance>();
+
+            foreach (var i in Context.IController.GetAllOPI())
+            {
+                NewList.Add(i);
+            }
+            if (NewList.Count == 0)
+            {
+                foreach (var item in OPList)
+                {
+                    Context.IController.AddOtherPersonInsurance(item);
+                }
+            }
+
+        }
+
     }
 }
 

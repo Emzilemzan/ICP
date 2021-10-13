@@ -18,7 +18,7 @@ namespace Models.Models
         public double AckValue { get; set; }
         public LifeInsurance LIFEID {get; set;}
         public OptionalType OptionalTypeId {get; set;}
-        public SAInsurance SAInsurance { get; set; }
+     
 
     }
 }

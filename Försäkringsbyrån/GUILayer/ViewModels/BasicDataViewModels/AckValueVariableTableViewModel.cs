@@ -22,10 +22,11 @@ namespace GUILayer.ViewModels.BasicDataViewModels
         {
             AckValues = UpdateAV();
             Date = DateTime.Today;
-            SAInsuranceTypes = new List<SAInsurance>() { new SAInsurance(1, "Sjuk- och olycksfallsförsäkring för barn"), new SAInsurance(2, "Sjuk- och olycksfallsförsäkring för vuxen") };
-            //OptionalTypes = new List<OptionalType>() { new OptionalType(1, "Invaliditet vid olycksfall"), new OptionalType(2, "Höjning av livförsäkring"), new OptionalType(3, "Månadsersättning vid långvarig sjukskrivning") };
+            OptionalTypes = UpdateOption();
+            LifeInsuranceTypes = UpdateLife();
+            OptionalType = OptionalTypes[0];
+            LifInsurance = LifeInsuranceTypes[0];
 
-            //Ska Livförsäkring vara med här också? Se BaseAmountOptionViewModel
         }
 
        private ObservableCollection<AckValueVariable> UpdateAV()
@@ -40,6 +41,37 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             return AckValues;
         }
 
+        public ObservableCollection<LifeInsurance> UpdateLife()
+        {
+            ObservableCollection<LifeInsurance> x = new ObservableCollection<LifeInsurance>();
+            x.Add(new LifeInsurance() { LifeID = 0, LifeName = "inget" });
+            foreach (var e in Context.IController.GetAllLIFE())
+            {
+                x?.Add(e);
+            }
+
+            LifeInsuranceTypes = x;
+
+            return LifeInsuranceTypes;
+        }
+
+
+        public ObservableCollection<OptionalType> UpdateOption()
+        {
+            ObservableCollection<OptionalType> x = new ObservableCollection<OptionalType>();
+            x.Add(new OptionalType() { OptionalTypeId = 0, OptionalName = "inget" });
+            foreach (var e in Context.IController.GetAllOPT())
+            {
+                x?.Add(e);
+            }
+
+            OptionalTypes = x;
+
+            return OptionalTypes;
+        }
+
+
+
         #region Commands
         private ICommand _addBtn;
         public ICommand AddAckValueVariableTable_Btn
@@ -50,13 +82,13 @@ namespace GUILayer.ViewModels.BasicDataViewModels
 
          private void AddAckValueVariableTable()
         {
-            if (Instance._date != null && Instance._ackValue != 0 && (Instance._sAInsurance != null || Instance._optionalType != null))
+            if (Instance._date != null && Instance._ackValue != 0 && (Instance._LifInsurance != null || Instance._optionalType != null))
             {
                 AckValueVariable ackValueVariable = new AckValueVariable()
                 {
                     Date = Instance._date,
                     AckValue = Instance._ackValue,
-                    SAInsurance = Instance._sAInsurance,
+                    LIFEID = Instance._LifInsurance,
                     OptionalTypeId = Instance._optionalType
 
                 };
@@ -111,20 +143,19 @@ namespace GUILayer.ViewModels.BasicDataViewModels
 
         #region Properties
         public ObservableCollection<AckValueVariable> AckValues { get; set; }
-
-        public List<SAInsurance> SAInsuranceTypes { get; set; }
-        public List<OptionalType> OptionalTypes { get; set; }
+        public ObservableCollection<LifeInsurance> LifeInsuranceTypes { get; set; }
+        public ObservableCollection<OptionalType> OptionalTypes { get; set; }
 
         //Vilket tillval 
-        private SAInsurance _sAInsurance;
-        public SAInsurance SAInsurance
+        private LifeInsurance _LifInsurance;
+        public LifeInsurance LifInsurance
         {
-            get => _sAInsurance;
+            get => _LifInsurance;
             set
             {
-                _sAInsurance = value;
+                _LifInsurance = value;
 
-                OnPropertyChanged("SAInsurance");
+                OnPropertyChanged("LifInsurance");
             }
         }
 
@@ -140,6 +171,7 @@ namespace GUILayer.ViewModels.BasicDataViewModels
                 OnPropertyChanged("OptionalType");
             }
         }
+      
 
         private DateTime _date;
         public DateTime Date

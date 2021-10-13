@@ -59,7 +59,6 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
                 SelectedPerson.Postalcode = Postalcode;
                 SelectedPerson.TaxRate = TaxRate;
                 SelectedPerson.City = City;
-
                 Context.SMController.Edit(SelectedPerson);
                 Instance.UpdateSM();
                 MessageBox.Show($"Uppdateringen lyckades av agenturnumret: {SelectedPerson.AgentNumber}", "Lyckad uppdatering", MessageBoxButton.OK, MessageBoxImage.Information);

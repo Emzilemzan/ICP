@@ -14,7 +14,7 @@ namespace Models.Models
         [Key]
         public int OPIId { get; set; } 
    
-
+        public string OPIName { get; set; }
 
     }
 }

@@ -31,7 +31,7 @@
         <Label Content="Säljare" FontSize="20" Grid.ColumnSpan="2" Margin="124,10,26,40" Grid.Row="2" Grid.RowSpan="2"  />
         <Label Content="Månad" FontSize="20" Grid.ColumnSpan="2" Margin="124,10,26,40" Grid.Row="4" Grid.RowSpan="2"  />
         <ComboBox Name="GetSalesmanCommission" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2"/>
-        <ComboBox Name="GetDateCommission" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2"/>
+        <ComboBox Name="GetDateCommission" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" ItemsSource="{Binding Months}" SelectedItem="{Binding Month}"/>
         <Button x:Name="GetCommissionBtn" Grid.Column="2" Grid.Row="6" Content="Hämta provision" Style="{DynamicResource OtherButtonStyle}"/>
 
     </Grid>

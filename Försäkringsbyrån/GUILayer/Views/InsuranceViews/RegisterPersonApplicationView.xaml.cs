@@ -20,9 +20,11 @@ namespace GUILayer.Views.InsuranceViews
     /// </summary>
     public partial class RegisterPersonApplicationView : UserControl
     {
+
         public RegisterPersonApplicationView()
         {
             InitializeComponent();
         }
+
     }
 }
