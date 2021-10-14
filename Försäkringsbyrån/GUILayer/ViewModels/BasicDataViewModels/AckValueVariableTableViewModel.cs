@@ -27,6 +27,7 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             OptionalType = OptionalTypes[0];
             LifInsurance = LifeInsuranceTypes[0];
 
+            CreateComboBoxInsuranceList();
         }
 
        private ObservableCollection<AckValueVariable> UpdateAV()
@@ -211,5 +212,58 @@ namespace GUILayer.ViewModels.BasicDataViewModels
 
         #endregion
 
+        public class ComboBoxInsurance
+        {
+            public string InsuranceName { get; set; }
+            public string InsuranceType { get; set; }
+        }
+
+        public ObservableCollection<ComboBoxInsurance> AllInsuranceTypesList { get; set; }
+
+        private void CreateComboBoxInsuranceList()
+        {
+            // Ny lista som skall fyllas
+            List<ComboBoxInsurance> tempList = new List<ComboBoxInsurance>();
+
+            // Temp liostor
+            List<OtherPersonInsurance> OPInsuranceList = new List<OtherPersonInsurance>();
+            List<SAInsurance> SAInsuranceList = new List<SAInsurance>();
+            List<LifeInsurance> LifeInsuranceList = new List<LifeInsurance>();
+
+            // Fylla templistor
+            foreach (var i in Context.IController.GetAllOPI()) OPInsuranceList.Add(i);
+            foreach (var i in Context.IController.GetAllSAI()) SAInsuranceList.Add(i);
+            foreach (var i in Context.IController.GetAllLIFE()) LifeInsuranceList.Add(i);
+
+            // Loopa igenom OPInsurance
+            foreach (var item in OPInsuranceList)
+            {
+                tempList.Add(new ComboBoxInsurance
+                {
+                    InsuranceName = item.OPIName
+                });
+            }
+
+            // Loopa igenom SAInsurance
+            foreach (var item in SAInsuranceList)
+            {
+                tempList.Add(new ComboBoxInsurance
+                {
+                    InsuranceName = $"Sjuk o olycksfalls försäkring {item.SAInsuranceType}"
+                    //InsuranceType = item.SAInsuranceType
+                });
+            }
+
+            // Loopa igenom LifeInsurance
+            foreach (var item in LifeInsuranceList)
+            {
+                tempList.Add(new ComboBoxInsurance
+                {
+                    InsuranceName = item.LifeName
+                });
+            }
+
+            AllInsuranceTypesList = new ObservableCollection<ComboBoxInsurance>(tempList);
+        }
     }
 }
