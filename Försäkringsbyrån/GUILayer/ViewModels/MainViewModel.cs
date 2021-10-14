@@ -26,7 +26,7 @@ namespace GUILayer.ViewModels
         private MainViewModel()
         {
             _selectedViewModel = LogInViewModel.Instance;
-            _toolsVisibility = Visibility.Hidden;
+            _toolsVisibility = Visibility.Hidden; 
             CreateOptionalTypes();
             CreateSAInsurances();
             CreateOtherPersonInsurance();
@@ -347,7 +347,7 @@ namespace GUILayer.ViewModels
             List<OtherPersonInsurance> OPList = new List<OtherPersonInsurance>();
 
 
-            OPList.Add(new OtherPersonInsurance { OPIId = 1, OPIName ="Övrig personförsäkring"  });
+            OPList.Add(new OtherPersonInsurance { OPIId = 1, OPIName ="Övrig personförsäkring" });
 
             List<OtherPersonInsurance> NewList = new List<OtherPersonInsurance>();
 
