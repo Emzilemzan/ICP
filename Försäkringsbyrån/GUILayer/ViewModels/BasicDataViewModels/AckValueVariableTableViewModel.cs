@@ -71,7 +71,6 @@ namespace GUILayer.ViewModels.BasicDataViewModels
         }
 
 
-
         #region Commands
         private ICommand _addBtn;
         public ICommand AddAckValueVariableTable_Btn

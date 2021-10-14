@@ -29,9 +29,6 @@ namespace GUILayer.Views.SearchViews
 
         }
 
-        private void Button_Click()
-        {
 
-        }
     }
 }

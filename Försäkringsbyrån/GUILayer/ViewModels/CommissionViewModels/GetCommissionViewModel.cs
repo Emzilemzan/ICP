@@ -1,6 +1,8 @@
 ﻿using GUILayer.Commands;
+using Models.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -13,10 +15,26 @@ namespace GUILayer.ViewModels.CommissionViewModels
     {
         public static readonly GetCommissionViewModel Instance = new GetCommissionViewModel();
 
+
         private GetCommissionViewModel()
         {
             Months = GetMonths();
+            SalesMens = GetAllSM();
+            Salesman = SalesMens[0];
         }
+
+        public ObservableCollection<SalesMen> GetAllSM()
+        {
+            ObservableCollection<SalesMen> x = new ObservableCollection<SalesMen>();
+            foreach (var e in Context.SMController.GetAllSalesMen())
+            {
+                x?.Add(e);
+            }
+            SalesMens = x;
+            return SalesMens;
+        }
+        
+
 
         #region Commands
         private ICommand _getBtn;
@@ -41,9 +59,12 @@ namespace GUILayer.ViewModels.CommissionViewModels
         #endregion
 
         #region Properties
+
+        public ObservableCollection<SalesMen> SalesMens { get; set; }
+
         //Vilken säljare 
-        private int _salesMan;
-        public int Salesman
+        private SalesMen _salesMan;
+        public SalesMen Salesman
         {
             get => _salesMan;
             set

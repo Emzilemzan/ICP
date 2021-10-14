@@ -365,6 +365,15 @@ namespace GUILayer.ViewModels
 
         }
 
+        public void CreateAList()
+        {
+            List<string> insuranceTypes = new List<string>();
+            insuranceTypes.Add("Övrig personförsäkring");
+            insuranceTypes.Add("Sjuk- och olycksfallsförsäkring för vuxen");
+            insuranceTypes.Add("Livförsäkring för vuxen");
+            insuranceTypes.Add("Sjuk - och olycksfallsförsäkring för barn");
+        }
+
     }
 }
 
