@@ -347,7 +347,7 @@ namespace GUILayer.ViewModels
             List<OtherPersonInsurance> OPList = new List<OtherPersonInsurance>();
 
 
-            OPList.Add(new OtherPersonInsurance { OPIId = 1, OPIName ="Övrig personförsäkring" });
+            OPList.Add(new OtherPersonInsurance { OPIId = 1, OPIName ="Övrig personförsäkring för vuxen" });
 
             List<OtherPersonInsurance> NewList = new List<OtherPersonInsurance>();
 
