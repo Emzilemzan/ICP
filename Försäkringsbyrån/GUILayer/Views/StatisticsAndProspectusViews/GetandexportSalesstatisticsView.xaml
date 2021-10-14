@@ -40,30 +40,12 @@
             <Button Grid.Row="5" Grid.Column="5" Background="LightGray" Margin="12" Content="Exportera till Excel"/>
             <Button Grid.Row="5" Grid.Column="4" Background="LightGray" Margin="12" Content="Tillbaka"/>
 
+            <DataGrid Grid.Row="0 " Grid.Column="2" Grid.ColumnSpan="4" Grid.RowSpan="5" Margin="52,38,81,45"></DataGrid>
 
 
 
 
-            <Grid Margin="65,33,83,10" Grid.Row="3" Grid.RowSpan="3" Grid.ColumnSpan="4" Background="White">
-                
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
 
-            </Grid>
 
 
 
