@@ -12,7 +12,7 @@ namespace Models.Models
     [Table("Försäkring", Schema = "dbo")]
     public class Insurance
     {
-        [Key]
+        [Key, DatabaseGenerat‌ed(DatabaseGeneratedOp‌​tion.None)]
         public string SerialNumber { get; set; } 
         public InsuredPerson InsuredID { get; set; }
         public SalesMen AgentNo { get; set; }

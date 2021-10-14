@@ -49,9 +49,6 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Label Content="Befintlig Försäkringstagare" FontWeight="Bold" Grid.Row="1" Grid.Column="0" FontSize="18"/>
-                    <Label Grid.Row="2" Grid.Column="0" Content="Personnummer:"/>
-                    <TextBox Grid.Row="2" Grid.Column="1" Text="" Margin="0,0,0,30" Height="30"/>
                     <Label Grid.Column="0" Grid.Row="3" Content="Försäkringstagarens uppgifter:" FontSize="18" FontWeight="Bold"/>
                     <Label Grid.Column="0" Grid.Row="4" Content="*Personnummer:" FontSize="15"/>
                     <TextBox Grid.Row="4" Grid.Column="1" Text=""/>

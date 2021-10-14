@@ -76,7 +76,6 @@ namespace BussinessLayer
                 x.DiallingCodeWork = dnbr2;
                 x.EmailOne = email1;
                 x.EmailTwo = email2;
-
                 Edit(x);
             }
         }

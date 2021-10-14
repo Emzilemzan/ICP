@@ -23,6 +23,11 @@ namespace BussinessLayer
             p.Insurances.Add(insuranceApplication);
             BusinessController.Instance.Save();
         }
+        public void AddInsuranceApplication(Insurance insuranceApplication)
+        {
+            BusinessController.Instance.Context.Insurances.Add(insuranceApplication);
+            BusinessController.Instance.Save();
+        }
         public void RemoveInsuranceApplication(Insurance insuranceApplication, Person p)
         {
             insuranceApplication.PersonTaker.Insurances.Remove(insuranceApplication);

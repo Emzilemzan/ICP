@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:GUILayer.Views.InsuranceViews"
+             xmlns:local="clr-namespace:GUILayer.Views.InsuranceViews" xmlns:insuranceviewmodels="clr-namespace:GUILayer.ViewModels.InsuranceViewModels" d:DataContext="{d:DesignInstance Type=insuranceviewmodels:InsuranceApplicationChoiceViewModel}"
              mc:Ignorable="d" d:DesignWidth="900" Height="270">
     <Grid Margin="0,10,0,103">
         <Grid.RowDefinitions>
@@ -19,17 +19,25 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
-
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Button  Margin ="10,10,0.333,10" Grid.Column="0"
                          FontSize="15"
                          Height="106"
-                         Content="Personförsäkringar"
+                         Content="SOförsäkringar"
                             Background="Transparent"
                          Command="{Binding PI_Btn}"
                          Style="{DynamicResource OtherButtonStyle}" Width="Auto">
                 </Button>
-                <Button  Grid.Column="1"
+                <Button  Margin ="10,10,0.333,10" Grid.Column="1"
+                         FontSize="15"
+                         Height="106"
+                         Content="Livförsäkringar"
+                            Background="Transparent"
+                         Command="{Binding LI_Btn}"
+                         Style="{DynamicResource OtherButtonStyle}" Width="Auto">
+                </Button>
+                <Button  Grid.Column="2"
                          FontSize="15"
                          Height="106"
                          Content=" Företagsförsäkringar"
@@ -37,7 +45,7 @@
                          Command="{Binding CI_Btn}"
                          Style="{DynamicResource OtherButtonStyle}" Width="Auto">
                 </Button>
-                <Button  Margin ="10.333,10" Grid.Column="2"
+                <Button  Margin ="10.333,10" Grid.Column="3"
                             FontSize="15"
                             Height="106"
                             Background="Transparent"
@@ -45,7 +53,7 @@
                          Style="{DynamicResource OtherButtonStyle}" Width="Auto">
                     <TextBlock Width="194" Height="43" RenderTransformOrigin="0.579,0.889">Övrig personförsäkring<LineBreak/>för vuxen - Person</TextBlock>
                 </Button>
-                <Button  Grid.Column="3"
+                <Button  Grid.Column="4"
                             FontSize="15"
                             Height="106"
                             Background="Transparent" Margin="9.333,10,10,10"

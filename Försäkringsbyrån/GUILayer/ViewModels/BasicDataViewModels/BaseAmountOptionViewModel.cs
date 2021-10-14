@@ -20,7 +20,7 @@ namespace GUILayer.ViewModels.BasicDataViewModels
         {
             BaseAmounts = UpdateBA();
             Date = DateTime.Today;
-            OptionalTypes = UpdateS();
+            OptionalTypes = UpdateOptionalType();
             LifeInsurances = UpdateLife();
             OptionalTypeId = OptionalTypes[0];
             LifeInsurance = LifeInsurances[0];
@@ -38,13 +38,14 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             return BaseAmounts;
         }
 
-        public ObservableCollection<OptionalType> UpdateS()
+        public ObservableCollection<OptionalType> UpdateOptionalType()
         {
             ObservableCollection<OptionalType> x = new ObservableCollection<OptionalType>();
             x.Add(new OptionalType() { OptionalTypeId = 0, OptionalName = "inget" });
             foreach (var e in Context.IController.GetAllOPT())
             {
-                x?.Add(e);
+                if(e.OptionalName != "Höjning av livförsäkring")
+                    x?.Add(e);
             }
 
             OptionalTypes = x;
@@ -183,13 +184,13 @@ namespace GUILayer.ViewModels.BasicDataViewModels
         }
 
         //Grundbelopp
-        private double _baseAmount;
+        private int _baseAmount;
         public string BaseAmount
         {
             get => _baseAmount > 0 ? _baseAmount.ToString() : "";
             set
             {
-                if (double.TryParse(value, out _baseAmount))
+                if (int.TryParse(value, out _baseAmount))
                 { OnPropertyChanged("BaseAmount"); }
             }
         }

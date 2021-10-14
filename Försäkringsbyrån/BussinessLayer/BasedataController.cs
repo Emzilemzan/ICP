@@ -24,14 +24,17 @@ namespace BussinessLayer
             BusinessController.Instance.Context.Tables.Remove(baseAmountTabel);
             BusinessController.Instance.Save();
         }
-
+        /// <summary>
+        /// check if id existis in database before remove. 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="a"></param>
         public void CheckExistingTable(int id, BaseAmountTabel a)
         {
             BaseAmountTabel x = BusinessController.Instance.Context.Tables.GetById(id);
             if (x != null)
             {
-                RemoveBaseAmountTable(a);
-                MessageBox.Show("Grunddatan togs bort");
+                CheckBdIsInInsurance(a);
             }
             else
             {
@@ -39,6 +42,63 @@ namespace BussinessLayer
             }
         }
 
+        /// <summary>
+        /// Check if you can remove baseamount, only if its not included in any insurance. 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="a"></param>
+        public void CheckBdIsInInsurance(BaseAmountTabel a)
+        {
+            foreach (var i in BusinessController.Instance.Context.Insurances.GetAll())
+            {
+                if(i.SAI.Tabels.Contains(a))
+                {
+                    MessageBox.Show("Du kan inte ta bort denna grunddatan, då den finns registrerad på en ansökan eller en tecknad försäkring");
+                }
+                else
+                {
+                    RemoveBaseAmountTable(a);
+                    MessageBox.Show("Grunddatan togs bort");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Check number of existing baseamounts, only allows a maxium per year. 
+        /// </summary>
+        public void CheckNbrOfBASA(SAInsurance s, DateTime d, BaseAmountTabel baseAmountTabel)
+        {
+            List<BaseAmountTabel> bases = new List<BaseAmountTabel>();
+            List<BaseAmountTabel> bases2 = new List<BaseAmountTabel>();
+            foreach (BaseAmountTabel b in GetAllTables())
+            {
+                if (b.SAID == s && b.Date.Year == d.Year)
+                {
+                    if(b.SAID.SAID == 2)
+                    {
+                        bases.Add(b);
+                    }
+                    else if(b.SAID.SAID == 1)
+                    {
+                        bases2.Add(b);
+                    }
+                }
+            }
+            if (bases.Count != 3 && s.SAID == 2 && s.SAID != 1 )
+            {
+                AddBaseAmountTable(baseAmountTabel);
+                MessageBox.Show("Grundbeloppet las till.");
+            }
+            else if (bases2.Count != 4 && s.SAID == 1 && s.SAID != 2)
+            {
+                AddBaseAmountTable(baseAmountTabel);
+                MessageBox.Show("Grundbeloppet las till.");
+            }
+            else
+            {
+                MessageBox.Show("Grundbeloppet las inte till då det får max finnas 4 st per år för SObarn och 3 st per år för SOvuxen");
+            }
+        }
 
         #endregion
 

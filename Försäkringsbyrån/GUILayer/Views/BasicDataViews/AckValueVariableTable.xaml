@@ -50,7 +50,9 @@
                                 </Grid>
                             </DataTemplate>
                         </ComboBox.Resources>
-                        <ComboBox.ItemTemplate>                            <StaticResource ResourceKey="DataTemplateAckValue"/>                        </ComboBox.ItemTemplate>
+                        <ComboBox.ItemTemplate>
+                            <StaticResource ResourceKey="DataTemplateAckValue"/>
+                        </ComboBox.ItemTemplate>
                     </ComboBox>
                     <Label Content="Datum" Grid.Column="0" Grid.Row="2"  FontSize="15" Margin="120,0,0,0"/>
                     <DatePicker IsTodayHighlighted="True" Grid.Row="2" Grid.Column="1" DisplayDateStart="1900-01-01"/>

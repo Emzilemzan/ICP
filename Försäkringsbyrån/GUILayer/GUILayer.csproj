@@ -103,6 +103,7 @@
     <Compile Include="ViewModels\InsuranceViewModels\InsuranceApplicationChoiceViewModel.cs" />
     <Compile Include="ViewModels\InsuranceViewModels\InsuranceViewModel.cs" />
     <Compile Include="ViewModels\InsuranceViewModels\RegisterApplicationViewModel.cs" />
+    <Compile Include="ViewModels\InsuranceViewModels\RegisterLifeApplicationViewModel.cs" />
     <Compile Include="ViewModels\InsuranceViewModels\RegisterOPICApplicationViewModel.cs" />
     <Compile Include="ViewModels\InsuranceViewModels\RegisterOPIPApplicationViewModel.cs" />
     <Compile Include="ViewModels\InsuranceViewModels\RegisterPersonApplicationViewModel.cs" />
@@ -168,6 +169,9 @@
     </Compile>
     <Compile Include="Views\InsuranceViews\RegisterApplicationView.xaml.cs">
       <DependentUpon>RegisterApplicationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InsuranceViews\RegisterLifeApplicationView.xaml.cs">
+      <DependentUpon>RegisterLifeApplicationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\InsuranceViews\RegisterOPICApplicationView.xaml.cs">
       <DependentUpon>RegisterOPICApplicationView.xaml</DependentUpon>
@@ -288,6 +292,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\InsuranceViews\RegisterApplicationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InsuranceViews\RegisterLifeApplicationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
