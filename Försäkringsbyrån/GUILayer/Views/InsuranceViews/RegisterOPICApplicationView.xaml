@@ -19,7 +19,7 @@
                 <RowDefinition Height="100"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Label Content="Registrera Ansökan - Övrig företagsförsäkring" FontSize="24"  Grid.Row="0" Grid.Column="0"/>
+            <Label Content="Registrera Ansökan - Övrig personförsäkring" FontSize="24"  Grid.Row="0" Grid.Column="0"/>
             <StackPanel Grid.Column="0" Grid.Row="1" Grid.RowSpan="6" >
                 <Grid>
                     <Grid.ColumnDefinitions>
