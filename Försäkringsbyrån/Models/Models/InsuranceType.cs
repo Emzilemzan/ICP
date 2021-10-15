@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Models.Models
 {
     /// <summary>
-    /// Our main class for our differnt types of Insurances. 
+    /// Skall tas bort!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     /// </summary>
     /// 
     [Table("Försäkringstyp", Schema = "dbo")]

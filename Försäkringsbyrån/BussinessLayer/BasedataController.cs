@@ -22,11 +22,11 @@ namespace BussinessLayer
         public void RemoveBaseAmountTable(BaseAmountTabel baseAmountTabel)
         {
             BusinessController.Instance.Context.Tables.Remove(baseAmountTabel);
-            BusinessController.Instance.Save();
+            BusinessController.Instance.Save(); 
         }
         /// <summary>
         /// check if id existis in database before remove. 
-        /// </summary>
+        /// </summary> 
         /// <param name="id"></param>
         /// <param name="a"></param>
         public void CheckExistingTable(int id, BaseAmountTabel a)
@@ -102,6 +102,7 @@ namespace BussinessLayer
 
         #endregion
 
+        
         #region Controls for VacationPay
 
         public VacationPay GetVacationPay(int id) => BusinessController.Instance.Context.VPays.Find(x => x.SEId == id).FirstOrDefault();
@@ -155,11 +156,11 @@ namespace BussinessLayer
 
         public void CheckExistingBaseAmountOption(int id, BaseAmount o)
         {
-            BaseAmount x = BusinessController.Instance.Context.BaseAmounts.GetById(id);
+            BaseAmount x = BusinessController.Instance.Context.BaseAmounts.GetById(id); 
             if (x != null)
             {
                 RemoveBaseAmountOption(o);
-                MessageBox.Show("Grunddatan togs bort");
+                MessageBox.Show("Grunddatan togs bort"); 
             }
             else
             {
@@ -194,7 +195,7 @@ namespace BussinessLayer
             }
             else
             {
-                MessageBox.Show("Finns ingen grunddata med det id.t att ta bort");
+                MessageBox.Show("Finns ingen grunddata med det id.t att ta bort"); 
             }
         }
         #endregion

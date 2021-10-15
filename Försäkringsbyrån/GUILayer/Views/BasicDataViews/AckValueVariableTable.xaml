@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:GUILayer.Views.BasicDataViews" 
              xmlns:basicdataviewmodels="clr-namespace:GUILayer.ViewModels.BasicDataViewModels" 
              d:DataContext="{d:DesignInstance Type=basicdataviewmodels:AckValueVariableTableViewModel}"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -41,14 +41,14 @@
                     </Grid.RowDefinitions>
                     <Label Content="Lägg till ny data" Grid.Column="0" FontSize="20" FontWeight="Bold"/>
                     <Label Content="Försäkringstyp" Grid.Column="0" Grid.Row="1"  FontSize="15" Margin="60,0,0,0"/>
-                    <ComboBox Grid.Row="1" Grid.Column="1" Height="20" ItemsSource="{Binding AllInsuranceTypesList }" SelectedItem="{Binding ComboBoxInsurance }">
+                    <ComboBox Grid.Row="1" Grid.Column="1" Height="20" ItemsSource="{Binding LifeInsuranceTypes }" SelectedItem="{Binding LifInsurance }">
                         <ComboBox.Resources>
                             <DataTemplate x:Key="DataTemplateAckValue">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock Text="{Binding InsuranceName}" Grid.Column="1" />
+                                    <TextBlock Text="{Binding Path= LifeName}" Grid.Column="1" /> 
                                 </Grid>
                             </DataTemplate>
                         </ComboBox.Resources>
@@ -57,7 +57,7 @@
                         </ComboBox.ItemTemplate>
                     </ComboBox>
                     <Label Content="Tillvalstyp" Grid.Column="0" Grid.Row="2"  FontSize="15" Margin="60,0,0,0"/>
-                    <ComboBox Grid.Row="2" Grid.Column="1" Height="20" ItemsSource="{Binding OptionalTypes }" SelectedItem="{Binding OptionalTypeId }">
+                    <ComboBox Grid.Row="2" Grid.Column="1" Height="20" ItemsSource="{Binding OptionalTypes }" SelectedItem="{Binding OptionalType }">
                         <ComboBox.Resources>
                             <DataTemplate x:Key="DataTemplateAckValue">
                                 <Grid>
@@ -117,8 +117,8 @@
                 <DataGridTextColumn Header="Id" Binding="{Binding Path=AckValueId }"/>
                 <DataGridTextColumn Header="Datum" Binding="{Binding Date}" />
                 <DataGridTextColumn Header="Ack.värdevariabel" Binding="{Binding AckValue }" />
-                <DataGridTextColumn Header="Försäkringstyp" Binding="{Binding }" />
-                <DataGridTextColumn Header="Tillvalstyp" Binding="{Binding }" />
+                <DataGridTextColumn Header="Försäkringstyp" Binding="{Binding LIFEID.LifeName }" />
+                <DataGridTextColumn Header="Tillvalstyp" Binding="{Binding OptionalTypeId.OptionalName}" />
             </DataGrid.Columns>
         </DataGrid>
         
