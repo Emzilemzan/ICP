@@ -172,7 +172,7 @@
                             <StaticResource ResourceKey="DataTemplateSalesMen"/>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
-                    <Label Content="Tecknad försäkringsuppgifter" Grid.Row="7" Grid.Column="0" FontSize="18" Margin="0,30,226,0" FontWeight="Bold" Grid.ColumnSpan="2"/>
+                    <Label Content="Tecknade försäkringsuppgifter" Grid.Row="7" Grid.Column="0" FontSize="18" Margin="0,30,226,0" FontWeight="Bold" Grid.ColumnSpan="2"/>
                     <Label Grid.Column="0" Grid.Row="8" Content="*Betald:" FontSize="15"/>
                     <Label Grid.Column="0" Grid.Row="8" Content="*År:" FontSize="15" Margin="113,0,0,0"/>
                     <ComboBox Grid.Column="0" Grid.Row="8" Margin="151,0,226,0" Grid.ColumnSpan="2"></ComboBox>

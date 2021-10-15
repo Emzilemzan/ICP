@@ -17,7 +17,6 @@ namespace GUILayer.ViewModels.BasicDataViewModels
     {
         public static readonly AckValueVariableTableViewModel Instance = new AckValueVariableTableViewModel();
 
-   
         private AckValueVariableTableViewModel()
         {
             AckValues = UpdateAV();
@@ -70,8 +69,6 @@ namespace GUILayer.ViewModels.BasicDataViewModels
 
             return OptionalTypes;
         }
-
-
 
         #region Commands
         private ICommand _addBtn;
@@ -219,7 +216,6 @@ namespace GUILayer.ViewModels.BasicDataViewModels
         }
 
         public ObservableCollection<ComboBoxInsurance> AllInsuranceTypesList { get; set; }
-
         private void CreateComboBoxInsuranceList()
         {
             // Ny lista som skall fyllas
