@@ -51,10 +51,14 @@ namespace BussinessLayer
         {
             foreach (var i in BusinessController.Instance.Context.Insurances.GetAll())
             {
-                if(i.SAI.Tabels.Contains(a))
+                if (i.SAI != null)
                 {
-                    MessageBox.Show("Du kan inte ta bort denna grunddatan, då den finns registrerad på en ansökan eller en tecknad försäkring");
+                    if (i.SAI.Tabels.Contains(a))
+                    {
+                        MessageBox.Show("Du kan inte ta bort denna grunddatan, då den finns registrerad på en ansökan eller en tecknad försäkring");
+                    }
                 }
+              
                 else
                 {
                     RemoveBaseAmountTable(a);
