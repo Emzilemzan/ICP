@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 using GUILayer.Commands;
 using Models.Models;
 
@@ -18,8 +20,18 @@ namespace GUILayer.ViewModels.InsuranceViewModels
 
         public RegisterApplicationViewModel()
         {
-            AddCompanyApplication = new RelayCommand(RegisterCompanyApplication, CanAddCompanyApplication);
+
         }
+
+        #region
+        private ICommand _registerApplication;
+        public ICommand AddCompanyApplication
+        {
+            get => _registerApplication ?? (_registerApplication = new RelayCommand(x => { RegisterCompanyApplication(); CanAddCompanyApplication(); }));
+        }
+
+        #endregion
+
 
         public ObservableCollection<Company> Companies { get; set; }
 
@@ -44,83 +56,45 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             return Companies;
         }
 
-        public RelayCommand AddCompanyApplication { get; set; }
-
-        public bool CanAddCompanyApplication(object parameter)
-        {
-            return true;
-        }
-        public void RegisterCompanyApplication(object parameter)
+        private bool CanAddCompanyApplication() => true;
+        private void RegisterCompanyApplication()
         {
             Insurance i = new Insurance();
 
-            if (Instance._orgNbr == null)
+            if (Instance._orgNbr != null && Instance.ContactPerson != null && Instance.CompanyName != null && Instance.City != null && Instance.AgentNo != null & Instance.DiallingCode != null
+                && Instance.Email != null && Instance.FaxNumber != null)
             {
-                Company _tk = new Company();
-                {
-                    OrganizationNumber = Instance.OrganizationNumber;
-                PostalCode = Instance.PostalCode;
-                StreetAddress = Instance.StreetAddress;
-                City = Instance.City;
-                CompanyName = Instance.CompanyName;
-                ContactPerson = Instance.ContactPerson;
-                FaxNumber = Instance.FaxNumber;
-                TelephoneNbr = Instance.TelephoneNbr;
 
-                    // add insurancetaker (instance?) gör något som bara skirver ut rå datan i excel och sen laborera i excel och för över det till koden. 
-            };     
+                // add insurancetaker (instance?) gör något som bara skirver ut rå datan i excel och sen laborera i excel och för över det till koden.   
             }
-        } 
+            else
+            {
+                MessageBox.Show("Alla fält med en * är obligatoriska att fylla i", "Fel", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
 
-        //  if (Instance._username != null)
-        //    {
-        //        UserAccess a = new UserAccess()
-        //        {
-        //            Username = Instance.Username,
-        //            Password = Instance.Password,
-        //            Search = Instance.Search,
-        //            StatisticsAndProspects = Instance.StatisticsAndProspects,
-        //            Insurances = Instance.Insurances,
-        //            EmployeeManagement = Instance.EmployeeManagement,
-        //            Commission = Instance.Commission,
-        //            BasicData = Instance.BasicData
-        //        };
-        //Context.UAController.CheckExistingUser(Instance._username, a);
-        //        MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
-        //        MainViewModel.Instance.CurrentTool = "";
+        private Company AddCompany()
+        {
+            Company _tk = new Company()
+            {
+                OrganizationNumber = Instance.OrganizationNumber,
+                PostalCode = Instance._pC,
+                StreetAddress = Instance.StreetAddress,
+                City = Instance.City,
+                CompanyName = Instance.CompanyName,
+                DiallingCode = Instance.DiallingCode,
+                Email = Instance.Email,
+                ContactPerson = Instance.ContactPerson,
+                FaxNumber = Instance.FaxNumber,
+                TelephoneNbr = Instance.TelephoneNbr,
+            };
+            Context.ITController.CheckExistingCompany(Instance._orgNbr, _tk, Instance.CompanyName, Instance.City, Instance._pC, Instance.StreetAddress, Instance.TelephoneNbr, Instance.DiallingCode, Instance.Email, Instance.ContactPerson, Instance.FaxNumber);
+            Company x = Context.ITController.GetCompany(Instance._orgNbr);
+            Company = x;
+            return Company;
+        }
 
         #region properties
-        private int _serialNumber;
-        public int SerialNumber
-        {
-            get => _serialNumber;
-            set
-            {
-                _serialNumber = value;
-                OnPropertyChanged("SerialNumber");
-            }
-        }
-
-        private string _payDate;
-        public string PayDate
-        {
-            get => _payDate;
-            set
-            {
-                _payDate = value;
-                OnPropertyChanged("PayDate");
-            }
-        }
-        private SalesMen _agentNo;
-        public SalesMen AgentNo
-        {
-            get => _agentNo;
-            set
-            {
-                _agentNo = value;
-                OnPropertyChanged("AgentNo");
-            }
-        }
 
         private string _companyName;
         public string CompanyName
@@ -147,7 +121,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         private string _streetAdress;
         public string StreetAddress
         {
-          get =>  _streetAdress;
+            get => _streetAdress;
             set
             {
                 _streetAdress = value;
@@ -155,17 +129,45 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             }
         }
 
-        private int _postalCode;
-        public int PostalCode
+        private int _pC;
+        public string PostalCode
         {
-            get => _postalCode;
+            get => _pC > 0 ? _pC.ToString() : "";
             set
             {
-                _postalCode = value;
-                OnPropertyChanged("PostalCode");
+                if (int.TryParse(value, out _pC) && PostalCode.Length == 5)
+                {
+                    OnPropertyChanged("PostalCode");
+                }
+                else if (Check == false)
+                {
+                    MessageBox.Show("Måste vara fem siffror");
+                }
             }
         }
 
+        private bool _check;
+        public bool Check
+        {
+            get => _check;
+            set
+            {
+                _check = value;
+                OnPropertyChanged("Check");
+            }
+        }
+
+
+        private string _dc;
+        public string DiallingCode
+        {
+            get => _dc;
+            set
+            {
+                _dc = value;
+                OnPropertyChanged("DiallingCode");
+            }
+        }
 
         private string _city;
         public string City
@@ -221,36 +223,29 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             }
         }
 
-        private string _insuredName;
-        public string InsuredName
+
+        private Company _company;
+        public Company Company
         {
-            get => _insuredName;
+            get => _company;
             set
             {
-                _insuredName = value;
-                OnPropertyChanged("InsuredName");
+                _company = value;
+                OnPropertyChanged("Company");
             }
         }
+        #endregion
 
-        private string _insuredLastName;
-        public string InsuredLastName
+        #region Insurance properties
+
+        private SalesMen _agentNo;
+        public SalesMen AgentNo
         {
-            get => _insuredLastName;
+            get => _agentNo;
             set
             {
-                _insuredLastName = value;
-                OnPropertyChanged("InsuredLastName");
-            }
-        }
-
-        private string _insuredssNbr;
-        public string InsuredSocialSecurityNbr
-        {
-            get => _insuredssNbr;
-            set
-            {
-                _insuredssNbr = value;
-                OnPropertyChanged("InsuredSocialSecurityNbr");
+                _agentNo = value;
+                OnPropertyChanged("AgentNo");
             }
         }
 
@@ -275,10 +270,28 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                 OnPropertyChanged("Notes");
             }
         }
+
+        private int _serialNumber;
+        public int SerialNumber
+        {
+            get => _serialNumber;
+            set
+            {
+                _serialNumber = value;
+                OnPropertyChanged("SerialNumber");
+            }
+        }
+        public string CompanyInsuranceType { get; set; }
+        public string PaymentForm { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+
+        public string InsuranceCompany { get; set; }
+
+        #endregion
+
     }
-
-
-    #endregion
+    
 }
 
 

@@ -37,6 +37,36 @@ namespace BussinessLayer
             BusinessController.Instance.Save();
         }
 
+
+        public void CheckExistingCompany(string id, Company a, string name, string city, int postalCode, string streetadress, string number1, string nbr2,
+           string email1, string contact, string num)
+        {
+            Company x = BusinessController.Instance.Context.Companies.GetById(id);
+            if (x == null)
+            {
+                AddCompanyInsuranceTaker(a);
+            }
+            else
+            {
+                x.OrganizationNumber = id;
+                x.CompanyName= name;
+                x.City = city;
+                x.PostalCode = postalCode;
+                x.StreetAddress = streetadress;
+                x.TelephoneNbr = number1;
+                x.DiallingCode = nbr2;
+                x.Email = email1;
+                x.ContactPerson = contact;
+                x.FaxNumber = num;
+                Edit(x);
+            }
+        }
+        public void Edit(Company sm)
+        {
+            BusinessController.Instance.Context.Companies.Update(sm);
+            BusinessController.Instance.Save();
+        }
+
         #endregion
 
         #region Persons

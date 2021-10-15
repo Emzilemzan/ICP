@@ -29,6 +29,7 @@ namespace Models.Models
         public string CompanyInsuranceType { get; set; }
         public int BaseAmountValue { get; set; }
 
+        public string InsuranceCompany { get; set; }
 
         #region InsuranceTypes
         public SAInsurance SAI { get; set; }
