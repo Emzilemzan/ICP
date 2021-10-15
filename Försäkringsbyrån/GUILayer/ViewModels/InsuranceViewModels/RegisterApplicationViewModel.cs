@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -20,56 +21,113 @@ namespace GUILayer.ViewModels.InsuranceViewModels
 
         public RegisterApplicationViewModel()
         {
-
+            PayMentForms = new List<string>() { "Helår", "Halvår", "Kvartal", "Månad" };
+            SalesMens = UpdateSM();
+            CInsuranceTypes = new List<string>() { "Kombinerad företagsförsäkring", "Fastighet" };
+            CompanyInsurances = UpdateCompanyInsurances();
+            StartDate = DateTime.Today;
         }
 
-        #region
+        #region commands and methods
         private ICommand _registerApplication;
         public ICommand AddCompanyApplication
         {
             get => _registerApplication ?? (_registerApplication = new RelayCommand(x => { RegisterCompanyApplication(); CanAddCompanyApplication(); }));
         }
 
-        #endregion
-
-
-        public ObservableCollection<Company> Companies { get; set; }
-
-        private string _searchFrase;
-        public string SearchFrase
+        //Get all salesmen. 
+        public ObservableCollection<SalesMen> UpdateSM()
         {
-            get => _searchFrase;
-            set
+            ObservableCollection<SalesMen> x = new ObservableCollection<SalesMen>();
+            foreach (var e in Context.SMController.GetAllSalesMen())
             {
-                _searchFrase = value;
-                OnPropertyChanged("SearchFrase");
+                x?.Add(e);
             }
+            SalesMens = x;
+            return SalesMens;
         }
-        public ObservableCollection<Company> UpdateCompanies()
+
+        public ObservableCollection<CompanyInsurance> CompanyInsurances { get; set; }
+        public ObservableCollection<CompanyInsurance> UpdateCompanyInsurances()
         {
-            ObservableCollection<Company> x = new ObservableCollection<Company>();
-            foreach (var c in Context.ITController.GetAllCompanies())
+            ObservableCollection<CompanyInsurance> x = new ObservableCollection<CompanyInsurance>();
+            foreach (var c in Context.IController.GetAllCAI())
             {
                 x?.Add(c);
             }
-            Companies = x;
-            return Companies;
+            CompanyInsurances = x;
+            return CompanyInsurances;
+        }
+
+        private void AddInsurance()
+        {
+            if (Instance._orgNbr != null && Instance.ContactPerson != null && Instance.CompanyName != null && Instance.City != null && Instance.AgentNo != null & Instance.DiallingCode != null
+                 && Instance.CompanyInsuranceType != null && Instance.EndDate != null && Instance.StartDate != null && Instance.PaymentForm != null && Instance.StreetAddress != null &&
+                 Instance.PostalCode != null && Instance.Premie != null)
+            {
+                Insurance i = new Insurance()
+                {
+                    SerialNumber = Instance.SerialNumber = GenerateIdFormation(),
+                    AgentNo = Instance.AgentNo,
+                    COI = Instance.CompanyI,
+                    PaymentForm = Instance.PaymentForm,
+                    InsuranceCompany = Instance.InsuranceCompany,
+                    CompanyTaker = Instance.Company = AddCompany(),
+                    EndDate = Instance.EndDate,
+                    StartDate = Instance.StartDate,
+                    Notes = Instance.Notes,
+                    Premie = Instance._premie,
+                    InsuranceStatus = Status.Otecknad,
+                    CompanyInsuranceType = Instance.CompanyInsuranceType,
+                };
+                Context.IController.AddInsuranceApplication(i);
+                MessageBox.Show("Ansökan har lagts till");
+                Check = true;
+                Instance.OrganizationNumber = string.Empty;
+                Instance.AgentNo = null;
+                Instance.City = string.Empty;
+                Instance.StreetAddress = string.Empty;
+                Instance.TelephoneNbr = string.Empty;
+                Instance.DiallingCode = string.Empty;
+                Instance.Email = string.Empty;
+                Instance.EndDate = Today;
+                Instance.StartDate = Today;
+                Instance.CompanyName = string.Empty;
+                Instance.Premie = string.Empty;
+                Instance.PaymentForm = null;
+                Instance.PostalCode = string.Empty;
+                Instance.Notes = string.Empty;
+                Instance.FaxNumber = string.Empty;
+                Instance.InsuranceCompany = string.Empty;
+                Instance.CompanyI = null;
+                Instance.Company = null;
+                Instance.CompanyInsuranceType = null;
+            }
+            else
+            {
+                MessageBox.Show("Alla fält med en * är obligatoriska att fylla i", "Fel", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
         private bool CanAddCompanyApplication() => true;
         private void RegisterCompanyApplication()
         {
-            Insurance i = new Insurance();
-
-            if (Instance._orgNbr != null && Instance.ContactPerson != null && Instance.CompanyName != null && Instance.City != null && Instance.AgentNo != null & Instance.DiallingCode != null
-                && Instance.Email != null && Instance.FaxNumber != null)
+            Company y = Context.ITController.GetCompany(Instance.OrganizationNumber);
+            if (y != null)
             {
-
-                // add insurancetaker (instance?) gör något som bara skirver ut rå datan i excel och sen laborera i excel och för över det till koden.   
+                MessageBoxResult result = MessageBox.Show($"Det finns redan en försäkringstagare med det inskrivna organisationsnumret vid namn: {y.CompanyName} vill du uppdatera dessa uppgifter?", "Varning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.Yes)
+                {
+                    AddInsurance();                
+                }
+                else
+                {
+                    MessageBox.Show("Ändra organisationsnummer.");
+                }
             }
             else
             {
-                MessageBox.Show("Alla fält med en * är obligatoriska att fylla i", "Fel", MessageBoxButton.OK, MessageBoxImage.Warning);
+                AddInsurance();
             }
         }
 
@@ -93,8 +151,50 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             Company = x;
             return Company;
         }
+        /// <summary>
+        /// method for autogenerate alphanumeric serialnumber
+        /// </summary>
+        /// <returns></returns>
+        private string GenerateIdFormation()
+        {
+            string y;
+            List<Insurance> insurances = new List<Insurance>();
+            foreach (var i in Context.IController.GetAllInsurances())
+            {
+                if (i.COI == Instance.CompanyI)
+                {
+                    insurances?.Add(i);
+                }
+            }
+            if (insurances.Count < 1)
+            {
+                string str = "FF";
+                string num = "1";
 
+                y = str + num;
+            }
+            else
+            {
+                string x = insurances.Last().SerialNumber;
+
+                string str = Regex.Replace(x, @"\d", "");
+                string num = Regex.Replace(x, @"\D", "");
+
+                int num1 = int.Parse(num);
+                int num2 = num1++;
+                string newNum = num2.ToString();
+
+                y = str + newNum;
+            }
+            return y;
+        }
+
+        #endregion
         #region properties
+
+        public List<string> PayMentForms { get; set; }
+        public List<string> CInsuranceTypes { get; set; }
+        public ObservableCollection<SalesMen> SalesMens { get; set; }
 
         private string _companyName;
         public string CompanyName
@@ -135,13 +235,16 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             get => _pC > 0 ? _pC.ToString() : "";
             set
             {
-                if (int.TryParse(value, out _pC) && PostalCode.Length == 5)
+                if(Check == false)
                 {
-                    OnPropertyChanged("PostalCode");
-                }
-                else if (Check == false)
-                {
-                    MessageBox.Show("Måste vara fem siffror");
+                    if (int.TryParse(value, out _pC) && PostalCode.Length == 5)
+                    {
+                        OnPropertyChanged("PostalCode");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Måste vara fem siffror");
+                    }
                 }
             }
         }
@@ -238,6 +341,17 @@ namespace GUILayer.ViewModels.InsuranceViewModels
 
         #region Insurance properties
 
+        private CompanyInsurance _companyi;
+        public CompanyInsurance CompanyI
+        {
+            get => _companyi;
+            set
+            {
+                _companyi = value;
+                OnPropertyChanged("CompanyI");
+            }
+        }
+
         private SalesMen _agentNo;
         public SalesMen AgentNo
         {
@@ -250,13 +364,22 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         }
 
         private int _premie;
-        public int Premie
+        public string Premie
         {
-            get => _premie;
+            get => _premie > 0 ? _premie.ToString() : "";
             set
             {
-                _premie = value;
-                OnPropertyChanged("Premie");
+                if(Check == false)
+                {
+                    if (int.TryParse(value, out _premie) && _premie.ToString().Length == 5)
+                    {
+                        OnPropertyChanged("Premie");
+                    }
+                    else 
+                    {
+                        MessageBox.Show("Måste vara ett tal");
+                    }
+                }
             }
         }
 
@@ -271,8 +394,8 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             }
         }
 
-        private int _serialNumber;
-        public int SerialNumber
+        private string _serialNumber;
+        public string SerialNumber
         {
             get => _serialNumber;
             set
@@ -281,12 +404,59 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                 OnPropertyChanged("SerialNumber");
             }
         }
-        public string CompanyInsuranceType { get; set; }
-        public string PaymentForm { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        private string _CIT;
+        public string CompanyInsuranceType
+        {
+            get => _CIT;
+            set
+            {
+                _CIT = value;
+                OnPropertyChanged("CompanyInsuranceType");
+            }
+        }
+        private string _pF;
+        public string PaymentForm 
+        { 
+            get => _pF; 
+            set
+            {
+                _pF = value;
+                OnPropertyChanged("PaymentForm");
+            }
+        }
+        private DateTime _st;
+        public DateTime StartDate
+        {
+            get => _st;
+            set
+            {
+                _st = value;
+                OnPropertyChanged("StartDate");
+            }
+        }
+        private DateTime _et;
+        public DateTime EndDate
+        {
+            get => _et;
+            set
+            {
+                _et = value;
+                OnPropertyChanged("EndDate");
+            }
+        }
 
-        public string InsuranceCompany { get; set; }
+        private string _IC;
+        public string InsuranceCompany 
+        {
+            get => _IC; 
+            set
+            {
+                _IC = value;
+                OnPropertyChanged("InsuranceCompany");
+            }
+        }
+
+        public DateTime Today => DateTime.Today.Date;
 
         #endregion
 

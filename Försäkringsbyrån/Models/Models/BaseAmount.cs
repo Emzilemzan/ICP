@@ -18,7 +18,6 @@ namespace Models.Models
         public int BaseAmountId { get; set; }
         public DateTime Date { get; set; }
         public int Baseamount{ get; set; }
-        public OptionalType OptionalTypeId { get; set; }
         public LifeInsurance LIFEID { get; set; }
     }
 }

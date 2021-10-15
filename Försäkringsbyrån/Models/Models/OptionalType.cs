@@ -18,7 +18,6 @@ namespace Models.Models
         [Key]
         public int OptionalTypeId { get; set; }
         public string OptionalName { get; set; }
-        public ICollection<BaseAmount> Amounts { get; set; }
         public ICollection<AckValueVariable> Variables { get; set; }
     } 
 }

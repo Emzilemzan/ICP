@@ -114,11 +114,11 @@
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
                   ScrollViewer.HorizontalScrollBarVisibility="Auto">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding Path=AckValueId }"/>
+                <DataGridTextColumn Header="Id" Binding="{Binding Path=AckValueID}"/>
                 <DataGridTextColumn Header="Datum" Binding="{Binding Date}" />
                 <DataGridTextColumn Header="Ack.värdevariabel" Binding="{Binding AckValue }" />
-                <DataGridTextColumn Header="Försäkringstyp" Binding="{Binding }" />
-                <DataGridTextColumn Header="Tillvalstyp" Binding="{Binding }" />
+                <DataGridTextColumn Header="Försäkringstyp" Binding="{Binding LIFEID.LifeName }" />
+                <DataGridTextColumn Header="Tillvalstyp" Binding="{Binding OptionalTypeId.OptionalName}" />
             </DataGrid.Columns>
         </DataGrid>
         

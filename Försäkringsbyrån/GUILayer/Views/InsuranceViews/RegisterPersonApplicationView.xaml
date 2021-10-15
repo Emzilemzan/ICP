@@ -196,20 +196,7 @@
                     </ComboBox>
                     <Label Content="*Grundbelopp:" FontSize="15" Grid.Row="10" Grid.Column="0" Margin="0,30,0,0" Visibility="{Binding Path=IsChecked,ElementName=Optional, Converter={StaticResource VisibleIfTrueConverter}}"/>
                     <ComboBox Grid.Row="10" Grid.Column="1" Text="" Margin="0,10,120,0" Width="130" Height="30" Visibility="{Binding Path=IsChecked,ElementName=Optional, Converter={StaticResource VisibleIfTrueConverter}}"
-                              ItemsSource="{Binding OptionalType.Amounts, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedItem="{Binding BAmount}">
-                        <ComboBox.Resources>
-                            <DataTemplate x:Key="DataTemplateBaseAmount">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock Text="{Binding Path= Baseamount}" Grid.Column="1" />
-                                </Grid>
-                            </DataTemplate>
-                        </ComboBox.Resources>
-                        <ComboBox.ItemTemplate>
-                            <StaticResource ResourceKey="DataTemplateBaseAmount"/>
-                        </ComboBox.ItemTemplate>
+                              ItemsSource="{Binding BaseAmountsOP2, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedItem="{Binding BAmount}">
                     </ComboBox>
                     <CheckBox x:Name="Optional1" IsChecked="{Binding BCheck, UpdateSourceTrigger=PropertyChanged}" Grid.Row="11" Content="Ska tillvalet: 'Invaliditet vid olycksfall' göras?" Grid.ColumnSpan="2" Margin="0,0,235,0"/>
 
@@ -235,7 +222,7 @@
 
                     <Label Content="*Grundbelopp:" FontSize="15" Grid.Row="13" Grid.Column="0" Visibility="{Binding Path=IsChecked,ElementName=Optional1, Converter={StaticResource VisibleIfTrueConverter}}"/>
                     <ComboBox Grid.Row="13" Grid.Column="1" Margin="0,30,120,0" Width="130" Height="30" Visibility="{Binding Path=IsChecked,ElementName=Optional1, Converter={StaticResource VisibleIfTrueConverter}}" 
-                              ItemsSource="{Binding OptionalType1.Amounts, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedItem="{Binding BAmount1}">
+                              ItemsSource="{Binding BaseAmountsOP1, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedItem="{Binding BAmount1}">
                         <ComboBox.Resources>
                             <DataTemplate x:Key="DataTemplateBaseAmount1">
                                 <Grid>

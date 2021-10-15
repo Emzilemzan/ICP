@@ -184,7 +184,8 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             ObservableCollection<UserAccess> x = new ObservableCollection<UserAccess>();
             foreach (var u in Context.UAController.GetAllUsers())
             {
-                x?.Add(u);
+                if(u.Username != "Admin")
+                    x?.Add(u);
             }
             Users = x;
             return Users;
