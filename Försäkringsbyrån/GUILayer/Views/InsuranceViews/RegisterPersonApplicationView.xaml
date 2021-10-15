@@ -94,6 +94,7 @@
 
                 </Grid>
             </StackPanel>
+         
             <StackPanel  Grid.Column="1" Grid.Row="2"  Grid.RowSpan="6">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -249,10 +250,8 @@
                     </ComboBox>
 
                    
-                    <Label Content="* Grundbelopp:" FontSize="15" Grid.Row="13" Margin="0,10,0,0" Visibility="{Binding Path=IsChecked,ElementName=Optional2, Converter={StaticResource VisibleIfTrueConverter}}"
-/>
-                    <ComboBox Grid.Row="13" Grid.Column="1" Margin="0,10,120,0" Height="30" Visibility="{Binding Path=IsChecked,ElementName=Optional2, Converter={StaticResource VisibleIfTrueConverter}}"
-/>
+                    <Label Content="* Grundbelopp:" FontSize="15" Grid.Row="13" Margin="0,10,0,0" Visibility="{Binding Path=IsChecked,ElementName=Optional2, Converter={StaticResource VisibleIfTrueConverter}}"/>
+                    <ComboBox Grid.Row="13" Grid.Column="1" Margin="0,10,120,0" Height="30" Visibility="{Binding Path=IsChecked,ElementName=Optional2, Converter={StaticResource VisibleIfTrueConverter}}"></ComboBox>
 
                     <Button Grid.Row="14" Grid.Column="1" Content="Registrera ansökan" Height="25" Margin="0,10,130,0" Command="{Binding AddInsuranceBtn}"/>
 
