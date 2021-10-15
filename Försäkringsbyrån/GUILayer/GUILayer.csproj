@@ -182,6 +182,9 @@
     <Compile Include="Views\InsuranceViews\RegisterPersonApplicationView.xaml.cs">
       <DependentUpon>RegisterPersonApplicationView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\InsuranceViews\SignedLifeInsuranceView.xaml.cs">
+      <DependentUpon>SignedLifeInsuranceView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\LogInView.xaml.cs">
       <DependentUpon>LogInView.xaml</DependentUpon>
     </Compile>
@@ -308,6 +311,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\InsuranceViews\RegisterPersonApplicationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InsuranceViews\SignedLifeInsuranceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
