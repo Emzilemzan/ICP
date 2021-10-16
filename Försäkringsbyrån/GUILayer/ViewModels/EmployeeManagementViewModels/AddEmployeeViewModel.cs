@@ -173,7 +173,7 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
                 MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
                 MainViewModel.Instance.CurrentTool = "";
                 HandleEmployeeViewModel.Instance.UpdateSM();
-                //RegisterPersonApplicationViewModel.Instance.UpdateSM();
+                RegisterPersonApplicationViewModel.Instance.UpdateSM();
                 RegisterLifeApplicationViewModel.Instance.UpdateSM();
                 Check = true;
                 Instance.AgentNumber = string.Empty;

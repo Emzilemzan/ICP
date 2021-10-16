@@ -110,6 +110,8 @@
     <Compile Include="ViewModels\InsuranceViewModels\RegisterOPICApplicationViewModel.cs" />
     <Compile Include="ViewModels\InsuranceViewModels\RegisterOPIPApplicationViewModel.cs" />
     <Compile Include="ViewModels\InsuranceViewModels\RegisterPersonApplicationViewModel.cs" />
+    <Compile Include="ViewModels\InsuranceViewModels\SignedInsuranceViewModel.cs" />
+    <Compile Include="ViewModels\InsuranceViewModels\SignedLifeInsuranceViewModel.cs" />
     <Compile Include="ViewModels\LogInViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModels\SearchApplicationViewModel.cs" />
@@ -184,6 +186,9 @@
     </Compile>
     <Compile Include="Views\InsuranceViews\RegisterPersonApplicationView.xaml.cs">
       <DependentUpon>RegisterPersonApplicationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InsuranceViews\SignedInsurancesView.xaml.cs">
+      <DependentUpon>SignedInsurancesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\InsuranceViews\SignedLifeInsuranceView.xaml.cs">
       <DependentUpon>SignedLifeInsuranceView.xaml</DependentUpon>
@@ -318,6 +323,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\InsuranceViews\RegisterPersonApplicationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InsuranceViews\SignedInsurancesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

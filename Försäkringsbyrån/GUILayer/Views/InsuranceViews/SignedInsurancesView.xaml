@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="GUILayer.Views.InsuranceViews.SignedInsurancesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GUILayer.Views.InsuranceViews"
+              xmlns:xctk1="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:insuranceviewmodels="clr-namespace:GUILayer.ViewModels.InsuranceViewModels" d:DataContext="{d:DesignInstance Type=insuranceviewmodels:SignedInsuranceViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="250" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="37"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Label Content="Ansökningar att teckna:" FontSize="20" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,167,0"/>
+
+        <xctk1:WatermarkTextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                TextWrapping="WrapWithOverflow"
+                                Watermark="Skriv ditt sök ord här..."
+                                Foreground="Black"
+                                Background="Transparent" BorderBrush="Transparent"
+                                Text="{Binding SearchInput, UpdateSourceTrigger=PropertyChanged}"/>
+
+
+        <DataGrid x:Name ="InsuranceGrid" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3" AutoGenerateColumns="False" ItemsSource="{Binding InsuranceGrid, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                  RowDetailsVisibilityMode="VisibleWhenSelected" 
+                  IsReadOnly="True" 
+                  SelectedItem="{Binding SelectedInsurance, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                  AlternatingRowBackground="Gainsboro"  AlternationCount="2"
+                  IsSynchronizedWithCurrentItem="True"
+                  ScrollViewer.CanContentScroll="True" 
+                  ScrollViewer.VerticalScrollBarVisibility="Auto"
+                  ScrollViewer.HorizontalScrollBarVisibility="Auto" Margin="0,0,54,0">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Löpnummer" Binding="{Binding Path = SerialNumber}"/>
+                <DataGridTextColumn Header="Försäkringstagare (org.nr/person.nr)" Binding="{Binding Path = TakerNbr}" />
+                <DataGridTextColumn Header="Försäkringstyp" Binding="{Binding Path = TypeName}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="Markerad försäkring:" Grid.Row="2" Grid.Column="3" FontSize="15"></Label>
+        <Label Content="Löpnummer:" Grid.Row="3" Grid.Column="3" FontSize="15"></Label>
+        <TextBox Grid.Row="2" IsReadOnly="True" Grid.Column="3" Text="{Binding SelectedInsurance.SerialNumber}" Margin="111,50.333,0,25" Grid.RowSpan="2"></TextBox>
+        <Button Grid.Row="4" Grid.Column="3" Content="Teckna" Command="{Binding ShowInsurance}" HorizontalAlignment="Right" Margin="0,0,0,24.667" Width="89"/>
+
+    </Grid>
+
+
+</UserControl>

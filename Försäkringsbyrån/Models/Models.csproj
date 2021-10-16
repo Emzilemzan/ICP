@@ -51,7 +51,6 @@
     <Compile Include="Models\CompanyInsurance.cs" />
     <Compile Include="Models\CustomerProspect.cs" />
     <Compile Include="Models\Insurance.cs" />
-    <Compile Include="Models\InsuranceType.cs" />
     <Compile Include="Models\InsuredPerson.cs" />
     <Compile Include="Models\LifeInsurance.cs" />
     <Compile Include="Models\OptionalType.cs" />

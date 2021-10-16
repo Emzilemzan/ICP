@@ -43,6 +43,8 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             {
                 SerialNumber = Instance.SerialNumber = GenerateIdFormation(),
                 PersonTaker = x,
+                TakerNbr = x.SocialSecurityNumber,
+                TypeName = Instance.SAIType.SAInsuranceType,
                 PaymentForm = Instance.PaymentForm,
                 InsuranceStatus = Status.Otecknad,
                 DeliveryDate = Instance.DeliveryDate,
@@ -61,6 +63,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             };
             Context.IController.AddInsuranceApplication(i);
             MessageBox.Show("Ansökan har lagts till");
+            new SignedInsuranceViewModel();
             Check = true;
             Instance.ACheck = false;
             Instance.BCheck = false;
@@ -99,7 +102,14 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             {
                 if (IPISPerson == false)
                 {
-                    AddInsurance();
+                    if (SAIType.SAID != 1)
+                    {
+                        AddInsurance();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Om försäkringstagaren är samma som försäkrad måste SO vara för vuxen. ");
+                    }
                 }
                 else
                 {
@@ -232,9 +242,10 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             List<Insurance> insurances = new List<Insurance>();
             foreach (var i in Context.IController.GetAllInsurances())
             {
-                if (i.SAI == Instance.SAIType)
+                if (i.SAI != null)
                 {
-                    insurances?.Add(i);
+                    if (SAIType.SAInsuranceType.Equals(i.SAI.SAInsuranceType))
+                        insurances?.Add(i);
                 }
             }
             if (insurances.Count < 1)
@@ -252,7 +263,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                 string num = Regex.Replace(x, @"\D", "");
 
                 int num1 = int.Parse(num);
-                int num2 = num1++;
+                int num2 = num1+ 1;
                 string newNum = num2.ToString();
 
                 y = str + newNum;
@@ -279,7 +290,6 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         {
             ObservableCollection<SAInsurance> x = new ObservableCollection<SAInsurance>();
 
-            x.Add(new SAInsurance() { SAID = 0, SAInsuranceType = "inget" });
             foreach (var e in Context.IController.GetAllSAI())
             {
                 x?.Add(e);

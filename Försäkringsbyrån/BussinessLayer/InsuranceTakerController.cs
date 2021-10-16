@@ -13,9 +13,6 @@ namespace BussinessLayer
     /// </summary>
     public class InsuranceTakerController
     {
-
-     
-
         public IEnumerable<Person> GetAllPersons() => BusinessController.Instance.Context.Persons.GetAll();
 
         public IEnumerable<Company> GetAllCompanies() => BusinessController.Instance.Context.Companies.GetAll();
@@ -67,8 +64,22 @@ namespace BussinessLayer
             BusinessController.Instance.Save();
         }
 
+        public bool CheckCompanyInInsurance(Company a)
+        {
+            bool result = false;
+            foreach (var i in BusinessController.Instance.IController.GetAllInsurances())
+            {
+                if (i.CompanyTaker != null)
+                {
+                    if (i.CompanyTaker.Equals(a))
+                    {
+                        result = true;
+                    }
+                }
+            }
+            return result;
+        }
         #endregion
-
         #region Persons
         public void AddPersonInsuranceTaker(Person insuranceTaker)
         {
@@ -114,6 +125,23 @@ namespace BussinessLayer
             BusinessController.Instance.Context.Persons.Update(sm);
             BusinessController.Instance.Save();
         }
+
+        public bool CheckPersonInInsurance(Person a)
+        {
+            bool result = false;
+            foreach (var i in BusinessController.Instance.IController.GetAllInsurances())
+            {
+                if(i.PersonTaker != null)
+                {
+                    if (i.PersonTaker.Equals(a))
+                    {
+                        result = true;
+                    }
+                }
+            }
+            return result;
+        }
+
 
 
         #endregion

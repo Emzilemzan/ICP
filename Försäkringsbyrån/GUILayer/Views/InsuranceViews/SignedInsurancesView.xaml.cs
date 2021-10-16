@@ -13,17 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GUILayer.Views.SearchViews
+namespace GUILayer.Views.InsuranceViews
 {
     /// <summary>
-    /// Interaction logic for SearchInsuranceTakerCompanyView.xaml
+    /// Interaction logic for SignedInsurancesView.xaml
     /// </summary>
-    public partial class SearchInsuranceTakerCompanyView : UserControl
+    public partial class SignedInsurancesView : UserControl
     {
-        public SearchInsuranceTakerCompanyView()
+        public SignedInsurancesView()
         {
             InitializeComponent();
         }
-
     }
 }

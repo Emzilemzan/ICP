@@ -26,6 +26,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             CInsuranceTypes = new List<string>() { "Kombinerad företagsförsäkring", "Fastighet" };
             CompanyInsurances = UpdateCompanyInsurances();
             StartDate = DateTime.Today;
+            EndDate = DateTime.Today;
         }
 
         #region commands and methods
@@ -61,47 +62,57 @@ namespace GUILayer.ViewModels.InsuranceViewModels
 
         private void AddInsurance()
         {
-            if (Instance._orgNbr != null && Instance.ContactPerson != null && Instance.CompanyName != null && Instance.City != null && Instance.AgentNo != null & Instance.DiallingCode != null
+            if (Instance._orgNbr != null  && Instance.CompanyName != null && Instance.City != null && Instance.AgentNo != null & Instance.DiallingCode != null
                  && Instance.CompanyInsuranceType != null && Instance.EndDate != null && Instance.StartDate != null && Instance.PaymentForm != null && Instance.StreetAddress != null &&
                  Instance.PostalCode != null && Instance.Premie != null)
             {
-                Insurance i = new Insurance()
+                if(Instance.EndDate >= Instance.StartDate)
                 {
-                    SerialNumber = Instance.SerialNumber = GenerateIdFormation(),
-                    AgentNo = Instance.AgentNo,
-                    COI = Instance.CompanyI,
-                    PaymentForm = Instance.PaymentForm,
-                    InsuranceCompany = Instance.InsuranceCompany,
-                    CompanyTaker = Instance.Company = AddCompany(),
-                    EndDate = Instance.EndDate,
-                    StartDate = Instance.StartDate,
-                    Notes = Instance.Notes,
-                    Premie = Instance._premie,
-                    InsuranceStatus = Status.Otecknad,
-                    CompanyInsuranceType = Instance.CompanyInsuranceType,
-                };
-                Context.IController.AddInsuranceApplication(i);
-                MessageBox.Show("Ansökan har lagts till");
-                Check = true;
-                Instance.OrganizationNumber = string.Empty;
-                Instance.AgentNo = null;
-                Instance.City = string.Empty;
-                Instance.StreetAddress = string.Empty;
-                Instance.TelephoneNbr = string.Empty;
-                Instance.DiallingCode = string.Empty;
-                Instance.Email = string.Empty;
-                Instance.EndDate = Today;
-                Instance.StartDate = Today;
-                Instance.CompanyName = string.Empty;
-                Instance.Premie = string.Empty;
-                Instance.PaymentForm = null;
-                Instance.PostalCode = string.Empty;
-                Instance.Notes = string.Empty;
-                Instance.FaxNumber = string.Empty;
-                Instance.InsuranceCompany = string.Empty;
-                Instance.CompanyI = null;
-                Instance.Company = null;
-                Instance.CompanyInsuranceType = null;
+                    Insurance i = new Insurance()
+                    {
+                        SerialNumber = Instance.SerialNumber = GenerateIdFormation(),
+                        AgentNo = Instance.AgentNo,
+                        TakerNbr = Instance.OrganizationNumber,
+                        TypeName = Instance.CompanyI.COIName,
+                        COI = Instance.CompanyI,
+                        PaymentForm = Instance.PaymentForm,
+                        InsuranceCompany = Instance.InsuranceCompany,
+                        CompanyTaker = Instance.Company = AddCompany(),
+                        EndDate = Instance.EndDate,
+                        StartDate = Instance.StartDate,
+                        Notes = Instance.Notes,
+                        Premie = Instance._premie,
+                        InsuranceStatus = Status.Otecknad,
+                        CompanyInsuranceType = Instance.CompanyInsuranceType,
+                    };
+                    Context.IController.AddInsuranceApplication(i);
+                    MessageBox.Show("Ansökan har lagts till");
+                    SignedInsuranceViewModel.Instance.UpdateAC();
+                    Check = true;
+                    Instance.OrganizationNumber = string.Empty;
+                    Instance.AgentNo = null;
+                    Instance.City = string.Empty;
+                    Instance.StreetAddress = string.Empty;
+                    Instance.TelephoneNbr = string.Empty;
+                    Instance.DiallingCode = string.Empty;
+                    Instance.Email = string.Empty;
+                    Instance.EndDate = Today;
+                    Instance.StartDate = Today;
+                    Instance.CompanyName = string.Empty;
+                    Instance.Premie = string.Empty;
+                    Instance.PaymentForm = null;
+                    Instance.PostalCode = string.Empty;
+                    Instance.Notes = string.Empty;
+                    Instance.FaxNumber = string.Empty;
+                    Instance.InsuranceCompany = string.Empty;
+                    Instance.CompanyI = null;
+                    Instance.Company = null;
+                    Instance.CompanyInsuranceType = null;
+                }
+                else
+                {
+                    MessageBox.Show("Förfallodagen kan inte uppstå tidigare än Begynnelsedatumet", "Fel", MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
             }
             else
             {
@@ -161,12 +172,15 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             List<Insurance> insurances = new List<Insurance>();
             foreach (var i in Context.IController.GetAllInsurances())
             {
-                if (i.COI == Instance.CompanyI)
+                if(i.COI != null)
                 {
-                    insurances?.Add(i);
+                    if (CompanyI.COIName.Equals(i.COI.COIName))
+                    {
+                        insurances?.Add(i);
+                    }
                 }
             }
-            if (insurances.Count < 1)
+            if (insurances == null)
             {
                 string str = "FF";
                 string num = "1";
@@ -181,7 +195,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                 string num = Regex.Replace(x, @"\D", "");
 
                 int num1 = int.Parse(num);
-                int num2 = num1++;
+                int num2 = num1+ 1;
                 string newNum = num2.ToString();
 
                 y = str + newNum;
@@ -371,7 +385,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             {
                 if(Check == false)
                 {
-                    if (int.TryParse(value, out _premie) && _premie.ToString().Length == 5)
+                    if (int.TryParse(value, out _premie))
                     {
                         OnPropertyChanged("Premie");
                     }

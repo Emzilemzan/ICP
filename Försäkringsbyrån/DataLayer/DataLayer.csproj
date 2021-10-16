@@ -74,10 +74,8 @@
     <Compile Include="InterfaceRepository\IEmployeeRepository.cs" />
     <Compile Include="InterfaceRepository\IGenericRepository.cs" />
     <Compile Include="InterfaceRepository\IInsuranceRepository.cs" />
-    <Compile Include="InterfaceRepository\IInsuranceTypeRepository.cs" />
     <Compile Include="InterfaceRepository\IInsuredPersonRepository.cs" />
     <Compile Include="GenericRepository\InsuranceRepository.cs" />
-    <Compile Include="GenericRepository\InsuranceTypeRepository.cs" />
     <Compile Include="GenericRepository\InsuredPersonRepository.cs" />
     <Compile Include="InterfaceRepository\ILifeInsuranceRepository.cs" />
     <Compile Include="InterfaceRepository\IOptionalTypeRepository.cs" />

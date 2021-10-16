@@ -27,7 +27,6 @@ namespace DataLayer.UnitOfWork
         public IOptionalTypeRepository OptionalTypes { get; }
         public IAckValueVariableRepository AckValues { get; }
         public ICommissionRepository CommissionShares { get; }
-        public IInsuranceTypeRepository InsuranceTypes { get; }
         public ILifeInsuranceRepository LifeInsurances { get; }
         public IOtherPersonInsuranceRepository OPInsurances { get; }
         public ICompanyInsuranceRepository CIInsurances { get; }
@@ -46,12 +45,11 @@ namespace DataLayer.UnitOfWork
             VPays = new VacationPayRepository(_context);
             AckValues = new AckValueVariableRepository(_context);
             CommissionShares = new CommissionRepository(_context);
-            InsuranceTypes = new InsuranceTypeRepository(_context);
             SAInsurances = new SAInsuranceRepository(_context);
             LifeInsurances = new LifeInsuranceRepository(_context);
             OPInsurances = new OtherPersonInsuranceRepository(_context);
             CIInsurances = new CompanyInsuranceRepository(_context);
-            Init();
+            //Init();
         }
         public void Init() => _context.Reset();
         public int Complete() => _context.SaveChanges();

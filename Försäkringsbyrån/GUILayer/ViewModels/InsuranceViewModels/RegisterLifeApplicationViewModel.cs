@@ -38,6 +38,8 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                 {
                     SerialNumber = Instance.SerialNumber = GenerateIdFormation(),
                     PersonTaker = x,
+                    TakerNbr = x.SocialSecurityNumber,
+                    TypeName = Instance.LType.LifeName,
                     PaymentForm = Instance.PaymentForm,
                     InsuranceStatus = Status.Otecknad,
                     DeliveryDate = Instance.DeliveryDate,
@@ -50,6 +52,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
 
                 Context.IController.AddInsuranceApplication(i);
                 MessageBox.Show("Ansökan har lagts till");
+                SignedInsuranceViewModel.Instance.UpdateAC();
                 Check = true;
                 Instance.BAmount = null;
                 Instance.AgentNo = null;
@@ -168,9 +171,12 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             List<Insurance> insurances = new List<Insurance>();
             foreach (var i in Context.IController.GetAllInsurances())
             {
-                if(i.LIFE == Instance.LType)
+                if (i.LIFE != null)
                 {
-                    insurances?.Add(i);
+                    if (LType.LifeName.Equals(i.LIFE.LifeName))
+                    {
+                        insurances?.Add(i);
+                    }
                 }
             }
             if(insurances.Count < 1)
@@ -188,7 +194,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                 string num = Regex.Replace(x, @"\D", "");
 
                 int num1 = int.Parse(num);
-                int num2 = num1++;
+                int num2 = num1 + 1;
                 string newNum = num2.ToString();
 
                 y = str + newNum;
@@ -198,7 +204,10 @@ namespace GUILayer.ViewModels.InsuranceViewModels
 
         #endregion
 
+
+
         #region updating of lists
+
         //Update all baseamounts for a specific optionalinsurances and for the delivery year.  
         public ICollection<BaseAmount> UpdateBaseAmount()
         {
@@ -230,7 +239,6 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         {
             ObservableCollection<LifeInsurance> x = new ObservableCollection<LifeInsurance>();
 
-            x.Add(new LifeInsurance() { LifeID = 0, LifeName = "inget" });
             foreach (var e in Context.IController.GetAllLIFE())
             {
                 x?.Add(e);

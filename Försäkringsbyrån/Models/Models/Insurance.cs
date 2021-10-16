@@ -46,11 +46,16 @@ namespace Models.Models
         public CompanyInsurance COI { get; set; }
         public OtherPersonInsurance OPI { get; set; }
 
+        public string TypeName { get; set; }
+
         #endregion
 
         #region Takers
         public Person PersonTaker { get; set; }
         public Company CompanyTaker { get; set; }
+
+        public string TakerNbr { get; set; }
+
         #endregion
 
         #region SingedInsurance
