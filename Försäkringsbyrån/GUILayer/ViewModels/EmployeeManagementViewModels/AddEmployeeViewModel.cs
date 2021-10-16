@@ -1,4 +1,5 @@
 ﻿using GUILayer.Commands;
+using GUILayer.ViewModels.InsuranceViewModels;
 using GUILayer.ViewModels.SearchViewModels;
 using Models.Models;
 using System;
@@ -75,15 +76,14 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             get => _postalCode > 0 ? _postalCode.ToString() : "";
             set
             {
-                if (int.TryParse(value, out _postalCode) && _postalCode.ToString().Length > 0 && _postalCode.ToString().Length < 6 && _postalCode != 0)
+                if (int.TryParse(value, out _postalCode) && Postalcode.Length < 6 && Postalcode.Length > 0)
                 {
-                    OnPropertyChanged("PostalCode");
+                    OnPropertyChanged("Postalcode");
                 }
                 else if (Check == false)
                 {
-                    MessageBox.Show("Postnumret måste vara 5siffrigt!");
+                    MessageBox.Show("Måste vara fem siffror");
                 }
-
             }
         }
         private string _city;
@@ -173,6 +173,8 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
                 MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
                 MainViewModel.Instance.CurrentTool = "";
                 HandleEmployeeViewModel.Instance.UpdateSM();
+                //RegisterPersonApplicationViewModel.Instance.UpdateSM();
+                RegisterLifeApplicationViewModel.Instance.UpdateSM();
                 Check = true;
                 Instance.AgentNumber = string.Empty;
                 Instance.Firstname = string.Empty;

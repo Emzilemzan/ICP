@@ -12,7 +12,7 @@ namespace Models.Models
     [Table("Försäkring", Schema = "dbo")]
     public class Insurance
     {
-        [Key]
+        [Key, DatabaseGenerat‌ed(DatabaseGeneratedOp‌​tion.None)]
         public string SerialNumber { get; set; } 
         public InsuredPerson InsuredID { get; set; }
         public SalesMen AgentNo { get; set; }
@@ -26,11 +26,8 @@ namespace Models.Models
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public string Notes { get; set; }
-        public int BaseAmount { get; set; }
-        public int Ackvalue { get; set; }
         public string CompanyInsuranceType { get; set; }
-
-
+        public int BaseAmountValue { get; set; }
 
 
         #region InsuranceTypes

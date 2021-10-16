@@ -105,6 +105,9 @@
         <DataTemplate DataType="{x:Type spvm:GetTrendstatitcsViewModel}">
             <spv:GetTrendstatitics/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type ivm:RegisterLifeApplicationViewModel}">
+            <iv:RegisterLifeApplicationView/>
+        </DataTemplate>
         <!--#region Exit Button Style-->
         <Style x:Key="ExitBtnStyle" TargetType="{x:Type Button}">
             <Setter Property="Background" Value="Transparent"/>

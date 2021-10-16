@@ -9,6 +9,7 @@ namespace BussinessLayer
 {
     public class InsuranceController
     {
+        public IEnumerable<Insurance> GetAllInsurances() => BusinessController.Instance.Context.Insurances.GetAll();
         #region Insurance for InsuranceTaker. 
         public List<Insurance> GetInsuranceTakerIA(Person insuranceTaker) => insuranceTaker.Insurances?.OrderByDescending(i => i.InsuranceNumber).ToList();
         public List<Insurance> GetInsuranceTakerIAS(Person insuranceTaker)
@@ -17,12 +18,17 @@ namespace BussinessLayer
             GetInsuranceTakerIA(insuranceTaker)?.ForEach(p => applications.Add(p));
             return applications.OrderByDescending(i => i.InsuranceNumber).ToList();
         }
-        public void AddInsuranceApplication(Insurance insuranceApplication)
+        public void AddInsuranceApplication(Insurance insuranceApplication, Person p)
         {
-            insuranceApplication.PersonTaker.Insurances.Add(insuranceApplication);
+            p.Insurances.Add(insuranceApplication);
             BusinessController.Instance.Save();
         }
-        public void RemoveInsuranceApplication(Insurance insuranceApplication)
+        public void AddInsuranceApplication(Insurance insuranceApplication)
+        {
+            BusinessController.Instance.Context.Insurances.Add(insuranceApplication);
+            BusinessController.Instance.Save();
+        }
+        public void RemoveInsuranceApplication(Insurance insuranceApplication, Person p)
         {
             insuranceApplication.PersonTaker.Insurances.Remove(insuranceApplication);
             BusinessController.Instance.Save();

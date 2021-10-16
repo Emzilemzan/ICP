@@ -24,6 +24,7 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             SAID = SAInsuranceTypes[0];
         }
         #region commands
+
         private ICommand _addBtn;
         public ICommand AddBaseAmountTableValue_Btn
         {
@@ -43,9 +44,8 @@ namespace GUILayer.ViewModels.BasicDataViewModels
                     Date = Instance._date,
                     SAID = Instance.SAID,
                 };
-                Context.BDController.AddBaseAmountTable(baseAmountTabel);
+                Context.BDController.CheckNbrOfBASA(Instance.SAID, Instance.Date, baseAmountTabel);
  
-                MessageBox.Show("Grunddatan är uppdaterad");
                 Tabels.Clear();
                 foreach (var t in Context.BDController.GetAllTables())
                 {
@@ -61,6 +61,8 @@ namespace GUILayer.ViewModels.BasicDataViewModels
                 MessageBox.Show("Inget fält får lämnas tomt!");
             }
         }
+
+
         //Method that removes baseamounttabel based on what id it has in database. 
         //Needs a control here, if it exists in insurance you can't delete it. 
         private void RemoveBaseAmountTable()
@@ -95,10 +97,7 @@ namespace GUILayer.ViewModels.BasicDataViewModels
         {
             get => remove_Btn ?? (remove_Btn = new RelayCommand(x => { RemoveBaseAmountTable(); CanCreate(); }));
         }
-
-
         #endregion
-
         private ObservableCollection<BaseAmountTabel> UpdateTabels()
         {
             ObservableCollection<BaseAmountTabel> x = new ObservableCollection<BaseAmountTabel>();

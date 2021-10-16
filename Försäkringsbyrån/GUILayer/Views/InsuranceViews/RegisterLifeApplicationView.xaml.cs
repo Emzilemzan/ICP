@@ -16,15 +16,13 @@ using System.Windows.Shapes;
 namespace GUILayer.Views.InsuranceViews
 {
     /// <summary>
-    /// Interaction logic for RegisterPersonApplicationView.xaml
+    /// Interaction logic for RegisterLifeApplicationView.xaml
     /// </summary>
-    public partial class RegisterPersonApplicationView : UserControl
+    public partial class RegisterLifeApplicationView : UserControl
     {
-
-        public RegisterPersonApplicationView()
+        public RegisterLifeApplicationView()
         {
             InitializeComponent();
         }
-
     }
 }

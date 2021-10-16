@@ -26,7 +26,7 @@ namespace GUILayer.ViewModels
         private MainViewModel()
         {
             _selectedViewModel = LogInViewModel.Instance;
-            _toolsVisibility = Visibility.Hidden;
+            _toolsVisibility = Visibility.Hidden; 
             CreateOptionalTypes();
             CreateSAInsurances();
             CreateOtherPersonInsurance();
@@ -279,10 +279,8 @@ namespace GUILayer.ViewModels
         private void CreateSAInsurances()
         {
             List<SAInsurance> SAList = new List<SAInsurance>();
-
-
             SAList.Add(new SAInsurance { SAID = 1, SAInsuranceType = "Sjuk- och olycksfallsförsäkring för barn" });
-            SAList.Add(new SAInsurance { SAID = 2, SAInsuranceType = "Sjuk- och olycksfallsförsäkring för vuxen" });
+            SAList.Add(new SAInsurance { SAID = 2, SAInsuranceType = "Sjuk- och olycksfallsförsäkring för vuxen"});
 
             List<SAInsurance> NewList = new List<SAInsurance>();
             foreach (var i in Context.IController.GetAllSAI())
@@ -349,7 +347,7 @@ namespace GUILayer.ViewModels
             List<OtherPersonInsurance> OPList = new List<OtherPersonInsurance>();
 
 
-            OPList.Add(new OtherPersonInsurance { OPIId = 1, OPIName ="Övrig personförsäkring"  });
+            OPList.Add(new OtherPersonInsurance { OPIId = 1, OPIName ="Övrig personförsäkring för vuxen" });
 
             List<OtherPersonInsurance> NewList = new List<OtherPersonInsurance>();
 

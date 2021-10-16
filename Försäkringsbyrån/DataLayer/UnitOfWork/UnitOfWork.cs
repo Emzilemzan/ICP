@@ -14,15 +14,12 @@ namespace DataLayer.UnitOfWork
     public class UnitOfWork : IUnitOfWork
     {
         private readonly ApplicationContext _context;
-
         public IEmployeeRepository Employees { get; }
         public IInsuranceRepository Insurances { get; }
         public IInsuredPersonRepository InsuredPersons { get; }
         public IPersonRepository Persons { get; }
         public ICompanyRepository Companies { get; }
-
         public IAccessRepository Accesses { get; }
-
         public IBaseAmountTableRepository Tables { get; }
         public ISAInsuranceRepository SAInsurances { get; }
         public IVacationPayRepository VPays { get; }
@@ -30,14 +27,10 @@ namespace DataLayer.UnitOfWork
         public IOptionalTypeRepository OptionalTypes { get; }
         public IAckValueVariableRepository AckValues { get; }
         public ICommissionRepository CommissionShares { get; }
-
         public IInsuranceTypeRepository InsuranceTypes { get; }
-
         public ILifeInsuranceRepository LifeInsurances { get; }
         public IOtherPersonInsuranceRepository OPInsurances { get; }
-
         public ICompanyInsuranceRepository CIInsurances { get; }
-
         public UnitOfWork()
         {
             _context = new ApplicationContext();
@@ -58,12 +51,10 @@ namespace DataLayer.UnitOfWork
             LifeInsurances = new LifeInsuranceRepository(_context);
             OPInsurances = new OtherPersonInsuranceRepository(_context);
             CIInsurances = new CompanyInsuranceRepository(_context);
-            //Init();
+            Init();
         }
-        //public void Init() => _context.Reset();
+        public void Init() => _context.Reset();
         public int Complete() => _context.SaveChanges();
-
         public void Dispose() => _context.Dispose();
-        
     }
 }

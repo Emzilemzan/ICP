@@ -16,8 +16,7 @@ namespace Models.Models
     public class InsuredPerson
     {
         [Key]
-        public int InsuredID { get; set; }
-
+        public int InsuredId { get; set; }
         public string SocialSecurityNumber { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }

@@ -13,21 +13,31 @@ namespace BussinessLayer
     public class InsuredPersonController
     {
         #region InsurancePerson that belongs to a InsuranceTaker. 
-        public List<InsuredPerson> GetInsuranceTakerIP(Person insuranceTaker) => insuranceTaker.InsuredPersons?.OrderByDescending(i => i.InsuredID).ToList();
+        public List<InsuredPerson> GetInsuranceTakerIP(Person insuranceTaker) => insuranceTaker.InsuredPersons?.OrderByDescending(i => i.InsuredId).ToList();
+
+        public InsuredPerson GetPerson(string id) => BusinessController.Instance.Context.InsuredPersons.GetById(id);
+
         public List<InsuredPerson> GetInsuranceTakerIPS(Person insuranceTaker)
         {
             List<InsuredPerson> insuredPeople = new List<InsuredPerson>();
             GetInsuranceTakerIP(insuranceTaker)?.ForEach(p => insuredPeople.Add(p));
-            return insuredPeople.OrderByDescending(i => i.InsuredID).ToList();
+            return insuredPeople.OrderByDescending(i => i.InsuredId).ToList();
         }
-        public void AddInsuredPerson(InsuredPerson insuredPerson)
+        public void AddInsuredPersonOnPersontaker(InsuredPerson insuredPerson, Person p)
         {
-            insuredPerson.PersonTaker.InsuredPersons.Add(insuredPerson);
+            p.InsuredPersons.Add(insuredPerson);
             BusinessController.Instance.Save();
         }
-        public void RemoveInsuredPerson(InsuredPerson insuredPerson)
+
+        public void AddInsuredPerson(InsuredPerson insuredPerson)
         {
-            insuredPerson.PersonTaker.InsuredPersons.Remove(insuredPerson);
+            BusinessController.Instance.Context.InsuredPersons.Add(insuredPerson);
+            BusinessController.Instance.Save();
+        }
+
+        public void RemoveInsuredPerson(InsuredPerson insuredPerson, Person p)
+        {
+            p.InsuredPersons.Remove(insuredPerson);
             BusinessController.Instance.Save();
         }
 
