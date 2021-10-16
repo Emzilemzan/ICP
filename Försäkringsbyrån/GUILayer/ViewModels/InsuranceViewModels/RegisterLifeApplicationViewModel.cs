@@ -39,8 +39,6 @@ namespace GUILayer.ViewModels.InsuranceViewModels
               && Instance.PaymentForm != null && Instance.DeliveryDate != null && Instance.DeliveryDate != null && Instance.LType != null
               && Instance.AgentNo != null)
                     {
-
-
                         Person x = Instance.Personen = AddInsuranceTaker();
                         Insurance i = new Insurance()
                         {
@@ -85,7 +83,6 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                     }
             }
         }
-
         private Person AddInsuranceTaker()
         {
             Person newP = new Person()

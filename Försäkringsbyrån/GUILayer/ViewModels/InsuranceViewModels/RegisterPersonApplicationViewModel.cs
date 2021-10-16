@@ -328,8 +328,6 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         }
         #endregion
 
-
-
         #region lists
         //First list
         public ObservableCollection<OptionalType> OptionalTypes { get; set; }
