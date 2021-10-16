@@ -21,8 +21,8 @@ namespace Models.Models
         public string LastName { get; set; }
         public string FirstName { get; set; }
         public string PersonType { get; set; }
-        //public virtual InsuranceTaker Taker { get; set; }
         public virtual Person PersonTaker { get; set; }
+        public virtual Company CompanyTaker { get; set; }
 
     }
 }

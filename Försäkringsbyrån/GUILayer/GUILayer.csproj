@@ -85,6 +85,9 @@
     <Compile Include="Commands\EventArgs.cs" />
     <Compile Include="Commands\EventRaiser.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Components\BindPasswordBox.xaml.cs">
+      <DependentUpon>BindPasswordBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\BasicDataViewModels\AckValueVariableTableViewModel.cs" />
     <Compile Include="ViewModels\BasicDataViewModels\BaseAmountOptionViewModel.cs" />
@@ -218,6 +221,10 @@
     <Compile Include="Views\StatisticsAndProspectusViews\StatisticsAndProspectusView.xaml.cs">
       <DependentUpon>StatisticsAndProspectusView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Components\BindPasswordBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

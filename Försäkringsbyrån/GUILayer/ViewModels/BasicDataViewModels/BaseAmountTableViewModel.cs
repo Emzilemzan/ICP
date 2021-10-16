@@ -141,13 +141,13 @@ namespace GUILayer.ViewModels.BasicDataViewModels
         }
      
 
-        private double _baseAmount;
+        private int _baseAmount;
         public string BaseAmount
         {
             get => _baseAmount > 0 ? _baseAmount.ToString() : "";
             set
             {
-                if (double.TryParse(value, out _baseAmount))
+                if (int.TryParse(value, out _baseAmount))
                 { OnPropertyChanged("BaseAmount"); }
             }
         }

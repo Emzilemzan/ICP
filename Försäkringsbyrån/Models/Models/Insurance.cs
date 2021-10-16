@@ -34,10 +34,10 @@ namespace Models.Models
         public int BaseAmountValue2 { get; set; }
         public int BaseAmountValue3 { get; set; }
         public int BaseAmountValue4 { get; set; }
-        public int AckValue { get; set; }
-        public int AckValue2 { get; set; }
-        public int AckValue3 { get; set; }
-        public int AckValue4 { get; set; }
+        public double AckValue { get; set; }
+        public double AckValue2 { get; set; }
+        public double AckValue3 { get; set; }
+        public double AckValue4 { get; set; }
         #endregion
 
         #region InsuranceTypes

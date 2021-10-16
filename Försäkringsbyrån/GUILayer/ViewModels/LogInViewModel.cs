@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 
 namespace GUILayer.ViewModels
 {
@@ -20,6 +22,25 @@ namespace GUILayer.ViewModels
         private LogInViewModel()
         {
             
+        }
+
+        public ICommand LogInBtn => new RelayCommand(LogIn, CanLogIn);
+
+        public bool CanLogIn(object value) => true;
+
+        private void LogIn(object value)
+        {
+            bool result = Context.UAController.ValidateEmployee(Username, Password);
+            if (result == false)
+            {
+                MessageBox.Show("Användarnamn eller lösenord stämmer inte", "Fel uppgifter", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                MainViewModel.Instance.DisplayHomeView();
+                Instance.Username = string.Empty;
+                Instance.Password = string.Empty;
+            }
         }
 
         private string _username;

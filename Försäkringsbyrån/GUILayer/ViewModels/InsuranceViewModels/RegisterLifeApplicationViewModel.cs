@@ -31,12 +31,6 @@ namespace GUILayer.ViewModels.InsuranceViewModels
 
         private void AddInsurance()
         {
-            if (Instance.SocialSecurityNumber != null && Instance.City != null && Instance.Firstname != null && Instance.Lastname != null && Instance.PostalCode != null && Instance.EmailOne != null && Instance.StreetAddress != null
-              && Instance.DiallingCodeHome != null && Instance.TelephoneNbrHome != null && Instance.LastName != null && Instance.FirstName != null && Instance.SocialSecurityNumberIP != null
-              && Instance.PaymentForm != null && Instance.DeliveryDate != null && Instance.DeliveryDate != null && Instance.LType != null
-              && Instance.AgentNo != null)
-            {
-                
                 Person x = Instance.Personen = AddInsuranceTaker();
                 InsuredPerson insured = Instance.InsuredPerson = AddInsured(x);
 
@@ -51,7 +45,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                     InsuredID = insured,
                     LIFE = Instance.LType,
                     BaseAmountValue = Instance.BAmount.Baseamount,
-                    //AckValue = Instance.
+                    AckValue4 = Instance.AckValue4 = Context.BDController.CountAckvalueLife(Instance.DeliveryDate, Instance.LType, Instance.BAmount.Baseamount),
                 };
 
                 Context.IController.AddInsuranceApplication(i);
@@ -77,12 +71,32 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                 Instance.Firstname = string.Empty;
                 Instance.PaymentForm = null;
                 Instance.PostalCode = string.Empty;
+            
+        }
+
+        private void BoxesCheckInsurance()
+        {
+            if (Instance.SocialSecurityNumber != null && Instance.City != null && Instance.Firstname != null && Instance.Lastname != null && Instance.PostalCode != null && Instance.EmailOne != null && Instance.StreetAddress != null
+              && Instance.DiallingCodeHome != null && Instance.TelephoneNbrHome != null
+              && Instance.PaymentForm != null && Instance.DeliveryDate != null && Instance.DeliveryDate != null && Instance.LType != null
+              && Instance.AgentNo != null)
+            {
+                if (IPISPerson == false)
+                {
+                    AddInsurance();
+                }
+                else
+                {
+                    if (Instance.LastName != null && Instance.FirstName != null && Instance.SocialSecurityNumberIP != null)
+                        AddInsurance();
+                }
             }
             else
             {
                 MessageBox.Show("Alla fält med en stjärna är obligatoriska!");
             }
         }
+
         private void RegisterApplication()
         {
             Person y = Context.ITController.GetPerson(Instance.SocialSecurityNumber);
@@ -91,12 +105,12 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                 MessageBoxResult result = MessageBox.Show($"Det finns redan en försäkringstagare med det inskrivna personnumret vid namn: {y.Firstname} {y.Lastname} vill du uppdatera dessa uppgifter?", "Varning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 if (result == MessageBoxResult.Yes)
                 {
-                    AddInsurance();
+                    BoxesCheckInsurance();
                 }
             }
             else
             {
-                AddInsurance();
+                BoxesCheckInsurance();
             }
         }
 
@@ -127,7 +141,6 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         {
             InsuredPerson newInp = new InsuredPerson()
             {
-                InsuredId = Instance.InsuredID,
                 FirstName = Instance.FirstName,
                 LastName = Instance.LastName,
                 SocialSecurityNumber = Instance.SocialSecurityNumberIP,
@@ -135,7 +148,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                 PersonTaker = p,
             };
             Context.IPController.AddInsuredPerson(newInp);
-
+            InsuredPerson = newInp;
             return InsuredPerson;
         }
         private bool CanCreate() => true;
@@ -279,6 +292,8 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                 OnPropertyChanged("StreetAddress");
             }
         }
+
+
         private int _pC;
         public string PostalCode
         {
@@ -371,25 +386,20 @@ namespace GUILayer.ViewModels.InsuranceViewModels
 
         #endregion
         #region properties for insured person
-        private int _insuredId;
-        public int InsuredID
-        {
-            get => _insuredId;
-            set
-            {
-                _insuredId = value;
-                OnPropertyChanged("InsuredID");
-            }
-        }
-
-
         private string _sSNIP;
         public string SocialSecurityNumberIP
         {
             get => _sSNIP;
             set
             {
-                _sSNIP = value;
+                if (IPISPerson == false)
+                {
+                    _sSNIP = SocialSecurityNumber;
+                }
+                else
+                {
+                    _sSNIP = value;
+                }
                 OnPropertyChanged("SocialSecurityNumberIP");
             }
         }
@@ -399,7 +409,14 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             get => _lName;
             set
             {
-                _lName = value;
+                if (IPISPerson == false)
+                {
+                    _lName = Lastname;
+                }
+                else
+                {
+                    _lName = value;
+                }
                 OnPropertyChanged("LastName");
             }
         }
@@ -410,12 +427,31 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             get => _fName;
             set
             {
-                _fName = value;
+                if (IPISPerson == false)
+                {
+                    _fName = Firstname;
+                }
+                else
+                {
+                    _fName = value;
+                }
                 OnPropertyChanged("FirstName");
             }
         }
         #endregion
         #region properties for insurance
+
+        private double _av4;
+        public double AckValue4
+        {
+            get => _av4;
+            set
+            {
+                _av4 = value;
+                OnPropertyChanged("AckValue4");
+            }
+        }
+
         private LifeInsurance _Ltype;
         //The selection of _Ltype is responsible for populating the BaseAmounts collection based on their date.
         public LifeInsurance LType
@@ -535,6 +571,17 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             private set
             {
                 _check = value;
+            }
+        }
+
+        private bool _IPISPerson;
+        public bool IPISPerson
+        {
+            get => _IPISPerson;
+            set
+            {
+                _IPISPerson = value;
+                OnPropertyChanged("IPISPerson");
             }
         }
 

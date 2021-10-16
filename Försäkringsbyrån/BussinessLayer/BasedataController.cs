@@ -202,6 +202,47 @@ namespace BussinessLayer
                 MessageBox.Show("Finns ingen grunddata med det id.t att ta bort"); 
             }
         }
+
+        public double CountAckvalueOt(DateTime d, OptionalType ot, int i)
+        {
+            double y = 0;
+            if (i == 0 && ot == null)
+            {
+                y = 0;
+            }
+            else
+            {
+                foreach (var av in GetAllAckValues())
+                {
+                    if (d.Year.Equals(av.Date.Year) && ot.Equals(av.OptionalTypeId))
+                    {
+                        y = i * av.AckValue;
+                    }
+                }
+            }
+            return y;
+        }
+
+        public double CountAckvalueLife(DateTime d, LifeInsurance l, int i)
+        {
+            double y = 0;
+            if (i == 0 && l==null)
+            {
+                y = 0;
+            }
+            else
+            {
+                foreach (var av in GetAllAckValues())
+                {
+                    if (d.Year.Equals(av.Date.Year) && l.Equals(av.LIFEID))
+                    {
+                        y = i * av.AckValue;
+                    }
+                }
+            }
+            
+            return y;
+        }
         #endregion
 
         #region Controls for Commission

@@ -15,7 +15,7 @@ namespace BussinessLayer
         #region InsurancePerson that belongs to a InsuranceTaker. 
         public List<InsuredPerson> GetInsuranceTakerIP(Person insuranceTaker) => insuranceTaker.InsuredPersons?.OrderByDescending(i => i.InsuredId).ToList();
 
-        public InsuredPerson GetPerson(string id) => BusinessController.Instance.Context.InsuredPersons.GetById(id);
+       
 
         public List<InsuredPerson> GetInsuranceTakerIPS(Person insuranceTaker)
         {

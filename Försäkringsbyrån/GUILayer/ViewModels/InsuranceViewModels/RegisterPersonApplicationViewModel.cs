@@ -18,6 +18,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         {
             SalesMens = UpdateSM();
             PersonTypes = new List<string>() { "Vuxen", "Barn" };
+            PersonType = PersonTypes[0];
             PayMentForms = new List<string>() { "Helår", "Halvår", "Kvartal", "Månad" };
             OptionalTypes = UpdateOptionalType();
             OptionalTypes1 = UpdateOptionalType1();
@@ -33,6 +34,85 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             OptionalType2 = OptionalTypes2[0];
         }
         #region commands and methods for it. 
+
+        private void AddInsurance()
+        {
+            Person x = Instance.Personen = AddInsuranceTaker();
+            InsuredPerson insured = Instance.InsuredPerson = AddInsured(x);
+            Insurance i = new Insurance()
+            {
+                SerialNumber = Instance.SerialNumber = GenerateIdFormation(),
+                PersonTaker = x,
+                PaymentForm = Instance.PaymentForm,
+                InsuranceStatus = Status.Otecknad,
+                DeliveryDate = Instance.DeliveryDate,
+                AgentNo = Instance.AgentNo,
+                InsuredID = insured,
+                OptionalTypes = OTypes(),
+                BaseAmountValue = Instance._barll,
+                AckValue = Instance.AckValue = Context.BDController.CountAckvalueOt(Instance.DeliveryDate, Instance.OptionalType2, Instance._barll),
+                BaseAmountValue2 = Instance.BAmount,
+                AckValue2 = Instance.AckValue2 = Context.BDController.CountAckvalueOt(Instance.DeliveryDate, Instance.OptionalType, Instance.BAmount),
+                BaseAmountValue3 = Instance.BAmount1,
+                AckValue3 = Instance.AckValue3 = Context.BDController.CountAckvalueOt(Instance.DeliveryDate, Instance.OptionalType1, Instance.BAmount1),
+                BaseAmountValue4 = Instance.BaseTabel.BaseAmount,
+                AckValue4 = Instance.BaseTabel.AckValue,
+                SAI = Instance.SAIType,
+            };
+            Context.IController.AddInsuranceApplication(i);
+            MessageBox.Show("Ansökan har lagts till");
+            Check = true;
+            Instance.ACheck = false;
+            Instance.BCheck = false;
+            Instance.CCheck = false;
+            Instance.BAmount = 0;
+            Instance.BAmount1 = 0;
+            Instance.AgentNo = null;
+            Instance.BARLL = string.Empty;
+            Instance.BaseTabel = null;
+            Instance.City = string.Empty;
+            Instance.StreetAddress = string.Empty;
+            Instance.TelephoneNbrWork = string.Empty;
+            Instance.TelephoneNbrHome = string.Empty;
+            Instance.DiallingCodeHome = string.Empty;
+            Instance.DiallingCodeWork = string.Empty;
+            Instance.EmailOne = string.Empty;
+            Instance.EmailTwo = string.Empty;
+            Instance.SocialSecurityNumber = string.Empty;
+            Instance.SocialSecurityNumberIP = string.Empty;
+            Instance.SAIType = null;
+            Instance.DeliveryDate = Today;
+            Instance.LastName = string.Empty;
+            Instance.Lastname = string.Empty;
+            Instance.FirstName = string.Empty;
+            Instance.Firstname = string.Empty;
+            Instance.PaymentForm = null;
+            Instance.PersonType = null;
+            Instance.PostalCode = string.Empty;
+        }
+
+        private void BoxesCheckInsurance()
+        {
+            if (Instance.SocialSecurityNumber != null && Instance.City != null && Instance.Firstname != null && Instance.Lastname != null && Instance.PostalCode != null && Instance.EmailOne != null && Instance.StreetAddress != null
+                          && Instance.DiallingCodeHome != null && Instance.TelephoneNbrHome != null && Instance.PaymentForm != null && Instance.DeliveryDate != null && Instance.DeliveryDate != null && Instance.SAIType != null
+              && Instance.AgentNo != null)
+            {
+                if (IPISPerson == false)
+                {
+                    AddInsurance();
+                }
+                else
+                {
+                    if (Instance.LastName != null && Instance.FirstName != null && Instance.SocialSecurityNumberIP != null && Instance.PersonType != null)
+                        AddInsurance();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Alla fält med en stjärna är obligatoriska!");
+            }
+        }
+
         private void RegisterApplication()
         {
             Person y = Context.ITController.GetPerson(Instance.SocialSecurityNumber);
@@ -41,118 +121,12 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                 MessageBoxResult result = MessageBox.Show($"Det finns redan en försäkringstagare med det inskrivna personnumret vid namn: {y.Firstname} {y.Lastname} vill du uppdatera dessa uppgifter?", "Varning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 if (result == MessageBoxResult.Yes)
                 {
-                    if (Instance.SocialSecurityNumber != null && Instance.City != null && Instance.Firstname != null && Instance.Lastname != null && Instance.PostalCode != null && Instance.EmailOne != null && Instance.StreetAddress != null
-          && Instance.DiallingCodeHome != null && Instance.TelephoneNbrHome != null && Instance.LastName != null && Instance.FirstName != null && Instance.SocialSecurityNumberIP != null && Instance.PersonType != null
-          && Instance.PaymentForm != null && Instance.DeliveryDate != null && Instance.PersonType != null)
-                    {
-                        Person x = Instance.Personen = AddInsuranceTaker();
-                        Insurance i = new Insurance()
-                        {
-                            SerialNumber = Instance.SerialNumber = GenerateIdFormation(),
-                            PersonTaker = x,
-                            PaymentForm = Instance.PaymentForm,
-                            InsuranceStatus = Status.Otecknad,
-                            DeliveryDate = Instance.DeliveryDate,
-                            AgentNo = Instance.AgentNo,
-                            InsuredID = Instance.InsuredPerson = AddInsured(x),
-                            OptionalTypes = OTypes(),
-                            BaseAmountValue = Instance._barll,
-                            SAI = Instance.SAIType,  //Får vi med grunddata eller ej??
-                        };
-                        Context.IController.AddInsuranceApplication(i);
-                        MessageBox.Show("Ansökan har lagts till");
-                        Check = true;
-                        Instance.ACheck = false;
-                        Instance.BCheck = false;
-                        Instance.CCheck = false;
-                        Instance.BAmount = 0;
-                        Instance.BAmount1 = 0;
-                        Instance.AgentNo = null;
-                        Instance.BARLL = string.Empty;
-                        Instance.BaseTabel = null;
-                        Instance.City = string.Empty;
-                        Instance.StreetAddress = string.Empty;
-                        Instance.TelephoneNbrWork = string.Empty;
-                        Instance.TelephoneNbrHome = string.Empty;
-                        Instance.DiallingCodeHome = string.Empty;
-                        Instance.DiallingCodeWork = string.Empty;
-                        Instance.EmailOne = string.Empty;
-                        Instance.EmailTwo = string.Empty;
-                        Instance.SocialSecurityNumber = string.Empty;
-                        Instance.SocialSecurityNumberIP = string.Empty;
-                        Instance.SAIType = null;
-                        Instance.DeliveryDate = Today;
-                        Instance.LastName = string.Empty;
-                        Instance.Lastname = string.Empty;
-                        Instance.FirstName = string.Empty;
-                        Instance.Firstname = string.Empty;
-                        Instance.PaymentForm = null;
-                        Instance.PersonType = null;
-                        Instance.PostalCode = string.Empty;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Alla fält med en stjärna är obligatoriska!");
-                    }
+                    BoxesCheckInsurance();
                 }
             }
-             else
+            else
             {
-                if (Instance.SocialSecurityNumber != null && Instance.City != null && Instance.Firstname != null && Instance.Lastname != null && Instance.PostalCode != null && Instance.EmailOne != null && Instance.StreetAddress != null
-                          && Instance.DiallingCodeHome != null && Instance.TelephoneNbrHome != null && Instance.LastName != null && Instance.FirstName != null && Instance.SocialSecurityNumberIP != null && Instance.PersonType != null
-                          && Instance.PaymentForm != null && Instance.DeliveryDate != null && Instance.PersonType != null)
-                {
-                    Person x = Instance.Personen = AddInsuranceTaker();
-                    InsuredPerson insured = Instance.InsuredPerson = AddInsured(x);
-                    Insurance i = new Insurance()
-                    {
-                        SerialNumber = Instance.SerialNumber = GenerateIdFormation(),
-                        PersonTaker = x,
-                        PaymentForm = Instance.PaymentForm,
-                        InsuranceStatus = Status.Otecknad,
-                        DeliveryDate = Instance.DeliveryDate,
-                        AgentNo = Instance.AgentNo,
-                        InsuredID = insured,
-                        OptionalTypes = OTypes(),
-                        BaseAmountValue = Instance._barll,
-                        SAI = Instance.SAIType,
-                        //tror vi behöver ordna med baseamounts så de kommer in på något vis... troligtvis skapa fler properties i model insurance. 
-                    };
-                    Context.IController.AddInsuranceApplication(i);
-                    MessageBox.Show("Ansökan har lagts till");
-                    Check = true;
-                    Instance.ACheck = false;
-                    Instance.BCheck = false;
-                    Instance.CCheck = false;
-                    Instance.BAmount = 0;
-                    Instance.BAmount1 = 0;
-                    Instance.AgentNo = null;
-                    Instance.BARLL = string.Empty;
-                    Instance.BaseTabel = null;
-                    Instance.City = string.Empty;
-                    Instance.StreetAddress = string.Empty;
-                    Instance.TelephoneNbrWork = string.Empty;
-                    Instance.TelephoneNbrHome = string.Empty;
-                    Instance.DiallingCodeHome = string.Empty;
-                    Instance.DiallingCodeWork = string.Empty;
-                    Instance.EmailOne = string.Empty;
-                    Instance.EmailTwo = string.Empty;
-                    Instance.SocialSecurityNumber = string.Empty;
-                    Instance.SocialSecurityNumberIP = string.Empty;
-                    Instance.SAIType = null;
-                    Instance.DeliveryDate = Today;
-                    Instance.LastName = string.Empty;
-                    Instance.Lastname = string.Empty;
-                    Instance.FirstName = string.Empty;
-                    Instance.Firstname = string.Empty;
-                    Instance.PaymentForm = null;
-                    Instance.PersonType = null;
-                    Instance.PostalCode = string.Empty;
-                }
-                else
-                {
-                    MessageBox.Show("Alla fält med en stjärna är obligatoriska!");
-                }
+                BoxesCheckInsurance();
             }
         }
         private bool _check;
@@ -172,7 +146,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
 
             if (ACheck == true)
             {
-                if (OptionalType != null && BAmount != null)
+                if (OptionalType != null && BAmount != 0)
                     a = OptionalType;
                 else
                 {
@@ -190,7 +164,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             }
             if (CCheck == true)
             {
-                if (OptionalType2 != null && BAmount1 != null)
+                if (OptionalType2 != null && BAmount1 != 0)
                     c = OptionalType2;
                 else
                 {
@@ -226,19 +200,18 @@ namespace GUILayer.ViewModels.InsuranceViewModels
 
         private InsuredPerson AddInsured(Person p)
         {
-            List<InsuredPerson> tempList = new List<InsuredPerson>();
+            
             InsuredPerson newInp = new InsuredPerson()
             {
-                InsuredId = Instance.InsuredID,
                 FirstName = Instance.FirstName,
                 LastName = Instance.LastName,
                 SocialSecurityNumber = Instance.SocialSecurityNumberIP,
                 PersonType = Instance.PersonType,
                 PersonTaker = p,
             };
-            tempList.Add(newInp);
+            
             Context.IPController.AddInsuredPerson(newInp);
-
+            InsuredPerson = newInp;
             return InsuredPerson;
         }
         private bool CanCreate() => true;
@@ -389,8 +362,6 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             return BaseAmounts1;
         }
         #endregion
-
-
 
         #region lists
         
@@ -543,17 +514,6 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         #endregion
 
         #region properties for insured person
-        private int _insuredId;
-        public int InsuredID
-        {
-            get => _insuredId;
-            set
-            {
-                _insuredId = value;
-                OnPropertyChanged("InsuredID");
-            }
-        }
-
         private string _personType;
         public string PersonType
         {
@@ -571,7 +531,14 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             get => _sSNIP;
             set
             {
-                _sSNIP = value;
+                if(IPISPerson == false)
+                {
+                    _sSNIP = SocialSecurityNumber;
+                }
+                else
+                {
+                    _sSNIP = value;
+                }
                 OnPropertyChanged("SocialSecurityNumberIP");
             }
         }
@@ -581,7 +548,14 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             get => _lName;
             set
             {
-                _lName = value;
+                if (IPISPerson == false)
+                {
+                    _lName = Lastname;
+                }
+                else
+                {
+                    _lName = value;
+                }
                 OnPropertyChanged("LastName");
             }
         }
@@ -592,7 +566,14 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             get => _fName;
             set
             {
-                _fName = value;
+                if (IPISPerson == false)
+                {
+                    _fName = Firstname;
+                }
+                else
+                {
+                    _fName = value;
+                }
                 OnPropertyChanged("FirstName");
             }
         }
@@ -766,6 +747,57 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                 OnPropertyChanged("BAmount1");
             }
         }
+        private int _bAV4;
+        public int BaseAmountValue4
+        {
+            get => _bAV4;
+            set
+            {
+                _bAV4 = value;
+                OnPropertyChanged("BaseAmountValue4");
+            }
+        }
+        private double _av;
+        public double AckValue
+        {
+            get => _av;
+            set
+            {
+                _av = value;
+                OnPropertyChanged("AckValue");
+            }
+        }
+        private double _av2;
+        public double AckValue2
+        {
+            get => _av2;
+            set
+            {
+                _av2 = value;
+                OnPropertyChanged("AckValue2");
+            }
+        }
+
+        private double _av3;
+        public double AckValue3 
+        {
+            get => _av3;
+            set
+            {
+                _av3 = value;
+                OnPropertyChanged("AckValue3");
+            }
+        }
+        private double _av4;
+        public double AckValue4 
+        {
+            get => _av4;
+            set
+            {
+                _av4 = value;
+                OnPropertyChanged("AckValue4");
+            }
+        }
 
         private DateTime _dd;
         public DateTime DeliveryDate
@@ -779,7 +811,6 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         }
         #endregion
         public DateTime Today => DateTime.Today.Date;
-
 
         #region bools for three checkboxes
         private bool _aCheck;
@@ -813,5 +844,16 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             }
         }
         #endregion 
+
+        private bool _IPISPerson;
+        public bool IPISPerson
+        {
+            get => _IPISPerson;
+            set
+            {
+                _IPISPerson = value;
+                OnPropertyChanged("IPISPerson");
+            }
+        }
     }
 }
