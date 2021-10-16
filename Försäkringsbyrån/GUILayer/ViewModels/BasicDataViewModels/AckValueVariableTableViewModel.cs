@@ -100,7 +100,7 @@ namespace GUILayer.ViewModels.BasicDataViewModels
                         OptionalTypeId = Instance.OptionalType
 
                     };
-                    Context.BDController.AddAckValue(ackValueVariable);
+                    Context.BDController.CheckNbrOfAV(Instance.LifInsurance, Instance.OptionalType, Instance._date, ackValueVariable);
 
                     MessageBox.Show("Grunddatan är uppdaterad"); 
                     AckValues.Clear();

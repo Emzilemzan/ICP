@@ -171,10 +171,35 @@ namespace BussinessLayer
                 MessageBox.Show("Finns ingen grunddata med det id.t att ta bort");
             }
         }
-        #endregion
 
-        #region Controls for AckValueVariable
-        public AckValueVariable GetAckValue(int id) => BusinessController.Instance.Context.AckValues.Find(x => x.AckValueID == id).FirstOrDefault();
+        public void CheckNbrOfBA(LifeInsurance s, DateTime d, BaseAmount baseAmount)
+        {
+            List<BaseAmount> bases = new List<BaseAmount>();
+            foreach (BaseAmount b in GetAllBaseAmount())
+            {
+                if (b.LIFEID == s && b.Date.Year == d.Year)
+                {
+                    if (b.LIFEID.LifeID == 1)
+                    {
+                        bases.Add(b);
+                    }
+                }
+            }
+            if (bases.Count != 3 && s.LifeID == 2)
+            {
+                AddBaseAmountOption(baseAmount);
+                MessageBox.Show("Grundbeloppet las till.");
+            }
+            else
+            {
+                MessageBox.Show("Grundbeloppet las inte till då det får max finnas 4 st per år för SObarn och 3 st per år för SOvuxen");
+            }
+        }
+
+            #endregion
+
+            #region Controls for AckValueVariable
+            public AckValueVariable GetAckValue(int id) => BusinessController.Instance.Context.AckValues.Find(x => x.AckValueID == id).FirstOrDefault();
         public IEnumerable<AckValueVariable> GetAllAckValues() => BusinessController.Instance.Context.AckValues.GetAll();
 
         public void AddAckValue (AckValueVariable av)
@@ -201,6 +226,77 @@ namespace BussinessLayer
             {
                 MessageBox.Show("Finns ingen grunddata med det id.t att ta bort"); 
             }
+        }
+
+        public void CheckNbrOfAV(LifeInsurance s, OptionalType o, DateTime d, AckValueVariable av)
+        {
+            if (s != null)
+            {
+                List<AckValueVariable> bases = new List<AckValueVariable>();
+                foreach (AckValueVariable b in GetAllAckValues())
+                {
+                    if (b.LIFEID == s && b.Date.Year == d.Year)
+                    {
+                        if (b.LIFEID.LifeID == 1)
+                        {
+                            bases.Add(b);
+                        }
+                    }
+                }
+                if (bases.Count != 1 && s.LifeID == 1)
+                {
+                    AddAckValue(av);
+                    MessageBox.Show("Ackvärdet las till.");
+                }
+                else
+                {
+                    MessageBox.Show("Ackvärdet las inte till då det får max finnas 4 st per år för SObarn och 3 st per år för SOvuxen");
+                }
+            }
+
+            else if(o != null)
+            {
+                List<AckValueVariable> bases = new List<AckValueVariable>();
+                List<AckValueVariable> bases1 = new List<AckValueVariable>();
+                List<AckValueVariable> bases2 = new List<AckValueVariable>();
+                foreach (AckValueVariable b in GetAllAckValues())
+                    if (b.OptionalTypeId== o && b.Date.Year == d.Year)
+                    {
+                        if (b.OptionalTypeId.OptionalTypeId == 2)
+                        {
+                            bases2.Add(b);
+                        }
+                        else if (b.OptionalTypeId.OptionalTypeId == 1)
+                        {
+                            bases.Add(b);
+                        }
+                        else if (b.OptionalTypeId.OptionalTypeId == 3)
+                        {
+                            bases1.Add(b);
+                        }
+                    }
+                
+                if (bases.Count != 1 && o.OptionalTypeId == 1 && o.OptionalTypeId != 2 && o.OptionalTypeId != 3)
+                {
+                    AddAckValue(av);
+                    MessageBox.Show("Ackvärdet las till.");
+                }
+                else if (bases2.Count != 1 && o.OptionalTypeId == 2 && o.OptionalTypeId != 1 && o.OptionalTypeId != 3)
+                {
+                    AddAckValue(av);
+                    MessageBox.Show("Ackvärdet las till.");
+                }
+                else if (bases1.Count != 1 && o.OptionalTypeId == 3 && o.OptionalTypeId != 1 && o.OptionalTypeId != 2)
+                {
+                    AddAckValue(av);
+                    MessageBox.Show("Ackvärdet las till.");
+                }
+                else
+                {
+                    MessageBox.Show("Ackvärdet las inte till då det får max finnas 4 st per år för SObarn och 3 st per år för SOvuxen");
+                }
+            }
+            
         }
 
         public double CountAckvalueOt(DateTime d, OptionalType ot, int i)
