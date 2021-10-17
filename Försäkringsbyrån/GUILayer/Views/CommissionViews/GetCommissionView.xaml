@@ -5,11 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GUILayer.Views.CommissionViews"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="800" d:DesignWidth="1000">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -23,16 +22,16 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+
         </Grid.RowDefinitions>
 
         <Label Content="Hämta provision" FontSize="26" Grid.Row="0" Grid.Column="0"/>
 
-        <Label Content="Säljare" FontSize="20" Grid.ColumnSpan="2" Margin="124,10,26,40" Grid.Row="2" Grid.RowSpan="2"  />
-        <Label Content="Månad" FontSize="20" Grid.ColumnSpan="2" Margin="124,10,26,40" Grid.Row="4" Grid.RowSpan="2"  />
-        <ComboBox Name="GetSalesmanCommission" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2"/>
-        <ComboBox Name="GetDateCommission" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" ItemsSource="{Binding Months}" SelectedItem="{Binding Month}"/>
-        <Button x:Name="GetCommissionBtn" Grid.Column="2" Grid.Row="6" Content="Hämta provision" Style="{DynamicResource OtherButtonStyle}"/>
+        <Label Content="Säljare" FontSize="20" Margin="25,0.333,30,40" Grid.Row="2" Grid.RowSpan="2"  />
+        <Label Content="Månad" FontSize="20" Margin="25,0,10,40.333" Grid.Row="4" Grid.RowSpan="2"  />
+        <ComboBox Grid.Column="1" Grid.Row="2"/>
+        <ComboBox Grid.Column="1" Grid.Row="4" ItemsSource="{Binding Months}" SelectedItem="{Binding Month}"/>
+        <Button  Grid.Column="1" Grid.Row="6" Content="Hämta provision" Margin="602,0,10,37.333"/>
 
     </Grid>
 </UserControl>

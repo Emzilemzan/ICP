@@ -25,10 +25,8 @@ namespace GUILayer.ViewModels.CommissionViewModels
         private ICommand getCommission_Btn;
         public ICommand GetCommssion_Btn
         {
-            get => getCommission_Btn ?? (getCommission_Btn = new RelayCommand(x => { GetCommssion(); CanCreate(); }));
+            get => getCommission_Btn ?? (getCommission_Btn = new RelayCommand(x => { GetCommssion();}));
         }
-
-        public bool CanCreate() => true;
 
         public static void GetCommssion()
         {
