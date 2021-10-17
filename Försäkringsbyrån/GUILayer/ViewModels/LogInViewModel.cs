@@ -17,8 +17,6 @@ namespace GUILayer.ViewModels
     {
         public static readonly LogInViewModel Instance = new LogInViewModel();
 
-       
-
         private LogInViewModel()
         {
             

@@ -116,7 +116,6 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                 BoxesCheckInsurance();
             }
         }
-
         private Person AddInsuranceTaker()
         {
             Person newP = new Person()

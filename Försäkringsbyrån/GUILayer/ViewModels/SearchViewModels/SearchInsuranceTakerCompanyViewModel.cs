@@ -273,7 +273,6 @@ namespace GUILayer.ViewModels.SearchViewModels
 
         #endregion
 
-
         #region commands
 
         private ICommand _updateC;

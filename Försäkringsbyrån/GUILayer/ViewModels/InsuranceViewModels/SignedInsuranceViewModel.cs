@@ -98,7 +98,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                 SelectedInsurance = null;
             }
         }
-
+                                    
         #region Insurance properties
         public int? PayMonth
         {
