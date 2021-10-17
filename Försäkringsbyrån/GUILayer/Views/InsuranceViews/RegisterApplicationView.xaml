@@ -48,10 +48,7 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Label Content="Befintlig Försäkringstagare" FontWeight="Bold" Grid.Row="1" Grid.Column="0" FontSize="18"/>
-                    <Label Grid.Row="2" Grid.Column="0" Content="Organisationsnummer:"/>
-                    <TextBox Grid.Row="2" Text="{Binding SearchFrase}" Margin="169,4.4,120,25.6" Height="30" Grid.ColumnSpan="2"/>
-                    <Button Content="Sök" Grid.Column="1" Grid.Row="2" Height="20" RenderTransformOrigin="2.236,-0.565" Margin="165.6,10.4,28,29.6"/>
+
                     <Label Grid.Column="0" Grid.Row="3" Content="Försäkringstagarens uppgifter:" FontSize="18" FontWeight="Bold"/>
                     <Label Grid.Column="0" Grid.Row="4" Content="*Organisationsnummer:" FontSize="15"/>
                     <TextBox  x:Name="textBox1"  Grid.Row="4" Grid.Column="1" Text="{Binding OrganizationNumber}"/>
@@ -63,27 +60,21 @@
                     <TextBox x:Name="textBox4" Grid.Row="7" Grid.Column="1" Text="{Binding PostalCode}"/>
                     <Label Grid.Column="0" Grid.Row="8" Content="*PostOrt:" FontSize="15"/>
                     <TextBox x:Name="textBox5" Grid.Row="8" Grid.Column="1" Text="{Binding City}"/>
-                    <Label Grid.Column="0" Grid.Row="9" Content="*Rikt/TelNr: " FontSize="15"/>
-                    <TextBox x:Name="textBox6" Grid.Row="9" Grid.Column="1" Text="{Binding TelephoneNbr}"/>
-                    <Label Grid.Column="0" Grid.Row="10" Content="*Email:" FontSize="15"/>
+                    <Label Grid.Column="0" Grid.Row="9" Content="*Riktnr: " FontSize="15"/>
+                    <TextBox x:Name="textBox10" Grid.Row="9" Text="{Binding DiallingCode}" Margin="75,0,0,0"/>
+                    <Label Grid.Column="1" Grid.Row="9" Content="*TelNr: " FontSize="15" Margin="10,0,147,0"/>
+                    <TextBox x:Name="textBox6" Grid.Row="9" Grid.Column="1" Text="{Binding TelephoneNbr}" Margin="79,0,0,0"/>
+                    <Label Grid.Column="0" Grid.Row="10" Content="Email:" FontSize="15"/>
                     <TextBox x:Name="textBox7" Grid.Row="10" Grid.Column="1" Text="{Binding Email}"/>
-                    <Label Grid.Column="0" Grid.Row="11" Content="*Fax-Nummer:" FontSize="15"/>
+                    <Label Grid.Column="0" Grid.Row="11" Content="Fax-Nummer:" FontSize="15"/>
                     <TextBox x:Name="textBox8" Grid.Row="11" Grid.Column="1" Text="{Binding FaxNumber}"/>
-                    <Label Grid.Column="0" Grid.Row="12" Content="*Kontakt person:" FontSize="15"/>
+                    <Label Grid.Column="0" Grid.Row="12" Content="Kontakt person:" FontSize="15"/>
                     <TextBox x:Name="textBox9" Grid.Row="12" Grid.Column="1" Text="{Binding ContactPerson}"/>
-                    <Label Content="Försäkrades uppgifter" Grid.Row="13" Grid.Column="0" FontSize="18" FontWeight="Bold" Margin="0,0,0,15"/>
-                    <Label Grid.Column="0" Grid.Row="14" Content="*Personnummer:" FontSize="15"/>
-                    <TextBox Grid.Row="14" Grid.Column="1" Text=""/>
-                    <Label Grid.Column="0" Grid.Row="15" Content="*Efternamn:" FontSize="15"/>
-                    <TextBox Grid.Row="15" Grid.Column="1" Text=""/>
-                    <Label Grid.Column="0" Grid.Row="16" Content="*Förnamn:" FontSize="15"/>
-                    <TextBox Grid.Row="16" Grid.Column="1" Text=""/>
-                    <Label Content="Kategori:" FontSize="15" Grid.Row="17" Grid.Column="0" Margin="0,10,0,0"/>
-                    <ComboBox Grid.Row="17" Grid.Column="1" Text="" Margin="0,10,120,0" Width="130" Height="30"/>
+
 
                 </Grid>
             </StackPanel>
-            <StackPanel  Grid.Column="1" Grid.Row="2"  Grid.RowSpan="6">
+            <StackPanel  Grid.Column="1" Grid.Row="1"  Grid.RowSpan="6">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -105,26 +96,54 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Label Content=" Försäkringstyp: " FontSize="18" Margin="15,0,0,0" FontWeight="Bold"/>
-                    <ComboBox Grid.Row="1" Grid.Column="0" Margin="0,0,10,0" Width="200"/>
-                    <Label Content="Företagsförsäkrings typ" FontSize="15" Grid.Row="2" Grid.Column="0" Margin="20,10,0,0"/>
-                    <ComboBox Grid.Row="2" Grid.Column="1" Margin="0,0,120,0" Width="130" Height="30"/>
+                    <Label Content="*Försäkringstyp: " FontSize="18" Margin="15,0,0,0" FontWeight="Bold"/>
+                    <ComboBox Grid.Row="1" Grid.Column="0" Margin="0,0,10,0" Width="200" ItemsSource="{Binding CompanyInsurances}" SelectedItem="{Binding CompanyI}">
+                        <ComboBox.Resources>
+                            <DataTemplate x:Key="DataTemplateSalesMen">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding Path= COIName}" Grid.Column="1" />
+                                </Grid>
+                            </DataTemplate>
+                        </ComboBox.Resources>
+                        <ComboBox.ItemTemplate>
+                            <StaticResource ResourceKey="DataTemplateSalesMen"/>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <Label Content="*Företagsförsäkrings typ" FontSize="15" Grid.Row="2" Grid.Column="0" Margin="20,10,0,0"/>
+                    <ComboBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding CInsuranceTypes}" SelectedItem="{Binding CompanyInsuranceType}" Margin="0,0,120,0" Width="130" Height="30"/>
                     <Label Content="Övriga försäkringsuppgifter" Grid.Row="3" Grid.Column="0" FontSize="15" Margin="0,20,0,0" FontWeight="Bold"/>
-                    <Label Content="Försäkringsbolag:" FontSize="15" Grid.Row="4" Grid.Column="0"/>
-                    <TextBox Grid.Row="4" Grid.Column="1" Text="" Margin="0,0,120,0" Width="130" Height="30"/>
-                    <Label Content="Premie:" FontSize="15" Grid.Row="5" Grid.Column="0" Margin="0,10,0,0"/>
+                    <Label Content="*Försäkringsbolag:" FontSize="15" Grid.Row="4" Grid.Column="0"/>
+                    <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding InsuranceCompany}" Margin="0,0,120,0" Width="130" Height="30"/>
+                    <Label Content="*Premie:" FontSize="15" Grid.Row="5" Grid.Column="0" Margin="0,10,0,0"/>
                     <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Premie}" Margin="0,10,120,0" Width="130" Height="30"/>
-                    <Label Content="Betalform:" FontSize="15" Grid.Row="6" Grid.Column="0" Margin="0,10,0,0"/>
-                    <ComboBox Grid.Row="6" Grid.Column="1" Text="" Margin="0,10,120,0" Width="130" Height="30"/>
-                    <Label Content="Begynnelsedatum:" FontSize="15" Grid.Row="7" Grid.Column="0" Margin="0,10,0,0"/>
-                    <DatePicker Grid.Row="7" Grid.Column="1" Text="" Margin="0,10,120,0" Width="130" Height="30"/>
-                    <Label Content="Förfallodatum:" FontSize="15" Grid.Row="8" Grid.Column="0" Margin="0,10,0,0"/>
-                    <DatePicker Grid.Row="8" Grid.Column="1" Text="" Margin="0,10,120,0" Width="130" Height="30"/>
-                    <Label Content="Agenturnummer:" FontSize="15" Grid.Row="9" Grid.Column="0" Margin="0,10,0,0"/>
-                    <ComboBox Grid.Row="9" Grid.Column="1" Text="{Binding Notes}" Margin="0,10,120,0" Width="130" Height="30"/>
+                    <Label Content="*Betalform:" FontSize="15" Grid.Row="6" Grid.Column="0" Margin="0,10,0,0"/>
+                    <ComboBox Grid.Row="6" Grid.Column="1" ItemsSource="{Binding PayMentForms}" SelectedItem="{Binding PaymentForm}" Text="" Margin="0,10,120,0" Width="130" Height="30"/>
+                    <Label Content="*Begynnelsedatum:" FontSize="15" Grid.Row="7" Grid.Column="0" Margin="0,10,0,0"/>
+                    <DatePicker Grid.Row="7" Grid.Column="1" SelectedDate="{Binding StartDate}" Margin="0,10,120,0" Width="130" Height="30"/>
+                    <Label Content="*Förfallodatum:" FontSize="15" Grid.Row="8" Grid.Column="0" Margin="0,10,0,0"/>
+                    <DatePicker Grid.Row="8" Grid.Column="1" SelectedDate="{Binding EndDate}" Margin="0,10,120,0" Width="130" Height="30"/>
+                    <Label Content="*Agenturnummer:" FontSize="15" Grid.Row="9" Grid.Column="0" Margin="0,10,0,0"/>
+                    <ComboBox Grid.Row="9" Grid.Column="1" Text="" Margin="0,10,120,0" Width="130" Height="30" ItemsSource="{Binding SalesMens, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding AgentNo}">
+                        <ComboBox.Resources>
+                            <DataTemplate x:Key="DataTemplateSalesMen">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding Path= AgentNumber}" Grid.Column="1" />
+                                </Grid>
+                            </DataTemplate>
+                        </ComboBox.Resources>
+                        <ComboBox.ItemTemplate>
+                            <StaticResource ResourceKey="DataTemplateSalesMen"/>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
                     <Label Content="Anteckning:" FontSize="15" Grid.Row="10" Grid.Column="0" Margin="0,10,0,0"/>
-                    <TextBox Grid.Row="10" Grid.Column="1" Text="" Margin="0,10,120,0" Width="130" Height="80"/>
-                    <Button Grid.Row="11" Grid.Column="1" Height="25" Margin="0,20,130,0" Content="Registrera"/>
+                    <TextBox Grid.Row="10" Grid.Column="1" Text="{Binding Notes}" Margin="0,10,120,0" Width="130" Height="80"/>
+                    <Button Grid.Row="11" Grid.Column="1" Height="25" Margin="0,20,130,0" Content="Registrera" Command="{Binding AddCompanyApplication}"/>
 
                 </Grid>
             </StackPanel>

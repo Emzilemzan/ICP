@@ -17,24 +17,19 @@ namespace GUILayer.ViewModels.InsuranceViewModels
     {
         public static readonly InsuranceViewModel Instance = new InsuranceViewModel();
 
-        //public RegisterApplicationBtn RegisterApplication_Btn {get;}
-        //public RegisterSignedInsuranceBtn RegisterSignedInsurance_Btn { get; }
 
         private InsuranceViewModel()
         {
-            //RegisterSignedInsurance_Btn = new RegisterSignedInsuranceBtn();
-            //RegisterApplication_Btn = new RegisterApplicationBtn();
+
         }
 
         private ICommand registerApplication_Btn; 
         public ICommand RegisterApplication_Btn
         {
-            get => registerApplication_Btn ?? (registerApplication_Btn = new RelayCommand(x => { RegisterApplicationHome(); CanCreate(); }));
+            get => registerApplication_Btn ?? (registerApplication_Btn = new RelayCommand(x => { RegisterApplicationHome(); }));
         }
 
-        public bool CanCreate() => true; 
-
-        public static void RegisterApplicationHome()
+        private void RegisterApplicationHome()
         {
             if (MainViewModel.Instance.CurrentTool != "InsuranceChoices")
             {
@@ -55,12 +50,17 @@ namespace GUILayer.ViewModels.InsuranceViewModels
 
         public ICommand RegisterSignedInsurance_Btn
         {
-            get => registerSignedinsurance_Btn ?? (registerSignedinsurance_Btn = new RelayCommand(x => { RegisterSignedInusuranceHome(); CanCreate(); }));
+            get => registerSignedinsurance_Btn ?? (registerSignedinsurance_Btn = new RelayCommand(x => { RegisterSignedInusuranceHome(); }));
         }
 
-        public static void RegisterSignedInusuranceHome()
+        private void RegisterSignedInusuranceHome()
         {
-
+            if (MainViewModel.Instance.CurrentTool != "SignedInsurance")
+            {
+                MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
+                MainViewModel.Instance.CurrentTool = "";
+                MainViewModel.Instance.SelectedViewModel = SignedInsuranceViewModel.Instance;
+            }
         }
 
     }

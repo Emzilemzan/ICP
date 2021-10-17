@@ -26,6 +26,20 @@ namespace BussinessLayer
             BusinessController.Instance.Save();
         }
 
+
+        public bool CheckSalesMenInInsurance(SalesMen a)
+        {
+            bool result = false;
+            foreach(var i in BusinessController.Instance.IController.GetAllInsurances())
+            {
+                if(i.AgentNo.Equals(a))
+                {
+                    result = true;
+                }
+            }
+            return result;
+        }
+
         public void CheckExistingSalesMen(int id, SalesMen a)
         {
             SalesMen x = BusinessController.Instance.Context.Employees.GetById(id);

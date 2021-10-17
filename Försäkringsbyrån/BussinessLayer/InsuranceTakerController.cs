@@ -13,9 +13,6 @@ namespace BussinessLayer
     /// </summary>
     public class InsuranceTakerController
     {
-
-     
-
         public IEnumerable<Person> GetAllPersons() => BusinessController.Instance.Context.Persons.GetAll();
 
         public IEnumerable<Company> GetAllCompanies() => BusinessController.Instance.Context.Companies.GetAll();
@@ -37,8 +34,52 @@ namespace BussinessLayer
             BusinessController.Instance.Save();
         }
 
-        #endregion
 
+        public void CheckExistingCompany(string id, Company a, string name, string city, int postalCode, string streetadress, string number1, string nbr2,
+           string email1, string contact, string num)
+        {
+            Company x = BusinessController.Instance.Context.Companies.GetById(id);
+            if (x == null)
+            {
+                AddCompanyInsuranceTaker(a);
+            }
+            else
+            {
+                x.OrganizationNumber = id;
+                x.CompanyName= name;
+                x.City = city;
+                x.PostalCode = postalCode;
+                x.StreetAddress = streetadress;
+                x.TelephoneNbr = number1;
+                x.DiallingCode = nbr2;
+                x.Email = email1;
+                x.ContactPerson = contact;
+                x.FaxNumber = num;
+                Edit(x);
+            }
+        }
+        public void Edit(Company sm)
+        {
+            BusinessController.Instance.Context.Companies.Update(sm);
+            BusinessController.Instance.Save();
+        }
+
+        public bool CheckCompanyInInsurance(Company a)
+        {
+            bool result = false;
+            foreach (var i in BusinessController.Instance.IController.GetAllInsurances())
+            {
+                if (i.CompanyTaker != null)
+                {
+                    if (i.CompanyTaker.Equals(a))
+                    {
+                        result = true;
+                    }
+                }
+            }
+            return result;
+        }
+        #endregion
         #region Persons
         public void AddPersonInsuranceTaker(Person insuranceTaker)
         {
@@ -76,7 +117,6 @@ namespace BussinessLayer
                 x.DiallingCodeWork = dnbr2;
                 x.EmailOne = email1;
                 x.EmailTwo = email2;
-
                 Edit(x);
             }
         }
@@ -85,6 +125,23 @@ namespace BussinessLayer
             BusinessController.Instance.Context.Persons.Update(sm);
             BusinessController.Instance.Save();
         }
+
+        public bool CheckPersonInInsurance(Person a)
+        {
+            bool result = false;
+            foreach (var i in BusinessController.Instance.IController.GetAllInsurances())
+            {
+                if(i.PersonTaker != null)
+                {
+                    if (i.PersonTaker.Equals(a))
+                    {
+                        result = true;
+                    }
+                }
+            }
+            return result;
+        }
+
 
 
         #endregion

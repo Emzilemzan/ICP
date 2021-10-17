@@ -26,38 +26,27 @@ namespace GUILayer.ViewModels
         private MainViewModel()
         {
             _selectedViewModel = LogInViewModel.Instance;
-            _toolsVisibility = Visibility.Hidden; 
-            CreateOptionalTypes();
-            CreateSAInsurances();
-            CreateOtherPersonInsurance();
-            CreateCompanyInsurance();
-            CreateLifeInsurance();
-
+            _toolsVisibility = Visibility.Hidden;
+            Context.GenerateData();
         }
+    
         #region commands
-        private ICommand _homeBtn;
-        public ICommand HomeBtn
-        {
-            get => _homeBtn ?? (_homeBtn = new RelayCommand(x => { Home(); CanCommandHome(); }));
-        }
+        public ICommand HomeBtn => new RelayCommand(Home, CanCommandHome);
 
-        public bool CanCommandHome() => true;  //Ska ändras till --> MainViewModel.Instance.Context.CurrentEmployee != null;
 
-        private static void Home()
+        public bool CanCommandHome(object value) => Context.CurrentUser != null;
+
+        private void Home(object value)
         {
             Instance.ToolsVisibility = Visibility.Collapsed;
             Instance.DisplayHomeView();
         }
 
-        private ICommand _basicDataBtn;
-        public ICommand BasicDataBtn
-        {
-            get => _basicDataBtn ?? (_basicDataBtn = new RelayCommand(x => { BasicData(); CanCommandBasicData(); }));
-        }
+        public ICommand BasicDataBtn => new RelayCommand(BasicData, CanCommandBasicData);
 
-        public bool CanCommandBasicData() => true;  //Ska ändras till --> MainViewModel.Instance.Context.CurrentEmployee != null && (MainViewModel.Instance.Context.CurrentEmployee.PÅBEFATTNINGSTYP...
+        public bool CanCommandBasicData(object value) => Context.CurrentUser != null && Context.CurrentUser.BasicData == true;
 
-        private static void BasicData()
+        private void BasicData(object value)
         {
             if (Instance.CurrentTool != "BasicData")
             {
@@ -73,16 +62,11 @@ namespace GUILayer.ViewModels
                 Instance.SelectedViewModel = HomeViewModel.Instance;
             }
         }
+        public ICommand CommissionBtn => new RelayCommand(Commission, CanCommandC);
 
-        private ICommand _commissionBtn;
-        public ICommand CommissionBtn
-        {
-            get => _commissionBtn ?? (_commissionBtn = new RelayCommand(x => { Commission(); CanCommandC(); }));
-        }
+        public bool CanCommandC(object value)=> Context.CurrentUser != null && Context.CurrentUser.Commission == true;
 
-        public bool CanCommandC() => true;  //Ska ändras till --> MainViewModel.Instance.Context.CurrentEmployee != null && (MainViewModel.Instance.Context.CurrentEmployee.PÅBEFATTNINGSTYP...
-
-        private static void Commission()
+        private void Commission(object value)
         {
             if (Instance.CurrentTool != "Commission")
             {
@@ -99,17 +83,13 @@ namespace GUILayer.ViewModels
             }
 
         }
+        public ICommand EMBtn => new RelayCommand(EmployeeManagement, CanCommandEM);
 
-        private ICommand _employmentManagementBtn;
-        public ICommand EMBtn
+        public bool CanCommandEM(object value) => Context.CurrentUser != null && Context.CurrentUser.EmployeeManagement == true;
+
+        private void EmployeeManagement(object value)
         {
-            get => _employmentManagementBtn ?? (_employmentManagementBtn = new RelayCommand(x => { EmployeeManagement(); CanCommandEM(); }));
-        }
-
-        public bool CanCommandEM() => true;  //Ska ändras till --> MainViewModel.Instance.Context.CurrentEmployee != null && (MainViewModel.Instance.Context.CurrentEmployee.PÅBEFATTNINGSTYP...
-
-        private static void EmployeeManagement()
-        {
+            
             if (Instance.CurrentTool != "EmployeeManagement")
             {
                 Instance.ToolsVisibility = Visibility.Visible;
@@ -124,17 +104,12 @@ namespace GUILayer.ViewModels
                 Instance.SelectedViewModel = HomeViewModel.Instance;
             }
         }
+        public ICommand InsuranceBtn => new RelayCommand(Insurance, CanCommandIB);
 
-        private ICommand _insuranceBtn;
-        public ICommand InsuranceBtn
-        {
-            get => _insuranceBtn ?? (_insuranceBtn = new RelayCommand(x => { Insurance(); CanCommandIB(); }));
-        }
-
-        public bool CanCommandIB() => true;  //Ska ändras till --> MainViewModel.Instance.Context.CurrentEmployee != null && (MainViewModel.Instance.Context.CurrentEmployee.PÅBEFATTNINGSTYP...
+        public bool CanCommandIB(object value) => Context.CurrentUser != null && Context.CurrentUser.Insurances == true;
 
 
-        private static void Insurance()
+        private void Insurance(object value)
         {
             if (Instance.CurrentTool != "Insurance")
             {
@@ -151,15 +126,20 @@ namespace GUILayer.ViewModels
             }
         }
 
-        private ICommand _searchBtn;
-        public ICommand SearchBtn
+        public ICommand LogOutBtn => new RelayCommand(LogOut, CanLogOut);
+
+        public bool CanLogOut(object value) => Context.CurrentUser != null;
+
+        private void LogOut(object value)
         {
-            get => _searchBtn ?? (_searchBtn = new RelayCommand(x => { SearchIndex(); CanCommandSearch(); }));
+            Context.CurrentUser = null;
+            DisplayLogInView();
         }
 
-        public bool CanCommandSearch() => true;  //Ska ändras till --> MainViewModel.Instance.Context.CurrentEmployee != null && (MainViewModel.Instance.Context.CurrentEmployee.PÅBEFATTNINGSTYP...
+        public ICommand SearchBtn => new RelayCommand(SearchIndex, CanCommandSearch);
+        public bool CanCommandSearch(object value) => Context.CurrentUser != null && Context.CurrentUser.Search;
 
-        private static void SearchIndex()
+        private void SearchIndex(object value)
         {
             if (Instance.CurrentTool != "Search")
             {
@@ -174,18 +154,14 @@ namespace GUILayer.ViewModels
                 Instance.CurrentTool = "";
                 Instance.SelectedViewModel = HomeViewModel.Instance;
             }
+            
         }
 
+        public ICommand SapBtn => new RelayCommand(Sap, CanCommandSap);
 
-        private ICommand _sapBtn;
-        public ICommand SapBtn
-        {
-            get => _sapBtn ?? (_sapBtn = new RelayCommand(x => { Sap(); CanCommandSap(); }));
-        }
+        public bool CanCommandSap(object value) => Context.CurrentUser != null && Context.CurrentUser.StatisticsAndProspects == true;
 
-        public bool CanCommandSap() => true;  //Ska ändras till --> MainViewModel.Instance.Context.CurrentEmployee != null && (MainViewModel.Instance.Context.CurrentEmployee.PÅBEFATTNINGSTYP...
-
-        private static void Sap()
+        private void Sap(object value)
         {
             if (Instance.CurrentTool != "StatisticsAndProspect")
             {
@@ -251,118 +227,6 @@ namespace GUILayer.ViewModels
 
                 OnPropertyChanged("SelectedViewModel");
             }
-        }
-
-        private void CreateOptionalTypes()
-        {
-            List<OptionalType> OptionList = new List<OptionalType>();
-
-
-            OptionList.Add(new OptionalType { OptionalTypeId = 1, OptionalName = "Invaliditet vid olycksfall" });
-            OptionList.Add(new OptionalType { OptionalTypeId = 2, OptionalName = "Höjning av livförsäkring" });
-            OptionList.Add(new OptionalType { OptionalTypeId = 3, OptionalName = "Månadsersättning vid långvarig sjukskrivning" });
-
-            List<OptionalType> NewOptionList = new List<OptionalType>();
-
-            foreach(var i in Context.IController.GetAllOPT())
-            {
-                NewOptionList.Add(i);
-            }
-            if(NewOptionList.Count == 0)
-            {
-                foreach (var item in OptionList)
-                {
-                    Context.IController.AddOptionalTypes(item);
-                }
-            }
-        }
-        private void CreateSAInsurances()
-        {
-            List<SAInsurance> SAList = new List<SAInsurance>();
-            SAList.Add(new SAInsurance { SAID = 1, SAInsuranceType = "Sjuk- och olycksfallsförsäkring för barn" });
-            SAList.Add(new SAInsurance { SAID = 2, SAInsuranceType = "Sjuk- och olycksfallsförsäkring för vuxen"});
-
-            List<SAInsurance> NewList = new List<SAInsurance>();
-            foreach (var i in Context.IController.GetAllSAI())
-            {
-                NewList.Add(i);
-            }
-            if (NewList.Count == 0)
-            {
-                foreach (var item in SAList)
-                {
-                    Context.IController.AddSaInsurances(item);
-                }
-            }
-        }
-
-        private void CreateLifeInsurance()
-        {
-            List<LifeInsurance> LifeList = new List<LifeInsurance>();
-
-
-            LifeList.Add(new LifeInsurance {LifeID = 1, LifeName = "Livförsäkring för vuxen" });
-
-            List<LifeInsurance> NewList = new List<LifeInsurance>();
-            foreach (var i in Context.IController.GetAllLIFE())
-            {
-                NewList.Add(i);
-            }
-            if (NewList.Count == 0)
-            {
-                foreach (var item in LifeList)
-                {
-                    Context.IController.AddLifeInsurance(item);
-                }
-            }
-
-        }
-
-        private void CreateCompanyInsurance()
-        {
-            List<CompanyInsurance> CompList = new List<CompanyInsurance>();
-
-
-            CompList.Add(new CompanyInsurance {FFId = 1, COIName = "Företagsförsäkring" });
-
-
-            List<CompanyInsurance> NewList = new List<CompanyInsurance>();
-
-            foreach (var i in Context.IController.GetAllCAI())
-            {
-                NewList.Add(i);
-            }
-            if (NewList.Count == 0)
-            {
-                foreach (var item in CompList)
-                {
-                    Context.IController.AddCompanyInsurance(item);
-                }
-            }
-
-        }
-
-        private void CreateOtherPersonInsurance()
-        {
-            List<OtherPersonInsurance> OPList = new List<OtherPersonInsurance>();
-
-
-            OPList.Add(new OtherPersonInsurance { OPIId = 1, OPIName ="Övrig personförsäkring" });
-
-            List<OtherPersonInsurance> NewList = new List<OtherPersonInsurance>();
-
-            foreach (var i in Context.IController.GetAllOPI())
-            {
-                NewList.Add(i);
-            }
-            if (NewList.Count == 0)
-            {
-                foreach (var item in OPList)
-                {
-                    Context.IController.AddOtherPersonInsurance(item);
-                }
-            }
-
         }
     }
 }

@@ -14,11 +14,10 @@ namespace GUILayer.ViewModels
     {
         public static readonly HomeViewModel Instance = new HomeViewModel();
 
-
         private HomeViewModel()
         {
           
         }
-        //public string Firstname=> _employee.Firstname;
+        public string Fullname => Context.CurrentUser.Firstname + " " + Context.CurrentUser.Lastname + "!";
     }
 }

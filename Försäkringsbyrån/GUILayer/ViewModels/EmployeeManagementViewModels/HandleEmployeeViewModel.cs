@@ -88,21 +88,21 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
 
                 if (result == MessageBoxResult.Yes)
                 {
-                    SelectedPerson.AgentNumber = AgentNumber;
-                    SelectedPerson.StreetAddress = StreetAddress;
-                    SelectedPerson.Firstname = Firstname;
-                    SelectedPerson.Lastname = Lastname;
-                    SelectedPerson.Postalcode = Postalcode;
-                    SelectedPerson.TaxRate = TaxRate;
-                    SelectedPerson.City = City;
-
-                    Context.SMController.RemoveSalesMen(SelectedPerson);
-                    MessageBox.Show("Säljaren togs bort", "Lyckad borttagning", MessageBoxButton.OK, MessageBoxImage.Information);
-                    SalesMens.Remove(SelectedPerson);
-                    SalesMens.Clear();
-                    foreach (var salesMen in Context.SMController.GetAllSalesMen())
+                    bool valid =Context.SMController.CheckSalesMenInInsurance(SelectedPerson);
+                    if(valid == true)
                     {
-                        SalesMens?.Add(salesMen);
+                        MessageBox.Show("Det går inte att ta bort säljaren, då den finns registrerad på en försäkring.");
+                    }
+                    else
+                    {
+                        Context.SMController.RemoveSalesMen(SelectedPerson);
+                        MessageBox.Show("Säljaren togs bort", "Lyckad borttagning", MessageBoxButton.OK, MessageBoxImage.Information);
+                        SalesMens.Remove(SelectedPerson);
+                        SalesMens.Clear();
+                        foreach (var salesMen in Context.SMController.GetAllSalesMen())
+                        {
+                            SalesMens?.Add(salesMen);
+                        }
                     }
                 }
                 else
@@ -112,7 +112,7 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             }
             else
             {
-                MessageBox.Show("Antingen har inegn säljare markets i registret eller så har du lämnat något fält tomt! ", "Fel", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Antingen har ingen säljare markerats i registret eller så har du lämnat något fält tomt! ", "Fel", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         #endregion

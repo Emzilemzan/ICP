@@ -170,7 +170,8 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
                 Users.Clear();
                 foreach (var u in Context.UAController.GetAllUsers())
                 {
-                    Users?.Add(u);
+                    if(u.Username != "Admin")
+                       Users?.Add(u);
                 }
             }
             else
@@ -184,7 +185,8 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             ObservableCollection<UserAccess> x = new ObservableCollection<UserAccess>();
             foreach (var u in Context.UAController.GetAllUsers())
             {
-                x?.Add(u);
+                if(u.Username != "Admin")
+                    x?.Add(u);
             }
             Users = x;
             return Users;

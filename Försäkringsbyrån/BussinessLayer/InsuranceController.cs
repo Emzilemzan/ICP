@@ -18,14 +18,23 @@ namespace BussinessLayer
             GetInsuranceTakerIA(insuranceTaker)?.ForEach(p => applications.Add(p));
             return applications.OrderByDescending(i => i.InsuranceNumber).ToList();
         }
-        public void AddInsuranceApplication(Insurance insuranceApplication, Person p)
+
+        public List<Insurance> GetInsuranceTakerIAC(Company insuranceTaker) => insuranceTaker.Insurances?.OrderByDescending(i => i.InsuranceNumber).ToList();
+        public List<Insurance> GetInsuranceTakerIASC(Company insuranceTaker)
         {
-            p.Insurances.Add(insuranceApplication);
+            List<Insurance> applications = new List<Insurance>();
+            GetInsuranceTakerIAC(insuranceTaker)?.ForEach(p => applications.Add(p));
+            return applications.OrderByDescending(i => i.InsuranceNumber).ToList();
+        }
+
+        public void AddInsuranceApplication(Insurance insuranceApplication)
+        {
+            BusinessController.Instance.Context.Insurances.Add(insuranceApplication);
             BusinessController.Instance.Save();
         }
-        public void RemoveInsuranceApplication(Insurance insuranceApplication, Person p)
+        public void RemoveInsurance(Insurance insuranceApplication)
         {
-            insuranceApplication.PersonTaker.Insurances.Remove(insuranceApplication);
+            BusinessController.Instance.Context.Insurances.Remove(insuranceApplication);
             BusinessController.Instance.Save();
         }
 
@@ -36,23 +45,12 @@ namespace BussinessLayer
             GetInsuranceTakerCI(insuranceTaker)?.ForEach(p => applications.Add(p));
             return applications.OrderByDescending(i => i.InsuranceNumber).ToList();
         }
-        public void AddInsuranceApplicationCI(Insurance insuranceApplication)
-        {
-            insuranceApplication.CompanyTaker.Insurances.Add(insuranceApplication);
-            BusinessController.Instance.Save();
-        }
-        public void RemoveInsuranceApplicationCIA(Insurance insuranceApplication)
-        {
-            insuranceApplication.CompanyTaker.Insurances.Remove(insuranceApplication);
-            BusinessController.Instance.Save();
-        }
 
         #endregion
 
         #region insurancetype
-        public InsuranceType GetInsuranceType(int id) => BusinessController.Instance.Context.InsuranceTypes.Find(x => x.InsuranceTypeId == id).FirstOrDefault();
-        public IEnumerable<InsuranceType> GetAllIT() => BusinessController.Instance.Context.InsuranceTypes.GetAll();
-
+        public SAInsurance GetSA(int id) => BusinessController.Instance.Context.SAInsurances.Find(x => x.SAID == id).FirstOrDefault();
+        public LifeInsurance GetLIFE(int id) => BusinessController.Instance.Context.LifeInsurances.Find(x => x.LifeID == id).FirstOrDefault();
         public OptionalType GetOPT(int id) => BusinessController.Instance.Context.OptionalTypes.Find(x => x.OptionalTypeId == id).FirstOrDefault();
 
         public IEnumerable<OptionalType> GetAllOPT() => BusinessController.Instance.Context.OptionalTypes.GetAll();
@@ -94,7 +92,11 @@ namespace BussinessLayer
             BusinessController.Instance.Context.OPInsurances.Add(oi);
             BusinessController.Instance.Save();
         }
-
+        public void Edit(Insurance i)
+        {
+            BusinessController.Instance.Context.Insurances.Update(i);
+            BusinessController.Instance.Save();
+        }
     }
 }
 

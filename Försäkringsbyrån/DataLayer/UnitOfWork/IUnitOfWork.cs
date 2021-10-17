@@ -27,7 +27,6 @@ namespace DataLayer.UnitOfWork
         ILifeInsuranceRepository LifeInsurances { get; }
         IOtherPersonInsuranceRepository OPInsurances { get; }
         ICompanyInsuranceRepository CIInsurances { get; }
-        IInsuranceTypeRepository InsuranceTypes { get; }
 
         ISAInsuranceRepository SAInsurances { get; }
         int Complete();

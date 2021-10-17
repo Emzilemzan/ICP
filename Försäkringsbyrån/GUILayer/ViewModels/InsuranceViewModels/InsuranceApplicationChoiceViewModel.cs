@@ -35,7 +35,21 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             MainViewModel.Instance.CurrentTool = "";
             MainViewModel.Instance.SelectedViewModel = RegisterPersonApplicationViewModel.Instance;
         }
-        
+
+
+        private ICommand liBtn;
+        public ICommand LI_Btn
+        {
+            get => liBtn ?? (liBtn = new RelayCommand(x => { LifeApplicationHome(); CanCreate(); }));
+        }
+
+        private static void LifeApplicationHome()
+        {
+            MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
+            MainViewModel.Instance.CurrentTool = "";
+            MainViewModel.Instance.SelectedViewModel = RegisterLifeApplicationViewModel.Instance;
+        }
+
         /// <summary>
         /// Button to open Other person insurance company application. 
         /// </summary>

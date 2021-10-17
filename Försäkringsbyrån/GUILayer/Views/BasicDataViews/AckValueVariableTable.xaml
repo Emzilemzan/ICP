@@ -3,8 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:GUILayer.Views.BasicDataViews" xmlns:basicdataviewmodels="clr-namespace:GUILayer.ViewModels.BasicDataViewModels"  d:DataContext="{d:DesignInstance Type=basicdataviewmodels:AckValueVariableTableViewModel}"
-             mc:Ignorable="d" 
+             xmlns:local="clr-namespace:GUILayer.Views.BasicDataViews" 
+             xmlns:basicdataviewmodels="clr-namespace:GUILayer.ViewModels.BasicDataViewModels" 
+             d:DataContext="{d:DesignInstance Type=basicdataviewmodels:AckValueVariableTableViewModel}"
+             mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -39,21 +41,23 @@
                     </Grid.RowDefinitions>
                     <Label Content="Lägg till ny data" Grid.Column="0" FontSize="20" FontWeight="Bold"/>
                     <Label Content="Försäkringstyp" Grid.Column="0" Grid.Row="1"  FontSize="15" Margin="60,0,0,0"/>
-                    <ComboBox Grid.Row="1" Grid.Column="1" Height="20" ItemsSource="{Binding insuranceTypes }" SelectedItem="{Binding SAInsurance }">
+                    <ComboBox Grid.Row="1" Grid.Column="1" Height="20" ItemsSource="{Binding LifeInsuranceTypes }" SelectedItem="{Binding LifInsurance }">
                         <ComboBox.Resources>
                             <DataTemplate x:Key="DataTemplateAckValue">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock Text="{Binding SAInsuranceType }" Grid.Column="1" />
+                                    <TextBlock Text="{Binding Path= LifeName}" Grid.Column="1" /> 
                                 </Grid>
                             </DataTemplate>
                         </ComboBox.Resources>
-                        <ComboBox.ItemTemplate>                            <StaticResource ResourceKey="DataTemplateAckValue"/>                        </ComboBox.ItemTemplate>
+                        <ComboBox.ItemTemplate>
+                            <StaticResource ResourceKey="DataTemplateAckValue"/>
+                        </ComboBox.ItemTemplate>
                     </ComboBox>
                     <Label Content="Tillvalstyp" Grid.Column="0" Grid.Row="2"  FontSize="15" Margin="60,0,0,0"/>
-                    <ComboBox Grid.Row="2" Grid.Column="1" Height="20" ItemsSource="{Binding OptionalTypes }" SelectedItem="{Binding OptionalTypeId }">
+                    <ComboBox Grid.Row="2" Grid.Column="1" Height="20" ItemsSource="{Binding OptionalTypes }" SelectedItem="{Binding OptionalType }">
                         <ComboBox.Resources>
                             <DataTemplate x:Key="DataTemplateAckValue">
                                 <Grid>
@@ -64,7 +68,9 @@
                                 </Grid>
                             </DataTemplate>
                         </ComboBox.Resources>
-                        <ComboBox.ItemTemplate>                            <StaticResource ResourceKey="DataTemplateAckValue"/>                        </ComboBox.ItemTemplate>
+                        <ComboBox.ItemTemplate>
+                            <StaticResource ResourceKey="DataTemplateAckValue"/>
+                        </ComboBox.ItemTemplate>
                     </ComboBox>
                     <Label Content="Datum" Grid.Column="0" Grid.Row="3"  FontSize="15" Margin="120,0,0,0"/>
                     <DatePicker IsTodayHighlighted="True" Grid.Row="3" Grid.Column="1" DisplayDateStart="1900-01-01"/>
@@ -108,11 +114,11 @@
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
                   ScrollViewer.HorizontalScrollBarVisibility="Auto">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding Path=AckValueId }"/>
+                <DataGridTextColumn Header="Id" Binding="{Binding Path=AckValueID}"/>
                 <DataGridTextColumn Header="Datum" Binding="{Binding Date}" />
                 <DataGridTextColumn Header="Ack.värdevariabel" Binding="{Binding AckValue }" />
-                <DataGridTextColumn Header="Försäkringstyp" Binding="{Binding }" />
-                <DataGridTextColumn Header="Tillvalstyp" Binding="{Binding }" />
+                <DataGridTextColumn Header="Försäkringstyp" Binding="{Binding LIFEID.LifeName }" />
+                <DataGridTextColumn Header="Tillvalstyp" Binding="{Binding OptionalTypeId.OptionalName}" />
             </DataGrid.Columns>
         </DataGrid>
         
