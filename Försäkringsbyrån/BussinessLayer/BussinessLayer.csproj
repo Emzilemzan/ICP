@@ -51,6 +51,7 @@
     <Compile Include="InsuredPersonController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SalesMenController.cs" />
+    <Compile Include="Seed\SeedDatabase.cs" />
     <Compile Include="UserAccessController.cs" />
   </ItemGroup>
   <ItemGroup>

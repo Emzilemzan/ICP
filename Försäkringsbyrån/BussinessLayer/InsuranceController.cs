@@ -55,9 +55,8 @@ namespace BussinessLayer
         #endregion
 
         #region insurancetype
-        public InsuranceType GetInsuranceType(int id) => BusinessController.Instance.Context.InsuranceTypes.Find(x => x.InsuranceTypeId == id).FirstOrDefault();
-        public IEnumerable<InsuranceType> GetAllIT() => BusinessController.Instance.Context.InsuranceTypes.GetAll();
-
+        public SAInsurance GetSA(int id) => BusinessController.Instance.Context.SAInsurances.Find(x => x.SAID == id).FirstOrDefault();
+        public LifeInsurance GetLIFE(int id) => BusinessController.Instance.Context.LifeInsurances.Find(x => x.LifeID == id).FirstOrDefault();
         public OptionalType GetOPT(int id) => BusinessController.Instance.Context.OptionalTypes.Find(x => x.OptionalTypeId == id).FirstOrDefault();
 
         public IEnumerable<OptionalType> GetAllOPT() => BusinessController.Instance.Context.OptionalTypes.GetAll();

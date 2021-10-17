@@ -17,17 +17,16 @@ namespace GUILayer.ViewModels.BasicDataViewModels
     {
         public static readonly AckValueVariableTableViewModel Instance = new AckValueVariableTableViewModel();
 
-   
         private AckValueVariableTableViewModel()
         {
             AckValues = UpdateAV();
             Date = DateTime.Today;
             OptionalTypes = UpdateOption();
             LifeInsuranceTypes = UpdateLife();
-            OptionalType = OptionalTypes[0];
-            LifInsurance = LifeInsuranceTypes[0];
+           // OptionalType = OptionalTypes[0];
+           // LifInsurance = LifeInsuranceTypes[0];
 
-            CreateComboBoxInsuranceList();
+            //CreateComboBoxInsuranceList(); 
         }
 
        private ObservableCollection<AckValueVariable> UpdateAV()
@@ -71,8 +70,6 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             return OptionalTypes;
         }
 
-
-
         #region Commands
         private ICommand _addBtn;
         public ICommand AddAckValueVariableTable_Btn
@@ -83,30 +80,70 @@ namespace GUILayer.ViewModels.BasicDataViewModels
 
          private void AddAckValueVariableTable()
         {
-            if (Instance._date != null && Instance._ackValue != 0 && (Instance._LifInsurance != null || Instance._optionalType != null))
-            {
-                AckValueVariable ackValueVariable = new AckValueVariable()
-                {
-                    Date = Instance._date,
-                    AckValue = Instance._ackValue,
-                    LIFEID = Instance._LifInsurance,
-                    OptionalTypeId = Instance._optionalType
 
-                };
-                Context.BDController.AddAckValue(ackValueVariable);
-                MessageBox.Show("Grunddatan är uppdaterad");
-                AckValues.Clear();
-                foreach (var o in Context.BDController.GetAllAckValues())
-                {
-                    AckValues?.Add(o);
-                }
-                Date = DateTime.Now;
+            if (Instance._LifInsurance != null && Instance._optionalType != null)
+            {
+                Instance.LifInsurance = null;
+                Instance.OptionalTypes = null;
+                MessageBox.Show("Du får antingen lägga till grundbelopp till tillvals eller livförsäkring. Det går inte att ha valt båda");
             }
             else
             {
-                MessageBox.Show("Inget fält få lämnas tomt!");
+                if (Instance._date != null && Instance._ackValue != 0 && (Instance._LifInsurance != null || Instance._optionalType != null))
+                {
+                    AckValueVariable ackValueVariable  = new AckValueVariable()
+
+                    {
+                        AckValue = Instance._ackValue,
+                        Date = Instance._date,
+                        LIFEID = Instance.LifInsurance,
+                        OptionalTypeId = Instance.OptionalType
+
+                    };
+                    Context.BDController.AddAckValue(ackValueVariable);
+
+                    MessageBox.Show("Grunddatan är uppdaterad"); 
+                    AckValues.Clear();
+                    foreach (var o in Context.BDController.GetAllAckValues())  
+                    {
+                        AckValues?.Add(o);
+                    }
+                    Check = true;
+                    Date = DateTime.Now;
+                    Instance.AckValue = string.Empty;
+                    Instance.LifInsurance = null;
+                    Instance.OptionalTypes = null; 
+                }
+                else
+                {
+                    MessageBox.Show("Inget fält få lämnas tomt!"); 
+                }
             }
-        }
+
+            //if (Instance._date != null && Instance._ackValue != 0 && (Instance._LifInsurance != null || Instance._optionalType != null))
+            //{
+            //    AckValueVariable ackValueVariable = new AckValueVariable()
+            //    {
+            //        Date = Instance._date,
+            //        AckValue = Instance._ackValue,
+            //        LIFEID = Instance._LifInsurance,
+            //        OptionalTypeId = Instance._optionalType
+
+            //    };
+            //    Context.BDController.AddAckValue(ackValueVariable);
+            //    MessageBox.Show("Grunddatan är uppdaterad");
+            //    AckValues.Clear();
+            //    foreach (var o in Context.BDController.GetAllAckValues())
+            //    {
+            //        AckValues?.Add(o);
+            //    }
+            //    Date = DateTime.Now;
+            //}
+            //else 
+            //{
+            //    MessageBox.Show("Inget fält få lämnas tomt!"); 
+            //}
+        } 
 
         private ICommand remove_Btn;
         public ICommand RemoveAckValue_Btn
@@ -124,14 +161,14 @@ namespace GUILayer.ViewModels.BasicDataViewModels
                 {
                     Context.BDController.CheckExistingAckValue(Instance._ackValueId, av);
                     AckValues.Clear();
-                    foreach (var t in Context.BDController.GetAllAckValues())
+                    foreach (var t in Context.BDController.GetAllAckValues()) 
                     {
                         AckValues?.Add(t);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Grunddatan togs inte bort.");
+                    MessageBox.Show("Grunddatan togs inte bort."); 
                 }
             }
             else
@@ -210,60 +247,70 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             }
         }
 
+        private bool _check;
+        public bool Check
+        {
+            get => _check;
+            set
+            {
+                _check = value;
+                OnPropertyChanged("Check");
+            }
+        }
+
         #endregion
 
-        public class ComboBoxInsurance
-        {
-            public string InsuranceName { get; set; }
-            public string InsuranceType { get; set; }
-        }
+        //  public class ComboBoxInsurance
+        //// {
+        //     public string InsuranceName { get; set; }
+        //     public string InsuranceType { get; set; }
+        // }
 
-        public ObservableCollection<ComboBoxInsurance> AllInsuranceTypesList { get; set; }
+        // public ObservableCollection<ComboBoxInsurance> AllInsuranceTypesList { get; set; }
+        // private void CreateComboBoxInsuranceList()
+        //  {
+        //    // Ny lista som skall fyllas 
+        //    List<ComboBoxInsurance> tempList = new List<ComboBoxInsurance>();
 
-        private void CreateComboBoxInsuranceList()
-        {
-            // Ny lista som skall fyllas
-            List<ComboBoxInsurance> tempList = new List<ComboBoxInsurance>();
+        //    // Temp liostor
+        //    List<OtherPersonInsurance> OPInsuranceList = new List<OtherPersonInsurance>();
+        //    List<SAInsurance> SAInsuranceList = new List<SAInsurance>(); 
+        //    List<LifeInsurance> LifeInsuranceList = new List<LifeInsurance>(); 
 
-            // Temp liostor
-            List<OtherPersonInsurance> OPInsuranceList = new List<OtherPersonInsurance>();
-            List<SAInsurance> SAInsuranceList = new List<SAInsurance>();
-            List<LifeInsurance> LifeInsuranceList = new List<LifeInsurance>();
+        //    // Fylla templistor
+        //    foreach (var i in Context.IController.GetAllOPI()) OPInsuranceList.Add(i);
+        //    foreach (var i in Context.IController.GetAllSAI()) SAInsuranceList.Add(i);  
+        //    foreach (var i in Context.IController.GetAllLIFE()) LifeInsuranceList.Add(i);  
 
-            // Fylla templistor
-            foreach (var i in Context.IController.GetAllOPI()) OPInsuranceList.Add(i);
-            foreach (var i in Context.IController.GetAllSAI()) SAInsuranceList.Add(i);
-            foreach (var i in Context.IController.GetAllLIFE()) LifeInsuranceList.Add(i);
+        //    // Loopa igenom OPInsurance
+        //    foreach (var item in OPInsuranceList) 
+        //    {
+        //        tempList.Add(new ComboBoxInsurance
+        //        {
+        //            InsuranceName = item.OPIName
+        //        });
+        //    }
 
-            // Loopa igenom OPInsurance
-            foreach (var item in OPInsuranceList)
-            {
-                tempList.Add(new ComboBoxInsurance
-                {
-                    InsuranceName = item.OPIName
-                });
-            }
+        //    // Loopa igenom SAInsurance
+        //    foreach (var item in SAInsuranceList)
+        //    {
+        //        tempList.Add(new ComboBoxInsurance
+        //        {
+        //            InsuranceName = $"Sjuk o olycksfalls försäkring {item.SAInsuranceType}"
+        //            //InsuranceType = item.SAInsuranceType
+        //        });
+        //    }
 
-            // Loopa igenom SAInsurance
-            foreach (var item in SAInsuranceList)
-            {
-                tempList.Add(new ComboBoxInsurance
-                {
-                    InsuranceName = $"Sjuk o olycksfalls försäkring {item.SAInsuranceType}"
-                    //InsuranceType = item.SAInsuranceType
-                });
-            }
+        //    // Loopa igenom LifeInsurance
+        //    foreach (var item in LifeInsuranceList)
+        //    {
+        //        tempList.Add(new ComboBoxInsurance
+        //        {
+        //            InsuranceName = item.LifeName
+        //        });
+        //    }
 
-            // Loopa igenom LifeInsurance
-            foreach (var item in LifeInsuranceList)
-            {
-                tempList.Add(new ComboBoxInsurance
-                {
-                    InsuranceName = item.LifeName
-                });
-            }
-
-            AllInsuranceTypesList = new ObservableCollection<ComboBoxInsurance>(tempList);
-        }
+        //   AllInsuranceTypesList = new ObservableCollection<ComboBoxInsurance>(tempList);
     }
-}
+    }
+

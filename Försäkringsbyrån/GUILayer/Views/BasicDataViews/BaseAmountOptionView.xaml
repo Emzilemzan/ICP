@@ -37,27 +37,12 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Label Content="Lägg till ny data" Grid.Column="0" FontSize="20" FontWeight="Bold"/>
-                    <Label Content="Tillvalstyp:" Grid.Column="0" Grid.Row="1"  FontSize="15" Margin="120,0,0,0"/>
-                    <Label Content="Försäkringstyp:" Grid.Column="0" Grid.Row="2"  FontSize="15" Margin="120,0,0,0"/>
-                    <Label Content="Datum:" Grid.Column="0" Grid.Row="3"  FontSize="15" Margin="120,0,0,0"/>
-                    <Label Content="Grundbelopp" Grid.Column="0" Grid.Row="4"  FontSize="15" Margin="120,0,0,0"/>
-                    <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding OptionalTypes}" SelectedItem="{Binding OptionalTypeId}">
-                        <ComboBox.Resources>
-                            <DataTemplate x:Key="DataTemplateOptionType">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Text="{Binding Path= OptionalName}" Grid.Column="1" />
-                            </Grid>
-                            </DataTemplate>
-                        </ComboBox.Resources>
-                        <ComboBox.ItemTemplate>
-                            <StaticResource ResourceKey="DataTemplateOptionType"/>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>
+       
+                    <Label Content="Försäkringstyp:" Grid.Column="0" Grid.Row="1"  FontSize="15" Margin="120,0,0,0"/>
+                    <Label Content="Datum:" Grid.Column="0" Grid.Row="2"  FontSize="15" Margin="120,0,0,0"/>
+                    <Label Content="Grundbelopp" Grid.Column="0" Grid.Row="3"  FontSize="15" Margin="120,0,0,0"/>
 
-                    <ComboBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding LifeInsurances }" SelectedItem="{Binding LifeInsurance}">
+                    <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding LifeInsurances }" SelectedItem="{Binding LifeInsurance}">
                         <ComboBox.Resources >
                             <DataTemplate x:Key="DataTemplateLifeInsurance">
                                 <Grid>
@@ -74,8 +59,8 @@
 
                     </ComboBox>
 
-                    <DatePicker IsTodayHighlighted="True" Grid.Row="3" Grid.Column="1" DisplayDateStart="1900-01-01"/>
-                    <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding BaseAmount, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}" Height="26" VerticalAlignment="Bottom"/>
+                    <DatePicker IsTodayHighlighted="True" Grid.Row="2" Grid.Column="1" DisplayDateStart="1900-01-01"/>
+                    <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding BaseAmount, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}" Height="26" VerticalAlignment="Bottom"/>
                     <Button Grid.Column="1" Grid.Row="5" Margin="58,0,0,0" Content="Lägg till" FontSize="15" Command="{Binding AddBaseAmountOption_Btn}"></Button>
                 </Grid>
             </Border>
@@ -111,7 +96,6 @@
                 <DataGridTextColumn Header="Id" Binding="{Binding Path=BaseAmountId }"/>
                 <DataGridTextColumn Header="Datum" Binding="{Binding Date}" />
                 <DataGridTextColumn Header="Grundbelopp" Binding="{Binding Baseamount}" />
-                <DataGridTextColumn Header="Tillvalstyp"  Binding="{Binding OptionalTypeId.OptionalName}" />
                 <DataGridTextColumn Header="Försäkringstyp" Binding="{Binding LIFEID.LifeName}"/>
             </DataGrid.Columns>
         </DataGrid>

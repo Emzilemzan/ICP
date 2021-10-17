@@ -28,59 +28,75 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         }
 
         #region 
-        private void RegisterApplication()
+
+        private void AddInsurance()
         {
-            Person y = Context.ITController.GetPerson(Instance.SocialSecurityNumber);
-            MessageBoxResult result = MessageBox.Show($"Det finns redan en försäkringstagare med det inskrivna personnumret vid namn: {y.Firstname} {y.Lastname} vill du uppdatera dessa uppgifter?", "Varning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-            if(result == MessageBoxResult.Yes)
-            {
-                    if (Instance.SocialSecurityNumber != null && Instance.City != null && Instance.Firstname != null && Instance.Lastname != null && Instance.PostalCode != null && Instance.EmailOne != null && Instance.StreetAddress != null
+            if (Instance.SocialSecurityNumber != null && Instance.City != null && Instance.Firstname != null && Instance.Lastname != null && Instance.PostalCode != null && Instance.EmailOne != null && Instance.StreetAddress != null
               && Instance.DiallingCodeHome != null && Instance.TelephoneNbrHome != null && Instance.LastName != null && Instance.FirstName != null && Instance.SocialSecurityNumberIP != null
               && Instance.PaymentForm != null && Instance.DeliveryDate != null && Instance.DeliveryDate != null && Instance.LType != null
               && Instance.AgentNo != null)
-                    {
-                        Person x = Instance.Personen = AddInsuranceTaker();
-                        Insurance i = new Insurance()
-                        {
-                            SerialNumber = Instance.SerialNumber = GenerateIdFormation(),
-                            PersonTaker = x,
-                            PaymentForm = Instance.PaymentForm,
-                            InsuranceStatus = Status.Otecknad,
-                            DeliveryDate = Instance.DeliveryDate,
-                            AgentNo = Instance.AgentNo,
-                            InsuredID = Instance.InsuredPerson = AddInsured(x),
-                            LIFE = Instance.LType,
-                            BaseAmountValue = Instance.BAmount.Baseamount,
-                        };
+            {
+                
+                Person x = Instance.Personen = AddInsuranceTaker();
+                InsuredPerson insured = Instance.InsuredPerson = AddInsured(x);
 
-                        Context.IController.AddInsuranceApplication(i);
-                        MessageBox.Show("Ansökan har lagts till");
-                        Check = true;
-                        Instance.BAmount = null;
-                        Instance.AgentNo = null;
-                        Instance.City = string.Empty;
-                        Instance.StreetAddress = string.Empty;
-                        Instance.TelephoneNbrWork = string.Empty;
-                        Instance.TelephoneNbrHome = string.Empty;
-                        Instance.DiallingCodeHome = string.Empty;
-                        Instance.DiallingCodeWork = string.Empty;
-                        Instance.EmailOne = string.Empty;
-                        Instance.EmailTwo = string.Empty;
-                        Instance.SocialSecurityNumber = string.Empty;
-                        Instance.SocialSecurityNumberIP = string.Empty;
-                        Instance.LType = null;
-                        Instance.DeliveryDate = Today;
-                        Instance.LastName = string.Empty;
-                        Instance.Lastname = string.Empty;
-                        Instance.FirstName = string.Empty;
-                        Instance.Firstname = string.Empty;
-                        Instance.PaymentForm = null;
-                        Instance.PostalCode = string.Empty;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Alla fält med en stjärna är obligatoriska!");
-                    }
+                Insurance i = new Insurance()
+                {
+                    SerialNumber = Instance.SerialNumber = GenerateIdFormation(),
+                    PersonTaker = x,
+                    PaymentForm = Instance.PaymentForm,
+                    InsuranceStatus = Status.Otecknad,
+                    DeliveryDate = Instance.DeliveryDate,
+                    AgentNo = Instance.AgentNo,
+                    InsuredID = insured,
+                    LIFE = Instance.LType,
+                    BaseAmountValue = Instance.BAmount.Baseamount,
+                    //AckValue = Instance.
+                };
+
+                Context.IController.AddInsuranceApplication(i);
+                MessageBox.Show("Ansökan har lagts till");
+                Check = true;
+                Instance.BAmount = null;
+                Instance.AgentNo = null;
+                Instance.City = string.Empty;
+                Instance.StreetAddress = string.Empty;
+                Instance.TelephoneNbrWork = string.Empty;
+                Instance.TelephoneNbrHome = string.Empty;
+                Instance.DiallingCodeHome = string.Empty;
+                Instance.DiallingCodeWork = string.Empty;
+                Instance.EmailOne = string.Empty;
+                Instance.EmailTwo = string.Empty;
+                Instance.SocialSecurityNumber = string.Empty;
+                Instance.SocialSecurityNumberIP = string.Empty;
+                Instance.LType = null;
+                Instance.DeliveryDate = Today;
+                Instance.LastName = string.Empty;
+                Instance.Lastname = string.Empty;
+                Instance.FirstName = string.Empty;
+                Instance.Firstname = string.Empty;
+                Instance.PaymentForm = null;
+                Instance.PostalCode = string.Empty;
+            }
+            else
+            {
+                MessageBox.Show("Alla fält med en stjärna är obligatoriska!");
+            }
+        }
+        private void RegisterApplication()
+        {
+            Person y = Context.ITController.GetPerson(Instance.SocialSecurityNumber);
+            if(y != null)
+            {
+                MessageBoxResult result = MessageBox.Show($"Det finns redan en försäkringstagare med det inskrivna personnumret vid namn: {y.Firstname} {y.Lastname} vill du uppdatera dessa uppgifter?", "Varning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.Yes)
+                {
+                    AddInsurance();
+                }
+            }
+            else
+            {
+                AddInsurance();
             }
         }
         private Person AddInsuranceTaker()

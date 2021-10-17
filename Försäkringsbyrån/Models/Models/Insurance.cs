@@ -27,8 +27,18 @@ namespace Models.Models
         public DateTime EndDate { get; set; }
         public string Notes { get; set; }
         public string CompanyInsuranceType { get; set; }
-        public int BaseAmountValue { get; set; }
+        public string InsuranceCompany { get; set; }
 
+        #region different baseamount and ackvalue ints to get them in to the insurance, 4 thus in personapplication it can be up to 4.  
+        public int BaseAmountValue { get; set; }
+        public int BaseAmountValue2 { get; set; }
+        public int BaseAmountValue3 { get; set; }
+        public int BaseAmountValue4 { get; set; }
+        public int AckValue { get; set; }
+        public int AckValue2 { get; set; }
+        public int AckValue3 { get; set; }
+        public int AckValue4 { get; set; }
+        #endregion
 
         #region InsuranceTypes
         public SAInsurance SAI { get; set; }

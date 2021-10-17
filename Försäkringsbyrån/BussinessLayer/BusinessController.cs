@@ -1,4 +1,5 @@
-﻿using DataLayer;
+﻿using BussinessLayer.Seed;
+using DataLayer;
 using DataLayer.UnitOfWork;
 using Models.Models;
 using System;
@@ -40,7 +41,8 @@ namespace BussinessLayer
 
         public void Save() => Context.Complete();
 
+        public void GenerateData() => new SeedDatabase();
 
-       
+
     }
 }
