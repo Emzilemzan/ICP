@@ -92,7 +92,11 @@ namespace BussinessLayer
             BusinessController.Instance.Context.OPInsurances.Add(oi);
             BusinessController.Instance.Save();
         }
-
+        public void Edit(Insurance i)
+        {
+            BusinessController.Instance.Context.Insurances.Update(i);
+            BusinessController.Instance.Save();
+        }
     }
 }
 

@@ -16,7 +16,6 @@ namespace Models.Models
         public string SerialNumber { get; set; } 
         public InsuredPerson InsuredID { get; set; }
         public SalesMen AgentNo { get; set; }
-        public DateTime? PayDate { get; set; }
         public Status InsuranceStatus { get; set; }
         public ICollection<OptionalType> OptionalTypes { get; set; }
         public DateTime DeliveryDate { get; set; }
@@ -63,6 +62,8 @@ namespace Models.Models
         public int? PossibleBaseAmount { get; set; }
         public int? PossibleComisson { get; set; }
         public CustomerProspect CustomerProspectId { get; set; }
+        public int? PayYear { get; set; }
+        public int? PayMonth { get; set; }
         #endregion
     }
 

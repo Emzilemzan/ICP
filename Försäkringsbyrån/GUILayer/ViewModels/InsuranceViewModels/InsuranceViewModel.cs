@@ -57,16 +57,9 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         {
             if (MainViewModel.Instance.CurrentTool != "SignedInsurance")
             {
-                MainViewModel.Instance.ToolsVisibility = Visibility.Visible;
-                MainViewModel.Instance.Tools = Instance;
-                MainViewModel.Instance.CurrentTool = "SignedInsurance";
-                MainViewModel.Instance.SelectedViewModel = SignedInsuranceViewModel.Instance;
-            }
-            else
-            {
                 MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
                 MainViewModel.Instance.CurrentTool = "";
-                MainViewModel.Instance.SelectedViewModel = Instance;
+                MainViewModel.Instance.SelectedViewModel = SignedInsuranceViewModel.Instance;
             }
         }
 

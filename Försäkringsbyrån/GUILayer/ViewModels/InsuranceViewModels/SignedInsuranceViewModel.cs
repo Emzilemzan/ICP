@@ -22,6 +22,8 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             Applications = UpdateAC();
             InsuranceGrid = CollectionViewSource.GetDefaultView(Applications);
             InsuranceGrid.Filter = new Predicate<object>(o => Filter(o as Insurance));
+            Years = GetYears();
+            Months = new List<int>() {1,2,3,4,5,6,7,8,9,10,11,12};
         }
 
         private ICommand _signInsurance;
@@ -43,7 +45,21 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                     {
                         if (SelectedInsurance.PossibleBaseAmount != null && SelectedInsurance.PossibleComisson == null)
                         {
+                            SelectedInsurance.InsuranceNumber = InsuranceNumber;
+                            SelectedInsurance.SerialNumber = SerialNumber;
+                            SelectedInsurance.PayMonth = PayMonth;
+                            SelectedInsurance.PayYear = PayYear;
+                            SelectedInsurance.PossibleBaseAmount = PossibleBaseAmount;
+                            SelectedInsurance.InsuranceStatus = Status.Tecknad;
+                            Context.IController.Edit(SelectedInsurance);
 
+                            MessageBox.Show($"Registreringen lyckades av: {SelectedInsurance.InsuranceNumber}", "Lyckad registrering", MessageBoxButton.OK, MessageBoxImage.Information);
+                            Applications.Clear();
+                            foreach (var e in Context.IController.GetAllInsurances())
+                            {
+                                if (e.InsuranceStatus == Status.Otecknad)
+                                    Applications?.Add(e);
+                            }
                         }
                         else
                         {
@@ -54,7 +70,20 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                     {
                         if (SelectedInsurance.PossibleComisson != null && SelectedInsurance.PossibleBaseAmount == null)
                         {
-
+                            SelectedInsurance.InsuranceNumber = InsuranceNumber;
+                            SelectedInsurance.SerialNumber = SerialNumber;
+                            SelectedInsurance.PayMonth = PayMonth;
+                            SelectedInsurance.PayYear = PayYear;
+                            SelectedInsurance.InsuranceStatus = Status.Tecknad;
+                            SelectedInsurance.PossibleComisson = PossibleComisson;
+                            Context.IController.Edit(SelectedInsurance);
+                            MessageBox.Show($"Registreringen lyckades av: {SelectedInsurance.InsuranceNumber}", "Lyckad registrering", MessageBoxButton.OK, MessageBoxImage.Information);
+                            Applications.Clear();
+                            foreach (var e in Context.IController.GetAllInsurances())
+                            {
+                                if (e.InsuranceStatus == Status.Otecknad)
+                                    Applications?.Add(e);
+                            }
                         }
                         else
                         {
@@ -62,11 +91,41 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                         }
                     }
                 }
+                else
+                {
+                    MessageBox.Show("Försäkringsnumret måste fyllas i, samt provision eller grundbelopp.");
+                }
                 SelectedInsurance = null;
             }
         }
 
         #region Insurance properties
+        public int? PayMonth
+        {
+            get => SelectedInsurance.PayMonth;
+            set
+            {
+                SelectedInsurance.PayMonth = value;
+                OnPropertyChanged("PayMonth");
+            }
+        }
+        public int? PayYear
+        {
+            get => SelectedInsurance.PayYear;
+            set
+            {
+                SelectedInsurance.PayYear = value;
+                OnPropertyChanged("PayYear");
+            }
+        }
+        public List<int> Years { get; set; }
+        public List<int> Months { get; set; }
+        //För att visa årtal i combobox. 
+        public List<int> GetYears()
+        {
+            return Enumerable.Range(1950, DateTime.UtcNow.Year - 1949).Reverse().ToList();
+        }
+
 
         private Insurance _si;
         public Insurance SelectedInsurance
