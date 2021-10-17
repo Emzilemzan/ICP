@@ -68,9 +68,8 @@ namespace GUILayer.ViewModels.BasicDataViewModels
                         LIFEID = Instance.LifeInsurance,
 
                     };
-                    Context.BDController.AddBaseAmountOption(baseAmount);
+                    Context.BDController.CheckNbrOfBA(Instance.LifeInsurance, Instance._date, baseAmount);
 
-                    MessageBox.Show("Grunddatan är uppdaterad");
                     BaseAmounts.Clear();
                     foreach (var o in Context.BDController.GetAllBaseAmount())
                     {

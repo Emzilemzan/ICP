@@ -16,7 +16,6 @@ namespace Models.Models
         public string SerialNumber { get; set; } 
         public InsuredPerson InsuredID { get; set; }
         public SalesMen AgentNo { get; set; }
-        public DateTime? PayDate { get; set; }
         public Status InsuranceStatus { get; set; }
         public ICollection<OptionalType> OptionalTypes { get; set; }
         public DateTime DeliveryDate { get; set; }
@@ -34,10 +33,10 @@ namespace Models.Models
         public int BaseAmountValue2 { get; set; }
         public int BaseAmountValue3 { get; set; }
         public int BaseAmountValue4 { get; set; }
-        public int AckValue { get; set; }
-        public int AckValue2 { get; set; }
-        public int AckValue3 { get; set; }
-        public int AckValue4 { get; set; }
+        public double AckValue { get; set; }
+        public double AckValue2 { get; set; }
+        public double AckValue3 { get; set; }
+        public double AckValue4 { get; set; }
         #endregion
 
         #region InsuranceTypes
@@ -46,11 +45,16 @@ namespace Models.Models
         public CompanyInsurance COI { get; set; }
         public OtherPersonInsurance OPI { get; set; }
 
+        public string TypeName { get; set; }
+
         #endregion
 
         #region Takers
         public Person PersonTaker { get; set; }
         public Company CompanyTaker { get; set; }
+
+        public string TakerNbr { get; set; }
+
         #endregion
 
         #region SingedInsurance
@@ -58,6 +62,8 @@ namespace Models.Models
         public int? PossibleBaseAmount { get; set; }
         public int? PossibleComisson { get; set; }
         public CustomerProspect CustomerProspectId { get; set; }
+        public int? PayYear { get; set; }
+        public int? PayMonth { get; set; }
         #endregion
     }
 

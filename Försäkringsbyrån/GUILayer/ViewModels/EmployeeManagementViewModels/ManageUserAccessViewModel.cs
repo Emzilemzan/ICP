@@ -170,7 +170,8 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
                 Users.Clear();
                 foreach (var u in Context.UAController.GetAllUsers())
                 {
-                    Users?.Add(u);
+                    if(u.Username != "Admin")
+                       Users?.Add(u);
                 }
             }
             else

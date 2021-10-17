@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace GUILayer.Views.InsuranceViews
 {
     /// <summary>
-    /// Interaction logic for SignedLifeInsuranceView.xaml
+    /// Interaction logic for SignedInsurancesView.xaml
     /// </summary>
-    public partial class SignedLifeInsuranceView : UserControl
+    public partial class SignedInsurancesView : UserControl
     {
-        public SignedLifeInsuranceView()
+        public SignedInsurancesView()
         {
             InitializeComponent();
         }

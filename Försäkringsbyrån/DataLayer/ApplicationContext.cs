@@ -15,7 +15,6 @@ namespace DataLayer
         public DbSet<Company> Companies { get; set; }
         public DbSet<InsuredPerson> InsuredPersons { get; set; }
         public DbSet<Insurance> Insurances { get; set; }
-        public DbSet<InsuranceType> InsuranceTypes { get; set; }
         public DbSet<BaseAmount> BaseAmounts { get; set; }
         public DbSet<CustomerProspect> Prospects { get; set; }
         public DbSet<BaseAmountTabel> BaseAmountTables { get; set; }

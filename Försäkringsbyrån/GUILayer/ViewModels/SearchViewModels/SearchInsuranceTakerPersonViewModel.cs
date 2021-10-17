@@ -9,6 +9,8 @@ using System.ComponentModel;
 using System.Windows.Data;
 using System.Windows.Input;
 using GUILayer.Commands;
+using System.Windows;
+using GUILayer.ViewModels.InsuranceViewModels;
 
 namespace GUILayer.ViewModels.SearchViewModels
 {
@@ -121,169 +123,349 @@ namespace GUILayer.ViewModels.SearchViewModels
             }
         }
 
-        private string _socialSecurityNumber;
+
         public string SocialSecurityNumber
         {
-            get => _socialSecurityNumber;
+            get => SelectedPerson.SocialSecurityNumber;
             set
             {
-                _socialSecurityNumber = value;
+                SelectedPerson.SocialSecurityNumber = value;
                 OnPropertyChanged("SocialSecurityNumber");
             }
         }
 
-        private string _insuranceTakerId;
-        public string InsuranceTakerId
-        {
-            get => _insuranceTakerId;
-            set
-            {
-                _insuranceTakerId = value;
-                OnPropertyChanged("InsuranceTakerId");
-            }
-        }
-
-        private string _lastname;
         public string Lastname
         {
-            get => _lastname;
+            get => SelectedPerson.Lastname;
             set
             {
-                _lastname= value;
+                SelectedPerson.Lastname = value;
                 OnPropertyChanged("Lastname");
             }
         }
 
-        private string _firstname;
         public string Firstname
         {
-            get => _firstname;
+            get => SelectedPerson.Firstname;
             set
             {
-                _firstname = value;
+                SelectedPerson.Firstname = value;
                 OnPropertyChanged("Firstname");
             }
         }
-        private string _streetAddress;
+
         public string StreetAddress
         {
-            get => _streetAddress;
+            get => SelectedPerson.StreetAddress;
             set
             {
-                _streetAddress = value;
+                SelectedPerson.StreetAddress = value;
                 OnPropertyChanged("StreetAddress");
             }
         }
 
-        private int _postalCode;
         public int PostalCode
         {
-            get => _postalCode;
+            get => SelectedPerson.PostalCode;
             set
             {
-                _postalCode = value;
+                SelectedPerson.PostalCode = value;
                 OnPropertyChanged("PostalCode");
             }
         }
-        private string _city;
+
         public string City
         {
-            get => _city;
+            get => SelectedPerson.City;
             set
             {
-                _city = value;
+                SelectedPerson.City = value;
                 OnPropertyChanged("City");
             }
         }
-        private string _diallingCodeHome;
+
         public string DiallingCodeHome
         {
-            get => _diallingCodeHome;
+            get => SelectedPerson.DiallingCodeHome;
             set
             {
-                _diallingCodeHome = value;
+                SelectedPerson.DiallingCodeHome = value;
                 OnPropertyChanged("DiallingCodeHome");
             }
         }
-        private string _telephoneNbrHome;
+
         public string TelephoneNbrHome
         { 
-            get => _telephoneNbrHome;
+            get => SelectedPerson.TelephoneNbrHome;
             set
             {
-                _telephoneNbrHome = value;
+                SelectedPerson.TelephoneNbrHome = value;
                 OnPropertyChanged("TelephoneNbrHome");
             }
         }
-        private string _diallingCodeWork;
+
         public string DiallingCodeWork
         {
-            get => _diallingCodeWork;
+            get => SelectedPerson.DiallingCodeWork;
             set
             {
-                _diallingCodeWork = value;
+                SelectedPerson.DiallingCodeWork = value;
                 OnPropertyChanged("DiallingCodeWork");
             }
         }
-        private string _telephoneNbrWork;
         public string TelephoneNbrWork
         {
-            get => _telephoneNbrWork;
+            get => SelectedPerson.TelephoneNbrWork;
             set
             {
-                _telephoneNbrWork = value;
+                SelectedPerson.TelephoneNbrWork = value;
                 OnPropertyChanged("TelephoneNbrWork");
             }
         }
-        private string _emailOne;
+
         public string EmailOne
         {
-            get => _emailOne;
+            get => SelectedPerson.EmailOne;
             set
             {
-                _emailOne = value;
+                SelectedPerson.EmailOne = value;
                 OnPropertyChanged("EmailOne");
             }
         }
 
-        private string _emailTwo;
         public string EmailTwo
         {
-            get => _emailTwo;
+            get => SelectedPerson.EmailTwo;
             set
             {
-                _emailTwo = value;
+                SelectedPerson.EmailTwo = value;
                 OnPropertyChanged("EmailTwo");
             }
         }
         #endregion
 
-        #region commands
-
-        private ICommand _updateIT;
-        public ICommand UpdateIT
+        #region properties for insuredperson
+        private InsuredPerson _selectedIPerson;
+        public InsuredPerson SelectedIP
         {
-            get => _updateIT ?? (_updateIT = new RelayCommand(x => { UpdatePerson(); CanCommand(); }));
+            get => _selectedIPerson;
+            set
+            {
+                _selectedIPerson = value;
+                OnPropertyChanged("SelectedIP");
+            }
+        }
+        public int InsuredId
+        {
+            get => SelectedIP.InsuredId;
+            set
+            {
+                SelectedIP.InsuredId = value;
+                OnPropertyChanged("InsuredId");
+            }
+        }
+        public string SocialSecurityNumberIP
+        {
+            get => SelectedIP.SocialSecurityNumber;
+            set
+            {
+                SelectedIP.SocialSecurityNumber = value;
+                OnPropertyChanged("SocialSecurityNumberIP");
+            }
+        }
+        public string LastName
+        {
+            get => SelectedIP.LastName;
+            set
+            {
+                SelectedIP.LastName = value;
+                OnPropertyChanged("LastName");
+            }
+        }
+        public string FirstName
+        {
+            get => SelectedIP.FirstName;
+            set
+            {
+                SelectedIP.FirstName = value;
+                OnPropertyChanged("FirstName");
+            }
+        }
+        public string PersonType
+        {
+            get => SelectedIP.PersonType;
+            set
+            {
+                SelectedIP.PersonType = value;
+                OnPropertyChanged("PersonType");
+            }
         }
 
-        private bool CanCommand() => true;
+        #endregion
+
+        #region commands
+
+        private ICommand _updateP;
+        public ICommand UpdateP
+        {
+            get => _updateP ?? (_updateP = new RelayCommand(x => { UpdatePerson(); }));
+        }
+
 
         private void UpdatePerson()
         {
-            throw new NotImplementedException();
+            if (SelectedPerson != null && SelectedPerson.DiallingCodeHome != null && SelectedPerson.City != null && SelectedPerson.Firstname != null && SelectedPerson.Lastname != null && SelectedPerson.StreetAddress != null
+                && SelectedPerson.SocialSecurityNumber != null && SelectedPerson.PostalCode != 0 && SelectedPerson.TelephoneNbrHome != null && SelectedPerson.EmailOne != null)
+            {
+                SelectedPerson.SocialSecurityNumber = SocialSecurityNumber;
+                SelectedPerson.StreetAddress = StreetAddress;
+                SelectedPerson.Firstname = Firstname;
+                SelectedPerson.Lastname = Lastname;
+                SelectedPerson.PostalCode = PostalCode;
+                SelectedPerson.TelephoneNbrHome = TelephoneNbrHome;
+                SelectedPerson.TelephoneNbrWork = TelephoneNbrWork;
+                SelectedPerson.EmailOne = EmailOne;
+                SelectedPerson.EmailTwo = EmailTwo;
+                SelectedPerson.DiallingCodeHome = DiallingCodeHome;
+                SelectedPerson.DiallingCodeWork = DiallingCodeWork;
+                SelectedPerson.City = City;
+                Context.ITController.Edit(SelectedPerson);
+                
+                MessageBox.Show($"Uppdateringen lyckades av: {SelectedPerson.SocialSecurityNumber}", "Lyckad uppdatering", MessageBoxButton.OK, MessageBoxImage.Information);
+                Persons.Clear();
+                foreach (var p in Context.ITController.GetAllPersons())
+                {
+                    Persons?.Add(p);
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Du måste markera en person i registret eller ha fyllt i alla fält med en *", "Fel", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
-        private ICommand _deleteIT;
-        public ICommand DeleteIT
+        private ICommand _removeP;
+        public ICommand RemoveP
         {
-            get => _deleteIT ?? (_deleteIT = new RelayCommand(x => { DeletePerson(); CanCommand(); }));
+            get => _removeP ?? (_removeP = new RelayCommand(x => { DeletePerson(); }));
         }
-
 
         private void DeletePerson()
         {
+            if (SelectedPerson != null)
+            {
+                bool valid = Context.ITController.CheckPersonInInsurance(SelectedPerson);
+                if (valid == true)
+                {
+                    MessageBoxResult result2 = MessageBox.Show("Denna försäkringstagare är registrerad på en försäkring, vid borttagning tar du även bort försäkringen och den försäkrade. Vill du göra detta?", "Varning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                    if (result2 == MessageBoxResult.Yes)
+                    {
+                        foreach (var ip in Context.IPController.GetInsuranceTakerIPS(SelectedPerson))
+                        {
+                            Context.IPController.RemoveInsuredPerson(ip);
+                        }
+                        foreach (var it in Context.IController.GetInsuranceTakerIAS(SelectedPerson))
+                        {
+                            Context.IController.RemoveInsurance(it);
+                        }
+                        Context.ITController.RemovePersonInsuranceTaker(SelectedPerson);
+                        MessageBox.Show("Personen togs bort", "Lyckad borttagning", MessageBoxButton.OK, MessageBoxImage.Information);
+                        Persons.Remove(SelectedPerson);
+                        Persons.Clear();
+                        foreach (var p in Context.ITController.GetAllPersons())
+                        {
+                           Persons?.Add(p);
+                        }
+                        SignedInsuranceViewModel.Instance.UpdateAC();
+                    }
+                    else
+                    {
+                        MessageBox.Show($"{SelectedPerson.SocialSecurityNumber} är inte borttaget");
+                    }
+                }
+                else 
+                {
+                    MessageBoxResult result = MessageBox.Show("Vill du ta bort försäkringstagaren?", "Varning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        Context.ITController.RemovePersonInsuranceTaker(SelectedPerson);
+                        MessageBox.Show("Personen togs bort", "Lyckad borttagning", MessageBoxButton.OK, MessageBoxImage.Information);
+                        Persons.Remove(SelectedPerson);
+                        Persons.Clear();
+                        foreach (var p in Context.ITController.GetAllPersons())
+                        {
+                            Persons?.Add(p);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show($"{SelectedPerson.SocialSecurityNumber} är inte borttaget");
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Antingen har ingen person markerats i registret eller så har du lämnat något fält tomt! ", "Fel", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private ICommand _updateIP;
+        public ICommand UpdateIP
+        {
+            get => _updateIP ?? (_updateIP = new RelayCommand(x => { UpdateIPerson(); }));
+        }
+
+
+        private void UpdateIPerson()
+        {
+            if (SelectedIP != null && SelectedIP.PersonType != null && SelectedIP.LastName != null && SelectedIP.FirstName != null &&
+               SelectedIP.SocialSecurityNumber != null && SelectedIP.InsuredId != 0)
+            {
+                if (SelectedPerson.SocialSecurityNumber == SelectedIP.SocialSecurityNumber)
+                {
+                    MessageBox.Show("Du kan inte ändra uppgifterna, eftersom den försäkrade är samma person som försäkringstagaren");
+                }
+                else 
+                {
+                    SelectedIP.FirstName = FirstName;
+                    SelectedIP.LastName = LastName;
+                    SelectedIP.InsuredId = InsuredId;
+                    Context.IPController.Edit(SelectedIP);
+                    MessageBox.Show($"Uppdateringen lyckades av: {SelectedIP.InsuredId}", "Lyckad uppdatering", MessageBoxButton.OK, MessageBoxImage.Information);
+                   
+                }
+                InsuredPersons.Clear();
+                foreach (var i in Context.IPController.GetInsuranceTakerIPS(SelectedPerson))
+                {
+                    InsuredPersons?.Add(i);
+                }
+                Persons.Clear();
+                foreach (var p in Context.ITController.GetAllPersons())
+                {
+                    Persons?.Add(p);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Du måste markera en försäkrad i registret eller ha fyllt i alla fält med en *", "Fel", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private ICommand _exportP;
+        public ICommand ExportP
+        {
+            get => _exportP ?? (_exportP = new RelayCommand(x => { ExportPerson(); }));
+        }
+
+
+        private void ExportPerson()
+        {
             throw new NotImplementedException();
         }
+
         #endregion
     }
 }

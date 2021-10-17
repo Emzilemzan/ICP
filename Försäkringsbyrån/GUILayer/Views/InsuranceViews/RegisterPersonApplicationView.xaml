@@ -20,11 +20,11 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="100"/>
-                <RowDefinition Height="100"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="223.333"/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
             <Label Content="Registrera Ansökan - SOförsäkring" FontSize="26" Grid.Row="0" Grid.Column="0"/>
-            <StackPanel Grid.Column="0" Grid.Row="1" Grid.RowSpan="6" >
+            <StackPanel Grid.Column="0" Grid.Row="1" Grid.RowSpan="3" Margin="0,0,0,-1" >
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -56,7 +56,7 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                   
+
                     <Label Grid.Column="0" Grid.Row="3" Content="Försäkringstagarens uppgifter:" FontSize="18" FontWeight="Bold"/>
                     <Label Grid.Column="0" Grid.Row="4" Content="*Personnummer:" FontSize="15"/>
                     <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding SocialSecurityNumber}"/>
@@ -83,20 +83,19 @@
                     <Label Content="Email adress 2: " Grid.Row="13" Grid.Column="0" FontSize="15"/>
                     <TextBox Grid.Row="13" Grid.Column="1" Text="{Binding EmailTwo}"/>
                     <Label Content="Försäkrades uppgifter: " FontSize="18" FontWeight="Bold" Grid.Row="14" Grid.Column="0" Margin="0,15,0,0"/>
-
-                    <Label Grid.Column="0" Grid.Row="15" Content="*Personnummer:" FontSize="15"/>
-                    <TextBox Grid.Row="15" Grid.Column="1" Text="{Binding SocialSecurityNumberIP}"/>
-                    <Label Grid.Column="0" Grid.Row="16" Content="*Efternamn:" FontSize="15"/>
-                    <TextBox Grid.Row="16" Grid.Column="1" Text="{Binding LastName}"/>
-                    <Label Grid.Column="0" Grid.Row="17" Content="*Förnamn:" FontSize="15"/>
-                    <TextBox Grid.Row="17" Grid.Column="1" Text="{Binding FirstName}"/>
-                    <Label Content="*Persontyp:" FontSize="15" Grid.Row="18" Grid.Column="0" Margin="0,10,0,0"/>
-                    <ComboBox Grid.Row="18" Grid.Column="1" Text="" Margin="0,10,120,0" Width="130" Height="30" ItemsSource="{Binding PersonTypes}" SelectedItem="{Binding PersonType}"/>
+                    <CheckBox x:Name="ISPerson" Content="Är försäkringstagaren inte den försäkrade? Klicka i mig!" Grid.Row="15" Grid.Column="0" IsChecked="{Binding IPISPerson}" Grid.ColumnSpan="2" Margin="0,0.333,185,29.667" Grid.RowSpan="3"></CheckBox>
+                    <Label Grid.Column="0" Grid.Row="18" Content="*Personnummer:" FontSize="15" Visibility="{Binding Path=IsChecked,ElementName=ISPerson, Converter={StaticResource VisibleIfTrueConverter}}"/>
+                    <TextBox Grid.Row="18" Grid.Column="1" Text="{Binding SocialSecurityNumberIP}" Visibility="{Binding Path=IsChecked,ElementName=ISPerson, Converter={StaticResource VisibleIfTrueConverter}}"/>
+                    <Label Grid.Column="0" Grid.Row="19" Content="*Efternamn:" FontSize="15" Visibility="{Binding Path=IsChecked,ElementName=ISPerson, Converter={StaticResource VisibleIfTrueConverter}}"/>
+                    <TextBox Grid.Row="19" Grid.Column="1" Text="{Binding LastName}" Visibility="{Binding Path=IsChecked,ElementName=ISPerson, Converter={StaticResource VisibleIfTrueConverter}}"/>
+                    <Label Grid.Column="0" Grid.Row="20" Content="*Förnamn:" FontSize="15" Visibility="{Binding Path=IsChecked,ElementName=ISPerson, Converter={StaticResource VisibleIfTrueConverter}}"/>
+                    <TextBox Grid.Row="20" Grid.Column="1" Text="{Binding FirstName}" Visibility="{Binding Path=IsChecked,ElementName=ISPerson, Converter={StaticResource VisibleIfTrueConverter}}"/>
+                    <Label Content="*Persontyp:" FontSize="15" Grid.Row="21" Grid.Column="0" Margin="0,10,0,0" Visibility="{Binding Path=IsChecked,ElementName=ISPerson, Converter={StaticResource VisibleIfTrueConverter}}"/>
+                    <ComboBox Grid.Row="21" Grid.Column="1" Text="" Margin="0,10,120,0" Width="130" Height="30" ItemsSource="{Binding PersonTypes}" SelectedItem="{Binding PersonType}" Visibility="{Binding Path=IsChecked,ElementName=ISPerson, Converter={StaticResource VisibleIfTrueConverter}}"/>
 
                 </Grid>
             </StackPanel>
-         
-            <StackPanel  Grid.Column="1" Grid.Row="2"  Grid.RowSpan="6">
+            <StackPanel  Grid.Column="1" Grid.Row="1"  Grid.RowSpan="3" Margin="0,125,0,-1">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -157,7 +156,7 @@
                     <Label Content="*Betalform:" FontSize="15" Grid.Row="4" Grid.Column="0"/>
                     <ComboBox Grid.Row="4" Grid.Column="1" Text="" Margin="0,0,120,0" Width="130" Height="30" ItemsSource="{Binding PayMentForms}" SelectedItem="{Binding PaymentForm}"/>
                     <Label Content="*Ankomstdatum" FontSize="15" Grid.Row="5" Grid.Column="0" Margin="0,10,0,0"/>
-                    <DatePicker Grid.Row="5" Grid.Column="1" Text="" Margin="0,10,120,0" Width="130" Height="30" SelectedDate="{Binding DeliveryDate}" />
+                    <DatePicker Grid.Row="5" Grid.Column="1" Text="" Margin="0,10,120,0" Width="130" Height="30" DisplayDateEnd="{Binding Today, Mode=OneTime}" SelectedDate="{Binding DeliveryDate}" />
                     <Label Content="*Agenturnummer" FontSize="15" Grid.Row="6" Grid.Column="0" Margin="0,10,0,0"/>
                     <ComboBox Grid.Row="6" Grid.Column="1" Text="" Margin="0,10,120,0" Width="130" Height="30" ItemsSource="{Binding SalesMens, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding AgentNo}">
                         <ComboBox.Resources>
@@ -175,11 +174,11 @@
                         </ComboBox.ItemTemplate>
                     </ComboBox>
                     <!--#region OptionalTypes-->
-                    
+
                     <Label Content="Tillval: " FontSize="18" FontWeight="Bold" Grid.Row="7" Grid.Column="0" Margin="0,30,0,0"/>
                     <CheckBox x:Name="Optional" IsChecked="{Binding ACheck, UpdateSourceTrigger=PropertyChanged}" Grid.Row="8" Content="Ska tillvalet 'Månadsersättning vid långvarig sjukskrivning''göras?" Grid.ColumnSpan="2" Margin="0,0,130,0"/>
                     <Label Content="Tillvals typ 1:" FontSize="15" Grid.Row="9" Grid.Column="0" Margin="0,10,0,0" Visibility="{Binding Path=IsChecked,ElementName=Optional, Converter={StaticResource VisibleIfTrueConverter}}"/>
-                    <ComboBox Grid.Row="9" Grid.Column="1" Text="" Margin="0,10,120,0" Width="130" Height="30" ItemsSource="{Binding OptionalTypes, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedItem="{Binding OptionalType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                    <ComboBox Grid.Row="9" IsReadOnly="True" Grid.Column="1" Text="" Margin="0,10,120,0" Width="130" Height="30" ItemsSource="{Binding OptionalTypes, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedItem="{Binding OptionalType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                               Visibility="{Binding Path=IsChecked,ElementName=Optional, Converter={StaticResource VisibleIfTrueConverter}}" >
                         <ComboBox.Resources>
                             <DataTemplate x:Key="DataTemplate">
@@ -196,14 +195,14 @@
                         </ComboBox.ItemTemplate>
                     </ComboBox>
                     <Label Content="*Grundbelopp:" FontSize="15" Grid.Row="10" Grid.Column="0" Margin="0,30,0,0" Visibility="{Binding Path=IsChecked,ElementName=Optional, Converter={StaticResource VisibleIfTrueConverter}}"/>
-                    <ComboBox Grid.Row="10" Grid.Column="1" Text="" Margin="0,10,120,0" Width="130" Height="30" Visibility="{Binding Path=IsChecked,ElementName=Optional, Converter={StaticResource VisibleIfTrueConverter}}"
+                    <ComboBox Grid.Row="10" Height="30" Grid.Column="1" Margin="0,10,120,0" Width="130" Visibility="{Binding Path=IsChecked,ElementName=Optional, Converter={StaticResource VisibleIfTrueConverter}}"
                               ItemsSource="{Binding BaseAmountsOP2, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedItem="{Binding BAmount}">
                     </ComboBox>
                     <CheckBox x:Name="Optional1" IsChecked="{Binding BCheck, UpdateSourceTrigger=PropertyChanged}" Grid.Row="11" Content="Ska tillvalet: 'Invaliditet vid olycksfall' göras?" Grid.ColumnSpan="2" Margin="0,0,235,0"/>
 
                     <Label Content="Tillvals typ 2:" FontSize="15" Grid.Row="12" Grid.Column="0" Margin="0,30,0,0" Visibility="{Binding Path=IsChecked,ElementName=Optional1, Converter={StaticResource VisibleIfTrueConverter}}"
 />
-                    <ComboBox x:Name="o1" Grid.Row="12" Grid.Column="1" Text="" Margin="0,10,120,0" Width="130" Height="30" ItemsSource="{Binding OptionalTypes1, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedItem="{Binding OptionalType1, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                    <ComboBox x:Name="o1" IsReadOnly="True" Grid.Row="12" Grid.Column="1" Text="" Margin="0,10,120,0" Width="130" Height="30" ItemsSource="{Binding OptionalTypes1, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedItem="{Binding OptionalType1, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                               Visibility="{Binding Path=IsChecked,ElementName=Optional1, Converter={StaticResource VisibleIfTrueConverter}}">
                         <ComboBox.Resources>
                             <DataTemplate x:Key="DataTemplateSalesMen">
@@ -222,26 +221,13 @@
 
 
                     <Label Content="*Grundbelopp:" FontSize="15" Grid.Row="13" Grid.Column="0" Visibility="{Binding Path=IsChecked,ElementName=Optional1, Converter={StaticResource VisibleIfTrueConverter}}"/>
-                    <ComboBox Grid.Row="13" Grid.Column="1" Margin="0,30,120,0" Width="130" Height="30" Visibility="{Binding Path=IsChecked,ElementName=Optional1, Converter={StaticResource VisibleIfTrueConverter}}" 
+                    <ComboBox Grid.Row="13" Margin="0,10,120,0" Height="30"  Grid.Column="1" Width="130" Visibility="{Binding Path=IsChecked,ElementName=Optional1, Converter={StaticResource VisibleIfTrueConverter}}" 
                               ItemsSource="{Binding BaseAmountsOP1, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedItem="{Binding BAmount1}">
-                        <ComboBox.Resources>
-                            <DataTemplate x:Key="DataTemplateBaseAmount1">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock Text="{Binding Path= Baseamount}" Grid.Column="1" />
-                                </Grid>
-                            </DataTemplate>
-                        </ComboBox.Resources>
-                        <ComboBox.ItemTemplate>
-                            <StaticResource ResourceKey="DataTemplateBaseAmount1"/>
-                        </ComboBox.ItemTemplate>
                     </ComboBox>
                     <CheckBox x:Name="Optional2" Grid.Row="14" IsChecked="{Binding CCheck, UpdateSourceTrigger=PropertyChanged}" Content="Ska tillvalet: 'Höjning av livförsäkring' göras?" Grid.ColumnSpan="2" Margin="0,0,235,0"/>
 
                     <Label Content="Tillvals typ 3: " FontSize="15" Grid.Row="15" Grid.Column="0" Margin="0,30,0,0" Visibility="{Binding Path=IsChecked,ElementName=Optional2, Converter={StaticResource VisibleIfTrueConverter}}"/>
-                    <ComboBox Grid.Row="15" Grid.Column="1" Margin="0,30,120,0" Height="30"  Visibility="{Binding Path=IsChecked,ElementName=Optional2, Converter={StaticResource VisibleIfTrueConverter}}" ItemsSource="{Binding OptionalTypes2}" SelectedItem="{Binding OptionalType2}">
+                    <ComboBox Grid.Row="15" IsReadOnly="True" Grid.Column="1" Margin="0,30,120,0" Height="30"  Visibility="{Binding Path=IsChecked,ElementName=Optional2, Converter={StaticResource VisibleIfTrueConverter}}" ItemsSource="{Binding OptionalTypes2}" SelectedItem="{Binding OptionalType2}">
                         <ComboBox.Resources>
                             <DataTemplate x:Key="DataTemplateSalesMen">
                                 <Grid>
@@ -257,7 +243,7 @@
                         </ComboBox.ItemTemplate>
                     </ComboBox>
                     <Label Content="* Grundbelopp:" FontSize="16" Grid.Row="16" Margin="0,30,0,0" Visibility="{Binding Path=IsChecked,ElementName=Optional2, Converter={StaticResource VisibleIfTrueConverter}}"/>
-                    <TextBox Grid.Row="16" Text="{Binding BARLL, ValidatesOnExceptions=True}" Grid.Column="1" Margin="0,30,120,0" Height="30" Visibility="{Binding Path=IsChecked,ElementName=Optional2, Converter={StaticResource VisibleIfTrueConverter}}"/>
+                    <TextBox Grid.Row="16" Margin="0,10,120,0" Text="{Binding BARLL, ValidatesOnExceptions=True}" Grid.Column="1" Width="130" Height="30" Visibility="{Binding Path=IsChecked,ElementName=Optional2, Converter={StaticResource VisibleIfTrueConverter}}"/>
                     <!--#endregion-->
                     <Button Grid.Row="7" Grid.Column="1" Content="Registrera" Margin="153,10,10,30" Command="{Binding AddInsuranceBtn}"/>
                 </Grid>

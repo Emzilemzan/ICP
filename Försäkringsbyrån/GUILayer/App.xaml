@@ -108,6 +108,9 @@
         <DataTemplate DataType="{x:Type ivm:RegisterLifeApplicationViewModel}">
             <iv:RegisterLifeApplicationView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type ivm:SignedInsuranceViewModel}">
+            <iv:SignedInsurancesView/>
+        </DataTemplate>
         <!--#region Exit Button Style-->
         <Style x:Key="ExitBtnStyle" TargetType="{x:Type Button}">
             <Setter Property="Background" Value="Transparent"/>
