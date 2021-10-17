@@ -24,36 +24,43 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             InsuranceGrid.Filter = new Predicate<object>(o => Filter(o as Insurance));
         }
 
-        private ICommand _showInsurance;
-        public ICommand ShowInsurance
+        private ICommand _signInsurance;
+        public ICommand SignInsurance
         {
-            get=> _showInsurance ?? (_showInsurance = new RelayCommand(x => { ShowInsuranceMethod(); }));
+            get=> _signInsurance ?? (_signInsurance = new RelayCommand(x => { SignInsuranceMethod(); }));
         }
 
-        private void ShowInsuranceMethod()
+        private void SignInsuranceMethod()
         {
             if (SelectedInsurance != null)
             {
-                string SN = SerialNumber;
-                string str = Regex.Replace(SN, @"\d", "");
-                switch (str)
+                if(SelectedInsurance.InsuranceNumber != null && SelectedInsurance.SerialNumber != null)
                 {
-                    case "LIV":
-                        MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
-                        MainViewModel.Instance.CurrentTool = "";                       
-                        MainViewModel.Instance.SelectedViewModel = SignedLifeInsuranceViewModel.Instance;
-                        break;
-                    case "FF":
-                        MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
-                        MainViewModel.Instance.CurrentTool = "";
-                        break;
-                    case "SO":
-                        MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
-                        MainViewModel.Instance.CurrentTool = "";
-                        break;
-                    default:
-                        MessageBox.Show("Fanns ej i databasen");
-                        break;
+                    string SN = SerialNumber;
+                    string str = Regex.Replace(SN, @"\d", "");
+
+                    if (str == "LIV" || str == "SO")
+                    {
+                        if (SelectedInsurance.PossibleBaseAmount != null && SelectedInsurance.PossibleComisson == null)
+                        {
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("För LIV och SO försäkringar, ska bara grundbelopp fyllas i");
+                        }
+                    }
+                    else
+                    {
+                        if (SelectedInsurance.PossibleComisson != null && SelectedInsurance.PossibleBaseAmount == null)
+                        {
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("För FF och Övriga försäkringar, ska bara provision fyllas i");
+                        }
+                    }
                 }
                 SelectedInsurance = null;
             }
@@ -81,23 +88,31 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             }
         }
 
-        public string TakerNbr
+        public string InsuranceNumber
         {
-            get => SelectedInsurance.TakerNbr;
+            get => SelectedInsurance.InsuranceNumber;
             set
             {
-                SelectedInsurance.TakerNbr = value;
-                OnPropertyChanged("TakerNbr");
+                SelectedInsurance.InsuranceNumber = value;
+                OnPropertyChanged("InsuranceNumber");
             }
         }
-
-        public string TypeName
+        public int? PossibleBaseAmount 
         {
-            get => SelectedInsurance.TypeName;
+            get => SelectedInsurance.PossibleBaseAmount;
             set
             {
-                SelectedInsurance.TypeName = value;
-                OnPropertyChanged("TypeName");
+                SelectedInsurance.PossibleBaseAmount = value;
+                OnPropertyChanged("PossibleBaseAmount");
+            }
+        }
+        public int? PossibleComisson
+        {
+            get => SelectedInsurance.PossibleComisson;
+            set
+            {
+                SelectedInsurance.PossibleComisson = value;
+                OnPropertyChanged("PossibleComisson");
             }
         }
 

@@ -6,34 +6,31 @@
              xmlns:local="clr-namespace:GUILayer.Views.InsuranceViews"
               xmlns:xctk1="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:insuranceviewmodels="clr-namespace:GUILayer.ViewModels.InsuranceViewModels" d:DataContext="{d:DesignInstance Type=insuranceviewmodels:SignedInsuranceViewModel}"
              mc:Ignorable="d" 
-             d:DesignHeight="250" d:DesignWidth="800">
+             d:DesignHeight="300" d:DesignWidth="900">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="37"/>
             <RowDefinition Height="40"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Label Content="Ansökningar att teckna:" FontSize="20" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,167,0"/>
 
-        <xctk1:WatermarkTextBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+        <xctk1:WatermarkTextBox Grid.Column="0"
                                 HorizontalContentAlignment="Center"
                                 VerticalContentAlignment="Center"
                                 TextWrapping="WrapWithOverflow"
                                 Watermark="Skriv ditt sök ord här..."
                                 Foreground="Black"
                                 Background="Transparent" BorderBrush="Transparent"
-                                Text="{Binding SearchInput, UpdateSourceTrigger=PropertyChanged}"/>
+                                Text="{Binding SearchInput, UpdateSourceTrigger=PropertyChanged}" Margin="0,37,5,0.333" Grid.RowSpan="2"/>
 
 
-        <DataGrid x:Name ="InsuranceGrid" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="3" AutoGenerateColumns="False" ItemsSource="{Binding InsuranceGrid, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+        <DataGrid x:Name ="InsuranceGrid" Grid.Row="2" Grid.Column="0" Grid.RowSpan="3" AutoGenerateColumns="False" ItemsSource="{Binding InsuranceGrid, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                   RowDetailsVisibilityMode="VisibleWhenSelected" 
                   IsReadOnly="True" 
                   SelectedItem="{Binding SelectedInsurance, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
@@ -41,17 +38,43 @@
                   IsSynchronizedWithCurrentItem="True"
                   ScrollViewer.CanContentScroll="True" 
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
-                  ScrollViewer.HorizontalScrollBarVisibility="Auto" Margin="0,0,54,0">
+                  ScrollViewer.HorizontalScrollBarVisibility="Auto" Margin="0,0.333,10,-0.333">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Löpnummer" Binding="{Binding Path = SerialNumber}"/>
                 <DataGridTextColumn Header="Försäkringstagare (org.nr/person.nr)" Binding="{Binding Path = TakerNbr}" />
                 <DataGridTextColumn Header="Försäkringstyp" Binding="{Binding Path = TypeName}" />
             </DataGrid.Columns>
         </DataGrid>
-        <Label Content="Markerad försäkring:" Grid.Row="2" Grid.Column="3" FontSize="15"></Label>
-        <Label Content="Löpnummer:" Grid.Row="3" Grid.Column="3" FontSize="15"></Label>
-        <TextBox Grid.Row="2" IsReadOnly="True" Grid.Column="3" Text="{Binding SelectedInsurance.SerialNumber}" Margin="111,50.333,0,25" Grid.RowSpan="2"></TextBox>
-        <Button Grid.Row="4" Grid.Column="3" Content="Teckna" Command="{Binding ShowInsurance}" HorizontalAlignment="Right" Margin="0,0,0,24.667" Width="89"/>
+        <Label Content="Markerad försäkring" Grid.Row="1" Grid.Column="3" FontSize="15" Margin="0.333,10,-44,50.333" FontWeight="Bold" Grid.RowSpan="2"/>
+        <Grid Grid.Row="2" Grid.Column="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Label Content="Löpnummer:" Grid.Row="0" Grid.Column="0" FontSize="15"></Label>
+            <TextBox Grid.Row="0" IsReadOnly="True" Grid.Column="1" Text="{Binding SelectedInsurance.SerialNumber}" Margin="0.333,0,0,0.333"/>
+            <Label Grid.Column="0" Grid.Row="1" Content="*Betald:" FontSize="15"/>
+            <Label Grid.Column="0" Grid.Row="1" Content="*År:" FontSize="15" Margin="89,0.333,225,0.333" Grid.ColumnSpan="2"/>
+            <ComboBox Grid.Row="1" Margin="131,0.333,203,0.333" Grid.ColumnSpan="2"/>
+            <Label Grid.Column="1" Grid.Row="1" Content="*Månad:" FontSize="15" Margin="39.667,0.333,121,0.333"/>
+            <ComboBox Grid.Column="1" Grid.Row="1" Margin="108.667,0.333,0,0.333"/>
+            <Label Grid.Column="0" Grid.Row="2" Content="*Försäkringsnummer:" FontSize="15"/>
+            <TextBox Grid.Row="2" IsReadOnly="True" Grid.Column="1" Text="{Binding SelectedInsurance.InsuranceNumber}"/>
+            <Label Grid.Column="0" Grid.Row="3" Content="Eventuellt Grundbelopp:" FontSize="15"/>
+            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding SelectedInsurance.PossibleBaseAmount}"/>
+            <Label Grid.Column="0" Grid.Row="4" Content="Eventuell Provision:" FontSize="15"/>
+            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding SelectedInsurance.PossibleComisson}"/>
+            <Button Grid.Row="4" Grid.Column="1" Content="Teckna" Command="{Binding SignInsurance}" HorizontalAlignment="Right" Margin="0,44.333,0,-30.333" Width="89"/>
+
+        </Grid>
 
     </Grid>
 
