@@ -36,9 +36,88 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             get => _addCIInsuranceBtn ?? (_addCIInsuranceBtn = new RelayCommand(x => { RegisterApplication(); _ = CanCreate(); }));
         }
 
+        public void AddInsurance()
+        {
+            if (Instance._orgNr != null && Instance.ContactPerson != null && Instance.CompanyName != null && Instance.City != null && Instance.AgentNo != null & Instance.DialingCode != null
+                && Instance.CompanyInsuranceType != null  && Instance.PaymentForm != null && Instance.StreetAdress != null && Instance.DeliveryDate != null &&
+                Instance.PostalCode != null && Instance.Premie != null)
+            {
+                Insurance i = new Insurance()
+                {
+                    SerialNumber = Instance.SerialNbr = GenerateIdFormation(),
+                    AgentNo = Instance.AgentNo,
+                    OPI = Instance.OPIType,
+                    PaymentForm = Instance.PaymentForm,
+                    CompanyTaker = Instance.Companyn = AddCompany(),
+                    DeliveryDate = Instance.DeliveryDate,
+                    Premie = Instance._premie,
+                    Table = Instance.Tabell,
+                    InsuranceStatus = Status.Otecknad,
+
+                };
+                Context.IController.AddInsuranceApplication(i);
+                MessageBox.Show("Ansökan har lagts till");
+                Check = true;
+                Instance.OrganizationNbr = string.Empty;
+                Instance.AgentNo = null;
+                Instance.City = string.Empty;
+                Instance.StreetAdress = string.Empty;
+                Instance.TelephoneNbr = string.Empty;
+                Instance.DialingCode = string.Empty;
+                Instance.Email = string.Empty;
+                Instance.CompanyName = string.Empty;
+                Instance.Premie = string.Empty;
+                Instance.PaymentForm = null;
+                Instance.PostalCode = string.Empty;
+                Instance.FaxNbr = string.Empty;
+                Instance.Companyn = null;
+                Instance.CompanyInsuranceType = null;
+            }
+            else
+            {
+                MessageBox.Show("Alla fält med en * är obligatoriska att fylla i", "Fel", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
         public void RegisterApplication()
         {
+            Company y = Context.ITController.GetCompany(Instance.OrganizationNbr);
+            if (y != null)
+            {
+                MessageBoxResult result = MessageBox.Show($"Det finns redan en försäkringstagare med det inskrivna organisationsnumret vid namn: {y.CompanyName} vill du uppdatera dessa uppgifter?", "Varning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (result == MessageBoxResult.Yes)
+                {
+                    AddInsurance();
+                }
+                else
+                {
+                    MessageBox.Show("Ändra organisationsnummer.");
+                }
+            }
+            else
+            {
+                AddInsurance();
+            }
+        }
 
+    private Company AddCompany()
+        {
+            Company _tk = new Company()
+            {
+                OrganizationNumber = Instance.OrganizationNbr,
+                PostalCode = Instance._pC,
+                StreetAddress = Instance.StreetAdress,
+                City = Instance.City,
+                CompanyName = Instance.CompanyName,
+                DiallingCode = Instance.DialingCode,
+                Email = Instance.Email,
+                ContactPerson = Instance.ContactPerson,
+                FaxNumber = Instance.FaxNbr,
+                TelephoneNbr = Instance.TelephoneNbr,
+            };
+            Context.ITController.CheckExistingCompany(Instance._orgNr, _tk, Instance.CompanyName, Instance.City, Instance._pC, Instance.StreetAdress, Instance.TelephoneNbr, Instance.DialingCode, Instance.Email, Instance.ContactPerson, Instance.FaxNbr);
+            Company x = Context.ITController.GetCompany(Instance._orgNr);
+            Companyn = x;
+            return Companyn;
         }
         #endregion
 
@@ -192,6 +271,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                 OnPropertyChanged("FaxNbr");
             }
         }
+
         private string _contactPerson;
         public string ContactPerson
         {
@@ -306,13 +386,22 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         }
 
         private int _premie;
-        public int Premie
+        public string Premie
         {
-            get => _premie;
+            get => _premie > 0 ? _premie.ToString() : "";
             set
             {
-                _premie = value;
-                OnPropertyChanged("Premie");
+                if (Check == false)
+                {
+                    if (int.TryParse(value, out _premie) && _premie.ToString().Length == 5)
+                    {
+                        OnPropertyChanged("Premie");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Måste vara ett tal");
+                    }
+                }
             }
         }
 
@@ -338,6 +427,18 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             }
         }
 
+  
+
+        private string _CIT;
+        public string CompanyInsuranceType
+        {
+            get => _CIT;
+            set
+            {
+                _CIT = value;
+                OnPropertyChanged("CompanyInsuranceType");
+            }
+        }
 
         #endregion
 
