@@ -48,6 +48,8 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                     {
                         SerialNumber = Instance.SerialNumber = GenerateIdFormation(),
                         PersonTaker = x,
+                        TakerNbr = x.SocialSecurityNumber,
+                        TypeName = Instance.OPIType.OPIName,
                         PaymentForm = Instance.PaymentForm,
                         InsuranceStatus = Status.Otecknad,
                         DeliveryDate = Instance.DeliveryDate,
@@ -58,8 +60,8 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                         OPI = Instance.OPIType,
                     };
 
-                    Context.IController.AddInsuranceApplication(op);
-                    MessageBox.Show("Ansökan tillagd!");
+             Context.IController.AddInsuranceApplication(op);
+               MessageBox.Show("Ansökan tillagd!");
                   Check = true;
                  Instance.AgentNo = null;
                  Instance.City = string.Empty;
@@ -153,14 +155,17 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             List<Insurance> insurances = new List<Insurance>();
             foreach (var i in Context.IController.GetAllInsurances())
             {
-                if (i.OPI == Instance.OPIType)
+                if (i.OPI != null)
                 {
-                     insurances?.Add(i);
+                    if (OPIType.OPIName.Equals(i.OPI.OPIName))
+                    {
+                        insurances?.Add(i);
+                    }
                 }
             }
-            if (insurances.Count < 1)
+            if (insurances == null)
             {
-                string str = "Övrig personförsäkring för vuxen";
+                string str = "ÖPFV";
                 string num = "1";
 
                 y = str + num;
@@ -173,13 +178,14 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                 string num = Regex.Replace(x, @"\D", "");
 
                 int num1 = int.Parse(num);
-                int num2 = num1++;
+                int num2 = num1 + 1;
                 string newNum = num2.ToString();
 
                 y = str + newNum;
             }
             return y;
-         }
+        }
+
         #endregion
 
         #region update of collections and lists. 

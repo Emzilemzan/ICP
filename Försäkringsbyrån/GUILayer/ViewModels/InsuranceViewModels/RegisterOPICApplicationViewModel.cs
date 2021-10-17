@@ -24,6 +24,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         {
             SalesMens = UpdateSM();
             PayMentForms = new List<string>() { "Helår", "Halvår", "Kvartal", "Månad" };
+            DeliveryDate = DateTime.Today;
             OPInsuranceTypes = UpdateOPI();
         }
 
@@ -39,13 +40,15 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         public void AddInsurance()
         {
             if (Instance._orgNr != null && Instance.ContactPerson != null && Instance.CompanyName != null && Instance.City != null && Instance.AgentNo != null & Instance.DialingCode != null
-                && Instance.CompanyInsuranceType != null  && Instance.PaymentForm != null && Instance.StreetAdress != null && Instance.DeliveryDate != null &&
-                Instance.PostalCode != null && Instance.Premie != null)
+                && Instance.PaymentForm != null && Instance.StreetAdress != null && Instance.DeliveryDate != null && Instance.PostalCode != null && Instance.Premie != null && Instance.Tabell !=null 
+                && Instance.FaxNbr != null && Instance.TelephoneNbr !=null)
             {
                 Insurance i = new Insurance()
                 {
                     SerialNumber = Instance.SerialNbr = GenerateIdFormation(),
                     AgentNo = Instance.AgentNo,
+                    TakerNbr = Instance.OrganizationNbr,
+                    TypeName = Instance.OPIType.OPIName,
                     OPI = Instance.OPIType,
                     PaymentForm = Instance.PaymentForm,
                     CompanyTaker = Instance.Companyn = AddCompany(),
@@ -147,20 +150,25 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             return OPInsuranceTypes;
         }
 
+
+
         private string GenerateIdFormation()
         {
             string y;
             List<Insurance> insurances = new List<Insurance>();
             foreach (var i in Context.IController.GetAllInsurances())
             {
-                if (i.OPI == Instance.OPIType)
+                if (i.OPI != null)
                 {
-                    insurances?.Add(i);
+                    if (OPIType.OPIName.Equals(i.OPI.OPIName))
+                    {
+                        insurances?.Add(i);
+                    }
                 }
             }
-            if (insurances.Count < 1)
+            if (insurances == null)
             {
-                string str = "Övrig personförsäkring för vuxen";
+                string str = "ÖPFV";
                 string num = "1";
 
                 y = str + num;
@@ -173,7 +181,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                 string num = Regex.Replace(x, @"\D", "");
 
                 int num1 = int.Parse(num);
-                int num2 = num1++;
+                int num2 = num1 + 1;
                 string newNum = num2.ToString();
 
                 y = str + newNum;
@@ -184,7 +192,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         #endregion
 
         #region Lists
-        public List<string> PayMentForms = new List<string>();
+        public List<string> PayMentForms { get; set; }
         public ObservableCollection<SalesMen> SalesMens { get; set; }
         public ObservableCollection<OtherPersonInsurance> OPInsuranceTypes { get; set; }
 
@@ -426,8 +434,6 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                 OnPropertyChanged("DeliveryDate");
             }
         }
-
-  
 
         private string _CIT;
         public string CompanyInsuranceType
