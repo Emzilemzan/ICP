@@ -1,0 +1,122 @@
+﻿<UserControl x:Class="GUILayer.Views.CommissionViews.CommissionOverviewView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GUILayer.Views.CommissionViews"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="900">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="500"/>
+            <ColumnDefinition Width="500"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            
+        </Grid.RowDefinitions>
+        <Label Content="Provisionsöversikt" FontSize="24"  Grid.Row="0" Grid.Column="0"/>
+        <StackPanel Grid.Column="0" Grid.Row="1" Grid.RowSpan="6" >
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Column="0" Grid.Row="1" Content="*Säljare:" FontSize="15"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Text=""/>
+                <Label Grid.Column="0" Grid.Row="2" Content="*Månad:" FontSize="15"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Text=""/>
+                <Label Grid.Column="0" Grid.Row="3" Content="*Utdelningsadress:" FontSize="15"/>
+                <TextBox Grid.Row="3" Grid.Column="1" Text=""/>
+                <Label Grid.Column="0" Grid.Row="4" Content="*Postnummer:" FontSize="15"/>
+                <TextBox Grid.Row="4" Grid.Column="1" Text=""/>
+                <Label Grid.Column="0" Grid.Row="5" Content="*Postadress:" FontSize="15"/>
+                <TextBox Grid.Row="5" Grid.Column="1" Text=""/>
+                <Label Grid.Column="0" Grid.Row="6" Content="*Insättning bankkonto den:" FontSize="15"/>
+                <TextBox Grid.Row="6" Grid.Column="1" Text=""/>
+                <Label Grid.Column="0" Grid.Row="7" Content="Barn Summa Ackvärde:" FontSize="15"/>
+                <TextBox Grid.Row="7" Grid.Column="1" Text=""/>
+                <Label Grid.Column="0" Grid.Row="8" Content="Vuxen Summa Ackvärde:" FontSize="15"/>
+                <TextBox Grid.Row="8" Grid.Column="8" Text=""/>
+                <Label Grid.Column="0" Grid.Row="9" Content="Summa Ackvärde:" FontSize="15"/>
+                <TextBox Grid.Row="9" Grid.Column="1" Text=""/>
+                <Label Grid.Column="0" Grid.Row="10" Content="Liv- Summa Ackvärde:" FontSize="15"/>
+                <TextBox Grid.Row="10" Grid.Column="1" Text=""/>
+            </Grid>
+        </StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row="5" Grid.RowSpan="6">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Column="0" Grid.Row="1" Content="Övrig provision:" FontSize="15"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Text=""/>
+                <Label Grid.Column="0" Grid.Row="2" Content="Semesterersättning:" FontSize="15"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Text=""/>
+                <Label Grid.Column="0" Grid.Row="3" Content="Preliminärskatt:" FontSize="15"/>
+                <TextBox Grid.Row="3" Grid.Column="1" Text=""/>
+                <Label Grid.Column="0" Grid.Row="4" Content="Summa Provision:" FontSize="15"/>
+                <TextBox Grid.Row="4" Grid.Column="1" Text=""/>
+                <Label Grid.Column="0" Grid.Row="5" Content="Avgår skatt:" FontSize="15"/>
+                <TextBox Grid.Row="5" Grid.Column="1" Text=""/>
+                <Label Grid.Column="0" Grid.Row="6" Content="Att utbetala:" FontSize="15"/>
+                <TextBox Grid.Row="6" Grid.Column="1" Text=""/>
+            </Grid>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="5" Grid.RowSpan="5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Column="0" Grid.Row="1" Content="Prov so:" FontSize="15"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Text=""/>
+                <Label Grid.Column="0" Grid.Row="2" Content="Prov liv:" FontSize="15"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Text=""/>
+                <Label Grid.Column="0" Grid.Row="3" Content="Prov övrig:" FontSize="15"/>
+                <TextBox Grid.Row="3" Grid.Column="1" Text=""/>
+            </Grid>
+        </StackPanel>
+        <Button Grid.Row="6" Grid.Column="1" Content="Exportera Provsion" Height="25" Margin="0,40,350,0" Command="" />
+        <Button Grid.Row="6" Grid.Column="1" Content="Spara" Height="25" Margin="250,40,150,0" Command="" />
+    </Grid>
+</UserControl>
