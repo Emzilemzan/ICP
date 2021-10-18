@@ -1,6 +1,8 @@
 ﻿using GUILayer.Commands;
+using Models.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -13,9 +15,10 @@ namespace GUILayer.ViewModels.CommissionViewModels
     {
         public static readonly GetCommissionViewModel Instance = new GetCommissionViewModel();
 
-        private GetCommissionViewModel()
+        public GetCommissionViewModel()
         {
-            Months = GetMonths();
+            Months = new List<string>() {"Januari", "Februari", "Mars", "April", "Maj", "Juni", "Juli", "Augusti", "September", "November", "December"};
+            SalesMens = UpdateSM();
         }
 
         #region Commands
@@ -31,38 +34,57 @@ namespace GUILayer.ViewModels.CommissionViewModels
         }
 
         //För att visa månader i combobox. 
-        public List<int> Months { get; set; }
-        public List<int> GetMonths()
-        { 
-            Enumerable.Range(1, 12).Select(i => new { I = i, M = DateTimeFormatInfo.CurrentInfo.GetMonthName(i) });
-            return Months;
-    
-        }
+        public List<string> Months { get; set; }
+        
         #endregion
 
-        #region Properties
-        //Vilken säljare 
-        private int _salesMan;
-        public int Salesman
+        //Get all salesmen. 
+        public ObservableCollection<SalesMen> UpdateSM()
         {
-            get => _salesMan;
-            set
+            ObservableCollection<SalesMen> x = new ObservableCollection<SalesMen>();
+            foreach (var e in Context.SMController.GetAllSalesMen())
             {
-                _salesMan = value;
+                x?.Add(e);
+            }
+            SalesMens = x;
+            return SalesMens;
+        }
 
-                OnPropertyChanged("Salesman");
+
+
+        #region Properties
+        public ObservableCollection<SalesMen> SalesMens { get; set; }
+
+        private SalesMen _agentNo;
+
+        public SalesMen AgentNo
+        {
+            get => _agentNo;
+            set 
+            { 
+                _agentNo = value;
+                OnPropertyChanged("AgentNo");
             }
         }
 
-        //Vilken månad 
-        private int _month;
-        public int Month
+        private int _year;
+        public int Year
+        {
+            get => _year;
+            set
+            {
+                _year = value;
+                OnPropertyChanged("Year");
+            }
+        }
+
+        private string _month;
+        public string Month
         {
             get => _month;
             set
             {
                 _month = value;
-
                 OnPropertyChanged("Month");
             }
         }

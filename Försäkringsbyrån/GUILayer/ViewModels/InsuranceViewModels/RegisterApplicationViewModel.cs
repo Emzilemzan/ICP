@@ -60,6 +60,30 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             return CompanyInsurances;
         }
 
+        public void EmptyAllChoices()
+        {
+            Check = true;
+            Instance.OrganizationNumber = string.Empty;
+            Instance.AgentNo = null;
+            Instance.City = string.Empty;
+            Instance.StreetAddress = string.Empty;
+            Instance.TelephoneNbr = string.Empty;
+            Instance.DiallingCode = string.Empty;
+            Instance.Email = string.Empty;
+            Instance.EndDate = Today;
+            Instance.StartDate = Today;
+            Instance.CompanyName = string.Empty;
+            Instance.Premie = string.Empty;
+            Instance.PaymentForm = null;
+            Instance.PostalCode = string.Empty;
+            Instance.Notes = string.Empty;
+            Instance.FaxNumber = string.Empty;
+            Instance.InsuranceCompany = string.Empty;
+            Instance.CompanyI = null;
+            Instance.Company = null;
+            Instance.CompanyInsuranceType = null;
+        }
+
         private void AddInsurance()
         {
             if (Instance._orgNbr != null  && Instance.CompanyName != null && Instance.City != null && Instance.AgentNo != null & Instance.DiallingCode != null
@@ -88,26 +112,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                     Context.IController.AddInsuranceApplication(i);
                     MessageBox.Show("Ansökan har lagts till");
                     SignedInsuranceViewModel.Instance.UpdateAC();
-                    Check = true;
-                    Instance.OrganizationNumber = string.Empty;
-                    Instance.AgentNo = null;
-                    Instance.City = string.Empty;
-                    Instance.StreetAddress = string.Empty;
-                    Instance.TelephoneNbr = string.Empty;
-                    Instance.DiallingCode = string.Empty;
-                    Instance.Email = string.Empty;
-                    Instance.EndDate = Today;
-                    Instance.StartDate = Today;
-                    Instance.CompanyName = string.Empty;
-                    Instance.Premie = string.Empty;
-                    Instance.PaymentForm = null;
-                    Instance.PostalCode = string.Empty;
-                    Instance.Notes = string.Empty;
-                    Instance.FaxNumber = string.Empty;
-                    Instance.InsuranceCompany = string.Empty;
-                    Instance.CompanyI = null;
-                    Instance.Company = null;
-                    Instance.CompanyInsuranceType = null;
+                    EmptyAllChoices();
                 }
                 else
                 {
@@ -141,7 +146,6 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                 AddInsurance();
             }
         }
-
         private Company AddCompany()
         {
             Company _tk = new Company()

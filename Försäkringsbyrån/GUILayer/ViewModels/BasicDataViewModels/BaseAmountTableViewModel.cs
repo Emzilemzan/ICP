@@ -13,7 +13,7 @@ using System.Windows.Input;
 
 namespace GUILayer.ViewModels.BasicDataViewModels
 {
-    public class BaseAmountTableViewModel: BaseViewModel 
+    public class BaseAmountTableViewModel : BaseViewModel
     {
         public static readonly BaseAmountTableViewModel Instance = new BaseAmountTableViewModel();
         private BaseAmountTableViewModel()
@@ -45,16 +45,13 @@ namespace GUILayer.ViewModels.BasicDataViewModels
                     SAID = Instance.SAID,
                 };
                 Context.BDController.CheckNbrOfBASA(Instance.SAID, Instance.Date, baseAmountTabel);
- 
+
                 Tabels.Clear();
                 foreach (var t in Context.BDController.GetAllTables())
                 {
                     Tabels?.Add(t);
                 }
-                AckValue = string.Empty;
-                BaseAmount = string.Empty;
-                SAID = null;
-                Date = DateTime.Now; 
+                EmptyAllChoices();
             }
             else
             {
@@ -62,7 +59,13 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             }
         }
 
-
+        public void EmptyAllChoices()
+        {
+            AckValue = string.Empty;
+            BaseAmount = string.Empty;
+            SAID = null;
+            Date = DateTime.Now;
+        }
         //Method that removes baseamounttabel based on what id it has in database. 
         //Needs a control here, if it exists in insurance you can't delete it. 
         private void RemoveBaseAmountTable()
@@ -113,7 +116,7 @@ namespace GUILayer.ViewModels.BasicDataViewModels
         {
             ObservableCollection<SAInsurance> x = new ObservableCollection<SAInsurance>();
 
-            x.Add(new SAInsurance() { SAID= 0, SAInsuranceType = "inget" });
+            x.Add(new SAInsurance() { SAID = 0, SAInsuranceType = "inget" });
             foreach (var e in Context.IController.GetAllSAI())
             {
                 x?.Add(e);
@@ -139,7 +142,7 @@ namespace GUILayer.ViewModels.BasicDataViewModels
                 }
             }
         }
-     
+
 
         private int _baseAmount;
         public string BaseAmount
@@ -151,7 +154,7 @@ namespace GUILayer.ViewModels.BasicDataViewModels
                 { OnPropertyChanged("BaseAmount"); }
             }
         }
-        
+
         private double _ackValue;
         public string AckValue
         {
@@ -179,15 +182,14 @@ namespace GUILayer.ViewModels.BasicDataViewModels
         private SAInsurance _sAInsurance;
         public SAInsurance SAID
         {
-            get =>  _sAInsurance;
+            get => _sAInsurance;
             set
             {
                 _sAInsurance = value;
-                
+
                 OnPropertyChanged("SAInsurance");
             }
         }
-
 
         public ObservableCollection<SAInsurance> SAInsuranceTypes { get; set; }
 
