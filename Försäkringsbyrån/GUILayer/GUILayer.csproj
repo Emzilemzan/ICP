@@ -95,6 +95,7 @@
     <Compile Include="ViewModels\BasicDataViewModels\BasicDataViewModel.cs" />
     <Compile Include="ViewModels\BasicDataViewModels\PermissionValueTableViewModel.cs" />
     <Compile Include="ViewModels\BasicDataViewModels\VacationPayViewModel.cs" />
+    <Compile Include="ViewModels\CommissionViewModels\CommissionOverviewViewModel.cs" />
     <Compile Include="ViewModels\CommissionViewModels\CommissionViewModel.cs" />
     <Compile Include="ViewModels\CommissionViewModels\GetCommissionViewModel.cs" />
     <Compile Include="ViewModels\EmployeeManagementViewModels\AddEmployeeViewModel.cs" />

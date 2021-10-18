@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:GUILayer.Views.CommissionViews"
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="900">
-    <Grid>
+    <ScrollViewer Margin="10" CanContentScroll="False" VerticalScrollBarVisibility="Auto" >
+        <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="500"/>
             <ColumnDefinition Width="500"/>
@@ -44,11 +45,27 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Label Grid.Column="0" Grid.Row="1" Content="*Säljare:" FontSize="15"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Text=""/>
+                <ComboBox Grid.Column="1" Grid.Row="1" ItemsSource="{Binding SalesMens, UpdateSourceTrigger=PropertyChanged, NotifyOnSourceUpdated=True}" SelectedItem="{Binding AgentNo}">
+                    <ComboBox.Resources>
+                        <DataTemplate x:Key="DataTemplateBaseAmountT">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="{Binding Path= AgentNumber}" Grid.Column="0" Margin="0,0,10,0" />
+                                <TextBlock Text="{Binding Path= Firstname}" Grid.Column="1" Margin="0,0,10,0"  />
+                                <TextBlock Text="{Binding Path= Lastname}" Grid.Column="2" Grid.ColumnSpan="1" Margin="0,0,10,0" />
+                            </Grid>
+                        </DataTemplate>
+                    </ComboBox.Resources>
+                    <ComboBox.ItemTemplate>
+                        <StaticResource ResourceKey="DataTemplateBaseAmountT"/>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
                 <Label Grid.Column="0" Grid.Row="2" Content="*Månad:" FontSize="15"/>
                 <TextBox Grid.Row="2" Grid.Column="1" Text=""/>
-                <Label Grid.Column="0" Grid.Row="3" Content="*Utdelningsadress:" FontSize="15"/>
-                <TextBox Grid.Row="3" Grid.Column="1" Text=""/>
                 <Label Grid.Column="0" Grid.Row="4" Content="*Postnummer:" FontSize="15"/>
                 <TextBox Grid.Row="4" Grid.Column="1" Text=""/>
                 <Label Grid.Column="0" Grid.Row="5" Content="*Postadress:" FontSize="15"/>
@@ -79,21 +96,24 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
-
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Label Grid.Column="0" Grid.Row="1" Content="Övrig provision:" FontSize="15"/>
                 <TextBox Grid.Row="1" Grid.Column="1" Text=""/>
-                <Label Grid.Column="0" Grid.Row="2" Content="Semesterersättning:" FontSize="15"/>
+                <Label Grid.Column="0" Grid.Row="2" Content="Semesterersättning %:" FontSize="15"/>
                 <TextBox Grid.Row="2" Grid.Column="1" Text=""/>
-                <Label Grid.Column="0" Grid.Row="3" Content="Preliminärskatt:" FontSize="15"/>
+                <Label Grid.Column="0" Grid.Row="3" Content="Semesterersättning kr:" FontSize="15"/>
                 <TextBox Grid.Row="3" Grid.Column="1" Text=""/>
-                <Label Grid.Column="0" Grid.Row="4" Content="Summa Provision:" FontSize="15"/>
+                <Label Grid.Column="0" Grid.Row="4" Content="Preliminärskatt %:" FontSize="15"/>
                 <TextBox Grid.Row="4" Grid.Column="1" Text=""/>
-                <Label Grid.Column="0" Grid.Row="5" Content="Avgår skatt:" FontSize="15"/>
+                <Label Grid.Column="0" Grid.Row="5" Content="Summa Provision:" FontSize="15"/>
                 <TextBox Grid.Row="5" Grid.Column="1" Text=""/>
-                <Label Grid.Column="0" Grid.Row="6" Content="Att utbetala:" FontSize="15"/>
+                <Label Grid.Column="0" Grid.Row="6" Content="Avgår skatt:" FontSize="15"/>
                 <TextBox Grid.Row="6" Grid.Column="1" Text=""/>
+                <Label Grid.Column="0" Grid.Row="7" Content="Att utbetala:" FontSize="15"/>
+                <TextBox Grid.Row="7" Grid.Column="8" Text=""/>
             </Grid>
         </StackPanel>
         <StackPanel Grid.Column="1" Grid.Row="5" Grid.RowSpan="5">
@@ -117,6 +137,6 @@
             </Grid>
         </StackPanel>
         <Button Grid.Row="6" Grid.Column="1" Content="Exportera Provsion" Height="25" Margin="0,40,350,0" Command="" />
-        <Button Grid.Row="6" Grid.Column="1" Content="Spara" Height="25" Margin="250,40,150,0" Command="" />
     </Grid>
+    </ScrollViewer>
 </UserControl>
