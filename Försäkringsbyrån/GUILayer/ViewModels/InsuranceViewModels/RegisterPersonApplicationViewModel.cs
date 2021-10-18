@@ -97,7 +97,6 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             };
             Context.IController.AddInsuranceApplication(i);
             MessageBox.Show("Ansökan har lagts till");
-            new SignedInsuranceViewModel();
             EmptyAllChoices();
         }
 
@@ -615,7 +614,6 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             get => _Stype;
             set
             {
-                
                     _Stype = value;
                     OnPropertyChanged("SAIType");
                 if (Check == false)

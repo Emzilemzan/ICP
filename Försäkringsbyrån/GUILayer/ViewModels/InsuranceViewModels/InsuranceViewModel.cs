@@ -59,6 +59,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             {
                 MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
                 MainViewModel.Instance.CurrentTool = "";
+                SignedInsuranceViewModel.Instance.Update();
                 MainViewModel.Instance.SelectedViewModel = SignedInsuranceViewModel.Instance;
             }
         }
