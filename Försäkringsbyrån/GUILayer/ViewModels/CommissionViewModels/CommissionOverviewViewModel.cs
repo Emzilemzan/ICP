@@ -16,6 +16,7 @@ namespace GUILayer.ViewModels.CommissionViewModels
 
         private CommissionOverviewViewModel()
         {
+            Months = new List<string>() { "Januari", "Februari", "Mars", "April", "Maj", "Juni", "Juli", "Augusti", "September", "November", "December" };
             SalesMens = UpdateSM();
         }
 
@@ -37,18 +38,30 @@ namespace GUILayer.ViewModels.CommissionViewModels
 
         #region Properties for Salesman
         public ObservableCollection<SalesMen> SalesMens { get; set; }
+        public List<string> Months { get; set; }
 
-        private SalesMen _agentNo;
-
-        public SalesMen AgentNo
+        private SalesMen _salesMen;
+        public SalesMen SelectedSalesMen
         {
-            get => _agentNo;
+            get => _salesMen;
             set
             {
-                _agentNo = value;
-                OnPropertyChanged("AgentNo");
+                _salesMen = value;
+                OnPropertyChanged("SelectedSalesMen");
             }
         }
+
+        //private SalesMen _agentNo;
+
+        //public SalesMen AgentNo
+        //{
+        //    get => _agentNo;
+        //    set
+        //    {
+        //        _agentNo = value;
+        //        OnPropertyChanged("AgentNo");
+        //    }
+        //}
 
         private string _month;
         public string Month
@@ -61,16 +74,18 @@ namespace GUILayer.ViewModels.CommissionViewModels
             }
         }
 
-        private int _postalCode;
-        public int PostalCode
-        {
-            get => _postalCode;
-            set
-            {
-                _postalCode = value;
-                OnPropertyChanged("PostalCode");
-            }
-        }
+       
+
+        //private int _postalCode;
+        //public int PostalCode
+        //{
+        //    get => _postalCode;
+        //    set
+        //    {
+        //        _postalCode = value;
+        //        OnPropertyChanged("PostalCode");
+        //    }
+        //}
 
         private string _adress;
         public string StreetAdress

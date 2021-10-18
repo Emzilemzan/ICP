@@ -65,9 +65,9 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
                 <Label Grid.Column="0" Grid.Row="2" Content="*Månad:" FontSize="15"/>
-                <TextBox Grid.Row="2" Grid.Column="1" Text=""/>
-                <Label Grid.Column="0" Grid.Row="4" Content="*Postnummer:" FontSize="15"/>
-                <TextBox Grid.Row="4" Grid.Column="1" Text=""/>
+                    <ComboBox Grid.Column="1" Grid.Row="2"  ItemsSource="{Binding Months}" SelectedItem="{Binding Month}"/>
+                    <Label Grid.Column="0" Grid.Row="4" Content="*Postnummer:" FontSize="15"/>
+                    <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding SelectedSalesmen.Postalcode}"/>
                 <Label Grid.Column="0" Grid.Row="5" Content="*Postadress:" FontSize="15"/>
                 <TextBox Grid.Row="5" Grid.Column="1" Text=""/>
                 <Label Grid.Column="0" Grid.Row="6" Content="*Insättning bankkonto den:" FontSize="15"/>

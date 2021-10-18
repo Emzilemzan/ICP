@@ -64,7 +64,7 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto" />
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock Text="{Binding OptionalName }" Grid.Column="1" />
+                                    <TextBlock Text="{Binding OptionalName}" Grid.Column="1" />
                                 </Grid>
                             </DataTemplate>
                         </ComboBox.Resources>

@@ -66,9 +66,6 @@
         <DataTemplate DataType="{x:Type cvm:CommissionViewModel}">
             <cv:CommissionView/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type cvm:GetCommissionViewModel}">
-            <cv:GetCommissionView/>
-        </DataTemplate>
         <DataTemplate DataType="{x:Type cvm:CommissionOverviewViewModel}">
             <cv:CommissionOverviewView/>
         </DataTemplate>
