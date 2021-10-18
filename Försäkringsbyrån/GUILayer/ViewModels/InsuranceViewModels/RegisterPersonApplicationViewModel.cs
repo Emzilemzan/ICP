@@ -73,24 +73,10 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         {
             string y;
             Person x = Instance.Personen = AddInsuranceTaker();
-            InsuredPerson insured;
-            if (IPISPerson == false)
-            {
-                insured = Instance.InsuredPerson = AddInsuredIT(x);
-            }
-            else
-            {
-                insured = Instance.InsuredPerson = AddInsured(x);
-            }
-
-            if (Instance.SAIType.SAID == 1)
-            {
-                y = Instance.SerialNumber = GenerateIdFormationSOB();
-            }
-            else
-            {
-                y = Instance.SerialNumber = GenerateIdFormationSOV();
-            }
+            InsuredPerson insured = IPISPerson == false ? (Instance.InsuredPerson = AddInsuredIT(x)) : (Instance.InsuredPerson = AddInsured(x));
+            y = Instance.SAIType.SAInsuranceType == "Sjuk- och olycksfallsförsäkring för vuxen"
+                ? (Instance.SerialNumber = GenerateIdFormationSOV())
+                : (Instance.SerialNumber = GenerateIdFormationSOB());
 
             Insurance i = new Insurance()
             {

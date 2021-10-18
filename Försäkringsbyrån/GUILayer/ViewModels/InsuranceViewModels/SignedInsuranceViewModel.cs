@@ -40,7 +40,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                     string SN = SerialNumber;
                     string str = Regex.Replace(SN, @"\d", "");
 
-                    if (str == "LIV" || str == "SO")
+                    if (str == "LIV" || str == "SOV" || str == "SOB")
                     {
                         if (SelectedInsurance.PossibleBaseAmount != null && SelectedInsurance.PossibleComisson == null)
                         {
