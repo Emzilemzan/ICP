@@ -176,6 +176,12 @@ namespace GUILayer.ViewModels.InsuranceViewModels
 
         #endregion
         #region Collection
+
+        public void MakeSearchWordEmpty()
+        {
+            SearchInput = string.Empty;
+        }
+
         //searchmethod. 
         public void UpdateAC(string filter ="")
         {

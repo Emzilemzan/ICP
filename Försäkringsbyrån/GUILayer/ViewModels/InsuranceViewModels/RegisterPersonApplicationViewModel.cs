@@ -73,15 +73,25 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         {
             string y;
             Person x = Instance.Personen = AddInsuranceTaker();
-            InsuredPerson insured = Instance.InsuredPerson = AddInsured(x);
-            if(Instance.SAIType.SAID == 1)
+            InsuredPerson insured;
+            if (IPISPerson == false)
             {
-                 y = Instance.SerialNumber = GenerateIdFormationSOB();
+                insured = Instance.InsuredPerson = AddInsuredIT(x);
             }
             else
             {
-                 y = Instance.SerialNumber = GenerateIdFormationSOV();
+                insured = Instance.InsuredPerson = AddInsured(x);
             }
+
+            if (Instance.SAIType.SAID == 1)
+            {
+                y = Instance.SerialNumber = GenerateIdFormationSOB();
+            }
+            else
+            {
+                y = Instance.SerialNumber = GenerateIdFormationSOV();
+            }
+
             Insurance i = new Insurance()
             {
                 SerialNumber = y,
@@ -107,6 +117,8 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             Context.IController.AddInsuranceApplication(i);
             MessageBox.Show("Ansökan har lagts till");
             EmptyAllChoices();
+            SignedInsuranceViewModel.Instance.UpdateAC();
+
         }
 
         private void BoxesCheckInsurance()
@@ -225,7 +237,6 @@ namespace GUILayer.ViewModels.InsuranceViewModels
 
         private InsuredPerson AddInsured(Person p)
         {
-
             InsuredPerson newInp = new InsuredPerson()
             {
                 FirstName = Instance.FirstName,
@@ -239,6 +250,23 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             InsuredPerson = newInp;
             return InsuredPerson;
         }
+
+        private InsuredPerson AddInsuredIT(Person p)
+        {
+            InsuredPerson newInp = new InsuredPerson()
+            {
+                FirstName = Instance.FirstName = p.Firstname,
+                LastName = Instance.LastName = p.Lastname,
+                SocialSecurityNumber = p.SocialSecurityNumber,
+                PersonType = PersonTypes[0],
+                PersonTaker = p,
+            };
+
+            Context.IPController.AddInsuredPerson(newInp);
+            InsuredPerson = newInp;
+            return InsuredPerson;
+        }
+
         private bool CanCreate() => true;
 
         private ICommand _addInsuranceBtn;
@@ -595,14 +623,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             get => _sSNIP;
             set
             {
-                if (IPISPerson == false)
-                {
-                    _sSNIP = SocialSecurityNumber;
-                }
-                else
-                {
-                    _sSNIP = value;
-                }
+                _sSNIP = value;
                 OnPropertyChanged("SocialSecurityNumberIP");
             }
         }
@@ -612,14 +633,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             get => _lName;
             set
             {
-                if (IPISPerson == false)
-                {
-                    _lName = Lastname;
-                }
-                else
-                {
-                    _lName = value;
-                }
+                _lName = value;
                 OnPropertyChanged("LastName");
             }
         }
@@ -630,14 +644,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             get => _fName;
             set
             {
-                if (IPISPerson == false)
-                {
-                    _fName = Firstname;
-                }
-                else
-                {
-                    _fName = value;
-                }
+                _fName = value;
                 OnPropertyChanged("FirstName");
             }
         }
@@ -662,11 +669,11 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             get => _Stype;
             set
             {
-                    _Stype = value;
-                    OnPropertyChanged("SAIType");
+                _Stype = value;
+                OnPropertyChanged("SAIType");
                 if (Check == false)
                 {
-                    if(_Stype != null)
+                    if (_Stype != null)
                     {
                         List<BaseAmountTabel> Bases = new List<BaseAmountTabel>();
                         foreach (var e in this.BaseAmountTabell = _Stype.Tabels)
@@ -680,10 +687,10 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                         }
                         OnPropertyChanged("BaseAmountTabell");
                     }
-                } 
+                }
             }
         }
-        
+
         private OptionalType _opType;
         public OptionalType OptionalType
         {

@@ -113,6 +113,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                     MessageBox.Show("Ansökan har lagts till");
                     EmptyAllChoices();
                     Context.Save();
+                    SignedInsuranceViewModel.Instance.UpdateAC();
                 }
                 else
                 {

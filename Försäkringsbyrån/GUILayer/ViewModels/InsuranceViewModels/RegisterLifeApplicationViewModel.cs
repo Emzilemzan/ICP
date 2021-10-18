@@ -56,7 +56,15 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         private void AddInsurance()
         {
             Person x = Instance.Personen = AddInsuranceTaker();
-            InsuredPerson insured = Instance.InsuredPerson = AddInsured(x);
+            InsuredPerson insured;
+            if (IPISPerson == false)
+            {
+                insured = Instance.InsuredPerson = AddInsuredIT(x);
+            }
+            else
+            {
+                insured = Instance.InsuredPerson = AddInsured(x);
+            }
 
             Insurance i = new Insurance()
             {
@@ -79,7 +87,26 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             SignedInsuranceViewModel.Instance.UpdateAC();
             EmptyAllChoices();
             Context.Save();
+            SignedInsuranceViewModel.Instance.UpdateAC();
         }
+
+        private InsuredPerson AddInsuredIT(Person p)
+        {
+            InsuredPerson newInp = new InsuredPerson()
+            {
+                FirstName = Instance.FirstName = p.Firstname,
+                LastName = Instance.LastName = p.Lastname,
+                SocialSecurityNumber = p.SocialSecurityNumber,
+                PersonType = PersonTypes[0],
+                PersonTaker = p,
+            };
+
+            Context.IPController.AddInsuredPerson(newInp);
+            InsuredPerson = newInp;
+            return InsuredPerson;
+        }
+
+        readonly List<string> PersonTypes = new List<string>() { "Vuxen" };
 
         private void BoxesCheckInsurance()
         {
@@ -253,7 +280,6 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         }
         #endregion
         #region lists
-        public List<string> PersonTypes { get; set; }
         public ICollection<BaseAmount> BaseAmounts { get; set; }
         public ObservableCollection<LifeInsurance> LifeInsuranceTypes { get; set; }
         public List<string> PayMentForms { get; set; }
@@ -402,14 +428,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             get => _sSNIP;
             set
             {
-                if (IPISPerson == false)
-                {
-                    _sSNIP = SocialSecurityNumber;
-                }
-                else
-                {
                     _sSNIP = value;
-                }
                 OnPropertyChanged("SocialSecurityNumberIP");
             }
         }
@@ -419,14 +438,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             get => _lName;
             set
             {
-                if (IPISPerson == false)
-                {
-                    _lName = Lastname;
-                }
-                else
-                {
                     _lName = value;
-                }
                 OnPropertyChanged("LastName");
             }
         }
@@ -437,14 +449,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             get => _fName;
             set
             {
-                if (IPISPerson == false)
-                {
-                    _fName = Firstname;
-                }
-                else
-                {
                     _fName = value;
-                }
                 OnPropertyChanged("FirstName");
             }
         }
