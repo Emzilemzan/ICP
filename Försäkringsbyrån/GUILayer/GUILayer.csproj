@@ -141,6 +141,9 @@
     <Compile Include="Views\BasicDataViews\VacationPayView.xaml.cs">
       <DependentUpon>VacationPayView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\CommissionViews\CommissionOverviewView.xaml.cs">
+      <DependentUpon>CommissionOverviewView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CommissionViews\CommissionView.xaml.cs">
       <DependentUpon>CommissionView.xaml</DependentUpon>
     </Compile>
@@ -259,6 +262,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\BasicDataViews\VacationPayView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CommissionViews\CommissionOverviewView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
