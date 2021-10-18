@@ -7,6 +7,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace GUILayer.ViewModels.CommissionViewModels
@@ -29,8 +30,11 @@ namespace GUILayer.ViewModels.CommissionViewModels
         }
         public bool CanCreate() => true;
 
-        private void GetCommissionOverView()
+        public static void GetCommissionOverView()
         {
+            MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
+            MainViewModel.Instance.CurrentTool = "";
+            MainViewModel.Instance.SelectedViewModel = CommissionOverviewViewModel.Instance;
         }
 
         //För att visa månader i combobox. 
@@ -89,5 +93,7 @@ namespace GUILayer.ViewModels.CommissionViewModels
             }
         }
         #endregion
+
+       
     }
 }
