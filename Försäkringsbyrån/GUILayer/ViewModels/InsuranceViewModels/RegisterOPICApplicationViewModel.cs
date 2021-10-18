@@ -60,27 +60,34 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                 };
                 Context.IController.AddInsuranceApplication(i);
                 MessageBox.Show("Ansökan har lagts till");
-                Check = true;
-                Instance.OrganizationNbr = string.Empty;
-                Instance.AgentNo = null;
-                Instance.City = string.Empty;
-                Instance.StreetAdress = string.Empty;
-                Instance.TelephoneNbr = string.Empty;
-                Instance.DialingCode = string.Empty;
-                Instance.Email = string.Empty;
-                Instance.CompanyName = string.Empty;
-                Instance.Premie = string.Empty;
-                Instance.PaymentForm = null;
-                Instance.PostalCode = string.Empty;
-                Instance.FaxNbr = string.Empty;
-                Instance.Companyn = null;
-                Instance.CompanyInsuranceType = null;
+                EmptyAllChoices();
+               
             }
             else
             {
                 MessageBox.Show("Alla fält med en * är obligatoriska att fylla i", "Fel", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
+
+        public void EmptyAllChoices()
+        {
+            Check = true;
+            Instance.OrganizationNbr = string.Empty;
+            Instance.AgentNo = null;
+            Instance.City = string.Empty;
+            Instance.StreetAdress = string.Empty;
+            Instance.TelephoneNbr = string.Empty;
+            Instance.DialingCode = string.Empty;
+            Instance.Email = string.Empty;
+            Instance.CompanyName = string.Empty;
+            Instance.Premie = string.Empty;
+            Instance.PaymentForm = null;
+            Instance.PostalCode = string.Empty;
+            Instance.FaxNbr = string.Empty;
+            Instance.Companyn = null;
+            Instance.CompanyInsuranceType = null;
+        }
+
         public void RegisterApplication()
         {
             Company y = Context.ITController.GetCompany(Instance.OrganizationNbr);
@@ -166,7 +173,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                     }
                 }
             }
-            if (insurances == null)
+            if (insurances.Count < 1)
             {
                 string str = "ÖPFV";
                 string num = "1";

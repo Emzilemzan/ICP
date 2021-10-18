@@ -10,7 +10,7 @@ using GUILayer.Commands;
 
 namespace GUILayer.ViewModels.EmployeeManagementViewModels
 {
-    public class AddUserAccessViewModel: BaseViewModel
+    public class AddUserAccessViewModel : BaseViewModel
     {
         public static readonly AddUserAccessViewModel Instance = new AddUserAccessViewModel();
         public AddUserAccessViewModel()
@@ -24,8 +24,8 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             get => _lastname;
             set
             {
-                    _lastname = value;
-                    OnPropertyChanged("Lasttname");
+                _lastname = value;
+                OnPropertyChanged("Lasttname");
             }
         }
 
@@ -35,8 +35,8 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             get => _firstname;
             set
             {
-                    _firstname = value;
-                    OnPropertyChanged("Firstname");
+                _firstname = value;
+                OnPropertyChanged("Firstname");
             }
         }
         private string _username;
@@ -45,8 +45,8 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             get => _username;
             set
             {
-                    _username = value;
-                    OnPropertyChanged("Username");
+                _username = value;
+                OnPropertyChanged("Username");
             }
         }
 
@@ -56,8 +56,8 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             get => _password;
             set
             {
-                    _password = value;
-                    OnPropertyChanged("Password");
+                _password = value;
+                OnPropertyChanged("Password");
             }
         }
         #endregion
@@ -132,18 +132,26 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
         private ICommand _addUserBtn;
         public ICommand AddUserBtn
         {
-            get => _addUserBtn ?? (_addUserBtn = new RelayCommand(x => { InsertUser(); CanCommand(); }));
+            get => _addUserBtn ?? (_addUserBtn = new RelayCommand(x => { InsertUser(); }));
         }
 
-        public bool CanCommand()
+        public void EmptyAllChoices()
         {
-            return !string.IsNullOrWhiteSpace(Instance.Username) && !string.IsNullOrWhiteSpace(Instance.Password);
+            Instance.Username = string.Empty;
+            Instance.Password = string.Empty;
+            Instance.Lastname = string.Empty;
+            Instance.Firstname = string.Empty;
+            Instance.Search = false;
+            Instance.StatisticsAndProspects = false;
+            Instance.BasicData = false;
+            Instance.Commission = false;
+            Instance.EmployeeManagement = false;
+            Instance.Insurances = false;
         }
-
 
         private void InsertUser()
         {
-            if (Instance._username != null && Instance.Password != null && Instance.Firstname != null && Instance.Lastname != null && 
+            if (Instance._username != null && Instance.Password != null && Instance.Firstname != null && Instance.Lastname != null &&
                 (Instance.StatisticsAndProspects != false || Instance.Commission != false || Instance.Insurances != false
                 || Instance.EmployeeManagement != false || Instance.BasicData != false || Instance.Search != false))
             {
@@ -163,22 +171,13 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
                 Context.UAController.CheckExistingUser(Instance._username, a);
                 MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
                 MainViewModel.Instance.CurrentTool = "";
-                Instance.Username = string.Empty;
-                Instance.Password = string.Empty;
-                Instance.Lastname = string.Empty;
-                Instance.Firstname = string.Empty;
-                Instance.Search = false;
-                Instance.StatisticsAndProspects = false;
-                Instance.BasicData = false;
-                Instance.Commission = false;
-                Instance.EmployeeManagement = false;
-                Instance.Insurances = false;
+                EmptyAllChoices();
                 ManageUserAccessViewModel.Instance.UpdateUA();
                 MainViewModel.Instance.SelectedViewModel = ManageUserAccessViewModel.Instance;
             }
             else
             {
-                MessageBox.Show("Inget fält får lämnas tomt och minst en behörighet måste väljas","Felinmatning", MessageBoxButton.OK, MessageBoxImage.Hand);
+                MessageBox.Show("Inget fält får lämnas tomt och minst en behörighet måste väljas", "Felinmatning", MessageBoxButton.OK, MessageBoxImage.Hand);
             }
         }
         #endregion

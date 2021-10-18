@@ -76,6 +76,7 @@ namespace GUILayer.ViewModels.BasicDataViewModels
 
         }
 
+
         private ICommand _removeBtn;
         public ICommand RemoveCommissionShare_Btn
         {

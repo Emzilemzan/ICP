@@ -3,62 +3,41 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:GUILayer.Views.StatisticsAndProspectusViews"
+             xmlns:local="clr-namespace:GUILayer.Views.StatisticsAndProspectusViews" xmlns:statisticsandprospectusviewmodels="clr-namespace:GUILayer.ViewModels.StatisticsAndProspectusViewModels" d:DataContext="{d:DesignInstance Type=statisticsandprospectusviewmodels:GetandexportCustomerLeadsViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="50"/>
-
-
         </Grid.RowDefinitions>
+        <Label Content="Kundprospekt" FontSize="26" Grid.Row="0" Grid.Column="0"/>
+        <Label Content="Befintliga kundprospekt" FontSize="16" Grid.Row="1" Grid.Column="0"/>
+        <DataGrid  Grid.Row="2" AutoGenerateColumns="False" ItemsSource="{Binding People, NotifyOnSourceUpdated=True}"
+                  RowDetailsVisibilityMode="VisibleWhenSelected" 
+                  IsReadOnly="True"
+                  AlternatingRowBackground="Gainsboro"  AlternationCount="2"
+                  IsSynchronizedWithCurrentItem="True"
+                  ScrollViewer.CanContentScroll="True" 
+                  ScrollViewer.VerticalScrollBarVisibility="Auto"
+                  ScrollViewer.HorizontalScrollBarVisibility="Auto" Margin="0,0,10,10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Personnummer" Binding="{Binding Path= SocialSecurityNumber}"/>
+                <DataGridTextColumn Header="Förnamn" Binding="{Binding Path= Firstname}" />
+                <DataGridTextColumn Header="Efternamn" Binding="{Binding Path= Lastname}" />
+                <DataGridTextColumn Header="Gatuadress" Binding="{Binding Path= StreetAddress}" />
+                <DataGridTextColumn Header="Postort" Binding="{Binding Path= City}" />
+                <DataGridTextColumn Header="Postnummer" Binding="{Binding Path= Postalcode}" />
+                <DataGridTextColumn Header="Riktnummer" Binding="{Binding Path= DiallingCodeHome}" />
+                <DataGridTextColumn Header="Telefonnummer" Binding="{Binding Path= TelephoneNbrHome}" />
+                <DataGridTextColumn Header="Email" Binding="{Binding Path= EmailOne}" />
+                <DataGridTextColumn Header="Email" Binding="{Binding Path= EmailTwo}" />
+                <DataGridTextColumn Header="Agentnummer" />
+            </DataGrid.Columns>
+        </DataGrid>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-
-        </Grid.ColumnDefinitions>
-        <Label Content="Kundprosopekt" FontWeight="Light" FontSize="40" Grid.ColumnSpan="4"
-                   Foreground="Black" HorizontalAlignment="Center"  Grid.RowSpan="2" ></Label>
-        <ListBox Grid.Row="1" Grid.ColumnSpan="6"> </ListBox>
-        <Border  BorderThickness="4" Grid.Row="1" Margin=" 17" Grid.ColumnSpan=" 6">
-            <Grid Margin="40">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                 
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="54*"/>
-                    <RowDefinition Height="54*"/>
-                    <RowDefinition Height="53*"/>
-                    <RowDefinition Height="54*"/>
-                    <RowDefinition Height="53.333"/>
-                </Grid.RowDefinitions>
-
-                <Label Content="Personnummer" FontSize="14" FontStyle="Italic" HorizontalAlignment="Left" Margin="0,0,0,0.333" Width="122"/>
-                <Label Content="Förnamn" FontSize="14" FontStyle="Italic" Grid.Row="0" Grid.Column="1"/>
-                <Label Content="Efternamn" FontSize="14" FontStyle="Italic"  Grid.Row="0" Grid.Column="2"/>
-                <Label Content="Gatuadress" FontSize="14" FontStyle="Italic"  Grid.Row="0" Grid.Column="3" />
-                <Label Content="Postadress" FontSize="14" FontStyle="Italic"  Grid.Row="0" Grid.Column="4" />
-                <Label Content="Postnummer" FontSize="14" FontStyle="Italic"   Grid.Row="0" Grid.Column="5"/>
-
-                <Label Content=" Befitnliga kundprospekt" Margin="-38,-36,115.333,36" Grid.ColumnSpan="2" FontSize="13">
-                 </Label>
-                
-            </Grid>
-        </Border>
-        <Button Grid.Column="5" Grid.Row="2" Content="Exportera kundprospekt"></Button>
-        <Button Grid.Column="0" Grid.Row="2" Content="Tillbaka"></Button>
+        <Button Grid.Row="3" Content="Exportera kundprospekt" Margin="622,0,10,0"/>
     </Grid>
 </UserControl>

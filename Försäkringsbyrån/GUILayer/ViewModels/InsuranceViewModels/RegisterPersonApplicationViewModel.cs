@@ -35,6 +35,40 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         }
         #region commands and methods for it. 
 
+        public void EmptyAllChoices()
+        {
+            Check = true;
+            Instance.ACheck = false;
+            Instance.BCheck = false;
+            Instance.CCheck = false;
+            Instance.BAmount = 0;
+            Instance.BAmount1 = 0;
+            Instance.AgentNo = null;
+            Instance.BARLL = string.Empty;
+            Instance.BaseTabel = null;
+            Instance.City = string.Empty;
+            Instance.StreetAddress = string.Empty;
+            Instance.TelephoneNbrWork = string.Empty;
+            Instance.TelephoneNbrHome = string.Empty;
+            Instance.DiallingCodeHome = string.Empty;
+            Instance.DiallingCodeWork = string.Empty;
+            Instance.EmailOne = string.Empty;
+            Instance.EmailTwo = string.Empty;
+            Instance.SocialSecurityNumber = string.Empty;
+            Instance.SocialSecurityNumberIP = string.Empty;
+            Instance.BaseAmountTabell = null;
+            Instance.SAIType = null;
+            Instance.DeliveryDate = Today;
+            Instance.LastName = string.Empty;
+            Instance.Lastname = string.Empty;
+            Instance.FirstName = string.Empty;
+            Instance.Firstname = string.Empty;
+            Instance.PaymentForm = null;
+            Instance.PersonType = null;
+            Instance.PostalCode = string.Empty;
+        }
+
+
         private void AddInsurance()
         {
             string y;
@@ -73,34 +107,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             Context.IController.AddInsuranceApplication(i);
             MessageBox.Show("Ansökan har lagts till");
             new SignedInsuranceViewModel();
-            Check = true;
-            Instance.ACheck = false;
-            Instance.BCheck = false;
-            Instance.CCheck = false;
-            Instance.BAmount = 0;
-            Instance.BAmount1 = 0;
-            Instance.AgentNo = null;
-            Instance.BARLL = string.Empty;
-            Instance.BaseTabel = null;
-            Instance.City = string.Empty;
-            Instance.StreetAddress = string.Empty;
-            Instance.TelephoneNbrWork = string.Empty;
-            Instance.TelephoneNbrHome = string.Empty;
-            Instance.DiallingCodeHome = string.Empty;
-            Instance.DiallingCodeWork = string.Empty;
-            Instance.EmailOne = string.Empty;
-            Instance.EmailTwo = string.Empty;
-            Instance.SocialSecurityNumber = string.Empty;
-            Instance.SocialSecurityNumberIP = string.Empty;
-            Instance.SAIType = null;
-            Instance.DeliveryDate = Today;
-            Instance.LastName = string.Empty;
-            Instance.Lastname = string.Empty;
-            Instance.FirstName = string.Empty;
-            Instance.Firstname = string.Empty;
-            Instance.PaymentForm = null;
-            Instance.PersonType = null;
-            Instance.PostalCode = string.Empty;
+            EmptyAllChoices();
         }
 
         private void BoxesCheckInsurance()
@@ -488,7 +495,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             get => _pC > 0 ? _pC.ToString() : "";
             set
             {
-                if (int.TryParse(value, out _pC) && PostalCode.Length == 5)
+                if (int.TryParse(value, out _pC) && PostalCode.Length < 6 && PostalCode.Length > 0)
                 {
                     OnPropertyChanged("PostalCode");
                 }
@@ -656,25 +663,29 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             get => _Stype;
             set
             {
-                _Stype = value;
-                OnPropertyChanged("SAIType");
+                
+                    _Stype = value;
+                    OnPropertyChanged("SAIType");
                 if (Check == false)
                 {
-                    List<BaseAmountTabel> Bases = new List<BaseAmountTabel>();
-                    foreach (var e in this.BaseAmountTabell = _Stype.Tabels)
+                    if(_Stype != null)
                     {
-                        if (!Today.Year.Equals(e.Date.Year))
-                            Bases.Add(e);
+                        List<BaseAmountTabel> Bases = new List<BaseAmountTabel>();
+                        foreach (var e in this.BaseAmountTabell = _Stype.Tabels)
+                        {
+                            if (!Today.Year.Equals(e.Date.Year))
+                                Bases.Add(e);
+                        }
+                        foreach (var f in Bases)
+                        {
+                            BaseAmountTabell.Remove(f);
+                        }
+                        OnPropertyChanged("BaseAmountTabell");
                     }
-                    foreach (var f in Bases)
-                    {
-                        BaseAmountTabell.Remove(f);
-                    }
-                    OnPropertyChanged("BaseAmountTabell");
-                }
+                } 
             }
         }
-
+        
         private OptionalType _opType;
         public OptionalType OptionalType
         {

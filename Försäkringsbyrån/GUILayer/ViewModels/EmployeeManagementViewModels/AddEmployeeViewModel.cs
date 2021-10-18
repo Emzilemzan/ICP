@@ -155,6 +155,18 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             }
         }
 
+        public void EmptyAllChoices()
+        {
+            Check = true;
+            Instance.AgentNumber = string.Empty;
+            Instance.Firstname = string.Empty;
+            Instance.StreetAddress = string.Empty;
+            Instance.City = string.Empty;
+            Instance.Lastname = string.Empty;
+            Instance.Postalcode = string.Empty;
+            Instance.TaxRate = string.Empty;
+        }
+
         private void InsertSalesMen()
         {
             if (Instance._agentNumber != 0 && Instance.City != null && Instance.Firstname != null && Instance.Lastname != null && Instance._postalCode != 0 && Instance._taxRate != 0 && Instance.StreetAddress != null)
@@ -175,14 +187,7 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
                 HandleEmployeeViewModel.Instance.UpdateSM();
                 RegisterPersonApplicationViewModel.Instance.UpdateSM();
                 RegisterLifeApplicationViewModel.Instance.UpdateSM();
-                Check = true;
-                Instance.AgentNumber = string.Empty;
-                Instance.Firstname = string.Empty;
-                Instance.StreetAddress = string.Empty;
-                Instance.City = string.Empty;
-                Instance.Lastname = string.Empty;
-                Instance.Postalcode = string.Empty;
-                Instance.TaxRate = string.Empty;
+                EmptyAllChoices();
                 MainViewModel.Instance.SelectedViewModel = HandleEmployeeViewModel.Instance;
             }
             else

@@ -134,7 +134,6 @@ namespace BussinessLayer.Seed
                 }
             }
         }
-
         private void GenerateUA()
         {
             List<UserAccess> users = new List<UserAccess>();
@@ -203,7 +202,6 @@ namespace BussinessLayer.Seed
                 }
             }
         }
-
         private void GenerateBAT()
         {
             
@@ -270,7 +268,6 @@ namespace BussinessLayer.Seed
                 }
             }
         }
-
         private void GenerateBA()
         {
             List<BaseAmount> bat = new List<BaseAmount>();
@@ -352,7 +349,6 @@ namespace BussinessLayer.Seed
                 }
             }
         }
-
         private void CreateOptionalTypes()
         {
             List<OptionalType> OptionList = new List<OptionalType>();
@@ -439,7 +435,6 @@ namespace BussinessLayer.Seed
             }
 
         }
-
         private void CreateOtherPersonInsurance()
         {
             List<OtherPersonInsurance> OPList = new List<OtherPersonInsurance>();
