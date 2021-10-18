@@ -29,12 +29,13 @@ namespace BussinessLayer
         /// </summary> 
         /// <param name="id"></param>
         /// <param name="a"></param>
-        public void CheckExistingTable(int id, BaseAmountTabel a)
+        public void CheckExistingTable(int id)
         {
             BaseAmountTabel x = BusinessController.Instance.Context.Tables.GetById(id);
             if (x != null)
             {
-                CheckBdIsInInsurance(a);
+                CheckBdIsInInsurance(x);
+                MessageBox.Show("Grunddatan togs bort");
             }
             else
             {
@@ -58,10 +59,9 @@ namespace BussinessLayer
                         MessageBox.Show("Du kan inte ta bort denna grunddatan, då den finns registrerad på en ansökan eller en tecknad försäkring");
                     }
                 }
-              
                 else
                 {
-                    RemoveBaseAmountTable(a);
+                    RemoveBaseAmountTable(a);    //fungerar inte? varför?
                     MessageBox.Show("Grunddatan togs bort");
                 }
             }

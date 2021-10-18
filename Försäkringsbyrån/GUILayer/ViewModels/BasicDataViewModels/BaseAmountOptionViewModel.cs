@@ -88,7 +88,8 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             Check = true;
             Date = DateTime.Now;
             Instance.BaseAmount = string.Empty;
-            Instance.LifeInsurance = null;
+            LifeInsurance = null;
+            BaseAmountId = string.Empty;
         }
 
         private ICommand remove_Btn;
@@ -99,7 +100,7 @@ namespace GUILayer.ViewModels.BasicDataViewModels
 
         private void RemoveBaseAmountOption()
         {
-            if (Instance._baseAmountOptionId != 0)
+            if (Instance.BaseAmountId != null)
             {
                 BaseAmount ot = Context.BDController.GetBaseAmount(_baseAmountOptionId);
                 MessageBoxResult result = MessageBox.Show("Vill du ta bort grunddatan?", "Varning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
@@ -192,12 +193,9 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             get => _baseAmountOptionId > 0 ? _baseAmountOptionId.ToString() : "";
             set
             {
-                if (Check == false)
+                if (int.TryParse(value, out _baseAmountOptionId))
                 {
-                    if (int.TryParse(value, out _baseAmountOptionId))
-                    {
-                        OnPropertyChanged("BaseAmountId");
-                    }
+                    OnPropertyChanged("BaseAmountId");
                 }
             }
         }

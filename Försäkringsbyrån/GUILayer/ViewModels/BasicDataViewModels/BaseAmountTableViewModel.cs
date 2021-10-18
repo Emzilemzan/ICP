@@ -65,19 +65,19 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             BaseAmount = string.Empty;
             SAID = null;
             Date = DateTime.Now;
+            BaseAmountId = string.Empty;
         }
         //Method that removes baseamounttabel based on what id it has in database. 
         //Needs a control here, if it exists in insurance you can't delete it. 
         private void RemoveBaseAmountTable()
         {
-            if (Instance._baseAmountId != 0)
+            if (Instance.BaseAmountId != null)
             {
-                BaseAmountTabel bdt = Context.BDController.GetBaseAmountTable(_baseAmountId);
                 MessageBoxResult result = MessageBox.Show("Vill du ta bort grunddatan?", "Varning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
                 if (result == MessageBoxResult.Yes)
                 {
-                    Context.BDController.CheckExistingTable(Instance._baseAmountId, bdt);
+                    Context.BDController.CheckExistingTable(Instance._baseAmountId);
                     Tabels.Clear();
                     foreach (var t in Context.BDController.GetAllTables())
                     {
