@@ -61,7 +61,8 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                 Context.IController.AddInsuranceApplication(i);
                 MessageBox.Show("Ansökan har lagts till");
                 EmptyAllChoices();
-               
+                Context.Save();
+
             }
             else
             {

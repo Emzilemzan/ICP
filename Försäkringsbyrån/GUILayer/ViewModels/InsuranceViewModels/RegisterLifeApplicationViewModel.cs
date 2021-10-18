@@ -78,7 +78,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             MessageBox.Show("Ansökan har lagts till");
             SignedInsuranceViewModel.Instance.UpdateAC();
             EmptyAllChoices();
-
+            Context.Save();
         }
 
         private void BoxesCheckInsurance()

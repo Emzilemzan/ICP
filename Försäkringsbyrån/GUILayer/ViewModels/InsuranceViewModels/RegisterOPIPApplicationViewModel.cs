@@ -89,6 +89,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                 Context.IController.AddInsuranceApplication(op);
                 MessageBox.Show("Ansökan tillagd!");
                 EmptyAllChoices();
+                Context.Save();
             }
 
             else
