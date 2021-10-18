@@ -27,7 +27,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             BaseAmountTabell = UpdateBaseTable();
             BaseAmounts1 = UpdateBaseAmount();
             DeliveryDate = DateTime.Today;
-            BaseAmountsOP1 = new List<int>() {100000,200000,300000,400000,500000,600000,700000,800000};
+            BaseAmountsOP1 = new List<int>() { 100000, 200000, 300000, 400000, 500000, 600000, 700000, 800000 };
             BaseAmountsOP2 = new List<int>() { 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000 };
             OptionalType = OptionalTypes[0];
             OptionalType1 = OptionalTypes1[0];
@@ -37,11 +37,20 @@ namespace GUILayer.ViewModels.InsuranceViewModels
 
         private void AddInsurance()
         {
+            string y;
             Person x = Instance.Personen = AddInsuranceTaker();
             InsuredPerson insured = Instance.InsuredPerson = AddInsured(x);
+            if(Instance.SAIType.SAID == 1)
+            {
+                 y = Instance.SerialNumber = GenerateIdFormationSOB();
+            }
+            else
+            {
+                 y = Instance.SerialNumber = GenerateIdFormationSOV();
+            }
             Insurance i = new Insurance()
             {
-                SerialNumber = Instance.SerialNumber = GenerateIdFormation(),
+                SerialNumber = y,
                 PersonTaker = x,
                 TakerNbr = x.SocialSecurityNumber,
                 TypeName = Instance.SAIType.SAInsuranceType,
@@ -181,7 +190,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                     MessageBox.Show("Om någon checkbox för tillval är i klickad måste du också ha fyllt i tillhörande uppgifter");
                 }
             }
-            List<OptionalType> y = new List<OptionalType>() {a, b, c};
+            List<OptionalType> y = new List<OptionalType>() { a, b, c };
             return y;
         }
 
@@ -210,7 +219,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
 
         private InsuredPerson AddInsured(Person p)
         {
-            
+
             InsuredPerson newInp = new InsuredPerson()
             {
                 FirstName = Instance.FirstName,
@@ -219,7 +228,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                 PersonType = Instance.PersonType,
                 PersonTaker = p,
             };
-            
+
             Context.IPController.AddInsuredPerson(newInp);
             InsuredPerson = newInp;
             return InsuredPerson;
@@ -236,7 +245,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         /// method for autogenerate alphanumeric serialnumber
         /// </summary>
         /// <returns></returns>
-        private string GenerateIdFormation()
+        private string GenerateIdFormationSOB()
         {
             string y;
             List<Insurance> insurances = new List<Insurance>();
@@ -244,13 +253,13 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             {
                 if (i.SAI != null)
                 {
-                    if (SAIType.SAInsuranceType.Equals(i.SAI.SAInsuranceType))
+                    if (SAIType.SAID == 1)
                         insurances?.Add(i);
                 }
             }
             if (insurances.Count < 1)
             {
-                string str = "SO";
+                string str = "SOB";
                 string num = "1";
 
                 y = str + num;
@@ -263,13 +272,52 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                 string num = Regex.Replace(x, @"\D", "");
 
                 int num1 = int.Parse(num);
-                int num2 = num1+ 1;
+                int num2 = num1 + 1;
                 string newNum = num2.ToString();
 
                 y = str + newNum;
             }
+
             return y;
         }
+
+        private string GenerateIdFormationSOV()
+        {
+            string y;
+            List<Insurance> insurances = new List<Insurance>();
+            foreach (var i in Context.IController.GetAllInsurances())
+            {
+                if (i.SAI != null)
+                {
+                    if (SAIType.SAID == 2)
+                        insurances?.Add(i);
+                }
+            }
+
+            if (insurances.Count < 1)
+            {
+                string str = "SOV";
+                string num = "1";
+
+                y = str + num;
+            }
+            else
+            {
+                string x = insurances.Last().SerialNumber;
+
+                string str = Regex.Replace(x, @"\d", "");
+                string num = Regex.Replace(x, @"\D", "");
+
+                int num1 = int.Parse(num);
+                int num2 = num1 + 1;
+                string newNum = num2.ToString();
+
+                y = str + newNum;
+            }
+
+            return y;
+        }
+
 
         #endregion
 
@@ -305,7 +353,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             ObservableCollection<OptionalType> x = new ObservableCollection<OptionalType>();
             foreach (var e in Context.IController.GetAllOPT())
             {
-                if(e.OptionalName == "Månadsersättning vid långvarig sjukskrivning")
+                if (e.OptionalName == "Månadsersättning vid långvarig sjukskrivning")
                 {
                     x?.Add(e);
                 }
@@ -348,10 +396,10 @@ namespace GUILayer.ViewModels.InsuranceViewModels
 
             foreach (var e in Context.BDController.GetAllTables())
             {
-                 if(Today.Year.Equals(e.Date.Year))
-                 {
+                if (Today.Year.Equals(e.Date.Year))
+                {
                     x?.Add(e);
-                 }
+                }
             }
             BaseAmountTabell = x;
             return BaseAmountTabell;
@@ -374,7 +422,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         #endregion
 
         #region lists
-        
+
         public List<int> BaseAmountsOP1 { get; set; }
         public List<int> BaseAmountsOP2 { get; set; }
         //First list
@@ -390,7 +438,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         public ObservableCollection<SalesMen> SalesMens { get; set; }
         public ICollection<BaseAmountTabel> BaseAmountTabell { get; set; }
         #endregion
-       
+
         #region properties for person
 
         private string _sSN;
@@ -541,7 +589,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             get => _sSNIP;
             set
             {
-                if(IPISPerson == false)
+                if (IPISPerson == false)
                 {
                     _sSNIP = SocialSecurityNumber;
                 }
@@ -623,10 +671,10 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                         BaseAmountTabell.Remove(f);
                     }
                     OnPropertyChanged("BaseAmountTabell");
-                } 
+                }
             }
         }
-        
+
         private OptionalType _opType;
         public OptionalType OptionalType
         {
@@ -671,13 +719,14 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             }
         }
         private string _serialNumber;
-        public string SerialNumber 
-        { get => _serialNumber;
-          set 
-          {
+        public string SerialNumber
+        {
+            get => _serialNumber;
+            set
+            {
                 _serialNumber = value;
                 OnPropertyChanged("SerialNumber");
-          }
+            }
         }
         private InsuredPerson _iP;
         public InsuredPerson InsuredPerson
@@ -706,7 +755,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             get => _status;
             set
             {
-                _status= value;
+                _status = value;
                 OnPropertyChanged("InsuranceStatus");
             }
         }
@@ -789,7 +838,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         }
 
         private double _av3;
-        public double AckValue3 
+        public double AckValue3
         {
             get => _av3;
             set
@@ -799,7 +848,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             }
         }
         private double _av4;
-        public double AckValue4 
+        public double AckValue4
         {
             get => _av4;
             set
