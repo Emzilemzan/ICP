@@ -16,8 +16,9 @@ namespace GUILayer.ViewModels.CommissionViewModels
 
         private CommissionOverviewViewModel()
         {
-            Months = new List<string>() { "Januari", "Februari", "Mars", "April", "Maj", "Juni", "Juli", "Augusti", "September", "November", "December" };
-            SalesMens = UpdateSM();
+            Months = new List<string>() { "Januari", "Februari", "Mars", "April", "Maj", "Juni", "Juli", "Augusti", "September", "Oktober", "November", "December" };
+            Date = new List<string>() { "25e" + SelectedMonth};
+                SalesMens = UpdateSM();
         }
 
 
@@ -39,6 +40,7 @@ namespace GUILayer.ViewModels.CommissionViewModels
         #region Properties for Salesman
         public ObservableCollection<SalesMen> SalesMens { get; set; }
         public List<string> Months { get; set; }
+        public List<string> Date { get; set; }
 
         private SalesMen _salesMen;
         public SalesMen SelectedSalesMen
@@ -51,64 +53,59 @@ namespace GUILayer.ViewModels.CommissionViewModels
             }
         }
 
-        //private SalesMen _agentNo;
-
-        //public SalesMen AgentNo
-        //{
-        //    get => _agentNo;
-        //    set
-        //    {
-        //        _agentNo = value;
-        //        OnPropertyChanged("AgentNo");
-        //    }
-        //}
-
         private string _month;
-        public string Month
+        public string SelectedMonth
         {
-            get => _month;
+            get => _month;            
             set
             {
                 _month = value;
-                OnPropertyChanged("Month");
+                OnPropertyChanged("SelectedMonths");
             }
         }
 
-       
-
-        //private int _postalCode;
-        //public int PostalCode
-        //{
-        //    get => _postalCode;
-        //    set
-        //    {
-        //        _postalCode = value;
-        //        OnPropertyChanged("PostalCode");
-        //    }
-        //}
-
-        private string _adress;
-        public string StreetAdress
+        public int Postalcode
         {
-            get => _adress;
+            get => SelectedSalesMen.Postalcode;
             set
             {
-                _adress = value;
+                SelectedSalesMen.Postalcode = value;
+                OnPropertyChanged("Postalcode");
+            }
+        }
+
+        public string StreetAdress
+        {
+            get => SelectedSalesMen.StreetAddress;
+            set
+            {
+                SelectedSalesMen.StreetAddress = value;
                 OnPropertyChanged("StreetAdress");
             }
         }
 
-        private DateTime _bankDate;
-        public DateTime BankDate
+        //Hårdkorda så att det alltid infaller den 25:e?
+        private DateTime _payDate;
+        public DateTime PayDate
         {
-            get => _bankDate;
+            get => _payDate;
             set
             {
-                _bankDate = value;
-                OnPropertyChanged("BankDate");
+                _payDate = value;
+                OnPropertyChanged("PayDate");
             }
         }
 
+        private DateTime _year;
+        public DateTime Year
+        {
+            get => _year != null ? _year : DateTime.Now;
+            set
+            {
+                _year = value;
+                OnPropertyChanged("Year");
+            }
+        }
 
         #endregion
 
