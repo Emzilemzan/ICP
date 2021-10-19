@@ -61,6 +61,7 @@ namespace GUILayer.ViewModels.BasicDataViewModels
 
         public void EmptyAllChoices()
         {
+            Check = true;
             AckValue = string.Empty;
             BaseAmount = string.Empty;
             SAID = null;
@@ -136,10 +137,16 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             get => _baseAmountId > 0 ? _baseAmountId.ToString() : "";
             set
             {
+                _baseAmountId = 0;
                 if (int.TryParse(value, out _baseAmountId))
                 {
-                    OnPropertyChanged("BaseAmountId");
+                    
                 }
+                else if (Check == false)
+                {
+                    MessageBox.Show("Måste vara en siffra");
+                }
+                OnPropertyChanged("BaseAmountId");
             }
         }
 
@@ -150,8 +157,14 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             get => _baseAmount > 0 ? _baseAmount.ToString() : "";
             set
             {
+                _baseAmount = 0;
                 if (int.TryParse(value, out _baseAmount))
-                { OnPropertyChanged("BaseAmount"); }
+                {  }
+                else if (Check == false)
+                {
+                    MessageBox.Show("Måste vara en siffra");
+                }
+                OnPropertyChanged("BaseAmount");
             }
         }
 
@@ -161,8 +174,17 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             get => _ackValue > 0 ? _ackValue.ToString() : "";
             set
             {
+                _ackValue = 0;
                 if (double.TryParse(value, out _ackValue))
-                { OnPropertyChanged("AckValue"); }
+                { 
+
+                }
+                else if (Check == false)
+                {
+                    MessageBox.Show("Måste vara en siffra");
+                }
+                OnPropertyChanged("AckValue");
+
             }
         }
 
@@ -191,6 +213,16 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             }
         }
 
+        private bool _check;
+        public bool Check
+        {
+            get => _check;
+            set
+            {
+                _check = value;
+                OnPropertyChanged("Check");
+            }
+        }
         public ObservableCollection<SAInsurance> SAInsuranceTypes { get; set; }
 
         #endregion
