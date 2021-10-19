@@ -74,9 +74,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             string y;
             Person x = Instance.Personen = AddInsuranceTaker();
             InsuredPerson insured = IPISPerson == false ? (Instance.InsuredPerson = AddInsuredIT(x)) : (Instance.InsuredPerson = AddInsured(x));
-            y = Instance.SAIType.SAInsuranceType == "Sjuk- och olycksfallsförsäkring för vuxen"
-                ? (Instance.SerialNumber = GenerateIdFormationSOV())
-                : (Instance.SerialNumber = GenerateIdFormationSOB());
+            y = Instance.SAIType.SAInsuranceType = Instance.SerialNumber = GenerateIdFormationSO();
 
             Insurance i = new Insurance()
             {
@@ -261,11 +259,12 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             get => _addInsuranceBtn ?? (_addInsuranceBtn = new RelayCommand(x => { RegisterApplication(); CanCreate(); }));
         }
 
+       
         /// <summary>
-        /// method for autogenerate alphanumeric serialnumber
+        /// Alphanumeric id. 
         /// </summary>
         /// <returns></returns>
-        private string GenerateIdFormationSOB()
+        private string GenerateIdFormationSO()
         {
             string y;
             List<Insurance> insurances = new List<Insurance>();
@@ -273,50 +272,13 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             {
                 if (i.SAI != null)
                 {
-                    if (SAIType.SAID == 1)
-                        insurances?.Add(i);
-                }
-            }
-            if (insurances.Count < 1)
-            {
-                string str = "SOB";
-                string num = "1";
-
-                y = str + num;
-            }
-            else
-            {
-                string x = insurances.Last().SerialNumber;
-
-                string str = Regex.Replace(x, @"\d", "");
-                string num = Regex.Replace(x, @"\D", "");
-
-                int num1 = int.Parse(num);
-                int num2 = num1 + 1;
-                string newNum = num2.ToString();
-
-                y = str + newNum;
-            }
-
-            return y;
-        }
-
-        private string GenerateIdFormationSOV()
-        {
-            string y;
-            List<Insurance> insurances = new List<Insurance>();
-            foreach (var i in Context.IController.GetAllInsurances())
-            {
-                if (i.SAI != null)
-                {
-                    if (SAIType.SAID == 2)
-                        insurances?.Add(i);
+                    insurances?.Add(i);
                 }
             }
 
             if (insurances.Count < 1)
             {
-                string str = "SOV";
+                string str = "SO";
                 string num = "1";
 
                 y = str + num;

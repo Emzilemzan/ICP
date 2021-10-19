@@ -164,12 +164,37 @@ namespace BussinessLayer
             BaseAmount x = BusinessController.Instance.Context.BaseAmounts.GetById(id); 
             if (x != null)
             {
-                RemoveBaseAmountOption(o);
-                MessageBox.Show("Grunddatan togs bort"); 
+                CheckBdaIsInInsurance(x);
             }
             else
             {
                 MessageBox.Show("Finns ingen grunddata med det id.t att ta bort");
+            }
+        }
+
+        /// <summary>
+        /// Check if you can remove baseamount, only if its not included in any insurance. 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="a"></param>
+        public void CheckBdaIsInInsurance(BaseAmount a)
+        {
+            foreach (var i in BusinessController.Instance.Context.Insurances.GetAll())
+            {
+                if (i.LIFE != null)
+                {
+                    if (i.LIFE.Amounts.Contains(a))
+                    {
+                        MessageBox.Show("Du kan inte ta bort denna grunddatan, då den finns registrerad på en ansökan eller en tecknad försäkring");
+                        break;
+                    }
+                }
+                else
+                {
+                    RemoveBaseAmountOption(a);
+                    MessageBox.Show("Grunddatan togs bort");
+                    break;
+                }
             }
         }
 
@@ -186,14 +211,14 @@ namespace BussinessLayer
                     }
                 }
             }
-            if (bases.Count != 3 && s.LifeID == 2)
+            if (bases.Count != 3 && s.LifeID == 1)
             {
                 AddBaseAmountOption(baseAmount);
                 MessageBox.Show("Grundbeloppet las till.");
             }
             else
             {
-                MessageBox.Show("Grundbeloppet las inte till då det får max finnas 4 st per år för SObarn och 3 st per år för SOvuxen");
+                MessageBox.Show("Grundbeloppet las inte till då det får max finnas 3st grundbelopp för livförsäkring");
             }
         }
 
@@ -220,14 +245,51 @@ namespace BussinessLayer
             AckValueVariable x = BusinessController.Instance.Context.AckValues.GetById(id);
             if (x !=null)
             {
-                RemoveAckValue(a);
-                MessageBox.Show("Grunddatan togs bort");
+                CheckavIsInInsurance(a);
             }
             else
             {
                 MessageBox.Show("Finns ingen grunddata med det id.t att ta bort"); 
             }
         }
+
+        /// <summary>
+        /// Check if you can remove ackvalue, only if its not included in any insurance. 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="a"></param>
+        public void CheckavIsInInsurance(AckValueVariable a)
+        {
+            foreach (var i in BusinessController.Instance.Context.Insurances.GetAll())
+            {
+                if (i.OptionalTypes != null)   //OptionalTypes är en Icollection i en insurance. ska kunna ha flera stycken. 
+                {
+                    foreach(var o in i.OptionalTypes)
+                    {
+                        if (o.Variables.Contains(a))     //Fungerar ej , Variables är en lista av ackvaluevariable i klassen optionaltype. 
+                        {
+                            MessageBox.Show("Du kan inte ta bort denna grunddatan, då den finns registrerad på en ansökan eller en tecknad försäkring");
+                            break;
+                        }
+                    }
+                }
+                else if(i.LIFE != null)   // fungerar som tänkt.  LIFE är inte en lista, då insurance bara kan ha en sådan. 
+                {
+                    if(i.LIFE.Variables.Contains(a))
+                    {
+                        MessageBox.Show("Du kan inte ta bort denna grunddatan, då den finns registrerad på en ansökan eller en tecknad försäkring");
+                        break;
+                    }
+                }
+                else
+                {
+                    RemoveAckValue(a);
+                    MessageBox.Show("Grunddatan togs bort");
+                    break;
+                }
+            }
+        }
+
 
         public void CheckNbrOfAV(LifeInsurance s, OptionalType o, DateTime d, AckValueVariable av)
         {
@@ -251,7 +313,7 @@ namespace BussinessLayer
                 }
                 else
                 {
-                    MessageBox.Show("Ackvärdet las inte till då det får max finnas 4 st per år för SObarn och 3 st per år för SOvuxen");
+                    MessageBox.Show("Ackvärdet las inte till då det max får finnas en per år. ");
                 }
             }
 
@@ -294,7 +356,7 @@ namespace BussinessLayer
                 }
                 else
                 {
-                    MessageBox.Show("Ackvärdet las inte till då det får max finnas 4 st per år för SObarn och 3 st per år för SOvuxen");
+                    MessageBox.Show("Ackvärdet las inte till då det max får finnas en per år. ");
                 }
             }
         }
