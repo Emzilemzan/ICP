@@ -74,10 +74,11 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             string y;
             Person x = Instance.Personen = AddInsuranceTaker();
             InsuredPerson insured = IPISPerson == false ? (Instance.InsuredPerson = AddInsuredIT(x)) : (Instance.InsuredPerson = AddInsured(x));
-            y = Instance.SAIType.SAInsuranceType = Instance.SerialNumber = GenerateIdFormationSO();
+            y = Instance.SAIType.SAID == 2 ? (Instance.SerialNumber = GenerateIdFormationSO()) : (Instance.SerialNumber = GenerateIdFormationSOB());
 
             Insurance i = new Insurance()
             {
+                SAI = Instance.SAIType,
                 SerialNumber = y,
                 PersonTaker = x,
                 TakerNbr = x.SocialSecurityNumber,
@@ -96,7 +97,6 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                 AckValue3 = Instance.AckValue3 = Context.BDController.CountAckvalueOt(Instance.DeliveryDate, Instance.OptionalType1, Instance.BAmount1),
                 BaseAmountValue4 = Instance.BaseTabel.BaseAmount,
                 AckValue4 = Instance.BaseTabel.AckValue,
-                SAI = Instance.SAIType,
             };
             Context.IController.AddInsuranceApplication(i);
             MessageBox.Show("Ansökan har lagts till");
@@ -241,7 +241,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             {
                 FirstName = Instance.FirstName = p.Firstname,
                 LastName = Instance.LastName = p.Lastname,
-                SocialSecurityNumber = p.SocialSecurityNumber,
+                SocialSecurityNumber = Instance.SocialSecurityNumberIP = p.SocialSecurityNumber,
                 PersonType = PersonTypes[0],
                 PersonTaker = p,
             };
@@ -259,7 +259,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             get => _addInsuranceBtn ?? (_addInsuranceBtn = new RelayCommand(x => { RegisterApplication(); CanCreate(); }));
         }
 
-       
+
         /// <summary>
         /// Alphanumeric id. 
         /// </summary>
@@ -272,13 +272,14 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             {
                 if (i.SAI != null)
                 {
-                    insurances?.Add(i);
+                    if (SAIType.SAInsuranceType.Equals(i.SAI.SAInsuranceType) && SAIType.SAID == 2)
+                        insurances?.Add(i);
                 }
             }
 
             if (insurances.Count < 1)
             {
-                string str = "SO";
+                string str = "SOV";
                 string num = "1";
 
                 y = str + num;
@@ -300,6 +301,42 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             return y;
         }
 
+        private string GenerateIdFormationSOB()
+        {
+            string y;
+            List<Insurance> insurances = new List<Insurance>();
+            foreach (var i in Context.IController.GetAllInsurances())
+            {
+                if (i.SAI != null)
+                {
+                    if (SAIType.SAInsuranceType.Equals(i.SAI.SAInsuranceType) && SAIType.SAID == 1)
+                        insurances?.Add(i);
+                }
+            }
+
+            if (insurances.Count < 1)
+            {
+                string str = "SOB";
+                string num = "1";
+
+                y = str + num;
+            }
+            else
+            {
+                string x = insurances.Last().SerialNumber;
+
+                string str = Regex.Replace(x, @"\d", "");
+                string num = Regex.Replace(x, @"\D", "");
+
+                int num1 = int.Parse(num);
+                int num2 = num1 + 1;
+                string newNum = num2.ToString();
+
+                y = str + newNum;
+            }
+
+            return y;
+        }
 
         #endregion
 
@@ -470,14 +507,16 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             get => _pC > 0 ? _pC.ToString() : "";
             set
             {
+                _pC = 0;
                 if (int.TryParse(value, out _pC) && PostalCode.Length < 6 && PostalCode.Length > 0)
                 {
-                    OnPropertyChanged("PostalCode");
+
                 }
                 else if (Check == false)
                 {
                     MessageBox.Show("Måste vara fem siffror");
                 }
+                OnPropertyChanged("PostalCode");
             }
         }
         private string _city;

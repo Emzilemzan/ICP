@@ -328,14 +328,16 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             get => _pC > 0 ? _pC.ToString() : "";
             set
             {
+                _pC = 0;
                 if (int.TryParse(value, out _pC) && PostalCode.Length == 5)
                 {
-                    OnPropertyChanged("PostalCode");
+                   
                 }
                 else if (Check == false)
                 {
                     MessageBox.Show("Måste vara fem siffror");
                 }
+                OnPropertyChanged("PostalCode");
             }
         }
         private string _city;
@@ -536,14 +538,16 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             get => _premie > 0 ? _premie.ToString() : "";
             set
             {
+                _premie = 0;
                 if (int.TryParse(value, out _premie) && _premie.ToString().Length == 5)
                 {
-                    OnPropertyChanged("Premie");
+                    
                 }
                 else if (Check == false)
                 {
                     MessageBox.Show("Måste vara ett tal");
                 }
+                OnPropertyChanged("Premie");
             }
         }
 

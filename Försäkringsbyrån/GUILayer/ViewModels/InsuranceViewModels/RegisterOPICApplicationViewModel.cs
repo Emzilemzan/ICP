@@ -16,7 +16,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
     /// <summary>
     /// Register Application for OtherPerson Insurance Company edition. 
     /// </summary>
-   public class RegisterOPICApplicationViewModel : BaseViewModel
+    public class RegisterOPICApplicationViewModel : BaseViewModel
     {
         public static readonly RegisterOPICApplicationViewModel Instance = new RegisterOPICApplicationViewModel();
 
@@ -40,8 +40,8 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         public void AddInsurance()
         {
             if (Instance._orgNr != null && Instance.ContactPerson != null && Instance.CompanyName != null && Instance.City != null && Instance.AgentNo != null & Instance.DialingCode != null
-                && Instance.PaymentForm != null && Instance.StreetAdress != null && Instance.DeliveryDate != null && Instance.PostalCode != null && Instance.Premie != null && Instance.Tabell !=null 
-                && Instance.FaxNbr != null && Instance.TelephoneNbr !=null)
+                && Instance.PaymentForm != null && Instance.StreetAdress != null && Instance.DeliveryDate != null && Instance.PostalCode != null && Instance.Premie != null && Instance.Tabell != null
+                && Instance.FaxNbr != null && Instance.TelephoneNbr != null)
             {
                 Insurance i = new Insurance()
                 {
@@ -110,7 +110,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             }
         }
 
-    private Company AddCompany()
+        private Company AddCompany()
         {
             Company _tk = new Company()
             {
@@ -256,14 +256,16 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             get => _pC > 0 ? _pC.ToString() : "";
             set
             {
+                _pC = 0;
                 if (int.TryParse(value, out _pC) && PostalCode.Length == 5)
                 {
-                    OnPropertyChanged("PostalCode");
+
                 }
                 else if (Check == false)
                 {
                     MessageBox.Show("Måste vara fem siffror");
                 }
+                OnPropertyChanged("PostalCode");
             }
         }
         private string _emial;
@@ -335,7 +337,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         #endregion
 
         #region Properties for Insurance
-        private string _serialNbr; 
+        private string _serialNbr;
         public string SerialNbr
         {
             get => _serialNbr;
@@ -407,17 +409,16 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             get => _premie > 0 ? _premie.ToString() : "";
             set
             {
-                if (Check == false)
+                _premie = 0;
+                if (int.TryParse(value, out _premie) && _premie.ToString().Length == 5)
                 {
-                    if (int.TryParse(value, out _premie) && _premie.ToString().Length == 5)
-                    {
-                        OnPropertyChanged("Premie");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Måste vara ett tal");
-                    }
+                    OnPropertyChanged("Premie");
                 }
+                else if (Check == false)
+                {
+                    MessageBox.Show("Måste vara ett tal");
+                }
+                OnPropertyChanged("Premie");
             }
         }
 

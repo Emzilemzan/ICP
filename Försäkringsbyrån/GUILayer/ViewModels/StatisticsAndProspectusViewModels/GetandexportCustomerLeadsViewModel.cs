@@ -88,11 +88,11 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
                     }
                 }
             }
-            foreach(var p in people2)
+            foreach (var p in people2)
             {
-                foreach(var i in p.Insurances)
+                foreach (var i in p.Insurances)
                 {
-                    if(i.TypeName != "Sjuk- och olycksfallsförsäkring för barn")
+                    if (i.TypeName != "Sjuk- och olycksfallsförsäkring för barn")
                     {
                         people2?.Remove(p);
                     }

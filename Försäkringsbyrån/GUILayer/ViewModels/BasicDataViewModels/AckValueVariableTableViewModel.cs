@@ -198,12 +198,14 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             get => _ackValue > 0 ? _ackValue.ToString() : "";
             set
             {
+                _ackValue = 0;
                 if (double.TryParse(value, out _ackValue))
-                { OnPropertyChanged("AckValue"); }
+                {  }
                 else if (Check == false)
                 {
                     MessageBox.Show("Måste vara en siffra");
                 }
+                OnPropertyChanged("AckValue");
             }
         }
 
@@ -214,10 +216,15 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             get => _ackValueId > 0 ? _ackValueId.ToString() : "";
             set
             {
+                _ackValueId = 0;
                 if (int.TryParse(value, out _ackValueId))
                 {
-                    OnPropertyChanged("AckValueId");
                 }
+                else if (Check == false)
+                {
+                    MessageBox.Show("Måste vara en siffra");
+                }
+                OnPropertyChanged("AckValueId");
             }
         }
 

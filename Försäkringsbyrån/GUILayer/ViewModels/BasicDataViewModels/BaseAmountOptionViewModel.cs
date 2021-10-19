@@ -177,12 +177,14 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             get => _baseAmount > 0 ? _baseAmount.ToString() : "";
             set
             {
+                _baseAmount = 0;
                 if (int.TryParse(value, out _baseAmount))
-                    OnPropertyChanged("BaseAmount");
+                { }
                 else if (Check == false)
                 {
                     MessageBox.Show("Grundbeloppet måste vara en siffra");
                 }
+                OnPropertyChanged("BaseAmount");
             }
         }
 
@@ -193,10 +195,15 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             get => _baseAmountOptionId > 0 ? _baseAmountOptionId.ToString() : "";
             set
             {
+                _baseAmountOptionId = 0;
                 if (int.TryParse(value, out _baseAmountOptionId))
                 {
-                    OnPropertyChanged("BaseAmountId");
                 }
+                else if (Check == false)
+                {
+                    MessageBox.Show("Måste vara en siffra");
+                }
+                OnPropertyChanged("BaseAmountId");
             }
         }
         #endregion
