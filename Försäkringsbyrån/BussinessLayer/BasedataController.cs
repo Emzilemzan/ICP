@@ -22,7 +22,7 @@ namespace BussinessLayer
         public void RemoveBaseAmountTable(BaseAmountTabel baseAmountTabel)
         {
             BusinessController.Instance.Context.Tables.Remove(baseAmountTabel);
-            BusinessController.Instance.Save(); 
+            BusinessController.Instance.Save();
         }
         /// <summary>
         /// check if id existis in database before remove. 
@@ -61,7 +61,7 @@ namespace BussinessLayer
                 }
                 else
                 {
-                    RemoveBaseAmountTable(a);   
+                    RemoveBaseAmountTable(a);
                     MessageBox.Show("Grunddatan togs bort");
                     break;
                 }
@@ -79,17 +79,17 @@ namespace BussinessLayer
             {
                 if (b.SAID == s && b.Date.Year == d.Year)
                 {
-                    if(b.SAID.SAID == 2)
+                    if (b.SAID.SAID == 2)
                     {
                         bases.Add(b);
                     }
-                    else if(b.SAID.SAID == 1)
+                    else if (b.SAID.SAID == 1)
                     {
                         bases2.Add(b);
                     }
                 }
             }
-            if (bases.Count != 3 && s.SAID == 2 && s.SAID != 1 )
+            if (bases.Count != 3 && s.SAID == 2 && s.SAID != 1)
             {
                 AddBaseAmountTable(baseAmountTabel);
                 MessageBox.Show("Grundbeloppet las till.");
@@ -107,7 +107,7 @@ namespace BussinessLayer
 
         #endregion
 
-        
+
         #region Controls for VacationPay
 
         public VacationPay GetVacationPay(int id) => BusinessController.Instance.Context.VPays.Find(x => x.SEId == id).FirstOrDefault();
@@ -116,7 +116,7 @@ namespace BussinessLayer
 
         public void AddVPay(VacationPay vPay)
         {
-            BusinessController.Instance.Context.VPays.Add(vPay); 
+            BusinessController.Instance.Context.VPays.Add(vPay);
             BusinessController.Instance.Save();
         }
 
@@ -136,7 +136,7 @@ namespace BussinessLayer
             }
             else
             {
-                MessageBox.Show("Finns ingen grunddata med det id.t att ta bort"); 
+                MessageBox.Show("Finns ingen grunddata med det id.t att ta bort");
             }
         }
 
@@ -147,13 +147,13 @@ namespace BussinessLayer
 
         public IEnumerable<BaseAmount> GetAllBaseAmount() => BusinessController.Instance.Context.BaseAmounts.GetAll();
 
-        public void AddBaseAmountOption (BaseAmount optionalType)
+        public void AddBaseAmountOption(BaseAmount optionalType)
         {
             BusinessController.Instance.Context.BaseAmounts.Add(optionalType);
             BusinessController.Instance.Save();
         }
 
-        public void RemoveBaseAmountOption (BaseAmount optionalType)
+        public void RemoveBaseAmountOption(BaseAmount optionalType)
         {
             BusinessController.Instance.Context.BaseAmounts.Remove(optionalType);
             BusinessController.Instance.Save();
@@ -161,7 +161,7 @@ namespace BussinessLayer
 
         public void CheckExistingBaseAmountOption(int id, BaseAmount o)
         {
-            BaseAmount x = BusinessController.Instance.Context.BaseAmounts.GetById(id); 
+            BaseAmount x = BusinessController.Instance.Context.BaseAmounts.GetById(id);
             if (x != null)
             {
                 CheckBdaIsInInsurance(x);
@@ -222,19 +222,19 @@ namespace BussinessLayer
             }
         }
 
-            #endregion
+        #endregion
 
-            #region Controls for AckValueVariable
-            public AckValueVariable GetAckValue(int id) => BusinessController.Instance.Context.AckValues.Find(x => x.AckValueID == id).FirstOrDefault();
+        #region Controls for AckValueVariable
+        public AckValueVariable GetAckValue(int id) => BusinessController.Instance.Context.AckValues.Find(x => x.AckValueID == id).FirstOrDefault();
         public IEnumerable<AckValueVariable> GetAllAckValues() => BusinessController.Instance.Context.AckValues.GetAll();
 
-        public void AddAckValue (AckValueVariable av)
+        public void AddAckValue(AckValueVariable av)
         {
             BusinessController.Instance.Context.AckValues.Add(av);
             BusinessController.Instance.Save();
         }
 
-        public void RemoveAckValue (AckValueVariable av)
+        public void RemoveAckValue(AckValueVariable av)
         {
             BusinessController.Instance.Context.AckValues.Remove(av);
             BusinessController.Instance.Save();
@@ -243,13 +243,13 @@ namespace BussinessLayer
         public void CheckExistingAckValue(int id, AckValueVariable a)
         {
             AckValueVariable x = BusinessController.Instance.Context.AckValues.GetById(id);
-            if (x !=null)
+            if (x != null)
             {
                 CheckavIsInInsurance(a);
             }
             else
             {
-                MessageBox.Show("Finns ingen grunddata med det id.t att ta bort"); 
+                MessageBox.Show("Finns ingen grunddata med det id.t att ta bort");
             }
         }
 
@@ -264,30 +264,26 @@ namespace BussinessLayer
             {
                 if (i.OptionalTypes != null)   //OptionalTypes är en Icollection i en insurance. ska kunna ha flera stycken. 
                 {
-                    foreach(var o in i.OptionalTypes)
+                    foreach (var o in i.OptionalTypes)
                     {
-                        if (o.Variables.Contains(a))     //Fungerar ej , Variables är en lista av ackvaluevariable i klassen optionaltype. 
+                        if (o.Variables != null && o.Variables.Contains(a))     //Fungerar ej , Variables är en lista av ackvaluevariable i klassen optionaltype. 
                         {
                             MessageBox.Show("Du kan inte ta bort denna grunddatan, då den finns registrerad på en ansökan eller en tecknad försäkring");
-                            break;
+                            return;
                         }
                     }
                 }
-                else if(i.LIFE != null)   // fungerar som tänkt.  LIFE är inte en lista, då insurance bara kan ha en sådan. 
+                else if (i.LIFE != null)   // fungerar som tänkt.  LIFE är inte en lista, då insurance bara kan ha en sådan. 
                 {
-                    if(i.LIFE.Variables.Contains(a))
+                    if (i.LIFE.Variables.Contains(a))
                     {
                         MessageBox.Show("Du kan inte ta bort denna grunddatan, då den finns registrerad på en ansökan eller en tecknad försäkring");
-                        break;
+                        return;
                     }
                 }
-                else
-                {
-                    RemoveAckValue(a);
-                    MessageBox.Show("Grunddatan togs bort");
-                    break;
-                }
             }
+            RemoveAckValue(a);
+            MessageBox.Show("Grunddatan togs bort");
         }
 
 
@@ -317,13 +313,13 @@ namespace BussinessLayer
                 }
             }
 
-            else if(o != null)
+            else if (o != null)
             {
                 List<AckValueVariable> bases = new List<AckValueVariable>();
                 List<AckValueVariable> bases1 = new List<AckValueVariable>();
                 List<AckValueVariable> bases2 = new List<AckValueVariable>();
                 foreach (AckValueVariable b in GetAllAckValues())
-                    if (b.OptionalTypeId== o && b.Date.Year == d.Year)
+                    if (b.OptionalTypeId == o && b.Date.Year == d.Year)
                     {
                         if (b.OptionalTypeId.OptionalTypeId == 2)
                         {
@@ -338,7 +334,7 @@ namespace BussinessLayer
                             bases1.Add(b);
                         }
                     }
-                
+
                 if (bases.Count != 1 && o.OptionalTypeId == 1 && o.OptionalTypeId != 2 && o.OptionalTypeId != 3)
                 {
                     AddAckValue(av);
@@ -384,7 +380,7 @@ namespace BussinessLayer
         public double CountAckvalueLife(DateTime d, LifeInsurance l, int i)
         {
             double y = 0;
-            if (i == 0 && l==null)
+            if (i == 0 && l == null)
             {
                 y = 0;
             }
@@ -398,7 +394,7 @@ namespace BussinessLayer
                     }
                 }
             }
-            
+
             return y;
         }
         #endregion
@@ -407,23 +403,23 @@ namespace BussinessLayer
         public ComissionShare GetCommissionShare(int id) => BusinessController.Instance.Context.CommissionShares.Find(x => x.PAId == id).FirstOrDefault();
         public IEnumerable<ComissionShare> GetAllCommissionShares() => BusinessController.Instance.Context.CommissionShares.GetAll();
 
-        public void AddCommissionShare (ComissionShare cs)
+        public void AddCommissionShare(ComissionShare cs)
         {
             BusinessController.Instance.Context.CommissionShares.Add(cs);
             BusinessController.Instance.Save();
         }
 
-        public void RemoveCommissionShare (ComissionShare cs)
+        public void RemoveCommissionShare(ComissionShare cs)
         {
             BusinessController.Instance.Context.CommissionShares.Remove(cs);
             BusinessController.Instance.Save();
 
         }
 
-        public void CheckExistingCommissionShare (int id, ComissionShare cs)
+        public void CheckExistingCommissionShare(int id, ComissionShare cs)
         {
             ComissionShare x = BusinessController.Instance.Context.CommissionShares.GetById(id);
-            if (x !=null)
+            if (x != null)
             {
                 RemoveCommissionShare(cs);
                 MessageBox.Show("Grunddatan togs bort");
@@ -433,7 +429,7 @@ namespace BussinessLayer
                 MessageBox.Show("Finns ingen grunddata med det id.t att ta bort");
             }
         }
-        
+
         #endregion
     }
 }
