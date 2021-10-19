@@ -235,7 +235,6 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         #endregion
 
 
-
         #region updating of lists
 
         //Update all baseamounts for a specific optionalinsurances and for the delivery year.  
@@ -337,8 +336,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             get => _pC > 0 ? _pC.ToString() : "";
             set
             {
-
-                if (int.TryParse(value, out _pC) && PostalCode.Length == 5)
+                if (int.TryParse(value, out _pC) && PostalCode.Length > 0 && PostalCode.Length < 6)
                 {
                     OnPropertyChanged("PostalCode");
                 }

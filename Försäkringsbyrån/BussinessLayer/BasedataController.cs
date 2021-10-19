@@ -35,7 +35,6 @@ namespace BussinessLayer
             if (x != null)
             {
                 CheckBdIsInInsurance(x);
-                MessageBox.Show("Grunddatan togs bort");
             }
             else
             {
@@ -57,12 +56,14 @@ namespace BussinessLayer
                     if (i.SAI.Tabels.Contains(a))
                     {
                         MessageBox.Show("Du kan inte ta bort denna grunddatan, då den finns registrerad på en ansökan eller en tecknad försäkring");
+                        break;
                     }
                 }
                 else
                 {
-                    RemoveBaseAmountTable(a);    //fungerar inte? varför?
+                    RemoveBaseAmountTable(a);   
                     MessageBox.Show("Grunddatan togs bort");
+                    break;
                 }
             }
         }
@@ -296,7 +297,6 @@ namespace BussinessLayer
                     MessageBox.Show("Ackvärdet las inte till då det får max finnas 4 st per år för SObarn och 3 st per år för SOvuxen");
                 }
             }
-            
         }
 
         public double CountAckvalueOt(DateTime d, OptionalType ot, int i)
