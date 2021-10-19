@@ -18,7 +18,7 @@ namespace GUILayer.ViewModels.CommissionViewModels
         {
             Months = new List<string>() { "Januari", "Februari", "Mars", "April", "Maj", "Juni", "Juli", "Augusti", "September", "Oktober", "November", "December" };
             Date = new List<string>() { "25e" + SelectedMonth};
-                SalesMens = UpdateSM();
+            SalesMens = UpdateSM();
         }
 
 
@@ -34,7 +34,87 @@ namespace GUILayer.ViewModels.CommissionViewModels
             return SalesMens;
         }
 
-        
+
+
+        #endregion
+
+        #region Count
+        private void Count()
+        {
+            CSumAck = CountCSumAck();
+            ASumAck = CountASumAck();
+        }
+
+        private double CountCSumAck()
+        {
+            double sum = 0;
+            if (SelectedSalesMen.Insurances != null)
+            {
+                foreach (Insurance i in SelectedSalesMen.Insurances)  
+                {
+                    if (i.InsuranceStatus == 0 && i.SAI.SAInsuranceType.Contains("barn") && i.PayYear == Year && i.PayMonth == (Months.IndexOf(_month) + 1) % 12)
+                    {
+                        int quarter = (Months.IndexOf(_month)) / 3; //Får samma ackvärde ? 
+                        switch (quarter)
+                        {
+                            case 0:
+                                sum += i.AckValue;
+                                break;
+                            case 1:
+                                sum += i.AckValue2;
+                                break;
+                            case 2:
+                                sum += i.AckValue3;
+                                break;
+                            case 3:
+                                sum += i.AckValue4;
+                                break;
+
+                        }
+                    }
+                }
+            }
+            return sum;
+        }
+
+        private double CountASumAck()
+        {
+            double sum = 0;
+            if (SelectedSalesMen.Insurances != null)
+            {
+                foreach (Insurance i in SelectedSalesMen.Insurances)
+                {
+                    if (i.InsuranceStatus == 0 && i.SAI.SAInsuranceType.Contains("vuxen") && i.PayYear == Year && i.PayMonth == (Months.IndexOf(_month) + 1) % 12)
+                    {
+                        int quarter = (Months.IndexOf(_month)) / 3; //Får samma ackvärde ? 
+                        switch (quarter)
+                        {
+                            case 0:
+                                sum += i.AckValue;
+                                break;
+                            case 1:
+                                sum += i.AckValue2;
+                                break;
+                            case 2:
+                                sum += i.AckValue3;
+                                break;
+                            case 3:
+                                sum += i.AckValue4;
+                                break;
+
+                        }
+                    }
+                }
+            }
+            return sum;
+        }
+
+        public double SumSAAck(double CSumAck, double ASumAck) //Titta vidare på denna
+        {
+            double sum;
+            sum = CSumAck + ASumAck;
+            return sum;
+        }
         #endregion
 
         #region Properties for Salesman
@@ -60,6 +140,15 @@ namespace GUILayer.ViewModels.CommissionViewModels
             set
             {
                 _month = value;
+                if(_month == Months[Months.Count - 1])
+                {
+                    PayDate = new DateTime(Year + 1, (Months.IndexOf(_month) + 2) % 12, 25).ToString("yyyy-MM-dd");
+                }
+                else
+                {
+                    PayDate = new DateTime(Year, (Months.IndexOf(_month) + 2) % 12, 25).ToString("yyyy-MM-dd");
+                }
+                Count();
                 OnPropertyChanged("SelectedMonths");
             }
         }
@@ -84,9 +173,8 @@ namespace GUILayer.ViewModels.CommissionViewModels
             }
         }
 
-        //Hårdkorda så att det alltid infaller den 25:e?
-        private DateTime _payDate;
-        public DateTime PayDate
+        private string _payDate;
+        public string PayDate
         {
             get => _payDate;
             set
@@ -96,10 +184,10 @@ namespace GUILayer.ViewModels.CommissionViewModels
             }
         }
 
-        private DateTime _year;
-        public DateTime Year
+        private int _year;
+        public int Year
         {
-            get => _year != null ? _year : DateTime.Now;
+            get => _year != 0 ? _year : DateTime.Now.Year;
             set
             {
                 _year = value;
@@ -110,7 +198,7 @@ namespace GUILayer.ViewModels.CommissionViewModels
         #endregion
 
         #region Properties for Commission
-        //Sum for child ack.
+        //Sum for child ack. 
         private double _cSumAck;
         public double CSumAck
         {

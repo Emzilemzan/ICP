@@ -72,11 +72,11 @@
                 <Label Grid.Column="0" Grid.Row="5" Content="*Postadress:" FontSize="15"/>
                     <TextBox Grid.Row="5" Grid.Column="1"  IsReadOnly="True" Text="{Binding SelectedSalesMen.StreetAddress}"/>
                 <Label Grid.Column="0" Grid.Row="6" Content="*Insättning bankkonto den:" FontSize="15"/>
-                    <TextBox Grid.Row="6" Grid.Column="1" IsReadOnly="True" Text="{Binding SelectedMonth.}"/>
+                    <TextBox Grid.Row="6" Grid.Column="1" IsReadOnly="True" Text="{Binding PayDate}"/>
                 <Label Grid.Column="0" Grid.Row="7" Content="Barn Summa Ackvärde:" FontSize="15"/>
-                <TextBox Grid.Row="7" Grid.Column="1" Text=""/>
+                <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding CSumAck}"/>
                 <Label Grid.Column="0" Grid.Row="8" Content="Vuxen Summa Ackvärde:" FontSize="15"/>
-                <TextBox Grid.Row="8" Grid.Column="8" Text=""/>
+                    <TextBox Grid.Row="8" Grid.Column="8" Text="{Binding ASumAck}"/>
                 <Label Grid.Column="0" Grid.Row="9" Content="Summa Ackvärde:" FontSize="15"/>
                 <TextBox Grid.Row="9" Grid.Column="1" Text=""/>
                 <Label Grid.Column="0" Grid.Row="10" Content="Liv- Summa Ackvärde:" FontSize="15"/>
