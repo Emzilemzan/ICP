@@ -65,11 +65,11 @@
                     <TextBox Grid.Row="9" Grid.Column="0" Text="{Binding DialingCode}" Margin="114,0,0,0"/>
                     <Label Grid.Column="1" Grid.Row="9" Content="*TelNr:" FontSize="15"/>
                     <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding TelephoneNbr}" Margin="111,0,0,0"/>
-                    <Label Grid.Column="0" Grid.Row="10" Content="Email:" FontSize="15"/>
+                    <Label Grid.Column="0" Grid.Row="10" Content="*Email:" FontSize="15"/>
                     <TextBox Grid.Row="10" Grid.Column="1" Text="{Binding Email}"/>
-                    <Label Grid.Column="0" Grid.Row="11" Content="Fax-Nummer:" FontSize="15"/>
+                    <Label Grid.Column="0" Grid.Row="11" Content="*Fax-Nummer:" FontSize="15"/>
                     <TextBox Grid.Row="11" Grid.Column="1" Text="{Binding FaxNbr}"/>
-                    <Label Grid.Column="0" Grid.Row="12" Content="Kontakt person:" FontSize="15"/>
+                    <Label Grid.Column="0" Grid.Row="12" Content="*Kontakt person:" FontSize="15"/>
                     <TextBox Grid.Row="12" Grid.Column="1" Text="{Binding ContactPerson}"/>
                     <Label Content="Försäkrades uppgifter" Grid.Row="13" Grid.Column="0" FontSize="18" FontWeight="Bold" Margin="0,0,0,15"/>
                     <Label Grid.Column="0" Grid.Row="14" Content="*Personnummer:" FontSize="15"/>
@@ -124,11 +124,11 @@
                     </ComboBox>
 
                         <Label Content="Övriga försäkringsuppgifter" Grid.Row="3" Grid.Column="0" FontSize="18" Margin="0,30,0,0" FontWeight="Bold"/>
-                    <Label Content="Betalform:" FontSize="15" Grid.Row="4" Grid.Column="0"/>
+                    <Label Content="*Betalform:" FontSize="15" Grid.Row="4" Grid.Column="0"/>
                     <ComboBox Grid.Row="4" Grid.Column="1" Text="" Margin="0,0,120,0" Width="130" Height="30" ItemsSource="{Binding PayMentForms}" SelectedItem="{Binding PaymentForm}" />
-                    <Label Content="Ankomstdatum" FontSize="15" Grid.Row="5" Grid.Column="0" Margin="0,10,0,0"/>
+                    <Label Content="*Ankomstdatum" FontSize="15" Grid.Row="5" Grid.Column="0" Margin="0,10,0,0"/>
                     <DatePicker Grid.Row="5" Grid.Column="1" Text="" Margin="0,10,120,0" Width="130" Height="30" SelectedDate="{Binding DeliveryDate}" DisplayDateEnd="{Binding Today, Mode=OneTime}" />
-                    <Label Content="Agenturnummer" FontSize="15" Grid.Row="6" Grid.Column="0" Margin="0,10,0,0"/>
+                    <Label Content="*Agenturnummer" FontSize="15" Grid.Row="6" Grid.Column="0" Margin="0,10,0,0"/>
                     <ComboBox Grid.Row="6" Grid.Column="1" Text="" Margin="0,10,120,0" Width="130" Height="30" ItemsSource="{Binding SalesMens, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding AgentNo}">
                         <ComboBox.Resources>
                             <DataTemplate x:Key="DataTemplateSalesMen">
