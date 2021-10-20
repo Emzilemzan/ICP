@@ -140,6 +140,29 @@ namespace BussinessLayer
             }
         }
 
+        public void CheckNbrOfVP(DateTime d, VacationPay vacationPay)
+        {
+            List<VacationPay> vps = new List<VacationPay>();
+            foreach(VacationPay v in GetAllVPays())
+            {
+                if(v.Year == d.Year)
+                {
+                    vps?.Add(v);
+                }
+            }
+            if(vps.Count != 1)
+            {
+                AddVPay(vacationPay);
+                MessageBox.Show("Semesterersättning las till.");
+            }
+            else
+            {
+                MessageBox.Show("Semesterersättning las inte til då det max får finnas 1 st per kalender år.");
+            }
+        }
+
+
+
         #endregion
 
         #region Controls for BaseAmountOption

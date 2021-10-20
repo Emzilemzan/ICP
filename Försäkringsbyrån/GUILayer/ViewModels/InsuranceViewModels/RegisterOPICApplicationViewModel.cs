@@ -43,6 +43,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                 && Instance.PaymentForm != null && Instance.StreetAdress != null && Instance.DeliveryDate != null && Instance.PostalCode != null && Instance.Premie != null && Instance.Tabell != null
                 && Instance.FaxNbr != null && Instance.TelephoneNbr != null)
             {
+                Company x = Instance.Companyn = AddCompany();
                 Insurance i = new Insurance()
                 {
                     SerialNumber = Instance.SerialNbr = GenerateIdFormation(),
@@ -51,7 +52,8 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                     TypeName = Instance.OPIType.OPIName,
                     OPI = Instance.OPIType,
                     PaymentForm = Instance.PaymentForm,
-                    CompanyTaker = Instance.Companyn = AddCompany(),
+                    CompanyTaker = x,
+                    InsuredID = Instance.InsuredPerson = AddInsured(x),
                     DeliveryDate = Instance.DeliveryDate,
                     Premie = Instance._premie,
                     Table = Instance.Tabell,
@@ -130,6 +132,26 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             Companyn = x;
             return Companyn;
         }
+
+        private InsuredPerson AddInsured(Company p)
+        {
+            List<InsuredPerson> tempList = new List<InsuredPerson>();
+            InsuredPerson newInp = new InsuredPerson()
+            {
+                InsuredId = Instance.InsuredID,
+                FirstName = Instance.FirstName,
+                LastName = Instance.LastName,
+                SocialSecurityNumberIP = Instance.SocialSecurityNumberIP,
+                PersonType = "Vuxen",
+                CompanyTaker = p,
+            };
+            tempList.Add(newInp);
+            Context.IPController.AddInsuredPerson(newInp);
+
+            return InsuredPerson;
+        }
+
+
         #endregion
 
         #region Updates 
