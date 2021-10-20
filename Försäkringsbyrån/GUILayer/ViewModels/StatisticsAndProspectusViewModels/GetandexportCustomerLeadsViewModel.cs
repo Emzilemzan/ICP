@@ -42,18 +42,15 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             List<string> nbr = new List<string>();
             foreach (var it in Context.ITController.GetAllPersons())
             {
-                nbr?.Add(it.TelephoneNbrHome);
-
                 foreach (var i in Context.IController.GetInsuranceTakerIAS(it))
                 {
                     if (i.InsuranceStatus == Status.Tecknad)
                     {
-                        insurances.Add(i); // tecknade försäkringar för alla personer. 
+                        nbr?.Add(it.TelephoneNbrHome); //alla nr för personer med tecknade försäkringar
+                        insurances?.Add(i); // tecknade försäkringar för alla personer. 
+                        people?.Add(it); // alla personer som har tecknade försäkringar 
                     }
                 }
-                //alla nr som finns för alla personer. 
-
-                people?.Add(it); //alla personer som finns.. 
             }
 
             List<string> nbr1 = new List<string>();
@@ -75,15 +72,12 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             {
                 foreach (var p in people)
                 {
-                    if (nr == p.TelephoneNbrHome && p.Insurances != null)
+                    if (nr == p.TelephoneNbrHome)
                     {
                         foreach (var i in p.Insurances)
                         {
-                            if (i.InsuranceStatus == Status.Tecknad)
-                            {
-                                if (i.TypeName == "Sjuk- och olycksfallsförsäkring för barn") //om det finns tecknade försäkringar som är vuxenförsäkringar, skapa ej kundprospekt. 
+                                if (i.TypeName == "Sjuk- och olycksfallsförsäkring för barn" && i.InsuranceStatus == Status.Tecknad) //om det finns tecknade försäkringar som är vuxenförsäkringar, skapa ej kundprospekt. 
                                     people2?.Add(p);
-                            }
                         }
                     }
                 }
