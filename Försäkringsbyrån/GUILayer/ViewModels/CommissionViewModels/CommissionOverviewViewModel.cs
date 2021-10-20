@@ -16,7 +16,8 @@ namespace GUILayer.ViewModels.CommissionViewModels
 
         private CommissionOverviewViewModel()
         {
-            Months = new List<string>() { "Januari", "Februari", "Mars", "April", "Maj", "Juni", "Juli", "Augusti", "September", "November", "December" };
+            Months = new List<string>() { "Januari", "Februari", "Mars", "April", "Maj", "Juni", "Juli", "Augusti", "September", "Oktober", "November", "December" };
+            Date = new List<string>() { "25e" + SelectedMonth};
             SalesMens = UpdateSM();
         }
 
@@ -33,12 +34,93 @@ namespace GUILayer.ViewModels.CommissionViewModels
             return SalesMens;
         }
 
-        
+
+
+        #endregion
+
+        #region Count
+        private void Count()
+        {
+            CSumAck = CountCSumAck();
+            ASumAck = CountASumAck();
+        }
+
+        private double CountCSumAck()
+        {
+            double sum = 0;
+            if (SelectedSalesMen.Insurances != null)
+            {
+                foreach (Insurance i in SelectedSalesMen.Insurances)  
+                {
+                    if (i.InsuranceStatus == 0 && i.SAI.SAInsuranceType.Contains("barn") && i.PayYear == Year && i.PayMonth == (Months.IndexOf(_month) + 1) % 12)
+                    {
+                        int quarter = (Months.IndexOf(_month)) / 3; //Får samma ackvärde ? 
+                        switch (quarter)
+                        {
+                            case 0:
+                                sum += i.AckValue;
+                                break;
+                            case 1:
+                                sum += i.AckValue2;
+                                break;
+                            case 2:
+                                sum += i.AckValue3;
+                                break;
+                            case 3:
+                                sum += i.AckValue4;
+                                break;
+
+                        }
+                    }
+                }
+            }
+            return sum;
+        }
+
+        private double CountASumAck()
+        {
+            double sum = 0;
+            if (SelectedSalesMen.Insurances != null)
+            {
+                foreach (Insurance i in SelectedSalesMen.Insurances)
+                {
+                    if (i.InsuranceStatus == 0 && i.SAI.SAInsuranceType.Contains("vuxen") && i.PayYear == Year && i.PayMonth == (Months.IndexOf(_month) + 1) % 12)
+                    {
+                        int quarter = (Months.IndexOf(_month)) / 3; //Får samma ackvärde ? 
+                        switch (quarter)
+                        {
+                            case 0:
+                                sum += i.AckValue;
+                                break;
+                            case 1:
+                                sum += i.AckValue2;
+                                break;
+                            case 2:
+                                sum += i.AckValue3;
+                                break;
+                            case 3:
+                                sum += i.AckValue4;
+                                break;
+
+                        }
+                    }
+                }
+            }
+            return sum;
+        }
+
+        public double SumSAAck(double CSumAck, double ASumAck) //Titta vidare på denna
+        {
+            double sum;
+            sum = CSumAck + ASumAck;
+            return sum;
+        }
         #endregion
 
         #region Properties for Salesman
         public ObservableCollection<SalesMen> SalesMens { get; set; }
         public List<string> Months { get; set; }
+        public List<string> Date { get; set; }
 
         private SalesMen _salesMen;
         public SalesMen SelectedSalesMen
@@ -51,69 +133,72 @@ namespace GUILayer.ViewModels.CommissionViewModels
             }
         }
 
-        //private SalesMen _agentNo;
-
-        //public SalesMen AgentNo
-        //{
-        //    get => _agentNo;
-        //    set
-        //    {
-        //        _agentNo = value;
-        //        OnPropertyChanged("AgentNo");
-        //    }
-        //}
-
         private string _month;
-        public string Month
+        public string SelectedMonth
         {
-            get => _month;
+            get => _month;            
             set
             {
                 _month = value;
-                OnPropertyChanged("Month");
+                if(_month == Months[Months.Count - 1])
+                {
+                    PayDate = new DateTime(Year + 1, (Months.IndexOf(_month) + 2) % 12, 25).ToString("yyyy-MM-dd");
+                }
+                else
+                {
+                    PayDate = new DateTime(Year, (Months.IndexOf(_month) + 2) % 12, 25).ToString("yyyy-MM-dd");
+                }
+                Count();
+                OnPropertyChanged("SelectedMonths");
             }
         }
 
-       
-
-        //private int _postalCode;
-        //public int PostalCode
-        //{
-        //    get => _postalCode;
-        //    set
-        //    {
-        //        _postalCode = value;
-        //        OnPropertyChanged("PostalCode");
-        //    }
-        //}
-
-        private string _adress;
-        public string StreetAdress
+        public int Postalcode
         {
-            get => _adress;
+            get => SelectedSalesMen.Postalcode;
             set
             {
-                _adress = value;
+                SelectedSalesMen.Postalcode = value;
+                OnPropertyChanged("Postalcode");
+            }
+        }
+
+        public string StreetAdress
+        {
+            get => SelectedSalesMen.StreetAddress;
+            set
+            {
+                SelectedSalesMen.StreetAddress = value;
                 OnPropertyChanged("StreetAdress");
             }
         }
 
-        private DateTime _bankDate;
-        public DateTime BankDate
+        private string _payDate;
+        public string PayDate
         {
-            get => _bankDate;
+            get => _payDate;
             set
             {
-                _bankDate = value;
-                OnPropertyChanged("BankDate");
+                _payDate = value;
+                OnPropertyChanged("PayDate");
             }
         }
 
+        private int _year;
+        public int Year
+        {
+            get => _year != 0 ? _year : DateTime.Now.Year;
+            set
+            {
+                _year = value;
+                OnPropertyChanged("Year");
+            }
+        }
 
         #endregion
 
         #region Properties for Commission
-        //Sum for child ack.
+        //Sum for child ack. 
         private double _cSumAck;
         public double CSumAck
         {
