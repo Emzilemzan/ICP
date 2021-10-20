@@ -246,6 +246,7 @@ namespace GUILayer.ViewModels
             BaseAmountOptionViewModel.Instance.EmptyAllChoices();
             SignedInsuranceViewModel.Instance.UpdateAC();
             SignedInsuranceViewModel.Instance.MakeSearchWordEmpty();
+            GetandexportCustomerLeadsViewModel.Instance.GetProspects();
         }
     }
 }

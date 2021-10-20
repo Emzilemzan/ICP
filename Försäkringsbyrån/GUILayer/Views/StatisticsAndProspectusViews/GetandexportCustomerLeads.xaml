@@ -15,7 +15,7 @@
         </Grid.RowDefinitions>
         <Label Content="Kundprospekt" FontSize="26" Grid.Row="0" Grid.Column="0"/>
         <Label Content="Befintliga kundprospekt" FontSize="16" Grid.Row="1" Grid.Column="0"/>
-        <DataGrid  Grid.Row="2" AutoGenerateColumns="False" ItemsSource="{Binding People, UpdateSourceTrigger=PropertyChanged}"
+        <DataGrid  Grid.Row="2" AutoGenerateColumns="False" ItemsSource="{Binding People, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                   RowDetailsVisibilityMode="VisibleWhenSelected" 
                   IsReadOnly="True"
                   AlternatingRowBackground="Gainsboro"  AlternationCount="2"
