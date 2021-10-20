@@ -32,7 +32,7 @@ namespace GUILayer.ViewModels.CommissionViewModels
         {
             MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
             MainViewModel.Instance.CurrentTool = "";
-            MainViewModel.Instance.SelectedViewModel = GetCommissionViewModel.Instance;
+            MainViewModel.Instance.SelectedViewModel = CommissionOverviewViewModel.Instance;
         }
     }
 }

@@ -95,8 +95,8 @@
     <Compile Include="ViewModels\BasicDataViewModels\BasicDataViewModel.cs" />
     <Compile Include="ViewModels\BasicDataViewModels\PermissionValueTableViewModel.cs" />
     <Compile Include="ViewModels\BasicDataViewModels\VacationPayViewModel.cs" />
+    <Compile Include="ViewModels\CommissionViewModels\CommissionOverviewViewModel.cs" />
     <Compile Include="ViewModels\CommissionViewModels\CommissionViewModel.cs" />
-    <Compile Include="ViewModels\CommissionViewModels\GetCommissionViewModel.cs" />
     <Compile Include="ViewModels\EmployeeManagementViewModels\AddEmployeeViewModel.cs" />
     <Compile Include="ViewModels\EmployeeManagementViewModels\AddUserAccessViewModel.cs" />
     <Compile Include="ViewModels\EmployeeManagementViewModels\EmployeeManagementViewModel.cs" />
@@ -146,9 +146,6 @@
     </Compile>
     <Compile Include="Views\CommissionViews\CommissionView.xaml.cs">
       <DependentUpon>CommissionView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\CommissionViews\GetCommissionView.xaml.cs">
-      <DependentUpon>GetCommissionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EmployeeManagementViews\AddEmployeeView.xaml.cs">
       <DependentUpon>AddEmployeeView.xaml</DependentUpon>
@@ -270,10 +267,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CommissionViews\CommissionView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\CommissionViews\GetCommissionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

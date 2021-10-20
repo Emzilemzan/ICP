@@ -56,7 +56,15 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         private void AddInsurance()
         {
             Person x = Instance.Personen = AddInsuranceTaker();
-            InsuredPerson insured = Instance.InsuredPerson = AddInsured(x);
+            InsuredPerson insured;
+            if (IPISPerson == false)
+            {
+                insured = Instance.InsuredPerson = AddInsuredIT(x);
+            }
+            else
+            {
+                insured = Instance.InsuredPerson = AddInsured(x);
+            }
 
             Insurance i = new Insurance()
             {
@@ -78,8 +86,27 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             MessageBox.Show("Ansökan har lagts till");
             SignedInsuranceViewModel.Instance.UpdateAC();
             EmptyAllChoices();
-
+            Context.Save();
+            SignedInsuranceViewModel.Instance.UpdateAC();
         }
+
+        private InsuredPerson AddInsuredIT(Person p)
+        {
+            InsuredPerson newInp = new InsuredPerson()
+            {
+                FirstName = Instance.FirstName = p.Firstname,
+                LastName = Instance.LastName = p.Lastname,
+                SocialSecurityNumberIP = Instance.SocialSecurityNumberIP = p.SocialSecurityNumber,
+                PersonType = PersonTypes[0],
+                PersonTaker = p,
+            };
+
+            Context.IPController.AddInsuredPerson(newInp);
+            InsuredPerson = newInp;
+            return InsuredPerson;
+        }
+
+        readonly List<string> PersonTypes = new List<string>() { "Vuxen" };
 
         private void BoxesCheckInsurance()
         {
@@ -149,7 +176,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             {
                 FirstName = Instance.FirstName,
                 LastName = Instance.LastName,
-                SocialSecurityNumber = Instance.SocialSecurityNumberIP,
+                SocialSecurityNumberIP = Instance.SocialSecurityNumberIP= Instance.SocialSecurityNumberIP,
                 PersonType = "Vuxen",
                 PersonTaker = p,
             };
@@ -208,7 +235,6 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         #endregion
 
 
-
         #region updating of lists
 
         //Update all baseamounts for a specific optionalinsurances and for the delivery year.  
@@ -253,7 +279,6 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         }
         #endregion
         #region lists
-        public List<string> PersonTypes { get; set; }
         public ICollection<BaseAmount> BaseAmounts { get; set; }
         public ObservableCollection<LifeInsurance> LifeInsuranceTypes { get; set; }
         public List<string> PayMentForms { get; set; }
@@ -311,16 +336,16 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             get => _pC > 0 ? _pC.ToString() : "";
             set
             {
-
-                if (int.TryParse(value, out _pC) && PostalCode.Length == 5)
+                _pC = 0;
+                if (int.TryParse(value, out _pC) && PostalCode.Length > 0 && PostalCode.Length < 6)
                 {
-                    OnPropertyChanged("PostalCode");
+                    
                 }
-
                 else if (Check == false)
                 {
                     MessageBox.Show("Måste vara fem siffror");
                 }
+                OnPropertyChanged("PostalCode");
             }
         }
         private string _city;
@@ -402,14 +427,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             get => _sSNIP;
             set
             {
-                if (IPISPerson == false)
-                {
-                    _sSNIP = SocialSecurityNumber;
-                }
-                else
-                {
                     _sSNIP = value;
-                }
                 OnPropertyChanged("SocialSecurityNumberIP");
             }
         }
@@ -419,14 +437,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             get => _lName;
             set
             {
-                if (IPISPerson == false)
-                {
-                    _lName = Lastname;
-                }
-                else
-                {
                     _lName = value;
-                }
                 OnPropertyChanged("LastName");
             }
         }
@@ -437,14 +448,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             get => _fName;
             set
             {
-                if (IPISPerson == false)
-                {
-                    _fName = Firstname;
-                }
-                else
-                {
                     _fName = value;
-                }
                 OnPropertyChanged("FirstName");
             }
         }

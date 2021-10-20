@@ -111,8 +111,9 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                     };
                     Context.IController.AddInsuranceApplication(i);
                     MessageBox.Show("Ansökan har lagts till");
-                    SignedInsuranceViewModel.Instance.UpdateAC();
                     EmptyAllChoices();
+                    Context.Save();
+                    SignedInsuranceViewModel.Instance.UpdateAC();
                 }
                 else
                 {

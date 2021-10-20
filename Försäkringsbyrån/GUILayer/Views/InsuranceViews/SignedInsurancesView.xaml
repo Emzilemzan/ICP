@@ -30,7 +30,7 @@
                                 Text="{Binding SearchInput, UpdateSourceTrigger=PropertyChanged}" Margin="0,37,5,0.333" Grid.RowSpan="2"/>
 
 
-        <DataGrid x:Name ="InsuranceGrid" Grid.Row="2" Grid.Column="0" AutoGenerateColumns="False" ItemsSource="{Binding InsuranceGrid, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+        <DataGrid x:Name ="InsuranceGrid" Grid.Row="2" Grid.Column="0" AutoGenerateColumns="False" ItemsSource="{Binding Applications, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                   RowDetailsVisibilityMode="VisibleWhenSelected" 
                   IsReadOnly="True" 
                   SelectedItem="{Binding SelectedInsurance, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"

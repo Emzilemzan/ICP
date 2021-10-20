@@ -60,10 +60,5 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             MainViewModel.Instance.CurrentTool = "";
             MainViewModel.Instance.SelectedViewModel = GetandexportCustomerLeadsViewModel.Instance;
         }
-
-
-
-
-
     }
 }

@@ -61,23 +61,24 @@ namespace GUILayer.ViewModels.BasicDataViewModels
 
         public void EmptyAllChoices()
         {
+            Check = true;
             AckValue = string.Empty;
             BaseAmount = string.Empty;
             SAID = null;
             Date = DateTime.Now;
+            BaseAmountId = string.Empty;
         }
         //Method that removes baseamounttabel based on what id it has in database. 
         //Needs a control here, if it exists in insurance you can't delete it. 
         private void RemoveBaseAmountTable()
         {
-            if (Instance._baseAmountId != 0)
+            if (Instance.BaseAmountId != null)
             {
-                BaseAmountTabel bdt = Context.BDController.GetBaseAmountTable(_baseAmountId);
                 MessageBoxResult result = MessageBox.Show("Vill du ta bort grunddatan?", "Varning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
                 if (result == MessageBoxResult.Yes)
                 {
-                    Context.BDController.CheckExistingTable(Instance._baseAmountId, bdt);
+                    Context.BDController.CheckExistingTable(Instance._baseAmountId);
                     Tabels.Clear();
                     foreach (var t in Context.BDController.GetAllTables())
                     {
@@ -114,9 +115,10 @@ namespace GUILayer.ViewModels.BasicDataViewModels
 
         public ObservableCollection<SAInsurance> UpdateSA()
         {
-            ObservableCollection<SAInsurance> x = new ObservableCollection<SAInsurance>();
-
-            x.Add(new SAInsurance() { SAID = 0, SAInsuranceType = "inget" });
+            ObservableCollection<SAInsurance> x = new ObservableCollection<SAInsurance>
+            {
+                new SAInsurance() { SAID = 0, SAInsuranceType = "inget" }
+            };
             foreach (var e in Context.IController.GetAllSAI())
             {
                 x?.Add(e);
@@ -136,10 +138,16 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             get => _baseAmountId > 0 ? _baseAmountId.ToString() : "";
             set
             {
+                _baseAmountId = 0;
                 if (int.TryParse(value, out _baseAmountId))
                 {
-                    OnPropertyChanged("BaseAmountId");
+                    
                 }
+                else if (Check == false)
+                {
+                    MessageBox.Show("Måste vara en siffra");
+                }
+                OnPropertyChanged("BaseAmountId");
             }
         }
 
@@ -150,8 +158,14 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             get => _baseAmount > 0 ? _baseAmount.ToString() : "";
             set
             {
+                _baseAmount = 0;
                 if (int.TryParse(value, out _baseAmount))
-                { OnPropertyChanged("BaseAmount"); }
+                {  }
+                else if (Check == false)
+                {
+                    MessageBox.Show("Måste vara en siffra");
+                }
+                OnPropertyChanged("BaseAmount");
             }
         }
 
@@ -161,8 +175,17 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             get => _ackValue > 0 ? _ackValue.ToString() : "";
             set
             {
+                _ackValue = 0;
                 if (double.TryParse(value, out _ackValue))
-                { OnPropertyChanged("AckValue"); }
+                { 
+
+                }
+                else if (Check == false)
+                {
+                    MessageBox.Show("Måste vara en siffra");
+                }
+                OnPropertyChanged("AckValue");
+
             }
         }
 
@@ -191,6 +214,16 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             }
         }
 
+        private bool _check;
+        public bool Check
+        {
+            get => _check;
+            set
+            {
+                _check = value;
+                OnPropertyChanged("Check");
+            }
+        }
         public ObservableCollection<SAInsurance> SAInsuranceTypes { get; set; }
 
         #endregion
