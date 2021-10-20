@@ -334,7 +334,7 @@ namespace BussinessLayer.Seed
                 AckValue = 1.54,
                 LIFEID = null,
                 OptionalTypeId = BusinessController.Instance.IController.GetOPT(3),
-
+                 
             });
             List<AckValueVariable> newList = new List<AckValueVariable>();
             foreach (var i in BusinessController.Instance.BDController.GetAllAckValues())

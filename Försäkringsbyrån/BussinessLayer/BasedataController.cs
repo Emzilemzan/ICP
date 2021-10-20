@@ -139,6 +139,29 @@ namespace BussinessLayer
             }
         }
 
+        public void CheckNbrOfVP(DateTime d, VacationPay vacationPay)
+        {
+            List<VacationPay> vps = new List<VacationPay>();
+            foreach(VacationPay v in GetAllVPays())
+            {
+                if(v.Year == d.Year)
+                {
+                    vps?.Add(v);
+                }
+            }
+            if(vps.Count != 1)
+            {
+                AddVPay(vacationPay);
+                MessageBox.Show("Semesterersättning las till.");
+            }
+            else
+            {
+                MessageBox.Show("Semesterersättning las inte til då det max får finnas 1 st per kalender år.");
+            }
+        }
+
+
+
         #endregion
 
         #region Controls for BaseAmountOption
@@ -198,7 +221,7 @@ namespace BussinessLayer
 
             #endregion
 
-            #region Controls for AckValueVariable
+        #region Controls for AckValueVariable
             public AckValueVariable GetAckValue(int id) => BusinessController.Instance.Context.AckValues.Find(x => x.AckValueID == id).FirstOrDefault();
         public IEnumerable<AckValueVariable> GetAllAckValues() => BusinessController.Instance.Context.AckValues.GetAll();
 
@@ -369,6 +392,19 @@ namespace BussinessLayer
             else
             {
                 MessageBox.Show("Finns ingen grunddata med det id.t att ta bort");
+            }
+        }
+
+        public void CheckNbrOfComissionShares(DateTime d, ComissionShare css)
+        {
+            List<ComissionShare> cs = new List<ComissionShare>();
+
+            foreach(ComissionShare c in GetAllCommissionShares())
+            {
+                if(c.CalenderYear == d.Year)
+                {
+                    cs?.Add(c);
+                }
             }
         }
         
