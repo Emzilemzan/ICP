@@ -141,7 +141,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                 InsuredId = Instance.InsuredID,
                 FirstName = Instance.FirstName,
                 LastName = Instance.LastName,
-                SocialSecurityNumber = Instance.SocialSecurityNumberIP,
+                SocialSecurityNumberIP = Instance.SocialSecurityNumberIP,
                 PersonType = "Vuxen",
                 CompanyTaker = p,
             };
