@@ -24,7 +24,7 @@ namespace BussinessLayer
 
         public IEnumerable<InsuredPerson> GetAllInsuredPersons() => BusinessController.Instance.Context.InsuredPersons.GetAll();
 
-        public InsuredPerson GetIPerson(string id) => BusinessController.Instance.Context.InsuredPersons.GetById(id);
+        public InsuredPerson GetIPerson(int id) => BusinessController.Instance.Context.InsuredPersons.GetById(id);
         public List<InsuredPerson> GetInsuranceTakerIPC(Company insuranceTaker) => insuranceTaker.InsuredPersons?.OrderByDescending(i => i.InsuredId).ToList();
 
         public List<InsuredPerson> GetInsuranceTakerIPSC(Company insuranceTaker)

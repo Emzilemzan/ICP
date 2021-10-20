@@ -115,9 +115,10 @@ namespace GUILayer.ViewModels.BasicDataViewModels
 
         public ObservableCollection<SAInsurance> UpdateSA()
         {
-            ObservableCollection<SAInsurance> x = new ObservableCollection<SAInsurance>();
-
-            x.Add(new SAInsurance() { SAID = 0, SAInsuranceType = "inget" });
+            ObservableCollection<SAInsurance> x = new ObservableCollection<SAInsurance>
+            {
+                new SAInsurance() { SAID = 0, SAInsuranceType = "inget" }
+            };
             foreach (var e in Context.IController.GetAllSAI())
             {
                 x?.Add(e);

@@ -102,12 +102,11 @@ namespace GUILayer.ViewModels.BasicDataViewModels
         {
             if (Instance.BaseAmountId != null)
             {
-                BaseAmount ot = Context.BDController.GetBaseAmount(_baseAmountOptionId);
                 MessageBoxResult result = MessageBox.Show("Vill du ta bort grunddatan?", "Varning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
                 if (result == MessageBoxResult.Yes)
                 {
-                    Context.BDController.CheckExistingBaseAmountOption(Instance._baseAmountOptionId, ot);
+                    Context.BDController.CheckExistingBaseAmountOption(Instance._baseAmountOptionId);
                     BaseAmounts.Clear();
                     foreach (var t in Context.BDController.GetAllBaseAmount())
                     {

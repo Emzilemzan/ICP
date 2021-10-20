@@ -159,7 +159,7 @@ namespace BussinessLayer
             BusinessController.Instance.Save();
         }
 
-        public void CheckExistingBaseAmountOption(int id, BaseAmount o)
+        public void CheckExistingBaseAmountOption(int id)
         {
             BaseAmount x = BusinessController.Instance.Context.BaseAmounts.GetById(id);
             if (x != null)
