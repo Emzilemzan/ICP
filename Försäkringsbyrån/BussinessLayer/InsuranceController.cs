@@ -52,7 +52,8 @@ namespace BussinessLayer
         public SAInsurance GetSA(int id) => BusinessController.Instance.Context.SAInsurances.Find(x => x.SAID == id).FirstOrDefault();
         public LifeInsurance GetLIFE(int id) => BusinessController.Instance.Context.LifeInsurances.Find(x => x.LifeID == id).FirstOrDefault();
         public OptionalType GetOPT(int id) => BusinessController.Instance.Context.OptionalTypes.Find(x => x.OptionalTypeId == id).FirstOrDefault();
-
+        public CompanyInsurance GetCI(int id) => BusinessController.Instance.Context.CIInsurances.Find(x => x.FFId == id).FirstOrDefault();
+        public OtherPersonInsurance GetOPI(int id) => BusinessController.Instance.Context.OPInsurances.Find(x => x.OPIId == id).FirstOrDefault();
         public IEnumerable<OptionalType> GetAllOPT() => BusinessController.Instance.Context.OptionalTypes.GetAll();
 
         public IEnumerable<SAInsurance> GetAllSAI() => BusinessController.Instance.Context.SAInsurances.GetAll();

@@ -24,6 +24,11 @@ namespace BussinessLayer.Seed
             GenerateBA();
             GenerateBAT();
             GenerateAV();
+            GeneratePersonTaker();
+            GenerateCompanyTaker();
+            GenerateInsuredPerson();
+            GenerateInsurances();
+
         }
 
         private void GenerateSM()
@@ -458,5 +463,460 @@ namespace BussinessLayer.Seed
 
         }
 
+        private void GeneratePersonTaker()
+        {
+            List<Person> persons = new List<Person>();
+
+            persons.Add(new Person()
+            {
+                SocialSecurityNumber = "8711306789",
+                City = "Jönköping",
+                Firstname = "Elin",
+                Lastname = "Käll",
+                PostalCode = 55446,
+                EmailOne = "elin.k@hotmail.com",
+                EmailTwo = null,
+                StreetAddress = "Bosshagsgatan 35",
+                DiallingCodeHome = "032",
+                TelephoneNbrHome = "87653",
+                DiallingCodeWork = null,
+                TelephoneNbrWork = null,
+            });
+            persons.Add(new Person()
+            {
+                SocialSecurityNumber = "7605206729",
+                City = "Borås",
+                Firstname = "Julia",
+                Lastname = "Hansson",
+                PostalCode = 50330,
+                EmailOne = "julia.hansson1@gmail.com",
+                EmailTwo = "j.k@gmail.com",
+                StreetAddress = "Säterivägen 12",
+                DiallingCodeHome = "037",
+                TelephoneNbrHome = "6785643",
+                DiallingCodeWork = "037",
+                TelephoneNbrWork = "76543",
+            });
+            persons.Add(new Person()
+            {
+                SocialSecurityNumber = "7407016739",
+                City = "Lerum",
+                Firstname = "Peter",
+                Lastname = "Alm",
+                PostalCode = 44330,
+                EmailOne = "almPeter@gmail.com",
+                EmailTwo = "PAlm45@hotmail.com",
+                StreetAddress = "Kolgatan 23",
+                DiallingCodeHome = "0302",
+                TelephoneNbrHome = "799865",
+                DiallingCodeWork = "0304",
+                TelephoneNbrWork = "78657637",
+            });
+            persons.Add(new Person()
+            {
+                SocialSecurityNumber = "6511156744",
+                City = "Göteborg",
+                Firstname = "Kristin",
+                Lastname = "Karlsson",
+                PostalCode = 41101,
+                EmailOne = "kk2@hotmail.com",
+                EmailTwo = "kristinkarlsson@live.se",
+                StreetAddress = "Vagngatan 56",
+                DiallingCodeHome = "031",
+                TelephoneNbrHome = "777473",
+                DiallingCodeWork = null,
+                TelephoneNbrWork = null,
+            });
+            persons.Add(new Person()
+            {
+                SocialSecurityNumber = "6301134514",
+                City = "Göteborg",
+                Firstname = "Daniel",
+                Lastname = "Karlsson",
+                PostalCode = 41101,
+                EmailOne = "dk@hotmail.com",
+                EmailTwo = null,
+                StreetAddress = "Vagngatan 56",
+                DiallingCodeHome = "031",
+                TelephoneNbrHome = "777473",
+                DiallingCodeWork = null,
+                TelephoneNbrWork = null,
+            });
+            List<Person> NewList = new List<Person>();
+            foreach (var i in BusinessController.Instance.ITController.GetAllPersons())
+            {
+                NewList.Add(i);
+            }
+            if (NewList.Count == 0)
+            {
+                foreach (var item in persons)
+                {
+                    BusinessController.Instance.ITController.AddPersonInsuranceTaker(item);
+                }
+            }
+        }
+        private void GenerateCompanyTaker()
+        {
+            List<Company> companies = new List<Company>();
+
+            companies.Add(new Company()
+            {
+                OrganizationNumber = "5567893531",
+                PostalCode = 50711,
+                StreetAddress = "Fallgatan 67",
+                City = "Borås",
+                CompanyName = "Borås Bilförvaltning AB",
+                DiallingCode = "03",
+                Email = "BorasBilForvaltning@gmail.com",
+                ContactPerson = "Anders Sundin",
+                FaxNumber = null,
+                TelephoneNbr = "7838637",
+            });
+            companies.Add(new Company()
+            {
+                OrganizationNumber = "5563260701",
+                PostalCode = 16867,
+                StreetAddress = "Ranhammarsvägen 9",
+                City = "Bromma",
+                CompanyName = "Alviks Måleri AB",
+                DiallingCode = "08",
+                Email = "AlviksMaleriAB@hotmail.com",
+                ContactPerson = "Malin Larsson",
+                FaxNumber = "896784",
+                TelephoneNbr = "7047581",
+            });
+            companies.Add(new Company()
+            {
+                OrganizationNumber = "5566925763",
+                PostalCode = 58278,
+                StreetAddress = "Finnögatan 10",
+                City = "Linköping",
+                CompanyName = "Belami Plåt & Lack AB",
+                DiallingCode = "01",
+                Email = null,
+                ContactPerson = null,
+                FaxNumber = null,
+                TelephoneNbr = "3102385",
+            });
+            List<Company> NewList = new List<Company>();
+            foreach (var i in BusinessController.Instance.ITController.GetAllCompanies())
+            {
+                NewList.Add(i);
+            }
+            if (NewList.Count == 0)
+            {
+                foreach (var item in companies)
+                {
+                    BusinessController.Instance.ITController.AddCompanyInsuranceTaker(item);
+                }
+            }
+        }
+        private void GenerateInsuredPerson()
+        {
+            List<InsuredPerson> persons = new List<InsuredPerson>();
+
+            persons.Add(new InsuredPerson()
+            {
+                FirstName = "Elin",
+                LastName = "Käll",
+                SocialSecurityNumberIP = "8711306789",
+                PersonType = "Vuxen",
+                PersonTaker = BusinessController.Instance.ITController.GetPerson(person1),
+            });
+            persons.Add(new InsuredPerson()
+            {
+                FirstName = "Lisa",
+                LastName = "Hansson",
+                SocialSecurityNumberIP = "0304116723",
+                PersonType = "Barn",
+                PersonTaker = BusinessController.Instance.ITController.GetPerson(person2),
+            });
+            persons.Add(new InsuredPerson()
+            {
+                FirstName = "Peter",
+                LastName = "Alm",
+                SocialSecurityNumberIP = "7407016739",
+                PersonType = "Vuxen",
+                PersonTaker = BusinessController.Instance.ITController.GetPerson(person3),
+            });
+            persons.Add(new InsuredPerson()
+            {
+                FirstName = "Erik",
+                LastName = "Karlsson",
+                SocialSecurityNumberIP = "9909248997",
+                PersonType = "Barn",
+                PersonTaker = BusinessController.Instance.ITController.GetPerson(person4),
+            });
+            persons.Add(new InsuredPerson()
+            {
+                FirstName = "Daniel",
+                LastName = "Karlsson",
+                SocialSecurityNumberIP = "6301134514",
+                PersonType = "Vuxen",
+                PersonTaker = BusinessController.Instance.ITController.GetPerson(person5),
+            });
+            persons.Add(new InsuredPerson()
+            {
+                FirstName = "Bertil",
+                LastName = "Alm",
+                SocialSecurityNumberIP = "5712086219",
+                PersonType = "Vuxen",
+                PersonTaker = BusinessController.Instance.ITController.GetPerson(person3),
+            });
+            persons.Add(new InsuredPerson()
+            {
+                FirstName = "Hans",
+                LastName = "Eriksson",
+                SocialSecurityNumberIP = "8407290999",
+                PersonType = "Vuxen",
+                CompanyTaker = BusinessController.Instance.ITController.GetCompany(company1),
+            });
+            persons.Add(new InsuredPerson()
+            {
+                FirstName = "Bert",
+                LastName = "Henningsson",
+                SocialSecurityNumberIP = "9102190719",
+                PersonType = "Vuxen",
+                CompanyTaker = BusinessController.Instance.ITController.GetCompany(company1),
+            });
+            persons.Add(new InsuredPerson()
+            {
+                FirstName = "Erika",
+                LastName = "Lundgren",
+                SocialSecurityNumberIP = "9503093321",
+                PersonType = "Vuxen",
+                CompanyTaker = BusinessController.Instance.ITController.GetCompany(company2),
+            });
+            List<InsuredPerson> NewList = new List<InsuredPerson>();
+            foreach (var i in BusinessController.Instance.IPController.GetAllInsuredPersons())
+            {
+                NewList.Add(i);
+            }
+            if (NewList.Count == 0)
+            {
+                foreach (var item in persons)
+                {
+                    BusinessController.Instance.IPController.AddInsuredPerson(item);
+                }
+            }
+        }
+        private readonly string person1 = "8711306789";
+        private readonly string person2 = "7605206729";
+        private readonly string person3 = "7407016739";
+        private readonly string person4 = "6511156744";
+        private readonly string person5 = "6301134514";
+
+        private readonly string company1 = "5567893531";
+        private readonly string company2 = "5563260701";
+        private readonly string company3 = "5566925763";
+
+        private readonly int sm1 = 7337;
+        private readonly int sm2 = 2264;
+        private readonly int sm3 = 5836;
+        private readonly int sm4 = 1153;
+
+        private readonly string insuredperson1 = "8711306789";
+        private readonly string insuredperson2 = "0304116723";
+        private readonly string insuredperson3 = "7407016739";
+        private readonly string insuredperson4 = "9909248997";
+        private readonly string insuredperson5 = "6301134514";
+        private readonly string insuredperson6 = "5712086219";
+        private readonly string insuredperson7 = "8407290999";
+        private readonly string insuredperson8 = "9102190719";
+        private readonly string insuredperson9 = "9503093321";
+        private void GenerateInsurances()
+        {
+            List<Insurance> insurances = new List<Insurance>();
+            var str = "31/12/2023";
+            DateTime dt;
+            DateTime.TryParse(str, out dt);
+
+            insurances.Add(new Insurance()   
+            {
+                SerialNumber = "FF1",
+                AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm1),
+                TakerNbr = "5566925763",
+                TypeName = "Företagsförsäkring",
+                COI = BusinessController.Instance.IController.GetCI(1),
+                PaymentForm = "Månad",
+                InsuranceCompany = "Länsförsäkringar",
+                CompanyTaker = BusinessController.Instance.ITController.GetCompany(company3),
+                EndDate = dt,
+                StartDate = DateTime.Today,
+                Notes = null,
+                Premie = 789,
+                InsuranceStatus = Status.Otecknad,
+                CompanyInsuranceType = "Fastighet",
+            });
+
+            insurances.Add(new Insurance()
+            {
+                SerialNumber = "LIV1",
+                PersonTaker = BusinessController.Instance.ITController.GetPerson(person1),
+                TakerNbr = "8711306789",
+                TypeName = "Livförsäkring för vuxen",
+                PaymentForm = "Halvår",
+                InsuranceStatus = Status.Otecknad,
+                DeliveryDate = DateTime.Today,
+                AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm3),
+                InsuredID = BusinessController.Instance.IPController.GetIPerson(insuredperson1),
+                LIFE = BusinessController.Instance.IController.GetLIFE(1),
+                BaseAmountValue = 400000,
+                AckValue4 = 2000,
+            });
+            insurances.Add(new Insurance()
+            {
+                SerialNumber = "LIV2",
+                PersonTaker = BusinessController.Instance.ITController.GetPerson(person3),
+                TakerNbr = "7407016739",
+                TypeName = "Livförsäkring för vuxen",
+                PaymentForm = "Kvartal",
+                InsuranceStatus = Status.Otecknad,
+                DeliveryDate = DateTime.Today,
+                AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm1),
+                InsuredID = BusinessController.Instance.IPController.GetIPerson(insuredperson3),
+                LIFE = BusinessController.Instance.IController.GetLIFE(1),
+                BaseAmountValue = 400000,
+                AckValue4 = 2000,
+            });
+            insurances.Add(new Insurance()
+            {
+                SerialNumber = "ÖPFV1",
+                AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm1),
+                TakerNbr = "5567893531",
+                TypeName = "Övrig personförsäkring för vuxen",
+                OPI = BusinessController.Instance.IController.GetOPI(1),
+                PaymentForm = "Kvartal",
+                InsuredID = BusinessController.Instance.IPController.GetIPerson(insuredperson8),
+                CompanyTaker = BusinessController.Instance.ITController.GetCompany(company1),
+                DeliveryDate = DateTime.Today,
+                Premie = 789,
+                Table = "RT23H6",
+                InsuranceStatus = Status.Otecknad,
+            });
+            insurances.Add(new Insurance()
+            {
+                SerialNumber = "ÖPFV2",
+                AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm1),
+                TakerNbr = "5567893531",
+                TypeName = "Övrig personförsäkring för vuxen",
+                OPI = BusinessController.Instance.IController.GetOPI(1),
+                PaymentForm = "Kvartal",
+                InsuredID = BusinessController.Instance.IPController.GetIPerson(insuredperson7),
+                CompanyTaker = BusinessController.Instance.ITController.GetCompany(company1),
+                DeliveryDate = DateTime.Today,
+                Premie = 789,
+                Table = "RT23H6",
+                InsuranceStatus = Status.Otecknad,
+            });
+            insurances.Add(new Insurance()
+            {
+                SerialNumber = "ÖPFV3",
+                AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm2),
+                TakerNbr = "5563260701",
+                TypeName = "Övrig personförsäkring för vuxen",
+                OPI = BusinessController.Instance.IController.GetOPI(1),
+                PaymentForm = "Kvartal",
+                InsuredID = BusinessController.Instance.IPController.GetIPerson(insuredperson9),
+                CompanyTaker = BusinessController.Instance.ITController.GetCompany(company2),
+                DeliveryDate = DateTime.Today,
+                Premie = 299,
+                Table = "RK23H6",
+                InsuranceStatus = Status.Otecknad,
+            });
+            insurances.Add(new Insurance()
+            {
+                SerialNumber = "ÖPFV4",
+                PersonTaker = BusinessController.Instance.ITController.GetPerson(person4),
+                TakerNbr = "6511156744",
+                TypeName = "Övrig personförsäkring för vuxen",
+                PaymentForm = "Månad",
+                InsuranceStatus = Status.Otecknad,
+                DeliveryDate = DateTime.Today,
+                AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm3),
+                InsuredID = BusinessController.Instance.IPController.GetIPerson(insuredperson6),
+                Table = "78YT",
+                Premie = 7867,
+                OPI = BusinessController.Instance.IController.GetOPI(1),
+            });
+            insurances.Add(new Insurance()
+            {
+                SAI = BusinessController.Instance.IController.GetSA(1),
+                SerialNumber = "SOB1",
+                PersonTaker = BusinessController.Instance.ITController.GetPerson(person4),
+                TakerNbr = "6511156744",
+                TypeName = "Sjuk- och olycksfallsförsäkring för barn",
+                PaymentForm = "Helår",
+                InsuranceStatus = Status.Otecknad,
+                DeliveryDate = DateTime.Today,
+                AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm4),
+                InsuredID = BusinessController.Instance.IPController.GetIPerson(insuredperson4),
+                OptionalTypes = null,
+                BaseAmountValue = 0,
+                AckValue = 0,
+                BaseAmountValue2 = 0,
+                AckValue2 = 0,
+                BaseAmountValue3 = 0,
+                AckValue3 = 0,
+                BaseAmountValue4 = 700000,
+                AckValue4 = 11000,
+            });
+            insurances.Add(new Insurance()
+            {
+                SAI = BusinessController.Instance.IController.GetSA(1),
+                SerialNumber = "SOB2",
+                PersonTaker = BusinessController.Instance.ITController.GetPerson(person2),
+                TakerNbr = "7605206729",
+                TypeName = "Sjuk- och olycksfallsförsäkring för barn",
+                PaymentForm = "Helår",
+                InsuranceStatus = Status.Otecknad,
+                DeliveryDate = DateTime.Today,
+                AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm4),
+                InsuredID = BusinessController.Instance.IPController.GetIPerson(insuredperson2),
+                OptionalTypes = null,
+                BaseAmountValue = 0,
+                AckValue = 0,
+                BaseAmountValue2 = 0,
+                AckValue2 = 0,
+                BaseAmountValue3 = 0,
+                AckValue3 = 0,
+                BaseAmountValue4 = 1100000,
+                AckValue4 = 14200,
+            });
+            insurances.Add(new Insurance()
+            {
+                SAI = BusinessController.Instance.IController.GetSA(2),
+                SerialNumber = "SOV1",
+                PersonTaker = BusinessController.Instance.ITController.GetPerson(person5),
+                TakerNbr = "6301134514",
+                TypeName = "Sjuk- och olycksfallsförsäkring för vuxen",
+                PaymentForm = "Halvår",
+                InsuranceStatus = Status.Otecknad,
+                DeliveryDate = DateTime.Today,
+                AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm3),
+                InsuredID = BusinessController.Instance.IPController.GetIPerson(insuredperson5),
+                OptionalTypes = null,
+                BaseAmountValue = 0,
+                AckValue = 0,
+                BaseAmountValue2 = 0,
+                AckValue2 = 0,
+                BaseAmountValue3 = 0,
+                AckValue3 = 0,
+                BaseAmountValue4 = 500000,
+                AckValue4 = 19600,
+            });
+            List<Insurance> NewList = new List<Insurance>();
+            foreach (var i in BusinessController.Instance.IController.GetAllInsurances())
+            {
+                NewList.Add(i);
+            }
+            if (NewList.Count == 0)
+            {
+                foreach (var item in insurances)
+                {
+                    BusinessController.Instance.IController.AddInsuranceApplication(item);
+                }
+            }
+        }
     }
 }

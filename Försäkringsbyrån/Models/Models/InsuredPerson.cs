@@ -17,12 +17,12 @@ namespace Models.Models
     {
         [Key]
         public int InsuredId { get; set; }
-        public string SocialSecurityNumber { get; set; }
+        public string SocialSecurityNumberIP { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
         public string PersonType { get; set; }
-        public virtual Person PersonTaker { get; set; }
-        public virtual Company CompanyTaker { get; set; }
+        public Person PersonTaker { get; set; }
+        public  Company CompanyTaker { get; set; }
 
     }
 }

@@ -236,10 +236,10 @@ namespace GUILayer.ViewModels.SearchViewModels
         }
         public string SocialSecurityNumberIP
         {
-            get => SelectedIP.SocialSecurityNumber;
+            get => SelectedIP.SocialSecurityNumberIP;
             set
             {
-                SelectedIP.SocialSecurityNumber = value;
+                SelectedIP.SocialSecurityNumberIP = value;
                 OnPropertyChanged("SocialSecurityNumberIP");
             }
         }
@@ -389,12 +389,12 @@ namespace GUILayer.ViewModels.SearchViewModels
         {
 
             if (SelectedIP != null && SelectedIP.PersonType != null && SelectedIP.LastName != null && SelectedIP.FirstName != null &&
-               SelectedIP.SocialSecurityNumber != null && SelectedIP.InsuredId != 0)
+               SelectedIP.SocialSecurityNumberIP != null && SelectedIP.InsuredId != 0)
             {
                 SelectedIP.FirstName = FirstName;
                 SelectedIP.LastName= LastName;
                 SelectedIP.LastName = LastName;
-                SelectedIP.SocialSecurityNumber = SocialSecurityNumberIP;
+                SelectedIP.SocialSecurityNumberIP = SocialSecurityNumberIP;
                 SelectedIP.InsuredId = InsuredId;
                 Context.IPController.Edit(SelectedIP);
 
