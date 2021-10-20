@@ -60,14 +60,12 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
                 if (nbr.Count != nbr.Distinct().Count())
                 {
                     nbr1?.Add(nr);
-                    // Duplicates exist, flera personer med samma nr. 
                 }
                 else
                 {
                     nbr2?.Add(nr);
                 }
             }
-
             #endregion
             if (nbr1.Count > 0)
             {
@@ -79,14 +77,18 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             }
             return People;
         }
-
+        /// <summary>
+        /// Method that runs when duplicates exist of numbers in dbo.Persons. 
+        /// </summary>
+        /// <param name="people"></param>
+        /// <param name="nbr2"></param>
+        /// <returns></returns>
         public ObservableCollection<Person> GetPerson(ObservableCollection<Person> people, List<string> nbr2)
         {
-            ObservableCollection<Person> people2 = new ObservableCollection<Person>();
-            ObservableCollection<Person> people3 = new ObservableCollection<Person>();
-            ObservableCollection<Person> people4 = new ObservableCollection<Person>();
-            ObservableCollection<Person> people5 = new ObservableCollection<Person>();
-            List<string> nbr = new List<string>();
+            ObservableCollection<Person> people2 = new ObservableCollection<Person>(); //alla som har tecknat någon barnförsäkring
+            ObservableCollection<Person> people3 = new ObservableCollection<Person>(); //alla som har tecknat vuxenförsäkring
+            ObservableCollection<Person> people4 = new ObservableCollection<Person>(); //alla som har tecknat barnförsäkring + vuxenförsäkringar
+            List<string> nbr = new List<string>(); //
             foreach (var nr in nbr2)
             {
                 foreach (var p in people)
@@ -95,86 +97,29 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
                     {
                         foreach (var i in p.Insurances)
                         {
-                            if (i.InsuranceStatus == Status.Tecknad && i.TypeName == "Sjuk- och olycksfallsförsäkring för barn") //Lägger till alla som har tecknade försäkringar.
-                               
-                            {
-                                people3?.Add(p);
-                            }
-                            else if(i.InsuranceStatus == Status.Tecknad && i.TypeName != "Sjuk - och olycksfallsförsäkring för barn") //Lista bara personer var försäkringar är tecknade dessa är ej barn
+                            if (i.InsuranceStatus == Status.Tecknad && i.TypeName == "Sjuk- och olycksfallsförsäkring för barn") //Lägger till alla som har tecknade barnförsäkringar.
                             {
                                 people2?.Add(p);
                             }
+                            else if(i.InsuranceStatus == Status.Tecknad && i.TypeName != "Sjuk - och olycksfallsförsäkring för barn")
+                            {
+                                nbr?.Add(nr); //alla nummer knytna till en vuxen försäkring
+                            }
                         }
-
                     }
                 }
             }
-            //foreach (var x in people3)
-            //{
-            //    people5?.Add(x);
-            //}
-            //foreach (var nbrs in nbr2)
-            //{
-            //    nbr?.Add(nbrs);
-            //}
-            //foreach (var nb in nbr2)
-            //{
-            //    foreach (var n in nbr)
-            //    {
-            //        if (nb == n)
-            //        {
-            //            foreach (var s in people3)
-            //            {
-            //                foreach (var y in people5)
-            //                {
-            //                    if (s.TelephoneNbrHome == y.TelephoneNbrHome)
-            //                    {
-            //                        foreach (var i in s.Insurances)
-            //                        {
-            //                            foreach (var k in y.Insurances)
-            //                            {
-            //                                if (i.TypeName == "Sjuk- och olycksfallsförsäkring för barn" && k.TypeName == "Sjuk- och olycksfallsförsäkring för barn" && i.InsuranceStatus == Status.Tecknad && k.InsuranceStatus == Status.Tecknad)
-            //                                {
-            //                                    people2?.Add(s);
-
-            //                                }
-            //                                else if (i.TypeName != "Sjuk- och olycksfallsförsäkring för barn" && k.TypeName == "Sjuk- och olycksfallsförsäkring för barn" && i.InsuranceStatus == Status.Otecknad && k.InsuranceStatus == Status.Tecknad)
-            //                                {
-            //                                    people2?.Add(s);
-            //                                }
-            //                                else if (i.TypeName == "Sjuk- och olycksfallsförsäkring för barn" && k.TypeName != "Sjuk- och olycksfallsförsäkring för barn" && i.InsuranceStatus == Status.Otecknad && k.InsuranceStatus == Status.Otecknad)
-            //                                {
-            //                                    people2?.Add(s);
-            //                                }
-
-            //                            }
-            //                        }
-            //                    }
-
-            //                }
-            //            }
-            //        }
-            //        else
-            //        {
-            //            foreach (var p in people)
-            //            {
-            //                if (n == p.TelephoneNbrHome)
-            //                {
-            //                    foreach (var i in p.Insurances)
-            //                    {
-            //                        if (i.TypeName == "Sjuk- och olycksfallsförsäkring för barn" && i.InsuranceStatus == Status.Tecknad) //om det finns tecknade försäkringar som är vuxenförsäkringar, skapa ej kundprospekt. 
-            //                            people2?.Add(p);
-
-            //                    }
-
-            //                }
-            //            }
-            //        }
-            //    }
-            //}
-
+            foreach(var nr in nbr)  //nbr listan är knyten till alla nr med en vuxen försäkring. 
+            {
+                foreach(var p in people2)
+                {
+                    if(nr == p.TelephoneNbrHome)
+                    {
+                        people3?.Add(p);
+                    }
+                }
+            }
             var p4 = people2.Except(people3).ToList();
-
             foreach (var p in p4)
             {
                 people4?.Add(p);
@@ -196,7 +141,7 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
                     {
                         foreach (var i in p.Insurances)
                         {
-                            if (i.TypeName == "Sjuk- och olycksfallsförsäkring för barn" && i.InsuranceStatus == Status.Tecknad) //om det finns tecknade försäkringar som är vuxenförsäkringar, skapa ej kundprospekt. 
+                            if (i.TypeName == "Sjuk- och olycksfallsförsäkring för barn" && i.InsuranceStatus == Status.Tecknad) //alla som har tecknat en barnförsäkring
                                 people2?.Add(p);
 
                         }
@@ -204,6 +149,16 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
                     }
                 }
             }
+            foreach(var p in people2)
+            {
+                foreach (var i in p.Insurances)
+                {
+                    if (i.TypeName != "Sjuk- och olycksfallsförsäkring för barn" && i.InsuranceStatus == Status.Tecknad) //alla som har tecknat barnförsäkring + vuxenförsäkringar
+                        people3?.Add(p);
+
+                }
+            }
+
             var p4 = people2.Except(people3).ToList();
 
             foreach (var p in p4)
