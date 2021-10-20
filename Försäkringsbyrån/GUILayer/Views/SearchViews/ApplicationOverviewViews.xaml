@@ -3,86 +3,141 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:xctk1="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:local="clr-namespace:GUILayer.Views.SearchViews"
              mc:Ignorable="d" 
-             d:DesignHeight="1100" d:DesignWidth="900">
+             d:DesignHeight="900" d:DesignWidth="1200">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300"/>
-            <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="56*"/>
-            <RowDefinition Height="55*"/>
-            <RowDefinition Height="55*"/>
-            <RowDefinition Height="55*"/>
-            <RowDefinition Height="55.333"/>
-            <RowDefinition Height="55*"/>
-            <RowDefinition Height="55*"/>
-            <RowDefinition Height="55*"/>
-            <RowDefinition Height="55*"/>
-            <RowDefinition Height="55*"/>
-            <RowDefinition Height="55*"/>
-            <RowDefinition Height="56*"/>
-            <RowDefinition Height="56*"/>
-            <RowDefinition Height="56*"/>
-            <RowDefinition Height="56*"/>
-            <RowDefinition Height="56*"/>
-            <RowDefinition Height="55*"/>
-            <RowDefinition Height="55*"/>
-
+            <RowDefinition Height="211.333"/>
         </Grid.RowDefinitions>
+        <Label Content="Register ansökningar" FontSize="20" Grid.Row="0" Grid.Column="0" Margin="0,0,0,50.333" Grid.RowSpan="2"/>
 
-        <Label Content="Översikt ansökan" FontSize="25" Grid.Row="0" Grid.Column="0"/>
-        <TextBlock Text="Välj försäkringstyp" FontSize="20" Grid.Row="1" Grid.Column="0" Margin="117,10,103,10" Grid.ColumnSpan="2"/>
-        <ComboBox Name="Företagsförsäkring" Width="200" Height="30" Grid.Row="1" Grid.Column="1" />
-
-        <TextBlock Text="Försäkringstagarens uppgifter " FontSize="20" Grid.Row="2" Grid.Column="0" Margin="10"/>
-        <Label Grid.Row="3" Grid.Column="0" Content="OrgNummer:" FontSize="15"/>
-        <TextBox Grid.Row="3" Width="160" Height="20" Grid.Column="0" Margin="70,25,60,10"></TextBox>
-        <Label Grid.Row="4" Grid.Column="0" Content="Företagsnamn:" FontSize="15"/>
-        <TextBox Grid.Row="4" Width="160" Height="20" Grid.Column="0" Margin="70,25,60,10"></TextBox>
-        <Label Grid.Row="5" Grid.Column="0" Content="Gatuadress:" FontSize="15"/>
-        <TextBox Grid.Row="5" Width="160" Height="20" Grid.Column="0" Margin="70,25,60,10"></TextBox>
-        <Label Grid.Row="6" Grid.Column="0" Content="Postadress:" FontSize="15"/>
-        <TextBox Grid.Row="6" Width="160" Height="20" Grid.Column="0" Margin="70,25,60,10"></TextBox>
-        <Label Grid.Row="7" Grid.Column="0" Content="PostNummer:" FontSize="15"/>
-        <TextBox Grid.Row="7" Width="160" Height="20" Grid.Column="0" Margin="70,25,60,10"></TextBox>
-        <Label Grid.Row="8" Grid.Column="0" Content="Rikt-och TelefonNr:" FontSize="15"/>
-        <TextBox Grid.Row="8" Width="160" Height="20" Grid.Column="0" Margin="70,25,60,10"></TextBox>
-        <Label Grid.Row="9" Grid.Column="0" Content="Email adress:" FontSize="15"/>
-        <TextBox Grid.Row="9" Width="160" Height="20" Grid.Column="0" Margin="70,25,60,10"></TextBox>
-        <Label Grid.Row="10" Grid.Column="0" Content="Fax Nummer:" FontSize="15"/>
-        <TextBox Grid.Row="10" Width="160" Height="20" Grid.Column="0" Margin="70,25,60,10"></TextBox>
-        <Label Grid.Row="11" Grid.Column="0" Content="Kontaktperson:" FontSize="15"/>
-        <TextBox Grid.Row="11" Width="160" Height="20" Grid.Column="0" Margin="70,25,60,10"></TextBox>
-        <TextBlock Text="Övriga försäkringsuppgifter " FontSize="20" Grid.Row="2" Grid.Column="2" Margin="10"/>
-        <Label Grid.Row="3" Grid.Column="2" Content="Försäkringsbolag:" FontSize="15"/>
-        <TextBox Grid.Row="3" Width="160" Height="20" Grid.Column="2" Margin="70,25,60,10"></TextBox>
-        <Label Grid.Row="4" Grid.Column="2" Content="Typ av försäkring:" FontSize="15"/>
-        <ComboBox Grid.Row="4" Width="160" Height="20" Grid.Column="2" Margin="70,25,60,10"></ComboBox>
-        <Label Grid.Row="5" Grid.Column="2" Content="Premie:" FontSize="15"/>
-        <TextBox Grid.Row="5" Width="160" Height="20" Grid.Column="2" Margin="70,25,60,10"></TextBox>
-        <Label Grid.Row="6" Grid.Column="2" Content="Betalform:" FontSize="15"/>
-        <ComboBox Grid.Row="6" Width="160" Height="20" Grid.Column="2" Margin="70,25,60,10"></ComboBox>
-        <Label Grid.Row="7" Grid.Column="2" Content="Begynnelsedatum:" FontSize="15"/>
-        <TextBox Grid.Row="7" Width="160" Height="20" Grid.Column="2" Margin="70,25,60,10"></TextBox>
-        <Label Grid.Row="8" Grid.Column="2" Content="Förfallodatum:" FontSize="15"/>
-        <TextBox Grid.Row="8" Width="160" Height="20" Grid.Column="2" Margin="70,25,60,10"></TextBox>
-        <Label Grid.Row="9" Grid.Column="2" Content="Agenturnummer:" FontSize="15"/>
-        <ComboBox Grid.Row="9" Width="160" Height="20" Grid.Column="2" Margin="70,25,60,10"></ComboBox>
-        <Label Grid.Row="10" Grid.Column="2" Content="Anteckningar:" FontSize="15"/>
-        <TextBox Grid.Row="10" Width="250" Height="150" Grid.Column="2" Margin="10,40.667,40,31.333" Grid.RowSpan="4"/>
-
-        <Button Grid.Row="15" Grid.Column="0" Width="150" Height="50" Margin="37,5.667,113,0.333" Content="Tillbaka" FontSize="17" ></Button>
-        <Button Grid.Row="15" Grid.Column="2" Width="150" Height="50" Margin="37,5.667,113,0.333" Content="Exportera Information" FontSize="15"></Button>
-        <Button Grid.Row="17" Grid.Column="2" Width="150" Height="50" Margin="37,5.667,113,0.333" Content="Uppdatera" FontSize="15" ></Button>
-        <Button Grid.Row="19" Grid.Column="2" Width="150" Height="50" Margin="37,5.667,113,0.333" Content="Ta bort i registret" FontSize="15" ></Button>
+        <xctk1:WatermarkTextBox Grid.Row="1" Grid.Column="0"
+                                HorizontalContentAlignment="Center"
+                                VerticalContentAlignment="Center"
+                                TextWrapping="WrapWithOverflow"
+                                Watermark="Skriv ditt sök ord här..."
+                                Foreground="Black"
+                                Background="Transparent" BorderBrush="Transparent"
+                                Text="{Binding SearchInput, UpdateSourceTrigger=PropertyChanged}" RenderTransformOrigin="0.389,0.307" Margin="0,0.333"/>
 
 
+        <DataGrid x:Name ="InsuranceGrid" Grid.Row="1" Grid.Column="0" AutoGenerateColumns="False" ItemsSource="{Binding }"
+                  RowDetailsVisibilityMode="VisibleWhenSelected" 
+                  IsReadOnly="True" 
+                  AlternatingRowBackground="Gainsboro"  AlternationCount="2"
+                  IsSynchronizedWithCurrentItem="True"
+                  ScrollViewer.CanContentScroll="True" 
+                  ScrollViewer.VerticalScrollBarVisibility="Auto"
+                  ScrollViewer.HorizontalScrollBarVisibility="Auto" Margin="0,50.333,5,0" Grid.RowSpan="2" Height="206" VerticalAlignment="Top">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Löpnummer" Binding="{Binding Path=InsuranceStatus}"/>
+                <DataGridTextColumn Header="Löpnummer" Binding="{Binding Path=SerialNumber}"/>
+                <DataGridTextColumn Header="Försäkringstagare" Binding="{Binding Path= Company.OrganizationNumber}" />
+                <DataGridTextColumn Header="Försäkringstyp" Binding="{Binding Path= Company.Companyname}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <ScrollViewer Grid.Column="1" Grid.Row="2" Margin="0,4.667,0,-256.667"
+                      VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible">
+            <Grid Grid.Column="0" Grid.Row="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="330"/>
+                    <ColumnDefinition Width="330"/>
+                    <ColumnDefinition Width="330"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="56*"/>
+                    <RowDefinition Height="55*"/>
+                    <RowDefinition Height="55*"/>
+                    <RowDefinition Height="55*"/>
+                    <RowDefinition Height="55.333"/>
+                    <RowDefinition Height="55*"/>
+                    <RowDefinition Height="55*"/>
+                    <RowDefinition Height="55*"/>
+                    <RowDefinition Height="55*"/>
+                    <RowDefinition Height="55*"/>
+                    <RowDefinition Height="55*"/>
+                    <RowDefinition Height="56*"/>
+                    <RowDefinition Height="56*"/>
+                    <RowDefinition Height="56*"/>
+                    <RowDefinition Height="56*"/>
+                    <RowDefinition Height="56*"/>
+                    <RowDefinition Height="55*"/>
+                    <RowDefinition Height="55*"/>
+
+                </Grid.RowDefinitions>
+                <Label Content="Markerad försäkring" FontSize="20" Grid.Row="0" Grid.Column="0"/>
+                <TextBlock Text="Försäkringstyp: " FontSize="20" Grid.Row="1" Grid.Column="0" Margin="0,10,165.667,10"/>
+                <ComboBox Name="Företagsförsäkring" Height="30" Grid.Row="1" Grid.Column="0" Margin="140,10,9.667,10" />
+
+                <TextBlock Text="Försäkringstagarens uppgifter " FontSize="20" Grid.Row="2" Grid.Column="0" Margin="10"/>
+                <Label Grid.Row="3" Grid.Column="0" Content="Organisationsnummer:" FontSize="15"/>
+                <TextBox Grid.Row="3" Width="160" Height="20" Grid.Column="0" Margin="70,25,60,10"></TextBox>
+                <Label Grid.Row="4" Grid.Column="0" Content="Företagsnamn:" FontSize="15"/>
+                <TextBox Grid.Row="4" Width="160" Height="20" Grid.Column="0" Margin="70,25,60,10"></TextBox>
+                <Label Grid.Row="5" Grid.Column="0" Content="Gatuadress:" FontSize="15"/>
+                <TextBox Grid.Row="5" Width="160" Height="20" Grid.Column="0" Margin="70,25,60,10"></TextBox>
+                <Label Grid.Row="6" Grid.Column="0" Content="Postadress:" FontSize="15"/>
+                <TextBox Grid.Row="6" Width="160" Height="20" Grid.Column="0" Margin="70,25,60,10"></TextBox>
+                <Label Grid.Row="7" Grid.Column="0" Content="PostNummer:" FontSize="15"/>
+                <TextBox Grid.Row="7" Width="160" Height="20" Grid.Column="0" Margin="70,25,60,10"></TextBox>
+                <Label Grid.Row="8" Grid.Column="0" Content="RiktNr:" FontSize="15" Grid.ColumnSpan="2" Margin="10,0.333,200.333,0"/>
+                <TextBox Grid.Row="8" Height="20" Grid.Column="0" Margin="10,25.333,165.667,10"/>
+                <Label Grid.Row="8" Grid.Column="0" Content="TelefonNr:" FontSize="15" Grid.ColumnSpan="2" Margin="140,0.333,200.333,0"/>
+                <TextBox Grid.Row="8" Height="20" Grid.Column="0" Margin="148,25.333,9.667,10"/>
+                <Label Grid.Row="9" Grid.Column="0" Content="Email adress:" FontSize="15"/>
+                <TextBox Grid.Row="9" Width="160" Height="20" Grid.Column="0" Margin="70,25,60,10"></TextBox>
+                <Label Grid.Row="10" Grid.Column="0" Content="Fax Nummer:" FontSize="15"/>
+                <TextBox Grid.Row="10" Width="160" Height="20" Grid.Column="0" Margin="70,25,60,10"></TextBox>
+                <Label Grid.Row="11" Grid.Column="0" Content="Kontaktperson:" FontSize="15"/>
+                <TextBox Grid.Row="11" Width="160" Height="20" Grid.Column="0" Margin="70,25,60,10"></TextBox>
+
+                <TextBlock Text="Övriga försäkringsuppgifter " FontSize="20" Grid.Row="1" Grid.Column="1" Margin="10"/>
+                <Label Grid.Row="2" Grid.Column="1" Content="Löpnummer:" FontSize="15"/>
+                <TextBox Grid.Row="2" IsReadOnly="true" Width="160" Height="20" Grid.Column="1" Margin="70,25,60,10"></TextBox>
+                <Label Grid.Row="3" Grid.Column="1" Content="Försäkringsbolag:" FontSize="15"/>
+                <TextBox Grid.Row="3" Width="160" Height="20" Grid.Column="1" Margin="70,25,60,10"></TextBox>
+                <Label Grid.Row="4" Grid.Column="1" Content="Typ av försäkring:" FontSize="15"/>
+                <ComboBox Grid.Row="4" Width="160" Height="20" Grid.Column="1" Margin="70,25,60,10"></ComboBox>
+                <Label Grid.Row="5" Grid.Column="1" Content="Premie:" FontSize="15"/>
+                <TextBox Grid.Row="5" Width="160" Height="20" Grid.Column="1" Margin="70,25,60,10"></TextBox>
+                <Label Grid.Row="6" Grid.Column="1" Content="Betalform:" FontSize="15"/>
+                <ComboBox Grid.Row="6" Width="160" Height="20" Grid.Column="1" Margin="70,25,60,10"></ComboBox>
+                <Label Grid.Row="7" Grid.Column="1" Content="Begynnelsedatum:" FontSize="15"/>
+                <TextBox Grid.Row="7" Width="160" Height="20" Grid.Column="1" Margin="70,25,60,10"></TextBox>
+                <Label Grid.Row="8" Grid.Column="1" Content="Förfallodatum:" FontSize="15"/>
+                <TextBox Grid.Row="8" Width="160" Height="20" Grid.Column="1" Margin="70,25,60,10"></TextBox>
+                <Label Grid.Row="9" Grid.Column="1" Content="Agenturnummer:" FontSize="15"/>
+                <ComboBox Grid.Row="9" Width="160" Height="20" Grid.Column="1" Margin="70,25,60,10"></ComboBox>
+                <Label Grid.Row="10" Grid.Column="1" Content="Anteckningar:" FontSize="15"/>
+                <TextBox Grid.Row="10" Width="250" Height="150" Grid.Column="1" Margin="10,40.667,40,31.333" Grid.RowSpan="4"/>
+
+                <TextBlock Text="Tecknade försäkringsuppgifter " FontSize="20" Grid.Row="1" Grid.Column="2" Margin="10"/>
+                <Label Grid.Row="2" Grid.Column="2" Content="Försäkringsnummer:" FontSize="15"/>
+                <TextBox Grid.Row="2" Width="160" IsReadOnly="true" Height="20" Grid.Column="2" Margin="70,25,60,10"></TextBox>
+                <Label Grid.Row="3" Grid.Column="2" Content="Provision:" FontSize="15"/>
+                <TextBox Grid.Row="3" Width="160" Height="20" Grid.Column="2" Margin="70,25,60,10"></TextBox>
+                <Label Grid.Row="4" Grid.Column="2" Content="År:" FontSize="15"/>
+                <ComboBox Grid.Row="4" Width="160" Height="20" Grid.Column="2" Margin="70,25,60,10"></ComboBox>
+                <Label Grid.Row="5" Grid.Column="2" Content="Månad:" FontSize="15"/>
+                <ComboBox Grid.Row="5" Width="160" Height="20" Grid.Column="2" Margin="70,25,60,10"></ComboBox>
+
+                <Button Grid.Row="7" Grid.Column="2" Height="50" Margin="37,5.667,29,55" Content="Exportera" FontSize="15" Grid.RowSpan="2"/>
+                <Button Grid.Row="8" Grid.Column="2" Height="50" Margin="37,5.333,29,0" Content="Uppdatera" FontSize="15" />
+                <Button Grid.Row="9" Grid.Column="2" Height="50" Margin="37,6,31,54.667" Content="Ta bort" FontSize="15" Grid.RowSpan="2" >
+                </Button>
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </UserControl>

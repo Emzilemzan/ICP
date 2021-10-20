@@ -69,7 +69,7 @@ namespace GUILayer.ViewModels.SearchViewModels
 
        
         private ICommand searchApplication_Btn;
-        public ICommand SearchApplicationBtn
+        public ICommand SearchInsurance_Btn
         {
             get => searchApplication_Btn ?? (searchApplication_Btn = new RelayCommand(x => { SearchApplicationHome(); CanCreate(); }));
 
@@ -77,22 +77,21 @@ namespace GUILayer.ViewModels.SearchViewModels
 
         public static void SearchApplicationHome()
         {
-            //MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
-            //MainViewModel.Instance.CurrentTool = "";
-            //MainViewModel.Instance.SelectedViewModel = SearchApplicationViewModel.Instance;
+            if (MainViewModel.Instance.CurrentTool != "Insurance")
+            {
+                MainViewModel.Instance.ToolsVisibility = Visibility.Visible;
+                MainViewModel.Instance.Tools = Instance;
+                MainViewModel.Instance.CurrentTool = "Insurance";
+                MainViewModel.Instance.SelectedViewModel = SearchApplicationChoiceViewModel.Instance;
+            }
+            else
+            {
+                MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
+                MainViewModel.Instance.CurrentTool = "";
+                MainViewModel.Instance.SelectedViewModel = Instance;
+            }
         }
-       
-
-        private ICommand searchSignedInsurance_Btn;
-        public ICommand SearchSignedInsuranceBtn
-        {
-            get => searchSignedInsurance_Btn ?? (searchSignedInsurance_Btn = new RelayCommand(x => { SearchSignedInsuranceHome(); CanCreate(); }));
-
-        }
-        public static void SearchSignedInsuranceHome()
-        {
-            // no code yet.
-        }
+      
         #endregion
 
     }

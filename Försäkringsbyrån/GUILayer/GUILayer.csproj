@@ -113,6 +113,7 @@
     <Compile Include="ViewModels\InsuranceViewModels\SignedInsuranceViewModel.cs" />
     <Compile Include="ViewModels\LogInViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\SearchViewModels\SearchApplicationChoiceViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModels\SearchApplicationViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModels\ApplicationOverviewViewmodels.cs" />
     <Compile Include="ViewModels\SearchViewModels\SearchEmployeeViewModel.cs" />
@@ -194,6 +195,9 @@
     </Compile>
     <Compile Include="Views\SearchViews\ApplicationOverviewViews.xaml.cs">
       <DependentUpon>ApplicationOverviewViews.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchViews\SearchApplicationChoiceView.xaml.cs">
+      <DependentUpon>SearchApplicationChoiceView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SearchViews\SearchEmployeeView.xaml.cs">
       <DependentUpon>SearchEmployeeView.xaml</DependentUpon>
@@ -331,6 +335,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SearchViews\ApplicationOverviewViews.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SearchViews\SearchApplicationChoiceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

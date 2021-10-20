@@ -36,6 +36,12 @@
         <DataTemplate DataType="{x:Type svm:SearchInsuranceTakerCompanyViewModel}">
             <sv:SearchInsuranceTakerCompanyView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type svm:SearchApplicationChoiceViewModel}">
+            <sv:SearchApplicationChoiceView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type svm:ApplicationOverviewViewModels}">
+            <sv:ApplicationOverviewViews/>
+        </DataTemplate>
         <DataTemplate DataType="{x:Type ivm:InsuranceViewModel}">
             <iv:InsuranceView/>
         </DataTemplate>
