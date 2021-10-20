@@ -19,7 +19,10 @@ namespace GUILayer.ViewModels.CommissionViewModels
             Months = new List<string>() { "Januari", "Februari", "Mars", "April", "Maj", "Juni", "Juli", "Augusti", "September", "Oktober", "November", "December" };
             Date = new List<string>() { "25e" + SelectedMonth};
             SalesMens = UpdateSM();
+            VacationPays = UpdateVpay();
         }
+
+        public List<Insurance> BaseAmounts;
 
 
         #region Commands 
@@ -34,6 +37,17 @@ namespace GUILayer.ViewModels.CommissionViewModels
             return SalesMens;
         }
 
+        public ObservableCollection<VacationPay> UpdateVpay()
+        {
+            ObservableCollection<VacationPay> x = new ObservableCollection<VacationPay>();
+            foreach (var e in Context.BDController.GetAllVPays())
+            {
+                x?.Add(e);
+            }
+            VacationPays = x;
+            return VacationPays;
+        }
+
 
 
         #endregion
@@ -42,7 +56,7 @@ namespace GUILayer.ViewModels.CommissionViewModels
         private void Count()
         {
             CSumAck = CountCSumAck();
-            ASumAck = CountASumAck();
+            //ASumAck = CountASumAck();
         }
 
         private double CountCSumAck()
@@ -66,9 +80,6 @@ namespace GUILayer.ViewModels.CommissionViewModels
                             case 2:
                                 sum += i.AckValue3;
                                 break;
-                            case 3:
-                                sum += i.AckValue4;
-                                break;
 
                         }
                     }
@@ -77,37 +88,37 @@ namespace GUILayer.ViewModels.CommissionViewModels
             return sum;
         }
 
-        private double CountASumAck()
-        {
-            double sum = 0;
-            if (SelectedSalesMen.Insurances != null)
-            {
-                foreach (Insurance i in SelectedSalesMen.Insurances)
-                {
-                    if (i.InsuranceStatus == 0 && i.SAI.SAInsuranceType.Contains("vuxen") && i.PayYear == Year && i.PayMonth == (Months.IndexOf(_month) + 1) % 12)
-                    {
-                        int quarter = (Months.IndexOf(_month)) / 3; //Får samma ackvärde ? 
-                        switch (quarter)
-                        {
-                            case 0:
-                                sum += i.AckValue;
-                                break;
-                            case 1:
-                                sum += i.AckValue2;
-                                break;
-                            case 2:
-                                sum += i.AckValue3;
-                                break;
-                            case 3:
-                                sum += i.AckValue4;
-                                break;
+        //private double CountASumAck()
+        //{
+        //    double sum = 0;
+        //    if (SelectedSalesMen.Insurances != null)
+        //    {
+        //        foreach (Insurance i in SelectedSalesMen.Insurances)
+        //        {
+        //            if (i.InsuranceStatus == 0 && i.SAI.SAInsuranceType.Contains("vuxen") && i.PayYear == Year && i.PayMonth == (Months.IndexOf(_month) + 1) % 12)
+        //            {
+        //                int quarter = (BaseAmounts.IndexOf(i.BaseAmountValue));   
+        //                switch (quarter)
+        //                {
+        //                    case 0:
+        //                        sum += i.AckValue;
+        //                        break;
+        //                    case 1:
+        //                        sum += i.AckValue2;
+        //                        break;
+        //                    case 2:
+        //                        sum += i.AckValue3;
+        //                        break;
+        //                    case 3:
+        //                        sum += i.AckValue4;
+        //                        break;
 
-                        }
-                    }
-                }
-            }
-            return sum;
-        }
+        //                }
+        //            }
+        //        }
+        //    }
+        //    return sum;
+        //}
 
         public double SumSAAck(double CSumAck, double ASumAck) //Titta vidare på denna
         {
@@ -121,6 +132,7 @@ namespace GUILayer.ViewModels.CommissionViewModels
         public ObservableCollection<SalesMen> SalesMens { get; set; }
         public List<string> Months { get; set; }
         public List<string> Date { get; set; }
+        public ObservableCollection<VacationPay> VacationPays { get; set; }
 
         private SalesMen _salesMen;
         public SalesMen SelectedSalesMen
@@ -259,14 +271,14 @@ namespace GUILayer.ViewModels.CommissionViewModels
         }
 
         //Vacation pay in %
-        private double _vPayPercent;
-        public double VPayPercent
+        private VacationPay _vPayPercent;
+        public VacationPay SelectedVPay
         {
             get => _vPayPercent;
             set
             {
                 _vPayPercent = value;
-                OnPropertyChanged("VPayPercent");
+                OnPropertyChanged("SelectedVPay");
             }
         }
 
