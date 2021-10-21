@@ -11,7 +11,7 @@ using System.Windows.Input;
 
 namespace GUILayer.ViewModels.SearchViewModels
 {
-    public class SAOverviewViewModel: BaseViewModel
+    public class SAOverviewViewModel : BaseViewModel
     {
         public static readonly SAOverviewViewModel Instance = new SAOverviewViewModel();
 
@@ -27,9 +27,10 @@ namespace GUILayer.ViewModels.SearchViewModels
             SAInsuranceTypes = UpdateSA();
             BaseAmountTabell = UpdateBaseTable();
             BaseAmounts1 = UpdateBaseAmount();
-            OptionalType = OptionalTypes[0];
-            OptionalType1 = OptionalTypes1[0];
-            OptionalType2 = OptionalTypes2[0];
+            Insurances = UpdateInsurance();
+            //OptionalType = OptionalTypes[0];
+            //OptionalType1 = OptionalTypes1[0];
+            //OptionalType2 = OptionalTypes2[0];
         }
         #region command 
         private ICommand _updateBtn;
@@ -69,6 +70,45 @@ namespace GUILayer.ViewModels.SearchViewModels
         }
         #endregion
 
+        #region method
+        private List<OptionalType> OTypes()
+        {
+            OptionalType a = new OptionalType();
+            OptionalType b = new OptionalType();
+            OptionalType c = new OptionalType();
+
+            if (ACheck == true)
+            {
+                if (OptionalType != null && BAmount != 0)
+                    a = OptionalType;
+                else
+                {
+                    MessageBox.Show("Om någon checkbox för tillval är i klickad måste du också ha fyllt i tillhörande uppgifter");
+                }
+            }
+            if (BCheck == true)
+            {
+                if (OptionalType1 != null && BAmount != 0)
+                    b = OptionalType1;
+                else
+                {
+                    MessageBox.Show("Om någon checkbox för tillval är i klickad måste du också ha fyllt i tillhörande uppgifter");
+                }
+            }
+            if (CCheck == true)
+            {
+                if (OptionalType2 != null && BARLL != null)
+                    c = OptionalType2;
+                else
+                {
+                    MessageBox.Show("Om någon checkbox för tillval är i klickad måste du också ha fyllt i tillhörande uppgifter");
+                }
+            }
+            List<OptionalType> y = new List<OptionalType>() { a, b, c };
+            return y;
+        }
+        #endregion
+
         #region updatelists
         //Update all baseamounts for a specific sainsurance and for the delivery year.  
         public ICollection<BaseAmount> UpdateBaseAmount()
@@ -77,7 +117,7 @@ namespace GUILayer.ViewModels.SearchViewModels
 
             foreach (var e in Context.BDController.GetAllBaseAmount())
             {
-                if (DeliveryDate.Year.Equals(e.Date.Year))
+                if (Date.Year.Equals(e.Date.Year))
                 {
                     x?.Add(e);
                 }
@@ -111,6 +151,22 @@ namespace GUILayer.ViewModels.SearchViewModels
 
             return SAInsuranceTypes;
         }
+
+        //Get all Insurances
+        public ObservableCollection<Insurance> UpdateInsurance()
+        {
+            ObservableCollection<Insurance> x = new ObservableCollection<Insurance>();
+                foreach (var e in Context.IController.GetAllInsurances())
+                {
+                    if (e.SAI != null)
+                        x?.Add(e);
+                }
+
+            Insurances = x;
+
+            return Insurances;
+        }
+
         //OptionalTypeList filled with only one choice. 
         public ObservableCollection<OptionalType> UpdateOptionalType()
         {
@@ -154,20 +210,20 @@ namespace GUILayer.ViewModels.SearchViewModels
             return OptionalTypes2;
         }
 
-        //public ObservableCollection<InsuredPerson> UpdateInsuredPersons()
-        //{
+        public ObservableCollection<InsuredPerson> UpdateInsuredPersons()
+        {
 
-        //    ObservableCollection<InsuredPerson> x = new ObservableCollection<InsuredPerson>();
-        //    if (SelectedInsurance != null)
-        //    {
-        //        foreach (var ip in Context.IPController.GetInsuranceTakerIPS(SelectedInsurance))
-        //        {
-        //            x?.Add(ip);
-        //        }
-        //    }
-        //    InsuredPersons = x;
-        //    return InsuredPersons;
-        //}
+            ObservableCollection<InsuredPerson> x = new ObservableCollection<InsuredPerson>();
+            if (SelectedInsurance != null)
+            {
+                foreach (var p in Context.IPController.GetAllInsuredPersons())
+                {
+                    x?.Add(p);
+                }
+            }
+            InsuredPersons = x;
+            return InsuredPersons;
+        }
 
         public ObservableCollection<Person> UpdatePersons()
         {
@@ -187,7 +243,7 @@ namespace GUILayer.ViewModels.SearchViewModels
 
             foreach (var e in Context.BDController.GetAllTables())
             {
-                if (DeliveryDate.Year.Equals(e.Date.Year))
+                if (Date.Year.Equals(e.Date.Year))
                 {
                     x?.Add(e);
                 }
@@ -211,6 +267,7 @@ namespace GUILayer.ViewModels.SearchViewModels
         public ObservableCollection<OptionalType> OptionalTypes1 { get; set; }
         // Third list
         public ObservableCollection<OptionalType> OptionalTypes2 { get; set; }
+        public ObservableCollection<Insurance> Insurances { get; set; }
         public List<string> PersonTypes { get; set; }
         public ICollection<BaseAmount> BaseAmounts1 { get; set; }
         public ObservableCollection<SAInsurance> SAInsuranceTypes { get; set; }
@@ -240,27 +297,44 @@ namespace GUILayer.ViewModels.SearchViewModels
             {
                 _Stype = value;
                 OnPropertyChanged("SAIType");
-                    if (_Stype != null)
+                if (_Stype != null)
+                {
+                    List<BaseAmountTabel> Bases = new List<BaseAmountTabel>();
+                    foreach (var e in this.BaseAmountTabell = _Stype.Tabels)
                     {
-                        List<BaseAmountTabel> Bases = new List<BaseAmountTabel>();
-                        foreach (var e in this.BaseAmountTabell = _Stype.Tabels)
-                        {
-                            if (!DeliveryDate.Year.Equals(e.Date.Year))
-                                Bases.Add(e);
-                        }
-                        foreach (var f in Bases)
-                        {
-                            BaseAmountTabell.Remove(f);
-                        }
-                        OnPropertyChanged("BaseAmountTabell");
+                        if (!Date.Year.Equals(e.Date.Year))
+                            Bases.Add(e);
                     }
+                    foreach (var f in Bases)
+                    {
+                        BaseAmountTabell.Remove(f);
+                    }
+                    OnPropertyChanged("BaseAmountTabell");
+                }
             }
         }
-
+        #region Optionaltype 
         private OptionalType _opType;
         public OptionalType OptionalType
         {
-            get => _opType;
+            get
+            {
+                if (SelectedInsurance != null)
+                {
+                    if (SelectedInsurance.OptionalTypes.Contains(Op()))
+                    {
+                        return _opType;
+                    }
+                    else
+                    {
+                        return _opType = null;
+                    }
+                }
+                else
+                {
+                    return _opType = null;
+                }
+            }
             set
             {
                 _opType = value;
@@ -271,7 +345,24 @@ namespace GUILayer.ViewModels.SearchViewModels
         private OptionalType _opType1;
         public OptionalType OptionalType1
         {
-            get => _opType1;
+            get
+            {
+                if (SelectedInsurance != null)
+                {
+                    if (SelectedInsurance.OptionalTypes.Contains(Op1()))
+                    {
+                        return _opType1;
+                    }
+                    else
+                    {
+                        return _opType1 = null;
+                    }
+                }
+                else
+                {
+                    return _opType1 = null;
+                }
+            }
             set
             {
                 _opType1 = value;
@@ -283,170 +374,192 @@ namespace GUILayer.ViewModels.SearchViewModels
         private OptionalType _opType2;
         public OptionalType OptionalType2
         {
-            get => _opType2;
+            get
+            {
+                if (SelectedInsurance != null)
+                {
+                    if (SelectedInsurance.OptionalTypes.Contains(Op2()))
+                    {
+                        return _opType2;
+                    }
+                    else
+                    {
+                        return _opType2 = null;
+                    }
+                }
+                else
+                {
+                    return _opType2 = null;
+                }
+            }
             set
             {
                 _opType2 = value;
                 OnPropertyChanged("OptionalType2");
             }
         }
-        private SalesMen _an;
+        public OptionalType Op()
+        {
+            return Context.IController.GetOPT(3);
+        }
+        public OptionalType Op1()
+        {
+            return Context.IController.GetOPT(1);
+        }
+        public OptionalType Op2()
+        {
+            return Context.IController.GetOPT(2);
+        }
+        #endregion
+        
         public SalesMen AgentNo
         {
-            get => _an;
+            get => SelectedInsurance.AgentNo;
             set
             {
-                _an = value;
+                SelectedInsurance.AgentNo = value;
                 OnPropertyChanged("AgentNo");
             }
         }
-        private string _serialNumber;
         public string SerialNumber
         {
-            get => _serialNumber;
+            get => SelectedInsurance.SerialNumber;
             set
             {
-                _serialNumber = value;
+                SelectedInsurance.SerialNumber = value;
                 OnPropertyChanged("SerialNumber");
             }
         }
-        private InsuredPerson _iP;
         public InsuredPerson InsuredPerson
         {
-            get => _iP;
+            get => SelectedInsurance.InsuredID;
             set
             {
-                _iP = value;
+                SelectedInsurance.InsuredID = value;
                 OnPropertyChanged("InsuredPerson");
             }
         }
-        private Person _person;
         public Person Personen
         {
-            get => _person;
+            get => SelectedInsurance.PersonTaker;
             set
             {
-                _person = value;
+                SelectedInsurance.PersonTaker = value;
                 OnPropertyChanged("Personen");
             }
         }
 
-        private Status _status;
         public Status InsuranceStatus
         {
-            get => _status;
+            get => SelectedInsurance.InsuranceStatus;
             set
             {
-                _status = value;
+                SelectedInsurance.InsuranceStatus = value;
                 OnPropertyChanged("InsuranceStatus");
             }
         }
 
-        private string _payMent;
         public string PaymentForm
         {
-            get => _payMent;
+            get => SelectedInsurance.PaymentForm;
             set
             {
-                _payMent = value;
+                SelectedInsurance.PaymentForm = value;
                 OnPropertyChanged("PaymentForm");
             }
         }
-        private int _barll;
-        public string BARLL
+        public int BARLL
         {
-            get => _barll > 0 ? _barll.ToString() : "";
+            get => SelectedInsurance.BaseAmountValue;
             set
             {
-                if (int.TryParse(value, out _barll))
-                {
-                    OnPropertyChanged("BARLL");
-                }
-                else
-                {
-                    MessageBox.Show("Måste vara en siffra ");
-                }
+                SelectedInsurance.BaseAmountValue = value;
+                OnPropertyChanged("BARLL");
             }
         }
-        private int _bAmount;
         public int BAmount
         {
-            get => _bAmount;
+            get => SelectedInsurance.BaseAmountValue2;
             set
             {
-                _bAmount = value;
+                SelectedInsurance.BaseAmountValue2 = value;
                 OnPropertyChanged("BAmount");
             }
         }
-        private int _bAmount1;
         public int BAmount1
         {
-            get => _bAmount1;
+            get => SelectedInsurance.BaseAmountValue3;
             set
             {
-                _bAmount1 = value;
+                SelectedInsurance.BaseAmountValue3 = value;
                 OnPropertyChanged("BAmount1");
             }
         }
-        private int _bAV4;
-        public int BaseAmountValue4
+        public int BaseAmount
         {
-            get => _bAV4;
+            get => SelectedInsurance.BaseAmountValue4;
             set
             {
-                _bAV4 = value;
-                OnPropertyChanged("BaseAmountValue4");
+                SelectedInsurance.BaseAmountValue4 = value;
+                OnPropertyChanged("BaseAmount");
             }
         }
-        private double _av;
         public double AckValue
         {
-            get => _av;
+            get => SelectedInsurance.AckValue;
             set
             {
-                _av = value;
+                SelectedInsurance.AckValue = value;
                 OnPropertyChanged("AckValue");
             }
         }
-        private double _av2;
         public double AckValue2
         {
-            get => _av2;
+            get => SelectedInsurance.AckValue2;
             set
             {
-                _av2 = value;
+                SelectedInsurance.AckValue2 = value;
                 OnPropertyChanged("AckValue2");
             }
         }
-
-        private double _av3;
         public double AckValue3
         {
-            get => _av3;
+            get => SelectedInsurance.AckValue3;
             set
             {
-                _av3 = value;
+                SelectedInsurance.AckValue3 = value;
                 OnPropertyChanged("AckValue3");
             }
         }
-        private double _av4;
         public double AckValue4
         {
-            get => _av4;
+            get => SelectedInsurance.AckValue4;
             set
             {
-                _av4 = value;
+                SelectedInsurance.AckValue4 = value;
                 OnPropertyChanged("AckValue4");
             }
         }
 
-        private DateTime _dd;
-        public DateTime DeliveryDate
+        public DateTime Date
         {
-            get => _dd != null ? _dd : DateTime.Now;
+            get
+            {
+                if (SelectedInsurance != null)
+                {
+                    return SelectedInsurance.DeliveryDate;
+                }
+                else
+                {
+                    return Date = DateTime.Now;
+                }
+            }
             set
             {
-                _dd = value;
+                if (SelectedInsurance != null)
+                {
+                    SelectedInsurance.DeliveryDate = value;
+                }
                 OnPropertyChanged("DeliveryDate");
             }
         }
@@ -468,7 +581,15 @@ namespace GUILayer.ViewModels.SearchViewModels
         private bool _aCheck;
         public bool ACheck
         {
-            get => _aCheck;
+            get
+            {
+                if (OptionalType != null)
+                    return _aCheck = true;
+                else
+                {
+                    return _aCheck = false;
+                }
+            }
             set
             {
                 _aCheck = value;
@@ -478,7 +599,15 @@ namespace GUILayer.ViewModels.SearchViewModels
         private bool _bCheck;
         public bool BCheck
         {
-            get => _bCheck;
+            get
+            {
+                if (OptionalType1 != null)
+                    return _bCheck = true;
+                else
+                {
+                    return _bCheck = false;
+                }
+            }
             set
             {
                 _bCheck = value;
@@ -488,7 +617,15 @@ namespace GUILayer.ViewModels.SearchViewModels
         private bool _cCheck;
         public bool CCheck
         {
-            get => _cCheck;
+            get
+            {
+                if (OptionalType2 != null)
+                    return _cCheck = true;
+                else
+                {
+                    return _cCheck = false;
+                }
+            }
             set
             {
                 _cCheck = value;

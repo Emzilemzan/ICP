@@ -143,16 +143,6 @@
                 <Label Grid.Row="6" Grid.Column="1" Content="Grundbelopp för vald SOtyp:" FontSize="15"/>
                 <ComboBox Grid.Row="6" Height="20" Grid.Column="1" Margin="10.333,25.333,9.667,9.333"/>
 
-                <TextBlock Text="Om tecknad: " FontSize="18" Grid.Row="1" Grid.Column="2" Margin="10"/>
-                <Label Grid.Row="2" Grid.Column="2" Content="Försäkringsnummer:" FontSize="15"/>
-                <TextBox Grid.Row="2" Height="20" Grid.Column="2" Margin="10.333,25,31.667,5"/>
-                <Label Grid.Row="3" Grid.Column="2" Content="Grundbelopp:" FontSize="15"/>
-                <TextBox Grid.Row="3" Height="20" Grid.Column="2" Margin="10.333,25,31.667,9.667"/>
-                <Label Grid.Row="4" Grid.Column="2" Content="År:" FontSize="15"/>
-                <ComboBox Grid.Row="4" Height="20" Grid.Column="2" Margin="10.333,25.333,31.667,9.333"/>
-                <Label Grid.Row="5" Grid.Column="2" Content="Månad:" FontSize="15"/>
-                <ComboBox Grid.Row="5" Height="20" Grid.Column="2" Margin="10.333,24.667,31.667,10"/>
-
                 <Button Grid.Row="6" Grid.Column="2" Height="50"  Content="Exportera" FontSize="15" Margin="0.333,2,146.667,2.667" />
                 <Button Grid.Row="6" Grid.Column="2" Height="50"  Content="Uppdatera" FontSize="15" Margin="138.667,2,9.667,2.667" RenderTransformOrigin="0.5,0.5" />
                 <Button Grid.Row="7" Grid.Column="2" Height="50"  Content="Ta bort" FontSize="15" Margin="62.333,2.333,83.667,2.333"  >

@@ -59,7 +59,7 @@ namespace GUILayer.ViewModels.CommissionViewModels
             //ASumAck = CountASumAck();
         }
 
-        private double CountCSumAck()
+        private double CountCSumAck()  
         {
             double sum = 0;
             if (SelectedSalesMen.Insurances != null)
