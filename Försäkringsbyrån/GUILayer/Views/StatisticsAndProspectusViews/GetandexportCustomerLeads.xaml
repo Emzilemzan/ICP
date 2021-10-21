@@ -22,7 +22,7 @@
                   IsSynchronizedWithCurrentItem="True"
                   ScrollViewer.CanContentScroll="True" 
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
-                  ScrollViewer.HorizontalScrollBarVisibility="Auto" Margin="0,0,10,10">
+                  ScrollViewer.HorizontalScrollBarVisibility="Auto" Margin="0,0,10,10" SelectionChanged="DataGrid_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Personnummer" Binding="{Binding Path= SocialSecurityNumber}"/>
                 <DataGridTextColumn Header="Förnamn" Binding="{Binding Path= Firstname}" />

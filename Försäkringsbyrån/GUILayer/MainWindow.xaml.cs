@@ -37,5 +37,10 @@ namespace GUILayer
             base.OnMouseLeftButtonDown(e);
             this.DragMove();
         }
+
+        private void Button_Click()
+        {
+
+        }
     }
 }
