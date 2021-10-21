@@ -196,14 +196,17 @@
     <Compile Include="Views\SearchViews\ApplicationOverviewViews.xaml.cs">
       <DependentUpon>ApplicationOverviewViews.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\SearchViews\LifeOverviewView.xaml.cs">
+      <DependentUpon>LifeOverviewView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchViews\SAOverviewView.xaml.cs">
+      <DependentUpon>SAOverviewView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SearchViews\SearchApplicationChoiceView.xaml.cs">
       <DependentUpon>SearchApplicationChoiceView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SearchViews\SearchEmployeeView.xaml.cs">
       <DependentUpon>SearchEmployeeView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\SearchViews\SearchInsurance.xaml.cs">
-      <DependentUpon>SearchInsurance.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SearchViews\SearchInsuranceTakerCompanyView.xaml.cs">
       <DependentUpon>SearchInsuranceTakerCompanyView.xaml</DependentUpon>
@@ -338,15 +341,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\SearchViews\LifeOverviewView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SearchViews\SAOverviewView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\SearchViews\SearchApplicationChoiceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SearchViews\SearchEmployeeView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\SearchViews\SearchInsurance.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
