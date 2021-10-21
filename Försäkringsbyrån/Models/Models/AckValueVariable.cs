@@ -16,8 +16,8 @@ namespace Models.Models
         public int AckValueID { get; set; }
         public  DateTime Date {get; set;} 
         public double AckValue { get; set; }
-        public LifeInsurance LIFEID {get; set;}
-        public OptionalType OptionalTypeId {get; set;}
+        public LifeInsurance LIFEID {get; set;} 
+        public OptionalType OptionalTypeId {get; set;} 
      
 
     }

@@ -107,7 +107,6 @@ namespace BussinessLayer
 
         #endregion
 
-
         #region Controls for VacationPay
 
         public VacationPay GetVacationPay(int id) => BusinessController.Instance.Context.VPays.Find(x => x.SEId == id).FirstOrDefault();
