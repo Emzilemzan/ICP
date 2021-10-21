@@ -95,8 +95,8 @@
     <Compile Include="ViewModels\BasicDataViewModels\BasicDataViewModel.cs" />
     <Compile Include="ViewModels\BasicDataViewModels\PermissionValueTableViewModel.cs" />
     <Compile Include="ViewModels\BasicDataViewModels\VacationPayViewModel.cs" />
+    <Compile Include="ViewModels\CommissionViewModels\CommissionOverviewViewModel.cs" />
     <Compile Include="ViewModels\CommissionViewModels\CommissionViewModel.cs" />
-    <Compile Include="ViewModels\CommissionViewModels\GetCommissionViewModel.cs" />
     <Compile Include="ViewModels\EmployeeManagementViewModels\AddEmployeeViewModel.cs" />
     <Compile Include="ViewModels\EmployeeManagementViewModels\AddUserAccessViewModel.cs" />
     <Compile Include="ViewModels\EmployeeManagementViewModels\EmployeeManagementViewModel.cs" />
@@ -113,6 +113,9 @@
     <Compile Include="ViewModels\InsuranceViewModels\SignedInsuranceViewModel.cs" />
     <Compile Include="ViewModels\LogInViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\SearchViewModels\LifeOverviewViewModel.cs" />
+    <Compile Include="ViewModels\SearchViewModels\SAOverviewViewModel.cs" />
+    <Compile Include="ViewModels\SearchViewModels\SearchApplicationChoiceViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModels\SearchApplicationViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModels\ApplicationOverviewViewmodels.cs" />
     <Compile Include="ViewModels\SearchViewModels\SearchEmployeeViewModel.cs" />
@@ -141,11 +144,11 @@
     <Compile Include="Views\BasicDataViews\VacationPayView.xaml.cs">
       <DependentUpon>VacationPayView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\CommissionViews\CommissionOverviewView.xaml.cs">
+      <DependentUpon>CommissionOverviewView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CommissionViews\CommissionView.xaml.cs">
       <DependentUpon>CommissionView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\CommissionViews\GetCommissionView.xaml.cs">
-      <DependentUpon>GetCommissionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EmployeeManagementViews\AddEmployeeView.xaml.cs">
       <DependentUpon>AddEmployeeView.xaml</DependentUpon>
@@ -195,11 +198,17 @@
     <Compile Include="Views\SearchViews\ApplicationOverviewViews.xaml.cs">
       <DependentUpon>ApplicationOverviewViews.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\SearchViews\LifeOverviewView.xaml.cs">
+      <DependentUpon>LifeOverviewView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchViews\SAOverviewView.xaml.cs">
+      <DependentUpon>SAOverviewView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchViews\SearchApplicationChoiceView.xaml.cs">
+      <DependentUpon>SearchApplicationChoiceView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SearchViews\SearchEmployeeView.xaml.cs">
       <DependentUpon>SearchEmployeeView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\SearchViews\SearchInsurance.xaml.cs">
-      <DependentUpon>SearchInsurance.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SearchViews\SearchInsuranceTakerCompanyView.xaml.cs">
       <DependentUpon>SearchInsuranceTakerCompanyView.xaml</DependentUpon>
@@ -262,11 +271,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\CommissionViews\CommissionView.xaml">
+    <Page Include="Views\CommissionViews\CommissionOverviewView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\CommissionViews\GetCommissionView.xaml">
+    <Page Include="Views\CommissionViews\CommissionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -334,11 +343,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SearchViews\SearchEmployeeView.xaml">
+    <Page Include="Views\SearchViews\LifeOverviewView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SearchViews\SearchInsurance.xaml">
+    <Page Include="Views\SearchViews\SAOverviewView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SearchViews\SearchApplicationChoiceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SearchViews\SearchEmployeeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

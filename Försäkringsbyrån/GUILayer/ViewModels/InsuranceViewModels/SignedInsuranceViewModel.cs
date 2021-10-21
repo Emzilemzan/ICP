@@ -19,29 +19,28 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         public static readonly SignedInsuranceViewModel Instance = new SignedInsuranceViewModel();
         public SignedInsuranceViewModel()
         {
-            Applications = UpdateAC();
-            InsuranceGrid = CollectionViewSource.GetDefaultView(Applications);
-            InsuranceGrid.Filter = new Predicate<object>(o => Filter(o as Insurance));
+            Applications = Update();
+            UpdateAC();
             Years = GetYears();
-            Months = new List<int>() {1,2,3,4,5,6,7,8,9,10,11,12};
+            Months = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
         }
 
         private ICommand _signInsurance;
         public ICommand SignInsurance
         {
-            get=> _signInsurance ?? (_signInsurance = new RelayCommand(x => { SignInsuranceMethod(); }));
+            get => _signInsurance ?? (_signInsurance = new RelayCommand(x => { SignInsuranceMethod(); }));
         }
 
         private void SignInsuranceMethod()
         {
             if (SelectedInsurance != null)
             {
-                if(SelectedInsurance.InsuranceNumber != null && SelectedInsurance.SerialNumber != null)
+                if (SelectedInsurance.InsuranceNumber != null && SelectedInsurance.SerialNumber != null)
                 {
                     string SN = SerialNumber;
                     string str = Regex.Replace(SN, @"\d", "");
 
-                    if (str == "LIV" || str == "SO")
+                    if (str == "LIV" || str == "SOV" || str == "SOB")
                     {
                         if (SelectedInsurance.PossibleBaseAmount != null && SelectedInsurance.PossibleComisson == null)
                         {
@@ -98,7 +97,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                 SelectedInsurance = null;
             }
         }
-                                    
+
         #region Insurance properties
         public int? PayMonth
         {
@@ -156,7 +155,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                 OnPropertyChanged("InsuranceNumber");
             }
         }
-        public int? PossibleBaseAmount 
+        public int? PossibleBaseAmount
         {
             get => SelectedInsurance.PossibleBaseAmount;
             set
@@ -177,36 +176,43 @@ namespace GUILayer.ViewModels.InsuranceViewModels
 
         #endregion
         #region Collection
-        public ObservableCollection<Insurance> UpdateAC()
+
+        public void MakeSearchWordEmpty()
         {
-            ObservableCollection<Insurance> x = new ObservableCollection<Insurance>();
+            SearchInput = string.Empty;
+        }
+
+        //searchmethod. 
+        public void UpdateAC(string filter ="")
+        {
+            Applications = new ObservableCollection<Insurance>();
+            List<Insurance> x = new List<Insurance>();
             foreach (var e in Context.IController.GetAllInsurances())
             {
-                if(e.InsuranceStatus == Status.Otecknad)
-                x?.Add(e);
+                if (e.InsuranceStatus == Status.Otecknad)
+                    x?.Add(e);
             }
-            Applications = x;
+            if (filter != "")
+            {
+                List<Insurance> y = x;
+                 x = new List<Insurance>();
+                foreach (Insurance i in y)
+                    if (i.SerialNumber.Contains(filter) || i.TypeName.Contains(filter) || i.TakerNbr.Contains(filter))
+                        x.Add(i);
+            }
+            x?.ForEach(i => Applications.Add(i));
+        }
+        public ObservableCollection<Insurance> Update()
+        {
+            ObservableCollection < Insurance > x = new ObservableCollection<Insurance>();
+            foreach (var e in Context.IController.GetAllInsurances())
+            {
+                if (e.InsuranceStatus == Status.Otecknad)
+                    x?.Add(e);
+            }
             return Applications;
         }
 
-        private ICollectionView _applicationCollection;
-        public ICollectionView InsuranceGrid
-        {
-            get => _applicationCollection;
-            set 
-            { 
-                _applicationCollection = value; 
-                OnPropertyChanged("InsuranceGrid"); 
-            }
-        }
-
-        private bool Filter(Insurance application)
-        {
-            return SearchInput == null
-                || application.SerialNumber.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
-                || application.TypeName.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
-                || application.TakerNbr.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1;
-        }
         private string _searchInput;
         public string SearchInput
         {
@@ -214,14 +220,23 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             set
             {
                 _searchInput = value;
+                UpdateAC(SearchInput);
                 OnPropertyChanged("SearchInput");
-                InsuranceGrid.Refresh();
+                
+            }
+        }
+        private ObservableCollection<Insurance> _applications;
+        public ObservableCollection<Insurance> Applications 
+        {
+            get => _applications;
+            set
+            {
+                _applications = value;
+                OnPropertyChanged("Applications");
             }
         }
 
-        public ObservableCollection<Insurance> Applications { get; set; }
-
         #endregion
-        
+
     }
 }

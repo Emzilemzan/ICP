@@ -12,7 +12,7 @@ using System.Windows.Input;
 
 namespace GUILayer.ViewModels.BasicDataViewModels
 {
-    public class AckValueVariableTableViewModel: BaseViewModel
+    public class AckValueVariableTableViewModel : BaseViewModel
 
     {
         public static readonly AckValueVariableTableViewModel Instance = new AckValueVariableTableViewModel();
@@ -20,16 +20,12 @@ namespace GUILayer.ViewModels.BasicDataViewModels
         private AckValueVariableTableViewModel()
         {
             AckValues = UpdateAV();
+            OptionalTypes = UpdateOptionalType();
             Date = DateTime.Today;
-            OptionalTypes = UpdateOption();
             LifeInsuranceTypes = UpdateLife();
-           // OptionalType = OptionalTypes[0];
-           // LifInsurance = LifeInsuranceTypes[0];
-
-            //CreateComboBoxInsuranceList(); 
         }
 
-       private ObservableCollection<AckValueVariable> UpdateAV()
+        private ObservableCollection<AckValueVariable> UpdateAV()
         {
             ObservableCollection<AckValueVariable> av = new ObservableCollection<AckValueVariable>();
             foreach (var o in Context.BDController.GetAllAckValues())
@@ -44,7 +40,6 @@ namespace GUILayer.ViewModels.BasicDataViewModels
         public ObservableCollection<LifeInsurance> UpdateLife()
         {
             ObservableCollection<LifeInsurance> x = new ObservableCollection<LifeInsurance>();
-            x.Add(new LifeInsurance() { LifeID = 0, LifeName = "inget" });
             foreach (var e in Context.IController.GetAllLIFE())
             {
                 x?.Add(e);
@@ -54,19 +49,14 @@ namespace GUILayer.ViewModels.BasicDataViewModels
 
             return LifeInsuranceTypes;
         }
-
-
-        public ObservableCollection<OptionalType> UpdateOption()
+        public ObservableCollection<OptionalType> UpdateOptionalType()
         {
             ObservableCollection<OptionalType> x = new ObservableCollection<OptionalType>();
-            x.Add(new OptionalType() { OptionalTypeId = 0, OptionalName = "inget" });
             foreach (var e in Context.IController.GetAllOPT())
             {
-                x?.Add(e);
+                    x?.Add(e);
             }
-
             OptionalTypes = x;
-
             return OptionalTypes;
         }
 
@@ -78,7 +68,15 @@ namespace GUILayer.ViewModels.BasicDataViewModels
         }
         public bool CanCreate() => true;
 
-         private void AddAckValueVariableTable()
+        public void EmptyAllChoices()
+        {
+            Check = true;
+            Date = DateTime.Now;
+            Instance.AckValue = string.Empty;
+            LifInsurance = null;
+            OptionalType = null;
+        }
+        private void AddAckValueVariableTable()
         {
 
             if (Instance._LifInsurance != null && Instance._optionalType != null)
@@ -91,7 +89,7 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             {
                 if (Instance._date != null && Instance._ackValue != 0 && (Instance._LifInsurance != null || Instance._optionalType != null))
                 {
-                    AckValueVariable ackValueVariable  = new AckValueVariable()
+                    AckValueVariable ackValueVariable = new AckValueVariable()
 
                     {
                         AckValue = Instance._ackValue,
@@ -102,57 +100,29 @@ namespace GUILayer.ViewModels.BasicDataViewModels
                     };
                     Context.BDController.CheckNbrOfAV(Instance.LifInsurance, Instance.OptionalType, Instance._date, ackValueVariable);
 
-                    MessageBox.Show("Grunddatan är uppdaterad"); 
+                    MessageBox.Show("Grunddatan är uppdaterad");
                     AckValues.Clear();
-                    foreach (var o in Context.BDController.GetAllAckValues())  
+                    foreach (var o in Context.BDController.GetAllAckValues())
                     {
                         AckValues?.Add(o);
                     }
-                    Check = true;
-                    Date = DateTime.Now;
-                    Instance.AckValue = string.Empty;
-                    Instance.LifInsurance = null;
-                    Instance.OptionalTypes = null; 
+                    EmptyAllChoices();
                 }
                 else
                 {
-                    MessageBox.Show("Inget fält få lämnas tomt!"); 
+                    MessageBox.Show("Inget fält få lämnas tomt!");
                 }
             }
-
-            //if (Instance._date != null && Instance._ackValue != 0 && (Instance._LifInsurance != null || Instance._optionalType != null))
-            //{
-            //    AckValueVariable ackValueVariable = new AckValueVariable()
-            //    {
-            //        Date = Instance._date,
-            //        AckValue = Instance._ackValue,
-            //        LIFEID = Instance._LifInsurance,
-            //        OptionalTypeId = Instance._optionalType
-
-            //    };
-            //    Context.BDController.AddAckValue(ackValueVariable);
-            //    MessageBox.Show("Grunddatan är uppdaterad");
-            //    AckValues.Clear();
-            //    foreach (var o in Context.BDController.GetAllAckValues())
-            //    {
-            //        AckValues?.Add(o);
-            //    }
-            //    Date = DateTime.Now;
-            //}
-            //else 
-            //{
-            //    MessageBox.Show("Inget fält få lämnas tomt!"); 
-            //}
-        } 
+        }
 
         private ICommand remove_Btn;
         public ICommand RemoveAckValue_Btn
         {
-            get => remove_Btn ?? (remove_Btn = new RelayCommand(x => { RemoveAckValue(); CanCreate(); }));
+            get => remove_Btn ?? (remove_Btn = new RelayCommand(x => { RemoveAckValue();}));
         }
         private void RemoveAckValue()
         {
-            if (Instance.AckValueId !=null)
+            if (Instance.AckValueId != null)
             {
                 AckValueVariable av = Context.BDController.GetAckValue(_ackValueId);
                 MessageBoxResult result = MessageBox.Show("Vill du ta bort grunddatan?", "Varning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
@@ -161,14 +131,14 @@ namespace GUILayer.ViewModels.BasicDataViewModels
                 {
                     Context.BDController.CheckExistingAckValue(Instance._ackValueId, av);
                     AckValues.Clear();
-                    foreach (var t in Context.BDController.GetAllAckValues()) 
+                    foreach (var t in Context.BDController.GetAllAckValues())
                     {
                         AckValues?.Add(t);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Grunddatan togs inte bort."); 
+                    MessageBox.Show("Grunddatan togs inte bort.");
                 }
             }
             else
@@ -209,7 +179,7 @@ namespace GUILayer.ViewModels.BasicDataViewModels
                 OnPropertyChanged("OptionalType");
             }
         }
-      
+
 
         private DateTime _date;
         public DateTime Date
@@ -228,8 +198,14 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             get => _ackValue > 0 ? _ackValue.ToString() : "";
             set
             {
+                _ackValue = 0;
                 if (double.TryParse(value, out _ackValue))
-                { OnPropertyChanged("AckValue"); }
+                {  }
+                else if (Check == false)
+                {
+                    MessageBox.Show("Måste vara en siffra");
+                }
+                OnPropertyChanged("AckValue");
             }
         }
 
@@ -240,10 +216,15 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             get => _ackValueId > 0 ? _ackValueId.ToString() : "";
             set
             {
+                _ackValueId = 0;
                 if (int.TryParse(value, out _ackValueId))
                 {
-                    OnPropertyChanged("AckValueId");
                 }
+                else if (Check == false)
+                {
+                    MessageBox.Show("Måste vara en siffra");
+                }
+                OnPropertyChanged("AckValueId");
             }
         }
 
@@ -312,5 +293,5 @@ namespace GUILayer.ViewModels.BasicDataViewModels
 
         //   AllInsuranceTypesList = new ObservableCollection<ComboBoxInsurance>(tempList);
     }
-    }
+}
 

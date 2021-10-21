@@ -15,7 +15,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
     /// <summary>
     /// ViewModel for Life Application adding.
     /// </summary>
-    public class RegisterLifeApplicationViewModel: BaseViewModel
+    public class RegisterLifeApplicationViewModel : BaseViewModel
     {
         public static readonly RegisterLifeApplicationViewModel Instance = new RegisterLifeApplicationViewModel();
         public RegisterLifeApplicationViewModel()
@@ -26,56 +26,87 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             DeliveryDate = DateTime.Today;
             LifeInsuranceTypes = UpdateLife();
         }
+        #region methods
 
-        #region 
+        public void EmptyAllChoices()
+        {
+            Check = true;
+            Instance.BAmount = null;
+            Instance.AgentNo = null;
+            Instance.City = string.Empty;
+            Instance.StreetAddress = string.Empty;
+            Instance.TelephoneNbrWork = string.Empty;
+            Instance.TelephoneNbrHome = string.Empty;
+            Instance.DiallingCodeHome = string.Empty;
+            Instance.DiallingCodeWork = string.Empty;
+            Instance.EmailOne = string.Empty;
+            Instance.EmailTwo = string.Empty;
+            Instance.SocialSecurityNumber = string.Empty;
+            Instance.SocialSecurityNumberIP = string.Empty;
+            Instance.LType = null;
+            Instance.DeliveryDate = Today;
+            Instance.LastName = string.Empty;
+            Instance.Lastname = string.Empty;
+            Instance.FirstName = string.Empty;
+            Instance.Firstname = string.Empty;
+            Instance.PaymentForm = null;
+            Instance.PostalCode = string.Empty;
+        }
 
         private void AddInsurance()
         {
-                Person x = Instance.Personen = AddInsuranceTaker();
-                InsuredPerson insured = Instance.InsuredPerson = AddInsured(x);
+            Person x = Instance.Personen = AddInsuranceTaker();
+            InsuredPerson insured;
+            if (IPISPerson == false)
+            {
+                insured = Instance.InsuredPerson = AddInsuredIT(x);
+            }
+            else
+            {
+                insured = Instance.InsuredPerson = AddInsured(x);
+            }
 
-                Insurance i = new Insurance()
-                {
-                    SerialNumber = Instance.SerialNumber = GenerateIdFormation(),
-                    PersonTaker = x,
-                    TakerNbr = x.SocialSecurityNumber,
-                    TypeName = Instance.LType.LifeName,
-                    PaymentForm = Instance.PaymentForm,
-                    InsuranceStatus = Status.Otecknad,
-                    DeliveryDate = Instance.DeliveryDate,
-                    AgentNo = Instance.AgentNo,
-                    InsuredID = insured,
-                    LIFE = Instance.LType,
-                    BaseAmountValue = Instance.BAmount.Baseamount,
-                    AckValue4 = Instance.AckValue4 = Context.BDController.CountAckvalueLife(Instance.DeliveryDate, Instance.LType, Instance.BAmount.Baseamount),
-                };
+            Insurance i = new Insurance()
+            {
+                SerialNumber = Instance.SerialNumber = GenerateIdFormation(),
+                PersonTaker = x,
+                TakerNbr = x.SocialSecurityNumber,
+                TypeName = Instance.LType.LifeName,
+                PaymentForm = Instance.PaymentForm,
+                InsuranceStatus = Status.Otecknad,
+                DeliveryDate = Instance.DeliveryDate,
+                AgentNo = Instance.AgentNo,
+                InsuredID = insured,
+                LIFE = Instance.LType,
+                BaseAmountValue = Instance.BAmount.Baseamount,
+                AckValue4 = Instance.AckValue4 = Context.BDController.CountAckvalueLife(Instance.DeliveryDate, Instance.LType, Instance.BAmount.Baseamount),
+            };
 
-                Context.IController.AddInsuranceApplication(i);
-                MessageBox.Show("Ansökan har lagts till");
-                SignedInsuranceViewModel.Instance.UpdateAC();
-                Check = true;
-                Instance.BAmount = null;
-                Instance.AgentNo = null;
-                Instance.City = string.Empty;
-                Instance.StreetAddress = string.Empty;
-                Instance.TelephoneNbrWork = string.Empty;
-                Instance.TelephoneNbrHome = string.Empty;
-                Instance.DiallingCodeHome = string.Empty;
-                Instance.DiallingCodeWork = string.Empty;
-                Instance.EmailOne = string.Empty;
-                Instance.EmailTwo = string.Empty;
-                Instance.SocialSecurityNumber = string.Empty;
-                Instance.SocialSecurityNumberIP = string.Empty;
-                Instance.LType = null;
-                Instance.DeliveryDate = Today;
-                Instance.LastName = string.Empty;
-                Instance.Lastname = string.Empty;
-                Instance.FirstName = string.Empty;
-                Instance.Firstname = string.Empty;
-                Instance.PaymentForm = null;
-                Instance.PostalCode = string.Empty;
-            
+            Context.IController.AddInsuranceApplication(i);
+            MessageBox.Show("Ansökan har lagts till");
+            SignedInsuranceViewModel.Instance.UpdateAC();
+            EmptyAllChoices();
+            Context.Save();
+            SignedInsuranceViewModel.Instance.UpdateAC();
         }
+
+        private InsuredPerson AddInsuredIT(Person p)
+        {
+            InsuredPerson newInp = new InsuredPerson()
+            {
+                FirstName = Instance.FirstName = p.Firstname,
+                LastName = Instance.LastName = p.Lastname,
+                SocialSecurityNumberIP = Instance.SocialSecurityNumberIP = p.SocialSecurityNumber,
+                PersonType = PersonTypes[0],
+                PersonTaker = p,
+            };
+
+            Context.IPController.AddInsuredPerson(newInp);
+            InsuredPerson = newInp;
+            return InsuredPerson;
+        }
+
+        readonly List<string> PersonTypes = new List<string>() { "Vuxen" };
 
         private void BoxesCheckInsurance()
         {
@@ -103,7 +134,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         private void RegisterApplication()
         {
             Person y = Context.ITController.GetPerson(Instance.SocialSecurityNumber);
-            if(y != null)
+            if (y != null)
             {
                 MessageBoxResult result = MessageBox.Show($"Det finns redan en försäkringstagare med det inskrivna personnumret vid namn: {y.Firstname} {y.Lastname} vill du uppdatera dessa uppgifter?", "Varning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 if (result == MessageBoxResult.Yes)
@@ -145,7 +176,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             {
                 FirstName = Instance.FirstName,
                 LastName = Instance.LastName,
-                SocialSecurityNumber = Instance.SocialSecurityNumberIP,
+                SocialSecurityNumberIP = Instance.SocialSecurityNumberIP= Instance.SocialSecurityNumberIP,
                 PersonType = "Vuxen",
                 PersonTaker = p,
             };
@@ -178,7 +209,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                     }
                 }
             }
-            if(insurances.Count < 1)
+            if (insurances.Count < 1)
             {
                 string str = "LIV";
                 string num = "1";
@@ -202,7 +233,6 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         }
 
         #endregion
-
 
 
         #region updating of lists
@@ -249,7 +279,6 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         }
         #endregion
         #region lists
-        public List<string> PersonTypes { get; set; }
         public ICollection<BaseAmount> BaseAmounts { get; set; }
         public ObservableCollection<LifeInsurance> LifeInsuranceTypes { get; set; }
         public List<string> PayMentForms { get; set; }
@@ -307,17 +336,16 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             get => _pC > 0 ? _pC.ToString() : "";
             set
             {
-                if(Check== false)
+                _pC = 0;
+                if (int.TryParse(value, out _pC) && PostalCode.Length > 0 && PostalCode.Length < 6)
                 {
-                    if (int.TryParse(value, out _pC) && PostalCode.Length == 5)
-                    {
-                        OnPropertyChanged("PostalCode");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Måste vara fem siffror");
-                    }
+                    
                 }
+                else if (Check == false)
+                {
+                    MessageBox.Show("Måste vara fem siffror");
+                }
+                OnPropertyChanged("PostalCode");
             }
         }
         private string _city;
@@ -399,14 +427,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             get => _sSNIP;
             set
             {
-                if (IPISPerson == false)
-                {
-                    _sSNIP = SocialSecurityNumber;
-                }
-                else
-                {
                     _sSNIP = value;
-                }
                 OnPropertyChanged("SocialSecurityNumberIP");
             }
         }
@@ -416,14 +437,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             get => _lName;
             set
             {
-                if (IPISPerson == false)
-                {
-                    _lName = Lastname;
-                }
-                else
-                {
                     _lName = value;
-                }
                 OnPropertyChanged("LastName");
             }
         }
@@ -434,14 +448,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             get => _fName;
             set
             {
-                if (IPISPerson == false)
-                {
-                    _fName = Firstname;
-                }
-                else
-                {
                     _fName = value;
-                }
                 OnPropertyChanged("FirstName");
             }
         }
@@ -468,7 +475,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             {
                 _Ltype = value;
                 OnPropertyChanged("LType");
-                if(Check == false)
+                if (Check == false)
                 {
                     List<BaseAmount> Bases = new List<BaseAmount>();
                     foreach (var e in this.BaseAmounts = _Ltype.Amounts)

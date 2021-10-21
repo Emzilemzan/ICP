@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Input; 
+using System.Windows.Input;
 
 namespace GUILayer.ViewModels.BasicDataViewModels
 {
@@ -43,7 +43,7 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             }
 
             LifeInsurances = x;
-            
+
             return LifeInsurances;
         }
 
@@ -58,33 +58,38 @@ namespace GUILayer.ViewModels.BasicDataViewModels
 
         private void AddBaseAmountOption()
         {
-
-                if (Instance._date != null && Instance._baseAmount != 0 && Instance._lifeInsurance != null)
+            if (Instance._date != null && Instance._baseAmount != 0 && Instance._lifeInsurance != null)
+            {
+                BaseAmount baseAmount = new BaseAmount()
                 {
-                    BaseAmount baseAmount = new BaseAmount()
-                    {
-                        Baseamount = Instance._baseAmount,
-                        Date = Instance._date,
-                        LIFEID = Instance.LifeInsurance,
+                    Baseamount = Instance._baseAmount,
+                    Date = Instance._date,
+                    LIFEID = Instance.LifeInsurance,
 
-                    };
-                    Context.BDController.CheckNbrOfBA(Instance.LifeInsurance, Instance._date, baseAmount);
+                };
+                Context.BDController.CheckNbrOfBA(Instance.LifeInsurance, Instance._date, baseAmount);
 
-                    BaseAmounts.Clear();
-                    foreach (var o in Context.BDController.GetAllBaseAmount())
-                    {
-                        BaseAmounts?.Add(o);
-                    }
-                    Check = true;
-                    Date = DateTime.Now;
-                    Instance.BaseAmount = string.Empty;
-                    Instance.LifeInsurance = null;
-                }
-                else
+                BaseAmounts.Clear();
+                foreach (var o in Context.BDController.GetAllBaseAmount())
                 {
-                    MessageBox.Show("Inget fält få lämnas tomt!");
+                    BaseAmounts?.Add(o);
                 }
-            
+                EmptyAllChoices();
+            }
+            else
+            {
+                MessageBox.Show("Inget fält få lämnas tomt!");
+            }
+
+        }
+
+        public void EmptyAllChoices()
+        {
+            Check = true;
+            Date = DateTime.Now;
+            Instance.BaseAmount = string.Empty;
+            LifeInsurance = null;
+            BaseAmountId = string.Empty;
         }
 
         private ICommand remove_Btn;
@@ -95,14 +100,13 @@ namespace GUILayer.ViewModels.BasicDataViewModels
 
         private void RemoveBaseAmountOption()
         {
-            if (Instance._baseAmountOptionId != 0)
+            if (Instance.BaseAmountId != null)
             {
-                BaseAmount ot = Context.BDController.GetBaseAmount(_baseAmountOptionId);
                 MessageBoxResult result = MessageBox.Show("Vill du ta bort grunddatan?", "Varning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
                 if (result == MessageBoxResult.Yes)
                 {
-                    Context.BDController.CheckExistingBaseAmountOption(Instance._baseAmountOptionId, ot);
+                    Context.BDController.CheckExistingBaseAmountOption(Instance._baseAmountOptionId);
                     BaseAmounts.Clear();
                     foreach (var t in Context.BDController.GetAllBaseAmount())
                     {
@@ -172,12 +176,14 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             get => _baseAmount > 0 ? _baseAmount.ToString() : "";
             set
             {
-                    if (int.TryParse(value, out _baseAmount))
-                        OnPropertyChanged("BaseAmount");
-                else if(Check == false)
-                    {
+                _baseAmount = 0;
+                if (int.TryParse(value, out _baseAmount))
+                { }
+                else if (Check == false)
+                {
                     MessageBox.Show("Grundbeloppet måste vara en siffra");
-                    }
+                }
+                OnPropertyChanged("BaseAmount");
             }
         }
 
@@ -188,13 +194,15 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             get => _baseAmountOptionId > 0 ? _baseAmountOptionId.ToString() : "";
             set
             {
-                if (Check == false)
+                _baseAmountOptionId = 0;
+                if (int.TryParse(value, out _baseAmountOptionId))
                 {
-                    if (int.TryParse(value, out _baseAmountOptionId))
-                    {
-                        OnPropertyChanged("BaseAmountId");
-                    }
                 }
+                else if (Check == false)
+                {
+                    MessageBox.Show("Måste vara en siffra");
+                }
+                OnPropertyChanged("BaseAmountId");
             }
         }
         #endregion

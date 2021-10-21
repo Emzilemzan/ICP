@@ -135,7 +135,7 @@
                               CanUserAddRows="False" Height="79" VerticalAlignment="Bottom" Grid.Row="1">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="FörsäkradId" Binding="{Binding Path= InsuredId}"/>
-                                <DataGridTextColumn Header="Personnummer" Binding="{Binding Path=SocialSecurityNumber}"/>
+                                <DataGridTextColumn Header="Personnummer" Binding="{Binding Path= SocialSecurityNumberIP}"/>
                                 <DataGridTextColumn Header="Förnamn" Binding="{Binding Path = FirstName}"/>
                                 <DataGridTextColumn Header="Efternamn" Binding="{Binding Path = LastName}"/>
                                 <DataGridTextColumn Header="Persontyp" Binding="{Binding Path=PersonType}"/>
@@ -144,7 +144,7 @@
                         <Label Grid.Column="0" Grid.Row="1" Content="*FörsäkradId:" FontSize="15" Margin="0,79,0,0" />
                         <TextBox  Grid.Column="0" IsReadOnly="True" Grid.Row="1" Text="{Binding SelectedIP.InsuredId}" Margin="144,84,159,28.667" Grid.RowSpan="2" />
                         <Label Grid.Column="0" Grid.Row="2" Content="*Personnummer:" FontSize="15" />
-                        <TextBox IsReadOnly="True" Grid.Column="0" Grid.Row="2" Text="{Binding SelectedIP.SocialSecurityNumber}" Margin="144,0,159,0" />
+                        <TextBox IsReadOnly="True" Grid.Column="0" Grid.Row="2" Text="{Binding SelectedIP.SocialSecurityNumberIP}" Margin="144,0,159,0" />
                         <Label Grid.Column="0" Grid.Row="3" Content="*Efternamn:" FontSize="15" />
                         <TextBox Grid.Row="3" Grid.Column="0" Text="{Binding SelectedIP.LastName}" Margin="144,0.333,159,29.667" Grid.RowSpan="2" />
                         <Label Grid.Column="0" Grid.Row="4" Content="*Förnamn:" FontSize="15" />

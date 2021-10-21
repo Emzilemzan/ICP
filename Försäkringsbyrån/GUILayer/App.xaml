@@ -36,6 +36,18 @@
         <DataTemplate DataType="{x:Type svm:SearchInsuranceTakerCompanyViewModel}">
             <sv:SearchInsuranceTakerCompanyView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type svm:SearchApplicationChoiceViewModel}">
+            <sv:SearchApplicationChoiceView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type svm:SAOverviewViewModel}">
+            <sv:SAOverviewView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type svm:LifeOverviewViewModel}">
+            <sv:LifeOverviewView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type svm:ApplicationOverviewViewModels}">
+            <sv:ApplicationOverviewViews/>
+        </DataTemplate>
         <DataTemplate DataType="{x:Type ivm:InsuranceViewModel}">
             <iv:InsuranceView/>
         </DataTemplate>
@@ -66,8 +78,8 @@
         <DataTemplate DataType="{x:Type cvm:CommissionViewModel}">
             <cv:CommissionView/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type cvm:GetCommissionViewModel}">
-            <cv:GetCommissionView/>
+        <DataTemplate DataType="{x:Type cvm:CommissionOverviewViewModel}">
+            <cv:CommissionOverviewView/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type ivm:RegisterApplicationViewModel}">
             <iv:RegisterApplicationView/>

@@ -16,7 +16,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
     /// <summary>
     /// Register Application for OtherPerson Insurance Company edition. 
     /// </summary>
-   public class RegisterOPICApplicationViewModel : BaseViewModel
+    public class RegisterOPICApplicationViewModel : BaseViewModel
     {
         public static readonly RegisterOPICApplicationViewModel Instance = new RegisterOPICApplicationViewModel();
 
@@ -40,9 +40,10 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         public void AddInsurance()
         {
             if (Instance._orgNr != null && Instance.ContactPerson != null && Instance.CompanyName != null && Instance.City != null && Instance.AgentNo != null & Instance.DialingCode != null
-                && Instance.PaymentForm != null && Instance.StreetAdress != null && Instance.DeliveryDate != null && Instance.PostalCode != null && Instance.Premie != null && Instance.Tabell !=null 
-                && Instance.FaxNbr != null && Instance.TelephoneNbr !=null)
+                && Instance.PaymentForm != null && Instance.StreetAdress != null && Instance.DeliveryDate != null && Instance.PostalCode != null && Instance.Premie != null && Instance.Tabell != null
+                && Instance.FaxNbr != null && Instance.TelephoneNbr != null)
             {
+                Company x = Instance.Companyn = AddCompany();
                 Insurance i = new Insurance()
                 {
                     SerialNumber = Instance.SerialNbr = GenerateIdFormation(),
@@ -51,7 +52,8 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                     TypeName = Instance.OPIType.OPIName,
                     OPI = Instance.OPIType,
                     PaymentForm = Instance.PaymentForm,
-                    CompanyTaker = Instance.Companyn = AddCompany(),
+                    CompanyTaker = x,
+                    InsuredID = Instance.InsuredPerson = AddInsured(x),
                     DeliveryDate = Instance.DeliveryDate,
                     Premie = Instance._premie,
                     Table = Instance.Tabell,
@@ -60,27 +62,35 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                 };
                 Context.IController.AddInsuranceApplication(i);
                 MessageBox.Show("Ansökan har lagts till");
-                Check = true;
-                Instance.OrganizationNbr = string.Empty;
-                Instance.AgentNo = null;
-                Instance.City = string.Empty;
-                Instance.StreetAdress = string.Empty;
-                Instance.TelephoneNbr = string.Empty;
-                Instance.DialingCode = string.Empty;
-                Instance.Email = string.Empty;
-                Instance.CompanyName = string.Empty;
-                Instance.Premie = string.Empty;
-                Instance.PaymentForm = null;
-                Instance.PostalCode = string.Empty;
-                Instance.FaxNbr = string.Empty;
-                Instance.Companyn = null;
-                Instance.CompanyInsuranceType = null;
+                EmptyAllChoices();
+                Context.Save();
+                SignedInsuranceViewModel.Instance.UpdateAC();
             }
             else
             {
                 MessageBox.Show("Alla fält med en * är obligatoriska att fylla i", "Fel", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
+
+        public void EmptyAllChoices()
+        {
+            Check = true;
+            Instance.OrganizationNbr = string.Empty;
+            Instance.AgentNo = null;
+            Instance.City = string.Empty;
+            Instance.StreetAdress = string.Empty;
+            Instance.TelephoneNbr = string.Empty;
+            Instance.DialingCode = string.Empty;
+            Instance.Email = string.Empty;
+            Instance.CompanyName = string.Empty;
+            Instance.Premie = string.Empty;
+            Instance.PaymentForm = null;
+            Instance.PostalCode = string.Empty;
+            Instance.FaxNbr = string.Empty;
+            Instance.Companyn = null;
+            Instance.CompanyInsuranceType = null;
+        }
+
         public void RegisterApplication()
         {
             Company y = Context.ITController.GetCompany(Instance.OrganizationNbr);
@@ -102,7 +112,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             }
         }
 
-    private Company AddCompany()
+        private Company AddCompany()
         {
             Company _tk = new Company()
             {
@@ -122,6 +132,26 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             Companyn = x;
             return Companyn;
         }
+
+        private InsuredPerson AddInsured(Company p)
+        {
+            List<InsuredPerson> tempList = new List<InsuredPerson>();
+            InsuredPerson newInp = new InsuredPerson()
+            {
+                InsuredId = Instance.InsuredID,
+                FirstName = Instance.FirstName,
+                LastName = Instance.LastName,
+                SocialSecurityNumberIP = Instance.SocialSecurityNumberIP,
+                PersonType = "Vuxen",
+                CompanyTaker = p,
+            };
+            tempList.Add(newInp);
+            Context.IPController.AddInsuredPerson(newInp);
+
+            return InsuredPerson;
+        }
+
+
         #endregion
 
         #region Updates 
@@ -137,9 +167,10 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         }
         public ObservableCollection<OtherPersonInsurance> UpdateOPI()
         {
-            ObservableCollection<OtherPersonInsurance> x = new ObservableCollection<OtherPersonInsurance>();
-
-            x.Add(new OtherPersonInsurance() { OPIId = 0, OPIName = "Inget" });
+            ObservableCollection<OtherPersonInsurance> x = new ObservableCollection<OtherPersonInsurance>
+            {
+                new OtherPersonInsurance() { OPIId = 0, OPIName = "Inget" }
+            };
             foreach (var e in Context.IController.GetAllOPI())
             {
                 x?.Add(e);
@@ -166,7 +197,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                     }
                 }
             }
-            if (insurances == null)
+            if (insurances.Count < 1)
             {
                 string str = "ÖPFV";
                 string num = "1";
@@ -248,14 +279,16 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             get => _pC > 0 ? _pC.ToString() : "";
             set
             {
+                _pC = 0;
                 if (int.TryParse(value, out _pC) && PostalCode.Length == 5)
                 {
-                    OnPropertyChanged("PostalCode");
+
                 }
                 else if (Check == false)
                 {
                     MessageBox.Show("Måste vara fem siffror");
                 }
+                OnPropertyChanged("PostalCode");
             }
         }
         private string _emial;
@@ -327,7 +360,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         #endregion
 
         #region Properties for Insurance
-        private string _serialNbr; 
+        private string _serialNbr;
         public string SerialNbr
         {
             get => _serialNbr;
@@ -399,17 +432,16 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             get => _premie > 0 ? _premie.ToString() : "";
             set
             {
-                if (Check == false)
+                _premie = 0;
+                if (int.TryParse(value, out _premie) && _premie.ToString().Length == 5)
                 {
-                    if (int.TryParse(value, out _premie) && _premie.ToString().Length == 5)
-                    {
-                        OnPropertyChanged("Premie");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Måste vara ett tal");
-                    }
+                    OnPropertyChanged("Premie");
                 }
+                else if (Check == false)
+                {
+                    MessageBox.Show("Måste vara ett tal");
+                }
+                OnPropertyChanged("Premie");
             }
         }
 

@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
+using System.Collections.ObjectModel;
 
 namespace DataLayer.GenericRepository
 {
@@ -25,6 +26,7 @@ namespace DataLayer.GenericRepository
         public void Remove(TEntity entity) => _context.Set<TEntity>().Remove(entity);
         public void RemoveRange(IEnumerable<TEntity> entities) => _context.Set<TEntity>().RemoveRange(entities);
 
+       
         public void Update(TEntity entity)
         {
             _context.Set<TEntity>().Attach(entity);

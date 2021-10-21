@@ -19,6 +19,7 @@ namespace BussinessLayer
             return applications.OrderByDescending(i => i.InsuranceNumber).ToList();
         }
 
+        public Insurance GetInsurance(string sn) => BusinessController.Instance.Context.Insurances.GetById(sn);
         public List<Insurance> GetInsuranceTakerIAC(Company insuranceTaker) => insuranceTaker.Insurances?.OrderByDescending(i => i.InsuranceNumber).ToList();
         public List<Insurance> GetInsuranceTakerIASC(Company insuranceTaker)
         {
@@ -52,7 +53,8 @@ namespace BussinessLayer
         public SAInsurance GetSA(int id) => BusinessController.Instance.Context.SAInsurances.Find(x => x.SAID == id).FirstOrDefault();
         public LifeInsurance GetLIFE(int id) => BusinessController.Instance.Context.LifeInsurances.Find(x => x.LifeID == id).FirstOrDefault();
         public OptionalType GetOPT(int id) => BusinessController.Instance.Context.OptionalTypes.Find(x => x.OptionalTypeId == id).FirstOrDefault();
-
+        public CompanyInsurance GetCI(int id) => BusinessController.Instance.Context.CIInsurances.Find(x => x.FFId == id).FirstOrDefault();
+        public OtherPersonInsurance GetOPI(int id) => BusinessController.Instance.Context.OPInsurances.Find(x => x.OPIId == id).FirstOrDefault();
         public IEnumerable<OptionalType> GetAllOPT() => BusinessController.Instance.Context.OptionalTypes.GetAll();
 
         public IEnumerable<SAInsurance> GetAllSAI() => BusinessController.Instance.Context.SAInsurances.GetAll();

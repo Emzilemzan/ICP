@@ -33,7 +33,6 @@ namespace GUILayer.ViewModels
         #region commands
         public ICommand HomeBtn => new RelayCommand(Home, CanCommandHome);
 
-
         public bool CanCommandHome(object value) => Context.CurrentUser != null;
 
         private void Home(object value)
@@ -54,6 +53,7 @@ namespace GUILayer.ViewModels
                 Instance.Tools = BasicDataViewModel.Instance;
                 Instance.CurrentTool = "BasicData";
                 Instance.SelectedViewModel = null;
+                ResetAllViews();
             }
             else
             {
@@ -74,6 +74,7 @@ namespace GUILayer.ViewModels
                 Instance.Tools = CommissionViewModel.Instance;
                 Instance.CurrentTool = "Commission";
                 Instance.SelectedViewModel = null;
+                ResetAllViews();
             }
             else
             {
@@ -96,6 +97,7 @@ namespace GUILayer.ViewModels
                 Instance.Tools = EmployeeManagementViewModel.Instance;
                 Instance.CurrentTool = "EmployeeManagement";
                 Instance.SelectedViewModel = null;
+                ResetAllViews();
             }
             else
             {
@@ -117,6 +119,7 @@ namespace GUILayer.ViewModels
                 Instance.Tools = InsuranceViewModel.Instance;
                 Instance.CurrentTool = "Insurance";
                 Instance.SelectedViewModel = null;
+                ResetAllViews();
             }
             else
             {
@@ -147,6 +150,7 @@ namespace GUILayer.ViewModels
                 Instance.Tools = SearchValueViewModel.Instance;
                 Instance.CurrentTool = "Search";
                 Instance.SelectedViewModel = null;
+                ResetAllViews();
             }
             else
             {
@@ -169,6 +173,7 @@ namespace GUILayer.ViewModels
                 Instance.Tools = StatisticsAndProspectusViewModel.Instance;
                 Instance.CurrentTool = "StatisticsAndProspect";
                 Instance.SelectedViewModel = null;
+                ResetAllViews();
             }
             else
             {
@@ -184,13 +189,11 @@ namespace GUILayer.ViewModels
         {
             SelectedViewModel = LogInViewModel.Instance;
             ToolsVisibility = Visibility.Collapsed;
-
         }
 
         public void DisplayHomeView()
         {
             SelectedViewModel = HomeViewModel.Instance;
-
         }
 
         public string CurrentTool { get; set; } = "";
@@ -227,6 +230,23 @@ namespace GUILayer.ViewModels
 
                 OnPropertyChanged("SelectedViewModel");
             }
+        }
+
+        private void ResetAllViews()
+        {
+            RegisterPersonApplicationViewModel.Instance.EmptyAllChoices();
+            AddEmployeeViewModel.Instance.EmptyAllChoices();
+            AddUserAccessViewModel.Instance.EmptyAllChoices();
+            RegisterApplicationViewModel.Instance.EmptyAllChoices();
+            RegisterLifeApplicationViewModel.Instance.EmptyAllChoices();
+            RegisterOPIPApplicationViewModel.Instance.EmptyAllChoices();
+            RegisterOPICApplicationViewModel.Instance.EmptyAllChoices();
+            AckValueVariableTableViewModel.Instance.EmptyAllChoices();
+            BaseAmountTableViewModel.Instance.EmptyAllChoices();
+            BaseAmountOptionViewModel.Instance.EmptyAllChoices();
+            SignedInsuranceViewModel.Instance.UpdateAC();
+            SignedInsuranceViewModel.Instance.MakeSearchWordEmpty();
+            GetandexportCustomerLeadsViewModel.Instance.GetProspects();
         }
     }
 }

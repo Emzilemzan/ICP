@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="GUILayer.Views.SearchViews.SearchApplicationChoiceView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GUILayer.Views.SearchViews"
+                mc:Ignorable="d" d:DesignWidth="900" Height="270">
+    <Grid Margin="0,10,0,103">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="120"/>
+        </Grid.RowDefinitions>
+        <Label Content="Välj försäkringsregister: " FontWeight="Light" FontSize="20"
+                   Foreground="Black" HorizontalAlignment="Center" Margin="10,0,545,0" Width="345" RenderTransformOrigin="0.5,0.5"/>
+        <StackPanel Grid.Row="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button  Margin ="10,10,0.333,10" Grid.Column="0"
+                         FontSize="15"
+                         Height="106"
+                         Content="SOförsäkringar"
+                            Background="Transparent"
+                         Command="{Binding PI_Btn}"
+                         Style="{DynamicResource OtherButtonStyle}" Width="Auto">
+                </Button>
+                <Button  Margin ="10,10,0.333,10" Grid.Column="1"
+                         FontSize="15"
+                         Height="106"
+                         Content="Livförsäkringar"
+                            Background="Transparent"
+                         Command="{Binding LI_Btn}"
+                         Style="{DynamicResource OtherButtonStyle}" Width="Auto">
+                </Button>
+                <Button  Grid.Column="2"
+                         FontSize="15"
+                         Height="106"
+                         Content=" Företagsförsäkringar"
+                         Background="Transparent" Margin="9.667,10"
+                         Command="{Binding CI_Btn}"
+                         Style="{DynamicResource OtherButtonStyle}" Width="Auto">
+                </Button>
+                <Button  Margin ="10.333,10" Grid.Column="3"
+                            FontSize="15"
+                            Height="106"
+                            Background="Transparent"
+                         Command="{Binding OPIP_Btn}"
+                         Style="{DynamicResource OtherButtonStyle}" Width="Auto">
+                    <TextBlock Width="194" Height="43" RenderTransformOrigin="0.579,0.889">Övrig personförsäkring<LineBreak/>för vuxen - Person</TextBlock>
+                </Button>
+                <Button  Grid.Column="4"
+                            FontSize="15"
+                            Height="106"
+                            Background="Transparent" Margin="9.333,10,10,10"
+                            Command="{Binding OPIC_Btn}"
+                         Style="{DynamicResource OtherButtonStyle}" Width="Auto">
+                    <TextBlock>Övrig personförsäkring<LineBreak/>för vuxen - Företag</TextBlock>
+                </Button>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</UserControl>

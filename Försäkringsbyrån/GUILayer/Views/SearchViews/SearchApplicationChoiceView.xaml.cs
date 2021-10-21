@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,17 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GUILayer.Views.InsuranceViews
+namespace GUILayer.Views.SearchViews
 {
     /// <summary>
-    /// Interaction logic for RegisterLifeApplicationView.xaml
+    /// Interaction logic for SearchApplicationChoiceView.xaml
     /// </summary>
-    public partial class RegisterLifeApplicationView : UserControl
+    public partial class SearchApplicationChoiceView : UserControl
     {
-        public RegisterLifeApplicationView()
+        public SearchApplicationChoiceView()
         {
             InitializeComponent();
         }
-
     }
 }

@@ -13,7 +13,6 @@ namespace Models.Models
     {
         [Key]
         public int CustomerProspectID { get; set; }
-        public bool Printed { get; set; }
-
+        public Person PersonProspect { get; set; }
     }
 }

@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GUILayer.Views.CommissionViews
+namespace GUILayer.Views.SearchViews
 {
     /// <summary>
-    /// Interaction logic for GetCommissionView.xaml
+    /// Interaction logic for LifeOverviewView.xaml
     /// </summary>
-    public partial class GetCommissionView : UserControl
+    public partial class LifeOverviewView : UserControl
     {
-        public GetCommissionView()
+        public LifeOverviewView()
         {
             InitializeComponent();
         }
