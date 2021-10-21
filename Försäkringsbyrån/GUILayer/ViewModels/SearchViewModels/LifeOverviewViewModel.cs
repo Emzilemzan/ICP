@@ -8,21 +8,20 @@ using System.Windows.Input;
 
 namespace GUILayer.ViewModels.SearchViewModels
 {
-    public class ApplicationOverviewViewModels : BaseViewModel
+    public class LifeOverviewViewModel:BaseViewModel
     {
-        public static readonly ApplicationOverviewViewModels Instance = new ApplicationOverviewViewModels();
+        public static readonly LifeOverviewViewModel Instance = new LifeOverviewViewModel();
 
-        private ApplicationOverviewViewModels()
+        private LifeOverviewViewModel()
         {
 
         }
-
         #region command 
         private ICommand _updateBtn;
 
         public ICommand UpdateBtn
         {
-            get => _updateBtn ?? (_updateBtn = new RelayCommand(x => { Update();}));
+            get => _updateBtn ?? (_updateBtn = new RelayCommand(x => { Update(); }));
         }
 
         public void Update()
@@ -54,7 +53,5 @@ namespace GUILayer.ViewModels.SearchViewModels
 
         }
         #endregion
-
-
     }
 }

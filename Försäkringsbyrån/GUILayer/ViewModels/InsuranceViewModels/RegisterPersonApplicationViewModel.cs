@@ -423,7 +423,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             BaseAmountTabell = x;
             return BaseAmountTabell;
         }
-        //Update all baseamounts for a specific lifeinsurance and for the delivery year.  
+        //Update all baseamounts for a specific sainsurance and for the delivery year.  
         public ICollection<BaseAmount> UpdateBaseAmount()
         {
             List<BaseAmount> x = new List<BaseAmount>();

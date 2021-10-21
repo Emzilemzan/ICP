@@ -32,7 +32,7 @@ namespace GUILayer.ViewModels.SearchViewModels
         {
             MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
             MainViewModel.Instance.CurrentTool = "";
-            //MainViewModel.Instance.SelectedViewModel = ;
+            MainViewModel.Instance.SelectedViewModel = SAOverviewViewModel.Instance;
         }
 
 
@@ -46,7 +46,7 @@ namespace GUILayer.ViewModels.SearchViewModels
         {
             MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
             MainViewModel.Instance.CurrentTool = "";
-            //MainViewModel.Instance.SelectedViewModel = ;
+            MainViewModel.Instance.SelectedViewModel = LifeOverviewViewModel.Instance;
         }
 
         /// <summary>

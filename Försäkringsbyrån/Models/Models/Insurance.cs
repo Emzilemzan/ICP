@@ -61,7 +61,6 @@ namespace Models.Models
         public string InsuranceNumber { get; set; }
         public int? PossibleBaseAmount { get; set; }
         public int? PossibleComisson { get; set; }
-        public CustomerProspect CustomerProspectId { get; set; }
         public int? PayYear { get; set; }
         public int? PayMonth { get; set; }
         #endregion

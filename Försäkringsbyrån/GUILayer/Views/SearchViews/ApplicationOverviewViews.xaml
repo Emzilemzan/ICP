@@ -13,15 +13,13 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="211.333"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Label Content="Register ansökningar" FontSize="20" Grid.Row="0" Grid.Column="0" Margin="0,0,-0.333,0"/>
-
+            <Label Content="Register företagsförsäkringar " FontSize="20" Grid.Row="0" Grid.Column="0" Margin="0,0,-0.333,0"/>
             <xctk1:WatermarkTextBox Grid.Row="1" Grid.Column="0"
                                 HorizontalContentAlignment="Center"
                                 VerticalContentAlignment="Center"
@@ -30,22 +28,23 @@
                                 Foreground="Black"
                                 Background="Transparent" BorderBrush="Transparent"
                                 Text="{Binding SearchInput, UpdateSourceTrigger=PropertyChanged}" RenderTransformOrigin="0.389,0.307" Margin="0,0.333"/>
-
-
             <DataGrid x:Name ="InsuranceGrid" Grid.Row="2" Grid.Column="0" AutoGenerateColumns="False" ItemsSource="{Binding Insurances}"
                   RowDetailsVisibilityMode="VisibleWhenSelected" 
                   IsReadOnly="True" 
-                      SelectedItem="{Binding SelectedInsurance}"
+                  SelectedItem="{Binding SelectedInsurance}"
                   AlternatingRowBackground="Gainsboro"  AlternationCount="2"
                   IsSynchronizedWithCurrentItem="True"
                   ScrollViewer.CanContentScroll="True" 
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
                   ScrollViewer.HorizontalScrollBarVisibility="Auto" Margin="0,20,5.333,0" Height="191" VerticalAlignment="Top">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Löpnummer" Binding="{Binding Path=InsuranceStatus}"/>
-                    <DataGridTextColumn Header="Löpnummer" Binding="{Binding Path=SerialNumber}"/>
-                    <DataGridTextColumn Header="Försäkringstagare" Binding="{Binding Path= Company.OrganizationNumber}" />
-                    <DataGridTextColumn Header="Försäkringstyp"  />
+                    <DataGridTextColumn Header="Status" Binding="{Binding Path=InsuranceStatus}"/>
+                    <DataGridTextColumn Header="Löpnummer" Binding="{Binding Path =SerialNumber}"/>
+                    <DataGridTextColumn Header="Försäkringstagare" Binding="{Binding Path = Company.OrganizationNumber}" />
+                    <DataGridTextColumn Header="Försäkringstyp" Binding="{Binding Path= TypeName}" />
+                    <DataGridTextColumn Header="Ankomstdatum" Binding="{Binding Path= DeliveryDate}" />
+                    <DataGridTextColumn Header="Agentnummer" Binding="{Binding Path=AgentNo.AgentNo}"/>
+                    <DataGridTextColumn Header="Försäkringsnummer" Binding="{Binding Path= InsuranceNumber}" />
                 </DataGrid.Columns>
             </DataGrid>
 
@@ -56,7 +55,6 @@
                     <ColumnDefinition Width="285"/>
                     <ColumnDefinition Width="265"/>
                 </Grid.ColumnDefinitions>
-
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40"/>
                     <RowDefinition Height="50"/>
@@ -78,7 +76,6 @@
                     <RowDefinition Height="18*"/>
                     <RowDefinition Height="18*"/>
                     <RowDefinition Height="18*"/>
-
                 </Grid.RowDefinitions>
                 <Label Content="Markerad försäkring" FontSize="20" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,118,0"/>
                 <TextBlock Text="Försäkringstyp: " FontSize="20" Grid.Row="1" Grid.Column="0" Margin="0,10,165.667,10"/>
@@ -107,7 +104,8 @@
                         <DataGridTextColumn Header="Kontakt person" Binding="{Binding Path=ContactPerson}" />
                     </DataGrid.Columns>
                 </DataGrid>
-                <TextBlock FontSize="14" FontWeight="DemiBold" Grid.Row="5">¡Försäkringstagares uppgifter ändras<LineBreak/>i sökregistret över företag!</TextBlock>
+                
+                <TextBlock FontSize="14" FontWeight="DemiBold" Grid.Row="5" Margin="10,0.333,0,0.333">¡Försäkringstagares uppgifter<LineBreak/> ändras i sökregistret över företag!</TextBlock>
 
                 <TextBlock Text="Övriga försäkringsuppgifter " FontSize="18" Grid.Row="1" Grid.Column="1" Margin="10.333,10,71.667,10" Grid.ColumnSpan="2"/>
                 <Label Grid.Row="2" Grid.Column="1" Content="Löpnummer:" FontSize="15"/>
