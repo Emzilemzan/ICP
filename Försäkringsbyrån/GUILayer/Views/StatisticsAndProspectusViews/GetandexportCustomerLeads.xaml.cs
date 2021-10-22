@@ -24,5 +24,10 @@ namespace GUILayer.Views.StatisticsAndProspectusViews
         {
             InitializeComponent();
         }
+
+        private void DataGrid_SelectionChanged()
+        {
+
+        }
     }
 }

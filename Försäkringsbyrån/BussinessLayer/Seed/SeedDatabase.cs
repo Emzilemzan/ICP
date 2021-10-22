@@ -854,7 +854,7 @@ namespace BussinessLayer.Seed
                 DeliveryDate = DateTime.Today,
                 AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm4),
                 InsuredID = BusinessController.Instance.IPController.GetIPerson(4),
-                OptionalTypes = null,
+                OptionalTypes = UpdateOt(),
                 BaseAmountValue = 0,
                 AckValue = 0,
                 BaseAmountValue2 = 0,
@@ -876,7 +876,7 @@ namespace BussinessLayer.Seed
                 DeliveryDate = DateTime.Today,
                 AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm4),
                 InsuredID = BusinessController.Instance.IPController.GetIPerson(2),
-                OptionalTypes = null,
+                OptionalTypes = UpdateOt(),
                 BaseAmountValue = 0,
                 AckValue = 0,
                 BaseAmountValue2 = 0,
@@ -898,7 +898,7 @@ namespace BussinessLayer.Seed
                 DeliveryDate = DateTime.Today,
                 AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm3),
                 InsuredID = BusinessController.Instance.IPController.GetIPerson(5),
-                OptionalTypes = null,
+                OptionalTypes = UpdateOt(),
                 BaseAmountValue = 0,
                 AckValue = 0,
                 BaseAmountValue2 = 0,
@@ -920,6 +920,11 @@ namespace BussinessLayer.Seed
                     BusinessController.Instance.IController.AddInsuranceApplication(item);
                 }
             }
+        }
+        private List<OptionalType> UpdateOt()
+        {
+            List<OptionalType> optionalTypes = new List<OptionalType>();
+            return optionalTypes;
         }
     }
 }

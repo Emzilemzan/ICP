@@ -157,7 +157,7 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             {
                 UserAccess a = new UserAccess()
                 {
-                    Username = Instance.Username,
+                    Username = Instance.Username.ToUpper(),
                     Password = Instance.Password,
                     Firstname = Instance.Firstname,
                     Lastname = Instance.Lastname,

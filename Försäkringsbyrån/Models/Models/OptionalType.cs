@@ -19,5 +19,6 @@ namespace Models.Models
         public int OptionalTypeId { get; set; }
         public string OptionalName { get; set; }
         public ICollection<AckValueVariable> Variables { get; set; }
+        public ICollection<Insurance> Insurance { get; set; }
     } 
 }

@@ -107,6 +107,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
 
         private void BoxesCheckInsurance()
         {
+
             if (Instance.SocialSecurityNumber != null && Instance.City != null && Instance.Firstname != null && Instance.Lastname != null && Instance.PostalCode != null && Instance.EmailOne != null && Instance.StreetAddress != null
                           && Instance.DiallingCodeHome != null && Instance.TelephoneNbrHome != null && Instance.PaymentForm != null && Instance.DeliveryDate != null && Instance.DeliveryDate != null && Instance.SAIType != null
               && Instance.AgentNo != null)
@@ -164,11 +165,14 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             OptionalType a = new OptionalType();
             OptionalType b = new OptionalType();
             OptionalType c = new OptionalType();
-
+            List<OptionalType> y = new List<OptionalType>();
             if (ACheck == true)
             {
                 if (OptionalType != null && BAmount != 0)
+                {
                     a = OptionalType;
+                    y.Add(a);
+                }
                 else
                 {
                     MessageBox.Show("Om någon checkbox för tillval är i klickad måste du också ha fyllt i tillhörande uppgifter");
@@ -177,7 +181,10 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             if (BCheck == true)
             {
                 if (OptionalType1 != null && BAmount1 != 0)
+                {
                     b = OptionalType1;
+                    y.Add(b);
+                }
                 else
                 {
                     MessageBox.Show("Om någon checkbox för tillval är i klickad måste du också ha fyllt i tillhörande uppgifter");
@@ -186,13 +193,16 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             if (CCheck == true)
             {
                 if (OptionalType2 != null && BARLL != null)
+                {
                     c = OptionalType2;
+                    y.Add(c);
+                }
                 else
                 {
                     MessageBox.Show("Om någon checkbox för tillval är i klickad måste du också ha fyllt i tillhörande uppgifter");
                 }
             }
-            List<OptionalType> y = new List<OptionalType>() { a, b, c };
+            
             return y;
         }
 
