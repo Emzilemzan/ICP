@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:xctk1="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:xctk1="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:searchviewmodels="clr-namespace:GUILayer.ViewModels.SearchViewModels" d:DataContext="{d:DesignInstance Type=searchviewmodels:OPICApplicationOverviewViewModel}"
              xmlns:local="clr-namespace:GUILayer.Views.SearchViews"
              mc:Ignorable="d" 
                  d:DesignHeight="450" d:DesignWidth="1100">
@@ -31,8 +31,7 @@
                                 Background="Transparent" BorderBrush="Transparent"
                                 Text="{Binding SearchInput, UpdateSourceTrigger=PropertyChanged}" RenderTransformOrigin="0.389,0.307" Margin="0,0.333"/>
 
-
-            <DataGrid x:Name ="InsuranceGrid" Grid.Row="2" Grid.Column="0" AutoGenerateColumns="False" ItemsSource="{Binding Insurances}"
+            <DataGrid x:Name ="InsuranceGrid" Grid.Row="2" Grid.Column="0" AutoGenerateColumns="False" ItemsSource="{Binding Insurancess, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                   RowDetailsVisibilityMode="VisibleWhenSelected" 
                   IsReadOnly="True" 
                       SelectedItem="{Binding SelectedInsurance}"
@@ -42,12 +41,20 @@
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
                   ScrollViewer.HorizontalScrollBarVisibility="Auto" Margin="0,20,5.333,0" Height="191" VerticalAlignment="Top">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Status" Binding="{Binding Path=InsuranceStatus}"/>
-                    <DataGridTextColumn Header="Löpnummer" Binding="{Binding Path=SerialNumber}"/>
-                    <DataGridTextColumn Header="Försäkringstagare" Binding="{Binding Path= Company.OrganizationNumber}" />
-                    <DataGridTextColumn Header="Företagsnamn" Binding="{Binding Path= Company.CompanyName}" />
-                    <DataGridTextColumn Header="Försäkringstyp"  />
+                    <DataGridTextColumn Header="Status" Binding="{Binding Path=InsuranceStatus, UpdateSourceTrigger=PropertyChanged}"/>
+                    <DataGridTextColumn Header="Löpnummer" Binding="{Binding Path=SerialNumber, UpdateSourceTrigger=PropertyChanged}"/>
+                    <DataGridTextColumn Header="Försäkringstagare" Binding="{Binding Path= CompanyTaker.OrganizationNumber, UpdateSourceTrigger=PropertyChanged}" />
+                    <DataGridTextColumn Header="Företagsnamn" Binding="{Binding Path= CompanyTaker.CompanyName, UpdateSourceTrigger=PropertyChanged}" />
+                    <DataGridTextColumn Header="Försäkringstyp" Binding="{Binding Path=TypeName, UpdateSourceTrigger=PropertyChanged}"/>
+                    <DataGridTextColumn Header="Personnummer försäkrad" Binding="{Binding Path=InsuredID.SocialSecurityNumberIP, UpdateSourceTrigger=PropertyChanged}"/>
+                    <DataGridTextColumn Header="Efternamn försäkrad" Binding="{Binding Path=InsuredID.LastName, UpdateSourceTrigger=PropertyChanged}"/>
+                    <DataGridTextColumn Header="Agenturnummer" Binding="{Binding Path= AgentNo.AgentNumber, UpdateSourceTrigger=PropertyChanged}"/>
+                    <DataGridTextColumn Header="Kontakt" Binding="{Binding Path= CompanyTaker.ContactPerson, UpdateSourceTrigger=PropertyChanged}"/>
                 </DataGrid.Columns>
+                <DataGrid.Resources>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="LightBlue"/>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"  Color="LightBlue"/>
+                </DataGrid.Resources>
             </DataGrid>
 
             <Grid Grid.Column="0" Grid.Row="2" Margin="0,211,-0.333,369.667" Grid.RowSpan="2">
@@ -83,86 +90,81 @@
                 </Grid.RowDefinitions>
                 <Label Content="Markerad försäkring" FontSize="20" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,118,0"/>
                 <TextBlock Text="Försäkringstyp: " FontSize="20" Grid.Row="1" Grid.Column="0" Margin="0,10,165.667,10"/>
-                <ComboBox Name="Företagsförsäkring" Height="30" Grid.Row="1" Margin="148,10,9.667,10" />
+                <ComboBox x:Name="Företagsförsäkring" Height="30" Grid.Row="1" Margin="148,10,9.667,10" ItemsSource="{Binding OPInsuranceTypes, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedItem="{Binding SelectedInsurance.OPI, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" >
+                    <ComboBox.Resources>
+                        <DataTemplate x:Key="DataTemplateSA">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="{Binding Path =OPIName}" Grid.Column="1" />
+                            </Grid>
+                        </DataTemplate>
+                    </ComboBox.Resources>
+                    <ComboBox.ItemTemplate>
+                        <StaticResource ResourceKey="DataTemplateSA"/>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
 
                 <TextBlock Text="Försäkringstagarens uppgifter " FontSize="18" Grid.Row="2" Grid.Column="0" Margin="10"/>
-                <DataGrid x:Name ="CompanyGrid" Grid.Row="3" AutoGenerateColumns="False" ItemsSource="{Binding SelectedInsurance, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                  RowDetailsVisibilityMode="VisibleWhenSelected" 
-                  CanUserAddRows="False"
-                  SelectedItem="{Binding SelectedCompany, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                  AlternatingRowBackground="Gainsboro"  AlternationCount="2"
-                  IsSynchronizedWithCurrentItem="True"
-                  ScrollViewer.CanContentScroll="True" 
-                  ScrollViewer.VerticalScrollBarVisibility="Auto"
-                  ScrollViewer.HorizontalScrollBarVisibility="Auto" Margin="10,7,9.667,23" Grid.RowSpan="2">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Organisationsnummer" Binding="{Binding Path=OrganizationNumber}" />
-                        <DataGridTextColumn Header="Företagsnamn" Binding="{Binding Path=CompanyName}" />
-                        <DataGridTextColumn Header="Gatuadress" Binding="{Binding Path=StreetAddress}" />
-                        <DataGridTextColumn Header="Postnummer" Binding="{Binding Path=PostalCode}" />
-                        <DataGridTextColumn Header="Postort" Binding="{Binding Path=City}" />
-                        <DataGridTextColumn Header="Riktnummer" Binding="{Binding Path= DiallingCode}"/>
-                        <DataGridTextColumn Header="Telefonnummer" Binding="{Binding Path= TelephoneNbr}"/>
-                        <DataGridTextColumn Header="Faxnummer" Binding="{Binding Path=FaxNumber}"/>
-                        <DataGridTextColumn Header="Email" Binding="{Binding Path=Email}"/>
-                        <DataGridTextColumn Header="Kontakt person" Binding="{Binding Path=ContactPerson}" />
-                    </DataGrid.Columns>
-                </DataGrid>
+                <TextBlock Text="Organisationsnumer" Grid.Row="3"/>
+                <TextBox IsReadOnly="True" Grid.Row="3" Grid.Column="0" Margin="127,0,71,34" Text="{Binding SelectedInsurance.CompanyTaker.OrganizationNumber}"/>
+                <TextBlock Text="Företagsnamn" Grid.Row="3" Margin="0,26,0,29" Grid.RowSpan="2"/>
+                <TextBox IsReadOnly="True" Grid.Row="3" Grid.Column="0" Margin="127,37,71,0" Text="{Binding SelectedInsurance.CompanyTaker.CompanyName}"/>
 
-                <TextBlock Text="Försäkrades uppgifter" Grid.Row="5" FontSize="18" Grid.Column="0" Margin="10"/>
-                <DataGrid x:Name="InuredPersonGrid" Grid.Row="6" AutoGenerateColumns="False" ItemsSource="{Binding SelectedInsurance, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
-                          RowDetailsVisibilityMode="VisibleWhenSelected" 
-                          CanUserAddRows="False" 
-                          SelectedItem="{Binding SelectedCompany, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
-                          AlternatingRowBackground="Gainsboro" AlternationCount="2" 
-                          IsSynchronizedWithCurrentItem="True" 
-                          ScrollViewer.CanContentScroll="True" 
-                          ScrollViewer.VerticalScrollBarVisibility="Auto" 
-                          ScrollViewer.HorizontalScrollBarVisibility="Auto" Margin="10,7,9.667,23" Grid.RowSpan="2">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Personnummer" Binding="{Binding Path=SocialSecurityNumberIP}" />
-                        <DataGridTextColumn Header="Förnamn" Binding="{Binding Path=FirstNameIP}" />
-                        <DataGridTextColumn Header="Efternamn" Binding="{Binding Path=LastNameIP}" />
+                <TextBlock Text="Försäkrades uppgifter" FontSize="18" Grid.Row="5" Grid.Column="0" Margin="5,0,15,20"/>
+                <TextBlock Text="Personnummer" Grid.Row="5" Grid.ColumnSpan="2" Margin="5,34,280,5" />
+                <TextBox IsReadOnly="True" Grid.Row="5" Grid.Column="0" Margin="127,39,71,2" Text="{Binding SelectedInsurance.InsuredID.SocialSecurityNumberIP}"/>
+                <TextBlock Text="Efternamn" Grid.Row="6" Margin="5,0,280,10" Grid.ColumnSpan="2"/>
+                <TextBox IsReadOnly="True" Grid.Row="6" Grid.Column="0" Margin="127,4,71,98" Text="{Binding SelectedInsurance.InsuredID.LastName}"/>
+                <TextBlock Text="Förnamn" Grid.Row="6" Margin="10,22,275,34" Grid.ColumnSpan="2"/>
+                <TextBox IsReadOnly="True" Grid.Row="6" Grid.Column="0" Margin="127,27,71,73" Text="{Binding SelectedInsurance.InsuredID.FirstName}"/>
 
-                    </DataGrid.Columns>
-                    
-                    
-                </DataGrid> 
-                
-                
-                
+
+
                 <TextBlock Text="Övriga försäkringsuppgifter " FontSize="18" Grid.Row="1" Grid.Column="1" Margin="10.333,10,71.667,10" Grid.ColumnSpan="2"/>
                 <Label Grid.Row="2" Grid.Column="1" Content="Löpnummer:" FontSize="15"/>
-                <TextBox Grid.Row="2" IsReadOnly="true" Height="20" Grid.Column="1" Margin="10.333,25,9.667,5"/>
+                <TextBox Grid.Row="2" IsReadOnly="true" Height="20" Grid.Column="1" Margin="10.333,25,9.667,5" Text="{Binding SelectedInsurance.SerialNumber}"/>
                 <Label Grid.Row="3" Grid.Column="1" Content="Tabell:" FontSize="15"/>
-                <TextBox Grid.Row="3" Height="20" Grid.Column="1" Margin="10.333,25,9.667,9.667"/>
-                <Label Grid.Row="5" Grid.Column="1" Content="Typ av försäkring:" FontSize="15"/>
-                <ComboBox Grid.Row="5" Height="20" Grid.Column="1" Margin="10.333,25.333,9.667,9.333" IsReadOnly="True"/>
-                <Label Grid.Row="4" Grid.Column="1" Content="Premie:" FontSize="15"/>
-                <TextBox Grid.Row="4" Height="20" Grid.Column="1" Margin="10.333,24.667,9.667,10"/>
+                <TextBox Grid.Row="3" Height="20" Grid.Column="1" Margin="10.333,25,9.667,9.667" Text="{Binding SelectedInsurance.Table}"/>
                
+                <Label Grid.Row="4" Grid.Column="1" Content="Premie:" FontSize="15"/>
+                <TextBox Grid.Row="4" Height="20" Grid.Column="1" Margin="10.333,24.667,9.667,10" Text="{Binding SelectedInsurance.Premie}"/>
+
 
                 <Label Grid.Row="2" Grid.Column="2" Content="Ankomstdatum:" FontSize="15"/>
-                <DatePicker Grid.Row="2" Grid.Column="2" Margin="10.333,25,9.667,0" IsEnabled="False"/>
+                <DatePicker Grid.Row="2" Grid.Column="2" Margin="10.333,25,9.667,0" IsEnabled="False" SelectedDate="{Binding SelectedInsurance.DeliveryDate}"/>
                 <Label Grid.Row="3" Grid.Column="2" Content="Betalform:" FontSize="15"/>
-                <ComboBox Grid.Row="3" Height="20" Grid.Column="2" Margin="10.333,25,9.667,9.667"/>
+                <ComboBox Grid.Row="3" Height="20" Grid.Column="2" Margin="10.333,25,9.667,9.667" ItemsSource="{Binding PayMentForms}" Text="{Binding SelectedInsurance.PaymentForm}"/>
+                
                 <Label Grid.Row="4" Grid.Column="2" Content="Agenturnummer:" FontSize="15"/>
-                <ComboBox Grid.Row="4" Height="20" Grid.Column="2" Margin="10.333,25.333,9.667,9.333"/>
-              
+                <ComboBox Grid.Row="4" Height="20" Grid.Column="2" Margin="10.333,25.333,9.667,9.333" ItemsSource="{Binding SalesMens}" SelectedItem="{Binding SelectedInsurance.AgentNo}">
+                    <ComboBox.Resources>
+                        <DataTemplate x:Key="DataTemplateBaseAmountT">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="{Binding Path= AgentNumber}" Grid.Column="1" />
+                            </Grid>
+                        </DataTemplate>
+                    </ComboBox.Resources>
+                    <ComboBox.ItemTemplate>
+                        <StaticResource ResourceKey="DataTemplateBaseAmountT"/>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
 
                 <TextBlock Text="Om tecknad: " FontSize="18" Grid.Row="1" Grid.Column="4" Margin="10"/>
-                <Label Grid.Row="2" Grid.Column="4" Content="Försäkringsnummer:" FontSize="15"/>
-                <TextBox Grid.Row="2" IsReadOnly="true" Height="20" Grid.Column="3" Margin="10.333,25,31.667,5"/>
+                <Label Grid.Row="2" Grid.Column="4" Content="Försäkringsnummer:" FontSize="15" />
+                <TextBox Grid.Row="2" IsReadOnly="true" Height="20" Grid.Column="3" Margin="10.333,25,31.667,5" Text="{Binding SelectedInsurance.InsuranceNumber}"/>
                 <Label Grid.Row="3" Grid.Column="4" Content="Provision:" FontSize="15"/>
-                <TextBox Grid.Row="3" Height="20" Grid.Column="3" Margin="10.333,25,31.667,9.667"/>
-                <Label Grid.Row="4" Grid.Column="4" Content="År:" FontSize="15"/>
-                <ComboBox Grid.Row="4" Height="20" Grid.Column="3" Margin="10.333,25.333,31.667,9.333"/>
-                <Label Grid.Row="5" Grid.Column="4" Content="Månad:" FontSize="15"/>
-                <ComboBox Grid.Row="5" Height="20" Grid.Column="3" Margin="10.333,24.667,31.667,10"/>
+                <TextBox Grid.Row="3" Height="20" Grid.Column="3" Margin="10.333,25,31.667,9.667" Text="{Binding SelectedInsurance.PossibleComisson}"/>
 
-                <Button Grid.Row="6" Grid.Column="3" Height="50"  Content="Exportera" FontSize="15" Margin="0.333,2,146.667,2.667" />
-                <Button Grid.Row="6" Grid.Column="3" Height="50"  Content="Uppdatera" FontSize="15" Margin="124.333,2,20.667,2.667" RenderTransformOrigin="0.5,0.5" />
-                <Button Grid.Row="7" Grid.Column="3" Height="50"  Content="Ta bort" FontSize="15" Margin="62.333,2.333,83.667,2.333"  >
+
+                <Button Grid.Row="6" Grid.Column="2" Height="50"  Content="Exportera" FontSize="15" Margin="201,10,231,50" RenderTransformOrigin="-0.102,0.66" Grid.ColumnSpan="2" Grid.RowSpan="2" Command="{Binding ExportBtn}" />
+                <Button Grid.Row="6" Grid.Column="2" Height="50"  Content="Uppdatera" FontSize="15" Margin="65,10,0,50" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2" HorizontalAlignment="Left" Width="120" Command="{Binding UppdateBtn}" />
+                <Button Grid.Row="6" Grid.Column="3" Height="50"  Content="Ta bort" FontSize="15" Margin="54,10,92,50" Grid.RowSpan="2" Command="{Binding RemoveBtn}" >
                 </Button>
             </Grid>
         </Grid>

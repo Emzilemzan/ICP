@@ -61,7 +61,7 @@ namespace GUILayer.ViewModels.SearchViewModels
 
             MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
             MainViewModel.Instance.CurrentTool = "";
-            //MainViewModel.Instance.SelectedViewModel = OPICApplicationOverviewViewModel.Instance;
+            MainViewModel.Instance.SelectedViewModel = OPICApplicationOverviewViewModel.Instance;
         }
 
         /// Command to open company Insurance view
