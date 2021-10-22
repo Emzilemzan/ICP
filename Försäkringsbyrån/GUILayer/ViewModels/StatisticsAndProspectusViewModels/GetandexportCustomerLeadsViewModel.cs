@@ -22,7 +22,6 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
         }
         //Hej Noah, när man klickat på export, då ska ett kundprospekt skapas. Alltså skapa en ny instans av klassen CustomerProspekt
         //Personen det berör ska således inte kunna finnas med i fler än ett kundprospekt. :) Behöver du hjälp me de säg till. 
-        //Du kanske förstår lättare om du tittar i metoden GetPerson() längre ner. 
 
         public ObservableCollection<Person> People { get; set; }
         public ObservableCollection<Person> Ppls { get; set; }
@@ -124,7 +123,7 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             ObservableCollection<Person> people2 = new ObservableCollection<Person>(); //all persons with child insurances. 
             ObservableCollection<Person> people3 = new ObservableCollection<Person>(); //all persons with adult insurances 
             ObservableCollection<Person> people4 = new ObservableCollection<Person>(); //all persons with the same homenbr that doesn't have an adult insurance. 
-            
+
             List<string> nbr = new List<string>(); //all numbers connected to an insurance for adults. 
             foreach (var nr in nbr2)
             {
@@ -146,7 +145,7 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
                     }
                 }
             }
-            
+
             foreach (var nr in nbr)
             {
                 foreach (var p in people2)
@@ -158,18 +157,10 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
                 }
             }
             var p4 = people2.Except(people3).ToList();
-
-            foreach(var c in Context.ITController.GetProspects()) //Check if person already exists in a prospects, thus it can't be exported again.
+            foreach (var p in p4)
             {
-                foreach (var p in p4)
-                {
-                    if(!c.PersonProspect.Equals(p))
-                    {
-                        people4?.Add(p);
-                    }
-                }
+                people4?.Add(p);
             }
-            
             return people4;
         }
 
@@ -207,15 +198,9 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
 
             var p4 = people2.Except(people3).ToList();
 
-            foreach (var c in Context.ITController.GetProspects())
+            foreach (var p in p4)
             {
-                foreach (var p in p4)
-                {
-                    if (!c.PersonProspect.Equals(p))
-                    {
-                        people4?.Add(p);
-                    }
-                }
+                 people4?.Add(p);
             }
 
             return people4;
