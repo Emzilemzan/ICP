@@ -62,18 +62,17 @@ namespace GUILayer.ViewModels.SearchViewModels
 
         public void Update()
         {
-            if (SelectedInsurance != null && PaymentForm != null && SAIType != null && AgentNo != null && SerialNumber != null
-                && BaseTabel != null)
+            if (SelectedInsurance != null && PaymentForm != null && AgentNo != null && SerialNumber != null
+               /* && BaseTabel != null*/)
             {
                 SelectedInsurance.PaymentForm = PaymentForm;
-                SelectedInsurance.OptionalTypes = OptionalTypes;  //fungerar ej byter ut andras lista??
-                SelectedInsurance.SAI = SAIType;
+                SelectedInsurance.OptionalTypes = UpdateOT(); 
                 SelectedInsurance.AgentNo = AgentNo;
                 SelectedInsurance.SerialNumber = SerialNumber;
                 SelectedInsurance.BaseAmountValue = BARLL;
                 SelectedInsurance.BaseAmountValue2 = BAmount;
                 SelectedInsurance.BaseAmountValue3 = BAmount1;
-                SelectedInsurance.BaseAmountValue4 = BaseAmount = Instance.BaseTabel.BaseAmount;
+                //SelectedInsurance.BaseAmountValue4 = BaseAmount = Instance.BaseTabel.BaseAmount;
                 Context.IController.Edit(SelectedInsurance);
             }
             else
