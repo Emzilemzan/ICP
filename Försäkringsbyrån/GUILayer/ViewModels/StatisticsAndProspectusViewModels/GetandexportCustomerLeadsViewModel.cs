@@ -18,20 +18,63 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
         public GetandexportCustomerLeadsViewModel()
         {
             People = GetProspects();
+            //Ppls = ExportToCsv();
         }
         private ICommand Searchleads_Btn;
         public ICommand GetandexportCustomerLeadsViewModel_Btn
         {
             get => Searchleads_Btn ?? (Searchleads_Btn = new RelayCommand(x => { GetandexportCustomerLeads(); }));
         }
+
         private void GetandexportCustomerLeads()
         {
 
         }
 
         public ObservableCollection<Person> People { get; set; }
+        public ObservableCollection<Person> Ppls { get; set; }
 
+        public string ExportToCsv(ObservableCollection<Person> Ppls)
+        {
+            var output = new StringBuilder();
+            // Add header if necessary
+            output.Append("SocialSecurityNumber,");
+            output.Append("Lastname ,");
+            output.Append("Firstname ,");
+            output.Append("StreetAddress ,");
+            output.Append("PostalCode ,");
+            output.Append("City ,");
+            output.Append("DiallingCodeHome ,");
+            output.Append("DiallingCodeWork ,");
+            output.Append("TelephoneNbrHome ,");
+            output.Append("TelephoneNbrWork ,");
+            output.Append("EmailOne ,");
+            output.Append("EmailTwo ,");
+            output.AppendLine();
+            // Add each row
+            foreach (var person in Ppls)
+            {
+                output.AppendFormat("{0},", person.SocialSecurityNumber);
+                output.AppendFormat("{0},", person.Lastname);
+                output.AppendFormat("{0},", person.Firstname);
+                output.AppendFormat("{0},", person.StreetAddress);
+                output.AppendFormat("{0},", person.PostalCode);
+                output.AppendFormat("{0},", person.City);
+                output.AppendFormat("{0},", person.DiallingCodeHome);
+                output.AppendFormat("{0},", person.DiallingCodeWork);
+                output.AppendFormat("{0},", person.TelephoneNbrHome);
+                output.AppendFormat("{0},", person.TelephoneNbrWork);
+                output.AppendFormat("{0},", person.EmailOne);
+                output.AppendFormat("{0},", person.EmailTwo);
+                output.AppendLine();
 
+                
+            }
+
+            System.IO.File.WriteAllText(@"c:\temp\output.txt", output.ToString());
+
+            return output.ToString();
+        }
 
         #region Methods to find customerprospects
 
@@ -169,6 +212,16 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             return people4;
         }
         #endregion
+
+        //private ICommand exportProspects_Btn;
+        //public ICommand ExportProspects_Btn
+        //{
+        //    get => exportProspects_Btn ?? (exportProspects_Btn = new RelayCommand(x => { ExportToCsv(); CanCreate(); }));
+        //}
+
+        public bool CanCreate() => true;
+
+
     }
 
 
