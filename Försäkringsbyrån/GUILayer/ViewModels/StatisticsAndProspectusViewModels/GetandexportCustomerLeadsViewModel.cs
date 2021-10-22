@@ -20,16 +20,9 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             People = GetProspects();
             //Ppls = ExportToCsv();
         }
-        private ICommand Searchleads_Btn;
-        public ICommand GetandexportCustomerLeadsViewModel_Btn
-        {
-            get => Searchleads_Btn ?? (Searchleads_Btn = new RelayCommand(x => { GetandexportCustomerLeads(); }));
-        }
-
-        private void GetandexportCustomerLeads()
-        {
-
-        }
+        //Hej Noah, när man klickat på export, då ska ett kundprospekt skapas. Alltså skapa en ny instans av klassen CustomerProspekt
+        //Personen det berör ska således inte kunna finnas med i fler än ett kundprospekt. :) Behöver du hjälp me de säg till. 
+        //Du kanske förstår lättare om du tittar i metoden GetPerson() längre ner. 
 
         public ObservableCollection<Person> People { get; set; }
         public ObservableCollection<Person> Ppls { get; set; }
@@ -68,7 +61,7 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
                 output.AppendFormat("{0},", person.EmailTwo);
                 output.AppendLine();
 
-                
+
             }
 
             System.IO.File.WriteAllText(@"c:\temp\output.txt", output.ToString());
@@ -89,9 +82,9 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
                 {
                     if (i.InsuranceStatus == Status.Tecknad)
                     {
-                        nbr?.Add(it.TelephoneNbrHome); //alla nr för personer med tecknade försäkringar
-                        insurances?.Add(i); // tecknade försäkringar för alla personer. 
-                        people?.Add(it); // alla personer som har tecknade försäkringar 
+                        nbr?.Add(it.TelephoneNbrHome);
+                        insurances?.Add(i);
+                        people?.Add(it);
                     }
                 }
             }
@@ -128,10 +121,11 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
         /// <returns></returns>
         public ObservableCollection<Person> GetPerson(ObservableCollection<Person> people, List<string> nbr2)
         {
-            ObservableCollection<Person> people2 = new ObservableCollection<Person>(); //alla som har tecknat någon barnförsäkring
-            ObservableCollection<Person> people3 = new ObservableCollection<Person>(); //alla som har tecknat vuxenförsäkring
-            ObservableCollection<Person> people4 = new ObservableCollection<Person>(); //alla som har tecknat barnförsäkring + vuxenförsäkringar
-            List<string> nbr = new List<string>(); //
+            ObservableCollection<Person> people2 = new ObservableCollection<Person>(); //all persons with child insurances. 
+            ObservableCollection<Person> people3 = new ObservableCollection<Person>(); //all persons with adult insurances 
+            ObservableCollection<Person> people4 = new ObservableCollection<Person>(); //all persons with the same homenbr that doesn't have an adult insurance. 
+            
+            List<string> nbr = new List<string>(); //all numbers connected to an insurance for adults. 
             foreach (var nr in nbr2)
             {
                 foreach (var p in people)
@@ -140,33 +134,42 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
                     {
                         foreach (var i in p.Insurances)
                         {
-                            if (i.InsuranceStatus == Status.Tecknad && i.TypeName == "Sjuk- och olycksfallsförsäkring för barn") //Lägger till alla som har tecknade barnförsäkringar.
+                            if (i.InsuranceStatus == Status.Tecknad && i.TypeName == "Sjuk- och olycksfallsförsäkring för barn")
                             {
                                 people2?.Add(p);
                             }
-                            else if(i.InsuranceStatus == Status.Tecknad && i.TypeName != "Sjuk - och olycksfallsförsäkring för barn")
+                            else if (i.InsuranceStatus == Status.Tecknad && i.TypeName != "Sjuk - och olycksfallsförsäkring för barn")
                             {
-                                nbr?.Add(nr); //alla nummer knytna till en vuxen försäkring
+                                nbr?.Add(nr);
                             }
                         }
                     }
                 }
             }
-            foreach(var nr in nbr)  //nbr listan är knyten till alla nr med en vuxen försäkring. 
+            
+            foreach (var nr in nbr)
             {
-                foreach(var p in people2)
+                foreach (var p in people2)
                 {
-                    if(nr == p.TelephoneNbrHome)
+                    if (nr == p.TelephoneNbrHome)
                     {
                         people3?.Add(p);
                     }
                 }
             }
             var p4 = people2.Except(people3).ToList();
-            foreach (var p in p4)
+
+            foreach(var c in Context.ITController.GetProspects()) //Check if person already exists in a prospects, thus it can't be exported again.
             {
-                people4?.Add(p);
+                foreach (var p in p4)
+                {
+                    if(!c.PersonProspect.Equals(p))
+                    {
+                        people4?.Add(p);
+                    }
+                }
             }
+            
             return people4;
         }
 
@@ -184,7 +187,7 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
                     {
                         foreach (var i in p.Insurances)
                         {
-                            if (i.TypeName == "Sjuk- och olycksfallsförsäkring för barn" && i.InsuranceStatus == Status.Tecknad) //alla som har tecknat en barnförsäkring
+                            if (i.TypeName == "Sjuk- och olycksfallsförsäkring för barn" && i.InsuranceStatus == Status.Tecknad)
                                 people2?.Add(p);
 
                         }
@@ -192,7 +195,7 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
                     }
                 }
             }
-            foreach(var p in people2)
+            foreach (var p in people2)
             {
                 foreach (var i in p.Insurances)
                 {
@@ -204,9 +207,15 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
 
             var p4 = people2.Except(people3).ToList();
 
-            foreach (var p in p4)
+            foreach (var c in Context.ITController.GetProspects())
             {
-                people4?.Add(p);
+                foreach (var p in p4)
+                {
+                    if (!c.PersonProspect.Equals(p))
+                    {
+                        people4?.Add(p);
+                    }
+                }
             }
 
             return people4;
@@ -216,10 +225,9 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
         //private ICommand exportProspects_Btn;
         //public ICommand ExportProspects_Btn
         //{
-        //    get => exportProspects_Btn ?? (exportProspects_Btn = new RelayCommand(x => { ExportToCsv(); CanCreate(); }));
+        //    get => exportProspects_Btn ?? (exportProspects_Btn = new RelayCommand(x => { ExportToCsv();  }));
         //}
 
-        public bool CanCreate() => true;
 
 
     }

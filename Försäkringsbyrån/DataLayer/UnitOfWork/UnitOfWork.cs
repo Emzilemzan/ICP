@@ -25,6 +25,7 @@ namespace DataLayer.UnitOfWork
         public IVacationPayRepository VPays { get; }
         public IBaseAmountRepository BaseAmounts { get; }
         public IOptionalTypeRepository OptionalTypes { get; }
+        public ICustomerProspectRepository Prospects { get; }
         public IAckValueVariableRepository AckValues { get; }
         public ICommissionRepository CommissionShares { get; }
         public ILifeInsuranceRepository LifeInsurances { get; }
@@ -36,6 +37,7 @@ namespace DataLayer.UnitOfWork
             Employees = new EmployeeRepository(_context);
             Insurances = new InsuranceRepository(_context);
             InsuredPersons = new InsuredPersonRepository(_context);
+            Prospects = new CustomerProspectRepository(_context);
             Persons = new PersonRepository(_context);
             Companies = new CompanyRepository(_context);
             Accesses = new AccessRepository(_context);
