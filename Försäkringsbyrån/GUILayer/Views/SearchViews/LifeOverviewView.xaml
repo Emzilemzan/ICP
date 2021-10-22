@@ -137,7 +137,7 @@
                 <Label Grid.Row="4" Grid.Column="1" Content="Agenturnummer:" FontSize="15" Margin="0,0.333,0.333,0.333"/>
                 <ComboBox Grid.Row="4" Grid.Column="1" Margin="10,25.333,9.333,9.333" ItemsSource="{Binding SalesMens}" SelectedItem="{Binding SelectedInsurance.AgentNo}" >
                     <ComboBox.Resources>
-                        <DataTemplate x:Key="DataTemplateBaseAmountT">
+                        <DataTemplate x:Key="DataTemplateAgent">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
@@ -147,7 +147,7 @@
                         </DataTemplate>
                     </ComboBox.Resources>
                     <ComboBox.ItemTemplate>
-                        <StaticResource ResourceKey="DataTemplateBaseAmountT"/>
+                        <StaticResource ResourceKey="DataTemplateAgent"/>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
                 <Label Grid.Row="3" Grid.Column="1" Content="Grundbelopp för vald SOtyp:" FontSize="15" Margin="0,0,0.333,54.333" Grid.RowSpan="2"/>
