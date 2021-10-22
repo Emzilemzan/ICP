@@ -245,7 +245,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             return SalesMens;
         }
 
-        // Get all OtherPerions insurances
+        // Get all OtherPersonInsurances
         public ObservableCollection<OtherPersonInsurance> UpdateOPI()
         {
             ObservableCollection<OtherPersonInsurance> x = new ObservableCollection<OtherPersonInsurance>
@@ -281,6 +281,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         }
 
         #endregion
+
         #region Properites for person 
         private string _sSN;
         public string SocialSecurityNumber
@@ -412,7 +413,8 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             }
         }
 
-        #endregion
+        #endregion 
+
         #region Properties for Insured Person
         private int _insuredId;
         public int InsuredID

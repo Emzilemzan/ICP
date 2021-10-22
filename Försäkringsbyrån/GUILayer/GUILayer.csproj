@@ -114,9 +114,10 @@
     <Compile Include="ViewModels\LogInViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModels\LifeOverviewViewModel.cs" />
+    <Compile Include="ViewModels\SearchViewModels\OPICApplicationOverviewViewModel.cs" />
+    <Compile Include="ViewModels\SearchViewModels\OPIPApplicationOverviewViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModels\SAOverviewViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModels\SearchApplicationChoiceViewModel.cs" />
-    <Compile Include="ViewModels\SearchViewModels\SearchApplicationViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModels\ApplicationOverviewViewmodels.cs" />
     <Compile Include="ViewModels\SearchViewModels\SearchEmployeeViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModels\SearchInsuranceTakerCompanyViewModel.cs" />
@@ -200,6 +201,12 @@
     </Compile>
     <Compile Include="Views\SearchViews\LifeOverviewView.xaml.cs">
       <DependentUpon>LifeOverviewView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchViews\OPICApplicationOverview.xaml.cs">
+      <DependentUpon>OPICApplicationOverview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchViews\OPIPApplicationOverviewView.xaml.cs">
+      <DependentUpon>OPIPApplicationOverviewView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SearchViews\SAOverviewView.xaml.cs">
       <DependentUpon>SAOverviewView.xaml</DependentUpon>
@@ -344,6 +351,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SearchViews\LifeOverviewView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SearchViews\OPICApplicationOverview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SearchViews\OPIPApplicationOverviewView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

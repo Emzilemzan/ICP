@@ -4,6 +4,7 @@ using Models.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,49 +13,57 @@ using System.Windows.Input;
 
 namespace GUILayer.ViewModels.SearchViewModels
 {
-    public class ApplicationOverviewViewModels : BaseViewModel
+    public class OPIPApplicationOverviewViewModel : BaseViewModel
     {
-        public static readonly ApplicationOverviewViewModels Instance = new ApplicationOverviewViewModels();
+        public static readonly OPIPApplicationOverviewViewModel Instance = new OPIPApplicationOverviewViewModel();
 
-        private ApplicationOverviewViewModels()
+        public OPIPApplicationOverviewViewModel()
         {
-            UpdateAC();
-          
-
-        }
-        public void UpdateComboBoxes()
-        {
-            CompInsurances = UpdateSA();
-            OnPropertyChanged("CompInsurances");
+            Insurancess = UpdateInsurance();
             SalesMens = UpdateSM();
-            OnPropertyChanged("SalesMens");
-            CInsuranceTypes = new List<string>() { "Kombinerad företagsförsäkring", "Fastighet" };
-            OnPropertyChanged("CInsuranceTypes");
+            UpdateAC();
             PayMentForms = new List<string>() { "Helår", "Halvår", "Kvartal", "Månad" };
-            OnPropertyChanged("PayMentForms");
+            OPInsuranceTypes = UpdateOPI();
             InsuredPersons = UpdateInsuredPerson();
-            OnPropertyChanged("InsuredPersons");
         }
 
-        #region command 
-        private ICommand _updateBtn;
+        #region Commands 
+        // Update, Export and Remove buttons 
+        public bool CanCreate() => true;
 
+        private ICommand _updateBtn;
         public ICommand UpdateBtn
         {
-            get => _updateBtn ?? (_updateBtn = new RelayCommand(x => { Update();}));
+            get => _updateBtn ?? (_updateBtn = new RelayCommand(x => { UpdateApplication(); CanCreate(); }));
         }
 
-        public void Update()
+        private ICommand _exportBtn;
+        public ICommand ExportBtn
         {
-            if (SelectedInsurance != null && SelectedInsurance.Premie != 0 && SelectedInsurance.EndDate !=null && SelectedInsurance.StartDate !=null &&
-           SelectedInsurance.PaymentForm != null && SelectedInsurance.AgentNo !=null && SelectedInsurance.CompanyInsuranceType!= null && SelectedInsurance.EndDate != null && SelectedInsurance.InsuranceCompany != null)
+            get => _exportBtn ?? (_exportBtn = new RelayCommand(x => { ExportApplication(); CanCreate(); }));
+        }
+
+
+        private ICommand _removeBtn;
+        public ICommand RemoveBtn
+        {
+            get => _removeBtn ?? (_removeBtn = new RelayCommand(x => { RemoveApplication(); CanCreate(); }));
+        }
+
+
+        #endregion
+
+        #region Methods
+        public void UpdateApplication()
+        {
+            if (SelectedInsurance != null && SelectedInsurance.Table != null && SelectedInsurance.Premie != 0 &&
+             SelectedInsurance.PaymentForm != null && SelectedInsurance.AgentNo != null)
             {
+                SelectedInsurance.Table = Tabell;
                 SelectedInsurance.Premie = Premie;
                 SelectedInsurance.AgentNo = AgentNo;
                 SelectedInsurance.PaymentForm = PaymentForm;
                 SelectedInsurance.SerialNumber = SerialNumber;
-                SelectedInsurance.Notes = Notes;
-                SelectedInsurance.EndDate = EndDate;
                 Context.IController.Edit(SelectedInsurance);
 
                 MessageBox.Show($"Uppdateringen lyckades av: {SelectedInsurance.SerialNumber}", "Lyckad uppdatering", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -65,22 +74,11 @@ namespace GUILayer.ViewModels.SearchViewModels
             }
         }
 
-        private ICommand _exportBtn;
-
-        public ICommand ExportBtn
+        public void ExportApplication()
         {
-            get => _exportBtn ?? (_exportBtn = new RelayCommand(x => { Export(); }));
         }
 
-        public void Export()
-        {
-
-        }
-
-        private ICommand _removeBtn;
-        public ICommand RemoveBtn => _removeBtn ?? (_removeBtn = new RelayCommand(x => { Remove(); }));
-
-        public void Remove()
+        public void RemoveApplication()
         {
             if (SelectedInsurance != null)
             {
@@ -95,7 +93,7 @@ namespace GUILayer.ViewModels.SearchViewModels
                         Insurancess.Clear();
                         foreach (var i in Context.IController.GetAllInsurances())
                         {
-                            if (i.COI != null)
+                            if (i.OPI != null && i.PersonTaker !=null)
                             {
                                 Insurancess?.Add(i);
                             }
@@ -118,9 +116,10 @@ namespace GUILayer.ViewModels.SearchViewModels
                 MessageBox.Show("Antingen har ingen person markerats i registret eller så har du lämnat något fält tomt! ", "Fel", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
         #endregion
 
-        #region Updating methods
+        #region Methods for updating
         public ObservableCollection<SalesMen> UpdateSM()
         {
             ObservableCollection<SalesMen> x = new ObservableCollection<SalesMen>();
@@ -131,19 +130,33 @@ namespace GUILayer.ViewModels.SearchViewModels
             SalesMens = x;
             return SalesMens;
         }
-        public ObservableCollection<CompanyInsurance> UpdateSA()
+        public ObservableCollection<OtherPersonInsurance> UpdateOPI()
         {
-            ObservableCollection<CompanyInsurance> x = new ObservableCollection<CompanyInsurance>();
-            foreach (var e in Context.IController.GetAllCAI())
+            ObservableCollection<OtherPersonInsurance> x = new ObservableCollection<OtherPersonInsurance>
+            {
+                new OtherPersonInsurance() { OPIId = 0, OPIName = "Inget" }
+            };
+            foreach (var e in Context.IController.GetAllOPI())
             {
                 x?.Add(e);
             }
-
-            CompInsurances = x;
-
-            return CompInsurances;
+            OPInsuranceTypes = x;
+            return OPInsuranceTypes;
         }
 
+        public ObservableCollection<Insurance> UpdateInsurance()
+        {
+            ObservableCollection<Insurance> x = new ObservableCollection<Insurance>();
+
+            foreach (var e in Context.IController.GetAllInsurances())
+            {
+                if (e.OPI != null && e.PersonTaker != null)
+                    x?.Add(e);
+            }
+
+            Insurancess = x;
+            return Insurancess;
+        }
 
         public ObservableCollection<InsuredPerson> UpdateInsuredPerson()
         {
@@ -161,7 +174,7 @@ namespace GUILayer.ViewModels.SearchViewModels
             List<Insurance> x = new List<Insurance>();
             foreach (var e in Context.IController.GetAllInsurances())
             {
-                if (e.COI !=null)
+                if (e.OPI != null && e.PersonTaker != null)
                     x?.Add(e);
             }
             if (filter != "")
@@ -169,36 +182,183 @@ namespace GUILayer.ViewModels.SearchViewModels
                 List<Insurance> y = x;
                 x = new List<Insurance>();
                 foreach (Insurance i in y)
-                    if (i.SerialNumber.Contains(filter) || i.CompanyTaker.OrganizationNumber.Contains(filter) || i.TypeName.Contains(filter)
-                        || i.InsuredID.SocialSecurityNumberIP.Contains(filter) || i.CompanyTaker.ContactPerson.Contains(filter) || i.CompanyTaker.CompanyName.Contains(filter))
+                    if (i.SerialNumber.Contains(filter) || i.PersonTaker.SocialSecurityNumber.Contains(filter) || i.TypeName.Contains(filter)
+                        || i.InsuredID.SocialSecurityNumberIP.Contains(filter))
                         x.Add(i);
             }
             x?.ForEach(i => Insurancess.Add(i));
         }
 
+
         #endregion
 
         #region Lists
+        public ObservableCollection<OtherPersonInsurance> OPInsuranceTypes { get; set; }
         public List<string> PayMentForms { get; set; }
-        public List<string> CInsuranceTypes { get; set; }
         public ObservableCollection<SalesMen> SalesMens { get; set; }
         public ObservableCollection<InsuredPerson> InsuredPersons { get; set; }
-        public ObservableCollection<CompanyInsurance> CompInsurances { get; set; }
 
-        private ObservableCollection<Insurance> _insurance;
+        private ObservableCollection<Insurance> _insurances;
         public ObservableCollection<Insurance> Insurancess
         {
-            get => _insurance;
+            get => _insurances;
             set
             {
-                _insurance = value;
+                _insurances = value;
                 OnPropertyChanged("Insurancess");
+            }
+        }
+
+        private OtherPersonInsurance _Opip;
+        public OtherPersonInsurance OPIType
+        {
+            get => _Opip;
+            set
+            {
+                _Opip = value;
+                OnPropertyChanged("OPIType");
             }
         }
         #endregion
 
 
-        #region Properties
+        #region Properties Person
+        private string _sSN;
+        public string SocialSecurityNumber
+        {
+            get => _sSN;
+            set
+            {
+                _sSN = value;
+                OnPropertyChanged("SocialSecurityNumber");
+            }
+        }
+        private string _lname;
+        public string Lastname
+        {
+            get => _lname;
+            set
+            {
+                _lname = value;
+                OnPropertyChanged("Lastname");
+            }
+        }
+
+        private string _fname;
+        public string Firstname
+        {
+            get => _fname;
+            set
+            {
+                _fname = value;
+                OnPropertyChanged("Firstname");
+            }
+        }
+        private string _streetA;
+        public string StreetAddress
+        {
+            get => _streetA;
+            set
+            {
+                _streetA = value;
+                OnPropertyChanged("StreetAddress");
+            }
+        }
+        private int _pC;
+        public string PostalCode
+        {
+            get => _pC > 0 ? _pC.ToString() : "";
+            set
+            {
+                _pC = 0;
+                if (int.TryParse(value, out _pC) && PostalCode.Length == 5)
+                {
+
+                }
+                else if (Check == false)
+                {
+                    MessageBox.Show("Måste vara fem siffror");
+                }
+                OnPropertyChanged("PostalCode");
+            }
+        }
+        private string _city;
+        public string City
+        {
+            get => _city;
+            set
+            {
+                _city = value;
+                OnPropertyChanged("City");
+            }
+        }
+        private string _dCH;
+        public string DiallingCodeHome
+        {
+            get => _dCH;
+            set
+            {
+                _dCH = value;
+                OnPropertyChanged("DiallingCodeHome");
+            }
+        }
+        private string _dCW;
+        public string DiallingCodeWork
+        {
+            get => _dCW;
+            set
+            {
+                _dCW = value;
+                OnPropertyChanged("DiallingCodeWork");
+            }
+        }
+        private string _tNH;
+        public string TelephoneNbrHome
+        {
+            get => _tNH;
+            set
+            {
+                _tNH = value;
+                OnPropertyChanged("TelephoneNbrHome");
+            }
+        }
+        private string _tNW;
+        public string TelephoneNbrWork
+        {
+            get => _tNW;
+            set
+            {
+                _tNW = value;
+                OnPropertyChanged("TelephoneNbrWork");
+            }
+        }
+        private string _emailOne;
+        public string EmailOne
+        {
+            get => _emailOne;
+            set
+            {
+                _emailOne = value;
+                OnPropertyChanged("EmailOne");
+            }
+        }
+        private string _emailTwo;
+        public string EmailTwo
+        {
+            get => _emailTwo;
+            set
+            {
+                _emailTwo = value;
+                OnPropertyChanged("EmailTwo");
+            }
+        }
+
+
+
+        #endregion
+
+        #region Properties Insurance
+
         public SalesMen AgentNo
         {
             get => SelectedInsurance.AgentNo;
@@ -224,7 +384,6 @@ namespace GUILayer.ViewModels.SearchViewModels
                 OnPropertyChanged("AgentNo1");
             }
         }
-
         public string SerialNumber
         {
             get => SelectedInsurance.SerialNumber;
@@ -243,13 +402,13 @@ namespace GUILayer.ViewModels.SearchViewModels
                 OnPropertyChanged("InsuredPerson");
             }
         }
-        public Company Companyn
+        public Person Personen
         {
-            get => SelectedInsurance.CompanyTaker;
+            get => SelectedInsurance.PersonTaker;
             set
             {
-                SelectedInsurance.CompanyTaker = value;
-                OnPropertyChanged("CompanyTaker");
+                SelectedInsurance.PersonTaker = value;
+                OnPropertyChanged("Personen");
             }
         }
 
@@ -293,53 +452,28 @@ namespace GUILayer.ViewModels.SearchViewModels
             }
         }
 
-        public DateTime StartDate
+        public DateTime DeliveryDate
         {
             get
             {
                 if (SelectedInsurance != null)
                 {
-                    return SelectedInsurance.StartDate;
+                    return SelectedInsurance.DeliveryDate;
                 }
                 else
                 {
-                    return StartDate = DateTime.Now;
+                    return DeliveryDate = DateTime.Now;
                 }
             }
             set
             {
                 if (SelectedInsurance != null)
                 {
-                    SelectedInsurance.StartDate = value;
+                    SelectedInsurance.DeliveryDate = value;
                 }
-                OnPropertyChanged("StartDate");
+                OnPropertyChanged("DeliveryDate");
             }
         }
-
-        public DateTime EndDate
-        {
-            get
-            {
-                if (SelectedInsurance != null)
-                {
-                    return SelectedInsurance.EndDate;
-                }
-                else
-                {
-                    return EndDate = DateTime.Now;
-                }
-            }
-            set
-            {
-                if (SelectedInsurance != null)
-                {
-                    SelectedInsurance.EndDate = value;
-                }
-                OnPropertyChanged("EndDate");
-            }
-        }
-
-
         public string InsuranceNumber
         {
             get => SelectedInsurance.InsuranceNumber;
@@ -349,26 +483,6 @@ namespace GUILayer.ViewModels.SearchViewModels
                 OnPropertyChanged("InsuranceNumber");
             }
         }
-
-        public string Notes
-        {
-            get => SelectedInsurance.Notes;
-            set
-            {
-                SelectedInsurance.Notes = value;
-                OnPropertyChanged("Notes");
-            }
-        }
-        public string InsuranceCompany
-        {
-            get => SelectedInsurance.InsuranceCompany;
-            set
-            {
-                SelectedInsurance.InsuranceCompany = value;
-                OnPropertyChanged("InsuranceCompany");
-            }
-        }
-
         public int? PayMonth
         {
             get => SelectedInsurance.PayMonth;
@@ -399,35 +513,24 @@ namespace GUILayer.ViewModels.SearchViewModels
         }
         public List<int> Years { get; set; }
         public List<int> Months { get; set; }
-
+        //För att visa årtal i combobox. 
         public List<int> GetYears()
         {
             return Enumerable.Range(1950, DateTime.UtcNow.Year - 1949).Reverse().ToList();
         }
 
-        private Insurance _selectedInsurance;
+        private Insurance _si;
         public Insurance SelectedInsurance
         {
-            get => _selectedInsurance;
+            get => _si;
             set
             {
-
-                _selectedInsurance = value;
-                PayMentForms = null;
-                SalesMens = null;
-
+                _si = value;
                 OnPropertyChanged("SelectedInsurance");
-                if (SelectedInsurance != null)
-                {
-                    UpdateComboBoxes();
-                    EndDate = SelectedInsurance.EndDate;
-                    StartDate = SelectedInsurance.StartDate;
-                    OnPropertyChanged("EndDate");
-                    OnPropertyChanged("StartDate");
-
-                }
             }
         }
+
+        #endregion
 
         private bool _check;
         public bool Check
@@ -451,7 +554,5 @@ namespace GUILayer.ViewModels.SearchViewModels
 
             }
         }
-          #endregion
-
     }
 }

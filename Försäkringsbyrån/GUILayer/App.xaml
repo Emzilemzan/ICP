@@ -45,6 +45,12 @@
         <DataTemplate DataType="{x:Type svm:LifeOverviewViewModel}">
             <sv:LifeOverviewView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type svm:OPIPApplicationOverviewViewModel}">
+            <sv:OPIPApplicationOverviewView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type svm:OPICApplicationOverviewViewModel}">
+            <sv:OPICApplicationOverview/>
+        </DataTemplate>
         <DataTemplate DataType="{x:Type svm:ApplicationOverviewViewModels}">
             <sv:ApplicationOverviewViews/>
         </DataTemplate>

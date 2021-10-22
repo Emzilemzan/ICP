@@ -303,7 +303,6 @@ namespace GUILayer.ViewModels.SearchViewModels
                 {
                     Companies?.Add(c);
                 }
-
             }
             else
             {
