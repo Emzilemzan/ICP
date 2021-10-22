@@ -82,23 +82,20 @@ namespace GUILayer.ViewModels.SearchViewModels
         {
             if (SelectedInsurance != null)
             {
-
                 if (SelectedInsurance.InsuranceStatus != Status.Tecknad)
                 {
-                    MessageBoxResult result2 = MessageBox.Show("Vill du verkligen ta bort försäkringen? ", "Varning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-
+                    MessageBoxResult result2 = MessageBox.Show("Vill du verkligen ta bort ansökan?", "Varning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                     if (result2 == MessageBoxResult.Yes)
                     {
                         Context.IController.RemoveInsurance(SelectedInsurance);
 
-                        MessageBox.Show("Försäkringen är borttagen! ", "Varning", MessageBoxButton.OK, MessageBoxImage.Information);
-
+                        MessageBox.Show("Ansökan togs bort", "Lyckad borttagning", MessageBoxButton.OK, MessageBoxImage.Information);
                         Insurancess.Clear();
-                        foreach (var p in Context.IController.GetAllInsurances())
+                        foreach (var i in Context.IController.GetAllInsurances())
                         {
-                            if (p.OPI != null && p.PersonTaker !=null)
+                            if (i.OPI != null && i.PersonTaker !=null)
                             {
-                                Insurancess?.Add(p);
+                                Insurancess?.Add(i);
                             }
                         }
                         SignedInsuranceViewModel.Instance.UpdateAC();
@@ -107,7 +104,16 @@ namespace GUILayer.ViewModels.SearchViewModels
                     {
                         MessageBox.Show($"{SelectedInsurance.SerialNumber} är inte borttaget");
                     }
+
                 }
+                else
+                {
+                    MessageBox.Show("Tecknad försäkring kan inte tas bort!", "Lyckad borttagning", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Antingen har ingen person markerats i registret eller så har du lämnat något fält tomt! ", "Fel", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

@@ -608,6 +608,20 @@ namespace BussinessLayer.Seed
                     ContactPerson = null,
                     FaxNumber = null,
                     TelephoneNbr = "3102385",
+                },
+
+                  new Company()
+                {
+                    OrganizationNumber = "5569235848",
+                    PostalCode = 64145,
+                    StreetAddress = "Brunnsgatan 3",
+                    City = "Katrineholm",
+                    CompanyName = "Oliven fastighets AB",
+                    DiallingCode = "070",
+                    Email = null,
+                    ContactPerson = "Farsid Larsson",
+                    FaxNumber = null,
+                    TelephoneNbr = "87802608",
                 }
             };
             List<Company> NewList = new List<Company>();
@@ -722,6 +736,7 @@ namespace BussinessLayer.Seed
         private readonly string company1 = "5567893531";
         private readonly string company2 = "5563260701";
         private readonly string company3 = "5566925763";
+        private readonly string company4 = "5569235848";
 
         private readonly int sm1 = 7337;
         private readonly int sm2 = 2264;
@@ -731,8 +746,7 @@ namespace BussinessLayer.Seed
         private void GenerateInsurances()
         {
             List<Insurance> insurances = new List<Insurance>();
-            string str = "31/12/2023";
-            DateTime.TryParse(str, out DateTime dt);
+           
 
             insurances.Add(new Insurance()
             {
@@ -744,12 +758,29 @@ namespace BussinessLayer.Seed
                 PaymentForm = "Månad",
                 InsuranceCompany = "Länsförsäkringar",
                 CompanyTaker = BusinessController.Instance.ITController.GetCompany(company3),
-                EndDate = dt,
+                EndDate = DateTime.Today.AddYears(1),
                 StartDate = DateTime.Today,
                 Notes = null,
                 Premie = 789,
                 InsuranceStatus = Status.Otecknad,
                 CompanyInsuranceType = "Fastighet",
+            });
+            insurances.Add(new Insurance()
+            {
+                SerialNumber = "FF2",
+                AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm2),
+                TakerNbr = "5569235848",
+                TypeName = "Företagsförsäkring",
+                COI = BusinessController.Instance.IController.GetCI(1),
+                PaymentForm = "Helår",
+                InsuranceCompany = "Trygg hansa",
+                CompanyTaker = BusinessController.Instance.ITController.GetCompany(company4),
+                EndDate = DateTime.Today.AddYears(1).AddDays(13),
+                StartDate = DateTime.Today.AddDays(13),
+                Notes = null,
+                Premie = 789,
+                InsuranceStatus = Status.Otecknad,
+                CompanyInsuranceType = "Kombinerad företagsförsäkring",
             });
 
             insurances.Add(new Insurance()

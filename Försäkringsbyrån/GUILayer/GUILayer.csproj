@@ -118,7 +118,6 @@
     <Compile Include="ViewModels\SearchViewModels\OPIPApplicationOverviewViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModels\SAOverviewViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModels\SearchApplicationChoiceViewModel.cs" />
-    <Compile Include="ViewModels\SearchViewModels\SearchApplicationViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModels\ApplicationOverviewViewmodels.cs" />
     <Compile Include="ViewModels\SearchViewModels\SearchEmployeeViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModels\SearchInsuranceTakerCompanyViewModel.cs" />

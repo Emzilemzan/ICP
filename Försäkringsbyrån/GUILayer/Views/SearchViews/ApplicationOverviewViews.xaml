@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:xctk1="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:xctk1="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:searchviewmodels="clr-namespace:GUILayer.ViewModels.SearchViewModels" d:DataContext="{d:DesignInstance Type=searchviewmodels:ApplicationOverviewViewModels}"
              xmlns:local="clr-namespace:GUILayer.Views.SearchViews"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="1100">
@@ -28,7 +28,7 @@
                                 Foreground="Black"
                                 Background="Transparent" BorderBrush="Transparent"
                                 Text="{Binding SearchInput, UpdateSourceTrigger=PropertyChanged}" RenderTransformOrigin="0.389,0.307" Margin="0,0.333"/>
-            <DataGrid x:Name ="InsuranceGrid" Grid.Row="2" Grid.Column="0" AutoGenerateColumns="False" ItemsSource="{Binding Insurances, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            <DataGrid x:Name ="InsuranceGrid" Grid.Row="2" Grid.Column="0" AutoGenerateColumns="False" ItemsSource="{Binding Insurancess, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                   RowDetailsVisibilityMode="VisibleWhenSelected" 
                   IsReadOnly="True" 
                   SelectedItem="{Binding SelectedInsurance, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
@@ -40,11 +40,14 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Status" Binding="{Binding Path=InsuranceStatus}"/>
                     <DataGridTextColumn Header="Löpnummer" Binding="{Binding Path =SerialNumber}"/>
-                    <DataGridTextColumn Header="Försäkringstagare" Binding="{Binding Path = Company.OrganizationNumber}" />
+                    <DataGridTextColumn Header="Försäkringstagare" Binding="{Binding Path = CompanyTaker.OrganizationNumber, UpdateSourceTrigger=PropertyChanged}" />
+                    <DataGridTextColumn Header="Företagsnamn" Binding="{Binding Path= CompanyTaker.CompanyName, UpdateSourceTrigger=PropertyChanged}" />
                     <DataGridTextColumn Header="Försäkringstyp" Binding="{Binding Path= TypeName}" />
                     <DataGridTextColumn Header="Ankomstdatum" Binding="{Binding Path= DeliveryDate}" />
-                    <DataGridTextColumn Header="Agentnummer" Binding="{Binding Path=AgentNo.AgentNo}"/>
+                    <DataGridTextColumn Header="Agentnummer" Binding="{Binding AgentNo.AgentNumber, UpdateSourceTrigger=PropertyChanged}"/>
                     <DataGridTextColumn Header="Försäkringsnummer" Binding="{Binding Path= InsuranceNumber}" />
+                    <DataGridTextColumn Header="Kontakt" Binding="{Binding Path= CompanyTaker.ContactPerson, UpdateSourceTrigger=PropertyChanged}"/>
+
                 </DataGrid.Columns>
                 <DataGrid.Resources>
                     <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="LightBlue"/>
@@ -83,7 +86,21 @@
                 </Grid.RowDefinitions>
                 <Label Content="Markerad försäkring" FontSize="20" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,118,0"/>
                 <TextBlock Text="Försäkringstyp: " FontSize="20" Grid.Row="1" Grid.Column="0" Margin="0,10,165.667,10"/>
-                <ComboBox Name="Företagsförsäkring" IsEnabled="False" Height="30" Grid.Row="1" Margin="148,10,9.667,10" />
+                <ComboBox Name="Företagsförsäkring" IsEnabled="False" Height="30" Grid.Row="1" Margin="148,10,9.667,10" ItemsSource="{Binding CompInsurances, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedItem="{Binding SelectedInsurance.COI, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.RowSpan="2">
+                    <ComboBox.Resources>
+                        <DataTemplate x:Key="DataTemplateSA">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="{Binding Path = COIName}" Grid.Column="1" />
+                            </Grid>
+                        </DataTemplate>
+                    </ComboBox.Resources>
+                    <ComboBox.ItemTemplate>
+                        <StaticResource ResourceKey="DataTemplateSA"/>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
 
                 <TextBlock Text="Försäkringstagarens uppgifter " FontSize="18" Grid.Row="2" Grid.Column="0" Margin="10"/>
                 <Label Grid.Row="3" Grid.Column="0" Content="Organisationsnummer:" FontSize="15"/>
@@ -97,7 +114,7 @@
                 <Label Grid.Row="2" Grid.Column="1" Content="Löpnummer:" FontSize="15" />
                 <TextBox Grid.Row="2" IsReadOnly="true" Height="20" Grid.Column="1" Margin="10.333,25,9.667,5" Text="{Binding SelectedInsurance.SerialNumber}"/>
                 <Label Grid.Row="3" Grid.Column="1" Content="Försäkringsbolag:" FontSize="15"/>
-                <TextBox Grid.Row="3" Height="20" Grid.Column="1" Margin="10.333,25,9.667,9.667" Text="{Binding SelectedInsurance.CompanyTaker.InsuranceCompany}"/>
+                <TextBox Grid.Row="3" Height="20" Grid.Column="1" Margin="10.333,25,9.667,9.667" Text="{Binding SelectedInsurance.InsuranceCompany}"/>
                 <Label Grid.Row="4" Grid.Column="1" Content="Typ av försäkring:" FontSize="15"/>
                 <ComboBox Grid.Row="4" Grid.Column="1" Margin="10,24.667,9.333,10" ItemsSource="{Binding CInsuranceTypes}" Text="{Binding SelectedInsurance.CompanyInsuranceType}" SelectedItem="{Binding SelectedInsurance.CompanyInsuranceType}"/>
                 <Label Grid.Row="5" Grid.Column="1" Content="Premie:" FontSize="15"/>

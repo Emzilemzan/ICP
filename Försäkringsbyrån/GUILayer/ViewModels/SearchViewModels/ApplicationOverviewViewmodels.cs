@@ -1,4 +1,5 @@
 ﻿using GUILayer.Commands;
+using GUILayer.ViewModels.InsuranceViewModels;
 using Models.Models;
 using System;
 using System.Collections.Generic;
@@ -23,11 +24,16 @@ namespace GUILayer.ViewModels.SearchViewModels
         }
         public void UpdateComboBoxes()
         {
-            Insurancess = UpdateInsurance();
+            CompInsurances = UpdateSA();
+            OnPropertyChanged("CompInsurances");
             SalesMens = UpdateSM();
+            OnPropertyChanged("SalesMens");
             CInsuranceTypes = new List<string>() { "Kombinerad företagsförsäkring", "Fastighet" };
+            OnPropertyChanged("CInsuranceTypes");
             PayMentForms = new List<string>() { "Helår", "Halvår", "Kvartal", "Månad" };
+            OnPropertyChanged("PayMentForms");
             InsuredPersons = UpdateInsuredPerson();
+            OnPropertyChanged("InsuredPersons");
         }
 
         #region command 
@@ -40,10 +46,9 @@ namespace GUILayer.ViewModels.SearchViewModels
 
         public void Update()
         {
-            if (SelectedInsurance != null && SelectedInsurance.Table != null && SelectedInsurance.Premie != 0 &&
-           SelectedInsurance.PaymentForm != null && SelectedInsurance.AgentNo != null && SelectedInsurance.EndDate != null)
+            if (SelectedInsurance != null && SelectedInsurance.Premie != 0 && SelectedInsurance.EndDate !=null && SelectedInsurance.StartDate !=null &&
+           SelectedInsurance.PaymentForm != null && SelectedInsurance.AgentNo !=null && SelectedInsurance.CompanyInsuranceType!= null && SelectedInsurance.EndDate != null && SelectedInsurance.InsuranceCompany != null)
             {
-                SelectedInsurance.Table = Tabell;
                 SelectedInsurance.Premie = Premie;
                 SelectedInsurance.AgentNo = AgentNo;
                 SelectedInsurance.PaymentForm = PaymentForm;
@@ -73,15 +78,45 @@ namespace GUILayer.ViewModels.SearchViewModels
         }
 
         private ICommand _removeBtn;
-
-        public ICommand RemoveBtn
-        {
-            get => _removeBtn ?? (_removeBtn = new RelayCommand(x => { Remove(); }));
-        }
+        public ICommand RemoveBtn => _removeBtn ?? (_removeBtn = new RelayCommand(x => { Remove(); }));
 
         public void Remove()
         {
+            if (SelectedInsurance != null)
+            {
+                if (SelectedInsurance.InsuranceStatus != Status.Tecknad)
+                {
+                    MessageBoxResult result2 = MessageBox.Show("Vill du verkligen ta bort ansökan?", "Varning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                    if (result2 == MessageBoxResult.Yes)
+                    {
+                        Context.IController.RemoveInsurance(SelectedInsurance);
 
+                        MessageBox.Show("Ansökan togs bort", "Lyckad borttagning", MessageBoxButton.OK, MessageBoxImage.Information);
+                        Insurancess.Clear();
+                        foreach (var i in Context.IController.GetAllInsurances())
+                        {
+                            if (i.COI != null)
+                            {
+                                Insurancess?.Add(i);
+                            }
+                        }
+                        SignedInsuranceViewModel.Instance.UpdateAC();
+                    }
+                    else
+                    {
+                        MessageBox.Show($"{SelectedInsurance.SerialNumber} är inte borttaget");
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("Tecknad försäkring kan inte tas bort!", "Lyckad borttagning", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Antingen har ingen person markerats i registret eller så har du lämnat något fält tomt! ", "Fel", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
         #endregion
 
@@ -96,20 +131,19 @@ namespace GUILayer.ViewModels.SearchViewModels
             SalesMens = x;
             return SalesMens;
         }
-      
-        public ObservableCollection<Insurance> UpdateInsurance()
+        public ObservableCollection<CompanyInsurance> UpdateSA()
         {
-            ObservableCollection<Insurance> x = new ObservableCollection<Insurance>();
-
-            foreach (var e in Context.IController.GetAllInsurances())
+            ObservableCollection<CompanyInsurance> x = new ObservableCollection<CompanyInsurance>();
+            foreach (var e in Context.IController.GetAllCAI())
             {
-                if (e.OPI != null && e.CompanyTaker != null)
-                    x?.Add(e);
+                x?.Add(e);
             }
 
-            Insurancess = x;
-            return Insurancess;
+            CompInsurances = x;
+
+            return CompInsurances;
         }
+
 
         public ObservableCollection<InsuredPerson> UpdateInsuredPerson()
         {
@@ -127,7 +161,7 @@ namespace GUILayer.ViewModels.SearchViewModels
             List<Insurance> x = new List<Insurance>();
             foreach (var e in Context.IController.GetAllInsurances())
             {
-                if (e.OPI != null && e.CompanyTaker != null)
+                if (e.COI !=null)
                     x?.Add(e);
             }
             if (filter != "")
@@ -149,6 +183,7 @@ namespace GUILayer.ViewModels.SearchViewModels
         public List<string> CInsuranceTypes { get; set; }
         public ObservableCollection<SalesMen> SalesMens { get; set; }
         public ObservableCollection<InsuredPerson> InsuredPersons { get; set; }
+        public ObservableCollection<CompanyInsurance> CompInsurances { get; set; }
 
         private ObservableCollection<Insurance> _insurance;
         public ObservableCollection<Insurance> Insurancess
@@ -370,14 +405,27 @@ namespace GUILayer.ViewModels.SearchViewModels
             return Enumerable.Range(1950, DateTime.UtcNow.Year - 1949).Reverse().ToList();
         }
 
-        private Insurance _si;
+        private Insurance _selectedInsurance;
         public Insurance SelectedInsurance
         {
-            get => _si;
+            get => _selectedInsurance;
             set
             {
-                _si = value;
+
+                _selectedInsurance = value;
+                PayMentForms = null;
+                SalesMens = null;
+
                 OnPropertyChanged("SelectedInsurance");
+                if (SelectedInsurance != null)
+                {
+                    UpdateComboBoxes();
+                    EndDate = SelectedInsurance.EndDate;
+                    StartDate = SelectedInsurance.StartDate;
+                    OnPropertyChanged("EndDate");
+                    OnPropertyChanged("StartDate");
+
+                }
             }
         }
 
