@@ -61,7 +61,7 @@
                 <Label Content="Användarnamn" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,21,260.333,0" Grid.RowSpan="2"/>
                 <TextBox Grid.Row="1" x:Name="tbUsername" IsReadOnly="True" Grid.Column="1" Text="{Binding SelectedPerson.Username, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="0.667,0,102.333,0"/>
                 <Label Content="Lösenord" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Margin="0,0,277.333,0.333"/>
-                <TextBox Grid.Row="2" x:Name="tbPassword" Grid.Column="1" Text="{Binding SelectedPerson.Password, UpdateSourceTrigger=PropertyChanged,  Mode=TwoWay}" Margin="0.667,0,102.333,0"/>
+                <TextBox Grid.Row="2" CharacterCasing="Upper" x:Name="tbPassword" Grid.Column="1" Text="{Binding SelectedPerson.Password, UpdateSourceTrigger=PropertyChanged,  Mode=TwoWay}" Margin="0.667,0,102.333,0"/>
                 <Label Content="Förnamn" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Margin="0,0,277,0"/>
                 <TextBox Grid.Row="3" x:Name="tbFirstname" Grid.Column="1" Text="{Binding SelectedPerson.Firstname, UpdateSourceTrigger=PropertyChanged,  Mode=TwoWay}" Margin="0.667,0,102.333,0"/>
                 <Label Content="Efternamn" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" Margin="0,0,277,0"/>

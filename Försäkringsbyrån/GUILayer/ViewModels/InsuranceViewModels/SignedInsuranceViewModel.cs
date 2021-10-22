@@ -236,6 +236,8 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             }
         }
 
+
+
         #endregion
 
     }

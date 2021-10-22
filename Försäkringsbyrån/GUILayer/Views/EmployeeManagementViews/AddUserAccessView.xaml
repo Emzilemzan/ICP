@@ -30,9 +30,9 @@
                 </Grid.RowDefinitions>
                 <Label Content="Behörig "  FontSize="15" FontWeight="Bold"></Label>
                 <Label  Grid.Column="0" Grid.Row="1" Content="Användarnamn:"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Path= Username, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}" Margin="0.333,0,-133.667,0"/>
+                <TextBox CharacterCasing="Upper" Grid.Row="1" Grid.Column="1" Text="{Binding Path= Username, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}" Margin="0.333,0,-133.667,0"/>
                 <Label Grid.Row="2" Grid.Column="0" Content="Lösenord:" Margin="0,0.667,0,0"/>
-                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path= Password, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}" Margin="0.333,0,-133.667,-0.333" Grid.RowSpan="2" />
+                <TextBox CharacterCasing="Upper" Grid.Row="2" Grid.Column="1" Text="{Binding Path= Password, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}" Margin="0.333,0,-133.667,-0.333" Grid.RowSpan="2" />
                 <Label  Grid.Column="0" Grid.Row="3" Content="Förnamn:"/>
                 <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Path= Firstname, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}" Margin="0.333,0,-133.667,0"/>
                 <Label Grid.Row="4" Grid.Column="0" Content="Efternamn:" Margin="0,0.667,0,0"/>

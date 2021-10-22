@@ -21,17 +21,13 @@ namespace GUILayer.ViewModels.SearchViewModels
             BaseAmountsOP2 = new List<int>() { 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000 };
             SalesMens = UpdateSM();
             PayMentForms = new List<string>() { "Helår", "Halvår", "Kvartal", "Månad" };
-            OptionalTypes = UpdateOptionalType();
-            OptionalTypes1 = UpdateOptionalType1();
-            OptionalTypes2 = UpdateOptionalType2();
             SAInsuranceTypes = UpdateSA();
             BaseAmountTabell = UpdateBaseTable();
             BaseAmounts1 = UpdateBaseAmount();
             Insurances = UpdateInsurance();
-            //OptionalType = OptionalTypes[0];
-            //OptionalType1 = OptionalTypes1[0];
-            //OptionalType2 = OptionalTypes2[0];
+            SelectedInsurance = Insurances[0];
         }
+
         #region command 
         private ICommand _updateBtn;
 
@@ -40,9 +36,50 @@ namespace GUILayer.ViewModels.SearchViewModels
             get => _updateBtn ?? (_updateBtn = new RelayCommand(x => { Update(); }));
         }
 
+        public List<OptionalType> UpdateOT()
+        {
+            OptionalType a = new OptionalType();
+            OptionalType b = new OptionalType();
+            OptionalType c = new OptionalType();
+            a = Context.IController.GetOPT(1);
+            b = Context.IController.GetOPT(2);
+            c = Context.IController.GetOPT(3);
+            List<OptionalType> x = new List<OptionalType>();
+            if (BARLL != 0)
+            {
+                x.Add(b);
+            }
+            if (BAmount != 0)
+            {
+                x.Add(c);
+            }
+            if (BAmount1 != 0)
+            {
+                x.Add(a);
+            }
+            return x;
+        }
+
         public void Update()
         {
-
+            if (SelectedInsurance != null && PaymentForm != null && SAIType != null && AgentNo != null && SerialNumber != null
+                && BaseTabel != null)
+            {
+                SelectedInsurance.PaymentForm = PaymentForm;
+                SelectedInsurance.OptionalTypes = OptionalTypes;  //fungerar ej byter ut andras lista??
+                SelectedInsurance.SAI = SAIType;
+                SelectedInsurance.AgentNo = AgentNo;
+                SelectedInsurance.SerialNumber = SerialNumber;
+                SelectedInsurance.BaseAmountValue = BARLL;
+                SelectedInsurance.BaseAmountValue2 = BAmount;
+                SelectedInsurance.BaseAmountValue3 = BAmount1;
+                SelectedInsurance.BaseAmountValue4 = BaseAmount = Instance.BaseTabel.BaseAmount;
+                Context.IController.Edit(SelectedInsurance);
+            }
+            else
+            {
+                MessageBox.Show("Du måste markera en försäkring i registret eller ha fyllt i alla fält med en *", "Fel", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private ICommand _exportBtn;
@@ -69,59 +106,61 @@ namespace GUILayer.ViewModels.SearchViewModels
 
         }
         #endregion
-
-        #region method
-        private List<OptionalType> OTypes()
+        private ICommand _valusBtn;
+        public ICommand WhatValuesOP1Btn => _valusBtn ?? (_valusBtn = new RelayCommand(x => { WhatValuesOP1(); }));
+        private void WhatValuesOP1()
         {
-            OptionalType a = new OptionalType();
-            OptionalType b = new OptionalType();
-            OptionalType c = new OptionalType();
-
-            if (ACheck == true)
-            {
-                if (OptionalType != null && BAmount != 0)
-                    a = OptionalType;
-                else
-                {
-                    MessageBox.Show("Om någon checkbox för tillval är i klickad måste du också ha fyllt i tillhörande uppgifter");
-                }
-            }
-            if (BCheck == true)
-            {
-                if (OptionalType1 != null && BAmount != 0)
-                    b = OptionalType1;
-                else
-                {
-                    MessageBox.Show("Om någon checkbox för tillval är i klickad måste du också ha fyllt i tillhörande uppgifter");
-                }
-            }
-            if (CCheck == true)
-            {
-                if (OptionalType2 != null && BARLL != null)
-                    c = OptionalType2;
-                else
-                {
-                    MessageBox.Show("Om någon checkbox för tillval är i klickad måste du också ha fyllt i tillhörande uppgifter");
-                }
-            }
-            List<OptionalType> y = new List<OptionalType>() { a, b, c };
-            return y;
+            MessageBox.Show("De grundbelopp du kan skriva in är: 100000, 200000, 300000, 400000, 500000, 600000, 700000, 800000", "Grundbelopp för tillval", MessageBoxButton.OK, MessageBoxImage.Information);
         }
-        #endregion
+        private ICommand _valusOP2Btn;
+        public ICommand WhatValuesOP2Btn => _valusOP2Btn ?? (_valusOP2Btn = new RelayCommand(x => { WhatValuesOP2(); }));
+        private void WhatValuesOP2()
+        {
+            MessageBox.Show("De grundbelopp du kan skriva in är: 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000", "Grundbelopp för tillval", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private ICommand _valusBase;
+        public ICommand WhatValuesSABtn => _valusBase ?? (_valusBase = new RelayCommand(x => { WhatValuesSA(); }));
+        private void WhatValuesSA()
+        {
+            //kod för att hitta grundbeloppen i baseamounttable som går att välja mellan för den SAI
+        }
+
+        //Update all baseamounts for a specific sainsurances and for the delivery year.  
+        public ICollection<BaseAmountTabel> UpdateBaseTable()
+        {
+            List<BaseAmountTabel> x = new List<BaseAmountTabel>();
+            if (SelectedInsurance != null)
+            {
+                foreach (var e in Context.BDController.GetAllTables())
+                {
+                    if (DateTime.Today.Year.Equals(e.Date.Year))
+                    {
+                        x?.Add(e);
+                    }
+                }
+            }
+            BaseAmountTabell = x;
+            return BaseAmountTabell;
+        }
+
 
         #region updatelists
         //Update all baseamounts for a specific sainsurance and for the delivery year.  
         public ICollection<BaseAmount> UpdateBaseAmount()
         {
             List<BaseAmount> x = new List<BaseAmount>();
-
-            foreach (var e in Context.BDController.GetAllBaseAmount())
+            if (SelectedInsurance != null)
             {
-                if (Date.Year.Equals(e.Date.Year))
+                foreach (var e in Context.BDController.GetAllBaseAmount())
                 {
-                    x?.Add(e);
+                    if (SelectedInsurance.DeliveryDate.Year.Equals(e.Date.Year))
+                    {
+                        x?.Add(e);
+                    }
                 }
             }
+
             BaseAmounts1 = x;
             return BaseAmounts1;
         }
@@ -141,7 +180,6 @@ namespace GUILayer.ViewModels.SearchViewModels
         public ObservableCollection<SAInsurance> UpdateSA()
         {
             ObservableCollection<SAInsurance> x = new ObservableCollection<SAInsurance>();
-
             foreach (var e in Context.IController.GetAllSAI())
             {
                 x?.Add(e);
@@ -156,58 +194,15 @@ namespace GUILayer.ViewModels.SearchViewModels
         public ObservableCollection<Insurance> UpdateInsurance()
         {
             ObservableCollection<Insurance> x = new ObservableCollection<Insurance>();
-                foreach (var e in Context.IController.GetAllInsurances())
-                {
-                    if (e.SAI != null)
-                        x?.Add(e);
-                }
+            foreach (var e in Context.IController.GetAllInsurances())
+            {
+                if (e.SAI != null)
+                    x?.Add(e);
+            }
 
             Insurances = x;
 
             return Insurances;
-        }
-
-        //OptionalTypeList filled with only one choice. 
-        public ObservableCollection<OptionalType> UpdateOptionalType()
-        {
-            ObservableCollection<OptionalType> x = new ObservableCollection<OptionalType>();
-            foreach (var e in Context.IController.GetAllOPT())
-            {
-                if (e.OptionalName == "Månadsersättning vid långvarig sjukskrivning")
-                {
-                    x?.Add(e);
-                }
-            }
-            OptionalTypes = x;
-            return OptionalTypes;
-        }
-        //OptionalTypeList filled with only one choice. 
-        private ObservableCollection<OptionalType> UpdateOptionalType1()
-        {
-            ObservableCollection<OptionalType> x = new ObservableCollection<OptionalType>();
-            foreach (var e in Context.IController.GetAllOPT())
-            {
-                if (e.OptionalName == "Invaliditet vid olycksfall")
-                {
-                    x?.Add(e);
-                }
-            }
-            OptionalTypes1 = x;
-            return OptionalTypes1;
-        }
-        //OptionalTypeList filled with only one choice. 
-        private ObservableCollection<OptionalType> UpdateOptionalType2()
-        {
-            ObservableCollection<OptionalType> x = new ObservableCollection<OptionalType>();
-            foreach (var e in Context.IController.GetAllOPT())
-            {
-                if (e.OptionalName == "Höjning av livförsäkring")
-                {
-                    x?.Add(e);
-                }
-            }
-            OptionalTypes2 = x;
-            return OptionalTypes2;
         }
 
         public ObservableCollection<InsuredPerson> UpdateInsuredPersons()
@@ -236,24 +231,42 @@ namespace GUILayer.ViewModels.SearchViewModels
             return Persons;
         }
 
-        //Update all baseamounts for a specific sainsurances and for the delivery year.  
-        public ICollection<BaseAmountTabel> UpdateBaseTable()
-        {
-            List<BaseAmountTabel> x = new List<BaseAmountTabel>();
 
-            foreach (var e in Context.BDController.GetAllTables())
+
+        private string _searchInput;
+        public string SearchInput
+        {
+            get => _searchInput;
+            set
             {
-                if (Date.Year.Equals(e.Date.Year))
-                {
-                    x?.Add(e);
-                }
+                _searchInput = value;
+                UpdateAC(SearchInput);
+                OnPropertyChanged("SearchInput");
+
             }
-            BaseAmountTabell = x;
-            return BaseAmountTabell;
         }
 
+        public void UpdateAC(string filter = "")
+        {
+            Insurances = new ObservableCollection<Insurance>();
+            List<Insurance> x = new List<Insurance>();
+            foreach (var e in Context.IController.GetAllInsurances())
+            {
+                if (e.SAI != null)
+                    x?.Add(e);
+            }
+            if (filter != "")
+            {
+                List<Insurance> y = x;
+                x = new List<Insurance>();
+                foreach (Insurance i in y)
+                    if (i.SerialNumber.Contains(filter) || i.PersonTaker.SocialSecurityNumber.Contains(filter) || i.TypeName.Contains(filter)
+                        || i.InsuredID.SocialSecurityNumberIP.Contains(filter))
+                        x.Add(i);
+            }
+            x?.ForEach(i => Insurances.Add(i));
+        }
         #endregion
-
 
         #region list
         public List<int> BaseAmountsOP1 { get; set; }
@@ -261,13 +274,17 @@ namespace GUILayer.ViewModels.SearchViewModels
         public ObservableCollection<InsuredPerson> InsuredPersons { get; set; } = new ObservableCollection<InsuredPerson>();
 
         public ObservableCollection<Person> Persons { get; set; } = new ObservableCollection<Person>();
-        //First list
-        public ObservableCollection<OptionalType> OptionalTypes { get; set; }
-        // Second list
-        public ObservableCollection<OptionalType> OptionalTypes1 { get; set; }
-        // Third list
-        public ObservableCollection<OptionalType> OptionalTypes2 { get; set; }
-        public ObservableCollection<Insurance> Insurances { get; set; }
+        
+        private ObservableCollection<Insurance> _insurances;
+        public ObservableCollection<Insurance> Insurances
+        {
+            get => _insurances;
+            set
+            {
+                _insurances = value;
+                OnPropertyChanged("Applications");
+            }
+        }
         public List<string> PersonTypes { get; set; }
         public ICollection<BaseAmount> BaseAmounts1 { get; set; }
         public ObservableCollection<SAInsurance> SAInsuranceTypes { get; set; }
@@ -277,6 +294,7 @@ namespace GUILayer.ViewModels.SearchViewModels
         #endregion
 
         #region properties
+
         private BaseAmountTabel _baseTbl;
         public BaseAmountTabel BaseTabel
         {
@@ -288,21 +306,22 @@ namespace GUILayer.ViewModels.SearchViewModels
             }
         }
 
-        private SAInsurance _Stype;
-        //The selection of _Stype is responsible for populating the BaseAmountTabell collection based on their date.
+
+        //The selection of SAItype is responsible for populating the BaseAmountTabell collection based on their date.
         public SAInsurance SAIType
         {
-            get => _Stype;
+            get => SelectedInsurance.SAI;
+
             set
             {
-                _Stype = value;
+                SelectedInsurance.SAI = value;
                 OnPropertyChanged("SAIType");
-                if (_Stype != null)
+                if (SelectedInsurance.SAI != null)
                 {
                     List<BaseAmountTabel> Bases = new List<BaseAmountTabel>();
-                    foreach (var e in this.BaseAmountTabell = _Stype.Tabels)
+                    foreach (var e in this.BaseAmountTabell = SelectedInsurance.SAI.Tabels)
                     {
-                        if (!Date.Year.Equals(e.Date.Year))
+                        if (!SelectedInsurance.DeliveryDate.Year.Equals(e.Date.Year))
                             Bases.Add(e);
                     }
                     foreach (var f in Bases)
@@ -311,106 +330,9 @@ namespace GUILayer.ViewModels.SearchViewModels
                     }
                     OnPropertyChanged("BaseAmountTabell");
                 }
-            }
-        }
-        #region Optionaltype 
-        private OptionalType _opType;
-        public OptionalType OptionalType
-        {
-            get
-            {
-                if (SelectedInsurance != null)
-                {
-                    if (SelectedInsurance.OptionalTypes.Contains(Op()))
-                    {
-                        return _opType;
-                    }
-                    else
-                    {
-                        return _opType = null;
-                    }
-                }
-                else
-                {
-                    return _opType = null;
-                }
-            }
-            set
-            {
-                _opType = value;
-                OnPropertyChanged("OptionalType");
-            }
-        }
 
-        private OptionalType _opType1;
-        public OptionalType OptionalType1
-        {
-            get
-            {
-                if (SelectedInsurance != null)
-                {
-                    if (SelectedInsurance.OptionalTypes.Contains(Op1()))
-                    {
-                        return _opType1;
-                    }
-                    else
-                    {
-                        return _opType1 = null;
-                    }
-                }
-                else
-                {
-                    return _opType1 = null;
-                }
-            }
-            set
-            {
-                _opType1 = value;
-                OnPropertyChanged("OptionalType1");
-            }
-
-        }
-
-        private OptionalType _opType2;
-        public OptionalType OptionalType2
-        {
-            get
-            {
-                if (SelectedInsurance != null)
-                {
-                    if (SelectedInsurance.OptionalTypes.Contains(Op2()))
-                    {
-                        return _opType2;
-                    }
-                    else
-                    {
-                        return _opType2 = null;
-                    }
-                }
-                else
-                {
-                    return _opType2 = null;
-                }
-            }
-            set
-            {
-                _opType2 = value;
-                OnPropertyChanged("OptionalType2");
             }
         }
-        public OptionalType Op()
-        {
-            return Context.IController.GetOPT(3);
-        }
-        public OptionalType Op1()
-        {
-            return Context.IController.GetOPT(1);
-        }
-        public OptionalType Op2()
-        {
-            return Context.IController.GetOPT(2);
-        }
-        #endregion
         
         public SalesMen AgentNo
         {
@@ -419,8 +341,25 @@ namespace GUILayer.ViewModels.SearchViewModels
             {
                 SelectedInsurance.AgentNo = value;
                 OnPropertyChanged("AgentNo");
+                if (AgentNo != null)
+                {
+                    AgentNo1 = SelectedInsurance.AgentNo;
+                    OnPropertyChanged("AgentNo1");
+                }
             }
         }
+
+        private SalesMen _an;
+        public SalesMen AgentNo1
+        {
+            get => _an;
+            set
+            {
+                _an = value;
+                OnPropertyChanged("AgentNo1");
+            }
+        }
+
         public string SerialNumber
         {
             get => SelectedInsurance.SerialNumber;
@@ -468,6 +407,7 @@ namespace GUILayer.ViewModels.SearchViewModels
                 OnPropertyChanged("PaymentForm");
             }
         }
+        //Int for BaseAmountValue for Optionaltype: "Höjning av livförsäkring"
         public int BARLL
         {
             get => SelectedInsurance.BaseAmountValue;
@@ -477,6 +417,7 @@ namespace GUILayer.ViewModels.SearchViewModels
                 OnPropertyChanged("BARLL");
             }
         }
+        //Int for BaseAmountValue for Optionaltype: "Månadsersättning vid långvarig sjukskrivning"
         public int BAmount
         {
             get => SelectedInsurance.BaseAmountValue2;
@@ -486,6 +427,7 @@ namespace GUILayer.ViewModels.SearchViewModels
                 OnPropertyChanged("BAmount");
             }
         }
+        //Int for BaseAmountValue for Optionaltype: "Invaliditet vid olycksfall"
         public int BAmount1
         {
             get => SelectedInsurance.BaseAmountValue3;
@@ -541,28 +483,29 @@ namespace GUILayer.ViewModels.SearchViewModels
             }
         }
 
-        public DateTime Date
+        public ICollection<OptionalType> OptionalTypes 
         {
-            get
-            {
-                if (SelectedInsurance != null)
-                {
-                    return SelectedInsurance.DeliveryDate;
-                }
-                else
-                {
-                    return Date = DateTime.Now;
-                }
-            }
+            get => SelectedInsurance.OptionalTypes;
+
             set
             {
-                if (SelectedInsurance != null)
-                {
-                    SelectedInsurance.DeliveryDate = value;
-                }
-                OnPropertyChanged("DeliveryDate");
+                SelectedInsurance.OptionalTypes = UpdateOT();
+                OnPropertyChanged("OptionalTypes");
             }
+        
         }
+
+
+
+        //public DateTime Date
+        //{
+        //    get => SelectedInsurance.DeliveryDate;  //kraschar bara här? varför? 
+        //    set
+        //    {
+        //        SelectedInsurance.DeliveryDate = value;
+        //        OnPropertyChanged("DeliveryDate");
+        //    }
+        //}
 
         private Insurance _selectedInsurance;
         public Insurance SelectedInsurance
@@ -577,61 +520,6 @@ namespace GUILayer.ViewModels.SearchViewModels
 
 
         #endregion
-        #region bools for three checkboxes
-        private bool _aCheck;
-        public bool ACheck
-        {
-            get
-            {
-                if (OptionalType != null)
-                    return _aCheck = true;
-                else
-                {
-                    return _aCheck = false;
-                }
-            }
-            set
-            {
-                _aCheck = value;
-                OnPropertyChanged("ACheck");
-            }
-        }
-        private bool _bCheck;
-        public bool BCheck
-        {
-            get
-            {
-                if (OptionalType1 != null)
-                    return _bCheck = true;
-                else
-                {
-                    return _bCheck = false;
-                }
-            }
-            set
-            {
-                _bCheck = value;
-                OnPropertyChanged("BCheck");
-            }
-        }
-        private bool _cCheck;
-        public bool CCheck
-        {
-            get
-            {
-                if (OptionalType2 != null)
-                    return _cCheck = true;
-                else
-                {
-                    return _cCheck = false;
-                }
-            }
-            set
-            {
-                _cCheck = value;
-                OnPropertyChanged("CCheck");
-            }
-        }
-        #endregion 
+
     }
 }
