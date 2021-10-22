@@ -176,7 +176,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             }
             if (BCheck == true)
             {
-                if (OptionalType1 != null && BARLL != null)
+                if (OptionalType1 != null && BAmount1 != 0)
                     b = OptionalType1;
                 else
                 {
@@ -185,7 +185,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             }
             if (CCheck == true)
             {
-                if (OptionalType2 != null && BAmount1 != 0)
+                if (OptionalType2 != null && BARLL != null)
                     c = OptionalType2;
                 else
                 {
@@ -423,7 +423,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             BaseAmountTabell = x;
             return BaseAmountTabell;
         }
-        //Update all baseamounts for a specific lifeinsurance and for the delivery year.  
+        //Update all baseamounts for a specific sainsurance and for the delivery year.  
         public ICollection<BaseAmount> UpdateBaseAmount()
         {
             List<BaseAmount> x = new List<BaseAmount>();
@@ -807,16 +807,6 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             {
                 _bAmount1 = value;
                 OnPropertyChanged("BAmount1");
-            }
-        }
-        private int _bAV4;
-        public int BaseAmountValue4
-        {
-            get => _bAV4;
-            set
-            {
-                _bAV4 = value;
-                OnPropertyChanged("BaseAmountValue4");
             }
         }
         private double _av;

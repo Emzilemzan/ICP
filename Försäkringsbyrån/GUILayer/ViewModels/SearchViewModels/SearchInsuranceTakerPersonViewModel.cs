@@ -21,7 +21,6 @@ namespace GUILayer.ViewModels.SearchViewModels
        
         public SearchInsuranceTakerPersonViewModel()
         {
-
             Persons = UpdatePersons();
             PersonGrid = CollectionViewSource.GetDefaultView(Persons);
             PersonGrid.Filter = new Predicate<object>(o => Filter(o as Person));

@@ -55,11 +55,14 @@ namespace GUILayer.ViewModels.CommissionViewModels
         #region Count
         private void Count()
         {
+            if (SelectedSalesMen == null)
+                return;
             CSumAck = CountCSumAck();
-            //ASumAck = CountASumAck();
+            ASumAck = CountASumAck();
+            SumAck = SumSAAck(CSumAck, ASumAck);
         }
 
-        private double CountCSumAck()
+        private double CountCSumAck()  
         {
             double sum = 0;
             if (SelectedSalesMen.Insurances != null)
@@ -68,64 +71,55 @@ namespace GUILayer.ViewModels.CommissionViewModels
                 {
                     if (i.InsuranceStatus == 0 && i.SAI.SAInsuranceType.Contains("barn") && i.PayYear == Year && i.PayMonth == (Months.IndexOf(_month) + 1) % 12)
                     {
-                        int quarter = (Months.IndexOf(_month)) / 3; //Får samma ackvärde ? 
-                        switch (quarter)
-                        {
-                            case 0:
-                                sum += i.AckValue;
-                                break;
-                            case 1:
-                                sum += i.AckValue2;
-                                break;
-                            case 2:
-                                sum += i.AckValue3;
-                                break;
-
-                        }
+                        sum += i.AckValue + i.AckValue2 + i.AckValue3 + i.AckValue4;
                     }
                 }
             }
             return sum;
         }
 
-        //private double CountASumAck()
-        //{
-        //    double sum = 0;
-        //    if (SelectedSalesMen.Insurances != null)
-        //    {
-        //        foreach (Insurance i in SelectedSalesMen.Insurances)
-        //        {
-        //            if (i.InsuranceStatus == 0 && i.SAI.SAInsuranceType.Contains("vuxen") && i.PayYear == Year && i.PayMonth == (Months.IndexOf(_month) + 1) % 12)
-        //            {
-        //                int quarter = (BaseAmounts.IndexOf(i.BaseAmountValue));   
-        //                switch (quarter)
-        //                {
-        //                    case 0:
-        //                        sum += i.AckValue;
-        //                        break;
-        //                    case 1:
-        //                        sum += i.AckValue2;
-        //                        break;
-        //                    case 2:
-        //                        sum += i.AckValue3;
-        //                        break;
-        //                    case 3:
-        //                        sum += i.AckValue4;
-        //                        break;
+        private double CountASumAck()
+        {
+            double sum = 0;
+            if (SelectedSalesMen.Insurances != null)
+            {
+                foreach (Insurance i in SelectedSalesMen.Insurances)
+                {
 
-        //                }
-        //            }
-        //        }
-        //    }
-        //    return sum;
-        //}
+                   if (i.InsuranceStatus == 0 && i.SAI.SAInsuranceType.Contains("vuxen") && i.PayYear == Year && i.PayMonth == (Months.IndexOf(_month) + 1) % 12)
+                   {
+                        sum += i.AckValue + i.AckValue2 + i.AckValue3 + i.AckValue4;
+                   }
 
-        public double SumSAAck(double CSumAck, double ASumAck) //Titta vidare på denna
+                }
+            }
+            return sum;
+        }
+
+        public double SumSAAck(double CSumAck, double ASumAck)
         {
             double sum;
             sum = CSumAck + ASumAck;
             return sum;
         }
+
+        //private double CountLifeSumAck()
+        //{
+        //    //double sum = 0;
+        //    //if (SelectedSalesMen.Insurances != null)
+        //    //{
+        //    //    foreach (Insurance i in SelectedSalesMen.Insurances)
+        //    //    {
+
+        //    //        if (i.InsuranceStatus == 0 i. && i.PayYear == Year && i.PayMonth == (Months.IndexOf(_month) + 1) % 12)
+        //    //        {
+        //    //            sum += i.AckValue + i.AckValue2 + i.AckValue3 + i.AckValue4;
+        //    //        }
+
+        //    //    }
+        //    //}
+        //    //return sum;
+        //}
         #endregion
 
         #region Properties for Salesman
@@ -141,6 +135,7 @@ namespace GUILayer.ViewModels.CommissionViewModels
             set
             {
                 _salesMen = value;
+                Count();
                 OnPropertyChanged("SelectedSalesMen");
             }
         }
@@ -158,7 +153,8 @@ namespace GUILayer.ViewModels.CommissionViewModels
                 }
                 else
                 {
-                    PayDate = new DateTime(Year, (Months.IndexOf(_month) + 2) % 12, 25).ToString("yyyy-MM-dd");
+                    
+                    PayDate = new DateTime(Year, (Months.IndexOf(_month) + 2), 25).ToString("yyyy-MM-dd");
                 }
                 Count();
                 OnPropertyChanged("SelectedMonths");

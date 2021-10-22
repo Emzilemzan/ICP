@@ -19,6 +19,7 @@ namespace BussinessLayer
             return applications.OrderByDescending(i => i.InsuranceNumber).ToList();
         }
 
+        public Insurance GetInsurance(string sn) => BusinessController.Instance.Context.Insurances.GetById(sn);
         public List<Insurance> GetInsuranceTakerIAC(Company insuranceTaker) => insuranceTaker.Insurances?.OrderByDescending(i => i.InsuranceNumber).ToList();
         public List<Insurance> GetInsuranceTakerIASC(Company insuranceTaker)
         {

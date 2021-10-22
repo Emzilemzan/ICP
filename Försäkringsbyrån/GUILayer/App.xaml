@@ -39,11 +39,11 @@
         <DataTemplate DataType="{x:Type svm:SearchApplicationChoiceViewModel}">
             <sv:SearchApplicationChoiceView/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type svm:OPIPApplicationOverviewViewModel}">
-            <sv:OPIPApplicationOverviewView/>
+        <DataTemplate DataType="{x:Type svm:SAOverviewViewModel}">
+            <sv:SAOverviewView/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type svm:OPICApplicationOverviewViewModel}">
-            <sv:OPICApplicationOverview/>
+        <DataTemplate DataType="{x:Type svm:LifeOverviewViewModel}">
+            <sv:LifeOverviewView/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type svm:ApplicationOverviewViewModels}">
             <sv:ApplicationOverviewViews/>
