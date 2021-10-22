@@ -46,6 +46,10 @@
                     <DataGridTextColumn Header="Agentnummer" Binding="{Binding Path=AgentNo.AgentNo}"/>
                     <DataGridTextColumn Header="Försäkringsnummer" Binding="{Binding Path= InsuranceNumber}" />
                 </DataGrid.Columns>
+                <DataGrid.Resources>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="LightBlue"/>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}"  Color="LightBlue"/>
+                </DataGrid.Resources>
             </DataGrid>
 
             <Grid Grid.Column="0" Grid.Row="2" Margin="0,211,-0.333,369.667" Grid.RowSpan="2">
