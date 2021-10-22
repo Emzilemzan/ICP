@@ -8,22 +8,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Data;
 using System.Windows.Input;
 
 namespace GUILayer.ViewModels.SearchViewModels
 {
-    public class OPIPApplicationOverviewViewModel : BaseViewModel
+   public class OPIPApplicationOverviewViewModel : BaseViewModel
     {
-
         public static readonly OPIPApplicationOverviewViewModel Instance = new OPIPApplicationOverviewViewModel();
 
         public OPIPApplicationOverviewViewModel()
         {
             SalesMens = UpdateSM();
             PayMentForms = new List<string>() { "Helår", "Halvår", "Kvartal", "Månad" };
-            InsuranceGrid = CollectionViewSource.GetDefaultView(Insurancess);
-            InsuranceGrid.Filter = new Predicate<object>(o => Filter(o as Insurance));
+            Insurancess = UpdateInsurance();
             OPInsuranceTypes = UpdateOPI();
             InsuredPersons = UpdateInsuredPerson();
         }
@@ -51,50 +48,24 @@ namespace GUILayer.ViewModels.SearchViewModels
             get => _removeBtn ?? (_removeBtn = new RelayCommand(x => { RemoveApplication(); CanCreate(); }));
         }
 
-        private ICommand _addBtn;
-
-        public ICommand SearchApplicationBtn
-        {
-            get => _addBtn ?? (_addBtn = new RelayCommand(x => { SearchApplication(); CanCreate(); }));
-        }
 
         #endregion
 
         #region Methods
 
-        public void SearchApplication()
-        {
-
-        }
+      
 
         public void UpdateApplication()
         {
             if (SelectedInsurance != null && SelectedInsurance.Table != null && SelectedInsurance.Premie != 0 && SelectedInsurance.DeliveryDate != null &&
-             SelectedInsurance.PaymentForm != null && SelectedInsurance.AgentNo != null)
+             SelectedInsurance.PaymentForm != null )
             {
-                SelectedInsurance.PersonTaker.SocialSecurityNumber = Instance.SocialSecurityNumber;
-                SelectedInsurance.PersonTaker.Firstname = Instance.Firstname;
-                SelectedInsurance.PersonTaker.Lastname = Instance.Lastname;
-                SelectedInsurance.PersonTaker.StreetAddress = Instance.StreetAddress;
-                SelectedInsurance.PersonTaker.City = Instance.City;
-                SelectedInsurance.PersonTaker.DiallingCodeHome = Instance.DiallingCodeHome;
-                SelectedInsurance.PersonTaker.DiallingCodeWork = Instance.DiallingCodeWork;
-                SelectedInsurance.PersonTaker.TelephoneNbrHome = Instance.TelephoneNbrHome;
-                SelectedInsurance.PersonTaker.TelephoneNbrWork = Instance.TelephoneNbrWork;
-                SelectedInsurance.PersonTaker.EmailOne = Instance.EmailOne;
-                SelectedInsurance.PersonTaker.EmailTwo = Instance.EmailTwo;
-                SelectedInsurance.AgentNo = Instance.AgentNo;
-                SelectedInsurance.InsuredID.SocialSecurityNumberIP = Instance.SocialSecurityNumberIP;
-                SelectedInsurance.InsuredID.FirstName = Instance.FirstNameIP;
-                SelectedInsurance.InsuredID.LastName = Instance.LastNameIP;
-                SelectedInsurance.SerialNumber = Instance.SerialNumber;
                 SelectedInsurance.Table = Instance.Tabell;
                 SelectedInsurance.Premie = Instance._premie;
+                SelectedInsurance.AgentNo = Instance.AgentNo;
                 SelectedInsurance.PaymentForm = Instance.PaymentForm;
-                SelectedInsurance.InsuranceNumber = Instance.InsuranceNumber;
-                SelectedInsurance.PayYear = Instance.PayYear;
-                SelectedInsurance.PayMonth = Instance.PayMonth;
-                SelectedInsurance.PossibleComisson = Instance.PossibleComisson;
+                SelectedInsurance.SerialNumber = Instance.SerialNumber;
+
 
                 MessageBox.Show($"Uppdateringen lyckades av: {SelectedInsurance.SerialNumber}", "Lyckad uppdatering", MessageBoxButton.OK, MessageBoxImage.Information);
                 //Companies.Clear();
@@ -151,7 +122,7 @@ namespace GUILayer.ViewModels.SearchViewModels
 
             foreach (var e in Context.IController.GetAllInsurances())
             {
-                if (e.OPI != null)
+                if (e.OPI != null && e.PersonTaker !=null)
                     x?.Add(e);
             }
 
@@ -193,19 +164,7 @@ namespace GUILayer.ViewModels.SearchViewModels
 
         #region GridViews, filter and search
 
-        private ICollectionView _insuranceCollection;
-        public ICollectionView InsuranceGrid
-        {
-            get { return _insuranceCollection; }
-            set { _insuranceCollection = value; OnPropertyChanged("InsuranceGrid"); }
-        }
-
-        private bool Filter(Insurance insurance)
-        {
-            return SearchInput == null
-                || insurance.SerialNumber.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
-                || insurance.InsuredID.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1;
-        }
+   
 
         private string _searchInput;
         public string SearchInput
@@ -215,7 +174,7 @@ namespace GUILayer.ViewModels.SearchViewModels
             {
                 _searchInput = value;
                 OnPropertyChanged("SearchInput");
-                InsuranceGrid.Refresh();
+                
             }
         }
         #endregion
@@ -359,40 +318,43 @@ namespace GUILayer.ViewModels.SearchViewModels
         private SalesMen _an;
         public SalesMen AgentNo
         {
-            get => _an;
+            get => SelectedInsurance.AgentNo;
             set
             {
-                _an = value;
+                SelectedInsurance.AgentNo = value;
                 OnPropertyChanged("AgentNo");
             }
         }
+
+
+      
         private string _serialNumber;
         public string SerialNumber
         {
-            get => _serialNumber;
+            get => SelectedInsurance.SerialNumber;
             set
             {
-                _serialNumber = value;
+                SelectedInsurance.SerialNumber = value;
                 OnPropertyChanged("SerialNumber");
             }
         }
         private InsuredPerson _iP;
         public InsuredPerson InsuredPerson
         {
-            get => _iP;
+            get => SelectedInsurance.InsuredID;
             set
             {
-                _iP = value;
+                SelectedInsurance.InsuredID = value;
                 OnPropertyChanged("InsuredPerson");
             }
         }
         private Person _person;
         public Person Personen
         {
-            get => _person;
+            get => SelectedInsurance.PersonTaker;
             set
             {
-                _person = value;
+                SelectedInsurance.PersonTaker = value;
                 OnPropertyChanged("Personen");
             }
         }
@@ -400,10 +362,10 @@ namespace GUILayer.ViewModels.SearchViewModels
         private Status _status;
         public Status InsuranceStatus
         {
-            get => _status;
+            get => SelectedInsurance.InsuranceStatus;
             set
             {
-                _status = value;
+                SelectedInsurance.InsuranceStatus = value;
                 OnPropertyChanged("InsuranceStatus");
             }
         }
@@ -411,10 +373,10 @@ namespace GUILayer.ViewModels.SearchViewModels
         private string _payMent;
         public string PaymentForm
         {
-            get => _payMent;
+            get => SelectedInsurance.PaymentForm;
             set
             {
-                _payMent = value;
+                SelectedInsurance.PaymentForm = value;
                 OnPropertyChanged("PaymentForm");
             }
         }
@@ -422,11 +384,11 @@ namespace GUILayer.ViewModels.SearchViewModels
         private int _premie;
         public string Premie
         {
-            get => _premie > 0 ? _premie.ToString() : "";
+            get => SelectedInsurance.Premie > 0 ? SelectedInsurance.Premie.ToString() : "";
             set
             {
-                _premie = 0;
-                if (int.TryParse(value, out _premie) && _premie.ToString().Length == 5)
+                SelectedInsurance.Premie = 0;
+                if (int.TryParse(value, out _premie) && SelectedInsurance.Premie.ToString().Length == 5)
                 {
 
                 }
@@ -441,21 +403,33 @@ namespace GUILayer.ViewModels.SearchViewModels
         private string _tabel;
         public string Tabell
         {
-            get => _tabel;
+            get => SelectedInsurance.Table;
             set
             {
-                _tabel = value;
+                SelectedInsurance.Table = value;
                 OnPropertyChanged("Tabell");
             }
         }
 
-        private DateTime _dd;
         public DateTime DeliveryDate
         {
-            get => _dd != null ? _dd : DateTime.Now;
+            get
+            {
+                if (SelectedInsurance != null)
+                {
+                    return SelectedInsurance.DeliveryDate;
+                }
+                else
+                {
+                    return DeliveryDate = DateTime.Now;
+                }
+            }
             set
             {
-                _dd = value;
+                if (SelectedInsurance != null)
+                {
+                    SelectedInsurance.DeliveryDate = value;
+                }
                 OnPropertyChanged("DeliveryDate");
             }
         }
@@ -518,46 +492,46 @@ namespace GUILayer.ViewModels.SearchViewModels
         #endregion
 
         #region Properties InsuredPerson
-        private int _insuredId;
-        public int InsuredID
-        {
-            get => _insuredId;
-            set
-            {
-                _insuredId = value;
-                OnPropertyChanged("InsuredID");
-            }
-        }
-        private string _sSNIP;
-        public string SocialSecurityNumberIP
-        {
-            get => _sSNIP;
-            set
-            {
-                _sSNIP = value;
-                OnPropertyChanged("SocialSecurityNumberIP");
-            }
-        }
-        private string _lName;
-        public string LastNameIP
-        {
-            get => _lName;
-            set
-            {
-                _lName = value;
-                OnPropertyChanged("LastNameIP");
-            }
-        }
-        private string _fName;
-        public string FirstNameIP
-        {
-            get => _fName;
-            set
-            {
-                _fName = value;
-                OnPropertyChanged("FirstNameIP");
-            }
-        }
+        //private int _insuredId;
+        //public int InsuredID
+        //{
+        //    get => _insuredId;
+        //    set
+        //    {
+        //        _insuredId = value;
+        //        OnPropertyChanged("InsuredID");
+        //    }
+        //}
+        //private string _sSNIP;
+        //public string SocialSecurityNumberIP
+        //{
+        //    get => _sSNIP;
+        //    set
+        //    {
+        //        _sSNIP = value;
+        //        OnPropertyChanged("SocialSecurityNumberIP");
+        //    }
+        //}
+        //private string _lName;
+        //public string LastNameIP
+        //{
+        //    get => _lName;
+        //    set
+        //    {
+        //        _lName = value;
+        //        OnPropertyChanged("LastNameIP");
+        //    }
+        //}
+        //private string _fName;
+        //public string FirstNameIP
+        //{
+        //    get => _fName;
+        //    set
+        //    {
+        //        _fName = value;
+        //        OnPropertyChanged("FirstNameIP");
+        //    }
+        //}
         #endregion
 
         private bool _check;

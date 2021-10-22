@@ -251,7 +251,6 @@ namespace GUILayer.ViewModels.SearchViewModels
             BaseAmountTabell = x;
             return BaseAmountTabell;
         }
-
         #endregion
 
 

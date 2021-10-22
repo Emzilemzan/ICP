@@ -114,6 +114,7 @@
     <Compile Include="ViewModels\LogInViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModels\LifeOverviewViewModel.cs" />
+    <Compile Include="ViewModels\SearchViewModels\OPIPApplicationOverviewViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModels\SAOverviewViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModels\SearchApplicationChoiceViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModels\SearchApplicationViewModel.cs" />

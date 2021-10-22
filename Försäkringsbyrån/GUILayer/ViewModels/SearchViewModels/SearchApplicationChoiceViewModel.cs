@@ -13,8 +13,6 @@ namespace GUILayer.ViewModels.SearchViewModels
     {
         public static readonly SearchApplicationChoiceViewModel Instance = new SearchApplicationChoiceViewModel();
 
-
-
         private SearchApplicationChoiceViewModel()
         {
 
