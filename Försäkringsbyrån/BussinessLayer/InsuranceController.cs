@@ -99,7 +99,6 @@ namespace BussinessLayer
             BusinessController.Instance.Context.Insurances.Update(i);
             BusinessController.Instance.Save();
         }
-
     }
 }
 

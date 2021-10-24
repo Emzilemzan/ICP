@@ -248,6 +248,7 @@ namespace GUILayer.ViewModels
             SignedInsuranceViewModel.Instance.MakeSearchWordEmpty();
             GetandexportCustomerLeadsViewModel.Instance.GetProspects();
             SAOverviewViewModel.Instance.UpdateAC();
+            GetTrendstatitcsViewModel.Instance.Update();
         }
     }
 }
