@@ -7,6 +7,10 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using iTextSharp.text.pdf;
+using System.IO;
+using iTextSharp.text;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 
@@ -89,7 +93,71 @@ namespace GUILayer.ViewModels.SearchViewModels
 
         public void Export()
         {
+            if (SelectedInsurance != null)
+            {
+                string date = DateTime.Today.ToString("MM-dd-yyyy");
+                Document document = new Document(PageSize.A4, 25, 25, 30, 30);
+                PdfWriter.GetInstance(document, new FileStream("FörsäkringSO.pdf", FileMode.Create));
+                BaseFont basefont = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, false);
+                Font times = new Font(basefont, 18);
+                document.Open();
+                document.Add(new Paragraph("Försäkring", times));
+                document.Add(new Paragraph("Dagens datum: \t" + date));
+                document.Add(new Paragraph("Försäkringstyp: \t" + SelectedInsurance.SAI.SAInsuranceType));
+                document.Add(new Paragraph(" "));
+                document.Add(new Paragraph("Försäkringstagaren ", times));
+                document.Add(new Paragraph("Personnummer: \t" + SelectedInsurance.PersonTaker.SocialSecurityNumber));
+                document.Add(new Paragraph("Namn: \t" + SelectedInsurance.PersonTaker.Firstname + " " + SelectedInsurance.PersonTaker.Lastname));
+                document.Add(new Paragraph("Gatuadress: \t" + SelectedInsurance.PersonTaker.StreetAddress));
+                document.Add(new Paragraph("Postnummer: \t" + SelectedInsurance.PersonTaker.PostalCode));
+                document.Add(new Paragraph("Postort: \t" + SelectedInsurance.PersonTaker.City));
+                document.Add(new Paragraph("Rikt- & telefonnummer bostad: \t" + SelectedInsurance.PersonTaker.DiallingCodeHome + "-" + SelectedInsurance.PersonTaker.TelephoneNbrHome));
+                document.Add(new Paragraph("Rikt- & telefonnummer bostad: \t" + SelectedInsurance.PersonTaker.DiallingCodeWork + "-" + SelectedInsurance.PersonTaker.TelephoneNbrWork));
+                document.Add(new Paragraph("Email: \t" + SelectedInsurance.PersonTaker.EmailOne));
+                document.Add(new Paragraph("Email: \t" + SelectedInsurance.PersonTaker.EmailTwo));
+                document.Add(new Paragraph(" "));
+                document.Add(new Paragraph("Försäkrad ", times));
+                document.Add(new Paragraph("Personnummer: \t" + SelectedInsurance.InsuredID.SocialSecurityNumberIP));
+                document.Add(new Paragraph("Namn: \t" + SelectedInsurance.InsuredID.FirstName + " " + SelectedInsurance.InsuredID.LastName));
+                document.Add(new Paragraph("Persontyp: \t" + SelectedInsurance.InsuredID.PersonType));
+                document.Add(new Paragraph(" "));
+                document.Add(new Paragraph("Övriga försäkringsuppgifter ", times));
+                document.Add(new Paragraph("Löpnummer: \t" + SelectedInsurance.SerialNumber));
+                document.Add(new Paragraph("Ankomstdatum: \t" + SelectedInsurance.DeliveryDate));
+                document.Add(new Paragraph("Betalform: \t" + SelectedInsurance.PaymentForm));
+                document.Add(new Paragraph("Agenturnummer: \t" + SelectedInsurance.AgentNo.AgentNumber));
+                document.Add(new Paragraph("Grundbelopp för SO: \t" + SelectedInsurance.BaseAmountValue4 + " kr"));
+                document.Add(new Paragraph(" "));
+                document.Add(new Paragraph("Tillval", times));
+                OptionalType a = Context.IController.GetOPT(1);
+                OptionalType b = Context.IController.GetOPT(2);
+                OptionalType c = Context.IController.GetOPT(3);
+                if (SelectedInsurance.OptionalTypes != null)
+                {
+                    foreach(var o in SelectedInsurance.OptionalTypes)
+                    {
+                        if(o == a)
+                        {
+                            document.Add(new Paragraph("Invaliditet vid olycksfall. Grundbelopp: \t" + SelectedInsurance.BaseAmountValue3 + " kr"));
+                        }
+                        else if(o == b)
+                        {
+                            document.Add(new Paragraph("Höjning av livförsäkring. Grundbelopp:  \t" + SelectedInsurance.BaseAmountValue + " kr"));
+                        }
+                        else if(o == c)
+                        {
+                            document.Add(new Paragraph("Månadsersättning vid långvarig sjukskrivning. Grundbelopp: \t" + SelectedInsurance.BaseAmountValue2 + " kr"));
+                        }
+                    }
+                }
 
+                document.Close();
+                Process.Start("FörsäkringSO.pdf");
+            }
+            else
+            {
+                MessageBox.Show("Du måste markera en försäkring att exportera. ");
+            }
         }
 
         private ICommand _removeBtn;
@@ -134,9 +202,6 @@ namespace GUILayer.ViewModels.SearchViewModels
             }
         }
         #endregion
-
-
-
 
         #region updatelists
         //Update all baseamounts for a specific sainsurances and for the delivery year.  

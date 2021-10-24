@@ -2,12 +2,12 @@
 using GUILayer.ViewModels.InsuranceViewModels;
 using Models.Models;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
@@ -411,15 +411,37 @@ namespace GUILayer.ViewModels.SearchViewModels
         }
 
         private ICommand _exportC;
-        public ICommand ExportC
-        {
-            get => _exportC ?? (_exportC = new RelayCommand(x => { ExportCompany(); }));
-        }
+        public ICommand ExportC => _exportC ?? (_exportC = new RelayCommand(x => { ExportCompany(); }));
 
-
+        /// <summary>
+        /// method to create pdf document and open it when button is clicked. 
+        /// </summary>
         private void ExportCompany()
         {
-            throw new NotImplementedException();
+            if (SelectedCompany != null)
+            {
+                Document document = new Document(PageSize.A4, 25, 25, 30, 30);
+                PdfWriter.GetInstance(document, new FileStream("FörsäkringstagareFöretag.pdf", FileMode.Create));
+                BaseFont basefont = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, false);
+                Font times = new Font(basefont, 15);
+                document.Open();
+                document.Add(new Paragraph("Försäkringstagare Företag", times));
+                document.Add(new Paragraph("Organisationsnummer: \t" + SelectedCompany.OrganizationNumber));
+                document.Add(new Paragraph("Företagsnamn: \t" + SelectedCompany.CompanyName));
+                document.Add(new Paragraph("Gatuadress: \t" + SelectedCompany.StreetAddress));
+                document.Add(new Paragraph("Postnummer: \t" + SelectedCompany.PostalCode));
+                document.Add(new Paragraph("Postort: \t" + SelectedCompany.City));
+                document.Add(new Paragraph("Rikt- & telefonnummer: \t" + SelectedCompany.DiallingCode + "-" + SelectedCompany.TelephoneNbr));
+                document.Add(new Paragraph("Email: \t" + SelectedCompany.Email));
+                document.Add(new Paragraph("Faxnummer: \t" + SelectedCompany.FaxNumber));
+                document.Add(new Paragraph("Kontaktperson: \t" + SelectedCompany.ContactPerson));
+                document.Close();
+                Process.Start("FörsäkringstagareFöretag.pdf");
+            }
+            else
+            {
+                MessageBox.Show("Du måste markera ett företag att exportera. ");
+            }
         }
 
         #endregion

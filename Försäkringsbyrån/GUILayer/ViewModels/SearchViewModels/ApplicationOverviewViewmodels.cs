@@ -9,6 +9,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using iTextSharp.text.pdf;
+using System.IO;
+using iTextSharp.text;
+using System.Diagnostics;
 
 namespace GUILayer.ViewModels.SearchViewModels
 {
@@ -19,8 +23,6 @@ namespace GUILayer.ViewModels.SearchViewModels
         private ApplicationOverviewViewModels()
         {
             UpdateAC();
-          
-
         }
         public void UpdateComboBoxes()
         {
@@ -39,10 +41,7 @@ namespace GUILayer.ViewModels.SearchViewModels
         #region command 
         private ICommand _updateBtn;
 
-        public ICommand UpdateBtn
-        {
-            get => _updateBtn ?? (_updateBtn = new RelayCommand(x => { Update();}));
-        }
+        public ICommand UpdateBtn => _updateBtn ?? (_updateBtn = new RelayCommand(x => { Update(); }));
 
         public void Update()
         {
@@ -74,7 +73,46 @@ namespace GUILayer.ViewModels.SearchViewModels
 
         public void Export()
         {
-
+            if (SelectedInsurance != null)
+            {
+                string date = DateTime.Today.ToString("MM-dd-yyyy");
+                Document document = new Document(PageSize.A4, 25, 25, 30, 30);
+                PdfWriter.GetInstance(document, new FileStream("FörsäkringFF.pdf", FileMode.Create));
+                BaseFont basefont = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, false);
+                Font times = new Font(basefont, 18);
+                document.Open();
+                document.Add(new Paragraph("Försäkring", times));
+                document.Add(new Paragraph("Dagens datum: \t" + date));
+                document.Add(new Paragraph("Försäkringstyp: \t" + SelectedInsurance.COI.COIName));
+                document.Add(new Paragraph(" "));
+                document.Add(new Paragraph("Försäkringstagaren ", times));
+                document.Add(new Paragraph("Organisationsnummer: \t" + SelectedInsurance.CompanyTaker.OrganizationNumber));
+                document.Add(new Paragraph("Företagsnamn: \t" + SelectedInsurance.CompanyTaker.CompanyName));
+                document.Add(new Paragraph("Gatuadress: \t" + SelectedInsurance.CompanyTaker.StreetAddress));
+                document.Add(new Paragraph("Postnummer: \t" + SelectedInsurance.CompanyTaker.PostalCode));
+                document.Add(new Paragraph("Postort: \t" + SelectedInsurance.CompanyTaker.City));
+                document.Add(new Paragraph("Rikt- & telefonnummer bostad: \t" + SelectedInsurance.CompanyTaker.DiallingCode + "-" + SelectedInsurance.CompanyTaker.TelephoneNbr));
+                document.Add(new Paragraph("Email: \t" + SelectedInsurance.CompanyTaker.Email));
+                document.Add(new Paragraph("Faxnummer: \t" + SelectedInsurance.CompanyTaker.FaxNumber));
+                document.Add(new Paragraph("Kontaktperson: \t" + SelectedInsurance.CompanyTaker.ContactPerson));
+                document.Add(new Paragraph(" "));
+                document.Add(new Paragraph("Övriga försäkringsuppgifter ", times));
+                document.Add(new Paragraph("Löpnummer: \t" + SelectedInsurance.SerialNumber));
+                document.Add(new Paragraph("Försäkringsbolag: \t" + SelectedInsurance.InsuranceCompany));
+                document.Add(new Paragraph("Typ av försäkring: \t" + SelectedInsurance.CompanyInsuranceType));
+                document.Add(new Paragraph("Premie: \t" + SelectedInsurance.Premie));
+                document.Add(new Paragraph("Betalform: \t" + SelectedInsurance.PaymentForm));
+                document.Add(new Paragraph("Begynnelsedatum: \t" + SelectedInsurance.StartDate));
+                document.Add(new Paragraph("Förfallodatum: \t" + SelectedInsurance.EndDate));
+                document.Add(new Paragraph("Agenturnummer: \t" + SelectedInsurance.AgentNo.AgentNumber));
+                document.Add(new Paragraph("Anteckningar: \t" + SelectedInsurance.Notes));
+                document.Close();
+                Process.Start("FörsäkringFF.pdf");
+            }
+            else
+            {
+                MessageBox.Show("Du måste markera en försäkring att exportera. ");
+            }
         }
 
         private ICommand _removeBtn;
@@ -196,7 +234,6 @@ namespace GUILayer.ViewModels.SearchViewModels
             }
         }
         #endregion
-
 
         #region Properties
         public SalesMen AgentNo

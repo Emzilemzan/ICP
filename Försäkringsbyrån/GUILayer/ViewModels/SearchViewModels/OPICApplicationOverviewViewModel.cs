@@ -8,6 +8,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using iTextSharp.text.pdf;
+using System.IO;
+using iTextSharp.text;
+using System.Diagnostics;
 using System.Windows.Input;
 
 namespace GUILayer.ViewModels.SearchViewModels
@@ -22,18 +26,14 @@ namespace GUILayer.ViewModels.SearchViewModels
             SalesMens = UpdateSM();
             UpdateAC();
             PayMentForms = new List<string>() { "Helår", "Halvår", "Kvartal", "Månad" };
-              OPInsuranceTypes = UpdateOPI();
+            OPInsuranceTypes = UpdateOPI();
             InsuredPersons = UpdateInsuredPerson();
         }
 
         #region Commands
         private ICommand _updateBtn;
-        public ICommand UppdateBtn
-        {
-            get => _updateBtn ?? (_updateBtn = new RelayCommand(x => { UpdateApplication(); CanCreate(); }));
-        }
+        public ICommand UpdateBtn => _updateBtn ?? (_updateBtn = new RelayCommand(x => { UpdateApplication();  }));
 
-        private bool CanCreate() => true;
 
         public void UpdateApplication()
         {
@@ -56,24 +56,57 @@ namespace GUILayer.ViewModels.SearchViewModels
        
     }
 
-    private ICommand _exportBtn;
-        public ICommand ExportBtn
-        {
-            get => _exportBtn ?? (_exportBtn = new RelayCommand(x => { ExportApplication(); CanCreate(); }));
-        }
+        private ICommand _exportBtn;
+        public ICommand ExportBtn => _exportBtn ?? (_exportBtn = new RelayCommand(x => { ExportApplication(); }));
 
         public void ExportApplication()
         {
+            if (SelectedInsurance != null)
+            {
+                string date = DateTime.Today.ToString("MM-dd-yyyy");
+                Document document = new Document(PageSize.A4, 25, 25, 30, 30);
+                PdfWriter.GetInstance(document, new FileStream("FörsäkringÖFP.pdf", FileMode.Create));
+                BaseFont basefont = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, false);
+                Font times = new Font(basefont, 18);
+                document.Open();
+                document.Add(new Paragraph("Försäkring", times));
+                document.Add(new Paragraph("Dagens datum: \t" + date));
+                document.Add(new Paragraph("Försäkringstyp: \t" + SelectedInsurance.OPI.OPIName));
+                document.Add(new Paragraph(" "));
+                document.Add(new Paragraph("Försäkringstagaren ", times));
+                document.Add(new Paragraph("Organisationsnummer: \t" + SelectedInsurance.CompanyTaker.OrganizationNumber));
+                document.Add(new Paragraph("Företagsnamn: \t" + SelectedInsurance.CompanyTaker.CompanyName));
+                document.Add(new Paragraph("Gatuadress: \t" + SelectedInsurance.CompanyTaker.StreetAddress));
+                document.Add(new Paragraph("Postnummer: \t" + SelectedInsurance.CompanyTaker.PostalCode));
+                document.Add(new Paragraph("Postort: \t" + SelectedInsurance.CompanyTaker.City));
+                document.Add(new Paragraph("Rikt- & telefonnummer bostad: \t" + SelectedInsurance.CompanyTaker.DiallingCode + "-" + SelectedInsurance.CompanyTaker.TelephoneNbr));
+                document.Add(new Paragraph("Email: \t" + SelectedInsurance.CompanyTaker.Email));
+                document.Add(new Paragraph("Faxnummer: \t" + SelectedInsurance.CompanyTaker.FaxNumber));
+                document.Add(new Paragraph("Kontaktperson: \t" + SelectedInsurance.CompanyTaker.ContactPerson));
+                document.Add(new Paragraph(" "));
+                document.Add(new Paragraph("Försäkrad ", times));
+                document.Add(new Paragraph("Personnummer: \t" + SelectedInsurance.InsuredID.SocialSecurityNumberIP));
+                document.Add(new Paragraph("Namn: \t" + SelectedInsurance.InsuredID.FirstName + " " + SelectedInsurance.InsuredID.LastName));
+                document.Add(new Paragraph("Persontyp: \t" + SelectedInsurance.InsuredID.PersonType));
+                document.Add(new Paragraph(" "));
+                document.Add(new Paragraph("Övriga försäkringsuppgifter ", times));
+                document.Add(new Paragraph("Löpnummer: \t" + SelectedInsurance.SerialNumber));
+                document.Add(new Paragraph("Tabell: \t" + SelectedInsurance.Table));
+                document.Add(new Paragraph("Premie: \t" + SelectedInsurance.Premie));
+                document.Add(new Paragraph("Betalform: \t" + SelectedInsurance.PaymentForm));
+                document.Add(new Paragraph("Ankomstdatum: \t" + SelectedInsurance.DeliveryDate));
+                document.Add(new Paragraph("Agenturnummer: \t" + SelectedInsurance.AgentNo.AgentNumber));
 
+                document.Close();
+                Process.Start("FörsäkringÖFP.pdf");
+            }
+            else
+            {
+                MessageBox.Show("Du måste markera en försäkring att exportera. ");
+            }
         }
-
-
-
         private ICommand _removeBtn;
-        public ICommand RemoveBtn
-        {
-            get => _removeBtn ?? (_removeBtn = new RelayCommand(x => { RemoveApplication(); CanCreate(); }));
-        }
+        public ICommand RemoveBtn => _removeBtn ?? (_removeBtn = new RelayCommand(x => { RemoveApplication(); }));
         public void RemoveApplication()
         {
             if (SelectedInsurance != null)

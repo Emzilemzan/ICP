@@ -9,6 +9,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using iTextSharp.text.pdf;
+using System.IO;
+using iTextSharp.text;
+using System.Diagnostics;
 
 namespace GUILayer.ViewModels.SearchViewModels
 {
@@ -59,7 +63,48 @@ namespace GUILayer.ViewModels.SearchViewModels
 
         public void Export()
         {
-
+            if (SelectedInsurance != null)
+            {
+                string date = DateTime.Today.ToString("MM-dd-yyyy");
+                Document document = new Document(PageSize.A4, 25, 25, 30, 30);
+                PdfWriter.GetInstance(document, new FileStream("FörsäkringLiv.pdf", FileMode.Create));
+                BaseFont basefont = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, false);
+                Font times = new Font(basefont, 18);
+                document.Open();
+                document.Add(new Paragraph("Försäkring", times));
+                document.Add(new Paragraph("Dagens datum: \t" + date));
+                document.Add(new Paragraph("Försäkringstyp: \t" + SelectedInsurance.LIFE.LifeName));
+                document.Add(new Paragraph(" "));
+                document.Add(new Paragraph("Försäkringstagaren ", times));
+                document.Add(new Paragraph("Personnummer: \t" + SelectedInsurance.PersonTaker.SocialSecurityNumber));
+                document.Add(new Paragraph("Namn: \t" + SelectedInsurance.PersonTaker.Firstname + " " + SelectedInsurance.PersonTaker.Lastname));
+                document.Add(new Paragraph("Gatuadress: \t" + SelectedInsurance.PersonTaker.StreetAddress));
+                document.Add(new Paragraph("Postnummer: \t" + SelectedInsurance.PersonTaker.PostalCode));
+                document.Add(new Paragraph("Postort: \t" + SelectedInsurance.PersonTaker.City));
+                document.Add(new Paragraph("Rikt- & telefonnummer bostad: \t" + SelectedInsurance.PersonTaker.DiallingCodeHome + "-" + SelectedInsurance.PersonTaker.TelephoneNbrHome));
+                document.Add(new Paragraph("Rikt- & telefonnummer bostad: \t" + SelectedInsurance.PersonTaker.DiallingCodeWork + "-" + SelectedInsurance.PersonTaker.TelephoneNbrWork));
+                document.Add(new Paragraph("Email: \t" + SelectedInsurance.PersonTaker.EmailOne));
+                document.Add(new Paragraph("Email: \t" + SelectedInsurance.PersonTaker.EmailTwo));
+                document.Add(new Paragraph(" "));
+                document.Add(new Paragraph("Försäkrad ", times));
+                document.Add(new Paragraph("Personnummer: \t" + SelectedInsurance.InsuredID.SocialSecurityNumberIP));
+                document.Add(new Paragraph("Namn: \t" + SelectedInsurance.InsuredID.FirstName + " " + SelectedInsurance.InsuredID.LastName));
+                document.Add(new Paragraph("Persontyp: \t" + SelectedInsurance.InsuredID.PersonType));
+                document.Add(new Paragraph(" "));
+                document.Add(new Paragraph("Övriga försäkringsuppgifter ", times));
+                document.Add(new Paragraph("Löpnummer: \t" + SelectedInsurance.SerialNumber));
+                document.Add(new Paragraph("Ankomstdatum: \t" + SelectedInsurance.DeliveryDate));
+                document.Add(new Paragraph("Betalform: \t" + SelectedInsurance.PaymentForm));
+                document.Add(new Paragraph("Agenturnummer: \t" + SelectedInsurance.AgentNo.AgentNumber));
+                document.Add(new Paragraph("Grundbelopp för Liv: \t" + SelectedInsurance.BaseAmountValue + " kr"));
+               
+                document.Close();
+                Process.Start("FörsäkringLiv.pdf");
+            }
+            else
+            {
+                MessageBox.Show("Du måste markera en försäkring att exportera. ");
+            }
         }
 
         private ICommand _removeBtn;
@@ -104,8 +149,6 @@ namespace GUILayer.ViewModels.SearchViewModels
             }
         }
         #endregion
-
-
 
 
         #region updatelists

@@ -101,7 +101,7 @@
                 <TextBox Grid.Row="11" Grid.Column="1" Text="{Binding SelectedCompany.ContactPerson}" Margin="0,0,-17.667,0"/>
 
                 <Button Grid.Row ="14" Grid.Column="1" Margin="46,10,-17.667,-30.333" Grid.RowSpan="3"  Content="Uppdatera" Command="{Binding UpdateC}"></Button>
-                <Button Grid.Row ="14" Margin="36,10,60.333,-30.333" Grid.RowSpan="2"  Content="Exportera till excel" Grid.ColumnSpan="2" Command="{Binding ExportC}"/>
+                <Button Grid.Row ="14" Margin="36,10,60.333,-30.333" Grid.RowSpan="2"  Content="Exportera till pdf" Grid.ColumnSpan="2" Command="{Binding ExportC}"/>
                 <Button Grid.Row ="14" Grid.Column="0" Margin="-35,10,69,-30.333" Grid.RowSpan="3"  Content="Ta bort" Command="{Binding RemoveC}"/>
             </Grid>
 

@@ -15,18 +15,12 @@ namespace GUILayer.ViewModels.CommissionViewModels
     public class CommissionViewModel: BaseViewModel
     {
         public static readonly CommissionViewModel Instance = new CommissionViewModel();
-
-
         private CommissionViewModel()
         {
-
         }
 
         private ICommand getCommission_Btn;
-        public ICommand GetCommssion_Btn
-        {
-            get => getCommission_Btn ?? (getCommission_Btn = new RelayCommand(x => { GetCommssion();}));
-        }
+        public ICommand GetCommssion_Btn => getCommission_Btn ?? (getCommission_Btn = new RelayCommand(x => { GetCommssion(); }));
 
         public static void GetCommssion()
         {
