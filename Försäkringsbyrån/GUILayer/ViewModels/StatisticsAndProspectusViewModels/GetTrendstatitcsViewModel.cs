@@ -18,7 +18,6 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
     public class GetTrendstatitcsViewModel : BaseViewModel
     {
         public static readonly GetTrendstatitcsViewModel Instance = new GetTrendstatitcsViewModel();
-
         public GetTrendstatitcsViewModel()
         {
             Update();

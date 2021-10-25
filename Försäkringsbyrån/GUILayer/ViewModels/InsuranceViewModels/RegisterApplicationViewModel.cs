@@ -86,11 +86,11 @@ namespace GUILayer.ViewModels.InsuranceViewModels
 
         private void AddInsurance()
         {
-            if (Instance._orgNbr != null  && Instance.CompanyName != null && Instance.City != null && Instance.AgentNo != null & Instance.DiallingCode != null
+            if (Instance._orgNbr != null && Instance.CompanyName != null && Instance.City != null && Instance.AgentNo != null & Instance.DiallingCode != null
                  && Instance.CompanyInsuranceType != null && Instance.EndDate != null && Instance.StartDate != null && Instance.PaymentForm != null && Instance.StreetAddress != null &&
                  Instance.PostalCode != null && Instance.Premie != null)
             {
-                if(Instance.EndDate >= Instance.StartDate)
+                if (Instance.EndDate >= Instance.StartDate)
                 {
                     Insurance i = new Insurance()
                     {
@@ -135,7 +135,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                 MessageBoxResult result = MessageBox.Show($"Det finns redan en försäkringstagare med det inskrivna organisationsnumret vid namn: {y.CompanyName} vill du uppdatera dessa uppgifter?", "Varning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 if (result == MessageBoxResult.Yes)
                 {
-                    AddInsurance();                
+                    AddInsurance();
                 }
                 else
                 {
@@ -177,7 +177,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             List<Insurance> insurances = new List<Insurance>();
             foreach (var i in Context.IController.GetAllInsurances())
             {
-                if(i.COI != null)
+                if (i.COI != null)
                 {
                     if (CompanyI.COIName.Equals(i.COI.COIName))
                     {
@@ -200,7 +200,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                 string num = Regex.Replace(x, @"\D", "");
 
                 int num1 = int.Parse(num);
-                int num2 = num1+ 1;
+                int num2 = num1 + 1;
                 string newNum = num2.ToString();
 
                 y = str + newNum;
@@ -254,17 +254,16 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             get => _pC > 0 ? _pC.ToString() : "";
             set
             {
-                if(Check == false)
+                _pC = 0;
+                if (int.TryParse(value, out _pC) && PostalCode.Length == 5)
                 {
-                    if (int.TryParse(value, out _pC) && PostalCode.Length == 5)
-                    {
-                        OnPropertyChanged("PostalCode");
-                    }
-                    else
-                    {
-                        MessageBox.Show("Måste vara fem siffror");
-                    }
+                    
                 }
+                else if (Check == false)
+                {
+                    MessageBox.Show("Måste vara fem siffror");
+                }
+                OnPropertyChanged("PostalCode");
             }
         }
 
@@ -388,13 +387,13 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             get => _premie > 0 ? _premie.ToString() : "";
             set
             {
-                if(Check == false)
+                if (Check == false)
                 {
                     if (int.TryParse(value, out _premie))
                     {
                         OnPropertyChanged("Premie");
                     }
-                    else 
+                    else
                     {
                         MessageBox.Show("Måste vara ett tal");
                     }
@@ -434,9 +433,9 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             }
         }
         private string _pF;
-        public string PaymentForm 
-        { 
-            get => _pF; 
+        public string PaymentForm
+        {
+            get => _pF;
             set
             {
                 _pF = value;
@@ -465,9 +464,9 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         }
 
         private string _IC;
-        public string InsuranceCompany 
+        public string InsuranceCompany
         {
-            get => _IC; 
+            get => _IC;
             set
             {
                 _IC = value;
@@ -480,7 +479,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         #endregion
 
     }
-    
+
 }
 
 
