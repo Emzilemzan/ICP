@@ -75,45 +75,42 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
 
         private void ExportToCsv()
         {
-            if (People != null)
+            if (Insurances != null)
             {
-                foreach (var p in People)
+                foreach (var i in Insurances)
                 {
-                    if (People.Contains(p))
-                    {
-                        string date = DateTime.Today.ToString("MM-dd-yyyy");
-                        Document document = new Document(PageSize.A4, 25, 25, 30, 30);
-                        PdfWriter.GetInstance(document, new FileStream("Kundprospekt.pdf", FileMode.Create));
-                        BaseFont basefont = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, false);
-                        Font times = new Font(basefont, 15);
-                        document.Open();
-                        document.Add(new Paragraph("Kundprospekt", times));
-                        document.Add(new Paragraph("Utskriftsdatum: \t" + date));
-                        document.Add(new Paragraph("Försäkringstagaren: \t"));
-                        document.Add(new Paragraph("Personnummer: \t" + p.SocialSecurityNumber));
-                        document.Add(new Paragraph("Namn: \t" + p.Firstname + " " + p.Lastname));
-                        document.Add(new Paragraph("Gatuadress: \t" + p.StreetAddress));
-                        document.Add(new Paragraph("Postnummer: \t" + p.PostalCode));
-                        document.Add(new Paragraph("Postort: \t" + p.City));
-                        document.Add(new Paragraph("Rikt- & telefonnummer bostad: \t" + p.DiallingCodeHome + "-" + p.TelephoneNbrHome));
-                        document.Add(new Paragraph("Email: \t" + p.EmailOne));
-                        document.Add(new Paragraph("Email: \t" + p.EmailTwo));
-                        document.Add(new Paragraph("Agenturnummer: \t" + Agenten(p)));
+                    string date = DateTime.Today.ToString("MM-dd-yyyy");
+                    Document document = new Document(PageSize.A4, 25, 25, 30, 30);
+                    PdfWriter.GetInstance(document, new FileStream(i.PersonTaker.SocialSecurityNumber + "Kundprospekt.pdf", FileMode.Create));
+                    BaseFont basefont = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, false);
+                    Font times = new Font(basefont, 15);
+                    document.Open();
+                    document.Add(new Paragraph("Kundprospekt", times));
+                    document.Add(new Paragraph("Utskriftsdatum: \t" + date));
+                    document.Add(new Paragraph("Försäkringstagaren: \t"));
+                    document.Add(new Paragraph("Personnummer: \t" + i.PersonTaker.SocialSecurityNumber));
+                    document.Add(new Paragraph("Namn: \t" + i.PersonTaker.Firstname + " " + i.PersonTaker.Lastname));
+                    document.Add(new Paragraph("Gatuadress: \t" + i.PersonTaker.StreetAddress));
+                    document.Add(new Paragraph("Postnummer: \t" + i.PersonTaker.PostalCode));
+                    document.Add(new Paragraph("Postort: \t" + i.PersonTaker.City));
+                    document.Add(new Paragraph("Rikt- & telefonnummer bostad: \t" + i.PersonTaker.DiallingCodeHome + "-" + i.PersonTaker.TelephoneNbrHome));
+                    document.Add(new Paragraph("Email: \t" + i.PersonTaker.EmailOne));
+                    document.Add(new Paragraph("Email: \t" + i.PersonTaker.EmailTwo));
+                    document.Add(new Paragraph("Agenturnummer: \t" + i.AgentNo.AgentNumber));
 
-                        document.Add(new Paragraph("\t"));
+                    document.Add(new Paragraph("\t"));
 
-                        document.Add(new Paragraph("Kontaktdatum: ________________________________"));
-                        document.Add(new Paragraph("Utfall: ______________________________________"));
-                        document.Add(new Paragraph("Säljare: _____________________________________"));
-                        document.Add(new Paragraph("Agentur: _____________________________________"));
-                        document.Add(new Paragraph("Notering: ____________________________________"));
-                        document.Add(new Paragraph(" _____________________________________________"));
-                        document.Add(new Paragraph(" _____________________________________________"));
+                    document.Add(new Paragraph("Kontaktdatum: ________________________________"));
+                    document.Add(new Paragraph("Utfall: ______________________________________"));
+                    document.Add(new Paragraph("Säljare: _____________________________________"));
+                    document.Add(new Paragraph("Agentur: _____________________________________"));
+                    document.Add(new Paragraph("Notering: ____________________________________"));
+                    document.Add(new Paragraph(" _____________________________________________"));
+                    document.Add(new Paragraph(" _____________________________________________"));
 
-                        document.Close();
-                        Process.Start("Kundprospekt.pdf");
-                        
-                    }
+                    document.Close();
+                    Process.Start(i.PersonTaker.SocialSecurityNumber + "Kundprospekt.pdf");
+
                 }
             }
 
@@ -121,14 +118,6 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             {
                 MessageBox.Show("De finns inga kundprospekt att hämta. ");
             }
-        }
-
-
-
-        private SalesMen Agenten(Person p)
-        {
-            SalesMen sm = new SalesMen();
-            return sm;
         }
 
 
@@ -222,9 +211,9 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             var p4 = people2.Except(people3).ToList();
             foreach (var p in p4)
             {
-                foreach(var i in p.Insurances)
+                foreach (var i in p.Insurances)
                 {
-                    if(i.InsuranceStatus == Status.Tecknad)
+                    if (i.InsuranceStatus == Status.Tecknad)
                     {
                         insurances?.Add(i);
                     }
