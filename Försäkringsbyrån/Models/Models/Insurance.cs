@@ -64,6 +64,8 @@ namespace Models.Models
         public int? PayYear { get; set; }
         public int? PayMonth { get; set; }
         #endregion
+
+        public bool Prospect { get; set; }
     }
 
     public enum Status

@@ -153,7 +153,7 @@
                     <Label Content="Försäkringar" Grid.Column="0" Grid.Row="15"  Margin="0,0,0,0"/>
                     <DataGrid  AutoGenerateColumns="False" ItemsSource="{Binding SelectedCompany.Insurances}" Margin="0,0,123,0" ScrollViewer.CanContentScroll="True" 
                   ScrollViewer.VerticalScrollBarVisibility="Auto" IsReadOnly="true"
-                  ScrollViewer.HorizontalScrollBarVisibility="Auto" >
+                  ScrollViewer.HorizontalScrollBarVisibility="Auto" Height="75" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Löpnummer" Binding="{Binding Path=SerialNumber}"/>
                             <DataGridTextColumn Header="FörsäkradId" Binding="{Binding Path=InsuredID.InsuredId}"/>

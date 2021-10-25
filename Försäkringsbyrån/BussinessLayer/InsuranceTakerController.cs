@@ -22,6 +22,12 @@ namespace BussinessLayer
 
         public Person GetPerson(string id) => BusinessController.Instance.Context.Persons.GetById(id);
 
+        public void AddProspect(CustomerProspect cp)
+        {
+            BusinessController.Instance.Context.Prospects.Add(cp);
+            BusinessController.Instance.Save();
+        }
+
         #region Companies
         public void AddCompanyInsuranceTaker(Company insuranceTaker)
         {

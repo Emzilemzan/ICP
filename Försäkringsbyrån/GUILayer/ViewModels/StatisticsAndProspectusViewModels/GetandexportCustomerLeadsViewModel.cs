@@ -22,12 +22,16 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
 
         public GetandexportCustomerLeadsViewModel()
         {
-            Insurances = GetProspects();
-            
+            Update();
         }
-       
+
+        public void Update()
+        {
+            Insurances = GetProspects();
+        }
+
         public ObservableCollection<Insurance> Insurances { get; set; }
-      
+
         private void ExportToCsv()
         {
             if (Insurances != null)
@@ -65,8 +69,10 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
 
                     document.Close();
                     Process.Start(i.PersonTaker.SocialSecurityNumber + "Kundprospekt.pdf");
-
+                    i.Prospect = true;
+                    Context.IController.Edit(i);
                 }
+                Update();
             }
 
             else
@@ -87,7 +93,7 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             {
                 foreach (var i in Context.IController.GetInsuranceTakerIAS(it))
                 {
-                    if (i.InsuranceStatus == Status.Tecknad)
+                    if (i.InsuranceStatus == Status.Tecknad && i.Prospect == false)
                     {
                         nbr?.Add(it.TelephoneNbrHome);
                         people?.Add(it);
@@ -111,13 +117,13 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             #endregion
             if (nbr1.Count > 0)
             {
-                Insurances = GetInsurance(people, nbr1);
+                insurances = GetInsurance(people, nbr1);
             }
             else if (nbr2.Count > 0)
             {
-                Insurances = GetInsurance2(people, nbr2);
+                insurances = GetInsurance2(people, nbr2);
             }
-            return insurances;
+            return Insurances = insurances;
         }
         /// <summary>
         /// Method that runs when duplicates exist of numbers in dbo.Persons. 
@@ -152,7 +158,6 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
                     }
                 }
             }
-
             foreach (var nr in nbr)
             {
                 foreach (var p in people2)
@@ -163,14 +168,18 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
                     }
                 }
             }
+
             var p4 = people2.Except(people3).ToList();
             foreach (var p in p4)
             {
                 foreach (var i in p.Insurances)
                 {
-                    if (i.InsuranceStatus == Status.Tecknad)
+                    foreach(var c in Context.ITController.GetProspects())
                     {
-                        insurances?.Add(i);
+                        if (i.InsuranceStatus == Status.Tecknad)
+                        {
+                            insurances?.Add(i);
+                        }
                     }
                 }
             }
@@ -203,14 +212,14 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             {
                 foreach (var i in p.Insurances)
                 {
-                    if (i.TypeName != "Sjuk- och olycksfallsförsäkring för barn" && i.InsuranceStatus == Status.Tecknad) 
+                    if (i.TypeName != "Sjuk- och olycksfallsförsäkring för barn" && i.InsuranceStatus == Status.Tecknad)
+                    {
                         people3?.Add(p);
-
+                    }
                 }
             }
 
             var p4 = people2.Except(people3).ToList();
-
             foreach (var p in p4)
             {
                 foreach (var i in p.Insurances)

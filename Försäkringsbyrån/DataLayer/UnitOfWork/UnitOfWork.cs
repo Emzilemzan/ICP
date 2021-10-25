@@ -51,7 +51,7 @@ namespace DataLayer.UnitOfWork
             LifeInsurances = new LifeInsuranceRepository(_context);
             OPInsurances = new OtherPersonInsuranceRepository(_context);
             CIInsurances = new CompanyInsuranceRepository(_context);
-            //Init();
+            Init();
         }
         public void Init() => _context.Reset();
         public int Complete() => _context.SaveChanges();
