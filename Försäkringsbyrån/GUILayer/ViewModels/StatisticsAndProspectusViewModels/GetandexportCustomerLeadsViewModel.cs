@@ -23,56 +23,11 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
         public GetandexportCustomerLeadsViewModel()
         {
             Insurances = GetProspects();
-            //Ppls = ExportToCsv();
+            
         }
-        //Hej Noah, när man klickat på export, då ska ett kundprospekt skapas. Alltså skapa en ny instans av klassen CustomerProspekt
-        //Personen det berör ska således inte kunna finnas med i fler än ett kundprospekt. :) Behöver du hjälp me de säg till. 
+       
         public ObservableCollection<Insurance> Insurances { get; set; }
-        public ObservableCollection<Person> People { get; set; }
-        public ObservableCollection<Person> Ppls { get; set; }
-
-        //public string ExportToCsv(ObservableCollection<Person> Ppls)
-        //{
-        //    var output = new StringBuilder();
-        //    // Add header if necessary
-        //    output.Append("SocialSecurityNumber,");
-        //    output.Append("Lastname ,");
-        //    output.Append("Firstname ,");
-        //    output.Append("StreetAddress ,");
-        //    output.Append("PostalCode ,");
-        //    output.Append("City ,");
-        //    output.Append("DiallingCodeHome ,");
-        //    output.Append("DiallingCodeWork ,");
-        //    output.Append("TelephoneNbrHome ,");
-        //    output.Append("TelephoneNbrWork ,");
-        //    output.Append("EmailOne ,");
-        //    output.Append("EmailTwo ,");
-        //    output.AppendLine();
-        //    // Add each row
-        //    foreach (var person in Ppls)
-        //    {
-        //        output.AppendFormat("{0},", person.SocialSecurityNumber);
-        //        output.AppendFormat("{0},", person.Lastname);
-        //        output.AppendFormat("{0},", person.Firstname);
-        //        output.AppendFormat("{0},", person.StreetAddress);
-        //        output.AppendFormat("{0},", person.PostalCode);
-        //        output.AppendFormat("{0},", person.City);
-        //        output.AppendFormat("{0},", person.DiallingCodeHome);
-        //        output.AppendFormat("{0},", person.DiallingCodeWork);
-        //        output.AppendFormat("{0},", person.TelephoneNbrHome);
-        //        output.AppendFormat("{0},", person.TelephoneNbrWork);
-        //        output.AppendFormat("{0},", person.EmailOne);
-        //        output.AppendFormat("{0},", person.EmailTwo);
-        //        output.AppendLine();
-
-
-        //    }
-
-        //    System.IO.File.WriteAllText(@"c:\temp\output.txt", output.ToString());
-
-        //    return output.ToString();
-        //}
-
+      
         private void ExportToCsv()
         {
             if (Insurances != null)
@@ -248,7 +203,7 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             {
                 foreach (var i in p.Insurances)
                 {
-                    if (i.TypeName != "Sjuk- och olycksfallsförsäkring för barn" && i.InsuranceStatus == Status.Tecknad) //alla som har tecknat barnförsäkring + vuxenförsäkringar
+                    if (i.TypeName != "Sjuk- och olycksfallsförsäkring för barn" && i.InsuranceStatus == Status.Tecknad) 
                         people3?.Add(p);
 
                 }
