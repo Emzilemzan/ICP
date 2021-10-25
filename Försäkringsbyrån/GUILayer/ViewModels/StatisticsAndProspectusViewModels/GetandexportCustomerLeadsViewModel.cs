@@ -1,11 +1,16 @@
 ﻿using GUILayer.Commands;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 using Models.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
@@ -26,47 +31,106 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
         public ObservableCollection<Person> People { get; set; }
         public ObservableCollection<Person> Ppls { get; set; }
 
-        public string ExportToCsv(ObservableCollection<Person> Ppls)
+        //public string ExportToCsv(ObservableCollection<Person> Ppls)
+        //{
+        //    var output = new StringBuilder();
+        //    // Add header if necessary
+        //    output.Append("SocialSecurityNumber,");
+        //    output.Append("Lastname ,");
+        //    output.Append("Firstname ,");
+        //    output.Append("StreetAddress ,");
+        //    output.Append("PostalCode ,");
+        //    output.Append("City ,");
+        //    output.Append("DiallingCodeHome ,");
+        //    output.Append("DiallingCodeWork ,");
+        //    output.Append("TelephoneNbrHome ,");
+        //    output.Append("TelephoneNbrWork ,");
+        //    output.Append("EmailOne ,");
+        //    output.Append("EmailTwo ,");
+        //    output.AppendLine();
+        //    // Add each row
+        //    foreach (var person in Ppls)
+        //    {
+        //        output.AppendFormat("{0},", person.SocialSecurityNumber);
+        //        output.AppendFormat("{0},", person.Lastname);
+        //        output.AppendFormat("{0},", person.Firstname);
+        //        output.AppendFormat("{0},", person.StreetAddress);
+        //        output.AppendFormat("{0},", person.PostalCode);
+        //        output.AppendFormat("{0},", person.City);
+        //        output.AppendFormat("{0},", person.DiallingCodeHome);
+        //        output.AppendFormat("{0},", person.DiallingCodeWork);
+        //        output.AppendFormat("{0},", person.TelephoneNbrHome);
+        //        output.AppendFormat("{0},", person.TelephoneNbrWork);
+        //        output.AppendFormat("{0},", person.EmailOne);
+        //        output.AppendFormat("{0},", person.EmailTwo);
+        //        output.AppendLine();
+
+
+        //    }
+
+        //    System.IO.File.WriteAllText(@"c:\temp\output.txt", output.ToString());
+
+        //    return output.ToString();
+        //}
+
+        private void ExportToCsv()
         {
-            var output = new StringBuilder();
-            // Add header if necessary
-            output.Append("SocialSecurityNumber,");
-            output.Append("Lastname ,");
-            output.Append("Firstname ,");
-            output.Append("StreetAddress ,");
-            output.Append("PostalCode ,");
-            output.Append("City ,");
-            output.Append("DiallingCodeHome ,");
-            output.Append("DiallingCodeWork ,");
-            output.Append("TelephoneNbrHome ,");
-            output.Append("TelephoneNbrWork ,");
-            output.Append("EmailOne ,");
-            output.Append("EmailTwo ,");
-            output.AppendLine();
-            // Add each row
-            foreach (var person in Ppls)
+            if (People != null)
             {
-                output.AppendFormat("{0},", person.SocialSecurityNumber);
-                output.AppendFormat("{0},", person.Lastname);
-                output.AppendFormat("{0},", person.Firstname);
-                output.AppendFormat("{0},", person.StreetAddress);
-                output.AppendFormat("{0},", person.PostalCode);
-                output.AppendFormat("{0},", person.City);
-                output.AppendFormat("{0},", person.DiallingCodeHome);
-                output.AppendFormat("{0},", person.DiallingCodeWork);
-                output.AppendFormat("{0},", person.TelephoneNbrHome);
-                output.AppendFormat("{0},", person.TelephoneNbrWork);
-                output.AppendFormat("{0},", person.EmailOne);
-                output.AppendFormat("{0},", person.EmailTwo);
-                output.AppendLine();
+                foreach (var p in People)
+                {
+                    if (People.Contains(p))
+                    {
+                        string date = DateTime.Today.ToString("MM-dd-yyyy");
+                        Document document = new Document(PageSize.A4, 25, 25, 30, 30);
+                        PdfWriter.GetInstance(document, new FileStream("Kundprospekt.pdf", FileMode.Create));
+                        BaseFont basefont = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, false);
+                        Font times = new Font(basefont, 15);
+                        document.Open();
+                        document.Add(new Paragraph("Kundprospekt", times));
+                        document.Add(new Paragraph("Utskriftsdatum: \t" + date));
+                        document.Add(new Paragraph("Försäkringstagaren: \t"));
+                        document.Add(new Paragraph("Personnummer: \t" + p.SocialSecurityNumber));
+                        document.Add(new Paragraph("Namn: \t" + p.Firstname + " " + p.Lastname));
+                        document.Add(new Paragraph("Gatuadress: \t" + p.StreetAddress));
+                        document.Add(new Paragraph("Postnummer: \t" + p.PostalCode));
+                        document.Add(new Paragraph("Postort: \t" + p.City));
+                        document.Add(new Paragraph("Rikt- & telefonnummer bostad: \t" + p.DiallingCodeHome + "-" + p.TelephoneNbrHome));
+                        document.Add(new Paragraph("Email: \t" + p.EmailOne));
+                        document.Add(new Paragraph("Email: \t" + p.EmailTwo));
+                        document.Add(new Paragraph("Agenturnummer: \t" + Agenten(p)));
 
+                        document.Add(new Paragraph("\t"));
 
+                        document.Add(new Paragraph("Kontaktdatum: ________________________________"));
+                        document.Add(new Paragraph("Utfall: ______________________________________"));
+                        document.Add(new Paragraph("Säljare: _____________________________________"));
+                        document.Add(new Paragraph("Agentur: _____________________________________"));
+                        document.Add(new Paragraph("Notering: ____________________________________"));
+                        document.Add(new Paragraph(" _____________________________________________"));
+                        document.Add(new Paragraph(" _____________________________________________"));
+
+                        document.Close();
+                        Process.Start("Kundprospekt.pdf");
+                        
+                    }
+                }
             }
 
-            System.IO.File.WriteAllText(@"c:\temp\output.txt", output.ToString());
-
-            return output.ToString();
+            else
+            {
+                MessageBox.Show("De finns inga kundprospekt att hämta. ");
+            }
         }
+
+
+
+        private SalesMen Agenten(Person p)
+        {
+            SalesMen sm = new SalesMen();
+            return sm;
+        }
+
 
         #region Methods to find customerprospects
 
@@ -200,18 +264,18 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
 
             foreach (var p in p4)
             {
-                 people4?.Add(p);
+                people4?.Add(p);
             }
 
             return people4;
         }
         #endregion
 
-        //private ICommand exportProspects_Btn;
-        //public ICommand ExportProspects_Btn
-        //{
-        //    get => exportProspects_Btn ?? (exportProspects_Btn = new RelayCommand(x => { ExportToCsv();  }));
-        //}
+        private ICommand exportProspects_Btn;
+        public ICommand ExportProspects_Btn
+        {
+            get => exportProspects_Btn ?? (exportProspects_Btn = new RelayCommand(x => { ExportToCsv(); }));
+        }
 
 
 

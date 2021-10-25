@@ -38,6 +38,6 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Button Grid.Row="3" Content="Exportera kundprospekt" Margin="622,0,10,0"/>
+        <Button Grid.Row="3" Content="Exportera kundprospekt" Margin="622,0,10,0" Command="{Binding ExportProspects_Btn }"/>
     </Grid>
 </UserControl>
