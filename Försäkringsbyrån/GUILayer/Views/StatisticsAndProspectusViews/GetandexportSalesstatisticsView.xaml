@@ -35,7 +35,7 @@
 
             <Label Content="Månad" FontWeight="Light"
                    Foreground="Black" Grid.Column="0" Grid.Row="1"  Margin="0,0,9.333,9" ></Label>
-            <ComboBox  ItemsSource="{Binding Months}" FontSize="10" SelectedItem="{Binding Month}" Grid.Column="0" Margin="10,26,10.333,30" RenderTransformOrigin="0.5,0.5" Grid.Row="1" Grid.RowSpan="2"/>
+            <ComboBox  ItemsSource="{Binding Years}" FontSize="10" SelectedItem="{Binding Year}" Grid.Column="0" Margin="10,26,10.333,30" RenderTransformOrigin="0.5,0.5" Grid.Row="1" Grid.RowSpan="2"/>
             <Label Grid.Row="3" Grid.Column="0" Content="Säljare"></Label>
             <ComboBox Grid.Row="3" Grid.Column="0" Margin="10,25,9.333,10" FontSize="10" ItemsSource="{Binding SalesMens}" SelectedItem="{Binding SalesMen}" >
                 <ComboBox.Resources>
@@ -65,17 +65,6 @@
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
                   ScrollViewer.HorizontalScrollBarVisibility="Auto" Margin="10.333,0,10,0.333" Grid.ColumnSpan="4" Grid.RowSpan="3">
             </DataGrid>
-
-
-
-
-
-
-
-
-
-
         </Grid>
-
     </Grid>
 </UserControl>

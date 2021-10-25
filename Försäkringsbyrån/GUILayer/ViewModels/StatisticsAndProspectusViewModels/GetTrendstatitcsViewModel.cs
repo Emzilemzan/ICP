@@ -56,7 +56,7 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
                 }
             }
             var sm = x.Union(x).ToList();
-            foreach(var s in sm)
+            foreach (var s in sm)
             {
                 y?.Add(s);
             }
@@ -102,7 +102,7 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             xlWorksheet.Name = "Alla säljares trendstatstik";
             xlWorksheet1 = xlWorkBook.Sheets.Add(value, value, 1, value) as Worksheet;
             xlWorksheet1.Name = "Vald säljares trendstatistik";
-            
+
             ExcelPrint(xlWorksheet, xlWorksheet1, year);
             CreateChart(xlWorksheet1, value, salesMen, year);
             xlWorksheet.get_Range("A1", "AN1").Font.Bold = true;
@@ -528,6 +528,7 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
 
             return sum;
         }
+
         /// <summary>
         /// Create month ackvalue for child per salesmen. 
         /// </summary>
