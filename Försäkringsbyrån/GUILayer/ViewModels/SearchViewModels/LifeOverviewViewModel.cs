@@ -105,9 +105,6 @@ namespace GUILayer.ViewModels.SearchViewModels
         }
         #endregion
 
-
-
-
         #region updatelists
         
         //Update all baseamounts for a specific lifeinsurances and for the delivery year.  

@@ -197,7 +197,6 @@ namespace GUILayer.ViewModels.SearchViewModels
         }
         #endregion
 
-
         #region Properties
         public SalesMen AgentNo
         {

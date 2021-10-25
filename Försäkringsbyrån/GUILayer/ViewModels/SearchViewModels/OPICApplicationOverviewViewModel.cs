@@ -67,8 +67,6 @@ namespace GUILayer.ViewModels.SearchViewModels
 
         }
 
-
-
         private ICommand _removeBtn;
         public ICommand RemoveBtn
         {
@@ -113,7 +111,6 @@ namespace GUILayer.ViewModels.SearchViewModels
             }
         }
     
-
         #endregion
 
         #region Updates
