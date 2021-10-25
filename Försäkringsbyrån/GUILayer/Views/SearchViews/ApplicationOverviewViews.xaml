@@ -107,7 +107,7 @@
                 <TextBox Grid.Row="3" IsReadOnly="true" Height="20" Grid.Column="0" Margin="10.333,25,9.667,5" Text="{Binding SelectedInsurance.CompanyTaker.OrganizationNumber}"/>
                 <Label Grid.Row="4" Grid.Column="0" Content="Företagsnamn:" FontSize="15"/>
                 <TextBox Grid.Row="4"  IsReadOnly="true" Height="20" Grid.Column="0" Margin="10.333,25,9.667,9.667" Text="{Binding SelectedInsurance.CompanyTaker.CompanyName}"/>
-                
+
                 <TextBlock FontSize="14" FontWeight="DemiBold" Grid.Row="5" Margin="10,0.333,0,0.333">¡Försäkringstagares uppgifter<LineBreak/> ändras i sökregistret över företag!</TextBlock>
 
                 <TextBlock Text="Övriga försäkringsuppgifter " FontSize="18" Grid.Row="1" Grid.Column="1" Margin="10.333,10,71.667,10" Grid.ColumnSpan="2"/>
@@ -146,8 +146,8 @@
                 <TextBox Grid.Row="5" Width="250" Grid.Column="2" Margin="10.667,31.667,24.667,31.333" Grid.RowSpan="3" Text="{Binding SelectedInsurance.Notes}"/>
 
                 <Button Grid.Row="5" Grid.Column="3"  Content="Uppdatera" FontSize="15" Margin="62.333,24.667,83.667,3" Command="{Binding UpdateBtn}" />
-                <Button Grid.Row="6" Grid.Column="3"  Content="Exportera" FontSize="15" Margin="62.333,2,83.667,2.667" Grid.RowSpan="2" Command="{Binding ExportBtn}" />
-                <Button Grid.Row="8" Grid.Column="3"  Content="Ta bort" FontSize="15" Margin="62.333,2.667,83.667,20.333" Command="{Binding RemoveBtn}" />
+                <Button Grid.Row="6" Grid.Column="3"  Content="Exportera" FontSize="15" Margin="62.333,2,83.667,43.667" Command="{Binding ExportBtn}" />
+                <Button Grid.Row="6" Grid.Column="3"  Content="Ta bort" FontSize="15" Margin="62.333,36,83.667,11.444" Command="{Binding RemoveBtn}" />
             </Grid>
         </Grid>
     </ScrollViewer>

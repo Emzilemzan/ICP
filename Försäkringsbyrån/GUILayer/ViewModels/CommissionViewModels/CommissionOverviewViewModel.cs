@@ -6,7 +6,15 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
+using System.Diagnostics;
 using System.Windows.Input;
+using System.Windows;
+using Microsoft.Office.Interop.Excel;
+using System.Reflection;
+using System.Runtime.InteropServices;
 
 namespace GUILayer.ViewModels.CommissionViewModels
 {
@@ -47,9 +55,118 @@ namespace GUILayer.ViewModels.CommissionViewModels
             VacationPays = x;
             return VacationPays;
         }
+        private ICommand _export;
+        public ICommand ExportBtn => _export ?? (_export = new RelayCommand(x => { Export(); }));
 
+        private void Export()
+        {
+            if (SelectedMonth != null && SelectedSalesMen != null)
+            {
+                ExportCommission(SelectedMonth, SelectedSalesMen);
+            }
+            else MessageBox.Show("Du måste välja en månad och en säljare");
+        }
 
+        /// <summary>
+        /// method to create pdf document and open it when button is clicked. 
+        /// </summary>
+        private void ExportCommission(string month, SalesMen salesMen)
+        {
+            Microsoft.Office.Interop.Excel.Application xlApp = new Microsoft.Office.Interop.Excel.Application();
+            Workbook xlWorkBook;
+            Worksheet xlWorksheet;
+            xlApp.DisplayAlerts = false;
+            object value = Missing.Value;
+            xlWorkBook = xlApp.Workbooks.Add(value);
+            xlWorksheet = xlWorkBook.ActiveSheet as Worksheet;
+            xlWorksheet.Name = "Provisionsbesked";
 
+            WriteDataToExcel(xlWorksheet);
+            xlWorksheet.get_Range("A1", "D1").Font.Bold = true;
+            xlWorksheet.get_Range("A1", "D1").VerticalAlignment = XlVAlign.xlVAlignCenter;
+            xlWorksheet.get_Range("A5", "D5").Font.Bold = true;
+
+            if (System.IO.File.Exists("Provisionsbesked"))
+            {
+                xlWorkBook.SaveAs("Provisionsbesked", XlFileFormat.xlWorkbookNormal,
+                value, value, value, value, XlSaveAsAccessMode.xlExclusive,
+                value, value, value, value, value);
+            }
+            else
+            {
+                xlWorkBook.SaveAs("Provisionsbesked", XlFileFormat.xlWorkbookNormal,
+                value, value, value, value, XlSaveAsAccessMode.xlExclusive,
+                value, value, value, value, value);
+            }
+            xlApp.Visible = true;
+            Marshal.ReleaseComObject(xlWorksheet);
+            Marshal.ReleaseComObject(xlWorkBook);
+            xlApp.DisplayAlerts = true;
+            Marshal.ReleaseComObject(xlApp);
+
+        }
+
+        private void WriteDataToExcel(Worksheet xlWorksheet)
+        {
+            xlWorksheet.Columns[1].ColumnWidth = 20;
+            xlWorksheet.Columns[2].ColumnWidth = 20;
+            xlWorksheet.Columns[3].ColumnWidth = 20;
+            xlWorksheet.Columns[4].ColumnWidth = 20;
+            xlWorksheet.Columns[5].ColumnWidth = 20;
+            xlWorksheet.Columns[6].ColumnWidth = 20;
+            xlWorksheet.Columns[7].ColumnWidth = 20;
+            xlWorksheet.Columns[8].ColumnWidth = 20;
+            xlWorksheet.Columns[9].ColumnWidth = 20;
+            xlWorksheet.Columns[10].ColumnWidth = 20;
+            xlWorksheet.Columns[11].ColumnWidth = 20;
+            xlWorksheet.Columns[12].ColumnWidth = 20;
+            xlWorksheet.Columns[13].ColumnWidth = 20;
+
+            xlWorksheet.Cells[1, 1] = SelectedSalesMen.Firstname + SelectedSalesMen.Lastname;
+            xlWorksheet.Cells[1, 3] = "Provisionsbesked";
+            xlWorksheet.Cells[2, 1] = SelectedSalesMen.StreetAddress;
+            xlWorksheet.Cells[3, 1] = SelectedSalesMen.Postalcode + SelectedSalesMen.City;
+
+            xlWorksheet.Cells[5, 1] = "Period";
+            xlWorksheet.Cells[5, 2] = SelectedMonth + " " + Year;
+
+            xlWorksheet.Cells[7, 1] = "Bu summa ackvärde: ";
+            xlWorksheet.Cells[7, 2] = Instance.CSumAck;
+            xlWorksheet.Cells[8, 1] = "Vu summa ackvärde: ";
+            xlWorksheet.Cells[8, 2] = Instance.ASumAck;
+            xlWorksheet.Cells[9, 1] = "Summa ackvärde: ";
+            xlWorksheet.Cells[9, 2] = Instance.SumAck;
+            xlWorksheet.Cells[9, 3] = "Prov so: ";
+            xlWorksheet.Cells[9, 4] = Instance.ProvSO;
+
+            xlWorksheet.Cells[11, 1] = "Liv summa ackvärde: ";
+            xlWorksheet.Cells[11, 2] = Instance.LSumAck;
+            xlWorksheet.Cells[11, 3] = "Prov liv: ";
+            xlWorksheet.Cells[11, 4] = Instance.ProvLiv;
+
+            xlWorksheet.Cells[13, 1] = "Övrigt provision: ";
+            xlWorksheet.Cells[13, 2] = Instance.OtherCommission;
+            xlWorksheet.Cells[13, 3] = "Prov övrigt: ";
+            xlWorksheet.Cells[13, 4] = Instance.ProvOther;
+
+            xlWorksheet.Cells[15, 1] = "Semesterersättning: ";
+            xlWorksheet.Cells[15, 2] = Instance.SelectedVPay;
+            xlWorksheet.Cells[15, 3] = "Semesterersättning: ";
+            xlWorksheet.Cells[15, 4] = Instance.VPay;
+
+            xlWorksheet.Cells[17, 3] = "Summa prov: ";
+            xlWorksheet.Cells[17, 4] = Instance.SumCommission;
+
+            xlWorksheet.Cells[19, 1] = "Preliminär skatt: ";
+            xlWorksheet.Cells[19, 2] = Instance.TaxesPercent;
+            xlWorksheet.Cells[19, 3] = "Avgår skatt: ";
+            xlWorksheet.Cells[19, 4] = Instance.Taxes;
+
+            xlWorksheet.Cells[21, 1] = "Bankkonto insättning: ";
+            xlWorksheet.Cells[21, 2] = Instance.PayDate;
+            xlWorksheet.Cells[21, 3] = "Att utbetala: ";
+            xlWorksheet.Cells[21, 4] = Instance.ToPay;
+        }
         #endregion
 
         #region Count
@@ -65,11 +182,11 @@ namespace GUILayer.ViewModels.CommissionViewModels
         private double CountCSumAck()  
         {
             double sum = 0;
-            if (SelectedSalesMen.Insurances != null)
+            if (SelectedSalesMen.Insurances != null && SelectedMonth != null)
             {
                 foreach (Insurance i in SelectedSalesMen.Insurances)  
                 {
-                    if (i.InsuranceStatus == 0 && i.SAI.SAInsuranceType.Contains("barn") && i.PayYear == Year && i.PayMonth == (Months.IndexOf(_month) + 1) % 12)
+                    if (i.InsuranceStatus == 0 && i.SAI.SAID == 1 && i.PayYear != null && i.PayMonth != null && i.PayYear == Year && i.PayMonth == (Months.IndexOf(_month) + 1) % 12)
                     {
                         sum += i.AckValue + i.AckValue2 + i.AckValue3 + i.AckValue4;
                     }
@@ -81,16 +198,14 @@ namespace GUILayer.ViewModels.CommissionViewModels
         private double CountASumAck()
         {
             double sum = 0;
-            if (SelectedSalesMen.Insurances != null)
+            if (SelectedSalesMen.Insurances != null && SelectedMonth != null)
             {
                 foreach (Insurance i in SelectedSalesMen.Insurances)
                 {
-
                    if (i.InsuranceStatus == 0 && i.SAI.SAInsuranceType.Contains("vuxen") && i.PayYear == Year && i.PayMonth == (Months.IndexOf(_month) + 1) % 12)
                    {
                         sum += i.AckValue + i.AckValue2 + i.AckValue3 + i.AckValue4;
                    }
-
                 }
             }
             return sum;
@@ -103,23 +218,6 @@ namespace GUILayer.ViewModels.CommissionViewModels
             return sum;
         }
 
-        //private double CountLifeSumAck()
-        //{
-        //    //double sum = 0;
-        //    //if (SelectedSalesMen.Insurances != null)
-        //    //{
-        //    //    foreach (Insurance i in SelectedSalesMen.Insurances)
-        //    //    {
-
-        //    //        if (i.InsuranceStatus == 0 i. && i.PayYear == Year && i.PayMonth == (Months.IndexOf(_month) + 1) % 12)
-        //    //        {
-        //    //            sum += i.AckValue + i.AckValue2 + i.AckValue3 + i.AckValue4;
-        //    //        }
-
-        //    //    }
-        //    //}
-        //    //return sum;
-        //}
         #endregion
 
         #region Properties for Salesman
@@ -157,7 +255,8 @@ namespace GUILayer.ViewModels.CommissionViewModels
                     PayDate = new DateTime(Year, (Months.IndexOf(_month) + 2), 25).ToString("yyyy-MM-dd");
                 }
                 Count();
-                OnPropertyChanged("SelectedMonths");
+                OnPropertyChanged("PayDate");
+                OnPropertyChanged("SelectedMonth");
             }
         }
 

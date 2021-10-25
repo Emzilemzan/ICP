@@ -152,10 +152,9 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
 
-                <Button Grid.Row="7" Grid.Column="2" Height="50"  Content="Exportera" FontSize="15" Margin="143,23,24,23" Command="{Binding ExportBtn}"/>
-                <Button Grid.Row="7" Grid.Column="2" Height="50"  Content="Uppdatera" FontSize="15" Margin="0,16,165,16" RenderTransformOrigin="0.5,0.5" Command="{Binding UpdateBtn}"/>
-                <Button Grid.Row="7" Grid.Column="3" Height="50"  Content="Ta bort" FontSize="15" Margin="22,23,124,23" Command="{Binding RemoveBtn}" >
-                </Button>
+                <Button Grid.Row="5" Grid.Column="3"  Content="Uppdatera" FontSize="15" Margin="62.333,24.667,83.667,3" Command="{Binding UpdateBtn}" />
+                <Button Grid.Row="6" Grid.Column="3"  Content="Exportera" FontSize="15" Margin="62.333,2.333,83.667,88" Command="{Binding ExportBtn}" />
+                <Button Grid.Row="6" Grid.Column="3"  Content="Ta bort" FontSize="15" Margin="62.333,46.333,83.667,46.333" Command="{Binding RemoveBtn}" />
             </Grid>
         </Grid>
     </ScrollViewer>

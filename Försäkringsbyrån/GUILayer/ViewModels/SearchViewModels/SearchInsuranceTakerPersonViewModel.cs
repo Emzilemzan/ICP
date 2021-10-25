@@ -7,6 +7,10 @@ using System.Collections.ObjectModel;
 using Models.Models;
 using System.ComponentModel;
 using System.Windows.Data;
+using iTextSharp.text.pdf;
+using System.IO;
+using iTextSharp.text;
+using System.Diagnostics;
 using System.Windows.Input;
 using GUILayer.Commands;
 using System.Windows;
@@ -410,14 +414,8 @@ namespace GUILayer.ViewModels.SearchViewModels
                 MessageBox.Show("Antingen har ingen person markerats i registret eller så har du lämnat något fält tomt! ", "Fel", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
         private ICommand _updateIP;
-        public ICommand UpdateIP
-        {
-            get => _updateIP ?? (_updateIP = new RelayCommand(x => { UpdateIPerson(); }));
-        }
-
-
+        public ICommand UpdateIP => _updateIP ?? (_updateIP = new RelayCommand(x => { UpdateIPerson(); }));
         private void UpdateIPerson()
         {
             if (SelectedIP != null && SelectedIP.PersonType != null && SelectedIP.LastName != null && SelectedIP.FirstName != null &&
@@ -458,11 +456,35 @@ namespace GUILayer.ViewModels.SearchViewModels
         {
             get => _exportP ?? (_exportP = new RelayCommand(x => { ExportPerson(); }));
         }
-
-
+        /// <summary>
+        /// method for exportation of selectedperson to pdf. 
+        /// </summary>
         private void ExportPerson()
         {
-            throw new NotImplementedException();
+            if (SelectedPerson != null)
+            {
+                Document document = new Document(PageSize.A4, 25, 25, 30, 30);
+                PdfWriter.GetInstance(document, new FileStream("FörsäkringstagarePerson.pdf", FileMode.Create));
+                BaseFont basefont = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, false);
+                Font times = new Font(basefont, 15);
+                document.Open();
+                document.Add(new Paragraph("Försäkringstagare Person", times));
+                document.Add(new Paragraph("Personnummer: \t" + SelectedPerson.SocialSecurityNumber));
+                document.Add(new Paragraph("Namn: \t" + SelectedPerson.Firstname+ " " + SelectedPerson.Lastname));
+                document.Add(new Paragraph("Gatuadress: \t" + SelectedPerson.StreetAddress));
+                document.Add(new Paragraph("Postnummer: \t" + SelectedPerson.PostalCode));
+                document.Add(new Paragraph("Postort: \t" + SelectedPerson.City));
+                document.Add(new Paragraph("Rikt- & telefonnummer bostad: \t" + SelectedPerson.DiallingCodeHome + "-" + SelectedPerson.TelephoneNbrHome));
+                document.Add(new Paragraph("Rikt- & telefonnummer arbete: \t" + SelectedPerson.DiallingCodeWork + "-" + SelectedPerson.TelephoneNbrWork));
+                document.Add(new Paragraph("Email: \t" + SelectedPerson.EmailOne));
+                document.Add(new Paragraph("Email: \t" + SelectedPerson.EmailTwo));
+                document.Close();
+                Process.Start("FörsäkringstagarePerson.pdf");
+            }
+            else
+            {
+                MessageBox.Show("Du måste markera en person att exportera. ");
+            }
         }
 
         #endregion

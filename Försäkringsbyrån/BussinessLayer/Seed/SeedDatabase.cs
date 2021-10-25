@@ -185,8 +185,8 @@ namespace BussinessLayer.Seed
                 },
                 new UserAccess()
                 {
-                    Username = "Admin",
-                    Password = "Admin",
+                    Username = "ADMIN",
+                    Password = "ADMIN",
                     Firstname = "Admin",
                     Lastname = "Admin",
                     Search = true,

@@ -15,14 +15,11 @@ namespace GUILayer.ViewModels.SearchViewModels
     public class SearchValueViewModel : BaseViewModel
     {
         public static readonly SearchValueViewModel Instance = new SearchValueViewModel();
-
-
         private SearchValueViewModel()
         {
-           
         }
-       
-    #region  Commands
+
+        #region  Commands
         private ICommand searchCompany_Btn;
         public ICommand SearchCompany_Btn
         {
@@ -44,7 +41,7 @@ namespace GUILayer.ViewModels.SearchViewModels
             get => searchPerson_Btn ?? (searchPerson_Btn = new RelayCommand(x => { SearchPersonHome(); CanCreate(); }));
 
         }
-        
+
         public static void SearchPersonHome()
         {
             MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
@@ -54,7 +51,7 @@ namespace GUILayer.ViewModels.SearchViewModels
 
         // Search Employee Command open the view.
 
-        private ICommand searchEmployee_Btn; 
+        private ICommand searchEmployee_Btn;
         public ICommand SearchEmployeeBtn
         {
             get => searchEmployee_Btn ?? (searchEmployee_Btn = new RelayCommand(x => { SearchEmployeeHome(); CanCreate(); }));
@@ -67,7 +64,7 @@ namespace GUILayer.ViewModels.SearchViewModels
             MainViewModel.Instance.SelectedViewModel = SearchEmployeeViewModel.Instance;
         }
 
-       
+
         private ICommand searchApplication_Btn;
         public ICommand SearchInsurance_Btn
         {
@@ -91,7 +88,7 @@ namespace GUILayer.ViewModels.SearchViewModels
                 MainViewModel.Instance.SelectedViewModel = Instance;
             }
         }
-      
+
         #endregion
 
     }

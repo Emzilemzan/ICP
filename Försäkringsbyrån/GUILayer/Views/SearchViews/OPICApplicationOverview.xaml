@@ -153,19 +153,9 @@
                         <StaticResource ResourceKey="DataTemplateBaseAmountT"/>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
-
-
-                <TextBlock Text="Om tecknad: " FontSize="18" Grid.Row="1" Grid.Column="4" Margin="10"/>
-                <Label Grid.Row="2" Grid.Column="4" Content="Försäkringsnummer:" FontSize="15" />
-                <TextBox Grid.Row="2" IsReadOnly="true" Height="20" Grid.Column="3" Margin="10.333,25,31.667,5" Text="{Binding SelectedInsurance.InsuranceNumber}"/>
-                <Label Grid.Row="3" Grid.Column="4" Content="Provision:" FontSize="15"/>
-                <TextBox Grid.Row="3" Height="20" Grid.Column="3" Margin="10.333,25,31.667,9.667" Text="{Binding SelectedInsurance.PossibleComisson}"/>
-
-
-                <Button Grid.Row="6" Grid.Column="2" Height="50"  Content="Exportera" FontSize="15" Margin="201,10,231,50" RenderTransformOrigin="-0.102,0.66" Grid.ColumnSpan="2" Grid.RowSpan="2" Command="{Binding ExportBtn}" />
-                <Button Grid.Row="6" Grid.Column="2" Height="50"  Content="Uppdatera" FontSize="15" Margin="65,10,0,50" RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2" HorizontalAlignment="Left" Width="120" Command="{Binding UppdateBtn}" />
-                <Button Grid.Row="6" Grid.Column="3" Height="50"  Content="Ta bort" FontSize="15" Margin="54,10,92,50" Grid.RowSpan="2" Command="{Binding RemoveBtn}" >
-                </Button>
+                <Button Grid.Row="5" Grid.Column="3"  Content="Uppdatera" FontSize="15" Margin="62.333,24.667,83.667,3" Command="{Binding UpdateBtn}" />
+                <Button Grid.Row="6" Grid.Column="3"  Content="Exportera" FontSize="15" Margin="62.333,2.333,83.667,85" Command="{Binding ExportBtn}" />
+                <Button Grid.Row="6" Grid.Column="3"  Content="Ta bort" FontSize="15" Margin="62.333,40.333,83.667,46.333" Command="{Binding RemoveBtn}" />
             </Grid>
         </Grid>
     </ScrollViewer>

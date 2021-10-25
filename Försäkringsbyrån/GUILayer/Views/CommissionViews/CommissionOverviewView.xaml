@@ -135,6 +135,8 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
+                    <Label Grid.Column="0" Grid.Row="0" Content="Summa prov:" FontSize="15"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" IsReadOnly="True" Text="{Binding SumCommission}"/>
                     <Label Grid.Column="0" Grid.Row="1" Content="Preliminärskatt %:" FontSize="15"/>
                     <TextBox Grid.Row="1" Grid.Column="1" IsReadOnly="True" Text="{Binding SelectedSalesMen.TaxRate}"/>
                     <Label Grid.Column="0" Grid.Row="2" Content="Avgår skatt:" FontSize="15"/>
@@ -235,7 +237,7 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Button Grid.Row="5" Grid.Column="2" Content="Exportera Provsion" Height="25"  Command="" />
+                    <Button Grid.Row="5" Grid.Column="2" Content="Exportera Provsion" Height="25"  Command="{Binding ExportBtn}" />
 
                 </Grid>
             </StackPanel>
