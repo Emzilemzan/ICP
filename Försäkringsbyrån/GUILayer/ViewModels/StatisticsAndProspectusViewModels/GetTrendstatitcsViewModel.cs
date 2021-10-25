@@ -146,14 +146,10 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             chartPage.ChartStyle = 209;
             Series series = chartPage.SeriesCollection(1) as Series;
 
-
             Trendlines trendlines = (Trendlines)series.Trendlines(Type.Missing);
             Trendline line = trendlines.Add(XlTrendlineType.xlLinear);
             line.Name = "Trendlinje";
             line.Select();
-            
-
-
         }
 
         private void ExcelPrint(Worksheet xlWorksheet, Worksheet xlWorksheet1, int year)
