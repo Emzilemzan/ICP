@@ -53,7 +53,6 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             }
         }
 
-
         public List<int?> Months { get; set; }
         private int? _month;
         public int? Month
