@@ -115,7 +115,7 @@ namespace GUILayer.ViewModels.BasicDataViewModels
         #region Properties
         public ObservableCollection<ComissionShare> CommissionShares { get; set; }
 
-        //Vilket år 
+        
         private int _calendarYear;
         public int CalendarYear
         {
@@ -128,7 +128,6 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             }
         }
 
-        //Vilket min. Ack.Värde 
         private int _totalMinAckValue;
         public int TotalMinAckValue
         {
@@ -141,7 +140,6 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             }
         }
 
-        //Vilket max. Ack.Värde 
         private int _totalMaxAckValue;
         public int TotalMaxAckValue
         {
@@ -154,7 +152,6 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             }
         }
 
-        //Vilket provisionsandel barn
         private int _commissionShareChildren;
         public int CommissionShareChildren
         {
@@ -167,7 +164,6 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             }
         }
 
-        //Vilket provisionsandel vuxen
         private int _comissionShareAdults;
         public int ComissionShareAdults
         {
@@ -180,7 +176,6 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             }
         }
 
-        //ID för att ta bort
         private int _pAID;
         public string PAId
         {

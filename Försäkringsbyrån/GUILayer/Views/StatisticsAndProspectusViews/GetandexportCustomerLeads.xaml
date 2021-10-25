@@ -15,7 +15,7 @@
         </Grid.RowDefinitions>
         <Label Content="Kundprospekt" FontSize="26" Grid.Row="0" Grid.Column="0"/>
         <Label Content="Befintliga kundprospekt" FontSize="16" Grid.Row="1" Grid.Column="0"/>
-        <DataGrid  Grid.Row="2" AutoGenerateColumns="False" ItemsSource="{Binding People, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+        <DataGrid  Grid.Row="2" AutoGenerateColumns="False" ItemsSource="{Binding Insurances, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                   RowDetailsVisibilityMode="VisibleWhenSelected" 
                   IsReadOnly="True"
                   AlternatingRowBackground="Gainsboro"  AlternationCount="2"
@@ -24,17 +24,17 @@
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
                   ScrollViewer.HorizontalScrollBarVisibility="Auto" Margin="0,0,10,10" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Personnummer" Binding="{Binding Path= SocialSecurityNumber}"/>
-                <DataGridTextColumn Header="Förnamn" Binding="{Binding Path= Firstname}" />
-                <DataGridTextColumn Header="Efternamn" Binding="{Binding Path= Lastname}" />
-                <DataGridTextColumn Header="Gatuadress" Binding="{Binding Path= StreetAddress}" />
-                <DataGridTextColumn Header="Postort" Binding="{Binding Path= City}" />
-                <DataGridTextColumn Header="Postnummer" Binding="{Binding Path= PostalCode}" />
-                <DataGridTextColumn Header="Riktnummer" Binding="{Binding Path= DiallingCodeHome}" />
-                <DataGridTextColumn Header="Telefonnummer" Binding="{Binding Path= TelephoneNbrHome}" />
-                <DataGridTextColumn Header="Email" Binding="{Binding Path= EmailOne}" />
-                <DataGridTextColumn Header="Email" Binding="{Binding Path= EmailTwo}" />
-                <DataGridTextColumn Header="Agentnummer" />
+                <DataGridTextColumn Header="Personnummer" Binding="{Binding Path= PersonTaker.SocialSecurityNumber}"/>
+                <DataGridTextColumn Header="Förnamn" Binding="{Binding Path= PersonTaker.Firstname}" />
+                <DataGridTextColumn Header="Efternamn" Binding="{Binding Path= PersonTaker.Lastname}" />
+                <DataGridTextColumn Header="Gatuadress" Binding="{Binding Path= PersonTaker.StreetAddress}" />
+                <DataGridTextColumn Header="Postort" Binding="{Binding Path= PersonTaker.City}" />
+                <DataGridTextColumn Header="Postnummer" Binding="{Binding Path= PersonTaker.PostalCode}" />
+                <DataGridTextColumn Header="Riktnummer" Binding="{Binding Path= PersonTaker.DiallingCodeHome}" />
+                <DataGridTextColumn Header="Telefonnummer" Binding="{Binding Path= PersonTaker.TelephoneNbrHome}" />
+                <DataGridTextColumn Header="Email" Binding="{Binding Path= PersonTaker.EmailOne}" />
+                <DataGridTextColumn Header="Email" Binding="{Binding Path= PersonTaker.EmailTwo}" />
+                <DataGridTextColumn Header="Agentnummer" Binding="{Binding Path= AgentNo.AgentNumber}" />
             </DataGrid.Columns>
         </DataGrid>
 

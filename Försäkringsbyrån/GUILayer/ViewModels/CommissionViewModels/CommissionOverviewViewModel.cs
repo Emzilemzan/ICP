@@ -32,7 +32,6 @@ namespace GUILayer.ViewModels.CommissionViewModels
 
         public List<Insurance> BaseAmounts;
 
-
         #region Commands 
         public ObservableCollection<SalesMen> UpdateSM()
         {
@@ -44,7 +43,6 @@ namespace GUILayer.ViewModels.CommissionViewModels
             SalesMens = x;
             return SalesMens;
         }
-
         public ObservableCollection<VacationPay> UpdateVpay()
         {
             ObservableCollection<VacationPay> x = new ObservableCollection<VacationPay>();

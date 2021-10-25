@@ -17,12 +17,12 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
 
         public GetandexportCustomerLeadsViewModel()
         {
-            People = GetProspects();
+            Insurances = GetProspects();
             //Ppls = ExportToCsv();
         }
         //Hej Noah, när man klickat på export, då ska ett kundprospekt skapas. Alltså skapa en ny instans av klassen CustomerProspekt
         //Personen det berör ska således inte kunna finnas med i fler än ett kundprospekt. :) Behöver du hjälp me de säg till. 
-
+        public ObservableCollection<Insurance> Insurances { get; set; }
         public ObservableCollection<Person> People { get; set; }
         public ObservableCollection<Person> Ppls { get; set; }
 
@@ -70,10 +70,10 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
 
         #region Methods to find customerprospects
 
-        public ObservableCollection<Person> GetProspects()
+        public ObservableCollection<Insurance> GetProspects()
         {
             ObservableCollection<Person> people = new ObservableCollection<Person>();
-            List<Insurance> insurances = new List<Insurance>();
+            ObservableCollection<Insurance> insurances = new ObservableCollection<Insurance>();
             List<string> nbr = new List<string>();
             foreach (var it in Context.ITController.GetAllPersons())
             {
@@ -82,7 +82,6 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
                     if (i.InsuranceStatus == Status.Tecknad)
                     {
                         nbr?.Add(it.TelephoneNbrHome);
-                        insurances?.Add(i);
                         people?.Add(it);
                     }
                 }
@@ -104,13 +103,13 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             #endregion
             if (nbr1.Count > 0)
             {
-                People = GetPerson(people, nbr1);
+                Insurances = GetInsurance(people, nbr1);
             }
             else if (nbr2.Count > 0)
             {
-                People = GetPerson2(people, nbr2);
+                Insurances = GetInsurance2(people, nbr2);
             }
-            return People;
+            return insurances;
         }
         /// <summary>
         /// Method that runs when duplicates exist of numbers in dbo.Persons. 
@@ -118,12 +117,12 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
         /// <param name="people"></param>
         /// <param name="nbr2"></param>
         /// <returns></returns>
-        public ObservableCollection<Person> GetPerson(ObservableCollection<Person> people, List<string> nbr2)
+        public ObservableCollection<Insurance> GetInsurance(ObservableCollection<Person> people, List<string> nbr2)
         {
             ObservableCollection<Person> people2 = new ObservableCollection<Person>(); //all persons with child insurances. 
             ObservableCollection<Person> people3 = new ObservableCollection<Person>(); //all persons with adult insurances 
             ObservableCollection<Person> people4 = new ObservableCollection<Person>(); //all persons with the same homenbr that doesn't have an adult insurance. 
-
+            ObservableCollection<Insurance> insurances = new ObservableCollection<Insurance>();
             List<string> nbr = new List<string>(); //all numbers connected to an insurance for adults. 
             foreach (var nr in nbr2)
             {
@@ -159,17 +158,23 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             var p4 = people2.Except(people3).ToList();
             foreach (var p in p4)
             {
-                people4?.Add(p);
+                foreach(var i in p.Insurances)
+                {
+                    if(i.InsuranceStatus == Status.Tecknad)
+                    {
+                        insurances?.Add(i);
+                    }
+                }
             }
-            return people4;
+            return insurances;
         }
 
-        public ObservableCollection<Person> GetPerson2(ObservableCollection<Person> people, List<string> nbr2)
+        public ObservableCollection<Insurance> GetInsurance2(ObservableCollection<Person> people, List<string> nbr2)
         {
             ObservableCollection<Person> people2 = new ObservableCollection<Person>();
             ObservableCollection<Person> people3 = new ObservableCollection<Person>();
             ObservableCollection<Person> people4 = new ObservableCollection<Person>();
-
+            ObservableCollection<Insurance> insurances = new ObservableCollection<Insurance>();
             foreach (var nr in nbr2)
             {
                 foreach (var p in people)
@@ -200,10 +205,16 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
 
             foreach (var p in p4)
             {
-                 people4?.Add(p);
+                foreach (var i in p.Insurances)
+                {
+                    if (i.InsuranceStatus == Status.Tecknad)
+                    {
+                        insurances?.Add(i);
+                    }
+                }
             }
 
-            return people4;
+            return insurances;
         }
         #endregion
 

@@ -145,7 +145,7 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             chartPage.ChartStyle = 209;
             Series series = (Series)chartPage.SeriesCollection(1);
             Trendlines trendlines = (Trendlines)series.Trendlines(Type.Missing);
-            Trendline newTrendline = trendlines.Add( XlTrendlineType.xlLinear, 3, Type.Missing, Type.Missing, Type.Missing, Type.Missing, true, true, Type.Missing);
+            Trendline newTrendline = trendlines.Add(XlTrendlineType.xlLinear, 3, Type.Missing, Type.Missing, Type.Missing, Type.Missing, true, true, Type.Missing);
             newTrendline.Select();
         }
 
