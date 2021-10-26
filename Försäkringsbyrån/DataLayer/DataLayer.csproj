@@ -59,7 +59,6 @@
     <Compile Include="GenericRepository\CommissionRepository.cs" />
     <Compile Include="GenericRepository\CompanyInsuranceRepository.cs" />
     <Compile Include="GenericRepository\CompanyRepository.cs" />
-    <Compile Include="GenericRepository\CustomerProspectRepository.cs" />
     <Compile Include="GenericRepository\EmployeeRepository.cs" />
     <Compile Include="GenericRepository\GenericRepository.cs" />
     <Compile Include="GenericRepository\LifeInsuranceRepository.cs" />
@@ -72,7 +71,6 @@
     <Compile Include="InterfaceRepository\ICommissionRepository.cs" />
     <Compile Include="InterfaceRepository\ICompanyInsuranceRepository.cs" />
     <Compile Include="InterfaceRepository\ICompanyRepository.cs" />
-    <Compile Include="InterfaceRepository\ICustomerProspectRepository.cs" />
     <Compile Include="InterfaceRepository\IEmployeeRepository.cs" />
     <Compile Include="InterfaceRepository\IGenericRepository.cs" />
     <Compile Include="InterfaceRepository\IInsuranceRepository.cs" />
