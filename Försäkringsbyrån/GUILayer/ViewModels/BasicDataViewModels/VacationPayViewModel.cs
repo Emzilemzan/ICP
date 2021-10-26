@@ -57,7 +57,7 @@ namespace GUILayer.ViewModels.BasicDataViewModels
         public void EmptyAllChoices()
         {
             Check = true;
-            Year = string.Empty;
+            Year = null;
             AdditionalPercentage = string.Empty;
             SEId = string.Empty;
         }
@@ -76,6 +76,7 @@ namespace GUILayer.ViewModels.BasicDataViewModels
                     {
                         VPays?.Add(t);
                     }
+                    EmptyAllChoices();
                 }
                 else
                 {

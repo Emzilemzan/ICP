@@ -14,13 +14,11 @@ namespace GUILayer.ViewModels.BasicDataViewModels
     public class PermissionValueTableViewModel : BaseViewModel
     {
         public static readonly PermissionValueTableViewModel Instance = new PermissionValueTableViewModel();
-
         private PermissionValueTableViewModel()
         {
             CommissionShares = UpdateCS();
             YearsString = GetYearsString();
         }
-
         private ObservableCollection<ComissionShare> UpdateCS()
         {
             ObservableCollection<ComissionShare> cs = new ObservableCollection<ComissionShare>();
@@ -28,11 +26,9 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             {
                 cs?.Add(o);
             }
-
             CommissionShares = cs;
             return CommissionShares;
         }
-
 
         public List<int> YearsInt { get; set; }
         public List<int> GetYearsInt()
@@ -56,7 +52,7 @@ namespace GUILayer.ViewModels.BasicDataViewModels
         public void EmptyAllChoices()
         {
             Check = true;
-            CalendarYear = string.Empty;
+            CalendarYear = null;
             TotalMaxAckValue = string.Empty;
             TotalMinAckValue = string.Empty;
             CommissionShareChildren = string.Empty;
@@ -121,6 +117,7 @@ namespace GUILayer.ViewModels.BasicDataViewModels
                     {
                         CommissionShares?.Add(t);
                     }
+                    EmptyAllChoices();
                 }
                 else
                 {
