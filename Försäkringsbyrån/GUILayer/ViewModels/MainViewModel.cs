@@ -251,6 +251,7 @@ namespace GUILayer.ViewModels
             GetandexportCustomerLeadsViewModel.Instance.Update();
             SAOverviewViewModel.Instance.UpdateAC();
             GetTrendstatitcsViewModel.Instance.Update();
+            CommissionOverviewViewModel.Instance.EmptyAllChoices1();
         }
     }
 }
