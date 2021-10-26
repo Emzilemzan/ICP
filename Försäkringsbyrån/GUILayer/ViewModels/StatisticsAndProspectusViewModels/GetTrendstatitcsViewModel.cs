@@ -12,6 +12,7 @@ using System.Reflection;
 using Excel = Microsoft.Office.Interop.Excel;
 using Microsoft.Office.Interop.Excel;
 using System.Windows;
+using System.Windows.Media;
 
 namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
 {
@@ -55,7 +56,7 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
                 }
             }
             var sm = x.Union(x).ToList();
-            foreach(var s in sm)
+            foreach (var s in sm)
             {
                 y?.Add(s);
             }
@@ -101,9 +102,9 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             xlWorksheet.Name = "Alla säljares trendstatstik";
             xlWorksheet1 = xlWorkBook.Sheets.Add(value, value, 1, value) as Worksheet;
             xlWorksheet1.Name = "Vald säljares trendstatistik";
-            
+
             ExcelPrint(xlWorksheet, xlWorksheet1, year);
-            CreateChart(xlWorksheet1, value);
+            CreateChart(xlWorksheet1, value, salesMen, year);
             xlWorksheet.get_Range("A1", "AN1").Font.Bold = true;
             xlWorksheet1.get_Range("A1", "M1").Font.Bold = true;
             xlWorksheet.get_Range("A1", "AN1").VerticalAlignment = XlVAlign.xlVAlignCenter;
@@ -131,7 +132,7 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
         /// </summary>
         /// <param name="xlWorksheet"></param>
         /// <param name="value"></param>
-        private void CreateChart(Worksheet xlWorksheet, object value)
+        private void CreateChart(Worksheet xlWorksheet, object value, SalesMen sm, int year)
         {
             Range chartRange;
             ChartObjects xlCharts = (ChartObjects)xlWorksheet.ChartObjects(Type.Missing);
@@ -143,10 +144,12 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             chartPage.SetSourceData(chartRange, value);
             chartPage.ChartType = XlChartType.xlColumnClustered;
             chartPage.ChartStyle = 209;
-            Series series = (Series)chartPage.SeriesCollection(1);
+            Series series = chartPage.SeriesCollection(1) as Series;
+
             Trendlines trendlines = (Trendlines)series.Trendlines(Type.Missing);
-            Trendline newTrendline = trendlines.Add(XlTrendlineType.xlLinear, 3, Type.Missing, Type.Missing, Type.Missing, Type.Missing, true, true, Type.Missing);
-            newTrendline.Select();
+            Trendline line = trendlines.Add(XlTrendlineType.xlLinear);
+            line.Name = "Trendlinje";
+            line.Select();
         }
 
         private void ExcelPrint(Worksheet xlWorksheet, Worksheet xlWorksheet1, int year)
@@ -525,6 +528,7 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
 
             return sum;
         }
+
         /// <summary>
         /// Create month ackvalue for child per salesmen. 
         /// </summary>

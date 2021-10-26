@@ -50,6 +50,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                             SelectedInsurance.PayYear = PayYear;
                             SelectedInsurance.PossibleBaseAmount = PossibleBaseAmount;
                             SelectedInsurance.InsuranceStatus = Status.Tecknad;
+                            SelectedInsurance.Prospect = false;
                             Context.IController.Edit(SelectedInsurance);
 
                             MessageBox.Show($"Registreringen lyckades av: {SelectedInsurance.InsuranceNumber}", "Lyckad registrering", MessageBoxButton.OK, MessageBoxImage.Information);

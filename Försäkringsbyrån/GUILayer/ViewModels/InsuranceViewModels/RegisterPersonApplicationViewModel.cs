@@ -75,7 +75,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             Person x = Instance.Personen = AddInsuranceTaker();
             InsuredPerson insured = IPISPerson == false ? (Instance.InsuredPerson = AddInsuredIT(x)) : (Instance.InsuredPerson = AddInsured(x));
             y = Instance.SAIType.SAID == 2 ? (Instance.SerialNumber = GenerateIdFormationSO()) : (Instance.SerialNumber = GenerateIdFormationSOB());
-
+            
             Insurance i = new Insurance()
             {
                 SAI = Instance.SAIType,
@@ -105,36 +105,72 @@ namespace GUILayer.ViewModels.InsuranceViewModels
 
         }
 
-        private void BoxesCheckInsurance()
+        private void CheckBCheck()
         {
-
-            if (Instance.SocialSecurityNumber != null && Instance.City != null && Instance.Firstname != null && Instance.Lastname != null && Instance.PostalCode != null && Instance.EmailOne != null && Instance.StreetAddress != null
-                          && Instance.DiallingCodeHome != null && Instance.TelephoneNbrHome != null && Instance.PaymentForm != null && Instance.DeliveryDate != null && Instance.DeliveryDate != null && Instance.SAIType != null
-              && Instance.AgentNo != null)
+            if (BCheck == true)
             {
-                if (IPISPerson == false)
+                if(OptionalType != null && BAmount1 == 0)
+                MessageBox.Show("Du måste fylla i tillvalsuppgifter för checkad checkbox.");
+            }
+            else
+            {
+                CheckCCheck();
+            }
+        }
+
+        private void CheckCCheck()
+        {
+            if (CCheck == true)
+            {
+                if (OptionalType2 != null && _barll == 0)
+                    MessageBox.Show("Du måste fylla i tillvalsuppgifter för checkad checkbox.");
+            }
+            else
+            {
+                if (Instance.SocialSecurityNumber != null && Instance.City != null && Instance.Firstname != null && Instance.Lastname != null && Instance.PostalCode != null && Instance.EmailOne != null && Instance.StreetAddress != null
+                         && Instance.DiallingCodeHome != null && Instance.TelephoneNbrHome != null && Instance.PaymentForm != null && Instance.DeliveryDate != null && Instance.DeliveryDate != null && Instance.SAIType != null
+             && Instance.AgentNo != null)
                 {
-                    if (SAIType.SAID != 1)
+                    if (IPISPerson == false)
                     {
-                        AddInsurance();
+                        if (SAIType.SAID != 1)
+                        {
+                            AddInsurance();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Om försäkringstagaren är samma som försäkrad måste SO vara för vuxen. ");
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("Om försäkringstagaren är samma som försäkrad måste SO vara för vuxen. ");
+                        if (Instance.LastName != null && Instance.FirstName != null && Instance.SocialSecurityNumberIP != null && Instance.PersonType != null)
+                            AddInsurance();
+                        else
+                        {
+                            MessageBox.Show("Du har missat att fylla i någon uppgift om den försäkrade ");
+                        }
                     }
                 }
                 else
                 {
-                    if (Instance.LastName != null && Instance.FirstName != null && Instance.SocialSecurityNumberIP != null && Instance.PersonType != null)
-                        AddInsurance();
+                    MessageBox.Show("Alla fält med en stjärna är obligatoriska!");
                 }
-            }
-            else
-            {
-                MessageBox.Show("Alla fält med en stjärna är obligatoriska!");
             }
         }
 
+        private void BoxesCheckInsurance()
+        {
+            if(ACheck == true)
+            {
+                if(OptionalType != null && BAmount == 0)
+                MessageBox.Show("Du måste fylla i tillvalsuppgifter för checkad checkbox.");
+            }
+            else
+            {
+                CheckBCheck();
+            }
+        }
         private void RegisterApplication()
         {
             Person y = Context.ITController.GetPerson(Instance.SocialSecurityNumber);
@@ -173,10 +209,6 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                     a = OptionalType;
                     y.Add(a);
                 }
-                else
-                {
-                    MessageBox.Show("Om någon checkbox för tillval är i klickad måste du också ha fyllt i tillhörande uppgifter");
-                }
             }
             if (BCheck == true)
             {
@@ -184,10 +216,6 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                 {
                     b = OptionalType1;
                     y.Add(b);
-                }
-                else
-                {
-                    MessageBox.Show("Om någon checkbox för tillval är i klickad måste du också ha fyllt i tillhörande uppgifter");
                 }
             }
             if (CCheck == true)
@@ -197,12 +225,8 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                     c = OptionalType2;
                     y.Add(c);
                 }
-                else
-                {
-                    MessageBox.Show("Om någon checkbox för tillval är i klickad måste du också ha fyllt i tillhörande uppgifter");
-                }
             }
-            
+
             return y;
         }
 
@@ -268,6 +292,8 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         {
             get => _addInsuranceBtn ?? (_addInsuranceBtn = new RelayCommand(x => { RegisterApplication(); CanCreate(); }));
         }
+
+
 
 
         /// <summary>
