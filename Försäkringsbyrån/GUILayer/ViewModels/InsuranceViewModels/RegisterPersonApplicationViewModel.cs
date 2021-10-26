@@ -127,6 +127,10 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                 {
                     if (Instance.LastName != null && Instance.FirstName != null && Instance.SocialSecurityNumberIP != null && Instance.PersonType != null)
                         AddInsurance();
+                    else
+                    {
+                        MessageBox.Show("Du har missat att fylla i någon uppgift om den försäkrade ");
+                    }
                 }
             }
             else

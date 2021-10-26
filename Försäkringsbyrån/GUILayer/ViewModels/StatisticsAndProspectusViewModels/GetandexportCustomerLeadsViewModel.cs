@@ -72,6 +72,7 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
                     i.Prospect = true;
                     Context.IController.Edit(i);
                 }
+                Insurances.Clear();
                 Update();
             }
 
@@ -93,7 +94,7 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             {
                 foreach (var i in Context.IController.GetInsuranceTakerIAS(it))
                 {
-                    if (i.InsuranceStatus == Status.Tecknad && i.Prospect == false)
+                    if (i.InsuranceStatus == Status.Tecknad)
                     {
                         nbr?.Add(it.TelephoneNbrHome);
                         people?.Add(it);
@@ -174,13 +175,10 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             {
                 foreach (var i in p.Insurances)
                 {
-                    foreach(var c in Context.ITController.GetProspects())
-                    {
-                        if (i.InsuranceStatus == Status.Tecknad)
+                        if (i.InsuranceStatus == Status.Tecknad && i.Prospect == false)
                         {
                             insurances?.Add(i);
                         }
-                    }
                 }
             }
             return insurances;
@@ -224,7 +222,7 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             {
                 foreach (var i in p.Insurances)
                 {
-                    if (i.InsuranceStatus == Status.Tecknad)
+                    if (i.InsuranceStatus == Status.Tecknad && i.Prospect == false)
                     {
                         insurances?.Add(i);
                     }
