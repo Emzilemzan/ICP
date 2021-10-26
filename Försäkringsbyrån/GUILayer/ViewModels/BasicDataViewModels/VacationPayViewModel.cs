@@ -40,8 +40,6 @@ namespace GUILayer.ViewModels.BasicDataViewModels
                     Year = Instance._year
                 };
                 Context.BDController.CheckNbrOfVP(Instance._year, v);
-
-                MessageBox.Show("Semesterersättning är uppdaterad");
                 VPays.Clear();
                 foreach (var t in Context.BDController.GetAllVPays())
                 {

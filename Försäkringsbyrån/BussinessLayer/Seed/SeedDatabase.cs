@@ -29,7 +29,7 @@ namespace BussinessLayer.Seed
             GenerateCompanyTaker();
             GenerateInsuredPerson();
             GenerateInsurances();
-
+            CreateCommissionShare();
         }
 
         private void GenerateSM()
@@ -384,6 +384,30 @@ namespace BussinessLayer.Seed
                 foreach (var item in VList)
                 {
                     BusinessController.Instance.BDController.AddVPay(item);
+                }
+            }
+        }
+        private void CreateCommissionShare()
+        {
+            List<ComissionShare> VList = new List<ComissionShare>
+            {
+                new ComissionShare {PAId= 1, CalenderYear = 2021, TotalMinAckValue=1, TotalMaxAckValue=599999, CommissionShareChildren=0.013, ComissionShareAdults=0.015},
+                new ComissionShare {PAId= 2, CalenderYear = 2021, TotalMinAckValue=600000, TotalMaxAckValue=799999, CommissionShareChildren=0.014, ComissionShareAdults=0.016},
+                new ComissionShare {PAId= 3, CalenderYear = 2021, TotalMinAckValue=800000, TotalMaxAckValue=999999, CommissionShareChildren=0.016, ComissionShareAdults=0.018},
+                new ComissionShare {PAId= 4, CalenderYear = 2021, TotalMinAckValue=1000000, TotalMaxAckValue=5000000, CommissionShareChildren=0.019, ComissionShareAdults=0.02}
+            };
+
+            List<ComissionShare> NewVList = new List<ComissionShare>();
+
+            foreach (var i in BusinessController.Instance.BDController.GetAllCommissionShares())
+            {
+                NewVList.Add(i);
+            }
+            if (NewVList.Count == 0)
+            {
+                foreach (var item in VList)
+                {
+                    BusinessController.Instance.BDController.AddCommissionShare(item);
                 }
             }
         }

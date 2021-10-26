@@ -60,9 +60,7 @@ namespace GUILayer.ViewModels.BasicDataViewModels
                     CommissionShareChildren = Instance._commissionShareChildren,
                     ComissionShareAdults = Instance._comissionShareAdults
                 };
-                Context.BDController.AddCommissionShare(comissionShare);
-
-                MessageBox.Show("Grunddatan är uppdaterad");
+                Context.BDController.CheckNbrOfCS(comissionShare, Instance._calendarYear);
                 CommissionShares.Clear();
                 foreach (var o in Context.BDController.GetAllCommissionShares())
                 {
