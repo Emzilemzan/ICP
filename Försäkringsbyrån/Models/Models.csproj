@@ -49,7 +49,6 @@
     <Compile Include="Models\ComissionShare.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\CompanyInsurance.cs" />
-    <Compile Include="Models\CustomerProspect.cs" />
     <Compile Include="Models\Insurance.cs" />
     <Compile Include="Models\InsuredPerson.cs" />
     <Compile Include="Models\LifeInsurance.cs" />

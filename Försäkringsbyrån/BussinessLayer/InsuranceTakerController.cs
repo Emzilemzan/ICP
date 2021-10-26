@@ -13,7 +13,7 @@ namespace BussinessLayer
     /// </summary>
     public class InsuranceTakerController
     {
-        public IEnumerable<CustomerProspect> GetProspects() => BusinessController.Instance.Context.Prospects.GetAll();
+        
         public IEnumerable<Person> GetAllPersons() => BusinessController.Instance.Context.Persons.GetAll();
 
         public IEnumerable<Company> GetAllCompanies() => BusinessController.Instance.Context.Companies.GetAll();
