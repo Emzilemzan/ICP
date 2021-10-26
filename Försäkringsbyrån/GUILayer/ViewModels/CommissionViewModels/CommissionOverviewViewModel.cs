@@ -243,7 +243,7 @@ namespace GUILayer.ViewModels.CommissionViewModels
             {
                 foreach (Insurance i in SelectedSalesMen.Insurances)
                 {
-                    if (i.InsuranceStatus == 0 && i.PayYear == Year && i.PayMonth == (Months.IndexOf(_month) + 1) % 12 && (i.COI != null || i.OPI != null))
+                    if (i.InsuranceStatus == 0 && i.PayYear == Year && i.PayMonth == (Months.IndexOf(_month) + 1) % 12 && i.PossibleComisson != null)
                     {
                         sum += i.PossibleComisson;
                     }
@@ -251,12 +251,10 @@ namespace GUILayer.ViewModels.CommissionViewModels
             }
             return sum;
         }
-
         private double? CountProvOther()
         {
             return OtherCommission * (1 - (SelectedVPay.AdditionalPercentage / 100));
         }
-
         private void Count()
         {
             CSumAck = CountCSumAck();
@@ -270,8 +268,8 @@ namespace GUILayer.ViewModels.CommissionViewModels
             OtherCommission = CountOtherSumAck();
             OnPropertyChanged("OtherCommission");
             ProvOther = CountProvOther();
+            OnPropertyChanged("ProvOther");
         }
-
         #endregion
 
         #region Properties for Salesman

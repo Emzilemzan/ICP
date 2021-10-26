@@ -31,24 +31,18 @@ namespace GUILayer.ViewModels.SearchViewModels
         public ICommand UpdateBtn => _updateBtn ?? (_updateBtn = new RelayCommand(x => { Update(); }));
         public List<OptionalType> UpdateOT()
         {
-            OptionalType a = new OptionalType();
-            OptionalType b = new OptionalType();
-            OptionalType c = new OptionalType();
-            a = Context.IController.GetOPT(1);
-            b = Context.IController.GetOPT(2);
-            c = Context.IController.GetOPT(3);
             List<OptionalType> x = new List<OptionalType>();
             if (BARLL != 0)
             {
-                x.Add(b);
+                x.Add(Context.IController.GetOPT(2));
             }
             if (BAmount != 0)
             {
-                x.Add(c);
+                x.Add(Context.IController.GetOPT(3));
             }
             if (BAmount1 != 0)
             {
-                x.Add(a);
+                x.Add(Context.IController.GetOPT(1));
             }
             return x;
         }
