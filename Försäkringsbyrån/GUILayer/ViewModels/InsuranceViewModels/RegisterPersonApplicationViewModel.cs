@@ -138,7 +138,6 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                 MessageBox.Show("Alla fält med en stjärna är obligatoriska!");
             }
         }
-
         private void RegisterApplication()
         {
             Person y = Context.ITController.GetPerson(Instance.SocialSecurityNumber);
