@@ -73,6 +73,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             Instance.EndDate = Today;
             Instance.StartDate = Today;
             Instance.CompanyName = string.Empty;
+            Instance.ContactPerson = string.Empty;
             Instance.Premie = string.Empty;
             Instance.PaymentForm = null;
             Instance.PostalCode = string.Empty;
