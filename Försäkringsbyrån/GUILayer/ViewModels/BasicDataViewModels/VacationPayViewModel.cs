@@ -18,7 +18,7 @@ namespace GUILayer.ViewModels.BasicDataViewModels
         public VacationPayViewModel()
         {
             VPays = UpdateVPay();
-            Years = GetYears();
+            YearsString = GetYearsString();
         }
 
         #region commands
@@ -47,12 +47,19 @@ namespace GUILayer.ViewModels.BasicDataViewModels
                 }
                 MainViewModel.Instance.SelectedViewModel = null;
                 MainViewModel.Instance.SelectedViewModel = Instance;
-                
+                EmptyAllChoices();
             }
             else
             {
                 MessageBox.Show("Inget fält får lämnas tomt!");
             }
+        }
+        public void EmptyAllChoices()
+        {
+            Check = true;
+            Year = string.Empty;
+            AdditionalPercentage = string.Empty;
+            SEId = string.Empty;
         }
         private void RemoveVPay()
         {
@@ -105,17 +112,35 @@ namespace GUILayer.ViewModels.BasicDataViewModels
         {
             return Enumerable.Range(1950, DateTime.UtcNow.Year - 1949).Reverse().ToList();
         }
+        public List<string> YearsString { get; set; }
 
+        public List<string> GetYearsString()
+        {
+            Years = GetYears();
+            List<string> strings = new List<string>();
+            foreach (var i in Years)
+            {
+                strings.Add(i.ToString());
+            }
+            return strings;
+        }
         #region properties
         public ObservableCollection<VacationPay> VPays { get; set; }
        
         private int _sEId;
-        public int SEId
+        public string SEId
         {
-            get => _sEId;
+            get => _sEId > 0 ? _sEId.ToString() : "";
             set
             {
-                _sEId = value;
+                _sEId = 0;
+                if (int.TryParse(value, out _sEId))
+                {
+                }
+                else if (Check == false)
+                {
+                    MessageBox.Show("Måste vara en siffra");
+                }
                 OnPropertyChanged("SEId");
             }
         }
@@ -126,21 +151,42 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             get => _addPerc > 0 ? _addPerc.ToString() : "";
             set
             {
+                _addPerc = 0;
                 if (double.TryParse(value, out _addPerc))
-                {
-                    OnPropertyChanged("AdditionalPercentage");
+                { 
                 }
+                else if (Check == false)
+                {
+                    MessageBox.Show("Måste vara en siffra");
+                }
+                OnPropertyChanged("AdditionalPercentage");
             }
         }
 
         private int _year;
-        public int Year
+        public string Year
         {
-            get => _year;
+            get => _year > 0 ? _year.ToString() : "";
             set
             {
-                _year = value;
+                _year = 0;
+                if (int.TryParse(value, out _year))
+                { }
+                else if (Check == false)
+                {
+                    MessageBox.Show("Måste vara ett årtal");
+                }
                 OnPropertyChanged("Year");
+            }
+        }
+        private bool _check;
+        public bool Check
+        {
+            get => _check;
+            set
+            {
+                _check = value;
+                OnPropertyChanged("Check");
             }
         }
         #endregion
