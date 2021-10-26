@@ -22,7 +22,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             Applications = Update();
             UpdateAC();
             Years = GetYears();
-            Months = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+            Months = new List<string>() { "Januari", "Februari", "Mars", "April", "Maj", "Juni", "Juli", "Augusti", "September", "Oktober", "November", "December" };
         }
 
         private ICommand _signInsurance;
@@ -33,22 +33,22 @@ namespace GUILayer.ViewModels.InsuranceViewModels
 
         private void SignInsuranceMethod()
         {
-            if (SelectedInsurance != null)
+            if (SelectedInsurance != null && Month != null && Year != null)
             {
-                if (SelectedInsurance.InsuranceNumber != null && SelectedInsurance.SerialNumber != null)
+                if (INumber != null && SelectedInsurance.SerialNumber != null)
                 {
                     string SN = SerialNumber;
                     string str = Regex.Replace(SN, @"\d", "");
 
                     if (str == "LIV" || str == "SOV" || str == "SOB")
                     {
-                        if (SelectedInsurance.PossibleBaseAmount != null && SelectedInsurance.PossibleComisson == null)
+                        if (_pBC == 0 && _pBA != 0)
                         {
-                            SelectedInsurance.InsuranceNumber = InsuranceNumber;
+                            SelectedInsurance.InsuranceNumber = INumber;
                             SelectedInsurance.SerialNumber = SerialNumber;
-                            SelectedInsurance.PayMonth = PayMonth;
-                            SelectedInsurance.PayYear = PayYear;
-                            SelectedInsurance.PossibleBaseAmount = PossibleBaseAmount;
+                            SelectedInsurance.PayMonth = GetMonth(Month);
+                            SelectedInsurance.PayYear = Year;
+                            SelectedInsurance.PossibleBaseAmount = _pBA;
                             SelectedInsurance.InsuranceStatus = Status.Tecknad;
                             SelectedInsurance.Prospect = false;
                             Context.IController.Edit(SelectedInsurance);
@@ -60,6 +60,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                                 if (e.InsuranceStatus == Status.Otecknad)
                                     Applications?.Add(e);
                             }
+                            MakeSearchWordEmpty();
                         }
                         else
                         {
@@ -68,14 +69,14 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                     }
                     else
                     {
-                        if (SelectedInsurance.PossibleComisson != null && SelectedInsurance.PossibleBaseAmount == null)
+                        if (_pBA == 0 && _pBC != 0)
                         {
-                            SelectedInsurance.InsuranceNumber = InsuranceNumber;
+                            SelectedInsurance.InsuranceNumber = INumber;
                             SelectedInsurance.SerialNumber = SerialNumber;
-                            SelectedInsurance.PayMonth = PayMonth;
-                            SelectedInsurance.PayYear = PayYear;
+                            SelectedInsurance.PayMonth = GetMonth(Month);
+                            SelectedInsurance.PayYear = Year;
                             SelectedInsurance.InsuranceStatus = Status.Tecknad;
-                            SelectedInsurance.PossibleComisson = PossibleComisson;
+                            SelectedInsurance.PossibleComisson = _pBC;
                             Context.IController.Edit(SelectedInsurance);
                             MessageBox.Show($"Registreringen lyckades av: {SelectedInsurance.InsuranceNumber}", "Lyckad registrering", MessageBoxButton.OK, MessageBoxImage.Information);
                             Applications.Clear();
@@ -84,6 +85,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                                 if (e.InsuranceStatus == Status.Otecknad)
                                     Applications?.Add(e);
                             }
+                            MakeSearchWordEmpty();
                         }
                         else
                         {
@@ -95,11 +97,70 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                 {
                     MessageBox.Show("Försäkringsnumret måste fyllas i, samt provision eller grundbelopp.");
                 }
-                SelectedInsurance = null;
+            }
+            else
+            {
+                MessageBox.Show("Försäkring måste ha markerats. Månad och år måste ha valts. Försäkringsnummer måste vara ifyllt, samt anitngen provision eller grundbelopp.");
             }
         }
 
+        private int? GetMonth(string month)
+        {
+            int? x = 0;
+            switch (month)
+            {
+                case "Januari":
+                    x = 1;
+                    break;
+                case "Februari":
+                    x = 2;
+                    break;
+                case "Mars":
+                    x = 3;
+                    break;
+                case "April":
+                    x = 4;
+                    break;
+                case "Maj":
+                    x = 5;
+                    break;
+                case "Juni":
+                    x = 6;
+                    break;
+                case "Juli":
+                    x = 7;
+                    break;
+                case "Augusti":
+                    x = 8;
+                    break;
+                case "September":
+                    x = 9;
+                    break;
+                case "Oktober":
+                    x = 10;
+                    break;
+                case "November":
+                    x = 11;
+                    break;
+                case "December":
+                    x = 12;
+                    break;
+            }
+            return x;
+        }
+
         #region Insurance properties
+        private string _month;
+        public string Month
+        {
+            get => _month;
+            set
+            {
+                _month = value;
+                OnPropertyChanged("Month");
+            }
+        }
+
         public int? PayMonth
         {
             get => SelectedInsurance.PayMonth;
@@ -107,6 +168,17 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             {
                 SelectedInsurance.PayMonth = value;
                 OnPropertyChanged("PayMonth");
+            }
+        }
+
+        private int? _year;
+        public int? Year
+        {
+            get => _year;
+            set
+            {
+                _year = value;
+                OnPropertyChanged("Year");
             }
         }
         public int? PayYear
@@ -119,7 +191,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             }
         }
         public List<int> Years { get; set; }
-        public List<int> Months { get; set; }
+        public List<string> Months { get; set; }
         //För att visa årtal i combobox. 
         public List<int> GetYears()
         {
@@ -147,6 +219,18 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             }
         }
 
+        private string _iNumber;
+
+        public string INumber
+        {
+            get => _iNumber;
+            set
+            {
+                _iNumber = value;
+                OnPropertyChanged("INumber");
+            }
+        }
+
         public string InsuranceNumber
         {
             get => SelectedInsurance.InsuranceNumber;
@@ -156,6 +240,20 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                 OnPropertyChanged("InsuranceNumber");
             }
         }
+
+        private int _pBA;
+        public string PBA
+        {
+            get => _pBA > 0 ? _pBA.ToString() : "";
+            set
+            {
+                _pBA = 0;
+                if (int.TryParse(value, out _pBA))
+                {
+                }
+                OnPropertyChanged("PBA");
+            }
+        }
         public int? PossibleBaseAmount
         {
             get => SelectedInsurance.PossibleBaseAmount;
@@ -163,6 +261,19 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             {
                 SelectedInsurance.PossibleBaseAmount = value;
                 OnPropertyChanged("PossibleBaseAmount");
+            }
+        }
+        private int _pBC;
+        public string PBC
+        {
+            get => _pBC > 0 ? _pBC.ToString() : "";
+            set
+            {
+                _pBC = 0;
+                if (int.TryParse(value, out _pBC))
+                {
+                }
+                OnPropertyChanged("PBC");
             }
         }
         public int? PossibleComisson
@@ -180,11 +291,17 @@ namespace GUILayer.ViewModels.InsuranceViewModels
 
         public void MakeSearchWordEmpty()
         {
+            Check = true;
             SearchInput = string.Empty;
+            Year = null;
+            Month = null;
+            PBC = string.Empty;
+            PBA = string.Empty;
+            INumber = string.Empty;
         }
 
         //searchmethod. 
-        public void UpdateAC(string filter ="")
+        public void UpdateAC(string filter = "")
         {
             Applications = new ObservableCollection<Insurance>();
             List<Insurance> x = new List<Insurance>();
@@ -196,7 +313,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             if (filter != "")
             {
                 List<Insurance> y = x;
-                 x = new List<Insurance>();
+                x = new List<Insurance>();
                 foreach (Insurance i in y)
                     if (i.SerialNumber.Contains(filter) || i.TypeName.Contains(filter) || i.TakerNbr.Contains(filter))
                         x.Add(i);
@@ -205,7 +322,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         }
         public ObservableCollection<Insurance> Update()
         {
-            ObservableCollection < Insurance > x = new ObservableCollection<Insurance>();
+            ObservableCollection<Insurance> x = new ObservableCollection<Insurance>();
             foreach (var e in Context.IController.GetAllInsurances())
             {
                 if (e.InsuranceStatus == Status.Otecknad)
@@ -223,11 +340,11 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                 _searchInput = value;
                 UpdateAC(SearchInput);
                 OnPropertyChanged("SearchInput");
-                
+
             }
         }
         private ObservableCollection<Insurance> _applications;
-        public ObservableCollection<Insurance> Applications 
+        public ObservableCollection<Insurance> Applications
         {
             get => _applications;
             set
@@ -237,7 +354,16 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             }
         }
 
-
+        private bool _check;
+        public bool Check
+        {
+            get => _check;
+            set
+            {
+                _check = value;
+                OnPropertyChanged("Check");
+            }
+        }
 
         #endregion
 
