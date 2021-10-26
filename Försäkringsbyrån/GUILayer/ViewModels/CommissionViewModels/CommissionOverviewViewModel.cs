@@ -21,8 +21,6 @@ namespace GUILayer.ViewModels.CommissionViewModels
             SalesMens = UpdateSM();
         }
 
-        public List<Insurance> BaseAmounts;
-
         #region update
         public ObservableCollection<SalesMen> UpdateSM()
         {
@@ -416,7 +414,7 @@ namespace GUILayer.ViewModels.CommissionViewModels
         public void EmptyAllChoices1()
         {
             SelectedSalesMen = null;
-
+            SelectedVPay = null;
             SelectedMonth = null;
             Taxes = string.Empty;
             ToPay = string.Empty;
@@ -607,6 +605,11 @@ namespace GUILayer.ViewModels.CommissionViewModels
         public VacationPay SelectedVPay
         {
             get => _vPayPercent = GetVPay();
+            set
+            {
+                _vPayPercent = value;
+                OnPropertyChanged("SelectedVPay");
+            }
         }
 
         private double _vPay;

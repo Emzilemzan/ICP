@@ -96,6 +96,8 @@ namespace GUILayer.ViewModels.BasicDataViewModels
         }
 
         #endregion
+
+        #region properties
         private ObservableCollection<VacationPay> UpdateVPay()
         {
             ObservableCollection<VacationPay> x = new ObservableCollection<VacationPay>();
@@ -108,7 +110,6 @@ namespace GUILayer.ViewModels.BasicDataViewModels
         }
 
         public List<int> Years { get; set; }
-        //För att visa årtal i combobox. 
         public List<int> GetYears()
         {
             return Enumerable.Range(1950, DateTime.UtcNow.Year - 1949).Reverse().ToList();
@@ -125,6 +126,8 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             }
             return strings;
         }
+        #endregion
+
         #region properties
         public ObservableCollection<VacationPay> VPays { get; set; }
        
