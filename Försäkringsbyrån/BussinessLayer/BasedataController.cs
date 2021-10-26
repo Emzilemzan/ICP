@@ -139,12 +139,12 @@ namespace BussinessLayer
             }
         }
 
-        public void CheckNbrOfVP(DateTime d, VacationPay vacationPay)
+        public void CheckNbrOfVP(int year, VacationPay vacationPay)
         {
             List<VacationPay> vps = new List<VacationPay>();
             foreach(VacationPay v in GetAllVPays())
             {
-                if(v.Year == d.Year)
+                if(v.Year == year)
                 {
                     vps?.Add(v);
                 }

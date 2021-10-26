@@ -39,7 +39,7 @@ namespace GUILayer.ViewModels.BasicDataViewModels
                     AdditionalPercentage = Instance._addPerc,
                     Year = Instance._year
                 };
-                Context.BDController.AddVPay(v);
+                Context.BDController.CheckNbrOfVP(Instance._year, v)
 
                 MessageBox.Show("Semesterersättning är uppdaterad");
                 VPays.Clear();

@@ -21,6 +21,7 @@ namespace BussinessLayer.Seed
             CreateLifeInsurance();
             GenerateSM();
             GenerateUA();
+            CreateVP();
             GenerateBA();
             GenerateBAT();
             GenerateAV();
@@ -363,6 +364,30 @@ namespace BussinessLayer.Seed
                 }
             }
         }
+
+        private void CreateVP()
+        {
+
+            List<VacationPay> VList = new List<VacationPay>
+            {
+                new VacationPay {SEId = 1, AdditionalPercentage = 12, Year= 2021}
+            };
+
+            List<VacationPay> NewVList = new List<VacationPay>();
+
+            foreach (var i in BusinessController.Instance.BDController.GetAllVPays())
+            {
+                NewVList.Add(i);
+            }
+            if (NewVList.Count == 0)
+            {
+                foreach (var item in VList)
+                {
+                    BusinessController.Instance.BDController.AddVPay(item);
+                }
+            }
+        }
+
         private void CreateOptionalTypes()
         {
             List<OptionalType> OptionList = new List<OptionalType>
