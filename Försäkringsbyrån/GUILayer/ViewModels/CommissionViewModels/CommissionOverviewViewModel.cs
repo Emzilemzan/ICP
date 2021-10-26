@@ -25,14 +25,13 @@ namespace GUILayer.ViewModels.CommissionViewModels
         private CommissionOverviewViewModel()
         {
             Months = new List<string>() { "Januari", "Februari", "Mars", "April", "Maj", "Juni", "Juli", "Augusti", "September", "Oktober", "November", "December" };
-            Date = new List<string>() { "25e" + SelectedMonth};
+            Date = new List<string>() { "25e" + SelectedMonth };
             SalesMens = UpdateSM();
-            VacationPays = UpdateVpay();
         }
 
         public List<Insurance> BaseAmounts;
 
-        #region Commands 
+        #region update
         public ObservableCollection<SalesMen> UpdateSM()
         {
             ObservableCollection<SalesMen> x = new ObservableCollection<SalesMen>();
@@ -42,6 +41,18 @@ namespace GUILayer.ViewModels.CommissionViewModels
             }
             SalesMens = x;
             return SalesMens;
+        }
+        private VacationPay GetVPay()
+        {
+            VacationPays = UpdateVpay();
+            VacationPay p = new VacationPay();
+            foreach (var e in VacationPays)
+            {
+                if (DateTime.Today.Year.Equals(e.Year))
+                    p = e;
+            }
+            return p;
+
         }
         public ObservableCollection<VacationPay> UpdateVpay()
         {
@@ -53,6 +64,9 @@ namespace GUILayer.ViewModels.CommissionViewModels
             VacationPays = x;
             return VacationPays;
         }
+
+        #endregion
+        #region excel
         private ICommand _export;
         public ICommand ExportBtn => _export ?? (_export = new RelayCommand(x => { Export(); }));
 
@@ -168,21 +182,12 @@ namespace GUILayer.ViewModels.CommissionViewModels
         #endregion
 
         #region Count
-        private void Count()
-        {
-            if (SelectedSalesMen == null)
-                return;
-            CSumAck = CountCSumAck();
-            ASumAck = CountASumAck();
-            SumAck = SumSAAck(CSumAck, ASumAck);
-        }
-
-        private double CountCSumAck()  
+        private double CountCSumAck()
         {
             double sum = 0;
             if (SelectedSalesMen.Insurances != null && SelectedMonth != null)
             {
-                foreach (Insurance i in SelectedSalesMen.Insurances)  
+                foreach (Insurance i in SelectedSalesMen.Insurances)
                 {
                     if (i.InsuranceStatus == 0 && i.SAI.SAID == 1 && i.PayYear != null && i.PayMonth != null && i.PayYear == Year && i.PayMonth == (Months.IndexOf(_month) + 1) % 12)
                     {
@@ -200,10 +205,10 @@ namespace GUILayer.ViewModels.CommissionViewModels
             {
                 foreach (Insurance i in SelectedSalesMen.Insurances)
                 {
-                   if (i.InsuranceStatus == 0 && i.SAI.SAInsuranceType.Contains("vuxen") && i.PayYear == Year && i.PayMonth == (Months.IndexOf(_month) + 1) % 12)
-                   {
+                    if (i.InsuranceStatus == 0 && i.SAI.SAInsuranceType.Contains("vuxen") && i.PayYear == Year && i.PayMonth == (Months.IndexOf(_month) + 1) % 12)
+                    {
                         sum += i.AckValue + i.AckValue2 + i.AckValue3 + i.AckValue4;
-                   }
+                    }
                 }
             }
             return sum;
@@ -214,6 +219,57 @@ namespace GUILayer.ViewModels.CommissionViewModels
             double sum;
             sum = CSumAck + ASumAck;
             return sum;
+        }
+
+        public double CountLSumAck()
+        {
+            double sum = 0;
+            if (SelectedSalesMen.Insurances != null && SelectedMonth != null)
+            {
+                foreach (Insurance i in SelectedSalesMen.Insurances)
+                {
+                    if (i.InsuranceStatus == 0 && i.LIFE != null && i.PayYear == Year && i.PayMonth == (Months.IndexOf(_month) + 1) % 12)
+                    {
+                        sum += i.AckValue + i.AckValue2 + i.AckValue3 + i.AckValue4;
+                    }
+                }
+            }
+            return sum;
+        }
+        public int? CountOtherSumAck()
+        {
+            int? sum = 0;
+            if (SelectedSalesMen.Insurances != null && SelectedMonth != null)
+            {
+                foreach (Insurance i in SelectedSalesMen.Insurances)
+                {
+                    if (i.InsuranceStatus == 0 && i.PayYear == Year && i.PayMonth == (Months.IndexOf(_month) + 1) % 12 && (i.COI != null || i.OPI != null))
+                    {
+                        sum += i.PossibleComisson;
+                    }
+                }
+            }
+            return sum;
+        }
+
+        private double? CountProvOther()
+        {
+            return OtherCommission * (1 - (SelectedVPay.AdditionalPercentage / 100));
+        }
+
+        private void Count()
+        {
+            CSumAck = CountCSumAck();
+            OnPropertyChanged("CSumAck");
+            ASumAck = CountASumAck();
+            OnPropertyChanged("ASumAck");
+            SumAck = SumSAAck(CSumAck, ASumAck);
+            OnPropertyChanged("SumAck");
+            LSumAck = CountLSumAck();
+            OnPropertyChanged("LSumAck");
+            OtherCommission = CountOtherSumAck();
+            OnPropertyChanged("OtherCommission");
+            ProvOther = CountProvOther();
         }
 
         #endregion
@@ -231,7 +287,6 @@ namespace GUILayer.ViewModels.CommissionViewModels
             set
             {
                 _salesMen = value;
-                Count();
                 OnPropertyChanged("SelectedSalesMen");
             }
         }
@@ -239,22 +294,25 @@ namespace GUILayer.ViewModels.CommissionViewModels
         private string _month;
         public string SelectedMonth
         {
-            get => _month;            
+            get => _month;
             set
             {
                 _month = value;
-                if(_month == Months[Months.Count - 1])
-                {
-                    PayDate = new DateTime(Year + 1, (Months.IndexOf(_month) + 2) % 12, 25).ToString("yyyy-MM-dd");
-                }
-                else
-                {
-                    
-                    PayDate = new DateTime(Year, (Months.IndexOf(_month) + 2), 25).ToString("yyyy-MM-dd");
-                }
-                Count();
-                OnPropertyChanged("PayDate");
                 OnPropertyChanged("SelectedMonth");
+                if (SelectedMonth != null)
+                {
+                    if (_month == Months[Months.Count - 1])
+                    {
+                        PayDate = new DateTime(Year + 1, (Months.IndexOf(_month) + 2) % 12, 25).ToString("yyyy-MM-dd");
+                    }
+                    else
+                    {
+
+                        PayDate = new DateTime(Year, (Months.IndexOf(_month) + 2), 25).ToString("yyyy-MM-dd");
+                    }
+                    OnPropertyChanged("PayDate");
+                    Count();
+                }
             }
         }
 
@@ -352,8 +410,8 @@ namespace GUILayer.ViewModels.CommissionViewModels
         }
 
         //other commission
-        private double _otherCommission;
-        public double OtherCommission
+        private int? _otherCommission;
+        public int? OtherCommission
         {
             get => _otherCommission;
             set
@@ -367,12 +425,7 @@ namespace GUILayer.ViewModels.CommissionViewModels
         private VacationPay _vPayPercent;
         public VacationPay SelectedVPay
         {
-            get => _vPayPercent;
-            set
-            {
-                _vPayPercent = value;
-                OnPropertyChanged("SelectedVPay");
-            }
+            get => _vPayPercent = GetVPay();
         }
 
         private double _vPay;
@@ -453,8 +506,8 @@ namespace GUILayer.ViewModels.CommissionViewModels
             }
         }
 
-        private double _provOther;
-        public double ProvOther
+        private double? _provOther;
+        public double? ProvOther
         {
             get => _provOther;
             set

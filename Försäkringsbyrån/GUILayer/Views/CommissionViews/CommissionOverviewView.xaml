@@ -92,7 +92,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Label Grid.Column="0" Grid.Row="3" Content="Liv- Summa Ackvärde:" FontSize="15"/>
-                    <TextBox Grid.Row="3" Grid.Column="1" IsReadOnly="True" Text=""/>
+                    <TextBox Grid.Row="3" Grid.Column="1" IsReadOnly="True" Text="{Binding LSumAck}"/>
                 </Grid>
             </StackPanel>
             <StackPanel Grid.Column="0" Grid.Row="4" Grid.RowSpan="1">
@@ -106,7 +106,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Label Grid.Column="0" Grid.Row="1" Content="Övrig provision:" FontSize="15"/>
-                    <TextBox Grid.Row="1" Grid.Column="1" IsReadOnly="True" Text=""/>
+                    <TextBox Grid.Row="1" Grid.Column="1" IsReadOnly="True" Text="{Binding OtherCommission}"/>
                 </Grid>
             </StackPanel>
             <StackPanel Grid.Column="0" Grid.Row="5" Grid.RowSpan="1">
@@ -140,9 +140,9 @@
                     <Label Grid.Column="0" Grid.Row="1" Content="Preliminärskatt %:" FontSize="15"/>
                     <TextBox Grid.Row="1" Grid.Column="1" IsReadOnly="True" Text="{Binding SelectedSalesMen.TaxRate}"/>
                     <Label Grid.Column="0" Grid.Row="2" Content="Avgår skatt:" FontSize="15"/>
-                    <TextBox Grid.Row="2" Grid.Column="1" IsReadOnly="True" Text=""/>
+                    <TextBox Grid.Row="2" Grid.Column="1" IsReadOnly="True" Text="{Binding Taxes}"/>
                     <Label Grid.Column="0" Grid.Row="3" Content="Att utbetala:" FontSize="15" FontWeight="Bold"/>
-                    <TextBox Grid.Row="3" Grid.Column="8" IsReadOnly="True" Text=""/>
+                    <TextBox Grid.Row="3" Grid.Column="8" IsReadOnly="True" Text="{Binding ToPay}"/>
                 </Grid>
             </StackPanel>
             <StackPanel Grid.Column="2" Grid.Row="1" Grid.RowSpan="1" >
@@ -181,7 +181,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Label Grid.Column="0" Grid.Row="3" Content="Prov so:" Margin="0,60,10,20" FontSize="15"/>
-                    <TextBox Grid.Row="3" Grid.Column="1" IsReadOnly="True" Margin="0,60,10,20"  Text=""/>
+                    <TextBox Grid.Row="3" Grid.Column="1" IsReadOnly="True" Margin="0,60,10,20"  Text="{Binding ProvSO}"/>
                 </Grid>
             </StackPanel>
             <StackPanel Grid.Column="2" Grid.Row="3" Grid.RowSpan="1">
@@ -195,7 +195,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Label Grid.Column="0" Grid.Row="2" Content="Prov liv:" FontSize="15"/>
-                    <TextBox Grid.Row="2" Grid.Column="1" IsReadOnly="True" Text=""/>
+                    <TextBox Grid.Row="2" Grid.Column="1" IsReadOnly="True" Text="{Binding ProvLiv}"/>
                 </Grid>
             </StackPanel>
             <StackPanel Grid.Column="2" Grid.Row="4" Grid.RowSpan="1">
@@ -209,7 +209,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Label Grid.Column="0" Grid.Row="3" Content="Prov övrig:" FontSize="15"/>
-                    <TextBox Grid.Row="3" Grid.Column="1" Text=""/>
+                    <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding ProvOther}"/>
                 </Grid>
             </StackPanel>
             <StackPanel Grid.Column="2" Grid.Row="5" Grid.RowSpan="1">
@@ -223,7 +223,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Label Grid.Column="0" Grid.Row="3" Content="Semesterersättning kr:" FontSize="15"/>
-                    <TextBox Grid.Row="3" Grid.Column="1" IsReadOnly="True" Text=""/>
+                    <TextBox Grid.Row="3" Grid.Column="1" IsReadOnly="True" Text="{Binding VPay}"/>
                 </Grid>
             </StackPanel>
             <StackPanel Grid.Column="2" Grid.Row="7" Grid.RowSpan="1">
@@ -238,7 +238,6 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Button Grid.Row="5" Grid.Column="2" Content="Exportera Provsion" Height="25"  Command="{Binding ExportBtn}" />
-
                 </Grid>
             </StackPanel>
         </Grid>
