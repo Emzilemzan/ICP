@@ -32,21 +32,20 @@ namespace GUILayer.ViewModels.BasicDataViewModels
 
         private void AddVPay()
         {
-            if (Instance._year != 0 && Instance._addPerc != 0)
+            if (Instance.Year != null && Instance._addPerc != 0)
             {
                 VacationPay v = new VacationPay()
                 {
                     AdditionalPercentage = Instance._addPerc,
-                    Year = Instance._year
+                    Year = int.Parse(Instance.Year),
                 };
-                Context.BDController.CheckNbrOfVP(Instance._year, v);
+                Context.BDController.CheckNbrOfVP(int.Parse(Instance.Year), v);
                 VPays.Clear();
                 foreach (var t in Context.BDController.GetAllVPays())
                 {
                     VPays?.Add(t);
                 }
-                MainViewModel.Instance.SelectedViewModel = null;
-                MainViewModel.Instance.SelectedViewModel = Instance;
+                
                 EmptyAllChoices();
             }
             else
@@ -76,12 +75,12 @@ namespace GUILayer.ViewModels.BasicDataViewModels
                     {
                         VPays?.Add(t);
                     }
-                    EmptyAllChoices();
                 }
                 else
                 {
                     MessageBox.Show("Grunddatan togs inte bort.");
                 }
+                EmptyAllChoices();
             }
             else
             {
@@ -167,19 +166,13 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             }
         }
 
-        private int _year;
+        private string _year;
         public string Year
         {
-            get => _year > 0 ? _year.ToString() : "";
+            get => _year;
             set
             {
-                _year = 0;
-                if (int.TryParse(value, out _year))
-                { }
-                else if (Check == false)
-                {
-                    MessageBox.Show("Måste vara ett årtal");
-                }
+                _year = value;
                 OnPropertyChanged("Year");
             }
         }

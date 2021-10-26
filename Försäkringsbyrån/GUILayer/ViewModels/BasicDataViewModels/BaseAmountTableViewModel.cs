@@ -84,11 +84,13 @@ namespace GUILayer.ViewModels.BasicDataViewModels
                     {
                         Tabels?.Add(t);
                     }
+                    
                 }
                 else
                 {
                     MessageBox.Show("Grunddatan togs inte bort.");
                 }
+                EmptyAllChoices();
             }
             else
             {

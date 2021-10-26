@@ -70,17 +70,17 @@ namespace GUILayer.ViewModels.BasicDataViewModels
 
         private void AddCommissionShare()
         {
-            if (Instance._calendarYear != 0 && Instance._totalMinAckValue != 0 && Instance._totalMaxAckValue != 0 && Instance._commissionShareChildren != 0 && Instance._comissionShareAdults != 0)
+            if (Instance.CalendarYear != null && Instance._totalMinAckValue != 0 && Instance._totalMaxAckValue != 0 && Instance._commissionShareChildren != 0 && Instance._comissionShareAdults != 0)
             {
                 ComissionShare comissionShare = new ComissionShare()
                 {
-                    CalenderYear = Instance._calendarYear,
+                    CalenderYear = int.Parse(Instance._calendarYear),
                     TotalMinAckValue = Instance._totalMinAckValue,
                     TotalMaxAckValue = Instance._totalMaxAckValue,
                     CommissionShareChildren = Instance._commissionShareChildren,
                     ComissionShareAdults = Instance._comissionShareAdults
                 };
-                Context.BDController.CheckNbrOfCS(comissionShare, Instance._calendarYear);
+                Context.BDController.CheckNbrOfCS(comissionShare, int.Parse(Instance._calendarYear));
                 CommissionShares.Clear();
                 foreach (var o in Context.BDController.GetAllCommissionShares())
                 {
@@ -117,12 +117,13 @@ namespace GUILayer.ViewModels.BasicDataViewModels
                     {
                         CommissionShares?.Add(t);
                     }
-                    EmptyAllChoices();
+                    
                 }
                 else
                 {
                     MessageBox.Show("Grunddatan togs inte bort.");
                 }
+                EmptyAllChoices();
             }
             else
             {
@@ -136,19 +137,13 @@ namespace GUILayer.ViewModels.BasicDataViewModels
         public ObservableCollection<ComissionShare> CommissionShares { get; set; }
 
         
-        private int _calendarYear;
+        private string _calendarYear;
         public string CalendarYear
         {
-            get => _calendarYear > 0 ? _calendarYear.ToString() : "";
+            get => _calendarYear;
             set
             {
-                _calendarYear = 0;
-                if (int.TryParse(value, out _calendarYear))
-                { }
-                else if (Check == false)
-                {
-                    MessageBox.Show("Måste vara ett årtal");
-                }
+                _calendarYear = value;
                 OnPropertyChanged("CalendarYear");
             }
         }
@@ -237,10 +232,16 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             get => _pAID > 0 ? _pAID.ToString() : "";
             set
             {
+                _pAID = 0;
                 if (int.TryParse(value, out _pAID))
                 {
-                    OnPropertyChanged("PAId");
+                    
                 }
+                else if(Check == false)
+                {
+                    MessageBox.Show("Måste vara en siffra");
+                }
+                OnPropertyChanged("PAId");
             }
         }
         #endregion
