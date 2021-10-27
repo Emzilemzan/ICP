@@ -244,11 +244,14 @@ namespace GUILayer.ViewModels
             AckValueVariableTableViewModel.Instance.EmptyAllChoices();
             BaseAmountTableViewModel.Instance.EmptyAllChoices();
             BaseAmountOptionViewModel.Instance.EmptyAllChoices();
+            PermissionValueTableViewModel.Instance.EmptyAllChoices();
             SignedInsuranceViewModel.Instance.UpdateAC();
+            VacationPayViewModel.Instance.EmptyAllChoices();
             SignedInsuranceViewModel.Instance.MakeSearchWordEmpty();
             GetandexportCustomerLeadsViewModel.Instance.Update();
             SAOverviewViewModel.Instance.UpdateAC();
             GetTrendstatitcsViewModel.Instance.Update();
+            CommissionOverviewViewModel.Instance.EmptyAllChoices1();
         }
     }
 }

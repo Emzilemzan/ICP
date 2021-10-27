@@ -83,6 +83,10 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             Instance.DialingCode = string.Empty;
             Instance.Email = string.Empty;
             Instance.CompanyName = string.Empty;
+            Instance.FirstName = string.Empty;
+            Instance.LastName = string.Empty;
+            Instance.SocialSecurityNumberIP = string.Empty;
+            Instance.PersonType = string.Empty;
             Instance.Premie = string.Empty;
             Instance.PaymentForm = null;
             Instance.PostalCode = string.Empty;

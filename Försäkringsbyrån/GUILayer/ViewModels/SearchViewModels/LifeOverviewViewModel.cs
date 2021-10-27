@@ -45,7 +45,7 @@ namespace GUILayer.ViewModels.SearchViewModels
                 Insurances.Clear();
                 foreach (var i in Context.IController.GetAllInsurances())
                 {
-                    if (i.SAI != null)
+                    if (i.LIFE != null)
                     {
                         Insurances?.Add(i);
                     }
@@ -125,7 +125,7 @@ namespace GUILayer.ViewModels.SearchViewModels
                         Insurances.Clear();
                         foreach (var i in Context.IController.GetAllInsurances())
                         {
-                            if (i.SAI != null)
+                            if (i.LIFE != null)
                             {
                                 Insurances?.Add(i);
                             }

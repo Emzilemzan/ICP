@@ -125,11 +125,11 @@ namespace GUILayer.ViewModels.InsuranceViewModels
                 if (OptionalType2 != null && _barll == 0)
                     MessageBox.Show("Du måste fylla i tillvalsuppgifter för checkad checkbox.");
             }
-            else
+            else if(CCheck == false)
             {
                 if (Instance.SocialSecurityNumber != null && Instance.City != null && Instance.Firstname != null && Instance.Lastname != null && Instance.PostalCode != null && Instance.EmailOne != null && Instance.StreetAddress != null
                          && Instance.DiallingCodeHome != null && Instance.TelephoneNbrHome != null && Instance.PaymentForm != null && Instance.DeliveryDate != null && Instance.DeliveryDate != null && Instance.SAIType != null
-             && Instance.AgentNo != null)
+                   && Instance.AgentNo != null)
                 {
                     if (IPISPerson == false)
                     {

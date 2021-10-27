@@ -11,14 +11,14 @@ using System.Windows.Input;
 
 namespace GUILayer.ViewModels.BasicDataViewModels
 {
-   public class PermissionValueTableViewModel: BaseViewModel
+    public class PermissionValueTableViewModel : BaseViewModel
     {
         public static readonly PermissionValueTableViewModel Instance = new PermissionValueTableViewModel();
-        
+
         private PermissionValueTableViewModel()
         {
             CommissionShares = UpdateCS();
-            Years = GetYears();
+            YearsString = GetYearsString();
         }
 
         private ObservableCollection<ComissionShare> UpdateCS()
@@ -34,10 +34,34 @@ namespace GUILayer.ViewModels.BasicDataViewModels
         }
 
 
-        public List<int> Years { get; set; }
-        public List<int> GetYears()
+        public List<int> YearsInt { get; set; }
+        public List<int> GetYearsInt()
         {
             return Enumerable.Range(1950, DateTime.UtcNow.Year - 1949).Reverse().ToList();
+        }
+
+        public List<string> YearsString { get; set; }
+
+        public List<string> GetYearsString()
+        {
+            YearsInt = GetYearsInt();
+            List<string> strings = new List<string>();
+            foreach (var i in YearsInt)
+            {
+                strings.Add(i.ToString());
+            }
+            return strings;
+        }
+
+        public void EmptyAllChoices()
+        {
+            Check = true;
+            CalendarYear = string.Empty;
+            TotalMaxAckValue = string.Empty;
+            TotalMinAckValue = string.Empty;
+            CommissionShareChildren = string.Empty;
+            ComissionShareAdults = string.Empty;
+            PAId = string.Empty;
         }
 
         #region Commands
@@ -60,14 +84,13 @@ namespace GUILayer.ViewModels.BasicDataViewModels
                     CommissionShareChildren = Instance._commissionShareChildren,
                     ComissionShareAdults = Instance._comissionShareAdults
                 };
-                Context.BDController.AddCommissionShare(comissionShare);
-
-                MessageBox.Show("Grunddatan är uppdaterad");
+                Context.BDController.CheckNbrOfCS(comissionShare, Instance._calendarYear);
                 CommissionShares.Clear();
                 foreach (var o in Context.BDController.GetAllCommissionShares())
                 {
                     CommissionShares?.Add(o);
                 }
+                EmptyAllChoices();
             }
             else
             {
@@ -117,65 +140,100 @@ namespace GUILayer.ViewModels.BasicDataViewModels
 
         
         private int _calendarYear;
-        public int CalendarYear
+        public string CalendarYear
         {
-            get => _calendarYear;
+            get => _calendarYear > 0 ? _calendarYear.ToString() : "";
             set
             {
-                _calendarYear = value;
-
+                _calendarYear = 0;
+                if (int.TryParse(value, out _calendarYear))
+                { }
+                else if (Check == false)
+                {
+                    MessageBox.Show("Måste vara ett årtal");
+                }
                 OnPropertyChanged("CalendarYear");
             }
         }
 
         private int _totalMinAckValue;
-        public int TotalMinAckValue
+        public string TotalMinAckValue
         {
-            get => _totalMinAckValue;
+            get => _totalMinAckValue > 0 ? _totalMinAckValue.ToString() : "";
             set
             {
-                _totalMinAckValue = value;
-
+                _totalMinAckValue = 0;
+                if (int.TryParse(value, out _totalMinAckValue))
+                { }
+                else if (Check == false)
+                {
+                    MessageBox.Show("Måste vara en siffra");
+                }
                 OnPropertyChanged("TotalMinAckValue");
             }
         }
 
         private int _totalMaxAckValue;
-        public int TotalMaxAckValue
+        public string TotalMaxAckValue
         {
-            get => _totalMaxAckValue;
+            get => _totalMaxAckValue > 0 ? _totalMaxAckValue.ToString() : "";
             set
             {
-                _totalMaxAckValue = value;
-
+                _totalMaxAckValue = 0;
+                if (int.TryParse(value, out _totalMaxAckValue))
+                { }
+                else if (Check == false)
+                {
+                    MessageBox.Show("Måste vara en siffra");
+                }
                 OnPropertyChanged("TotalMaxAckValue");
             }
         }
 
-        private int _commissionShareChildren;
-        public int CommissionShareChildren
+        private double _commissionShareChildren;
+        public string CommissionShareChildren
         {
-            get => _commissionShareChildren;
+            get => _commissionShareChildren > 0 ? _commissionShareChildren.ToString() : "";
             set
             {
-                _commissionShareChildren = value;
+                _commissionShareChildren = 0;
+                if (double.TryParse(value, out _commissionShareChildren))
+                { }
+                else if (Check == false)
+                {
+                    MessageBox.Show("Måste vara en siffra");
+                }
 
                 OnPropertyChanged("CommissionShareChildren");
             }
         }
 
-        private int _comissionShareAdults;
-        public int ComissionShareAdults
+        private double _comissionShareAdults;
+        public string ComissionShareAdults
         {
-            get => _comissionShareAdults;
+            get => _comissionShareAdults > 0 ? _comissionShareAdults.ToString() : "";
             set
             {
-                _comissionShareAdults = value;
-
+                _comissionShareAdults = 0;
+                if (double.TryParse(value, out _comissionShareAdults))
+                { }
+                else if (Check == false)
+                {
+                    MessageBox.Show("Måste vara en siffra");
+                }
                 OnPropertyChanged("ComissionShareAdults");
             }
         }
-
+        private bool _check;
+        public bool Check
+        {
+            get => _check;
+            set
+            {
+                _check = value;
+                OnPropertyChanged("Check");
+            }
+        }
         private int _pAID;
         public string PAId
         {

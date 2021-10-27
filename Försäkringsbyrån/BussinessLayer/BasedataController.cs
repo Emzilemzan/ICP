@@ -139,17 +139,17 @@ namespace BussinessLayer
             }
         }
 
-        public void CheckNbrOfVP(DateTime d, VacationPay vacationPay)
+        public void CheckNbrOfVP(int year, VacationPay vacationPay)
         {
             List<VacationPay> vps = new List<VacationPay>();
-            foreach(VacationPay v in GetAllVPays())
+            foreach (VacationPay v in GetAllVPays())
             {
-                if(v.Year == d.Year)
+                if (v.Year == year)
                 {
                     vps?.Add(v);
                 }
             }
-            if(vps.Count != 1)
+            if (vps.Count != 1)
             {
                 AddVPay(vacationPay);
                 MessageBox.Show("Semesterersättning las till.");
@@ -438,6 +438,27 @@ namespace BussinessLayer
 
         }
 
+        public void CheckNbrOfCS(ComissionShare cs, int d)
+        {
+            List<ComissionShare> bases = new List<ComissionShare>();
+            foreach (ComissionShare b in GetAllCommissionShares())
+            {
+                if (b.CalenderYear == d)
+                {
+                    bases.Add(b);
+                }
+            }
+            if (bases.Count != 4)
+            {
+                AddCommissionShare(cs);
+                MessageBox.Show("Provisionsandelen las till.");
+            }
+            else
+            {
+                MessageBox.Show("Provisionsandelen las inte till då det max får finnas fyra per år. ");
+            }
+
+        }
         public void CheckExistingCommissionShare(int id, ComissionShare cs)
         {
             ComissionShare x = BusinessController.Instance.Context.CommissionShares.GetById(id);
