@@ -69,15 +69,15 @@
             <TextBox Grid.Row="0" IsReadOnly="True" Grid.Column="1" Text="{Binding SelectedInsurance.SerialNumber}" Margin="0.333,0,0,0.333"/>
             <Label Grid.Column="0" Grid.Row="1" Content="*Betald:" FontSize="15"/>
             <Label Grid.Column="0" Grid.Row="1" Content="*År:" FontSize="15" Margin="89,0.333,225,0.333" Grid.ColumnSpan="2"/>
-            <ComboBox Grid.Row="1" Margin="131,0.333,203,0.333" ItemsSource="{Binding Years}" SelectedItem="{Binding SelectedInsurance.PayYear}" Grid.ColumnSpan="2"/>
+            <ComboBox Grid.Row="1" Margin="131,0.333,203,0.333" ItemsSource="{Binding Years}" SelectedItem="{Binding Year}" Grid.ColumnSpan="2"/>
             <Label Grid.Column="1" Grid.Row="1" Content="*Månad:" FontSize="15" Margin="39.667,0.333,121,0.333"/>
-            <ComboBox Grid.Column="1" Grid.Row="1" Margin="108.667,0.333,0,0.333" ItemsSource="{Binding Months}" SelectedItem="{Binding SelectedInsurance.PayMonth}"/>
+            <ComboBox Grid.Column="1" Grid.Row="1" Margin="108.667,0.333,0,0.333" ItemsSource="{Binding Months}" SelectedItem="{Binding Month}"/>
             <Label Grid.Column="0" Grid.Row="2" Content="*Försäkringsnummer:" FontSize="15"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding SelectedInsurance.InsuranceNumber}"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding INumber}"/>
             <Label Grid.Column="0" Grid.Row="3" Content="Eventuellt Grundbelopp:" FontSize="15"/>
-            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding SelectedInsurance.PossibleBaseAmount}"/>
+            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding PBA}"/>
             <Label Grid.Column="0" Grid.Row="4" Content="Eventuell Provision:" FontSize="15"/>
-            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding SelectedInsurance.PossibleComisson}"/>
+            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding PBC}"/>
             <Button Grid.Row="6" Grid.Column="1" Content="Teckna" Command="{Binding SignInsurance}" HorizontalAlignment="Right" Margin="0,0,0,10" Width="89" RenderTransformOrigin="0.5,0.5"/>
         </Grid>
 

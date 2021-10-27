@@ -75,6 +75,7 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             Instance.AckValue = string.Empty;
             LifInsurance = null;
             OptionalType = null;
+            AckValueId = string.Empty;
         }
         private void AddAckValueVariableTable()
         {
@@ -135,11 +136,13 @@ namespace GUILayer.ViewModels.BasicDataViewModels
                     {
                         AckValues?.Add(t);
                     }
+                    
                 }
                 else
                 {
                     MessageBox.Show("Grunddatan togs inte bort.");
                 }
+                EmptyAllChoices();
             }
             else
             {
