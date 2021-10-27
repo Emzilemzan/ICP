@@ -161,9 +161,13 @@
                             <DataTemplate x:Key="DataTemplateSalesMen">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <TextBlock Text="{Binding Path= AgentNumber}" Grid.Column="1" />
+                                    <TextBlock Text="{Binding Path= AgentNumber}" Grid.Column="0" Margin="0,0,10,0" />
+                                    <TextBlock Text="{Binding Path= Firstname}" Grid.Column="1" Margin="0,0,10,0"  />
+                                    <TextBlock Text="{Binding Path= Lastname}" Grid.Column="2" Grid.ColumnSpan="1" Margin="0,0,10,0" />
                                 </Grid>
                             </DataTemplate>
                         </ComboBox.Resources>
