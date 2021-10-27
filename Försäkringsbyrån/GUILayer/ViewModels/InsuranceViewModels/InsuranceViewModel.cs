@@ -24,10 +24,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         }
 
         private ICommand registerApplication_Btn; 
-        public ICommand RegisterApplication_Btn
-        {
-            get => registerApplication_Btn ?? (registerApplication_Btn = new RelayCommand(x => { RegisterApplicationHome(); }));
-        }
+        public ICommand RegisterApplication_Btn => registerApplication_Btn ?? (registerApplication_Btn = new RelayCommand(x => { RegisterApplicationHome(); }));
 
         private void RegisterApplicationHome()
         {

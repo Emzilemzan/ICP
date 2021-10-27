@@ -257,9 +257,6 @@
                             <Trigger Property="IsMouseOver" Value="true">
                                 <Setter Property="Background" TargetName="border" Value="DarkSeaGreen"/>
                             </Trigger>
-                            <Trigger Property="IsFocused" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="DarkSeaGreen"/>
-                            </Trigger>
                             <Trigger Property="IsPressed" Value="true">
                                 <Setter Property="Background" TargetName="border" Value="DarkSeaGreen"/>
                             </Trigger>

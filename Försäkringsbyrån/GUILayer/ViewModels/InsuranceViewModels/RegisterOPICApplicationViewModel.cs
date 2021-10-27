@@ -29,6 +29,20 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         }
 
         #region Commands and Methods
+        private ICommand registerApplication_Btn;
+        public ICommand GoBack => registerApplication_Btn ?? (registerApplication_Btn = new RelayCommand(x => { Back(); }));
+
+        private void Back()
+        {
+            if (MainViewModel.Instance.CurrentTool != "Insurance")
+            {
+                MainViewModel.Instance.ToolsVisibility = Visibility.Visible;
+                MainViewModel.Instance.Tools = InsuranceViewModel.Instance;
+                MainViewModel.Instance.CurrentTool = "Insurance";
+                MainViewModel.Instance.SelectedViewModel = InsuranceApplicationChoiceViewModel.Instance;
+            }
+        }
+
         private bool CanCreate() => true;
 
         private ICommand _addCIInsuranceBtn;

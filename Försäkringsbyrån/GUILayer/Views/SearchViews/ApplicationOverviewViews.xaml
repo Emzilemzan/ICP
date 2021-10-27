@@ -20,6 +20,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Label Content="Register Företagsförsäkringar " FontSize="20" Grid.Row="0" Grid.Column="0" Margin="0,0,-0.333,0"/>
+            <Button Grid.Row="0" Grid.Column="0"  Content="Tillbaka" FontSize="15" Margin="1066,2,10.333,5" Command="{Binding GoBack}" />
             <xctk1:WatermarkTextBox Grid.Row="1" Grid.Column="0"
                                 HorizontalContentAlignment="Center"
                                 VerticalContentAlignment="Center"

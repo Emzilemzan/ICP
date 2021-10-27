@@ -26,6 +26,19 @@ namespace GUILayer.ViewModels.SearchViewModels
         }
 
         #region command 
+        private ICommand registerApplication_Btn;
+        public ICommand GoBack => registerApplication_Btn ?? (registerApplication_Btn = new RelayCommand(x => { Back(); }));
+
+        private void Back()
+        {
+            if (MainViewModel.Instance.CurrentTool != "Search")
+            {
+                MainViewModel.Instance.ToolsVisibility = Visibility.Visible;
+                MainViewModel.Instance.Tools = SearchValueViewModel.Instance;
+                MainViewModel.Instance.CurrentTool = "Search";
+                MainViewModel.Instance.SelectedViewModel = SearchApplicationChoiceViewModel.Instance;
+            }
+        }
         private ICommand _updateBtn;
 
         public ICommand UpdateBtn => _updateBtn ?? (_updateBtn = new RelayCommand(x => { Update(); }));

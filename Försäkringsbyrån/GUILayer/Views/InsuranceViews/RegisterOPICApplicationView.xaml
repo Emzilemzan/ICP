@@ -20,6 +20,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Label Content="Registrera Ansökan - Övrig personförsäkring" FontSize="24"  Grid.Row="0" Grid.Column="0"/>
+            <Button Grid.Row="0" Grid.Column="1"  Content="Tillbaka" FontSize="15" Margin="271,2,130,5" Command="{Binding GoBack}" RenderTransformOrigin="0.5,0.5" />
             <StackPanel Grid.Column="0" Grid.Row="1" Grid.RowSpan="6" >
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -78,7 +79,7 @@
                     <TextBox Grid.Row="15" Grid.Column="1" Text="{Binding LastName}"/>
                     <Label Grid.Column="0" Grid.Row="16" Content="*Förnamn:" FontSize="15"/>
                     <TextBox Grid.Row="16" Grid.Column="1" Text="{Binding FirstName}"/>
-                   
+
 
                 </Grid>
             </StackPanel>
@@ -123,7 +124,7 @@
                         </ComboBox.ItemTemplate>
                     </ComboBox>
 
-                        <Label Content="Övriga försäkringsuppgifter" Grid.Row="3" Grid.Column="0" FontSize="18" Margin="0,30,0,0" FontWeight="Bold"/>
+                    <Label Content="Övriga försäkringsuppgifter" Grid.Row="3" Grid.Column="0" FontSize="18" Margin="0,30,0,0" FontWeight="Bold"/>
                     <Label Content="*Betalform:" FontSize="15" Grid.Row="4" Grid.Column="0"/>
                     <ComboBox Grid.Row="4" Grid.Column="1" Text="" Margin="0,0,120,0" Width="130" Height="30" ItemsSource="{Binding PayMentForms}" SelectedItem="{Binding PaymentForm}" />
                     <Label Content="*Ankomstdatum" FontSize="15" Grid.Row="5" Grid.Column="0" Margin="0,10,0,0"/>
@@ -149,7 +150,7 @@
                         </ComboBox.ItemTemplate>
                     </ComboBox>
 
-                        <Label Content="*Tabell: " FontSize="15"  Grid.Row="7" Grid.Column="0" Margin="0,0,0,0"/>
+                    <Label Content="*Tabell: " FontSize="15"  Grid.Row="7" Grid.Column="0" Margin="0,0,0,0"/>
                     <TextBox Grid.Row="7" Grid.Column="1" Margin="0,10,120,0" Height="25" Text="{Binding Tabell}"  />
                     <Label Content="*Premie:" FontSize="15" Grid.Row="8" Grid.Column="0" Margin="0,0,0,0"/>
                     <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding Premie}" Margin="0,10,120,0" Width="130" Height="25"/>

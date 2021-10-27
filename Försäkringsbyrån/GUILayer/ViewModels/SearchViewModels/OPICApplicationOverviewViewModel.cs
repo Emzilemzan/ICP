@@ -33,7 +33,19 @@ namespace GUILayer.ViewModels.SearchViewModels
             OnPropertyChanged("OPInsuranceTypes");
         }
         #region Commands
-       
+        private ICommand registerApplication_Btn;
+        public ICommand GoBack => registerApplication_Btn ?? (registerApplication_Btn = new RelayCommand(x => { Back(); }));
+
+        private void Back()
+        {
+            if (MainViewModel.Instance.CurrentTool != "Search")
+            {
+                MainViewModel.Instance.ToolsVisibility = Visibility.Visible;
+                MainViewModel.Instance.Tools = SearchValueViewModel.Instance;
+                MainViewModel.Instance.CurrentTool = "Search";
+                MainViewModel.Instance.SelectedViewModel = SearchApplicationChoiceViewModel.Instance;
+            }
+        }
         public void UpdateGridToDb()
         {
             UpdateAC();
