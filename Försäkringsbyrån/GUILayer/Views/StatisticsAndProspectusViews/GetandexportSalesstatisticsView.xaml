@@ -12,11 +12,11 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Label Content="Försäljningsstatistik" FontWeight="Light" FontSize="30"
-                   Foreground="Black" HorizontalAlignment="Center"  Grid.RowSpan="1" Margin="10,25,843,377" ></Label>
+                   Foreground="Black" HorizontalAlignment="Center"  Grid.RowSpan="1" Margin="10,10,832,402" Width="258" ></Label>
 
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="100"/>
+                <RowDefinition Height="40"/>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="*"/>
@@ -41,25 +41,25 @@
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <!--<ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>-->
 
             </Grid.ColumnDefinitions>
 
             <Label Content="ÅR" FontWeight="Light"
-                   Foreground="Black" Grid.Column="0" Grid.Row="1"  Margin="0,0,9.333,9" ></Label>
-            <ComboBox  ItemsSource="{Binding Years}" FontSize="10" SelectedItem="{Binding Year}" Grid.Column="0" Margin="0,26,0,0" RenderTransformOrigin="0.5,0.5" Grid.Row="1"/>
-            <Label Grid.Row="2" Grid.Column="0" Content="Säljare" Margin="0,8,33,12" Grid.RowSpan="2"/>
-            <ComboBox Grid.Row="3" Grid.Column="0" Margin="0,5,0,15.5" FontSize="10" ItemsSource="{Binding SalesMens}" SelectedItem="{Binding SalesMen}" Grid.RowSpan="3" >
+                   Foreground="Black" Grid.Column="0" Grid.Row="3"  Margin="0,0,9,15" Grid.RowSpan="2" />
+            <ComboBox  ItemsSource="{Binding Years}" FontSize="10" SelectedItem="{Binding Year}" Grid.Column="0" Margin="0,10,140,10" RenderTransformOrigin="0.5,0.5" Grid.Row="4" Grid.RowSpan="3"/>
+            <Label Grid.Row="1" Grid.Column="0" Content="Säljare" Margin="0,13,33,11"/>
+            <ComboBox Grid.Row="1" Grid.Column="0" Margin="0,41,140,0" FontSize="10" ItemsSource="{Binding SalesMens}" SelectedItem="{Binding SalesMen}" Grid.RowSpan="2" >
                 <ComboBox.Resources>
                     <DataTemplate x:Key="DataTemplateBaseAmountT">
                         <Grid>
@@ -74,43 +74,43 @@
                     <StaticResource ResourceKey="DataTemplateBaseAmountT"/>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <Button Grid.Row="5" Background="LightGray" Margin="0,10.5,9,15.5" Content="Exportera " Command="{Binding GetandexportSalesstatisticsViewModel_Btn}" Grid.RowSpan="4"/>
+            <Button Grid.Row="7" Background="LightGray" Margin="0,12,162,6" Content="Exportera " Command="{Binding GetandexportSalesstatisticsViewModel_Btn}" Grid.RowSpan="4"/>
 
-            <Label Grid.Row="0" Grid.Column="3" Content="Försäljningsstatisk för vald säljare:" FontSize="20" Margin="12,57,35,10" Grid.ColumnSpan="4"></Label>
+            <Label Grid.Column="3" Content="Försäljningsstatisk för vald säljare:" FontSize="20" Margin="10,0,35,0" Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5"/>
 
             <Label Content="Säljarens namn" Grid.Row="1" Grid.Column="2"/>
 
             <TextBox IsReadOnly="True" Grid.Row="1" Grid.Column="2" Margin="0,26,0,5" Text="{Binding SalesMen.Firstname}"/>
-            <Label Content="SO-Barn" FontWeight="SemiBold" Grid.Row="2" Grid.Column="2" Margin="0,5,0,0"/>
+            <Label Content="SO-Barn" FontWeight="Bold" Grid.Row="2" Grid.Column="2" Margin="0,5,0,0"/>
             <Label Content="Antal st" Grid.Row="2" Grid.Column="2" Margin="0,23,0,0" Grid.RowSpan="2" FontSize="8"/>
             <Label Content="Total ackvärde" Grid.Row="3" Grid.Column="2" FontSize="8" Margin="0,12,0,13.5" Grid.RowSpan="3"/>
 
 
-            <Label Content="SO-Vuxen" FontSize="8" FontWeight="SemiBold" Grid.Row="4" Grid.Column="2" Grid.RowSpan="3" Margin="0,10,37,15.5" />
+            <Label Content="SO-Vuxen"  FontWeight="Bold" Grid.Row="4" Grid.Column="2" Grid.RowSpan="3" Margin="0,10,31,11" />
             <Label Content="Antal st" Grid.Row="5" Grid.Column="2" FontSize="8" Margin="0,12,42,0" Grid.RowSpan="2"/>
             <Label Content="Total ackvärde" Grid.Row="6" Grid.Column="2" FontSize="8" Margin="0,10,31,15.5" Grid.RowSpan="3"/>
 
 
-            <Label Content="Liv-vuxen" FontWeight="SemiBold" Grid.Row="7" Grid.Column="2" FontSize="8" Margin="0,13,31,0" Grid.RowSpan="2"/>
+            <Label Content="Liv-vuxen" FontWeight="Bold" Grid.Row="7" Grid.Column="2"  Margin="0,13,31,0" Grid.RowSpan="2"/>
             <Label Content="Antal st" Grid.Row="8" Grid.Column="2" FontSize="8" Margin="0,13,0,0" Grid.RowSpan="2"/>
             <Label Content="Total ackvärde" Grid.Row="9" Grid.Column="2" FontSize="8" Margin="0,13,0,0" Grid.RowSpan="2"/>
 
-            <Label Content="ÖFP-vuxen" FontWeight="SemiBold" Grid.Row="10" Grid.Column="2" FontSize="8" Margin="0,13,37,0" Grid.RowSpan="2" />
+            <Label Content="ÖFP-vuxen" FontWeight="Bold" Grid.Row="10" Grid.Column="2"  Margin="0,13,31,11" Grid.RowSpan="3" />
             <Label Content="Antal st" Grid.Row="11" Grid.Column="2" FontSize="8" Margin="0,10,42,15.5" Grid.RowSpan="3"/>
             <Label Content="Total ackvärde" Grid.Row="12" Grid.Column="2" FontSize="8" Margin="0,10.333,31,15.667" Grid.RowSpan="3"/>
 
-            <Label Content="Företagsförsäkringar" FontWeight="SemiBold" Grid.Row="13" Grid.Column="2" FontSize="8" Margin="0,10.333,5,15.667" Grid.RowSpan="3"/>
+            <Label Content="Företagsförsäkringar" FontWeight="Bold" Grid.Row="13" Grid.Column="2"  Margin="0,10,5,10" Grid.RowSpan="3"/>
             <Label Content="Antal st" Grid.Row="14" Grid.Column="2" FontSize="8" Margin="0,10.5,37,14.167" Grid.RowSpan="3"/>
             <Label Content="Total ackvärde" Grid.Row="15" Grid.Column="2" FontSize="8" Margin="0,10.5,0,0.167" Grid.RowSpan="2"/>
 
-            <Label Content="Alla försäkringar" FontWeight="SemiBold" Grid.Row="16" Grid.Column="2" Margin="0,10.333,0,15.667" Grid.RowSpan="3" FontSize="8"/>
+            <Label Content="Alla försäkringar" FontWeight="Bold" Grid.Row="16" Grid.Column="2" Margin="0,10.333,0,9.667" Grid.RowSpan="3" />
             <Label Content="Antal st" Grid.Row="17" Grid.Column="2" FontSize="8" Margin="0,10.5,0,0.167" Grid.RowSpan="2"/>
             <Label Content="Total ackvärde" Grid.Row="18" Grid.Column="2" FontSize="8" Margin="0,10.5,19,-1" Grid.RowSpan="2"/>
 
 
-            <ScrollViewer Margin="0,4.667,0,-256.667"  Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="12" Grid.RowSpan="3"
+            <ScrollViewer Margin="0,4.667,0,-256.667"  Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="12" Grid.RowSpan="10"
                       VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible">
-                <Grid Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="9" Margin="5,8,26,10" Grid.RowSpan="17" >
+                <Grid Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="9" Margin="5,8,26,10" Grid.RowSpan="18" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="30"/>
@@ -161,178 +161,176 @@
 
 
                     <!--#region for SO Barn-->
-                    <TextBox IsReadOnly="True" x:Name="AntalSOJan" Grid.Row="2" Grid.Column="0" Margin="4,4,21,9" Text="{Binding CountSACJanuary}"/>
-                    <TextBox IsReadOnly="True" Grid.Row="2" Grid.Column="0" Margin="4,27,21,16" Text="{Binding AckSACJanuary}" Grid.RowSpan="2"/>
-                    <TextBox IsReadOnly="True" x:Name="AntalSOFeb" Grid.Row="2" Grid.Column="1" Margin="4,4,21,9" Text="{Binding CountSACFebruary}" />
-                    <TextBox IsReadOnly="True" Grid.Row="2" Grid.Column="1" Margin="4,27,21,16" Text="{Binding AckSACFebruary}" Grid.RowSpan="2"/>
-                    <TextBox IsReadOnly="True" x:Name="AntalSOMars" Grid.Row="2" Grid.Column="2" Margin="4,4,21,11" Text="{Binding CountSACMars}"/>
-                    <TextBox IsReadOnly="True" Grid.Row="2" Grid.Column="2" Margin="4,26,21,17" Text="{Binding AckSACMars}" Grid.RowSpan="2"/>
-                    <TextBox x:Name="AntalSOApril" IsReadOnly="True" Grid.Row="2" Grid.Column="3" Margin="4,4,21,11" Text="{Binding CountSACApril}"/>
-                    <TextBox Grid.Row="2" Grid.Column="3" Margin="4,26,21,17" IsReadOnly="True" Text="{Binding AckSACApril}" Grid.RowSpan="2"/>
-                    <TextBox x:Name="AntalSOMaj" Grid.Row="2" Grid.Column="4" Margin="4,4,21,0" IsReadOnly="True" Text="{Binding CountSACMay}" Height="20" VerticalAlignment="Top"/>
-                    <TextBox Grid.Row="2" Grid.Column="4" Margin="4,27,21,16" IsReadOnly="True" Text="{Binding AckSACMay}" Grid.RowSpan="2"/>
-                    <TextBox x:Name="AntalSOJuni" Grid.Row="2" Grid.Column="5" Margin="4,10,21,0" IsReadOnly="True" Text="{Binding CountSACJune}"/>
-                    <TextBox Grid.Row="3" Grid.Column="5" Margin="4,5,21,5" IsReadOnly="True" Text="{Binding AckSACJune}"/>
-                    <TextBox x:Name="AntalSOJuli" Grid.Row="2" Grid.Column="6" Margin="4,10,21,0" IsReadOnly="True" Text="{Binding CountSACJuly}"/>
-                    <TextBox Grid.Row="3" Grid.Column="6" Margin="4,5,21,5" IsReadOnly="True" Text="{Binding AckSACJuly}"/>
-                    <TextBox x:Name="AntalSOAug" Grid.Row="2" Grid.Column="7" Margin="4,10,21,0" IsReadOnly="True" Text="{Binding CountSACAugust}" />
-                    <TextBox Grid.Row="3" Grid.Column="7" Margin="4,5,21,5" IsReadOnly="True" Text="{Binding AckSACAugust}"/>
-                    <TextBox x:Name="AntalSOSept" Grid.Row="2" Grid.Column="8" Margin="4,10,21,0" IsReadOnly="True" Text="{Binding CountSACSeptember}"/>
-                    <TextBox Grid.Row="3" Grid.Column="8" Margin="4,5,21,5" IsReadOnly="True" Text="{Binding AckSACSeptember}"/>
-                    <TextBox x:Name="AntalSOOkt" Grid.Row="2" Grid.Column="9" Margin="4,10,21,0" IsReadOnly="True" Text="{Binding CountSACOctober}"/>
-                    <TextBox Grid.Row="3" Grid.Column="9" Margin="4,5,21,5" IsReadOnly="True" Text="{Binding AckSACOctober}"/>
-                    <TextBox x:Name="AntalSONov" Grid.Row="2" Grid.Column="10" Margin="4,10,21,0" IsReadOnly="True" Text="{Binding CountSACNovember}"/>
-                    <TextBox Grid.Row="3" Grid.Column="10" Margin="4,5,21,5" IsReadOnly="True" Text="{Binding AckSACNovember}"/>
-                    <TextBox x:Name="AntalSODec" Grid.Row="2" Grid.Column="11" Margin="4,10,21,0" IsReadOnly="True" Text="{Binding CountSACDecember}"/>
-                    <TextBox Grid.Row="3" Grid.Column="11" Margin="4,5,21,5" IsReadOnly="True" Text="{Binding AckSACDecember}"/>
-                    <TextBox x:Name="AntalSOÅr" Grid.Row="2" Grid.Column="12" Margin="4,10,21,0" IsReadOnly="True" Text="{Binding CountSACTotal}"/>
-                    <TextBox Grid.Row="3" Grid.Column="12" Margin="4,5,21,5" IsReadOnly="True" Text="{Binding AckSACTotal}"/>
+                    <TextBox IsReadOnly="True" x:Name="AntalSOJan" Grid.Row="2" Grid.Column="0" Margin="0,0.6,1.2,32.6" Text="{Binding CountSACJanuary}" Grid.RowSpan="2"/>
+                    <TextBox IsReadOnly="True" Grid.Row="3" Grid.Column="0" Margin="0,1,1.2,0" Text="{Binding AckSACJanuary}"/>
+                    <TextBox IsReadOnly="True" x:Name="AntalSOFeb" Grid.Row="1" Margin="47,30,2,0" Text="{Binding CountSACFebruary}" Grid.RowSpan="2" Grid.ColumnSpan="2" />
+                    <TextBox IsReadOnly="True" Grid.Row="3" Margin="47,0,1,0" Text="{Binding AckSACFebruary}" Grid.ColumnSpan="2"/>
+                    <TextBox IsReadOnly="True" x:Name="AntalSOMars" Grid.Row="2" Grid.Column="2" Margin="0,1.6,0.8,0" Text="{Binding CountSACMars}"/>
+                    <TextBox IsReadOnly="True" Grid.Row="3" Grid.Column="2" Margin="0,0.58,0.8,0.42" Text="{Binding AckSACMars}"/>
+                    <TextBox x:Name="AntalSOApril" IsReadOnly="True" Grid.Row="2" Grid.Column="3" Margin="0.2,0.6,0.8,0" Text="{Binding CountSACApril}"/>
+                    <TextBox Grid.Row="3" Grid.Column="3" Margin="0.2,0.58,0.8,0.42" IsReadOnly="True" Text="{Binding AckSACApril}"/>
+                    <TextBox x:Name="AntalSOMaj" Grid.Row="1" Grid.Column="4" Margin="0.2,30,0.8,0" IsReadOnly="True" Text="{Binding CountSACMay}" Height="35" VerticalAlignment="Top" Grid.RowSpan="2"/>
+                    <TextBox Grid.Row="3" Grid.Column="4" Margin="0.2,0.2,0.8,32.4" IsReadOnly="True" Text="{Binding AckSACMay}" Grid.RowSpan="2"/>
+                    <TextBox x:Name="AntalSOJuni" Grid.Row="2" Grid.Column="4" Margin="55.2,0.6,1.2,32.6" IsReadOnly="True" Text="{Binding CountSACJune}" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+                    <TextBox Grid.Row="3" Grid.Column="4" Margin="55.2,2.2,1.2,32.4" IsReadOnly="True" Text="{Binding AckSACJune}" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+                    <TextBox x:Name="AntalSOJuli" Grid.Row="1" Grid.Column="5" Margin="50.2,30,2.8,0" IsReadOnly="True" Text="{Binding CountSACJuly}" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+                    <TextBox Grid.Row="3" Grid.Column="5" Margin="50.2,1.2,2.8,32.4" IsReadOnly="True" Text="{Binding AckSACJuly}" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+                    <TextBox x:Name="AntalSOAug" Grid.Row="2" Grid.Column="7" Margin="2.2,1.6,0.6,0" IsReadOnly="True" Text="{Binding CountSACAugust}" />
+                    <TextBox Grid.Row="3" Grid.Column="7" Margin="0.2,1.2,0.6,32.4" IsReadOnly="True" Text="{Binding AckSACAugust}" Grid.RowSpan="2"/>
+                    <TextBox x:Name="AntalSOSept" Grid.Row="2" Grid.Column="8" Margin="0.4,1.6,1.4,0" IsReadOnly="True" Text="{Binding CountSACSeptember}"/>
+                    <TextBox Grid.Row="3" Grid.Column="8" Margin="0.4,1.2,1.4,32.4" IsReadOnly="True" Text="{Binding AckSACSeptember}" Grid.RowSpan="2"/>
+                    <TextBox x:Name="AntalSOOkt" Grid.Row="2" Grid.Column="8" Margin="60.4,0.6,1.6,0" IsReadOnly="True" Text="{Binding CountSACOctober}" Grid.ColumnSpan="2"/>
+                    <TextBox Grid.Row="3" Grid.Column="8" Margin="60.4,1.2,1.6,0.6" IsReadOnly="True" Text="{Binding AckSACOctober}" Grid.ColumnSpan="2"/>
+                    <TextBox x:Name="AntalSONov" Grid.Row="2" Grid.Column="10" Margin="0.4,0.6,1.6,3" IsReadOnly="True" Text="{Binding CountSACNovember}"/>
+                    <TextBox Grid.Row="3" Grid.Column="10" Margin="0.4,0,1.6,0" IsReadOnly="True" Text="{Binding AckSACNovember}" Height="31" VerticalAlignment="Top"/>
+                    <TextBox x:Name="AntalSODec" Grid.Row="2" Grid.Column="11" Margin="0.4,1.6,1,2.8" IsReadOnly="True" Text="{Binding CountSACDecember}"/>
+                    <TextBox Grid.Row="3" Grid.Column="11" Margin="0.4,0,1,1" IsReadOnly="True" Text="{Binding AckSACDecember}"/>
+                    <TextBox x:Name="AntalSOÅr" Grid.Row="2" Grid.Column="12" Margin="4,4,21,12" IsReadOnly="True" Text="{Binding CountSACTotal}"/>
+                    <TextBox Grid.Row="3" Grid.Column="12" Margin="4,0,21,10" IsReadOnly="True" Text="{Binding AckSACTotal}"/>
 
 
 
                     <!--region for SO vux-->
-                    <TextBox  IsReadOnly="True" x:Name="AntalSOVJan" Grid.Row="3" Grid.Column="0" Margin="4,23,21,15" Text="{Binding CountSAAJanuary}" Grid.RowSpan="2"/>
-                    <TextBox  IsReadOnly="True" Grid.Row="4" Grid.Column="0" Margin="4,18,21,20" Text="{Binding AckSAAJanuary}" Grid.RowSpan="2"/>
-                    <TextBox  IsReadOnly="True" x:Name="AntalSOVFeb" Grid.Row="3" Grid.Column="1" Margin="4,23,21,15" Text="{Binding CountSAAFebruary}" Grid.RowSpan="2"/>
-                    <TextBox  IsReadOnly="True" Grid.Row="4" Grid.Column="1" Margin="4,18,21,20" Text="{Binding AckSAAFebruary}" Grid.RowSpan="2"/>
-                    <TextBox  IsReadOnly="True" x:Name="AntalSOVMars" Grid.Row="3" Grid.Column="2" Margin="4,23,21,15" Text="{Binding CountSAAMars}" Grid.RowSpan="2"/>
-                    <TextBox  IsReadOnly="True" Grid.Row="4" Grid.Column="2" Margin="4,18,21,20" Text="{Binding AckSAAMars}" Grid.RowSpan="2"/>
-                    <TextBox  IsReadOnly="True" x:Name="AntalSOVApril" Grid.Row="3" Grid.Column="3" Margin="4,23,21,15" Text="{Binding CountSAAApril}" Grid.RowSpan="2"/>
-                    <TextBox  IsReadOnly="True" Grid.Row="4" Grid.Column="3" Margin="4,18,21,20" Text="{Binding AckSAAApril}" Grid.RowSpan="2"/>
-                    <TextBox  IsReadOnly="True" x:Name="AntalSOVMaj" Grid.Row="3" Grid.Column="4" Margin="4,23,21,15" Text="{Binding CountSAAMay}" Grid.RowSpan="2"/>
-                    <TextBox  IsReadOnly="True" Grid.Row="4" Grid.Column="4" Margin="4,18,21,20" Text="{Binding AckSAAMay}" Grid.RowSpan="2"/>
-                    <TextBox  IsReadOnly="True" x:Name="AntalSOVJuni" Grid.Row="4" Grid.Column="5" Margin="4,10,21,0" Text="{Binding CountSAAJune}"/>
-                    <TextBox  IsReadOnly="True" Grid.Row="5" Grid.Column="5" Margin="4,5,21,5" Text="{Binding AckSAAJune}"/>
-                    <TextBox  IsReadOnly="True" x:Name="AntalSOVJuli" Grid.Row="4" Grid.Column="6" Margin="4,10,21,0" Text="{Binding CountSAAJuly}"/>
-                    <TextBox  IsReadOnly="True" Grid.Row="5" Grid.Column="6" Margin="4,5,21,5" Text="{Binding AckSAAJuly}"/>
-                    <TextBox  IsReadOnly="True" x:Name="AntalSOVAug" Grid.Row="4" Grid.Column="7" Margin="4,10,21,0" Text="{Binding CountSAAAugust}"/>
-                    <TextBox  IsReadOnly="True" Grid.Row="5" Grid.Column="7" Margin="4,5,21,5" Text="{Binding AckSAAAugust}"/>
-                    <TextBox  IsReadOnly="True" x:Name="AntalSOVSep" Grid.Row="4" Grid.Column="8" Margin="4,10,21,0" Text="{Binding CountSAASeptember}"/>
-                    <TextBox  IsReadOnly="True" Grid.Row="5" Grid.Column="8" Margin="4,5,21,5" Text="{Binding AckSAASeptember}"/>
-                    <TextBox  IsReadOnly="True" x:Name="AntalSOVOkt" Grid.Row="4" Grid.Column="9" Margin="4,10,21,0" Text="{Binding CountSAAOctober}"/>
-                    <TextBox  IsReadOnly="True" Grid.Row="5" Grid.Column="9" Margin="4,5,21,5" Text="{Binding AckSAAOctober}"/>
-                    <TextBox  IsReadOnly="True" x:Name="AntalSOVNov" Grid.Row="4" Grid.Column="10" Margin="4,10,21,0" Text="{Binding CountSAANovember}"/>
-                    <TextBox  IsReadOnly="True" Grid.Row="5" Grid.Column="10" Margin="4,5,21,5" Text="{Binding AckSAANovember}"/>
-                    <TextBox  IsReadOnly="True" x:Name="AntalSOVDec" Grid.Row="4" Grid.Column="11" Margin="4,10,21,0" Text="{Binding CountSAADecember}"/>
-                    <TextBox  IsReadOnly="True" Grid.Row="5" Grid.Column="11" Margin="4,5,21,5" Text="{Binding AckSAADecember}"/>
+                    <TextBox  IsReadOnly="True" x:Name="AntalSOVJan" Grid.Row="4" Grid.Column="0" Margin="0,0,1.2,1" Text="{Binding CountSAAJanuary}"/>
+                    <TextBox  IsReadOnly="True" Grid.Row="4" Grid.Column="0" Margin="0,31,0.2,0" Text="{Binding AckSAAJanuary}" Grid.RowSpan="2"/>
+                    <TextBox  IsReadOnly="True" x:Name="AntalSOVFeb" Grid.Row="4" Margin="47,0,1,1" Text="{Binding CountSAAFebruary}" Grid.ColumnSpan="2"/>
+                    <TextBox  IsReadOnly="True" Grid.Row="5" Margin="47,0,0,0" Text="{Binding AckSAAFebruary}" Grid.ColumnSpan="2"/>
+                    <TextBox  IsReadOnly="True" x:Name="AntalSOVMars" Grid.Row="4" Grid.Column="2" Margin="0,0,0.8,1" Text="{Binding CountSAAMars}"/>
+                    <TextBox  IsReadOnly="True" Grid.Row="5" Grid.Column="2" Margin="0,0,0.8,0" Text="{Binding AckSAAMars}"/>
+                    <TextBox  IsReadOnly="True" x:Name="AntalSOVApril" Grid.Row="4" Grid.Column="2" Margin="56,0,0.8,1" Text="{Binding CountSAAApril}" Grid.ColumnSpan="2"/>
+                    <TextBox  IsReadOnly="True" Grid.Row="5" Grid.Column="3" Margin="0.2,0,0,0" Text="{Binding AckSAAApril}" HorizontalAlignment="Left" Width="59"/>
+                    <TextBox  IsReadOnly="True" x:Name="AntalSOVMaj" Grid.Row="4" Grid.Column="4" Margin="0.2,0,0.8,1" Text="{Binding CountSAAMay}"/>
+                    <TextBox  IsReadOnly="True" Grid.Row="5" Grid.Column="4" Margin="0.2,1,0.8,0" Text="{Binding AckSAAMay}"/>
+                    <TextBox  IsReadOnly="True" x:Name="AntalSOVJuni" Grid.Row="4" Grid.Column="5" Margin="0.2,0,1.2,1" Text="{Binding CountSAAJune}"/>
+                    <TextBox  IsReadOnly="True" Grid.Row="4" Grid.Column="5" Margin="0.2,31,1.2,0" Text="{Binding AckSAAJune}" Grid.RowSpan="2"/>
+                    <TextBox  IsReadOnly="True" x:Name="AntalSOVJuli" Grid.Row="4" Grid.Column="5" Margin="49.2,1,2.8,1" Text="{Binding CountSAAJuly}" Grid.ColumnSpan="2"/>
+                    <TextBox  IsReadOnly="True" Grid.Row="5" Grid.Column="5" Margin="49.2,0,2.8,0" Text="{Binding AckSAAJuly}" Grid.ColumnSpan="2"/>
+                    <TextBox  IsReadOnly="True" x:Name="AntalSOVAug" Grid.Row="4" Grid.Column="7" Margin="0.2,0,0.6,1" Text="{Binding CountSAAAugust}"/>
+                    <TextBox  IsReadOnly="True" Grid.Row="5" Grid.Column="7" Margin="0.2,1,0.6,0" Text="{Binding AckSAAAugust}"/>
+                    <TextBox  IsReadOnly="True" x:Name="AntalSOVSep" Grid.Row="4" Grid.Column="8" Margin="0.4,0,1.4,1" Text="{Binding CountSAASeptember}"/>
+                    <TextBox  IsReadOnly="True" Grid.Row="5" Grid.Column="8" Margin="0.4,0,1.4,0" Text="{Binding AckSAASeptember}"/>
+                    <TextBox  IsReadOnly="True" x:Name="AntalSOVOkt" Grid.Row="3" Grid.Column="8" Margin="60.4,31,1.6,1" Text="{Binding CountSAAOctober}" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+                    <TextBox  IsReadOnly="True" Grid.Row="5" Grid.Column="8" Margin="59.4,0,1.6,0" Text="{Binding AckSAAOctober}" Grid.ColumnSpan="2"/>
+                    <TextBox  IsReadOnly="True" x:Name="AntalSOVNov" Grid.Row="4" Grid.Column="10" Margin="0.4,0,1.6,1" Text="{Binding CountSAANovember}"/>
+                    <TextBox  IsReadOnly="True" Grid.Row="5" Grid.Column="10" Margin="0.4,0,1.6,0" Text="{Binding AckSAANovember}"/>
+                    <TextBox  IsReadOnly="True" x:Name="AntalSOVDec" Grid.Row="3" Grid.Column="11" Margin="0.4,31,1,4" Text="{Binding CountSAADecember}" Grid.RowSpan="2"/>
+                    <TextBox  IsReadOnly="True" Grid.Row="5" Grid.Column="11" Margin="0.4,1,1,0" Text="{Binding AckSAADecember}"/>
                     <TextBox  IsReadOnly="True" x:Name="AntalSOVÅr" Grid.Row="4" Grid.Column="12" Margin="4,10,21,0" Text="{Binding CountSAATotal}"/>
                     <TextBox  IsReadOnly="True" Grid.Row="5" Grid.Column="12" Margin="4,5,21,5" Text="{Binding AckSAATotal}"/>
 
-
-
                     <!--region for LIV vux-->
-                    <TextBox  IsReadOnly="True" x:Name="AntalLivJan" Grid.Row="5" Grid.Column="0" Margin="4,15,21,23" Text="{Binding CountLivJanuary}" Grid.RowSpan="2"/>
-                    <TextBox  IsReadOnly="True" Grid.Row="6" Grid.Column="0" Margin="4,10,21,0" Text="{Binding AckLivJanuary}"/>
-                    <TextBox  IsReadOnly="True" x:Name="AntalLivFeb" Grid.Row="5" Grid.Column="1" Margin="4,15,21,23" Text="{Binding CountLivFebruary}" Grid.RowSpan="2"/>
-                    <TextBox  IsReadOnly="True" Grid.Row="6" Grid.Column="1" Margin="4,10,21,0"  Text="{Binding AckLivFebruary}"/>
-                    <TextBox  IsReadOnly="True" x:Name="AntalLivMars" Grid.Row="5" Grid.Column="2" Margin="4,15,21,23" Text="{Binding CountLivMars}" Grid.RowSpan="2"/>
-                    <TextBox  IsReadOnly="True" Grid.Row="6" Grid.Column="2" Margin="4,10,21,0"  Text="{Binding AckLivMars}"/>
-                    <TextBox  IsReadOnly="True" x:Name="AntalLivApril" Grid.Row="5" Grid.Column="3" Margin="4,15,21,23" Text="{Binding CountLivApril}" Grid.RowSpan="2"/>
-                    <TextBox  IsReadOnly="True" Grid.Row="6" Grid.Column="3" Margin="4,10,21,0"  Text="{Binding AckLivApril}"/>
-                    <TextBox  IsReadOnly="True" x:Name="AntalLivMaj" Grid.Row="5" Grid.Column="4" Margin="4,15,21,23" Text="{Binding CountLivMay}" Grid.RowSpan="2"/>
-                    <TextBox  IsReadOnly="True" Grid.Row="6" Grid.Column="4" Margin="4,10,21,0"  Text="{Binding AckLivMay}"/>
-                    <TextBox  IsReadOnly="True" x:Name="AntalLivJuni" Grid.Row="6" Grid.Column="5" Margin="4,10,21,0" Text="{Binding CountLivJune}"/>
-                    <TextBox   IsReadOnly="True" Grid.Row="7" Grid.Column="5" Margin="4,5,21,5"  Text="{Binding AckLivJune}"/>
-                    <TextBox  IsReadOnly="True" x:Name="AntalLivJuli" Grid.Row="6" Grid.Column="6" Margin="4,10,21,0" Text="{Binding CountLivJuly}"/>
-                    <TextBox  IsReadOnly="True" Grid.Row="7" Grid.Column="6" Margin="4,5,21,5"  Text="{Binding AckLivJuly}"/>
-                    <TextBox  IsReadOnly="True" x:Name="AntalLivAug" Grid.Row="6" Grid.Column="7" Margin="4,10,21,0" Text="{Binding CountLivAugust}"/>
-                    <TextBox  IsReadOnly="True" Grid.Row="7" Grid.Column="7" Margin="4,5,21,5"  Text="{Binding AckLivAugust}"/>
-                    <TextBox  IsReadOnly="True" x:Name="AntalLivSep" Grid.Row="6" Grid.Column="8" Margin="4,10,21,0" Text="{Binding CountLivSeptember}"/>
-                    <TextBox  IsReadOnly="True" Grid.Row="7" Grid.Column="8" Margin="4,5,21,5"  Text="{Binding AckLivSeptember}"/>
-                    <TextBox  IsReadOnly="True" x:Name="AntalLivOkt" Grid.Row="6" Grid.Column="9" Margin="4,10,21,0" Text="{Binding CountLivOctober}"/>
-                    <TextBox  IsReadOnly="True" Grid.Row="7" Grid.Column="9" Margin="4,5,21,5"  Text="{Binding AckLivOctober}"/>
-                    <TextBox  IsReadOnly="True" x:Name="AntalLivNov" Grid.Row="6" Grid.Column="10" Margin="4,10,21,0" Text="{Binding CountLivNovember}"/>
-                    <TextBox  IsReadOnly="True" Grid.Row="7" Grid.Column="10" Margin="4,5,21,5"  Text="{Binding AckLivNovember}"/>
-                    <TextBox  IsReadOnly="True" x:Name="AntalLivDec" Grid.Row="6" Grid.Column="11" Margin="4,10,21,0" Text="{Binding CountLivDecember}"/>
-                    <TextBox  IsReadOnly="True" Grid.Row="7" Grid.Column="11" Margin="4,5,21,5"  Text="{Binding AckLivDecember}"/>
+                    <TextBox  IsReadOnly="True" x:Name="AntalLivJan" Grid.Row="6" Grid.Column="0" Margin="0,0,1.2,0" Text="{Binding CountLivJanuary}"/>
+                    <TextBox  IsReadOnly="True" Grid.Row="7" Grid.Column="0" Margin="0,0,0.2,1" Text="{Binding AckLivJanuary}"/>
+                    <TextBox  IsReadOnly="True" x:Name="AntalLivFeb" Grid.Row="6" Margin="46,0,1,0" Text="{Binding CountLivFebruary}" Grid.ColumnSpan="2"/>
+                    <TextBox  IsReadOnly="True" Grid.Row="7" Margin="47,0,1,1"  Text="{Binding AckLivFebruary}" Grid.ColumnSpan="2"/>
+                    <TextBox  IsReadOnly="True" x:Name="AntalLivMars" Grid.Row="6" Grid.Column="1" Margin="47.8,0,0.8,0" Text="{Binding CountLivMars}" Grid.ColumnSpan="2"/>
+                    <TextBox  IsReadOnly="True" Grid.Row="7" Grid.Column="2" Margin="0,0,0.8,1"  Text="{Binding AckLivMars}"/>
+                    <TextBox  IsReadOnly="True" x:Name="AntalLivApril" Grid.Row="6" Grid.Column="3" Margin="0.2,0,0.8,0" Text="{Binding CountLivApril}"/>
+                    <TextBox  IsReadOnly="True" Grid.Row="7" Grid.Column="3" Margin="0.2,0,55.8,1"  Text="{Binding AckLivApril}" Grid.ColumnSpan="2"/>
+                    <TextBox  IsReadOnly="True" x:Name="AntalLivMaj" Grid.Row="6" Grid.Column="3" Margin="59.2,1,0.8,0" Text="{Binding CountLivMay}" Grid.ColumnSpan="2"/>
+                    <TextBox  IsReadOnly="True" Grid.Row="7" Grid.Column="4" Margin="0.2,0,0.8,1"  Text="{Binding AckLivMay}"/>
+                    <TextBox  IsReadOnly="True" x:Name="AntalLivJuni" Grid.Row="6" Grid.Column="5" Margin="0.2,1,1.2,0" Text="{Binding CountLivJune}"/>
+                    <TextBox   IsReadOnly="True" Grid.Row="7" Grid.Column="5" Margin="0.2,0,1.2,1"  Text="{Binding AckLivJune}"/>
+                    <TextBox  IsReadOnly="True" x:Name="AntalLivJuli" Grid.Row="6" Grid.Column="5" Margin="49.2,1,2.8,0" Text="{Binding CountLivJuly}" Grid.ColumnSpan="2"/>
+                    <TextBox  IsReadOnly="True" Grid.Row="7" Grid.Column="5" Margin="49.2,0,2.8,1"  Text="{Binding AckLivJuly}" Grid.ColumnSpan="2"/>
+                    <TextBox  IsReadOnly="True" x:Name="AntalLivAug" Grid.Row="6" Grid.Column="7" Margin="0.2,1,0.6,0" Text="{Binding CountLivAugust}"/>
+                    <TextBox  IsReadOnly="True" Grid.Row="7" Grid.Column="7" Margin="0.2,0,0.6,1"  Text="{Binding AckLivAugust}"/>
+                    <TextBox  IsReadOnly="True" x:Name="AntalLivSep" Grid.Row="6" Grid.Column="8" Margin="0.4,0,1.4,0" Text="{Binding CountLivSeptember}"/>
+                    <TextBox  IsReadOnly="True" Grid.Row="7" Grid.Column="8" Margin="0.4,0,1.4,1"  Text="{Binding AckLivSeptember}"/>
+                    <TextBox  IsReadOnly="True" x:Name="AntalLivOkt" Grid.Row="6" Grid.Column="8" Margin="60.4,1,1.6,0" Text="{Binding CountLivOctober}" Grid.ColumnSpan="2"/>
+                    <TextBox  IsReadOnly="True" Grid.Row="7" Grid.Column="8" Margin="59.4,0,1.6,1"  Text="{Binding AckLivOctober}" Grid.ColumnSpan="2"/>
+                    <TextBox  IsReadOnly="True" x:Name="AntalLivNov" Grid.Row="6" Grid.Column="9" Margin="57.6,1,0.6,0" Text="{Binding CountLivNovember}" Grid.ColumnSpan="2"/>
+                    <TextBox  IsReadOnly="True" Grid.Row="7" Grid.Column="9" Margin="57.6,0,0.6,1"  Text="{Binding AckLivNovember}" Grid.ColumnSpan="2"/>
+                    <TextBox  IsReadOnly="True" x:Name="AntalLivDec" Grid.Row="6" Grid.Column="11" Margin="0.4,0,1,0" Text="{Binding CountLivDecember}"/>
+                    <TextBox  IsReadOnly="True" Grid.Row="7" Grid.Column="11" Margin="0.4,0,0,1"  Text="{Binding AckLivDecember}" HorizontalAlignment="Left" Width="61"/>
                     <TextBox  IsReadOnly="True" x:Name="AntalLivÅr" Grid.Row="6" Grid.Column="12" Margin="4,10,21,0" Text="{Binding CountLivTotal}"/>
                     <TextBox  IsReadOnly="True" Grid.Row="7" Grid.Column="12" Margin="4,5,21,5"  Text="{Binding AckLivTotal}"/>
 
 
                     <!--region for ÖFP vux-->
-                    <TextBox  IsReadOnly="True" x:Name="AntalÖFPJan" Grid.Row="7" Grid.Column="0" Margin="4,5,21,10" Text="{Binding CountOPJanuary}"/>
-                    <TextBox  IsReadOnly="True" Grid.Row="7" Grid.Column="0" Margin="4,28,21,15" Text="{Binding AckOPJanuary}" Grid.RowSpan="2"/>
-                    <TextBox  IsReadOnly="True" x:Name="AntalÖFPFeb" Grid.Row="7" Grid.Column="1" Margin="4,5,21,10" Text="{Binding CountOPFebruary}"/>
-                    <TextBox  IsReadOnly="True" Grid.Row="7" Grid.Column="1" Margin="4,28,21,15" Text="{Binding AckOPFebruary}" Grid.RowSpan="2"/>
-                    <TextBox  IsReadOnly="True" x:Name="AntalÖFPMArs" Grid.Row="7" Grid.Column="2" Margin="4,5,21,10" Text="{Binding CountOPMars}"/>
-                    <TextBox  IsReadOnly="True" Grid.Row="7" Grid.Column="2" Margin="4,28,21,15" Text="{Binding AckOPMars}" Grid.RowSpan="2"/>
-                    <TextBox  IsReadOnly="True" x:Name="AntalÖFPApril" Grid.Row="7" Grid.Column="3" Margin="4,5,21,10" Text="{Binding CountOPApril}"/>
-                    <TextBox  IsReadOnly="True" Grid.Row="7" Grid.Column="3" Margin="4,28,21,15" Text="{Binding AckOPApril}" Grid.RowSpan="2"/>
-                    <TextBox  IsReadOnly="True" x:Name="AntalÖFPMaj" Grid.Row="7" Grid.Column="4" Margin="4,10,21,5" Text="{Binding CountOPMay}"/>
-                    <TextBox  IsReadOnly="True" Grid.Row="8" Grid.Column="4" Margin="4,0,21,10" Text="{Binding AckOPMay}"/>
-                    <TextBox  IsReadOnly="True" x:Name="AntalÖFPJuni" Grid.Row="8" Grid.Column="5" Margin="4,10,21,0" Text="{Binding CountOPJune}"/>
-                    <TextBox  IsReadOnly="True" Grid.Row="9" Grid.Column="5" Margin="4,5,21,5" Text="{Binding AckOPJune}"/>
-                    <TextBox  IsReadOnly="True" x:Name="AntalÖFPJuli" Grid.Row="8" Grid.Column="6" Margin="4,10,21,0" Text="{Binding CountOPJuly}"/>
-                    <TextBox  IsReadOnly="True" Grid.Row="9" Grid.Column="6" Margin="4,5,21,5" Text="{Binding AckOPJuly}"/>
-                    <TextBox  IsReadOnly="True" x:Name="AntalÖFPAug" Grid.Row="8" Grid.Column="7" Margin="4,10,21,0" Text="{Binding CountOPAugust}"/>
-                    <TextBox  IsReadOnly="True" Grid.Row="9" Grid.Column="7" Margin="4,5,21,5" Text="{Binding AckOPAugust}"/>
-                    <TextBox  IsReadOnly="True" x:Name="AntalÖFPSep" Grid.Row="8" Grid.Column="8" Margin="4,10,21,0" Text="{Binding CountOPSeptember}"/>
-                    <TextBox  IsReadOnly="True" Grid.Row="9" Grid.Column="8" Margin="4,5,21,5" Text="{Binding AckOPSeptember}"/>
-                    <TextBox  IsReadOnly="True" x:Name="AntalÖFPOkt" Grid.Row="8" Grid.Column="9" Margin="4,10,21,0" Text="{Binding CountOPOctober}"/>
-                    <TextBox  IsReadOnly="True" Grid.Row="9" Grid.Column="9" Margin="4,5,21,5" Text="{Binding AckOPOctober}"/>
-                    <TextBox  IsReadOnly="True" x:Name="AntalÖFPNov" Grid.Row="8" Grid.Column="10" Margin="4,10,21,0" Text="{Binding CountOPNovember}"/>
-                    <TextBox  IsReadOnly="True" Grid.Row="9" Grid.Column="10" Margin="4,5,21,5" Text="{Binding AckOPNovember}"/>
-                    <TextBox  IsReadOnly="True" x:Name="AntalÖFPDec" Grid.Row="8" Grid.Column="11" Margin="4,10,21,0" Text="{Binding CountOPDecember}"/>
-                    <TextBox  IsReadOnly="True" Grid.Row="9" Grid.Column="11" Margin="4,5,21,5" Text="{Binding AckOPDecember}"/>
+                    <TextBox  IsReadOnly="True" x:Name="AntalÖFPJan" Grid.Row="8" Grid.Column="0" Margin="0,4.4,1.2,0.6" Text="{Binding CountOPJanuary}"/>
+                    <TextBox  IsReadOnly="True" Grid.Row="9" Grid.Column="0" Margin="3,4,1.2,3" Text="{Binding AckOPJanuary}"/>
+                    <TextBox  IsReadOnly="True" x:Name="AntalÖFPFeb" Grid.Row="8" Margin="47,4.4,0,0.6" Text="{Binding CountOPFebruary}" Grid.ColumnSpan="2"/>
+                    <TextBox  IsReadOnly="True" Grid.Row="9" Margin="2.8,4,1,3" Text="{Binding AckOPFebruary}" Grid.Column="1"/>
+                    <TextBox  IsReadOnly="True" x:Name="AntalÖFPMArs" Grid.Row="8" Grid.Column="2" Margin="0,4.4,0.8,0.6" Text="{Binding CountOPMars}"/>
+                    <TextBox  IsReadOnly="True" Grid.Row="9" Grid.Column="2" Margin="4,4.92,0.8,4.08" Text="{Binding AckOPMars}"/>
+                    <TextBox  IsReadOnly="True" x:Name="AntalÖFPApril" Grid.Row="8" Grid.Column="2" Margin="56,4.4,0.8,0.6" Text="{Binding CountOPApril}" Grid.ColumnSpan="2"/>
+                    <TextBox  IsReadOnly="True" Grid.Row="9" Grid.Column="3" Margin="0.2,4,0.8,5" Text="{Binding AckOPApril}"/>
+                    <TextBox  IsReadOnly="True" x:Name="AntalÖFPMaj" Grid.Row="8" Grid.Column="4" Margin="0.2,4.4,0.8,0.6" Text="{Binding CountOPMay}"/>
+                    <TextBox  IsReadOnly="True" Grid.Row="9" Grid.Column="4" Margin="0.2,4.4,0.8,5.6" Text="{Binding AckOPMay}"/>
+                    <TextBox  IsReadOnly="True" x:Name="AntalÖFPJuni" Grid.Row="8" Grid.Column="5" Margin="0.2,4.4,1.2,0.6" Text="{Binding CountOPJune}"/>
+                    <TextBox  IsReadOnly="True" Grid.Row="9" Grid.Column="5" Margin="0.2,4.4,1.2,5.6" Text="{Binding AckOPJune}"/>
+                    <TextBox  IsReadOnly="True" x:Name="AntalÖFPJuli" Grid.Row="8" Grid.Column="5" Margin="50.2,4.4,0.8,0.6" Text="{Binding CountOPJuly}" Grid.ColumnSpan="2"/>
+                    <TextBox  IsReadOnly="True" Grid.Row="9" Grid.Column="5" Margin="49.2,4.4,0.8,5.6" Text="{Binding AckOPJuly}" Grid.ColumnSpan="2"/>
+                    <TextBox  IsReadOnly="True" x:Name="AntalÖFPAug" Grid.Row="8" Grid.Column="7" Margin="0.2,4.4,0.6,0.6" Text="{Binding CountOPAugust}"/>
+                    <TextBox  IsReadOnly="True" Grid.Row="9" Grid.Column="7" Margin="2.2,4.4,0.6,5.6" Text="{Binding AckOPAugust}"/>
+                    <TextBox  IsReadOnly="True" x:Name="AntalÖFPSep" Grid.Row="8" Grid.Column="8" Margin="0.4,5.4,1.4,0.6" Text="{Binding CountOPSeptember}"/>
+                    <TextBox  IsReadOnly="True" Grid.Row="9" Grid.Column="8" Margin="3.4,4.4,1.4,5.6" Text="{Binding AckOPSeptember}"/>
+                    <TextBox  IsReadOnly="True" x:Name="AntalÖFPOkt" Grid.Row="8" Grid.Column="9" Margin="3.6,4.4,0.6,0.6" Text="{Binding CountOPOctober}"/>
+                    <TextBox  IsReadOnly="True" Grid.Row="9" Grid.Column="9" Margin="3.6,4.4,0.6,5.6" Text="{Binding AckOPOctober}"/>
+                    <TextBox  IsReadOnly="True" x:Name="AntalÖFPNov" Grid.Row="8" Grid.Column="10" Margin="0.4,4.4,0.6,0.6" Text="{Binding CountOPNovember}"/>
+                    <TextBox  IsReadOnly="True" Grid.Row="9" Grid.Column="10" Margin="3.4,4.4,0.6,5.6" Text="{Binding AckOPNovember}"/>
+                    <TextBox  IsReadOnly="True" x:Name="AntalÖFPDec" Grid.Row="8" Grid.Column="11" Margin="3.4,4,10,1" Text="{Binding CountOPDecember}"/>
+                    <TextBox  IsReadOnly="True" Grid.Row="9" Grid.Column="11" Margin="3.4,4.4,1,5.6" Text="{Binding AckOPDecember}"/>
                     <TextBox  IsReadOnly="True" x:Name="AntalÖFPÅr" Grid.Row="8" Grid.Column="12" Margin="4,10,21,0" Text="{Binding CountOPTotal}"/>
-                    <TextBox  IsReadOnly="True" Grid.Row="9" Grid.Column="12" Margin="4,5,21,5" Text="{Binding AckOPTotal}"/>
+                    <TextBox  IsReadOnly="True" Grid.Row="9" Grid.Column="12" Margin="3.4,4.4,1,5.6" Text="{Binding AckOPTotal}"/>
 
 
                     <!--region for FöretagsFörsäkring-->
-                    <TextBox x:Name="FöretagJan" Grid.Row="8" Grid.Column="0" Margin="4,23,21,15" Text="{Binding CountCIJanuary}"  IsReadOnly="True" Grid.RowSpan="2"/>
-                    <TextBox Grid.Row="11" Grid.Column="0" Margin="4,5,21,5" Text="{Binding AckCIJanuary}"  IsReadOnly="True"/>
-                    <TextBox x:Name="FöretagFeb" Grid.Row="8" Grid.Column="1" Margin="4,23,21,15" Text="{Binding CountCIFebruary}"  IsReadOnly="True" Grid.RowSpan="2"/>
-                    <TextBox Grid.Row="11" Grid.Column="1" Margin="4,5,21,5" Text="{Binding AckCIFebruary}"  IsReadOnly="True"/>
-                    <TextBox x:Name="FöretagMars" Grid.Row="8" Grid.Column="2" Margin="4,23,21,15" Text="{Binding CountCIMars}"  IsReadOnly="True" Grid.RowSpan="2"/>
-                    <TextBox Grid.Row="11" Grid.Column="2" Margin="4,5,21,5" Text="{Binding AckCIMars}"  IsReadOnly="True"/>
-                    <TextBox x:Name="FöretagApril" Grid.Row="8" Grid.Column="3" Margin="4,23,21,15" Text="{Binding CountCIApril}"  IsReadOnly="True" Grid.RowSpan="2"/>
-                    <TextBox Grid.Row="11" Grid.Column="3" Margin="4,5,21,5" Text="{Binding AckCIApril}"  IsReadOnly="True"/>
-                    <TextBox x:Name="FöretagMaj" Grid.Row="8" Grid.Column="4" Margin="4,23,21,15" Text="{Binding CountCIMay}"  IsReadOnly="True" Grid.RowSpan="2"/>
-                    <TextBox Grid.Row="11" Grid.Column="4" Margin="4,5,21,5" Text="{Binding AckCIMay}"  IsReadOnly="True"/>
-                    <TextBox x:Name="FöretagJuni" Grid.Row="10" Grid.Column="5" Margin="4,10,21,0" Text="{Binding CountCIJune}"  IsReadOnly="True"/>
-                    <TextBox Grid.Row="11" Grid.Column="5" Margin="4,5,21,5" Text="{Binding AckCIJune}"  IsReadOnly="True"/>
-                    <TextBox x:Name="FöretagJuli" Grid.Row="10" Grid.Column="6" Margin="4,10,21,0" Text="{Binding CountCIJuly}"  IsReadOnly="True"/>
-                    <TextBox Grid.Row="11" Grid.Column="6" Margin="4,5,21,5" Text="{Binding AckCIJuly}"  IsReadOnly="True"/>
-                    <TextBox x:Name="FöretagAug" Grid.Row="10" Grid.Column="7" Margin="4,10,21,0" Text="{Binding CountCIAugust}"  IsReadOnly="True"/>
-                    <TextBox Grid.Row="11" Grid.Column="7" Margin="4,5,21,5" Text="{Binding AckCIAugust}"  IsReadOnly="True"/>
-                    <TextBox x:Name="FöretagSep" Grid.Row="10" Grid.Column="8" Margin="4,10,21,0" Text="{Binding CountCISeptember}" IsReadOnly="True" />
-                    <TextBox Grid.Row="11" Grid.Column="8" Margin="4,5,21,5" Text="{Binding AckCISeptember}"  IsReadOnly="True"/>
-                    <TextBox x:Name="FöretagOkt" Grid.Row="10" Grid.Column="9" Margin="4,10,21,0" Text="{Binding CountCIOctober}"  IsReadOnly="True"/>
-                    <TextBox Grid.Row="11" Grid.Column="9" Margin="4,5,21,5" Text="{Binding AckCIOctober}"  IsReadOnly="True"/>
-                    <TextBox x:Name="FöretagNov" Grid.Row="10" Grid.Column="10" Margin="4,10,21,0" Text="{Binding CountCINovember}"  IsReadOnly="True"/>
-                    <TextBox Grid.Row="11" Grid.Column="10" Margin="4,5,21,5" Text="{Binding AckCINovember}"  IsReadOnly="True"/>
-                    <TextBox x:Name="FöretagDec" Grid.Row="10" Grid.Column="11" Margin="4,10,21,0" Text="{Binding CountCIDecember}"  IsReadOnly="True"/>
-                    <TextBox Grid.Row="11" Grid.Column="11" Margin="4,5,21,5" Text="{Binding AckCIDecember}"  IsReadOnly="True"/>
-                    <TextBox x:Name="FöretagÅr" Grid.Row="10" Grid.Column="12" Margin="4,10,21,0" Text="{Binding CountCITotal}"  IsReadOnly="True"/>
-                    <TextBox Grid.Row="11" Grid.Column="12" Margin="4,5,21,5" Text="{Binding AckCITotal}"  IsReadOnly="True"/>
+                    <TextBox x:Name="FöretagJan" Grid.Row="10" Grid.Column="0" Margin="4,4.4,1.2,1.6" Text="{Binding CountCIJanuary}"  IsReadOnly="True"/>
+                    <TextBox Grid.Row="11" Grid.Column="0" Margin="3,0,1.2,0" Text="{Binding AckCIJanuary}"  IsReadOnly="True"/>
+                    <TextBox x:Name="FöretagFeb" Grid.Row="10" Grid.Column="1" Margin="3.8,4.4,1,1.6" Text="{Binding CountCIFebruary}"  IsReadOnly="True"/>
+                    <TextBox Grid.Row="10" Margin="47,31.4,2,31.6" Text="{Binding AckCIFebruary}"  IsReadOnly="True" Grid.ColumnSpan="2" Grid.RowSpan="3"/>
+                    <TextBox x:Name="FöretagMars" Grid.Row="10" Grid.Column="2" Margin="3,4.4,0.8,1.6" Text="{Binding CountCIMars}"  IsReadOnly="True"/>
+                    <TextBox Grid.Row="10" Grid.Column="2" Margin="0,31.4,3.8,31.6" Text="{Binding AckCIMars}"  IsReadOnly="True" Grid.RowSpan="3"/>
+                    <TextBox x:Name="FöretagApril" Grid.Row="10" Grid.Column="3" Margin="3.2,4.4,0.8,1.6" Text="{Binding CountCIApril}"  IsReadOnly="True"/>
+                    <TextBox Grid.Row="10" Grid.Column="3" Margin="0.2,31.4,4.8,31.6" Text="{Binding AckCIApril}"  IsReadOnly="True" Grid.RowSpan="3"/>
+                    <TextBox x:Name="FöretagMaj" Grid.Row="10" Grid.Column="4" Margin="4.2,4.4,0.8,1.6" Text="{Binding CountCIMay}"  IsReadOnly="True"/>
+                    <TextBox Grid.Row="10" Grid.Column="4" Margin="0.2,31.4,4.8,4.6" Text="{Binding AckCIMay}"  IsReadOnly="True" Grid.RowSpan="2"/>
+                    <TextBox x:Name="FöretagJuni" Grid.Row="10" Grid.Column="5" Margin="0.2,4.4,1.2,1.6" Text="{Binding CountCIJune}"  IsReadOnly="True"/>
+                    <TextBox Grid.Row="10" Grid.Column="5" Margin="0.2,31.4,4.2,5.6" Text="{Binding AckCIJune}"  IsReadOnly="True" Grid.RowSpan="2"/>
+                    <TextBox x:Name="FöretagJuli" Grid.Row="10" Grid.Column="5" Margin="50.2,4.4,0.8,1.6" Text="{Binding CountCIJuly}"  IsReadOnly="True" Grid.ColumnSpan="2"/>
+                    <TextBox Grid.Row="10" Grid.Column="6" Margin="1.8,31.4,2.8,4.6" Text="{Binding AckCIJuly}"  IsReadOnly="True" Grid.RowSpan="2"/>
+                    <TextBox x:Name="FöretagAug" Grid.Row="10" Grid.Column="7" Margin="2.2,4.4,0.6,1.6" Text="{Binding CountCIAugust}"  IsReadOnly="True"/>
+                    <TextBox Grid.Row="10" Grid.Column="7" Margin="2.2,31.4,2.6,4.6" Text="{Binding AckCIAugust}"  IsReadOnly="True" Grid.RowSpan="2"/>
+                    <TextBox x:Name="FöretagSep" Grid.Row="10" Grid.Column="8" Margin="0.4,4.4,1.4,1.6" Text="{Binding CountCISeptember}" IsReadOnly="True" />
+                    <TextBox Grid.Row="10" Grid.Column="8" Margin="0.4,31.4,5.4,4.6" Text="{Binding AckCISeptember}"  IsReadOnly="True" Grid.RowSpan="2"/>
+                    <TextBox x:Name="FöretagOkt" Grid.Row="10" Grid.Column="9" Margin="3.6,4.4,0.6,1.6" Text="{Binding CountCIOctober}"  IsReadOnly="True"/>
+                    <TextBox Grid.Row="11" Grid.Column="9" Margin="3.6,4.4,0.6,5.6" Text="{Binding AckCIOctober}"  IsReadOnly="True"/>
+                    <TextBox x:Name="FöretagNov" Grid.Row="10" Grid.Column="10" Margin="4.4,4.4,0.6,1.6" Text="{Binding CountCINovember}"  IsReadOnly="True"/>
+                    <TextBox Grid.Row="11" Grid.Column="10" Margin="4.4,4.4,0.6,5.6" Text="{Binding AckCINovember}"  IsReadOnly="True"/>
+                    <TextBox x:Name="FöretagDec" Grid.Row="10" Grid.Column="11" Margin="4.4,4.4,1,1.6" Text="{Binding CountCIDecember}"  IsReadOnly="True"/>
+                    <TextBox Grid.Row="11" Grid.Column="11" Margin="4.4,4.4,1,5.6" Text="{Binding AckCIDecember}"  IsReadOnly="True"/>
+                    <TextBox x:Name="FöretagÅr" Grid.Row="10" Grid.Column="12" Margin="4.4,4.4,0.6,5.6" Text="{Binding CountCITotal}"  IsReadOnly="True"/>
+                    <TextBox Grid.Row="11" Grid.Column="12" Margin="4.4,4.4,0.6,5.6" Text="{Binding AckCITotal}"  IsReadOnly="True"/>
 
                     <!--region for ALLA-->
-                    <TextBox x:Name="ALLAJan" Grid.Row="12" Grid.Column="0" Margin="4,10,21,0" Text="{Binding CountJanuary}"  IsReadOnly="True"/>
-                    <TextBox Grid.Row="13" Grid.Column="0" Margin="4,5,21,5" Text="{Binding AckJanuary}"  IsReadOnly="True"/>
-                    <TextBox x:Name="ALLAFeb" Grid.Row="12" Grid.Column="1" Margin="4,10,21,0" Text="{Binding CountJanuary}"  IsReadOnly="True"/>
-                    <TextBox Grid.Row="13" Grid.Column="1" Margin="4,5,21,5" Text="{Binding AckFebruary}"  IsReadOnly="True"/>
-                    <TextBox x:Name="ALLAMars" Grid.Row="12" Grid.Column="2" Margin="4,10,21,0" Text="{Binding CountJanuary}"  IsReadOnly="True"/>
-                    <TextBox Grid.Row="13" Grid.Column="2" Margin="4,5,21,5" Text="{Binding AckMars}"  IsReadOnly="True"/>
-                    <TextBox x:Name="ALLAApril" Grid.Row="12" Grid.Column="3" Margin="4,10,21,0" Text="{Binding CountJanuary}"  IsReadOnly="True"/>
-                    <TextBox Grid.Row="13" Grid.Column="3" Margin="4,5,21,5" Text="{Binding AckApril}"  IsReadOnly="True"/>
-                    <TextBox x:Name="ALLAMaj" Grid.Row="12" Grid.Column="4" Margin="4,10,21,0" Text="{Binding CountJanuary}"  IsReadOnly="True"/>
-                    <TextBox Grid.Row="13" Grid.Column="4" Margin="4,5,21,5" Text="{Binding AckMay}"  IsReadOnly="True"/>
-                    <TextBox x:Name="ALLAJuni" Grid.Row="12" Grid.Column="5" Margin="4,10,21,0" Text="{Binding CountJanuary}"  IsReadOnly="True"/>
-                    <TextBox Grid.Row="13" Grid.Column="5" Margin="4,5,21,5" Text="{Binding AckJune}"  IsReadOnly="True"/>
-                    <TextBox x:Name="ALLAJuli" Grid.Row="12" Grid.Column="6" Margin="4,10,21,0" Text="{Binding CountJanuary}"  IsReadOnly="True"/>
-                    <TextBox Grid.Row="13" Grid.Column="6" Margin="4,5,21,5" Text="{Binding AckJuly}"  IsReadOnly="True"/>
-                    <TextBox x:Name="ALLAAug" Grid.Row="12" Grid.Column="7" Margin="4,10,21,0" Text="{Binding CountJanuary}"  IsReadOnly="True"/>
-                    <TextBox Grid.Row="13" Grid.Column="7" Margin="4,5,21,5" Text="{Binding AckAugust}"  IsReadOnly="True"/>
-                    <TextBox x:Name="ALLASep" Grid.Row="12" Grid.Column="8" Margin="4,10,21,0" Text="{Binding CountJanuary}"  IsReadOnly="True"/>
-                    <TextBox Grid.Row="13" Grid.Column="8" Margin="4,5,21,5" Text="{Binding AckSeptember}"  IsReadOnly="True"/>
-                    <TextBox x:Name="ALLAOkt" Grid.Row="12" Grid.Column="9" Margin="4,10,21,0" Text="{Binding CountJanuary}"  IsReadOnly="True"/>
-                    <TextBox Grid.Row="13" Grid.Column="9" Margin="4,5,21,5" Text="{Binding AckOctober}"  IsReadOnly="True"/>
-                    <TextBox x:Name="ALLANov" Grid.Row="12" Grid.Column="10"  IsReadOnly="True" Margin="4,10,21,0" Text="{Binding CountJanuary}"/>
-                    <TextBox Grid.Row="13" Grid.Column="10" Margin="4,5,21,5"  IsReadOnly="True" Text="{Binding AckNovember}"/>
-                    <TextBox x:Name="ALLADec" Grid.Row="12"  IsReadOnly="True" Grid.Column="11" Margin="4,10,21,0" Text="{Binding CountJanuary}"/>
-                    <TextBox Grid.Row="13"  IsReadOnly="True" Grid.Column="11" Margin="4,5,21,5" Text="{Binding AckDecember}"/>
-                    <TextBox  IsReadOnly="True" x:Name="ALLAÅr" Grid.Row="12" Grid.Column="12" Margin="4,10,21,0" Text="{Binding CountJanuary}"/>
-                    <TextBox  IsReadOnly="True" Grid.Row="13" Grid.Column="12" Margin="4,5,21,5" Text="{Binding AckTotalM}"/>
+                    <TextBox x:Name="ALLAJan" Grid.Row="12" Grid.Column="0" Margin="0,0.4,1.2,0.6" Text="{Binding CountJanuary}"  IsReadOnly="True"/>
+                    <TextBox Grid.Row="12" Grid.Column="0" Margin="0,31.4,1.2,5.6" Text="{Binding AckJanuary}"  IsReadOnly="True" Grid.RowSpan="2"/>
+                    <TextBox x:Name="ALLAFeb" Grid.Row="12" Margin="47,0.4,2,0.6" Text="{Binding CountFebruary}"  IsReadOnly="True" Grid.ColumnSpan="2"/>
+                    <TextBox Grid.Row="12" Margin="47,31.4,2,5.6" Text="{Binding AckFebruary}"  IsReadOnly="True" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+                    <TextBox x:Name="ALLAMars" Grid.Row="12" Grid.Column="2" Margin="0,0.4,0.8,0.6" Text="{Binding CountMars}"  IsReadOnly="True"/>
+                    <TextBox Grid.Row="12" Grid.Column="2" Margin="0,31.4,4.8,5.6" Text="{Binding AckMars}"  IsReadOnly="True" Grid.RowSpan="2"/>
+                    <TextBox x:Name="ALLAApril" Grid.Row="12" Grid.Column="2" Margin="56,0.4,0.8,0.6" Text="{Binding CountApril}"  IsReadOnly="True" Grid.ColumnSpan="2"/>
+                    <TextBox Grid.Row="12" Grid.Column="3" Margin="3.2,31.4,1.8,5.6" Text="{Binding AckApril}"  IsReadOnly="True" Grid.RowSpan="2"/>
+                    <TextBox x:Name="ALLAMaj" Grid.Row="12" Grid.Column="3" Margin="59.2,0.4,0.8,0.6" Text="{Binding CountMay}"  IsReadOnly="True" Grid.ColumnSpan="2"/>
+                    <TextBox Grid.Row="12" Grid.Column="4" Margin="0.2,31.4,4.8,5.6" Text="{Binding AckMay}"  IsReadOnly="True" Grid.RowSpan="2"/>
+                    <TextBox x:Name="ALLAJuni" Grid.Row="12" Grid.Column="5" Margin="0.2,0.4,1.2,0.6" Text="{Binding CountJune}"  IsReadOnly="True"/>
+                    <TextBox Grid.Row="12" Grid.Column="5" Margin="0.2,31.4,1.2,0.6" Text="{Binding AckJune}"  IsReadOnly="True" RenderTransformOrigin="0.37,0.218" Grid.RowSpan="2"/>
+                    <TextBox x:Name="ALLAJuli" Grid.Row="12" Grid.Column="6" Margin="1.8,0.4,2.8,0.6" Text="{Binding CountJuly}"  IsReadOnly="True"/>
+                    <TextBox Grid.Row="12" Grid.Column="5" Margin="50.2,31.4,4.8,0.6" Text="{Binding AckJuly}"  IsReadOnly="True" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+                    <TextBox x:Name="ALLAAug" Grid.Row="12" Grid.Column="7" Margin="2.2,0.4,2.6,0.6" Text="{Binding CountAugust}"  IsReadOnly="True"/>
+                    <TextBox Grid.Row="12" Grid.Column="7" Margin="0.2,31.4,4.6,0.6" Text="{Binding AckAugust}"  IsReadOnly="True" Grid.RowSpan="2"/>
+                    <TextBox x:Name="ALLASep" Grid.Row="12" Grid.Column="8" Margin="0.4,0.4,1.4,0.6" Text="{Binding CountSeptember}"  IsReadOnly="True"/>
+                    <TextBox Grid.Row="12" Grid.Column="8" Margin="3.4,31.4,2.4,5.6" Text="{Binding AckSeptember}"  IsReadOnly="True" Grid.RowSpan="2"/>
+                    <TextBox x:Name="ALLAOkt" Grid.Row="12" Grid.Column="8" Margin="60.4,0.4,1.6,0.6" Text="{Binding CountOctober}"  IsReadOnly="True" Grid.ColumnSpan="2"/>
+                    <TextBox Grid.Row="12" Grid.Column="8" Margin="60.4,31.4,4.6,5.6" Text="{Binding AckOctober}"  IsReadOnly="True" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+                    <TextBox x:Name="ALLANov" Grid.Row="12" Grid.Column="10"  IsReadOnly="True" Margin="0.4,0.4,4.6,0.6" Text="{Binding CountNovember}"/>
+                    <TextBox Grid.Row="12" Grid.Column="10" Margin="0.4,31.4,4.6,5.6"  IsReadOnly="True" Text="{Binding AckNovember}" Grid.RowSpan="2"/>
+                    <TextBox x:Name="ALLADec" Grid.Row="12"  IsReadOnly="True" Grid.Column="11" Margin="0.4,0.4,5,0.6" Text="{Binding CountDecember}"/>
+                    <TextBox Grid.Row="12"  IsReadOnly="True" Grid.Column="11" Margin="0.4,31.4,5,5.6" Text="{Binding AckDecember}" Grid.RowSpan="2"/>
+                    <TextBox  IsReadOnly="True" x:Name="ALLAÅr" Grid.Row="12" Grid.Column="12" Margin="3.6,9.4,0.6,0.6" Text="{Binding CountTotalM}"/>
+                    <TextBox  IsReadOnly="True" Grid.Row="13" Grid.Column="12" Margin="3.6,9.4,0.6,0.6" Text="{Binding AckTotalM}"/>
 
                 </Grid>
             </ScrollViewer>

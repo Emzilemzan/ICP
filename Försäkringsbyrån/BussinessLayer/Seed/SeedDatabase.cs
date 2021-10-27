@@ -21,7 +21,6 @@ namespace BussinessLayer.Seed
             CreateLifeInsurance();
             GenerateSM();
             GenerateUA();
-            CreateVP();
             GenerateBA();
             GenerateBAT();
             GenerateAV();
@@ -29,7 +28,7 @@ namespace BussinessLayer.Seed
             GenerateCompanyTaker();
             GenerateInsuredPerson();
             GenerateInsurances();
-            CreateCommissionShare();
+
         }
 
         private void GenerateSM()
@@ -364,54 +363,6 @@ namespace BussinessLayer.Seed
                 }
             }
         }
-
-        private void CreateVP()
-        {
-
-            List<VacationPay> VList = new List<VacationPay>
-            {
-                new VacationPay {SEId = 1, AdditionalPercentage = 12, Year= 2021}
-            };
-
-            List<VacationPay> NewVList = new List<VacationPay>();
-
-            foreach (var i in BusinessController.Instance.BDController.GetAllVPays())
-            {
-                NewVList.Add(i);
-            }
-            if (NewVList.Count == 0)
-            {
-                foreach (var item in VList)
-                {
-                    BusinessController.Instance.BDController.AddVPay(item);
-                }
-            }
-        }
-        private void CreateCommissionShare()
-        {
-            List<ComissionShare> VList = new List<ComissionShare>
-            {
-                new ComissionShare {PAId= 1, CalenderYear = 2021, TotalMinAckValue=1, TotalMaxAckValue=599999, CommissionShareChildren=0.013, ComissionShareAdults=0.015},
-                new ComissionShare {PAId= 2, CalenderYear = 2021, TotalMinAckValue=600000, TotalMaxAckValue=799999, CommissionShareChildren=0.014, ComissionShareAdults=0.016},
-                new ComissionShare {PAId= 3, CalenderYear = 2021, TotalMinAckValue=800000, TotalMaxAckValue=999999, CommissionShareChildren=0.016, ComissionShareAdults=0.018},
-                new ComissionShare {PAId= 4, CalenderYear = 2021, TotalMinAckValue=1000000, TotalMaxAckValue=5000000, CommissionShareChildren=0.019, ComissionShareAdults=0.02}
-            };
-
-            List<ComissionShare> NewVList = new List<ComissionShare>();
-
-            foreach (var i in BusinessController.Instance.BDController.GetAllCommissionShares())
-            {
-                NewVList.Add(i);
-            }
-            if (NewVList.Count == 0)
-            {
-                foreach (var item in VList)
-                {
-                    BusinessController.Instance.BDController.AddCommissionShare(item);
-                }
-            }
-        }
-
         private void CreateOptionalTypes()
         {
             List<OptionalType> OptionList = new List<OptionalType>
@@ -810,244 +761,244 @@ namespace BussinessLayer.Seed
 
         private void GenerateInsurances()
         {
-            List<Insurance> insurances = new List<Insurance>
-            {
-                new Insurance()
-                {
-                    SerialNumber = "FF1",
-                    AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm1),
-                    TakerNbr = "5566925763",
-                    TypeName = "Företagsförsäkring",
-                    COI = BusinessController.Instance.IController.GetCI(1),
-                    PaymentForm = "Månad",
-                    InsuranceCompany = "Länsförsäkringar",
-                    CompanyTaker = BusinessController.Instance.ITController.GetCompany(company3),
-                    EndDate = DateTime.Today.AddYears(1),
-                    StartDate = DateTime.Today,
-                    Notes = null,
-                    Premie = 789,
-                    InsuranceStatus = Status.Otecknad,
-                    CompanyInsuranceType = "Fastighet",
-                },
-                new Insurance()
-                {
-                    SerialNumber = "FF2",
-                    AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm2),
-                    TakerNbr = "5569235848",
-                    TypeName = "Företagsförsäkring",
-                    COI = BusinessController.Instance.IController.GetCI(1),
-                    PaymentForm = "Helår",
-                    InsuranceCompany = "Trygg hansa",
-                    CompanyTaker = BusinessController.Instance.ITController.GetCompany(company4),
-                    EndDate = DateTime.Today.AddYears(1).AddDays(13),
-                    StartDate = DateTime.Today.AddDays(13),
-                    Notes = null,
-                    Premie = 789,
-                    InsuranceStatus = Status.Otecknad,
-                    CompanyInsuranceType = "Kombinerad företagsförsäkring",
-                },
+            List<Insurance> insurances = new List<Insurance>();
+           
 
-                new Insurance()
-                {
-                    SerialNumber = "LIV1",
-                    PersonTaker = BusinessController.Instance.ITController.GetPerson(person1),
-                    TakerNbr = "8711306789",
-                    TypeName = "Livförsäkring för vuxen",
-                    PaymentForm = "Halvår",
-                    InsuranceStatus = Status.Otecknad,
-                    DeliveryDate = DateTime.Today,
-                    AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm3),
-                    InsuredID = BusinessController.Instance.IPController.GetIPerson(1),
-                    LIFE = BusinessController.Instance.IController.GetLIFE(1),
-                    BaseAmountValue = 400000,
-                    AckValue4 = 2000,
-                },
-                new Insurance()
-                {
-                    SerialNumber = "LIV2",
-                    PersonTaker = BusinessController.Instance.ITController.GetPerson(person3),
-                    TakerNbr = "7407016739",
-                    TypeName = "Livförsäkring för vuxen",
-                    PaymentForm = "Kvartal",
-                    InsuranceStatus = Status.Otecknad,
-                    DeliveryDate = DateTime.Today,
-                    AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm1),
-                    InsuredID = BusinessController.Instance.IPController.GetIPerson(3),
-                    LIFE = BusinessController.Instance.IController.GetLIFE(1),
-                    BaseAmountValue = 400000,
-                    AckValue4 = 2000,
-                },
-                new Insurance()
-                {
-                    SerialNumber = "ÖPFV1",
-                    AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm1),
-                    TakerNbr = "5567893531",
-                    TypeName = "Övrig personförsäkring för vuxen",
-                    OPI = BusinessController.Instance.IController.GetOPI(1),
-                    PaymentForm = "Kvartal",
-                    InsuredID = BusinessController.Instance.IPController.GetIPerson(8),
-                    CompanyTaker = BusinessController.Instance.ITController.GetCompany(company1),
-                    DeliveryDate = DateTime.Today,
-                    Premie = 789,
-                    Table = "RT23H6",
-                    InsuranceStatus = Status.Otecknad,
-                },
-                new Insurance()
-                {
-                    SerialNumber = "ÖPFV2",
-                    AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm1),
-                    TakerNbr = "5567893531",
-                    TypeName = "Övrig personförsäkring för vuxen",
-                    OPI = BusinessController.Instance.IController.GetOPI(1),
-                    PaymentForm = "Kvartal",
-                    InsuredID = BusinessController.Instance.IPController.GetIPerson(7),
-                    CompanyTaker = BusinessController.Instance.ITController.GetCompany(company1),
-                    DeliveryDate = DateTime.Today,
-                    Premie = 789,
-                    Table = "RT23H6",
-                    InsuranceStatus = Status.Otecknad,
-                },
-                new Insurance()
-                {
-                    SerialNumber = "ÖPFV3",
-                    AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm2),
-                    TakerNbr = "5563260701",
-                    TypeName = "Övrig personförsäkring för vuxen",
-                    OPI = BusinessController.Instance.IController.GetOPI(1),
-                    PaymentForm = "Kvartal",
-                    InsuredID = BusinessController.Instance.IPController.GetIPerson(9),
-                    CompanyTaker = BusinessController.Instance.ITController.GetCompany(company2),
-                    DeliveryDate = DateTime.Today,
-                    Premie = 299,
-                    Table = "RK23H6",
-                    InsuranceStatus = Status.Otecknad,
-                },
-                new Insurance()
-                {
-                    SerialNumber = "ÖPFV4",
-                    PersonTaker = BusinessController.Instance.ITController.GetPerson(person4),
-                    TakerNbr = "6511156744",
-                    TypeName = "Övrig personförsäkring för vuxen",
-                    PaymentForm = "Månad",
-                    InsuranceStatus = Status.Otecknad,
-                    DeliveryDate = DateTime.Today,
-                    AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm3),
-                    InsuredID = BusinessController.Instance.IPController.GetIPerson(6),
-                    Table = "78YT",
-                    Premie = 7867,
-                    OPI = BusinessController.Instance.IController.GetOPI(1),
-                },
-                new Insurance()
-                {
-                    SAI = BusinessController.Instance.IController.GetSA(1),
-                    SerialNumber = "SOB1",
-                    PersonTaker = BusinessController.Instance.ITController.GetPerson(person4),
-                    TakerNbr = "6511156744",
-                    TypeName = "Sjuk- och olycksfallsförsäkring för barn",
-                    PaymentForm = "Helår",
-                    InsuranceStatus = Status.Otecknad,
-                    DeliveryDate = DateTime.Today,
-                    AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm4),
-                    InsuredID = BusinessController.Instance.IPController.GetIPerson(4),
-                    OptionalTypes = UpdateOt(),
-                    BaseAmountValue = 0,
-                    AckValue = 0,
-                    BaseAmountValue2 = 0,
-                    AckValue2 = 0,
-                    BaseAmountValue3 = 0,
-                    AckValue3 = 0,
-                    BaseAmountValue4 = 700000,
-                    AckValue4 = 11000,
-                },
-                new Insurance()
-                {
-                    SAI = BusinessController.Instance.IController.GetSA(1),
-                    SerialNumber = "SOB2",
-                    PersonTaker = BusinessController.Instance.ITController.GetPerson(person2),
-                    TakerNbr = "7605206729",
-                    TypeName = "Sjuk- och olycksfallsförsäkring för barn",
-                    PaymentForm = "Helår",
-                    InsuranceStatus = Status.Otecknad,
-                    DeliveryDate = DateTime.Today,
-                    AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm4),
-                    InsuredID = BusinessController.Instance.IPController.GetIPerson(2),
-                    OptionalTypes = UpdateOt(),
-                    BaseAmountValue = 0,
-                    AckValue = 0,
-                    BaseAmountValue2 = 0,
-                    AckValue2 = 0,
-                    BaseAmountValue3 = 0,
-                    AckValue3 = 0,
-                    BaseAmountValue4 = 1100000,
-                    AckValue4 = 14200,
-                },
-                new Insurance()
-                {
-                    SAI = BusinessController.Instance.IController.GetSA(2),
-                    SerialNumber = "SOV1",
-                    PersonTaker = BusinessController.Instance.ITController.GetPerson(person5),
-                    TakerNbr = "6301134514",
-                    TypeName = "Sjuk- och olycksfallsförsäkring för vuxen",
-                    PaymentForm = "Halvår",
-                    InsuranceStatus = Status.Otecknad,
-                    DeliveryDate = DateTime.Today,
-                    AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm3),
-                    InsuredID = BusinessController.Instance.IPController.GetIPerson(5),
-                    OptionalTypes = UpdateOt(),
-                    BaseAmountValue = 0,
-                    AckValue = 0,
-                    BaseAmountValue2 = 0,
-                    AckValue2 = 0,
-                    BaseAmountValue3 = 0,
-                    AckValue3 = 0,
-                    BaseAmountValue4 = 500000,
-                    AckValue4 = 19600,
-                },
-                new Insurance()
-                {
-                    SAI = BusinessController.Instance.IController.GetSA(2),
-                    SerialNumber = "SOV2",
-                    PersonTaker = BusinessController.Instance.ITController.GetPerson(person2),
-                    TakerNbr = "7605206729",
-                    TypeName = "Sjuk- och olycksfallsförsäkring för vuxen",
-                    PaymentForm = "Kvartal",
-                    InsuranceStatus = Status.Otecknad,
-                    DeliveryDate = DateTime.Today,
-                    AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm4),
-                    InsuredID = BusinessController.Instance.IPController.GetIPerson(10),
-                    OptionalTypes = UpdateOt(),
-                    BaseAmountValue = 0,
-                    AckValue = 0,
-                    BaseAmountValue2 = 0,
-                    AckValue2 = 0,
-                    BaseAmountValue3 = 0,
-                    AckValue3 = 0,
-                    BaseAmountValue4 = 700000,
-                    AckValue4 = 11000,
-                },
-                new Insurance()
-                {
-                    SAI = BusinessController.Instance.IController.GetSA(2),
-                    SerialNumber = "SOV3",
-                    PersonTaker = BusinessController.Instance.ITController.GetPerson(person2),
-                    TakerNbr = "6511156744",
-                    TypeName = "Sjuk- och olycksfallsförsäkring för vuxen",
-                    PaymentForm = "Helår",
-                    InsuranceStatus = Status.Otecknad,
-                    DeliveryDate = DateTime.Today,
-                    AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm4),
-                    InsuredID = BusinessController.Instance.IPController.GetIPerson(11),
-                    OptionalTypes = UpdateOt(),
-                    BaseAmountValue = 0,
-                    AckValue = 0,
-                    BaseAmountValue2 = 0,
-                    AckValue2 = 0,
-                    BaseAmountValue3 = 0,
-                    AckValue3 = 0,
-                    BaseAmountValue4 = 700000,
-                    AckValue4 = 11000,
-                }
-            };
+            insurances.Add(new Insurance()
+            {
+                SerialNumber = "FF1",
+                AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm1),
+                TakerNbr = "5566925763",
+                TypeName = "Företagsförsäkring",
+                COI = BusinessController.Instance.IController.GetCI(1),
+                PaymentForm = "Månad",
+                InsuranceCompany = "Länsförsäkringar",
+                CompanyTaker = BusinessController.Instance.ITController.GetCompany(company3),
+                EndDate = DateTime.Today.AddYears(1),
+                StartDate = DateTime.Today,
+                Notes = null,
+                Premie = 789,
+                InsuranceStatus = Status.Otecknad,
+                CompanyInsuranceType = "Fastighet",
+            });
+            insurances.Add(new Insurance()
+            {
+                SerialNumber = "FF2",
+                AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm2),
+                TakerNbr = "5569235848",
+                TypeName = "Företagsförsäkring",
+                COI = BusinessController.Instance.IController.GetCI(1),
+                PaymentForm = "Helår",
+                InsuranceCompany = "Trygg hansa",
+                CompanyTaker = BusinessController.Instance.ITController.GetCompany(company4),
+                EndDate = DateTime.Today.AddYears(1).AddDays(13),
+                StartDate = DateTime.Today.AddDays(13),
+                Notes = null,
+                Premie = 789,
+                InsuranceStatus = Status.Otecknad,
+                CompanyInsuranceType = "Kombinerad företagsförsäkring",
+            });
+
+            insurances.Add(new Insurance()
+            {
+                SerialNumber = "LIV1",
+                PersonTaker = BusinessController.Instance.ITController.GetPerson(person1),
+                TakerNbr = "8711306789",
+                TypeName = "Livförsäkring för vuxen",
+                PaymentForm = "Halvår",
+                InsuranceStatus = Status.Otecknad,
+                DeliveryDate = DateTime.Today,
+                AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm3),
+                InsuredID = BusinessController.Instance.IPController.GetIPerson(1),
+                LIFE = BusinessController.Instance.IController.GetLIFE(1),
+                BaseAmountValue = 400000,
+                AckValue4 = 2000,
+            });
+            insurances.Add(new Insurance()
+            {
+                SerialNumber = "LIV2",
+                PersonTaker = BusinessController.Instance.ITController.GetPerson(person3),
+                TakerNbr = "7407016739",
+                TypeName = "Livförsäkring för vuxen",
+                PaymentForm = "Kvartal",
+                InsuranceStatus = Status.Otecknad,
+                DeliveryDate = DateTime.Today,
+                AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm1),
+                InsuredID = BusinessController.Instance.IPController.GetIPerson(3),
+                LIFE = BusinessController.Instance.IController.GetLIFE(1),
+                BaseAmountValue = 400000,
+                AckValue4 = 2000,
+            });
+            insurances.Add(new Insurance()
+            {
+                SerialNumber = "ÖPFV1",
+                AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm1),
+                TakerNbr = "5567893531",
+                TypeName = "Övrig personförsäkring för vuxen",
+                OPI = BusinessController.Instance.IController.GetOPI(1),
+                PaymentForm = "Kvartal",
+                InsuredID = BusinessController.Instance.IPController.GetIPerson(8),
+                CompanyTaker = BusinessController.Instance.ITController.GetCompany(company1),
+                DeliveryDate = DateTime.Today,
+                Premie = 789,
+                Table = "RT23H6",
+                InsuranceStatus = Status.Otecknad,
+            });
+            insurances.Add(new Insurance()
+            {
+                SerialNumber = "ÖPFV2",
+                AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm1),
+                TakerNbr = "5567893531",
+                TypeName = "Övrig personförsäkring för vuxen",
+                OPI = BusinessController.Instance.IController.GetOPI(1),
+                PaymentForm = "Kvartal",
+                InsuredID = BusinessController.Instance.IPController.GetIPerson(7),
+                CompanyTaker = BusinessController.Instance.ITController.GetCompany(company1),
+                DeliveryDate = DateTime.Today,
+                Premie = 789,
+                Table = "RT23H6",
+                InsuranceStatus = Status.Otecknad,
+            });
+            insurances.Add(new Insurance()
+            {
+                SerialNumber = "ÖPFV3",
+                AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm2),
+                TakerNbr = "5563260701",
+                TypeName = "Övrig personförsäkring för vuxen",
+                OPI = BusinessController.Instance.IController.GetOPI(1),
+                PaymentForm = "Kvartal",
+                InsuredID = BusinessController.Instance.IPController.GetIPerson(9),
+                CompanyTaker = BusinessController.Instance.ITController.GetCompany(company2),
+                DeliveryDate = DateTime.Today,
+                Premie = 299,
+                Table = "RK23H6",
+                InsuranceStatus = Status.Otecknad,
+            });
+            insurances.Add(new Insurance()
+            {
+                SerialNumber = "ÖPFV4",
+                PersonTaker = BusinessController.Instance.ITController.GetPerson(person4),
+                TakerNbr = "6511156744",
+                TypeName = "Övrig personförsäkring för vuxen",
+                PaymentForm = "Månad",
+                InsuranceStatus = Status.Otecknad,
+                DeliveryDate = DateTime.Today,
+                AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm3),
+                InsuredID = BusinessController.Instance.IPController.GetIPerson(6),
+                Table = "78YT",
+                Premie = 7867,
+                OPI = BusinessController.Instance.IController.GetOPI(1),
+            });
+            insurances.Add(new Insurance()
+            {
+                SAI = BusinessController.Instance.IController.GetSA(1),
+                SerialNumber = "SOB1",
+                PersonTaker = BusinessController.Instance.ITController.GetPerson(person4),
+                TakerNbr = "6511156744",
+                TypeName = "Sjuk- och olycksfallsförsäkring för barn",
+                PaymentForm = "Helår",
+                InsuranceStatus = Status.Otecknad,
+                DeliveryDate = DateTime.Today,
+                AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm4),
+                InsuredID = BusinessController.Instance.IPController.GetIPerson(4),
+                OptionalTypes = UpdateOt(),
+                BaseAmountValue = 0,
+                AckValue = 0,
+                BaseAmountValue2 = 0,
+                AckValue2 = 0,
+                BaseAmountValue3 = 0,
+                AckValue3 = 0,
+                BaseAmountValue4 = 700000,
+                AckValue4 = 11000,
+            });
+            insurances.Add(new Insurance()
+            {
+                SAI = BusinessController.Instance.IController.GetSA(1),
+                SerialNumber = "SOB2",
+                PersonTaker = BusinessController.Instance.ITController.GetPerson(person2),
+                TakerNbr = "7605206729",
+                TypeName = "Sjuk- och olycksfallsförsäkring för barn",
+                PaymentForm = "Helår",
+                InsuranceStatus = Status.Otecknad,
+                DeliveryDate = DateTime.Today,
+                AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm4),
+                InsuredID = BusinessController.Instance.IPController.GetIPerson(2),
+                OptionalTypes = UpdateOt(),
+                BaseAmountValue = 0,
+                AckValue = 0,
+                BaseAmountValue2 = 0,
+                AckValue2 = 0,
+                BaseAmountValue3 = 0,
+                AckValue3 = 0,
+                BaseAmountValue4 = 1100000,
+                AckValue4 = 14200,
+            });
+            insurances.Add(new Insurance()
+            {
+                SAI = BusinessController.Instance.IController.GetSA(2),
+                SerialNumber = "SOV1",
+                PersonTaker = BusinessController.Instance.ITController.GetPerson(person5),
+                TakerNbr = "6301134514",
+                TypeName = "Sjuk- och olycksfallsförsäkring för vuxen",
+                PaymentForm = "Halvår",
+                InsuranceStatus = Status.Otecknad,
+                DeliveryDate = DateTime.Today,
+                AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm3),
+                InsuredID = BusinessController.Instance.IPController.GetIPerson(5),
+                OptionalTypes = UpdateOt(),
+                BaseAmountValue = 0,
+                AckValue = 0,
+                BaseAmountValue2 = 0,
+                AckValue2 = 0,
+                BaseAmountValue3 = 0,
+                AckValue3 = 0,
+                BaseAmountValue4 = 500000,
+                AckValue4 = 19600,
+            });
+            insurances.Add(new Insurance()
+            {
+                SAI = BusinessController.Instance.IController.GetSA(2),
+                SerialNumber = "SOV2",
+                PersonTaker = BusinessController.Instance.ITController.GetPerson(person2),
+                TakerNbr = "7605206729",
+                TypeName = "Sjuk- och olycksfallsförsäkring för vuxen",
+                PaymentForm = "Kvartal",
+                InsuranceStatus = Status.Otecknad,
+                DeliveryDate = DateTime.Today,
+                AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm4),
+                InsuredID = BusinessController.Instance.IPController.GetIPerson(10),
+                OptionalTypes = UpdateOt(),
+                BaseAmountValue = 0,
+                AckValue = 0,
+                BaseAmountValue2 = 0,
+                AckValue2 = 0,
+                BaseAmountValue3 = 0,
+                AckValue3 = 0,
+                BaseAmountValue4 = 700000,
+                AckValue4 = 11000,
+            });
+            insurances.Add(new Insurance()
+            {
+                SAI = BusinessController.Instance.IController.GetSA(2),
+                SerialNumber = "SOV3",
+                PersonTaker = BusinessController.Instance.ITController.GetPerson(person2),
+                TakerNbr = "6511156744",
+                TypeName = "Sjuk- och olycksfallsförsäkring för vuxen",
+                PaymentForm = "Helår",
+                InsuranceStatus = Status.Otecknad,
+                DeliveryDate = DateTime.Today,
+                AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm4),
+                InsuredID = BusinessController.Instance.IPController.GetIPerson(11),
+                OptionalTypes = UpdateOt(),
+                BaseAmountValue = 0,
+                AckValue = 0,
+                BaseAmountValue2 = 0,
+                AckValue2 = 0,
+                BaseAmountValue3 = 0,
+                AckValue3 = 0,
+                BaseAmountValue4 = 700000,
+                AckValue4 = 11000,
+            });
             List<Insurance> NewList = new List<Insurance>();
             foreach (var i in BusinessController.Instance.IController.GetAllInsurances())
             {
