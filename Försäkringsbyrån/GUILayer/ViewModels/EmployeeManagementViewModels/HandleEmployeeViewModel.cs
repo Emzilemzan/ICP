@@ -22,7 +22,7 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
 
         public HandleEmployeeViewModel()
         {
-            SalesMens = UpdateSM();
+            
             
         }
 
@@ -39,44 +39,22 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             return SalesMens;
         }
 
-        private ICommand _updateSMBtn;
-        public ICommand UpdateSMBtn
+        public void UpdateGridToDb()
         {
-            get => _updateSMBtn ?? (_updateSMBtn = new RelayCommand(x => { UpdateSalesMen(); CanCommand(); }));
-        }
-
-        public bool CanCommand() => true;
-        //Method for updating a salesmen
-        private void UpdateSalesMen()
-        {
-            if (SelectedPerson != null && SelectedPerson.AgentNumber != 0 && SelectedPerson.City != null && SelectedPerson.Firstname != null && SelectedPerson.Lastname != null && SelectedPerson.StreetAddress != null
-                && SelectedPerson.TaxRate != 0 && SelectedPerson.Postalcode != 0)
+            SalesMens = UpdateSM();
+            if (SalesMens != null)
             {
-                SelectedPerson.AgentNumber = AgentNumber;
-                SelectedPerson.StreetAddress = StreetAddress;
-                SelectedPerson.Firstname = Firstname;
-                SelectedPerson.Lastname = Lastname;
-                SelectedPerson.Postalcode = Postalcode;
-                SelectedPerson.TaxRate = TaxRate;
-                SelectedPerson.City = City;
-                Context.SMController.Edit(SelectedPerson);
-                Instance.UpdateSM();
-                MessageBox.Show($"Uppdateringen lyckades av agenturnumret: {SelectedPerson.AgentNumber}", "Lyckad uppdatering", MessageBoxButton.OK, MessageBoxImage.Information);
-                SalesMens.Clear();
-                foreach (var salesMen in Context.SMController.GetAllSalesMen())
+                foreach (SalesMen sm in SalesMens)
                 {
-                    SalesMens?.Add(salesMen);
+                    Context.SMController.Edit(sm);
                 }
             }
-            else
-            {
-                MessageBox.Show("Du måste markera en säljare i registret eller ha fyllt i alla fält", "Fel", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
         }
+
         private ICommand _deleteSMBtn;
         public ICommand DeleteSMBtn
         {
-            get => _deleteSMBtn ?? (_deleteSMBtn = new RelayCommand(x => { DeleteSalesMen(); CanCommand(); }));
+            get => _deleteSMBtn ?? (_deleteSMBtn = new RelayCommand(x => { DeleteSalesMen(); }));
         }
         //Method for deleting a salesmen
         private void DeleteSalesMen()

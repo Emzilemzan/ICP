@@ -22,7 +22,7 @@ namespace GUILayer.ViewModels.SearchViewModels
 
         private SAOverviewViewModel()
         {
-            UpdateAC();
+            
         }
 
         #region command 
@@ -45,6 +45,18 @@ namespace GUILayer.ViewModels.SearchViewModels
                 x.Add(Context.IController.GetOPT(1));
             }
             return x;
+        }
+
+        public void UpdateGridToDb()
+        {
+            UpdateAC();
+            if (Insurances != null)
+            {
+                foreach (Insurance i in Insurances)
+                {
+                    Context.IController.Edit(i);
+                }
+            }
         }
 
         public void Update()
@@ -267,7 +279,7 @@ namespace GUILayer.ViewModels.SearchViewModels
                 x = new List<Insurance>();
                 foreach (Insurance i in y)
                 {
-                    if (i.SerialNumber.Contains(filter) || i.PersonTaker.SocialSecurityNumber.Contains(filter) || i.TypeName.Contains(filter)
+                    if (i.SerialNumber.Contains(filter) || i.PersonTaker.SocialSecurityNumber.Contains(filter) || i.TypeName.Contains(filter) || i.PersonTaker.Firstname.Contains(filter)
                         || i.InsuredID.SocialSecurityNumberIP.Contains(filter) || i.InsuredID.LastName.Contains(filter) || i.PersonTaker.Lastname.Contains(filter)
                         || i.SAI.SAInsuranceType.Contains(filter) || i.BaseAmountValue4.ToString().Contains(filter) || i.AgentNo.AgentNumber.ToString().Contains(filter))
                     {

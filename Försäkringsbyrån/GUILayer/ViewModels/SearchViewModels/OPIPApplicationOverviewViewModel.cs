@@ -23,20 +23,30 @@ namespace GUILayer.ViewModels.SearchViewModels
 
         public OPIPApplicationOverviewViewModel()
         {
-            Insurancess = UpdateInsurance();
-            SalesMens = UpdateSM();
-            UpdateAC();
-            PayMentForms = new List<string>() { "Helår", "Halvår", "Kvartal", "Månad" };
-            OPInsuranceTypes = UpdateOPI();
-            InsuredPersons = UpdateInsuredPerson();
         }
 
         #region Commands 
+        public void UpdateComboBoxes()
+        {
+            SalesMens = UpdateSM();
+            OnPropertyChanged("SalesMens");
+            PayMentForms = new List<string>() { "Helår", "Halvår", "Kvartal", "Månad" };
+            OnPropertyChanged("PayMentForms");
+            OPInsuranceTypes = UpdateOPI();
+            OnPropertyChanged("OPInsuranceTypes");
+        }
+        public void UpdateGridToDb()
+        {
+            UpdateAC();
+            if (Insurancess != null)
+            {
+                foreach (Insurance i in Insurancess)
+                {
+                    Context.IController.Edit(i);
+                }
+            }
+        }
         // Update, Export and Remove buttons 
-
-        private ICommand _updateBtn;
-        public ICommand UpdateBtn => _updateBtn ?? (_updateBtn = new RelayCommand(x => { UpdateApplication();}));
-
         private ICommand _exportBtn;
         public ICommand ExportBtn => _exportBtn ?? (_exportBtn = new RelayCommand(x => { ExportApplication();}));
 
@@ -44,25 +54,6 @@ namespace GUILayer.ViewModels.SearchViewModels
         private ICommand _removeBtn;
         public ICommand RemoveBtn => _removeBtn ?? (_removeBtn = new RelayCommand(x => { RemoveApplication();}));
 
-        public void UpdateApplication()
-        {
-            if (SelectedInsurance != null && SelectedInsurance.Table != null && SelectedInsurance.Premie != 0 &&
-             SelectedInsurance.PaymentForm != null && SelectedInsurance.AgentNo != null)
-            {
-                SelectedInsurance.Table = Tabell;
-                SelectedInsurance.Premie = Premie;
-                SelectedInsurance.AgentNo = AgentNo;
-                SelectedInsurance.PaymentForm = PaymentForm;
-                SelectedInsurance.SerialNumber = SerialNumber;
-                Context.IController.Edit(SelectedInsurance);
-
-                MessageBox.Show($"Uppdateringen lyckades av: {SelectedInsurance.SerialNumber}", "Lyckad uppdatering", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            else
-            {
-                MessageBox.Show("Du måste markera en försäkring i registret eller ha fyllt i alla fält med en *", "Fel", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
 
         public void ExportApplication()
         {
@@ -176,21 +167,6 @@ namespace GUILayer.ViewModels.SearchViewModels
             OPInsuranceTypes = x;
             return OPInsuranceTypes;
         }
-
-        public ObservableCollection<Insurance> UpdateInsurance()
-        {
-            ObservableCollection<Insurance> x = new ObservableCollection<Insurance>();
-
-            foreach (var e in Context.IController.GetAllInsurances())
-            {
-                if (e.OPI != null && e.PersonTaker != null)
-                    x?.Add(e);
-            }
-
-            Insurancess = x;
-            return Insurancess;
-        }
-
         public ObservableCollection<InsuredPerson> UpdateInsuredPerson()
         {
             ObservableCollection<InsuredPerson> x = new ObservableCollection<InsuredPerson>();
@@ -215,8 +191,8 @@ namespace GUILayer.ViewModels.SearchViewModels
                 List<Insurance> y = x;
                 x = new List<Insurance>();
                 foreach (Insurance i in y)
-                    if (i.SerialNumber.Contains(filter) || i.PersonTaker.SocialSecurityNumber.Contains(filter) || i.TypeName.Contains(filter)
-                        || i.InsuredID.SocialSecurityNumberIP.Contains(filter))
+                    if (i.SerialNumber.Contains(filter) || i.PersonTaker.SocialSecurityNumber.Contains(filter) || i.PersonTaker.Firstname.Contains(filter) || i.PersonTaker.Lastname.Contains(filter) || i.TypeName.Contains(filter)
+                        || i.InsuredID.SocialSecurityNumberIP.Contains(filter) || i.InsuredID.FirstName.Contains(filter) || i.InsuredID.LastName.Contains(filter))
                         x.Add(i);
             }
             x?.ForEach(i => Insurancess.Add(i));
@@ -559,6 +535,10 @@ namespace GUILayer.ViewModels.SearchViewModels
             {
                 _si = value;
                 OnPropertyChanged("SelectedInsurance");
+                if (SelectedInsurance != null)
+                {
+                    UpdateComboBoxes();
+                }
             }
         }
 

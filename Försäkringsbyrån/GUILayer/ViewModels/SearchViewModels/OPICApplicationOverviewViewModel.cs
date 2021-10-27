@@ -22,39 +22,30 @@ namespace GUILayer.ViewModels.SearchViewModels
 
         public OPICApplicationOverviewViewModel()
         {
-            Insurancess = UpdateInsurance();
+        }
+        public void UpdateComboBoxes()
+        {
             SalesMens = UpdateSM();
-            UpdateAC();
+            OnPropertyChanged("SalesMens");
             PayMentForms = new List<string>() { "Helår", "Halvår", "Kvartal", "Månad" };
+            OnPropertyChanged("PayMentForms");
             OPInsuranceTypes = UpdateOPI();
-            InsuredPersons = UpdateInsuredPerson();
+            OnPropertyChanged("OPInsuranceTypes");
+        }
+        #region Commands
+       
+        public void UpdateGridToDb()
+        {
+            UpdateAC();
+            if (Insurancess != null)
+            {
+                foreach (Insurance i in Insurancess)
+                {
+                    Context.IController.Edit(i);
+                }
+            }
         }
 
-        #region Commands
-        private ICommand _updateBtn;
-        public ICommand UpdateBtn => _updateBtn ?? (_updateBtn = new RelayCommand(x => { UpdateApplication();  }));
-
-
-        public void UpdateApplication()
-        {
-            if (SelectedInsurance != null && SelectedInsurance.Table != null && SelectedInsurance.Premie != 0 &&
-            SelectedInsurance.PaymentForm != null && SelectedInsurance.AgentNo != null)
-            {
-                SelectedInsurance.Table = Tabell;
-                SelectedInsurance.Premie = Premie;
-                SelectedInsurance.AgentNo = AgentNo;
-                SelectedInsurance.PaymentForm = PaymentForm;
-                SelectedInsurance.SerialNumber = SerialNumber;
-                Context.IController.Edit(SelectedInsurance);
-
-                MessageBox.Show($"Uppdateringen lyckades av: {SelectedInsurance.SerialNumber}", "Lyckad uppdatering", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            else
-            {
-                MessageBox.Show("Du måste markera en försäkring i registret eller ha fyllt i alla fält med en *", "Fel", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-       
-    }
 
         private ICommand _exportBtn;
         public ICommand ExportBtn => _exportBtn ?? (_exportBtn = new RelayCommand(x => { ExportApplication(); }));
@@ -174,20 +165,6 @@ namespace GUILayer.ViewModels.SearchViewModels
             return OPInsuranceTypes;
         }
 
-        public ObservableCollection<Insurance> UpdateInsurance()
-        {
-            ObservableCollection<Insurance> x = new ObservableCollection<Insurance>();
-
-            foreach (var e in Context.IController.GetAllInsurances())
-            {
-                if (e.OPI != null && e.CompanyTaker != null)
-                    x?.Add(e);
-            }
-
-            Insurancess = x;
-            return Insurancess;
-        }
-
         public ObservableCollection<InsuredPerson> UpdateInsuredPerson()
         {
             ObservableCollection<InsuredPerson> x = new ObservableCollection<InsuredPerson>();
@@ -213,7 +190,7 @@ namespace GUILayer.ViewModels.SearchViewModels
                 x = new List<Insurance>();
                 foreach (Insurance i in y)
                     if (i.SerialNumber.Contains(filter) || i.CompanyTaker.OrganizationNumber.Contains(filter) || i.TypeName.Contains(filter)
-                        || i.InsuredID.SocialSecurityNumberIP.Contains(filter) || i.CompanyTaker.ContactPerson.Contains(filter) || i.CompanyTaker.CompanyName.Contains(filter))
+                        || i.InsuredID.SocialSecurityNumberIP.Contains(filter) || i.InsuredID.FirstName.Contains(filter) || i.InsuredID.LastName.Contains(filter) || i.CompanyTaker.ContactPerson.Contains(filter) || i.CompanyTaker.CompanyName.Contains(filter))
                         x.Add(i);
             }
             x?.ForEach(i => Insurancess.Add(i));
@@ -422,6 +399,10 @@ namespace GUILayer.ViewModels.SearchViewModels
             {
                 _si = value;
                 OnPropertyChanged("SelectedInsurance");
+                if(SelectedInsurance != null)
+                {
+                    UpdateComboBoxes();
+                }
             }
         }
 

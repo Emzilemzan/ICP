@@ -20,11 +20,8 @@ namespace GUILayer.ViewModels.SearchViewModels
 
         public SearchInsuranceTakerCompanyViewModel()
         {
-            Companies = UpdateCompanies();
-            CompanyGrid = CollectionViewSource.GetDefaultView(Companies);
-            CompanyGrid.Filter = new Predicate<object>(o => Filter(o as Company));
+            
             Insurances = UpdateInsurance();
-            InsuredPersons = UpdateInsuredPersons();
         }
         
         #region list
@@ -83,8 +80,7 @@ namespace GUILayer.ViewModels.SearchViewModels
         {
             return SearchInput == null
                 || company.OrganizationNumber.ToString().IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
-                || company.CompanyName.IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1
-                || company.ContactPerson.IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1;
+                || company.CompanyName.IndexOf(SearchInput, StringComparison.OrdinalIgnoreCase) != -1;
         }
         private string _searchInput;
 
@@ -274,48 +270,30 @@ namespace GUILayer.ViewModels.SearchViewModels
         #endregion
 
         #region commands
-
-        private ICommand _updateC;
-        public ICommand UpdateC
+        public void UpdateGridToDb()
         {
-            get => _updateC ?? (_updateC = new RelayCommand(x => { UpdateCompany(); }));
-        }
-        private void UpdateCompany()
-        {
-            if (SelectedCompany != null && SelectedCompany.OrganizationNumber != null && SelectedCompany.StreetAddress != null && SelectedCompany.City != null &&
-                SelectedCompany.PostalCode != 0 && SelectedCompany.CompanyName != null && SelectedCompany.DiallingCode != null && SelectedCompany.TelephoneNbr != null)
+            Companies = UpdateCompanies();
+            InsuredPersons = UpdateInsuredPersons();
+            if (Companies != null)
             {
-                SelectedCompany.OrganizationNumber = OrganizationNumber;
-                SelectedCompany.StreetAddress = StreetAddress;
-                SelectedCompany.CompanyName = CompanyName;
-                SelectedCompany.PostalCode = PostalCode;
-                SelectedCompany.FaxNumber = FaxNumber;
-                SelectedCompany.ContactPerson = ContactPerson;
-                SelectedCompany.TelephoneNbr = TelephoneNbr;
-                SelectedCompany.Email = Email;
-                SelectedCompany.DiallingCode = DiallingCode;
-                SelectedCompany.City = City;
-                Context.ITController.Edit(SelectedCompany);
-
-                MessageBox.Show($"Uppdateringen lyckades av: {SelectedCompany.OrganizationNumber}", "Lyckad uppdatering", MessageBoxButton.OK, MessageBoxImage.Information);
-                Companies.Clear();
-                foreach (var c in Context.ITController.GetAllCompanies())
+                foreach (Company c in Companies)
                 {
-                    Companies?.Add(c);
+                    Context.ITController.Edit(c);
+                }
+                CompanyGrid = CollectionViewSource.GetDefaultView(Companies);
+                CompanyGrid.Filter = new Predicate<object>(o => Filter(o as Company));
+            }
+            if (InsuredPersons != null)
+            {
+                foreach (InsuredPerson ip in InsuredPersons)
+                {
+                    Context.IPController.Edit(ip);
                 }
             }
-            else
-            {
-                MessageBox.Show("Du måste markera ett företag i registret eller ha fyllt i alla fält med en *", "Fel", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
         }
-
+       
         private ICommand _removeC;
-        public ICommand RemoveC
-        {
-            get => _removeC ?? (_removeC = new RelayCommand(x => { DeleteCompany(); }));
-        }
-
+        public ICommand RemoveC => _removeC ?? (_removeC = new RelayCommand(x => { DeleteCompany(); }));
         private void DeleteCompany()
         {
             if (SelectedCompany != null)
@@ -376,40 +354,7 @@ namespace GUILayer.ViewModels.SearchViewModels
                 MessageBox.Show("Antingen har ingen person markerats i registret eller så har du lämnat något fält tomt! ", "Fel", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
-        private ICommand _updateIP;
-        public ICommand UpdateIP
-        {
-            get => _updateIP ?? (_updateIP = new RelayCommand(x => { UpdateIPerson(); }));
-        }
-
-
-        private void UpdateIPerson()
-        {
-
-            if (SelectedIP != null && SelectedIP.PersonType != null && SelectedIP.LastName != null && SelectedIP.FirstName != null &&
-               SelectedIP.SocialSecurityNumberIP != null && SelectedIP.InsuredId != 0)
-            {
-                SelectedIP.FirstName = FirstName;
-                SelectedIP.LastName= LastName;
-                SelectedIP.LastName = LastName;
-                SelectedIP.SocialSecurityNumberIP = SocialSecurityNumberIP;
-                SelectedIP.InsuredId = InsuredId;
-                Context.IPController.Edit(SelectedIP);
-
-                MessageBox.Show($"Uppdateringen lyckades av: {SelectedIP.InsuredId}", "Lyckad uppdatering", MessageBoxButton.OK, MessageBoxImage.Information);
-                InsuredPersons.Clear();
-                foreach(var i in Context.IPController.GetInsuranceTakerIPSC(SelectedCompany))
-                {
-                    InsuredPersons?.Add(i);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Du måste markera ett företag i registret eller ha fyllt i alla fält med en *", "Fel", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
+       
         private ICommand _exportC;
         public ICommand ExportC => _exportC ?? (_exportC = new RelayCommand(x => { ExportCompany(); }));
 

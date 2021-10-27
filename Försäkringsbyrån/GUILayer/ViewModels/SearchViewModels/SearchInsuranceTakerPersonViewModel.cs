@@ -25,11 +25,7 @@ namespace GUILayer.ViewModels.SearchViewModels
        
         public SearchInsuranceTakerPersonViewModel()
         {
-            Persons = UpdatePersons();
-            PersonGrid = CollectionViewSource.GetDefaultView(Persons);
-            PersonGrid.Filter = new Predicate<object>(o => Filter(o as Person));
             Insurances = UpdatePersonInsurance();
-            InsuredPersons = UpdateInsuredPersons();
         }
 
         #region Specific Porperties and methods for search in collection
@@ -64,6 +60,28 @@ namespace GUILayer.ViewModels.SearchViewModels
         #endregion
 
         #region Methods
+        public void UpdateGridToDb()
+        {
+            Persons = UpdatePersons();
+            InsuredPersons = UpdateInsuredPersons();
+            if (Persons != null)
+            {
+                foreach (Person p in Persons)
+                {
+                    Context.ITController.Edit(p);
+                }
+                PersonGrid = CollectionViewSource.GetDefaultView(Persons);
+                PersonGrid.Filter = new Predicate<object>(o => Filter(o as Person));
+            }
+            if(InsuredPersons != null )
+            {
+                foreach (InsuredPerson ip in InsuredPersons)
+                {
+                    Context.IPController.Edit(ip);
+                }
+            }
+        }
+
         public ObservableCollection<Person> UpdatePersons()
         {
             ObservableCollection<Person> x = new ObservableCollection<Person>();
@@ -89,7 +107,6 @@ namespace GUILayer.ViewModels.SearchViewModels
             Insurances = x;
             return Insurances;
         }
-
         public ObservableCollection<InsuredPerson> UpdateInsuredPersons()
         {
 
@@ -308,51 +325,8 @@ namespace GUILayer.ViewModels.SearchViewModels
 
         #region commands
 
-        private ICommand _updateP;
-        public ICommand UpdateP
-        {
-            get => _updateP ?? (_updateP = new RelayCommand(x => { UpdatePerson(); }));
-        }
-
-
-        private void UpdatePerson()
-        {
-            if (SelectedPerson != null && SelectedPerson.DiallingCodeHome != null && SelectedPerson.City != null && SelectedPerson.Firstname != null && SelectedPerson.Lastname != null && SelectedPerson.StreetAddress != null
-                && SelectedPerson.SocialSecurityNumber != null && SelectedPerson.PostalCode != 0 && SelectedPerson.TelephoneNbrHome != null && SelectedPerson.EmailOne != null)
-            {
-                SelectedPerson.SocialSecurityNumber = SocialSecurityNumber;
-                SelectedPerson.StreetAddress = StreetAddress;
-                SelectedPerson.Firstname = Firstname;
-                SelectedPerson.Lastname = Lastname;
-                SelectedPerson.PostalCode = PostalCode;
-                SelectedPerson.TelephoneNbrHome = TelephoneNbrHome;
-                SelectedPerson.TelephoneNbrWork = TelephoneNbrWork;
-                SelectedPerson.EmailOne = EmailOne;
-                SelectedPerson.EmailTwo = EmailTwo;
-                SelectedPerson.DiallingCodeHome = DiallingCodeHome;
-                SelectedPerson.DiallingCodeWork = DiallingCodeWork;
-                SelectedPerson.City = City;
-                Context.ITController.Edit(SelectedPerson);
-                
-                MessageBox.Show($"Uppdateringen lyckades av: {SelectedPerson.SocialSecurityNumber}", "Lyckad uppdatering", MessageBoxButton.OK, MessageBoxImage.Information);
-                Persons.Clear();
-                foreach (var p in Context.ITController.GetAllPersons())
-                {
-                    Persons?.Add(p);
-                }
-
-            }
-            else
-            {
-                MessageBox.Show("Du måste markera en person i registret eller ha fyllt i alla fält med en *", "Fel", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
         private ICommand _removeP;
-        public ICommand RemoveP
-        {
-            get => _removeP ?? (_removeP = new RelayCommand(x => { DeletePerson(); }));
-        }
+        public ICommand RemoveP => _removeP ?? (_removeP = new RelayCommand(x => { DeletePerson(); }));
 
         private void DeletePerson()
         {
@@ -414,48 +388,10 @@ namespace GUILayer.ViewModels.SearchViewModels
                 MessageBox.Show("Antingen har ingen person markerats i registret eller så har du lämnat något fält tomt! ", "Fel", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        private ICommand _updateIP;
-        public ICommand UpdateIP => _updateIP ?? (_updateIP = new RelayCommand(x => { UpdateIPerson(); }));
-        private void UpdateIPerson()
-        {
-            if (SelectedIP != null && SelectedIP.PersonType != null && SelectedIP.LastName != null && SelectedIP.FirstName != null &&
-               SelectedIP.SocialSecurityNumberIP != null && SelectedIP.InsuredId != 0)
-            {
-                if (SelectedPerson.SocialSecurityNumber == SelectedIP.SocialSecurityNumberIP)
-                {
-                    MessageBox.Show("Du kan inte ändra uppgifterna, eftersom den försäkrade är samma person som försäkringstagaren");
-                }
-                else 
-                {
-                    SelectedIP.FirstName = FirstName;
-                    SelectedIP.LastName = LastName;
-                    SelectedIP.InsuredId = InsuredId;
-                    Context.IPController.Edit(SelectedIP);
-                    MessageBox.Show($"Uppdateringen lyckades av: {SelectedIP.InsuredId}", "Lyckad uppdatering", MessageBoxButton.OK, MessageBoxImage.Information);
-                   
-                }
-                InsuredPersons.Clear();
-                foreach (var i in Context.IPController.GetInsuranceTakerIPS(SelectedPerson))
-                {
-                    InsuredPersons?.Add(i);
-                }
-                Persons.Clear();
-                foreach (var p in Context.ITController.GetAllPersons())
-                {
-                    Persons?.Add(p);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Du måste markera en försäkrad i registret eller ha fyllt i alla fält med en *", "Fel", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
 
         private ICommand _exportP;
-        public ICommand ExportP
-        {
-            get => _exportP ?? (_exportP = new RelayCommand(x => { ExportPerson(); }));
-        }
+        public ICommand ExportP => _exportP ?? (_exportP = new RelayCommand(x => { ExportPerson(); }));
+
         /// <summary>
         /// method for exportation of selectedperson to pdf. 
         /// </summary>

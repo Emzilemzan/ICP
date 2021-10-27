@@ -249,9 +249,17 @@ namespace GUILayer.ViewModels
             VacationPayViewModel.Instance.EmptyAllChoices();
             SignedInsuranceViewModel.Instance.MakeSearchWordEmpty();
             GetandexportCustomerLeadsViewModel.Instance.Update();
-            SAOverviewViewModel.Instance.UpdateAC();
+            SAOverviewViewModel.Instance.UpdateGridToDb();
             GetTrendstatitcsViewModel.Instance.Update();
             CommissionOverviewViewModel.Instance.EmptyAllChoices1();
+            ManageUserAccessViewModel.Instance.UpdateGridToDb();
+            HandleEmployeeViewModel.Instance.UpdateGridToDb();
+            SearchInsuranceTakerPersonViewModel.Instance.UpdateGridToDb();
+            SearchInsuranceTakerCompanyViewModel.Instance.UpdateGridToDb();
+            LifeOverviewViewModel.Instance.UpdateGridToDb();
+            ApplicationOverviewViewModels.Instance.UpdateGridToDb();
+            OPICApplicationOverviewViewModel.Instance.UpdateGridToDb();
+            OPIPApplicationOverviewViewModel.Instance.UpdateGridToDb();
         }
     }
 }

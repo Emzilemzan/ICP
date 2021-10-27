@@ -22,7 +22,7 @@
                   RowDetailsVisibilityMode="VisibleWhenSelected" 
                   IsReadOnly="True" 
                   x:Name="dgUsers"
-                  SelectedItem="{Binding SelectedPerson, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                  SelectedItem="{Binding SelectedPerson}"
                   AlternatingRowBackground="Gainsboro"  AlternationCount="2"
                   IsSynchronizedWithCurrentItem="True"
                   ScrollViewer.CanContentScroll="True" 
@@ -35,11 +35,13 @@
                 <DataGridTextColumn Header="Efternamn" Binding="{Binding Lastname}" />
             </DataGrid.Columns>
         </DataGrid>
+        <Label Content="*Uppdateringar sparas permanent så fort du skrivit klart din ändring" Grid.Column="0" Grid.Row="2" Margin="0,297,349,0" Grid.ColumnSpan="2"></Label>
         <StackPanel Grid.Column="1" Grid.Row="2" Margin="10,9.667,10,155">
             <Grid Margin="0,0,47,0" Height="302">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="31*"/>
                     <ColumnDefinition Width="104*"/>
+                    <ColumnDefinition Width="5"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -61,7 +63,8 @@
                 <Label Content="Användarnamn" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,21,260.333,0" Grid.RowSpan="2"/>
                 <TextBox Grid.Row="1" x:Name="tbUsername" IsReadOnly="True" Grid.Column="1" Text="{Binding SelectedPerson.Username, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="0.667,0,102.333,0"/>
                 <Label Content="Lösenord" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Margin="0,0,277.333,0.333"/>
-                <TextBox Grid.Row="2" CharacterCasing="Upper" x:Name="tbPassword" Grid.Column="1" Text="{Binding SelectedPerson.Password, UpdateSourceTrigger=PropertyChanged,  Mode=TwoWay}" Margin="0.667,0,102.333,0"/>
+                <TextBox Grid.Row="2" CharacterCasing="Upper" x:Name="tbPassword" Grid.Column="1" Text="{Binding SelectedPerson.Password, UpdateSourceTrigger=PropertyChanged,  Mode=TwoWay}" Margin="1,0,102.333,0" Height="25" VerticalAlignment="Top" />
+                <Label x:Name="pwLabel"></Label>
                 <Label Content="Förnamn" Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Margin="0,0,277,0"/>
                 <TextBox Grid.Row="3" x:Name="tbFirstname" Grid.Column="1" Text="{Binding SelectedPerson.Firstname, UpdateSourceTrigger=PropertyChanged,  Mode=TwoWay}" Margin="0.667,0,102.333,0"/>
                 <Label Content="Efternamn" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" Margin="0,0,277,0"/>
@@ -76,8 +79,7 @@
                         <CheckBox Content="Hantera provision" x:Name="cbCommission" IsChecked="{Binding SelectedPerson.Commission, UpdateSourceTrigger=PropertyChanged,  Mode=TwoWay}" />
                     </StackPanel>
                 </GroupBox>
-                <Button Content="Uppdatera" Grid.Column="1" Grid.Row="11" Command="{Binding UpdateUserBtn}" Grid.RowSpan="2" Margin="99,10,102.333,10"></Button>
-                <Button Content="Ta bort" Grid.Column="1" Grid.Row="11" Command="{Binding DeleteUserBtn}" Grid.RowSpan="2" Margin="1,10,204.333,10.333"></Button>
+                <Button Content="Ta bort" Grid.Column="1" Grid.Row="11" Command="{Binding DeleteUserBtn}" Grid.RowSpan="2" Margin="99,10,102.333,10"></Button>
             </Grid>
         </StackPanel>
     </Grid>
