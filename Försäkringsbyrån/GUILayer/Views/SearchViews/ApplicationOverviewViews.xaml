@@ -150,7 +150,11 @@
                 </ComboBox>
                 <Label Grid.Row="5" Grid.Column="2" Content="Anteckningar:" FontSize="15"/>
                 <TextBox Grid.Row="5" Width="250" Grid.Column="2" Margin="10.667,31.667,24.667,31.333" Grid.RowSpan="3" Text="{Binding SelectedInsurance.Notes}"/>
-
+                <Label Content="Om tecknad: " FontSize="18" Grid.Row="1" Grid.Column="3"></Label>
+                <Label Content="Försäkringsnummer: " Grid.Row="2" Grid.Column="3"></Label>
+                <TextBox Grid.Row="2" Grid.Column="3"  Text="{Binding SelectedInsurance.InsuranceNumber}" Margin="10.333,25,-0.333,0" />
+                <Label Content="Provision: " Grid.Row="3" Grid.Column="3"></Label>
+                <TextBox Grid.Row="3" Grid.Column="3" Margin="10.333,32,-0.333,9.667" Text="{Binding SelectedInsurance.PossibleComisson}" />
                 <Button Grid.Row="6" Grid.Column="3"  Content="Exportera" FontSize="15" Margin="62.333,2,83.667,43.667" Command="{Binding ExportBtn}" />
                 <Button Grid.Row="6" Grid.Column="3"  Content="Ta bort" FontSize="15" Margin="62.333,36,83.667,11.444" Command="{Binding RemoveBtn}" />
             </Grid>

@@ -180,7 +180,11 @@
                 <ComboBox Grid.Row="3" IsReadOnly="true" Grid.Column="2" Margin="10.667,32,9.667,12.667" ItemsSource="{Binding BaseAmountsOP2}" Text="{Binding SelectedInsurance.BaseAmountValue3}" SelectedItem="{Binding SelectedInsurance.BaseAmountValue3}"/>
                 <Label Grid.Row="4" Grid.Column="1" Content="Höjning av livförsäkring: " FontSize="15" Grid.ColumnSpan="3" Margin="285,0.333,264.667,0.333"/>
                 <TextBox Grid.Row="4" Grid.Column="2" Margin="10.667,27.333,9.667,6.333" Text="{Binding SelectedInsurance.BaseAmountValue}" />
-
+                <Label Content="Om tecknad: " FontSize="18" Grid.Row="1" Grid.Column="3"></Label>
+                <Label Content="Försäkringsnummer: " Grid.Row="2" Grid.Column="3"></Label>
+                <TextBox Grid.Row="2" Grid.Column="3"  Text="{Binding SelectedInsurance.InsuranceNumber}" Margin="10.333,25,-0.333,0" />
+                <Label Content="Grundbelopp: " Grid.Row="3" Grid.Column="3"></Label>
+                <TextBox Grid.Row="3" Grid.Column="3" Margin="10.333,32,-0.333,9.667" Text="{Binding SelectedInsurance.PossibleBaseAmount}" />
                 <Button Grid.Row="5" Grid.Column="3"  Content="Uppdatera" FontSize="15" Margin="62.333,24.667,83.667,3" Command="{Binding UpdateBtn}" />
                 <Button Grid.Row="6" Grid.Column="3"  Content="Exportera" FontSize="15" Margin="62.333,2,83.667,2.667" Grid.RowSpan="2" Command="{Binding ExportBtn}" />
                 <Button Grid.Row="8" Grid.Column="3"  Content="Ta bort" FontSize="15" Margin="62.333,2.667,83.667,20.333" Command="{Binding RemoveBtn}" />

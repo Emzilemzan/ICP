@@ -158,8 +158,12 @@
                         <StaticResource ResourceKey="DataTemplateBaseAmountT"/>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
+                <Label Content="Om tecknad: " FontSize="18" Grid.Row="1" Grid.Column="3"></Label>
+                <Label Content="Försäkringsnummer: " Grid.Row="2" Grid.Column="3"></Label>
+                <TextBox Grid.Row="2" Grid.Column="3"  Text="{Binding SelectedInsurance.InsuranceNumber}" Margin="10.333,25,-0.333,0" />
+                <Label Content="Provision: " Grid.Row="3" Grid.Column="3"></Label>
+                <TextBox Grid.Row="3" Grid.Column="3" Margin="10.333,32,-0.333,9.667" Text="{Binding SelectedInsurance.PossibleComisson}" />
 
-               
                 <Button Grid.Row="6" Grid.Column="3"  Content="Exportera" FontSize="15" Margin="62.333,2.333,83.667,88" Command="{Binding ExportBtn}" />
                 <Button Grid.Row="6" Grid.Column="3"  Content="Ta bort" FontSize="15" Margin="62.333,46.333,83.667,46.333" Command="{Binding RemoveBtn}" />
             </Grid>

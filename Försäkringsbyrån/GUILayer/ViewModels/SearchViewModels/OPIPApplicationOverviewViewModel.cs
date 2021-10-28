@@ -174,10 +174,7 @@ namespace GUILayer.ViewModels.SearchViewModels
         }
         public ObservableCollection<OtherPersonInsurance> UpdateOPI()
         {
-            ObservableCollection<OtherPersonInsurance> x = new ObservableCollection<OtherPersonInsurance>
-            {
-                new OtherPersonInsurance() { OPIId = 0, OPIName = "Inget" }
-            };
+            ObservableCollection<OtherPersonInsurance> x = new ObservableCollection<OtherPersonInsurance>();
             foreach (var e in Context.IController.GetAllOPI())
             {
                 x?.Add(e);
