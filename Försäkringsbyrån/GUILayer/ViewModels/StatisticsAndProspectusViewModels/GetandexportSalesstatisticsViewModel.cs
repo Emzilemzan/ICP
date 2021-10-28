@@ -386,9 +386,157 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
                 }
             }
         }
-
-        public void EmptyAllChoices()
+        public void EmptyAllChoices1()
         {
+            Fullname = null;
+            SalesMen = null;
+            Year = null;
+            #region number total
+            CountSACJanuary = 0;
+            CountSACFebruary = 0;
+            CountSACMars = 0;
+            CountSACApril = 0;
+            CountSACMay = 0;
+            CountSACJune = 0;
+            CountSACJuly = 0;
+            CountSACAugust = 0;
+            CountSACSeptember = 0;
+            CountSACOctober = 0;
+            CountSACNovember = 0;
+            CountSACDecember = 0;
+            CountSACTotal = 0;
+
+            CountSAAJanuary = 0;
+            CountSAAFebruary = 0;
+            CountSAAMars = 0;
+            CountSAAApril = 0;
+            CountSAAMay = 0;
+            CountSAAJune = 0;
+            CountSAAJuly = 0;
+            CountSAAAugust = 0;
+            CountSAASeptember = 0;
+            CountSAAOctober = 0;
+            CountSAANovember = 0;
+            CountSAADecember = 0;
+            CountSAATotal = 0;
+
+            CountLivJanuary = 0;
+            CountLivFebruary = 0;
+            CountLivMars = 0;
+            CountLivApril = 0;
+            CountLivMay = 0;
+            CountLivJune = 0;
+            CountLivJuly = 0;
+            CountLivAugust = 0;
+            CountLivSeptember = 0;
+            CountLivOctober = 0;
+            CountLivNovember = 0;
+            CountLivDecember = 0;
+            CountLivTotal = 0;
+
+            CountOPJanuary = 0;
+            CountOPFebruary = 0;
+            CountOPMars = 0;
+            CountOPApril = 0;
+            CountOPMay = 0;
+            CountOPJune = 0;
+            CountOPJuly = 0;
+            CountOPAugust = 0;
+            CountOPSeptember = 0;
+            CountOPOctober = 0;
+            CountOPNovember = 0;
+            CountOPDecember = 0;
+            CountOPTotal = 0;
+
+            CountCIJanuary = 0;
+            CountCIFebruary = 0;
+            CountCIMars = 0;
+            CountCIApril = 0;
+            CountCIMay = 0;
+            CountCIJune = 0;
+            CountCIJuly = 0;
+            CountCIAugust = 0;
+            CountCISeptember = 0;
+            CountCIOctober = 0;
+            CountCINovember = 0;
+            CountCIDecember = 0;
+            CountCITotal = 0;
+
+            CountJanuary = 0;
+            CountFebruary = 0;
+            CountMars = 0;
+            CountApril = 0;
+            CountMay = 0;
+            CountJune = 0;
+            CountJuly = 0;
+            CountAugust = 0;
+            CountSeptember = 0;
+            CountOctober = 0;
+            CountNovember = 0;
+            CountDecember = 0;
+            CountTotalM = 0;
+            #endregion
+            #region all ackvisitions. 
+            AckSACJanuary = 0;
+            AckSACFebruary = 0;
+            AckSACMars = 0;
+            AckSACApril = 0;
+            AckSACMay = 0;
+            AckSACJune = 0;
+            AckSACJuly = 0;
+            AckSACAugust = 0;
+            AckSACSeptember = 0;
+            AckSACOctober = 0;
+            AckSACNovember = 0;
+            AckSACDecember = 0;
+            AckSACTotal = 0;
+
+            AckSAAJanuary = 0;
+            AckSAAFebruary = 0;
+            AckSAAMars = 0;
+            AckSAAApril = 0;
+            AckSAAMay = 0;
+            AckSAAJune = 0;
+            AckSAAJuly = 0;
+            AckSAAAugust = 0;
+            AckSAASeptember = 0;
+            AckSAAOctober = 0;
+            AckSAANovember = 0;
+            AckSAADecember = 0;
+            AckSAATotal = 0;
+
+            AckLivJanuary = 0;
+            AckLivFebruary = 0;
+            AckLivMars = 0;
+            AckLivApril = 0;
+            AckLivMay = 0;
+            AckLivJune = 0;
+            AckLivJuly = 0;
+            AckLivAugust = 0;
+            AckLivSeptember = 0;
+            AckLivOctober = 0;
+            AckLivNovember = 0;
+            AckLivDecember = 0;
+            AckLivTotal = 0;
+
+            AckJanuary = 0;
+            AckFebruary = 0;
+            AckMars = 0;
+            AckApril = 0;
+            AckMay = 0;
+            AckJune = 0;
+            AckJuly = 0;
+            AckAugust = 0;
+            AckSeptember = 0;
+            AckOctober = 0;
+            AckNovember = 0;
+            AckDecember = 0;
+            AckTotalM = 0;
+            #endregion
+        }
+        private void EmptyAllChoices()
+        {
+            Fullname = null;
             Year = null;
             #region number total
             CountSACJanuary = 0;

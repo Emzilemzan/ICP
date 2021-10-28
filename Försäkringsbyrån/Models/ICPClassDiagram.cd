@@ -45,8 +45,8 @@
       <FileName>Models\Company.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
-      <Property Name="Insurances" />
       <Property Name="InsuredPersons" />
+      <Property Name="Insurances" />
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="Models.Models.CompanyInsurance">
@@ -73,14 +73,14 @@
       <FileName>Models\Insurance.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="AgentNo" />
-      <Property Name="COI" />
-      <Property Name="SAI" />
-      <Property Name="PersonTaker" />
       <Property Name="InsuredID" />
-      <Property Name="OPI" />
-      <Property Name="LIFE" />
+      <Property Name="AgentNo" />
       <Property Name="InsuranceStatus" />
+      <Property Name="SAI" />
+      <Property Name="LIFE" />
+      <Property Name="COI" />
+      <Property Name="OPI" />
+      <Property Name="PersonTaker" />
       <Property Name="CompanyTaker" />
     </ShowAsAssociation>
     <ShowAsCollectionAssociation>
@@ -129,8 +129,8 @@
       <FileName>Models\Person.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
-      <Property Name="Insurances" />
       <Property Name="InsuredPersons" />
+      <Property Name="Insurances" />
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="Models.Models.SAInsurance">

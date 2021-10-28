@@ -260,6 +260,7 @@ namespace GUILayer.ViewModels
             ApplicationOverviewViewModels.Instance.UpdateGridToDb();
             OPICApplicationOverviewViewModel.Instance.UpdateGridToDb();
             OPIPApplicationOverviewViewModel.Instance.UpdateGridToDb();
+            GetandexportSalesstatisticsViewModel.Instance.EmptyAllChoices1();
         }
     }
 }
