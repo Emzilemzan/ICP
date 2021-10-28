@@ -29,19 +29,17 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
         /// only shows years that actually has signed insurances. 
         /// </summary>
         /// <returns></returns>
-        public List<int?> GetYears()
+        public List<int?> GetYears(SalesMen sm)
         {
             List<int?> Years1 = new List<int?>();
             foreach (var i in Context.IController.GetAllInsurances())
             {
-                if (i.PayYear != null)
+                if (i.PayYear != null && i.AgentNo == sm)
                 {
                     Years1?.Add(i.PayYear);
                 }
             }
-
             return Years = Years1.Union(Years1).ToList();
-
         }
 
         //Get all salesmen. 
@@ -67,7 +65,7 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
         public void Update()
         {
             SalesMens = UpdateSM();
-            Years = GetYears();
+            
         }
 
         #endregion
@@ -182,15 +180,13 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
 
             xlWorksheet.Cells[16, 1] = "ÖFP";
             xlWorksheet.Cells[17, 1] = "Antal tecknade";
-            xlWorksheet.Cells[18, 1] = "Totalt ack.värde";
 
-            xlWorksheet.Cells[20, 1] = "FF";
-            xlWorksheet.Cells[21, 1] = "Antal tecknade";
-            xlWorksheet.Cells[22, 1] = "Totalt ack.värde";
+            xlWorksheet.Cells[19, 1] = "FF";
+            xlWorksheet.Cells[20, 1] = "Antal tecknade";
 
-            xlWorksheet.Cells[24, 1] = "Totalt";
-            xlWorksheet.Cells[25, 1] = "Antal tecknade";
-            xlWorksheet.Cells[26, 1] = "Totalt ack.värde";
+            xlWorksheet.Cells[22, 1] = "Totalt";
+            xlWorksheet.Cells[23, 1] = "Antal tecknade";
+            xlWorksheet.Cells[24, 1] = "Totalt ack.värde";
             #endregion
 
             WriteDataToExcel(xlWorksheet, year);
@@ -264,33 +260,33 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             xlWorksheet.Cells[17, 13] = UpdateOP(12);
             xlWorksheet.Cells[17, 14] = UpdateOP(1) + UpdateOP(2) + UpdateOP(3) + UpdateOP(4) + UpdateOP(5) + UpdateOP(6) + UpdateOP(7) + UpdateOP(8) + UpdateOP(9) + UpdateOP(10) + UpdateOP(11) + UpdateOP(12);
 
-            xlWorksheet.Cells[21, 2] = UpdateCI(1);
-            xlWorksheet.Cells[21, 3] = UpdateCI(2);
-            xlWorksheet.Cells[21, 4] = UpdateCI(3);
-            xlWorksheet.Cells[21, 5] = UpdateCI(4);
-            xlWorksheet.Cells[21, 6] = UpdateCI(5);
-            xlWorksheet.Cells[21, 7] = UpdateCI(6);
-            xlWorksheet.Cells[21, 8] = UpdateCI(7);
-            xlWorksheet.Cells[21, 9] = UpdateCI(8);
-            xlWorksheet.Cells[21, 10] = UpdateCI(9);
-            xlWorksheet.Cells[21, 11] = UpdateCI(10);
-            xlWorksheet.Cells[21, 12] = UpdateCI(11);
-            xlWorksheet.Cells[21, 13] = UpdateCI(12);
-            xlWorksheet.Cells[21, 14] = UpdateCI(1) + UpdateCI(2) + UpdateCI(3) + UpdateCI(4) + UpdateCI(5) + UpdateCI(6) + UpdateCI(7) + UpdateCI(8) + UpdateCI(9) + UpdateCI(10) + UpdateCI(11) + UpdateCI(12);
+            xlWorksheet.Cells[20, 2] = UpdateCI(1);
+            xlWorksheet.Cells[20, 3] = UpdateCI(2);
+            xlWorksheet.Cells[20, 4] = UpdateCI(3);
+            xlWorksheet.Cells[20, 5] = UpdateCI(4);
+            xlWorksheet.Cells[20, 6] = UpdateCI(5);
+            xlWorksheet.Cells[20, 7] = UpdateCI(6);
+            xlWorksheet.Cells[20, 8] = UpdateCI(7);
+            xlWorksheet.Cells[20, 9] = UpdateCI(8);
+            xlWorksheet.Cells[20, 10] = UpdateCI(9);
+            xlWorksheet.Cells[20, 11] = UpdateCI(10);
+            xlWorksheet.Cells[20, 12] = UpdateCI(11);
+            xlWorksheet.Cells[20, 13] = UpdateCI(12);
+            xlWorksheet.Cells[20, 14] = UpdateCI(1) + UpdateCI(2) + UpdateCI(3) + UpdateCI(4) + UpdateCI(5) + UpdateCI(6) + UpdateCI(7) + UpdateCI(8) + UpdateCI(9) + UpdateCI(10) + UpdateCI(11) + UpdateCI(12);
 
-            xlWorksheet.Cells[25, 2] = UpdateTotal(1);
-            xlWorksheet.Cells[25, 3] = UpdateTotal(2);
-            xlWorksheet.Cells[25, 4] = UpdateTotal(3);
-            xlWorksheet.Cells[25, 5] = UpdateTotal(4);
-            xlWorksheet.Cells[25, 6] = UpdateTotal(5);
-            xlWorksheet.Cells[25, 7] = UpdateTotal(6);
-            xlWorksheet.Cells[25, 8] = UpdateTotal(7);
-            xlWorksheet.Cells[25, 9] = UpdateTotal(8);
-            xlWorksheet.Cells[25, 10] = UpdateTotal(9);
-            xlWorksheet.Cells[25, 11] = UpdateTotal(10);
-            xlWorksheet.Cells[25, 12] = UpdateTotal(11);
-            xlWorksheet.Cells[25, 13] = UpdateTotal(12);
-            xlWorksheet.Cells[25, 14] = UpdateTotal(1) + UpdateTotal(2) + UpdateTotal(3) + UpdateTotal(4) + UpdateTotal(5) + UpdateTotal(6) + UpdateTotal(7) + UpdateTotal(8) + UpdateTotal(9) + UpdateTotal(10) + UpdateTotal(11) + UpdateTotal(12);
+            xlWorksheet.Cells[23, 2] = UpdateTotal(1);
+            xlWorksheet.Cells[23, 3] = UpdateTotal(2);
+            xlWorksheet.Cells[23, 4] = UpdateTotal(3);
+            xlWorksheet.Cells[23, 5] = UpdateTotal(4);
+            xlWorksheet.Cells[23, 6] = UpdateTotal(5);
+            xlWorksheet.Cells[23, 7] = UpdateTotal(6);
+            xlWorksheet.Cells[23, 8] = UpdateTotal(7);
+            xlWorksheet.Cells[23, 9] = UpdateTotal(8);
+            xlWorksheet.Cells[23, 10] = UpdateTotal(9);
+            xlWorksheet.Cells[23, 11] = UpdateTotal(10);
+            xlWorksheet.Cells[23, 12] = UpdateTotal(11);
+            xlWorksheet.Cells[23, 13] = UpdateTotal(12);
+            xlWorksheet.Cells[23, 14] = UpdateTotal(1) + UpdateTotal(2) + UpdateTotal(3) + UpdateTotal(4) + UpdateTotal(5) + UpdateTotal(6) + UpdateTotal(7) + UpdateTotal(8) + UpdateTotal(9) + UpdateTotal(10) + UpdateTotal(11) + UpdateTotal(12);
             #endregion
             #region all ackvisitions. 
             xlWorksheet.Cells[6, 2] = CreateSMAVC(s, 1, year);
@@ -335,47 +331,19 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             xlWorksheet.Cells[14, 13] = CreateLife(s, 12, year);
             xlWorksheet.Cells[14, 14] = CreateLife(s, 1, year) + CreateLife(s, 2, year) + CreateLife(s, 3, year) + CreateLife(s, 4, year) + CreateLife(s, 5, year) + CreateLife(s, 6, year) + CreateLife(s, 7, year) + CreateLife(s, 8, year) + CreateLife(s, 9, year) + CreateLife(s, 10, year) + CreateLife(s, 11, year) + CreateLife(s, 12, year);
 
-            xlWorksheet.Cells[18, 2] = CreateOP(s, 1, year);
-            xlWorksheet.Cells[18, 3] = CreateOP(s, 2, year);
-            xlWorksheet.Cells[18, 4] = CreateOP(s, 3, year);
-            xlWorksheet.Cells[18, 5] = CreateOP(s, 4, year);
-            xlWorksheet.Cells[18, 6] = CreateOP(s, 5, year);
-            xlWorksheet.Cells[18, 7] = CreateOP(s, 6, year);
-            xlWorksheet.Cells[18, 8] = CreateOP(s, 7, year);
-            xlWorksheet.Cells[18, 9] = CreateOP(s, 8, year);
-            xlWorksheet.Cells[18, 10] = CreateOP(s, 9, year);
-            xlWorksheet.Cells[18, 11] = CreateOP(s, 10, year);
-            xlWorksheet.Cells[18, 12] = CreateOP(s, 11, year);
-            xlWorksheet.Cells[18, 13] = CreateOP(s, 12, year);
-            xlWorksheet.Cells[18, 14] = CreateOP(s, 1, year) + CreateOP(s, 2, year) + CreateOP(s, 3, year) + CreateOP(s, 4, year) + CreateOP(s, 5, year) + CreateOP(s, 6, year) + CreateOP(s, 7, year) + CreateOP(s, 8, year) + CreateOP(s, 9, year) + CreateOP(s, 10, year) + CreateOP(s, 11, year) + CreateOP(s, 12, year);
-
-            xlWorksheet.Cells[22, 2] = CreateCI(s, 1, year);
-            xlWorksheet.Cells[22, 3] = CreateCI(s, 2, year);
-            xlWorksheet.Cells[22, 4] = CreateCI(s, 3, year);
-            xlWorksheet.Cells[22, 5] = CreateCI(s, 4, year);
-            xlWorksheet.Cells[22, 6] = CreateCI(s, 5, year);
-            xlWorksheet.Cells[22, 7] = CreateCI(s, 6, year);
-            xlWorksheet.Cells[22, 8] = CreateCI(s, 7, year);
-            xlWorksheet.Cells[22, 9] = CreateCI(s, 8, year);
-            xlWorksheet.Cells[22, 10] = CreateCI(s, 9, year);
-            xlWorksheet.Cells[22, 11] = CreateCI(s, 10, year);
-            xlWorksheet.Cells[22, 12] = CreateCI(s, 11, year);
-            xlWorksheet.Cells[22, 13] = CreateCI(s, 12, year);
-            xlWorksheet.Cells[22, 14] = CreateCI(s, 1, year) + CreateCI(s, 2, year) + CreateCI(s, 3, year) + CreateCI(s, 4, year) + CreateCI(s, 5, year) + CreateCI(s, 6, year) + CreateCI(s, 7, year) + CreateCI(s, 8, year) + CreateCI(s, 9, year) + CreateCI(s, 10, year) + CreateCI(s, 11, year) + CreateCI(s, 12, year);
-
-            xlWorksheet.Cells[26, 2] = CountMonthTotalSM(s, 1, year);
-            xlWorksheet.Cells[26, 3] = CountMonthTotalSM(s, 2, year);
-            xlWorksheet.Cells[26, 4] = CountMonthTotalSM(s, 3, year);
-            xlWorksheet.Cells[26, 5] = CountMonthTotalSM(s, 4, year);
-            xlWorksheet.Cells[26, 6] = CountMonthTotalSM(s, 5, year);
-            xlWorksheet.Cells[26, 7] = CountMonthTotalSM(s, 6, year);
-            xlWorksheet.Cells[26, 8] = CountMonthTotalSM(s, 7, year);
-            xlWorksheet.Cells[26, 9] = CountMonthTotalSM(s, 8, year);
-            xlWorksheet.Cells[26, 10] = CountMonthTotalSM(s, 9, year);
-            xlWorksheet.Cells[26, 11] = CountMonthTotalSM(s, 10, year);
-            xlWorksheet.Cells[26, 12] = CountMonthTotalSM(s, 11, year);
-            xlWorksheet.Cells[26, 13] = CountMonthTotalSM(s, 12, year);
-            xlWorksheet.Cells[26, 14] = CountTotal(s, year);
+            xlWorksheet.Cells[24, 2] = CountMonthTotalSM(s, 1, year);
+            xlWorksheet.Cells[24, 3] = CountMonthTotalSM(s, 2, year);
+            xlWorksheet.Cells[24, 4] = CountMonthTotalSM(s, 3, year);
+            xlWorksheet.Cells[24, 5] = CountMonthTotalSM(s, 4, year);
+            xlWorksheet.Cells[24, 6] = CountMonthTotalSM(s, 5, year);
+            xlWorksheet.Cells[24, 7] = CountMonthTotalSM(s, 6, year);
+            xlWorksheet.Cells[24, 8] = CountMonthTotalSM(s, 7, year);
+            xlWorksheet.Cells[24, 9] = CountMonthTotalSM(s, 8, year);
+            xlWorksheet.Cells[24, 10] = CountMonthTotalSM(s, 9, year);
+            xlWorksheet.Cells[24, 11] = CountMonthTotalSM(s, 10, year);
+            xlWorksheet.Cells[24, 12] = CountMonthTotalSM(s, 11, year);
+            xlWorksheet.Cells[24, 13] = CountMonthTotalSM(s, 12, year);
+            xlWorksheet.Cells[24, 14] = CountTotal(s, year);
 
             #endregion
         }
@@ -393,10 +361,11 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             {
                 _year = value;
                 OnPropertyChanged("Year");
-                if (SalesMen != null)
+                if(Year != null)
                 {
                     UpdateAllFields();
                 }
+               
             }
         }
         public ObservableCollection<SalesMen> SalesMens { get; set; }
@@ -408,11 +377,167 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             {
                 _salesMen = value;
                 OnPropertyChanged("SalesMen");
+                EmptyAllChoices();
+                if (SalesMen != null)
+                {
+                    Years = GetYears(SalesMen);
+                    OnPropertyChanged("Years");
+
+                }
             }
+        }
+
+        public void EmptyAllChoices()
+        {
+            Year = null;
+            #region number total
+            CountSACJanuary = 0;
+            CountSACFebruary = 0;
+            CountSACMars = 0;
+            CountSACApril = 0;
+            CountSACMay = 0;
+            CountSACJune = 0;
+            CountSACJuly = 0;
+            CountSACAugust = 0;
+            CountSACSeptember = 0;
+            CountSACOctober = 0;
+            CountSACNovember = 0;
+            CountSACDecember = 0;
+            CountSACTotal = 0;
+
+            CountSAAJanuary = 0;
+            CountSAAFebruary = 0;
+            CountSAAMars = 0;
+            CountSAAApril = 0;
+            CountSAAMay = 0;
+            CountSAAJune = 0;
+            CountSAAJuly = 0;
+            CountSAAAugust = 0;
+            CountSAASeptember = 0;
+            CountSAAOctober = 0;
+            CountSAANovember = 0;
+            CountSAADecember = 0;
+            CountSAATotal = 0;
+
+            CountLivJanuary = 0;
+            CountLivFebruary = 0;
+            CountLivMars = 0;
+            CountLivApril = 0;
+            CountLivMay = 0;
+            CountLivJune = 0;
+            CountLivJuly = 0;
+            CountLivAugust = 0;
+            CountLivSeptember = 0;
+            CountLivOctober = 0;
+            CountLivNovember = 0;
+            CountLivDecember = 0;
+            CountLivTotal = 0;
+
+            CountOPJanuary = 0;
+            CountOPFebruary = 0;
+            CountOPMars = 0;
+            CountOPApril = 0;
+            CountOPMay = 0;
+            CountOPJune = 0;
+            CountOPJuly = 0;
+            CountOPAugust = 0;
+            CountOPSeptember = 0;
+            CountOPOctober = 0;
+            CountOPNovember = 0;
+            CountOPDecember = 0;
+            CountOPTotal = 0;
+
+            CountCIJanuary = 0;
+            CountCIFebruary = 0;
+            CountCIMars = 0;
+            CountCIApril = 0;
+            CountCIMay = 0;
+            CountCIJune = 0;
+            CountCIJuly = 0;
+            CountCIAugust = 0;
+            CountCISeptember = 0;
+            CountCIOctober = 0;
+            CountCINovember = 0;
+            CountCIDecember = 0;
+            CountCITotal = 0;
+
+            CountJanuary = 0;
+            CountFebruary = 0;
+            CountMars = 0;
+            CountApril = 0;
+            CountMay = 0;
+            CountJune = 0;
+            CountJuly = 0;
+            CountAugust = 0;
+            CountSeptember = 0;
+            CountOctober = 0;
+            CountNovember = 0;
+            CountDecember = 0;
+            CountTotalM = 0;
+            #endregion
+            #region all ackvisitions. 
+            AckSACJanuary = 0;
+            AckSACFebruary = 0;
+            AckSACMars = 0;
+            AckSACApril = 0;
+            AckSACMay = 0;
+            AckSACJune = 0;
+            AckSACJuly = 0;
+            AckSACAugust = 0;
+            AckSACSeptember = 0;
+            AckSACOctober = 0;
+            AckSACNovember = 0;
+            AckSACDecember = 0;
+            AckSACTotal = 0;
+
+            AckSAAJanuary = 0;
+            AckSAAFebruary = 0;
+            AckSAAMars = 0;
+            AckSAAApril = 0;
+            AckSAAMay = 0;
+            AckSAAJune = 0;
+            AckSAAJuly = 0;
+            AckSAAAugust = 0;
+            AckSAASeptember = 0;
+            AckSAAOctober = 0;
+            AckSAANovember = 0;
+            AckSAADecember = 0;
+            AckSAATotal = 0;
+
+            AckLivJanuary = 0;
+            AckLivFebruary = 0;
+            AckLivMars = 0;
+            AckLivApril = 0;
+            AckLivMay = 0;
+            AckLivJune = 0;
+            AckLivJuly = 0;
+            AckLivAugust = 0;
+            AckLivSeptember = 0;
+            AckLivOctober = 0;
+            AckLivNovember = 0;
+            AckLivDecember = 0;
+            AckLivTotal = 0;
+
+            AckJanuary = 0;
+            AckFebruary = 0;
+            AckMars = 0;
+            AckApril = 0;
+            AckMay = 0;
+            AckJune = 0;
+            AckJuly = 0;
+            AckAugust = 0;
+            AckSeptember = 0;
+            AckOctober = 0;
+            AckNovember = 0;
+            AckDecember = 0;
+            AckTotalM = 0;
+            #endregion
         }
 
         private void UpdateAllFields()
         {
+            Fullname = SalesMen.Firstname + " " + SalesMen.Lastname;
+            OnPropertyChanged("FullName");
             int year = int.Parse(Year?.ToString());
             #region number total
             CountSACJanuary = UpdateCSAC(1);
@@ -661,60 +786,6 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             AckLivTotal = CreateLife(s, 1, year) + CreateLife(s, 2, year) + CreateLife(s, 3, year) + CreateLife(s, 4, year) + CreateLife(s, 5, year) + CreateLife(s, 6, year) + CreateLife(s, 7, year) + CreateLife(s, 8, year) + CreateLife(s, 9, year) + CreateLife(s, 10, year) + CreateLife(s, 11, year) + CreateLife(s, 12, year);
             OnPropertyChanged("AckLivTotal");
 
-            AckOPJanuary = CreateOP(s, 1, year);
-            OnPropertyChanged("AckOPJanuary");
-            AckOPFebruary = CreateOP(s, 2, year);
-            OnPropertyChanged("AckOPFebruary");
-            AckOPMars = CreateOP(s, 3, year);
-            OnPropertyChanged("AckOPMars");
-            AckOPApril = CreateOP(s, 4, year);
-            OnPropertyChanged("AckOPApril");
-            AckOPMay = CreateOP(s, 5, year);
-            OnPropertyChanged("AckOPMay");
-            AckOPJune = CreateOP(s, 6, year);
-            OnPropertyChanged("AckOPJune");
-            AckOPJuly = CreateOP(s, 7, year);
-            OnPropertyChanged("AckOPJuly");
-            AckOPAugust = CreateOP(s, 8, year);
-            OnPropertyChanged("AckOPAugust");
-            AckOPSeptember = CreateOP(s, 9, year);
-            OnPropertyChanged("AckOPSeptember");
-            AckOPOctober = CreateOP(s, 10, year);
-            OnPropertyChanged("AckOPOctober");
-            AckOPNovember = CreateOP(s, 11, year);
-            OnPropertyChanged("AckOPNovember");
-            AckOPDecember = CreateOP(s, 12, year);
-            OnPropertyChanged("AckOPDecember");
-            AckOPTotal = CreateOP(s, 1, year) + CreateOP(s, 2, year) + CreateOP(s, 3, year) + CreateOP(s, 4, year) + CreateOP(s, 5, year) + CreateOP(s, 6, year) + CreateOP(s, 7, year) + CreateOP(s, 8, year) + CreateOP(s, 9, year) + CreateOP(s, 10, year) + CreateOP(s, 11, year) + CreateOP(s, 12, year);
-            OnPropertyChanged("AckOPTotal");
-
-            AckCIJanuary = CreateCI(s, 1, year);
-            OnPropertyChanged("AckCIJanuary");
-            AckCIFebruary = CreateCI(s, 2, year);
-            OnPropertyChanged("AckCIFebruary");
-            AckCIMars = CreateCI(s, 3, year);
-            OnPropertyChanged("AckCIMars");
-            AckCIApril = CreateCI(s, 4, year);
-            OnPropertyChanged("AckCIApril");
-            AckCIMay = CreateCI(s, 5, year);
-            OnPropertyChanged("AckCIMay");
-            AckCIJune = CreateCI(s, 6, year);
-            OnPropertyChanged("AckCIJune");
-            AckCIJuly = CreateCI(s, 7, year);
-            OnPropertyChanged("AckCIJuly");
-            AckCIAugust = CreateCI(s, 8, year);
-            OnPropertyChanged("AckCIAugust");
-            AckCISeptember = CreateCI(s, 9, year);
-            OnPropertyChanged("AckCISeptember");
-            AckCIOctober = CreateCI(s, 10, year);
-            OnPropertyChanged("AckCIOctober");
-            AckCINovember = CreateCI(s, 11, year);
-            OnPropertyChanged("AckCINovember");
-            AckCIDecember = CreateCI(s, 12, year);
-            OnPropertyChanged("AckCIDecember");
-            AckCITotal = CreateCI(s, 1, year) + CreateCI(s, 2, year) + CreateCI(s, 3, year) + CreateCI(s, 4, year) + CreateCI(s, 5, year) + CreateCI(s, 6, year) + CreateCI(s, 7, year) + CreateCI(s, 8, year) + CreateCI(s, 9, year) + CreateCI(s, 10, year) + CreateCI(s, 11, year) + CreateCI(s, 12, year);
-            OnPropertyChanged("AckCITotal");
-
             AckJanuary = CountMonthTotalSM(s, 1, year);
             OnPropertyChanged("AckJanuary");
             AckFebruary = CountMonthTotalSM(s, 2, year);
@@ -745,7 +816,16 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
         }
 
         #endregion
-
+        public string _fullName;
+        public string Fullname
+        {
+            get => _fullName;
+            set
+            {
+                _fullName = value;
+                OnPropertyChanged("FullName");
+            }
+        }
         #region Properties Ackvalue per month and total. 
         private double _AckSACJanuary;
 
@@ -1038,204 +1118,6 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
         {
             get => _AckLivTotal;
             set { _AckLivTotal = value; OnPropertyChanged("AckLivTotal"); }
-        }
-
-        private double _AckOPJanuary;
-
-        public double AckOPJanuary
-        {
-            get => _AckOPJanuary;
-            set { _AckOPJanuary = value; OnPropertyChanged("AckOPJanuary"); }
-        }
-
-        private double _AckOPFebruary;
-
-        public double AckOPFebruary
-        {
-            get => _AckOPFebruary;
-            set { _AckOPFebruary = value; OnPropertyChanged("AckOPFebruary"); }
-        }
-
-        private double _AckOPMars;
-        public double AckOPMars
-        {
-            get => _AckOPMars;
-            set { _AckOPMars = value; OnPropertyChanged("AckOPMars"); }
-        }
-
-        private double _AckOPApril;
-        public double AckOPApril
-        {
-            get => _AckOPApril;
-            set { _AckOPApril = value; OnPropertyChanged("AckOPApril"); }
-        }
-
-        private double _AckOPMay;
-
-        public double AckOPMay
-        {
-            get => _AckOPMay;
-            set { _AckOPMay = value; OnPropertyChanged("AckOPMay"); }
-        }
-
-        private double _AckOPJune;
-
-        public double AckOPJune
-        {
-            get => _AckOPJune;
-            set { _AckOPJune = value; OnPropertyChanged("AckOPJune"); }
-        }
-
-        private double _AckOPJuly;
-        public double AckOPJuly
-        {
-            get => _AckOPJuly;
-            set { _AckOPJuly = value; OnPropertyChanged("AckOPJuly"); }
-        }
-
-        private double _AckOPAugust;
-        public double AckOPAugust
-        {
-            get => _AckOPAugust;
-            set { _AckOPAugust = value; OnPropertyChanged("AckOPAugust"); }
-        }
-
-
-        private double _AckOPSeptember;
-
-        public double AckOPSeptember
-        {
-            get => _AckOPSeptember;
-            set { _AckOPSeptember = value; OnPropertyChanged("AckOPSeptember"); }
-        }
-
-        private double _AckOPOctober;
-
-        public double AckOPOctober
-        {
-            get => _AckOPOctober;
-            set { _AckOPOctober = value; OnPropertyChanged("AckOPOctober"); }
-        }
-
-        private double _AckOPNovember;
-        public double AckOPNovember
-        {
-            get => _AckOPNovember;
-            set { _AckOPNovember = value; OnPropertyChanged("AckOPNovember"); }
-        }
-
-        private double _AckOPDecember;
-        public double AckOPDecember
-        {
-            get => _AckOPDecember;
-            set { _AckOPDecember = value; OnPropertyChanged("AckOPDecember"); }
-        }
-
-        private double _AckOPTotal;
-
-        public double AckOPTotal
-        {
-            get => _AckOPTotal;
-            set { _AckOPTotal = value; OnPropertyChanged("AckOPTotal"); }
-        }
-
-        private double _AckCIJanuary;
-
-        public double AckCIJanuary
-        {
-            get => _AckCIJanuary;
-            set { _AckCIJanuary = value; OnPropertyChanged("AckCIJanuary"); }
-        }
-
-        private double _AckCIFebruary;
-
-        public double AckCIFebruary
-        {
-            get => _AckCIFebruary;
-            set { _AckCIFebruary = value; OnPropertyChanged("AckCIFebruary"); }
-        }
-
-        private double _AckCIMars;
-        public double AckCIMars
-        {
-            get => _AckCIMars;
-            set { _AckCIMars = value; OnPropertyChanged("AckCIMars"); }
-        }
-
-        private double _AckCIApril;
-        public double AckCIApril
-        {
-            get => _AckCIApril;
-            set { _AckCIApril = value; OnPropertyChanged("AckCIApril"); }
-        }
-
-        private double _AckCIMay;
-
-        public double AckCIMay
-        {
-            get => _AckCIMay;
-            set { _AckCIMay = value; OnPropertyChanged("AckCIMay"); }
-        }
-
-        private double _AckCIJune;
-
-        public double AckCIJune
-        {
-            get => _AckCIJune;
-            set { _AckCIJune = value; OnPropertyChanged("AckCIJune"); }
-        }
-
-        private double _AckCIJuly;
-        public double AckCIJuly
-        {
-            get => _AckCIJuly;
-            set { _AckCIJuly = value; OnPropertyChanged("AckCIJuly"); }
-        }
-
-        private double _AckCIAugust;
-        public double AckCIAugust
-        {
-            get => _AckCIAugust;
-            set { _AckCIAugust = value; OnPropertyChanged("AckCIAugust"); }
-        }
-
-
-        private double _AckCISeptember;
-
-        public double AckCISeptember
-        {
-            get => _AckCISeptember;
-            set { _AckCISeptember = value; OnPropertyChanged("AckCISeptember"); }
-        }
-
-        private double _AckCIOctober;
-
-        public double AckCIOctober
-        {
-            get => _AckCIOctober;
-            set { _AckCIOctober = value; OnPropertyChanged("AckCIOctober"); }
-        }
-
-        private double _AckCINovember;
-        public double AckCINovember
-        {
-            get => _AckCINovember;
-            set { _AckCINovember = value; OnPropertyChanged("AckCINovember"); }
-        }
-
-        private double _AckCIDecember;
-        public double AckCIDecember
-        {
-            get => _AckCIDecember;
-            set { _AckCIDecember = value; OnPropertyChanged("AckCIDecember"); }
-        }
-
-        private double _AckCITotal;
-
-        public double AckCITotal
-        {
-            get => _AckCITotal;
-            set { _AckCITotal = value; OnPropertyChanged("AckCITotal"); }
         }
 
         private double _AckJanuary;
@@ -1996,36 +1878,7 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             }
             return sum;
         }
-        private double CreateOP(SalesMen sm, int Month, int year)
-        {
-            double sum = 0;
-            foreach (Insurance i in sm.Insurances)
-            {
-                if (i.InsuranceStatus == Status.Tecknad && i.PayYear == year && i.OPI != null)
-                {
-                    if (i.PayMonth == Month)
-                    {
-                        sum += i.AckValue + i.AckValue2 + i.AckValue3 + i.AckValue4;
-                    }
-                }
-            }
-            return sum;
-        }
-        private double CreateCI(SalesMen sm, int Month, int year)
-        {
-            double sum = 0;
-            foreach (Insurance i in sm.Insurances)
-            {
-                if (i.InsuranceStatus == Status.Tecknad && i.PayYear == year && i.COI != null)
-                {
-                    if (i.PayMonth == Month)
-                    {
-                        sum += i.AckValue + i.AckValue2 + i.AckValue3 + i.AckValue4;
-                    }
-                }
-            }
-            return sum;
-        }
+        
         private double CreateSMAVA(SalesMen sm, int Month, int year)
         {
             double sum = 0;
