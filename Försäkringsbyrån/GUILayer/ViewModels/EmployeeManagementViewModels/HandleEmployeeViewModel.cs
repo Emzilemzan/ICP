@@ -22,10 +22,7 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
 
         public HandleEmployeeViewModel()
         {
-            
-            
         }
-
         #region methods and commands
         //Method for filling datagrid with all existing salesmen in db. 
         public ObservableCollection<SalesMen> UpdateSM()

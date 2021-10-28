@@ -15,7 +15,6 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
         public static readonly AddUserAccessViewModel Instance = new AddUserAccessViewModel();
         public AddUserAccessViewModel()
         {
-
         }
         #region properties
         private string _lastname;
