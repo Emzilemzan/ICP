@@ -18,6 +18,9 @@ using GUILayer.ViewModels.InsuranceViewModels;
 
 namespace GUILayer.ViewModels.SearchViewModels
 {
+    /// <summary>
+    /// Viewmodel to search all insurancestakers that are Persons.
+    /// </summary>
     public class SearchInsuranceTakerPersonViewModel : BaseViewModel
     {
         public static readonly SearchInsuranceTakerPersonViewModel Instance = new SearchInsuranceTakerPersonViewModel();

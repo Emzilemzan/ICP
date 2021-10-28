@@ -10,6 +10,9 @@ using System.Windows.Input;
 
 namespace GUILayer.ViewModels.InsuranceViewModels
 {
+    /// <summary>
+    /// Viewmodel for register a new application where the taker is a person. 
+    /// </summary>
     public class RegisterPersonApplicationViewModel : BaseViewModel
     {
         public static readonly RegisterPersonApplicationViewModel Instance = new RegisterPersonApplicationViewModel();

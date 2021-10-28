@@ -14,7 +14,7 @@ using Models.Models;
 namespace GUILayer.ViewModels.InsuranceViewModels
 {
     /// <summary>
-    /// Register Application for OtherPerson Insurance Company edition. 
+    /// Viewmodel for register a new otherperson insurance where the taker is a Company
     /// </summary>
     public class RegisterOPICApplicationViewModel : BaseViewModel
     {

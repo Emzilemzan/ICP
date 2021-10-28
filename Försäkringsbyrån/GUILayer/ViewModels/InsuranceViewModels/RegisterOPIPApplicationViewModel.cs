@@ -10,12 +10,11 @@ using System.Windows.Input;
 using GUILayer.Commands;
 using Models.Models;
 
-/// <summary>
-/// Register application for the other person insurances. 
-/// </summary>
-
 namespace GUILayer.ViewModels.InsuranceViewModels
 {
+    /// <summary>
+    /// Viewmodel for register a new otherperson insurance where the taker is a person
+    /// </summary>
     public class RegisterOPIPApplicationViewModel : BaseViewModel
     {
         public static readonly RegisterOPIPApplicationViewModel Instance = new RegisterOPIPApplicationViewModel();

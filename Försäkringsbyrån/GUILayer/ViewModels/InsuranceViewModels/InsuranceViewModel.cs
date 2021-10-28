@@ -11,7 +11,7 @@ using System.Windows.Input;
 namespace GUILayer.ViewModels.InsuranceViewModels
 {
     /// <summary>
-    /// viewmodel for insuranceview. 
+    /// viewmodel for insuranceview menuchoices. 
     /// </summary>
     public class InsuranceViewModel : BaseViewModel
     {
