@@ -323,6 +323,15 @@ namespace GUILayer.ViewModels.SearchViewModels
             OnPropertyChanged("PayYears");
             PayMonths = new List<int?>() {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
             OnPropertyChanged("PayMonths");
+            if(SelectedInsurance.InsuranceStatus == Status.Tecknad)
+            {
+                StatusCheck = true;
+            }
+            else
+            {
+                StatusCheck = false;
+            }
+            OnPropertyChanged("StatusCheck");
         }
         public List<int> GetYears()
         {
@@ -357,6 +366,16 @@ namespace GUILayer.ViewModels.SearchViewModels
 
         #region properties
 
+        private bool _SCheck;
+        public bool StatusCheck
+        {
+            get => _SCheck;
+            set
+            {
+                _SCheck = value;
+                OnPropertyChanged("StatusCheck");
+            }
+        }
 
         private BaseAmountTabel _baseTbl;
         public BaseAmountTabel BaseTabel

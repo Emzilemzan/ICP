@@ -38,6 +38,15 @@ namespace GUILayer.ViewModels.SearchViewModels
             OnPropertyChanged("PayYears");
             PayMonths = new List<int?>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
             OnPropertyChanged("PayMonths");
+            if (SelectedInsurance.InsuranceStatus == Status.Tecknad)
+            {
+                StatusCheck = true;
+            }
+            else
+            {
+                StatusCheck = false;
+            }
+            OnPropertyChanged("StatusCheck");
         } 
         #region Commands
         private ICommand registerApplication_Btn;
@@ -439,7 +448,16 @@ namespace GUILayer.ViewModels.SearchViewModels
                 _check = value;
             }
         }
-
+        private bool _SCheck;
+        public bool StatusCheck
+        {
+            get => _SCheck;
+            set
+            {
+                _SCheck = value;
+                OnPropertyChanged("StatusCheck");
+            }
+        }
         private string _searchInput;
         public string SearchInput
         {
