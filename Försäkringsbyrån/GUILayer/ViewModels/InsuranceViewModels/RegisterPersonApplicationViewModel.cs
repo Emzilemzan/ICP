@@ -34,7 +34,19 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             OptionalType2 = OptionalTypes2[0];
         }
         #region commands and methods for it. 
+        private ICommand registerApplication_Btn;
+        public ICommand GoBack => registerApplication_Btn ?? (registerApplication_Btn = new RelayCommand(x => { Back(); }));
 
+        private void Back()
+        {
+            if (MainViewModel.Instance.CurrentTool != "Insurance")
+            {
+                MainViewModel.Instance.ToolsVisibility = Visibility.Visible;
+                MainViewModel.Instance.Tools = InsuranceViewModel.Instance;
+                MainViewModel.Instance.CurrentTool = "Insurance";
+                MainViewModel.Instance.SelectedViewModel = InsuranceApplicationChoiceViewModel.Instance;
+            }
+        }
         public void EmptyAllChoices()
         {
             Check = true;
@@ -296,12 +308,10 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             return InsuredPerson;
         }
 
-        private bool CanCreate() => true;
-
         private ICommand _addInsuranceBtn;
         public ICommand AddInsuranceBtn
         {
-            get => _addInsuranceBtn ?? (_addInsuranceBtn = new RelayCommand(x => { RegisterApplication(); CanCreate(); }));
+            get => _addInsuranceBtn ?? (_addInsuranceBtn = new RelayCommand(x => { RegisterApplication(); }));
         }
 
 

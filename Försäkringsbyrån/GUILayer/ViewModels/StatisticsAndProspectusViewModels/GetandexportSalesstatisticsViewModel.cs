@@ -110,15 +110,15 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             xlWorksheet.get_Range("A20").Font.Bold = true;
             xlWorksheet.get_Range("A24").Font.Bold = true;
 
-            if (System.IO.File.Exists("Excel_Trendstatistik"))
+            if (System.IO.File.Exists("Excel_Försäljningsstatistik"))
             {
-                xlWorkBook.SaveAs("Excel_Trendstatistik", Excel.XlFileFormat.xlWorkbookNormal,
+                xlWorkBook.SaveAs("Excel_Försäljningsstatistik", Excel.XlFileFormat.xlWorkbookNormal,
                 value, value, value, value, Excel.XlSaveAsAccessMode.xlExclusive,
                 value, value, value, value, value);
             }
             else
             {
-                xlWorkBook.SaveAs("Excel_Trendstatistik", Excel.XlFileFormat.xlWorkbookNormal,
+                xlWorkBook.SaveAs("Excel_Försäljningsstatistik", Excel.XlFileFormat.xlWorkbookNormal,
                 value, value, value, value, Excel.XlSaveAsAccessMode.xlExclusive,
                 value, value, value, value, value);
             }

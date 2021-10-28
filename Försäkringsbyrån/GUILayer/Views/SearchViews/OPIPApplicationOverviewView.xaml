@@ -21,7 +21,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Label Content="Register ansökningar Övrig Personförsäkring Person" FontSize="20" Grid.Row="0" Grid.Column="0" Margin="0,0,-0.333,0"/>
-
+            <Button Grid.Row="0" Grid.Column="0"  Content="Tillbaka" FontSize="15" Margin="1066,2,10.333,5" Command="{Binding GoBack}" />
             <xctk1:WatermarkTextBox Grid.Row="1" Grid.Column="0"
                                 HorizontalContentAlignment="Center"
                                 VerticalContentAlignment="Center"
@@ -45,7 +45,9 @@
                     <DataGridTextColumn Header="Status" Binding="{Binding Path=InsuranceStatus, UpdateSourceTrigger=PropertyChanged}"/>
                     <DataGridTextColumn Header="Löpnummer" Binding="{Binding Path=SerialNumber, UpdateSourceTrigger=PropertyChanged}"/>
                     <DataGridTextColumn Header="Försäkringstagare" Binding="{Binding Path= PersonTaker.SocialSecurityNumber, UpdateSourceTrigger=PropertyChanged}" />
-                    <DataGridTextColumn Header="Försäkrad" Binding="{Binding Path= InsuredID.SocialSecurityNumberIP, UpdateSourceTrigger=PropertyChanged}"/>
+                    <DataGridTextColumn Header="Försäkrad Personnummer" Binding="{Binding Path= InsuredID.SocialSecurityNumberIP, UpdateSourceTrigger=PropertyChanged}"/>
+                    <DataGridTextColumn Header="Försäkrad Förnamn" Binding="{Binding Path = InsuredID.FirstName}" />
+                    <DataGridTextColumn Header="Försäkrad Efternamn" Binding="{Binding Path = InsuredID.LastName}" />
                     <DataGridTextColumn Header="Försäkringstyp" Binding="{Binding Path= TypeName, UpdateSourceTrigger=PropertyChanged}" />
                     <DataGridTextColumn Header="Ankomstdatum" Binding="{Binding Path= DeliveryDate, UpdateSourceTrigger=PropertyChanged}"/>
                     <DataGridTextColumn Header="Agenturnummer" Binding="{Binding Path= AgentNo.AgentNumber, UpdateSourceTrigger=PropertyChanged}"/>
@@ -88,8 +90,9 @@
 
                 </Grid.RowDefinitions>
                 <Label Content="Markerad försäkring" FontSize="20" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,118,0"/>
+                <Label Content="*Uppdateringar sparas permanent så fort du lämnar sidan" Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="2" Margin="0.333,0,151.667,0" />
                 <TextBlock Text="Försäkringstyp: " FontSize="20" Grid.Row="1" Grid.Column="0" Margin="0,10,165.667,10"/>
-                <ComboBox Name="Företagsförsäkring" Height="30" Grid.Row="1" Margin="148,10,9.667,10" ItemsSource="{Binding OPInsuranceTypes, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedItem="{Binding SelectedInsurance.OPI, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" >
+                <ComboBox Name="Företagsförsäkring" IsEnabled="False" Height="30" Grid.Row="1" Margin="148,10,9.667,10" ItemsSource="{Binding OPInsuranceTypes, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedItem="{Binding SelectedInsurance.OPI, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" >
                     <ComboBox.Resources>
                         <DataTemplate x:Key="DataTemplateSA">
                             <Grid>
@@ -116,9 +119,9 @@
                 <TextBlock Text="Försäkrades uppgifter" FontSize="18" Grid.Row="5" Grid.Column="0" Margin="5,0,15,20"/>
                 <TextBlock Text="Personnummer" Grid.Row="5" Grid.ColumnSpan="2" Margin="5,34,280,5" />
                 <TextBox IsReadOnly="True" Grid.Row="5" Grid.Column="0" Margin="127,39,120,2" Text="{Binding SelectedInsurance.InsuredID.SocialSecurityNumberIP}"/>
-                <TextBlock Text="Efternamn" Grid.Row="6" Margin="5,0,280,10" Grid.ColumnSpan="2"/>
-                <TextBox IsReadOnly="True" Grid.Row="6" Grid.Column="0" Margin="127,4,120,23" Text="{Binding SelectedInsurance.InsuredID.LastName}"/>
-                <TextBlock Text="Förnamn" Grid.Row="6" Margin="5,36,280,20" Grid.ColumnSpan="2" Grid.RowSpan="2"/>
+                <TextBlock Text="Efternamn" Grid.Row="6" Margin="5,0.333,280.333,110.667" Grid.ColumnSpan="2"/>
+                <TextBox IsReadOnly="True" Grid.Row="6" Grid.Column="0" Margin="127,3.333,120,110.667" Text="{Binding SelectedInsurance.InsuredID.LastName}" RenderTransformOrigin="-0.506,0.691"/>
+                <TextBlock Text="Förnamn" Grid.Row="6" Margin="5,35.333,280.333,82.667" Grid.ColumnSpan="2"/>
                 <TextBox IsReadOnly="True" Grid.Row="6" Grid.Column="0" Margin="127,35,120,87" Text="{Binding SelectedInsurance.InsuredID.FirstName}" Grid.RowSpan="2"/>
 
 
@@ -134,7 +137,7 @@
                 <Label Grid.Row="2" Grid.Column="2" Content="Ankomstdatum:" FontSize="15"/>
                 <DatePicker Grid.Row="2" Grid.Column="2" Margin="10.333,25,9.667,0" IsEnabled="False" SelectedDate="{Binding SelectedInsurance.DeliveryDate}"/>
                 <Label Grid.Row="3" Grid.Column="2" Content="Betalform:" FontSize="15"/>
-                <ComboBox Grid.Row="3" Height="20" Grid.Column="2" Margin="10.333,25,9.667,9.667" ItemsSource="{Binding PayMentForms}" Text="{Binding SelectedInsurance.PaymentForm}"/>
+                <ComboBox Grid.Row="3" Height="20" Grid.Column="2" Margin="10.333,25,9.667,9.667" ItemsSource="{Binding PayMentForms}" Text="{Binding SelectedInsurance.PaymentForm}" SelectedItem="{Binding SelectedInsurance.PaymentForm}"/>
                 <Label Grid.Row="4" Grid.Column="2" Content="Agenturnummer:" FontSize="15"/>
                 <ComboBox Grid.Row="4" Height="20" Grid.Column="2" Margin="10.333,25.333,9.667,9.333" ItemsSource="{Binding SalesMens}" SelectedItem="{Binding SelectedInsurance.AgentNo}">
                     <ComboBox.Resources>
@@ -156,7 +159,7 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
 
-                <Button Grid.Row="5" Grid.Column="3"  Content="Uppdatera" FontSize="15" Margin="62.333,24.667,83.667,3" Command="{Binding UpdateBtn}" />
+               
                 <Button Grid.Row="6" Grid.Column="3"  Content="Exportera" FontSize="15" Margin="62.333,2.333,83.667,88" Command="{Binding ExportBtn}" />
                 <Button Grid.Row="6" Grid.Column="3"  Content="Ta bort" FontSize="15" Margin="62.333,46.333,83.667,46.333" Command="{Binding RemoveBtn}" />
             </Grid>

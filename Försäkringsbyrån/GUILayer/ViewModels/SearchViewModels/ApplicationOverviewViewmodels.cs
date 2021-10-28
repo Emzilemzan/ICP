@@ -22,7 +22,6 @@ namespace GUILayer.ViewModels.SearchViewModels
 
         private ApplicationOverviewViewModels()
         {
-            UpdateAC();
         }
         public void UpdateComboBoxes()
         {
@@ -37,30 +36,29 @@ namespace GUILayer.ViewModels.SearchViewModels
             InsuredPersons = UpdateInsuredPerson();
             OnPropertyChanged("InsuredPersons");
         }
-
-        #region command 
-        private ICommand _updateBtn;
-
-        public ICommand UpdateBtn => _updateBtn ?? (_updateBtn = new RelayCommand(x => { Update(); }));
-
-        public void Update()
+        public void UpdateGridToDb()
         {
-            if (SelectedInsurance != null && SelectedInsurance.Premie != 0 && SelectedInsurance.EndDate !=null && SelectedInsurance.StartDate !=null &&
-           SelectedInsurance.PaymentForm != null && SelectedInsurance.AgentNo !=null && SelectedInsurance.CompanyInsuranceType!= null && SelectedInsurance.EndDate != null && SelectedInsurance.InsuranceCompany != null)
+            UpdateAC();
+            if (Insurancess != null)
             {
-                SelectedInsurance.Premie = Premie;
-                SelectedInsurance.AgentNo = AgentNo;
-                SelectedInsurance.PaymentForm = PaymentForm;
-                SelectedInsurance.SerialNumber = SerialNumber;
-                SelectedInsurance.Notes = Notes;
-                SelectedInsurance.EndDate = EndDate;
-                Context.IController.Edit(SelectedInsurance);
-
-                MessageBox.Show($"Uppdateringen lyckades av: {SelectedInsurance.SerialNumber}", "Lyckad uppdatering", MessageBoxButton.OK, MessageBoxImage.Information);
+                foreach (Insurance i in Insurancess)
+                {
+                    Context.IController.Edit(i);
+                }
             }
-            else
+        }
+        #region command 
+        private ICommand registerApplication_Btn;
+        public ICommand GoBack => registerApplication_Btn ?? (registerApplication_Btn = new RelayCommand(x => { Back(); }));
+
+        private void Back()
+        {
+            if (MainViewModel.Instance.CurrentTool != "Search")
             {
-                MessageBox.Show("Du måste markera en försäkring i registret eller ha fyllt i alla fält med en *", "Fel", MessageBoxButton.OK, MessageBoxImage.Error);
+                MainViewModel.Instance.ToolsVisibility = Visibility.Visible;
+                MainViewModel.Instance.Tools = SearchValueViewModel.Instance;
+                MainViewModel.Instance.CurrentTool = "Search";
+                MainViewModel.Instance.SelectedViewModel = SearchApplicationChoiceViewModel.Instance;
             }
         }
 
@@ -208,7 +206,7 @@ namespace GUILayer.ViewModels.SearchViewModels
                 x = new List<Insurance>();
                 foreach (Insurance i in y)
                     if (i.SerialNumber.Contains(filter) || i.CompanyTaker.OrganizationNumber.Contains(filter) || i.TypeName.Contains(filter)
-                        || i.InsuredID.SocialSecurityNumberIP.Contains(filter) || i.CompanyTaker.ContactPerson.Contains(filter) || i.CompanyTaker.CompanyName.Contains(filter))
+                       || i.CompanyTaker.CompanyName.Contains(filter))
                         x.Add(i);
             }
             x?.ForEach(i => Insurancess.Add(i));

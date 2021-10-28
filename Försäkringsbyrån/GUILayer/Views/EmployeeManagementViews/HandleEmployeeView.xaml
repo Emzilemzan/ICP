@@ -39,6 +39,7 @@
                 <DataGridTextColumn Header="Skattesats" Binding="{Binding TaxRate}" />
             </DataGrid.Columns>
         </DataGrid>
+        <Label Content="*Uppdateringar sparas permanent så fort du skrivit klart din ändring" Grid.Column="0" Grid.Row="2" Margin="0,297,349,0" Grid.ColumnSpan="2"></Label>
         <StackPanel Grid.Column="1" Grid.Row="2" >
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -76,8 +77,8 @@
                 <TextBox Grid.Row="6"  Grid.Column="1" Text="{Binding SelectedPerson.City}" Margin="0.667,0,102.333,0" HorizontalAlignment="Left" Width="258" RenderTransformOrigin="0.5,0.5"></TextBox>
                 <Label Content="Skattesats(%)" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" Margin="0,0,277,0"/>
                 <TextBox Grid.Row="7" x:Name="tbTR" Grid.Column="1" Text="{Binding SelectedPerson.TaxRate}" PreviewTextInput="NumberTaxValidationTextBox" Margin="0.667,0,102.333,0"/>
-                <Button Content="Uppdatera" Margin="27,10,87,-50" Grid.Row="13" Command="{Binding UpdateSMBtn}" />
-                <Button Content="Ta bort" Margin="120,10,0,-50" Grid.Row="13" Command="{Binding DeleteSMBtn}"/>
+
+                <Button Content="Ta bort" Margin="70,10,102,-50" Grid.Row="13" Command="{Binding DeleteSMBtn}" Grid.Column="1"/>
             </Grid>
         </StackPanel>
 

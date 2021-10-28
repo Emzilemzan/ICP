@@ -21,7 +21,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Label Content="Registrera Ansökan - Företagsförsäkring" FontSize="26" Grid.Row="0" Grid.Column="0"/>
-
+            <Button Grid.Row="0" Grid.Column="1"  Content="Tillbaka" FontSize="15" Margin="271,2,130,5" Command="{Binding GoBack}" RenderTransformOrigin="0.5,0.5" />
             <StackPanel Grid.Column="0" Grid.Row="1" Grid.RowSpan="6" >
                 <Grid>
                     <Grid.ColumnDefinitions>

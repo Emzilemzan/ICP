@@ -22,13 +22,37 @@ namespace GUILayer.ViewModels.SearchViewModels
 
         private LifeOverviewViewModel()
         {
-            UpdateAC();
         }
 
         #region command 
+        private ICommand registerApplication_Btn;
+        public ICommand GoBack => registerApplication_Btn ?? (registerApplication_Btn = new RelayCommand(x => { Back(); }));
+
+        private void Back()
+        {
+            if (MainViewModel.Instance.CurrentTool != "Search")
+            {
+                MainViewModel.Instance.ToolsVisibility = Visibility.Visible;
+                MainViewModel.Instance.Tools = SearchValueViewModel.Instance;
+                MainViewModel.Instance.CurrentTool = "Search";
+                MainViewModel.Instance.SelectedViewModel = SearchApplicationChoiceViewModel.Instance;
+            }
+        }
         private ICommand _updateBtn;
 
         public ICommand UpdateBtn => _updateBtn ?? (_updateBtn = new RelayCommand(x => { Update(); }));
+
+        public void UpdateGridToDb()
+        {
+            UpdateAC();
+            if (Insurances != null)
+            {
+                foreach (Insurance i in Insurances)
+                {
+                    Context.IController.Edit(i);
+                }
+            }
+        }
 
         public void Update()
         {
@@ -222,7 +246,7 @@ namespace GUILayer.ViewModels.SearchViewModels
                 x = new List<Insurance>();
                 foreach (Insurance i in y)
                 {
-                    if (i.SerialNumber.Contains(filter) || i.PersonTaker.SocialSecurityNumber.Contains(filter) || i.TypeName.Contains(filter)
+                    if (i.SerialNumber.Contains(filter) || i.PersonTaker.SocialSecurityNumber.Contains(filter) || i.TypeName.Contains(filter) || i.PersonTaker.Firstname.Contains(filter)
                         || i.InsuredID.SocialSecurityNumberIP.Contains(filter) || i.InsuredID.LastName.Contains(filter) || i.PersonTaker.Lastname.Contains(filter)
                         || i.LIFE.LifeName.Contains(filter) || i.BaseAmountValue.ToString().Contains(filter) || i.AgentNo.AgentNumber.ToString().Contains(filter))
                     {

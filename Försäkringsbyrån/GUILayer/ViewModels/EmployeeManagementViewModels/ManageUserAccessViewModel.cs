@@ -13,13 +13,13 @@ using System.Windows.Input;
 
 namespace GUILayer.ViewModels.EmployeeManagementViewModels
 {
-    public class ManageUserAccessViewModel: BaseViewModel
+    public class ManageUserAccessViewModel : BaseViewModel
     {
         public static readonly ManageUserAccessViewModel Instance = new ManageUserAccessViewModel();
 
         public ManageUserAccessViewModel()
         {
-            Users = UpdateUA();
+
         }
 
         #region properties
@@ -29,26 +29,26 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             set
             {
                 SelectedPerson.Username = value;
-                    OnPropertyChanged("Username");
+                OnPropertyChanged("Username");
             }
         }
-
         public string Password
         {
             get => SelectedPerson.Password;
             set
             {
                 SelectedPerson.Password = value;
-                    OnPropertyChanged("Password");
+                OnPropertyChanged("Password");
             }
         }
+
         public string Lastname
         {
             get => SelectedPerson.Lastname;
             set
             {
                 SelectedPerson.Lastname = value;
-                    OnPropertyChanged("Lasttname");
+                OnPropertyChanged("Lastname");
             }
         }
 
@@ -58,9 +58,10 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             set
             {
                 SelectedPerson.Firstname = value;
-                    OnPropertyChanged("Firstname");
+                OnPropertyChanged("Firstname");
             }
         }
+
         //SelectedPerson is used to select rowdata in datagrid. 
         private UserAccess _selectedPerson;
         public UserAccess SelectedPerson
@@ -72,9 +73,17 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
                 OnPropertyChanged("SelectedPerson");
             }
         }
+        private ObservableCollection<UserAccess> _users;
+        public ObservableCollection<UserAccess> Users
+        {
+            get => _users;
+            set
+            {
+                _users = value;
+                OnPropertyChanged("Users");
+            }
+        }
 
-        public ObservableCollection<UserAccess> Users { get; set; }
-       
         #endregion
         #region properties bools for access
         public bool Search
@@ -126,7 +135,6 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
                 OnPropertyChanged("BasicData");
             }
         }
-
         public bool Commission
         {
             get => SelectedPerson.Commission;
@@ -138,45 +146,13 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
         }
         #endregion
         #region methods and commands
-        private ICommand _uUserBtn;
-        public ICommand UpdateUserBtn
-        {
-            get => _uUserBtn ?? (_uUserBtn = new RelayCommand(x => { UpdateUser(); CanCommand(); }));
-        }
 
-        public bool CanCommand() => true;
-            
-        //method for update existing user 
-        private void UpdateUser()
+        public void UpdateGridToDb()
         {
-            if (SelectedPerson != null && Instance.Password != null && Instance.Firstname != null && Instance.Lastname != null &&
-                (Instance.StatisticsAndProspects != false || Instance.Commission != false || Instance.Insurances != false
-                || Instance.EmployeeManagement != false || Instance.BasicData != false || Instance.Search != false))
+            Users = UpdateUA();
+            foreach (UserAccess ua in Users)
             {
-                SelectedPerson.Username = Username;
-                SelectedPerson.Password = Password;
-                SelectedPerson.Firstname = Firstname;
-                SelectedPerson.Lastname = Lastname;
-                SelectedPerson.Search = Search;
-                SelectedPerson.StatisticsAndProspects = StatisticsAndProspects;
-                SelectedPerson.Insurances = Insurances;
-                SelectedPerson.EmployeeManagement = EmployeeManagement;
-                SelectedPerson.Commission = Commission;
-                SelectedPerson.BasicData = BasicData;
-
-                Context.UAController.EditUser(SelectedPerson);
-                
-                MessageBox.Show($"Uppdateringen lyckades av användarnamet: {SelectedPerson.Username}", "Lyckad uppdatering", MessageBoxButton.OK, MessageBoxImage.Information);
-                Users.Clear();
-                foreach (var u in Context.UAController.GetAllUsers())
-                {
-                    if(u.Username != "Admin")
-                       Users?.Add(u);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Du måste markera en behörig i registret, alla fält måste vara ifyllda och minst en behörighet ska ha valts","Fel", MessageBoxButton.OK, MessageBoxImage.Error);
+                Context.UAController.EditUser(ua);
             }
         }
         //method to get all useraccesses in db. 
@@ -185,7 +161,7 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
             ObservableCollection<UserAccess> x = new ObservableCollection<UserAccess>();
             foreach (var u in Context.UAController.GetAllUsers())
             {
-                if(u.Username != "Admin")
+                if (u.Username != "ADMIN")
                     x?.Add(u);
             }
             Users = x;
@@ -193,37 +169,48 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
         }
 
         private ICommand _deleteUserBtn;
-        public ICommand DeleteUserBtn
-        {
-            get => _deleteUserBtn ?? (_deleteUserBtn = new RelayCommand(x => { DeleteSalesMen(); CanCommand(); }));
-        }
-        //Method for deleting a salesmen
-        //Om säljaren är registrerad på någon ansökan, ska denne ej gå att ta bort!
-        private void DeleteSalesMen()
+        public ICommand DeleteUserBtn => _deleteUserBtn ?? (_deleteUserBtn = new RelayCommand(x => { DeleteUser(); }));
+
+        /// <summary>
+        /// Method for deleting user
+        /// </summary>
+        private void DeleteUser()
         {
             if (SelectedPerson != null)
             {
-                MessageBoxResult result = MessageBox.Show("Vill du ta bort säljaren?", "Varning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-                if (result == MessageBoxResult.Yes)
+                if (SelectedPerson != Context.CurrentUser)
                 {
-                    SelectedPerson.Username = Username;
-                    SelectedPerson.Password = Password;
-                    SelectedPerson.Firstname = Firstname;
-                    SelectedPerson.Lastname = Lastname;
-                    SelectedPerson.Search = Search;
-                    SelectedPerson.StatisticsAndProspects = StatisticsAndProspects;
-                    SelectedPerson.Insurances = Insurances;
-                    SelectedPerson.EmployeeManagement = EmployeeManagement;
-                    SelectedPerson.Commission = Commission;
-                    SelectedPerson.BasicData = BasicData;
+                    MessageBoxResult result = MessageBox.Show("Vill du ta bort behörig?", "Varning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        SelectedPerson.Username = Username;
+                        SelectedPerson.Password = Password;
+                        SelectedPerson.Firstname = Firstname;
+                        SelectedPerson.Lastname = Lastname;
+                        SelectedPerson.Search = Search;
+                        SelectedPerson.StatisticsAndProspects = StatisticsAndProspects;
+                        SelectedPerson.Insurances = Insurances;
+                        SelectedPerson.EmployeeManagement = EmployeeManagement;
+                        SelectedPerson.Commission = Commission;
+                        SelectedPerson.BasicData = BasicData;
 
-                    Context.UAController.RemoveUser(SelectedPerson);
-                    Users.Remove(SelectedPerson);
-                    MessageBox.Show("Borttagningen lyckades:", "Lyckad borttagning", MessageBoxButton.OK, MessageBoxImage.Information);
+                        Context.UAController.RemoveUser(SelectedPerson);
+                        Users.Clear();
+                        foreach (var u in Context.UAController.GetAllUsers())
+                        {
+                            if (u.Username != "Admin")
+                                Users?.Add(u);
+                        }
+                        MessageBox.Show("Borttagningen lyckades:", "Lyckad borttagning", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show($"{SelectedPerson.Username} är inte borttagen");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show($"{SelectedPerson.Username} är inte borttagen");
+                    MessageBox.Show("Den behörige du försöker ta bort är dig själv, det går därmed inte att ta bort. Ska du försvinna kontakta it service, eller någon annan med personhanterings behörighet");
                 }
             }
             else

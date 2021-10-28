@@ -27,6 +27,5 @@ namespace GUILayer.Views.EmployeeManagementViews
         {
             InitializeComponent();
         }
-
     }
 }

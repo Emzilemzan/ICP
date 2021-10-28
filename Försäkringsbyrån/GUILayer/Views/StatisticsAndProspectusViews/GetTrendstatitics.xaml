@@ -39,7 +39,7 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
         <Button Grid.Column="2" Grid.Row="2" Margin="10,60,120,10" Content="Hämta och exportera till excel" Command="{Binding ExportBtn}"/>
-
+        <Label Grid.Column="0" Grid.Row="3" Content="*Om det inte finns något år eller någon säljare att välja finns det inga tecknade SOförsäkringar!" Grid.ColumnSpan="3" Margin="0,0,263,0"></Label>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -47,8 +47,8 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        
+
     </Grid>
-   
-    
+
+
 </UserControl>
