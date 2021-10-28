@@ -45,16 +45,6 @@ namespace BussinessLayer
             BusinessController.Instance.Context.InsuredPersons.Remove(insuredPerson);
             BusinessController.Instance.Save();
         }
-
-        public void CheckExistingIP(string id, InsuredPerson p)
-        {
-            InsuredPerson x = BusinessController.Instance.Context.InsuredPersons.GetById(id);
-            if (x == null)
-            {
-                AddInsuredPerson(p);
-            }
-           
-        }
         public void Edit(InsuredPerson sm)
         {
             BusinessController.Instance.Context.InsuredPersons.Update(sm);

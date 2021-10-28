@@ -39,7 +39,7 @@
                 <DataGridTextColumn Header="Skattesats" Binding="{Binding TaxRate}" />
             </DataGrid.Columns>
         </DataGrid>
-        <Label Content="*Uppdateringar sparas permanent så fort du skrivit klart din ändring" Grid.Column="0" Grid.Row="2" Margin="0,297,349,0" Grid.ColumnSpan="2"></Label>
+        <Label Content="*Uppdateringar sparas permanent så fort du lämnar sidan" Grid.Column="0" Grid.Row="2" Margin="0,297,349,0" Grid.ColumnSpan="2"></Label>
         <StackPanel Grid.Column="1" Grid.Row="2" >
             <Grid>
                 <Grid.ColumnDefinitions>

@@ -16,10 +16,8 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
     public class ManageUserAccessViewModel : BaseViewModel
     {
         public static readonly ManageUserAccessViewModel Instance = new ManageUserAccessViewModel();
-
         public ManageUserAccessViewModel()
         {
-
         }
 
         #region properties
@@ -146,7 +144,6 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
         }
         #endregion
         #region methods and commands
-
         public void UpdateGridToDb()
         {
             Users = UpdateUA();

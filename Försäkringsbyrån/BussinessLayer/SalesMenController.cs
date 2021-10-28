@@ -8,6 +8,9 @@ using System.Windows;
 
 namespace BussinessLayer
 {
+    /// <summary>
+    /// Manages salesmen. 
+    /// </summary>
     public class SalesMenController
     {
         public SalesMen GetSalesMen(int id) => BusinessController.Instance.Context.Employees.GetById(id);

@@ -24,12 +24,9 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
 
         public AddEmployeeViewModel()
         {
-            
         }
 
         #region properties
-        
-
         private string _lastname;
         public string Lastname
         {

@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace DataLayer
 {
+    /// <summary>
+    /// Our context class that manages the connection to database. 
+    /// </summary>
    public class ApplicationContext : DbContext
     {
         public DbSet<Person> Persons { get; set; }

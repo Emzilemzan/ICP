@@ -7,6 +7,10 @@ using System.Windows.Input;
 
 namespace GUILayer.Commands
 {
+    /// <summary>
+    /// implement icommand, fires actions when execute is called. 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class RelayCommand<T> : ICommand
     {
         private readonly Predicate<T> _canExecute;

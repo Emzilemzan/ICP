@@ -38,21 +38,19 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
                     Years1?.Add(i.PayYear);
                 }
             }
-
             return Years = Years1.Union(Years1).ToList();
-
         }
 
-        //Get all salesmen. 
         public ObservableCollection<SalesMen> UpdateSM()
         {
             ObservableCollection<SalesMen> x = new ObservableCollection<SalesMen>();
             ObservableCollection<SalesMen> y = new ObservableCollection<SalesMen>();
             foreach (var i in Context.IController.GetAllInsurances())
             {
-                if (i.InsuranceStatus == Status.Tecknad && i.SAI != null)
+                if (i.InsuranceStatus == Status.Tecknad)
                 {
-                    x?.Add(i.AgentNo);
+                    if (i.SAI != null)
+                        x?.Add(i.AgentNo);
                 }
             }
             var sm = x.Union(x).ToList();
@@ -73,7 +71,6 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
 
         #region command export
         private ICommand trendstatic_btn;
-
         public ICommand ExportBtn => trendstatic_btn ?? (trendstatic_btn = new RelayCommand(x => { SendStatisticsToExcel(); }));
 
         private void SendStatisticsToExcel()
@@ -387,8 +384,6 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
                 xlWorksheet.Cells[row, 40] = CountDifference(s, year);
             }
         }
-
-
         #endregion
 
         #region properties
@@ -449,8 +444,7 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
         private int CountDifference(SalesMen sm, int year)
         {
             double sum = CountAverage(sm, year) - CountAverageForAllSm(year);
-            int sum1 = 0;
-            return sum1 = Convert.ToInt32(sum);
+            return Convert.ToInt32(sum);
         }
 
 
@@ -487,19 +481,19 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
         /// <returns></returns>
         private int CountTotalSM(SalesMen sm, int year)
         {
-            int sum1 = 0;
             double sum = 0;
             foreach (Insurance i in sm.Insurances)
             {
                 if (i.InsuranceStatus == Status.Tecknad && i.PayYear == year)
                 {
+                    if(i.SAI != null)
                     if (i.SAI.SAID.Equals(2) || i.SAI.SAID.Equals(1))
                     {
                         sum += i.AckValue + i.AckValue2 + i.AckValue3 + i.AckValue4;
                     }
                 }
             }
-            sum1 = Convert.ToInt32(sum);
+            int sum1 = Convert.ToInt32(sum);
             return sum1;
         }
         /// <summary>
@@ -516,7 +510,7 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             {
                 if (i.InsuranceStatus == Status.Tecknad && i.PayYear == year)
                 {
-                    if (i.SAI.SAID.Equals(2) || i.SAI.SAID.Equals(1))
+                    if (i.SAI != null && (i.SAI.SAID.Equals(2) || i.SAI.SAID.Equals(1)))
                     {
                         if (i.PayMonth == Month)
                         {
@@ -525,7 +519,6 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
                     }
                 }
             }
-
             return sum;
         }
 
@@ -541,7 +534,7 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             double sum = 0;
             foreach (Insurance i in sm.Insurances)
             {
-                if (i.InsuranceStatus == Status.Tecknad && i.PayYear == year && i.SAI.SAID.Equals(1))
+                if (i.InsuranceStatus == Status.Tecknad && i.PayYear == year && i.SAI != null && i.SAI.SAID.Equals(1))
                 {
                     if (i.PayMonth == Month)
                     {
@@ -563,7 +556,7 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             double sum = 0;
             foreach (Insurance i in sm.Insurances)
             {
-                if (i.InsuranceStatus == Status.Tecknad && i.PayYear == year && i.SAI.SAID.Equals(2))
+                if (i.InsuranceStatus == Status.Tecknad && i.PayYear == year && i.SAI != null && i.SAI.SAID.Equals(2))
                 {
                     if (i.PayMonth == Month)
                     {

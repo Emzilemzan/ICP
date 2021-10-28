@@ -35,7 +35,6 @@ namespace BussinessLayer
             BusinessController.Instance.Save();
         }
 
-
         public void CheckExistingCompany(string id, Company a, string name, string city, int postalCode, string streetadress, string number1, string nbr2,
            string email1, string contact, string num)
         {
@@ -64,7 +63,6 @@ namespace BussinessLayer
             BusinessController.Instance.Context.Companies.Update(sm);
             BusinessController.Instance.Save();
         }
-
         public bool CheckCompanyInInsurance(Company a)
         {
             bool result = false;
@@ -94,7 +92,6 @@ namespace BussinessLayer
             BusinessController.Instance.Context.Persons.Remove(insuranceTaker);
             BusinessController.Instance.Save();
         }
-
 
         public void CheckExistingPerson(string id, Person a, string fname, string lname, string city, int postalCode, string streetadress, string number1, string nbr2, string dnbr1, string dnbr2, 
             string email1, string email2)
@@ -126,7 +123,6 @@ namespace BussinessLayer
             BusinessController.Instance.Context.Persons.Update(sm);
             BusinessController.Instance.Save();
         }
-
         public bool CheckPersonInInsurance(Person a)
         {
             bool result = false;
@@ -142,9 +138,6 @@ namespace BussinessLayer
             }
             return result;
         }
-
-        
-
         #endregion
     }
 }

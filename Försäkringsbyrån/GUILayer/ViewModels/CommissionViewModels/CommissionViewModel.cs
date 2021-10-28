@@ -18,10 +18,8 @@ namespace GUILayer.ViewModels.CommissionViewModels
         private CommissionViewModel()
         {
         }
-
         private ICommand getCommission_Btn;
         public ICommand GetCommssion_Btn => getCommission_Btn ?? (getCommission_Btn = new RelayCommand(x => { GetCommssion(); }));
-
         public static void GetCommssion()
         {
             MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;

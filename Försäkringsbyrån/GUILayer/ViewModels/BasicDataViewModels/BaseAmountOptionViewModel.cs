@@ -12,6 +12,9 @@ using System.Windows.Input;
 
 namespace GUILayer.ViewModels.BasicDataViewModels
 {
+    /// <summary>
+    /// Viewmodel for managing the basedata: BaseAmountOption --> for Lifeinsurance, not optionaltype. 
+    /// </summary>
     public class BaseAmountOptionViewModel : BaseViewModel
     {
         public static readonly BaseAmountOptionViewModel Instance = new BaseAmountOptionViewModel();
@@ -22,6 +25,7 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             Date = DateTime.Today;
             LifeInsurances = UpdateLife();
         }
+        #region update
         private ObservableCollection<BaseAmount> UpdateBA()
         {
             ObservableCollection<BaseAmount> ba = new ObservableCollection<BaseAmount>();
@@ -46,15 +50,10 @@ namespace GUILayer.ViewModels.BasicDataViewModels
 
             return LifeInsurances;
         }
-
+        #endregion
         #region Commands
         private ICommand _addBtn;
-        public ICommand AddBaseAmountOption_Btn
-        {
-            get => _addBtn ?? (_addBtn = new RelayCommand(x => { AddBaseAmountOption(); CanCreate(); }));
-        }
-
-        public bool CanCreate() => true;
+        public ICommand AddBaseAmountOption_Btn => _addBtn ?? (_addBtn = new RelayCommand(x => { AddBaseAmountOption();}));
 
         private void AddBaseAmountOption()
         {
@@ -93,11 +92,7 @@ namespace GUILayer.ViewModels.BasicDataViewModels
         }
 
         private ICommand remove_Btn;
-        public ICommand RemoveBaseAmountOption_Btn
-        {
-            get => remove_Btn ?? (remove_Btn = new RelayCommand(x => { RemoveBaseAmountOption(); CanCreate(); }));
-        }
-
+        public ICommand RemoveBaseAmountOption_Btn=> remove_Btn ?? (remove_Btn = new RelayCommand(x => { RemoveBaseAmountOption();}));
         private void RemoveBaseAmountOption()
         {
             if (Instance.BaseAmountId != null)
@@ -144,8 +139,6 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             }
         }
 
-
-        //Vilken försäkringstyp 
         private LifeInsurance _lifeInsurance;
         public LifeInsurance LifeInsurance
         {
@@ -157,7 +150,6 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             }
         }
 
-        //Datum
         private DateTime _date;
         public DateTime Date
         {
@@ -169,7 +161,6 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             }
         }
 
-        //Grundbelopp
         private int _baseAmount;
         public string BaseAmount
         {
@@ -187,7 +178,6 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             }
         }
 
-        //ID för att ta bort
         private int _baseAmountOptionId;
         public string BaseAmountId
         {
@@ -206,7 +196,5 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             }
         }
         #endregion
-
     }
-
 }

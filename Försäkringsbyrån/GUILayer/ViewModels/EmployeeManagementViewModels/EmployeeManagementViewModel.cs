@@ -18,7 +18,6 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
 
         private EmployeeManagementViewModel()
         {
-              
         }
 
         #region commands

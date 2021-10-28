@@ -15,18 +15,13 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
     public class StatisticsAndProspectusViewModel : BaseViewModel
     {
         public static readonly StatisticsAndProspectusViewModel Instance = new StatisticsAndProspectusViewModel();
-
         private StatisticsAndProspectusViewModel()
         {
-            
         }
-
+        #region commands
         private ICommand trendstatic_btn;
-        public ICommand Trendstatic_btn
-        {
-            get => trendstatic_btn ?? (trendstatic_btn = new RelayCommand(x => { Trendstatic(); CanCreate(); }));
-        }
-        public bool CanCreate() => true;
+        public ICommand Trendstatic_btn => trendstatic_btn ?? (trendstatic_btn = new RelayCommand(x => { Trendstatic(); }));
+
         public static void Trendstatic()
         {
             MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
@@ -35,11 +30,7 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
         }
 
         private ICommand getStatics_Btn;
-        public ICommand GetStatics_Btn
-        {
-            get => getStatics_Btn ?? (getStatics_Btn = new RelayCommand(x => { GetStatics(); CanCreate(); }));
-
-        }
+        public ICommand GetStatics_Btn => getStatics_Btn ?? (getStatics_Btn = new RelayCommand(x => { GetStatics(); }));
         public static void GetStatics()
         {
             MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
@@ -48,11 +39,7 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
         }
 
         private ICommand searchleads_Btn;
-        public ICommand Searchleads_Btn
-        {
-            get => searchleads_Btn ?? (searchleads_Btn = new RelayCommand(x => { Searchleads(); CanCreate(); }));
-
-        }
+        public ICommand Searchleads_Btn => searchleads_Btn ?? (searchleads_Btn = new RelayCommand(x => { Searchleads(); }));
         public static void Searchleads()
         {
 
@@ -60,5 +47,6 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             MainViewModel.Instance.CurrentTool = "";
             MainViewModel.Instance.SelectedViewModel = GetandexportCustomerLeadsViewModel.Instance;
         }
+        #endregion
     }
 }
