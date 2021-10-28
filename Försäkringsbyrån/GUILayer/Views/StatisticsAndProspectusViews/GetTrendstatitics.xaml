@@ -19,7 +19,7 @@
         <ComboBox Grid.Row="1"  ItemsSource="{Binding Years}" FontSize="40" SelectedItem="{Binding Year}" Grid.Column="1" Margin="10,10.333"/>
         <Label Content="Säljare" FontWeight="Light" FontSize="30" HorizontalAlignment="Right"
                    Foreground="Black" Grid.Column="0" Grid.Row="2"></Label>
-        <ComboBox Grid.Row="2" Grid.Column="1" Margin="10,25.333,9.333,9.333" FontSize="30" ItemsSource="{Binding SalesMens}" SelectedItem="{Binding SalesMen}" >
+        <ComboBox Grid.Row="2" Grid.Column="1" Margin="10,25.333,9.333,9.333" FontSize="23" ItemsSource="{Binding SalesMens}" SelectedItem="{Binding SalesMen}" >
             <ComboBox.Resources>
                 <DataTemplate x:Key="DataTemplateBaseAmountT">
                     <Grid>
