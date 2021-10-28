@@ -486,11 +486,11 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             {
                 if (i.InsuranceStatus == Status.Tecknad && i.PayYear == year)
                 {
-                    if(i.SAI != null)
-                    if (i.SAI.SAID.Equals(2) || i.SAI.SAID.Equals(1))
-                    {
-                        sum += i.AckValue + i.AckValue2 + i.AckValue3 + i.AckValue4;
-                    }
+                    if (i.SAI != null)
+                        if (i.SAI.SAID.Equals(2) || i.SAI.SAID.Equals(1))
+                        {
+                            sum += i.AckValue + i.AckValue2 + i.AckValue3 + i.AckValue4;
+                        }
                 }
             }
             int sum1 = Convert.ToInt32(sum);
@@ -510,12 +510,13 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             {
                 if (i.InsuranceStatus == Status.Tecknad && i.PayYear == year)
                 {
-                    if (i.SAI != null && (i.SAI.SAID.Equals(2) || i.SAI.SAID.Equals(1)))
+                    if (i.SAI != null)
                     {
-                        if (i.PayMonth == Month)
-                        {
-                            sum += i.AckValue + i.AckValue2 + i.AckValue3 + i.AckValue4;
-                        }
+                        if (i.SAI.SAID.Equals(2) || i.SAI.SAID.Equals(1))
+                            if (i.PayMonth == Month)
+                            {
+                                sum += i.AckValue + i.AckValue2 + i.AckValue3 + i.AckValue4;
+                            }
                     }
                 }
             }
@@ -534,11 +535,15 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             double sum = 0;
             foreach (Insurance i in sm.Insurances)
             {
-                if (i.InsuranceStatus == Status.Tecknad && i.PayYear == year && i.SAI != null && i.SAI.SAID.Equals(1))
+                if (i.InsuranceStatus == Status.Tecknad && i.PayYear == year)
                 {
-                    if (i.PayMonth == Month)
+                    if (i.SAI != null)
                     {
-                        sum += i.AckValue + i.AckValue2 + i.AckValue3 + i.AckValue4;
+                        if (i.SAI.SAID.Equals(1))
+                            if (i.PayMonth == Month)
+                            {
+                                sum += i.AckValue + i.AckValue2 + i.AckValue3 + i.AckValue4;
+                            }
                     }
                 }
             }
@@ -556,11 +561,15 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             double sum = 0;
             foreach (Insurance i in sm.Insurances)
             {
-                if (i.InsuranceStatus == Status.Tecknad && i.PayYear == year && i.SAI != null && i.SAI.SAID.Equals(2))
+                if (i.InsuranceStatus == Status.Tecknad && i.PayYear == year)
                 {
-                    if (i.PayMonth == Month)
+                    if (i.SAI != null)
                     {
-                        sum += i.AckValue + i.AckValue2 + i.AckValue3 + i.AckValue4;
+                        if (i.SAI.SAID.Equals(2))
+                            if (i.PayMonth == Month)
+                            {
+                                sum += i.AckValue + i.AckValue2 + i.AckValue3 + i.AckValue4;
+                            }
                     }
                 }
             }
