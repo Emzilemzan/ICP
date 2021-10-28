@@ -13,7 +13,7 @@ using System.Windows.Input;
 namespace GUILayer.ViewModels.InsuranceViewModels
 {
     /// <summary>
-    /// ViewModel for Life Application adding.
+    /// Viewmodel for register a new lifeinsurance. 
     /// </summary>
     public class RegisterLifeApplicationViewModel : BaseViewModel
     {
@@ -30,6 +30,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         private ICommand registerApplication_Btn;
         public ICommand GoBack => registerApplication_Btn ?? (registerApplication_Btn = new RelayCommand(x => { Back(); }));
 
+        // Takes user back to previous view.
         private void Back()
         {
             if (MainViewModel.Instance.CurrentTool != "Insurance")
@@ -245,7 +246,6 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         }
 
         #endregion
-
 
         #region updating of lists
 

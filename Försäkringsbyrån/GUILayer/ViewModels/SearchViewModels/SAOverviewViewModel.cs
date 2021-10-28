@@ -16,6 +16,9 @@ using System.Windows.Input;
 
 namespace GUILayer.ViewModels.SearchViewModels
 {
+    /// <summary>
+    /// Overview for our Sick and Accident insurances.
+    /// </summary>
     public class SAOverviewViewModel : BaseViewModel
     {
         public static readonly SAOverviewViewModel Instance = new SAOverviewViewModel();
@@ -223,7 +226,7 @@ namespace GUILayer.ViewModels.SearchViewModels
         #endregion
 
         #region updatelists
-        //Update all baseamounts for a specific sainsurances and for the delivery year.  
+        
         public ICollection<BaseAmountTabel> UpdateBaseTable()
         {
             List<BaseAmountTabel> x = new List<BaseAmountTabel>();
@@ -241,7 +244,7 @@ namespace GUILayer.ViewModels.SearchViewModels
             return BaseAmountTabell;
         }
 
-        //Get all salesmen. 
+       
         public ObservableCollection<SalesMen> UpdateSM()
         {
             ObservableCollection<SalesMen> x = new ObservableCollection<SalesMen>();
@@ -252,7 +255,7 @@ namespace GUILayer.ViewModels.SearchViewModels
             SalesMens = x;
             return SalesMens;
         }
-        //Get alla SAInsurances. 
+        
         public ObservableCollection<SAInsurance> UpdateSA()
         {
             ObservableCollection<SAInsurance> x = new ObservableCollection<SAInsurance>();
@@ -277,6 +280,7 @@ namespace GUILayer.ViewModels.SearchViewModels
                 UpdateAC(SearchInput);
             }
         }
+        
         public void UpdateAC(string filter = "")
         {
             Insurances = new ObservableCollection<Insurance>();

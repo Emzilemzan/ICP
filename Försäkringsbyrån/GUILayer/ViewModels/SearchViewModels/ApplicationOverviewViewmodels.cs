@@ -16,6 +16,9 @@ using System.Diagnostics;
 
 namespace GUILayer.ViewModels.SearchViewModels
 {
+    /// <summary>
+    /// ViewModel for overview of Company applications. 
+    /// </summary>
     public class ApplicationOverviewViewModels : BaseViewModel
     {
         public static readonly ApplicationOverviewViewModels Instance = new ApplicationOverviewViewModels();

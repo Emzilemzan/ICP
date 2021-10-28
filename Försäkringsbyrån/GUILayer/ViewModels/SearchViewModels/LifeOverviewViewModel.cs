@@ -16,6 +16,9 @@ using System.Diagnostics;
 
 namespace GUILayer.ViewModels.SearchViewModels
 {
+    /// <summary>
+    /// Overview for our Lifeinsurances.
+    /// </summary>
     public class LifeOverviewViewModel : BaseViewModel
     {
         public static readonly LifeOverviewViewModel Instance = new LifeOverviewViewModel();
@@ -28,6 +31,7 @@ namespace GUILayer.ViewModels.SearchViewModels
         private ICommand registerApplication_Btn;
         public ICommand GoBack => registerApplication_Btn ?? (registerApplication_Btn = new RelayCommand(x => { Back(); }));
 
+        // Takes user back to previous view.
         private void Back()
         {
             if (MainViewModel.Instance.CurrentTool != "Search")
@@ -42,6 +46,7 @@ namespace GUILayer.ViewModels.SearchViewModels
 
         public ICommand UpdateBtn => _updateBtn ?? (_updateBtn = new RelayCommand(x => { Update(); }));
 
+        // Method that updates the datagrid and the database when changes are made in the view.
         public void UpdateGridToDb()
         {
             UpdateAC();
@@ -173,7 +178,6 @@ namespace GUILayer.ViewModels.SearchViewModels
             }
         }
         #endregion
-
 
         #region updatelists
         

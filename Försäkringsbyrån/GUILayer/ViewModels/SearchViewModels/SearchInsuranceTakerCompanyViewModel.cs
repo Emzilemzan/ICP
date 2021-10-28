@@ -14,6 +14,9 @@ using System.Windows.Input;
 
 namespace GUILayer.ViewModels.SearchViewModels
 {
+    /// <summary>
+    /// Viewmodel to search all insurancestakers that are companies.
+    /// </summary>
     public class SearchInsuranceTakerCompanyViewModel : BaseViewModel
     {
         public static readonly SearchInsuranceTakerCompanyViewModel Instance = new SearchInsuranceTakerCompanyViewModel();
@@ -76,6 +79,7 @@ namespace GUILayer.ViewModels.SearchViewModels
             get => _companyCollection; 
             set { _companyCollection = value; OnPropertyChanged("CompanyGrid"); }
         }
+        // Method that helps users to search for comopanys in our CollectionView.
         private bool Filter(Company company)
         {
             return SearchInput == null
@@ -270,6 +274,7 @@ namespace GUILayer.ViewModels.SearchViewModels
         #endregion
 
         #region commands
+       
         public void UpdateGridToDb()
         {
             Companies = UpdateCompanies();

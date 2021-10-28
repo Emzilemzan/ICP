@@ -17,6 +17,9 @@ using System.Windows.Input;
 
 namespace GUILayer.ViewModels.SearchViewModels
 {
+    /// <summary>
+    /// Overview for Otherperson Insurances taken by Persons.
+    /// </summary>
     public class OPIPApplicationOverviewViewModel : BaseViewModel
     {
         public static readonly OPIPApplicationOverviewViewModel Instance = new OPIPApplicationOverviewViewModel();
@@ -29,6 +32,7 @@ namespace GUILayer.ViewModels.SearchViewModels
         private ICommand registerApplication_Btn;
         public ICommand GoBack => registerApplication_Btn ?? (registerApplication_Btn = new RelayCommand(x => { Back(); }));
 
+        
         private void Back()
         {
             if (MainViewModel.Instance.CurrentTool != "Search")
@@ -48,6 +52,7 @@ namespace GUILayer.ViewModels.SearchViewModels
             OPInsuranceTypes = UpdateOPI();
             OnPropertyChanged("OPInsuranceTypes");
         }
+        
         public void UpdateGridToDb()
         {
             UpdateAC();
@@ -59,7 +64,7 @@ namespace GUILayer.ViewModels.SearchViewModels
                 }
             }
         }
-        // Update, Export and Remove buttons 
+       
         private ICommand _exportBtn;
         public ICommand ExportBtn => _exportBtn ?? (_exportBtn = new RelayCommand(x => { ExportApplication();}));
 
@@ -190,6 +195,7 @@ namespace GUILayer.ViewModels.SearchViewModels
             InsuredPersons = x;
             return InsuredPersons;
         }
+        
         public void UpdateAC(string filter = "")
         {
             Insurancess = new ObservableCollection<Insurance>();
@@ -210,7 +216,6 @@ namespace GUILayer.ViewModels.SearchViewModels
             }
             x?.ForEach(i => Insurancess.Add(i));
         }
-
 
         #endregion
 
@@ -556,6 +561,7 @@ namespace GUILayer.ViewModels.SearchViewModels
         }
 
         #endregion
+
 
         private bool _check;
         public bool Check

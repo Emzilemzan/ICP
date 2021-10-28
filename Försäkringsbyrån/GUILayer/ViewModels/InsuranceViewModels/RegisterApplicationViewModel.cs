@@ -13,7 +13,7 @@ using Models.Models;
 namespace GUILayer.ViewModels.InsuranceViewModels
 {
     /// <summary>
-    /// FÖRETAGSFÖRSÄKRING!!!! REGISTRERA FÖRETAGSFÖRSÄKRING!!!!!!!
+    /// Viewmodel for register a new application where the taker is a Company. 
     /// </summary>
     public class RegisterApplicationViewModel : BaseViewModel
     {
@@ -34,6 +34,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
         private ICommand registerApplication_Btn;
         public ICommand GoBack => registerApplication_Btn ?? (registerApplication_Btn = new RelayCommand(x => { Back(); }));
 
+        //Takes user back to previous view.
         private void Back()
         {
             if (MainViewModel.Instance.CurrentTool != "Insurance")
@@ -183,8 +184,9 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             Company = x;
             return Company;
         }
+
         /// <summary>
-        /// method for autogenerate alphanumeric serialnumber
+        /// method for autogenerate alphanumeric serialnumber.
         /// </summary>
         /// <returns></returns>
         private string GenerateIdFormation()

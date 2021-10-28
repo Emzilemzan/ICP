@@ -10,7 +10,7 @@ using System.Windows.Input;
 namespace GUILayer.ViewModels.SearchViewModels
 {
     /// <summary>
-    /// viewmodel for searchvalueview
+    /// viewmodel for searchvalueview menuchoises. 
     /// </summary>
     public class SearchValueViewModel : BaseViewModel
     {

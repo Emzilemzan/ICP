@@ -10,6 +10,9 @@ using Models.Models;
 
 namespace GUILayer.ViewModels.SearchViewModels
 {
+    /// <summary>
+    /// Viewmodel for Search employees.
+    /// </summary>
     public class SearchEmployeeViewModel : BaseViewModel
     {
         public static readonly SearchEmployeeViewModel Instance = new SearchEmployeeViewModel();
@@ -20,6 +23,7 @@ namespace GUILayer.ViewModels.SearchViewModels
             EmployeeGrid = CollectionViewSource.GetDefaultView(SalesMens);
             EmployeeGrid.Filter = new Predicate<object>(o => Filter(o as SalesMen));
         }
+
         #region methods
         public ObservableCollection<SalesMen> UpdateSM()
         {
@@ -41,6 +45,7 @@ namespace GUILayer.ViewModels.SearchViewModels
             get { return _employeeCollection; }
             set { _employeeCollection = value; OnPropertyChanged("EmployeeGrid"); }
         }
+        // Method that helps user to search in the ICollectionView, on certain searchvalues.
         private bool Filter(SalesMen employee)
         {
             return SearchInput == null

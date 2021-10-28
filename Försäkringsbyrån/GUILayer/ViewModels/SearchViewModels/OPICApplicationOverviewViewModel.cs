@@ -16,6 +16,9 @@ using System.Windows.Input;
 
 namespace GUILayer.ViewModels.SearchViewModels
 {
+    /// <summary>
+    /// Overview for Otherperson insurances taken by Companies.
+    /// </summary>
     public class OPICApplicationOverviewViewModel : BaseViewModel
     {
         public static readonly OPICApplicationOverviewViewModel Instance = new OPICApplicationOverviewViewModel();
@@ -31,7 +34,7 @@ namespace GUILayer.ViewModels.SearchViewModels
             OnPropertyChanged("PayMentForms");
             OPInsuranceTypes = UpdateOPI();
             OnPropertyChanged("OPInsuranceTypes");
-        }
+        } 
         #region Commands
         private ICommand registerApplication_Btn;
         public ICommand GoBack => registerApplication_Btn ?? (registerApplication_Btn = new RelayCommand(x => { Back(); }));
@@ -187,6 +190,7 @@ namespace GUILayer.ViewModels.SearchViewModels
             InsuredPersons = x;
             return InsuredPersons;
         }
+       
         public void UpdateAC(string filter = "")
         {
             Insurancess = new ObservableCollection<Insurance>();

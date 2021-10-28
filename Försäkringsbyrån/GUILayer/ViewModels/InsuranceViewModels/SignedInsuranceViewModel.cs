@@ -14,6 +14,9 @@ using System.Windows.Input;
 
 namespace GUILayer.ViewModels.InsuranceViewModels
 {
+    /// <summary>
+    /// Viewmodel to signe insurnace application to become Signed Insurances. 
+    /// </summary>
     public class SignedInsuranceViewModel : BaseViewModel
     {
         public static readonly SignedInsuranceViewModel Instance = new SignedInsuranceViewModel();
@@ -25,6 +28,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             Months = new List<string>() { "Januari", "Februari", "Mars", "April", "Maj", "Juni", "Juli", "Augusti", "September", "Oktober", "November", "December" };
         }
 
+        #region Commands
         private ICommand _signInsurance;
         public ICommand SignInsurance
         {
@@ -148,7 +152,7 @@ namespace GUILayer.ViewModels.InsuranceViewModels
             }
             return x;
         }
-
+        #endregion
         #region Insurance properties
         private string _month;
         public string Month

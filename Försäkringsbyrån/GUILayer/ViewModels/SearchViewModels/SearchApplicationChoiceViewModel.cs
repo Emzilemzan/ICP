@@ -9,6 +9,9 @@ using System.Windows.Input;
 
 namespace GUILayer.ViewModels.SearchViewModels
 {
+    /// <summary>
+    /// ViewModel for menu choices in search insurances.
+    /// </summary>
     public class SearchApplicationChoiceViewModel : BaseViewModel
     {
         public static readonly SearchApplicationChoiceViewModel Instance = new SearchApplicationChoiceViewModel();
