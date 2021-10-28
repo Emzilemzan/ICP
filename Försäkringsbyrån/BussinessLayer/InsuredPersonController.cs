@@ -34,8 +34,6 @@ namespace BussinessLayer
             return insuredPeople.OrderByDescending(i => i.InsuredId).ToList();
         }
 
-
-
         public void AddInsuredPerson(InsuredPerson insuredPerson)
         {
             BusinessController.Instance.Context.InsuredPersons.Add(insuredPerson);
@@ -64,6 +62,5 @@ namespace BussinessLayer
         }
 
         #endregion
-
     }
 }

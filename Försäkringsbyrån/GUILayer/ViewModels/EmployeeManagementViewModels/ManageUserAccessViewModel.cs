@@ -146,7 +146,7 @@ namespace GUILayer.ViewModels.EmployeeManagementViewModels
 
         public bool CanCommand() => true;
             
-        //method for update existing user
+        //method for update existing user 
         private void UpdateUser()
         {
             if (SelectedPerson != null && Instance.Password != null && Instance.Firstname != null && Instance.Lastname != null &&
