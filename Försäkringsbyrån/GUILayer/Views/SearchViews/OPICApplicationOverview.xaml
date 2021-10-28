@@ -164,6 +164,9 @@
                 <TextBox Grid.Row="2" Grid.Column="3"  Text="{Binding SelectedInsurance.InsuranceNumber}" Margin="10.333,25,-0.333,0" />
                 <Label Content="Provision: " Grid.Row="3" Grid.Column="3"></Label>
                 <TextBox Grid.Row="3" Grid.Column="3" Margin="10.333,32,-0.333,9.667" Text="{Binding SelectedInsurance.PossibleComisson}" />
+                <Label Content="Betald år och månad:" Grid.Row="4" Grid.Column="3"></Label>
+                <ComboBox Grid.Row="4" Grid.Column="3" Margin="10.333,27.333,117.667,0.333" ItemsSource="{Binding PayYears}" Text="{Binding SelectedInsurance.PayYear}" SelectedItem="{Binding SelectedInsurance.PayYear}"></ComboBox>
+                <ComboBox Grid.Row="4" Grid.Column="3" Margin="153.333,27.333,9.667,0.333" ItemsSource="{Binding PayMonths}" Text="{Binding SelectedInsurance.PayMonth}" SelectedItem="{Binding SelectedInsurance.PayMonth}"></ComboBox>
                 <Button Grid.Row="6" Grid.Column="3"  Content="Exportera" FontSize="15" Margin="62.333,2.333,83.667,85" Command="{Binding ExportBtn}" />
                 <Button Grid.Row="6" Grid.Column="3"  Content="Ta bort" FontSize="15" Margin="62.333,40.333,83.667,46.333" Command="{Binding RemoveBtn}" />
             </Grid>

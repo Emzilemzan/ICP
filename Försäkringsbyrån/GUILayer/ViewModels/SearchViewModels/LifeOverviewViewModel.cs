@@ -269,12 +269,21 @@ namespace GUILayer.ViewModels.SearchViewModels
             OnPropertyChanged("PayMentForms");
             LifeInsuranceTypes = UpdateLife();
             OnPropertyChanged("LifeInsuranceTypes");
+            PayYears = GetYears();
+            OnPropertyChanged("PayYears");
+            PayMonths = new List<int?>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+            OnPropertyChanged("PayMonths");
         }
         #endregion
 
         #region list
         public ObservableCollection<InsuredPerson> InsuredPersons { get; set; } = new ObservableCollection<InsuredPerson>();
-
+        public List<int> GetYears()
+        {
+            return Enumerable.Range(1950, DateTime.UtcNow.Year - 1949).Reverse().ToList();
+        }
+        public List<int> PayYears { get; set; }
+        public List<int?> PayMonths { get; set; }
         public ObservableCollection<Person> Persons { get; set; } = new ObservableCollection<Person>();
 
         private ObservableCollection<Insurance> _insurances;

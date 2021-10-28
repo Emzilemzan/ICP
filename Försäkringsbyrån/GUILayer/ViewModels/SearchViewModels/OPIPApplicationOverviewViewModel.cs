@@ -51,6 +51,10 @@ namespace GUILayer.ViewModels.SearchViewModels
             OnPropertyChanged("PayMentForms");
             OPInsuranceTypes = UpdateOPI();
             OnPropertyChanged("OPInsuranceTypes");
+            PayYears = GetYears();
+            OnPropertyChanged("PayYears");
+            PayMonths = new List<int?>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+            OnPropertyChanged("PayMonths");
         }
         
         public void UpdateGridToDb()
@@ -162,6 +166,7 @@ namespace GUILayer.ViewModels.SearchViewModels
         #endregion
 
         #region Methods for updating
+
         public ObservableCollection<SalesMen> UpdateSM()
         {
             ObservableCollection<SalesMen> x = new ObservableCollection<SalesMen>();
@@ -217,6 +222,8 @@ namespace GUILayer.ViewModels.SearchViewModels
         #endregion
 
         #region Lists
+        public List<int> PayYears { get; set; }
+        public List<int?> PayMonths { get; set; }
         public ObservableCollection<OtherPersonInsurance> OPInsuranceTypes { get; set; }
         public List<string> PayMentForms { get; set; }
         public ObservableCollection<SalesMen> SalesMens { get; set; }
@@ -534,9 +541,6 @@ namespace GUILayer.ViewModels.SearchViewModels
                 OnPropertyChanged("PossibleComisson");
             }
         }
-        public List<int> Years { get; set; }
-        public List<int> Months { get; set; }
-        //För att visa årtal i combobox. 
         public List<int> GetYears()
         {
             return Enumerable.Range(1950, DateTime.UtcNow.Year - 1949).Reverse().ToList();
