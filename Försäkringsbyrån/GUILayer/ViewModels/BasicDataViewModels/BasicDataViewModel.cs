@@ -17,19 +17,11 @@ namespace GUILayer.ViewModels.BasicDataViewModels
     public class BasicDataViewModel: BaseViewModel
     {
         public static readonly BasicDataViewModel Instance = new BasicDataViewModel();
-
         private BasicDataViewModel()
         {
-            //CreateComboBoxInsuranceList();
         }
-
         private ICommand amountTable_Btn;
-        public ICommand AmountTable_Btn
-        {
-            get => amountTable_Btn ?? (amountTable_Btn = new RelayCommand(x => { BaseAmountTable(); CanCreate(); }));
-        }
-
-        public bool CanCreate() => true;
+        public ICommand AmountTable_Btn => amountTable_Btn ?? (amountTable_Btn = new RelayCommand(x => { BaseAmountTable(); }));
         public static void BaseAmountTable()
         {
             MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
@@ -38,11 +30,7 @@ namespace GUILayer.ViewModels.BasicDataViewModels
         }
 
         private ICommand ackvaluevariableTable_Btn;
-        public ICommand AckvaluevariableTable_Btn
-        {
-            get => ackvaluevariableTable_Btn ?? (ackvaluevariableTable_Btn = new RelayCommand(x => { AckValueVariableTable(); CanCreate(); }));
-        }
-
+        public ICommand AckvaluevariableTable_Btn => ackvaluevariableTable_Btn ?? (ackvaluevariableTable_Btn = new RelayCommand(x => { AckValueVariableTable(); }));
         public static void AckValueVariableTable()
         {
             MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
@@ -51,10 +39,7 @@ namespace GUILayer.ViewModels.BasicDataViewModels
         }
 
         private ICommand amountOption_Btn;
-        public ICommand AmountOption_Btn
-        {
-            get => amountOption_Btn ?? (amountOption_Btn = new RelayCommand(x => { BaseAmountOption(); CanCreate(); }));
-        }
+        public ICommand AmountOption_Btn => amountOption_Btn ?? (amountOption_Btn = new RelayCommand(x => { BaseAmountOption();}));
 
         public static void BaseAmountOption()
         {
@@ -62,26 +47,16 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             MainViewModel.Instance.CurrentTool = "";
             MainViewModel.Instance.SelectedViewModel = BaseAmountOptionViewModel.Instance;
         }
-
         private ICommand vPay_Btn;
-        public ICommand VPayBtn
-        {
-            get => vPay_Btn ?? (vPay_Btn = new RelayCommand(x => { VPay(); CanCreate(); }));
-        }
-
+        public ICommand VPayBtn => vPay_Btn ?? (vPay_Btn = new RelayCommand(x => { VPay();  }));
         public static void VPay()
         {
             MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;
             MainViewModel.Instance.CurrentTool = "";
             MainViewModel.Instance.SelectedViewModel = VacationPayViewModel.Instance;
         }
-
         private ICommand commissionShare_Btn;
-        public ICommand CommissionShare_Btn
-        {
-            get => commissionShare_Btn ?? (commissionShare_Btn = new RelayCommand(x => { CommissionShare(); CanCreate(); }));
-        }
-
+        public ICommand CommissionShare_Btn => commissionShare_Btn ?? (commissionShare_Btn = new RelayCommand(x => { CommissionShare();}));
         public static void CommissionShare()
         {
             MainViewModel.Instance.ToolsVisibility = Visibility.Collapsed;

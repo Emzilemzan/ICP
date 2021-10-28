@@ -12,11 +12,12 @@ using System.Windows.Input;
 
 namespace GUILayer.ViewModels.BasicDataViewModels
 {
+    /// <summary>
+    /// Viewmodel for managing the basedata: AckValueVariable
+    /// </summary>
     public class AckValueVariableTableViewModel : BaseViewModel
-
     {
         public static readonly AckValueVariableTableViewModel Instance = new AckValueVariableTableViewModel();
-
         private AckValueVariableTableViewModel()
         {
             AckValues = UpdateAV();
@@ -24,7 +25,7 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             Date = DateTime.Today;
             LifeInsuranceTypes = UpdateLife();
         }
-
+        #region listupdating
         private ObservableCollection<AckValueVariable> UpdateAV()
         {
             ObservableCollection<AckValueVariable> av = new ObservableCollection<AckValueVariable>();
@@ -59,7 +60,7 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             OptionalTypes = x;
             return OptionalTypes;
         }
-
+        #endregion
         #region Commands
         private ICommand _addBtn;
         public ICommand AddAckValueVariableTable_Btn
@@ -117,10 +118,8 @@ namespace GUILayer.ViewModels.BasicDataViewModels
         }
 
         private ICommand remove_Btn;
-        public ICommand RemoveAckValue_Btn
-        {
-            get => remove_Btn ?? (remove_Btn = new RelayCommand(x => { RemoveAckValue();}));
-        }
+        public ICommand RemoveAckValue_Btn => remove_Btn ?? (remove_Btn = new RelayCommand(x => { RemoveAckValue();}));
+
         private void RemoveAckValue()
         {
             if (Instance.AckValueId != null)
@@ -157,7 +156,6 @@ namespace GUILayer.ViewModels.BasicDataViewModels
         public ObservableCollection<LifeInsurance> LifeInsuranceTypes { get; set; }
         public ObservableCollection<OptionalType> OptionalTypes { get; set; }
 
-        //Vilket tillval 
         private LifeInsurance _LifInsurance;
         public LifeInsurance LifInsurance
         {
@@ -170,7 +168,6 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             }
         }
 
-        //Vilken försäkringstyp 
         private OptionalType _optionalType;
         public OptionalType OptionalType
         {
@@ -182,7 +179,6 @@ namespace GUILayer.ViewModels.BasicDataViewModels
                 OnPropertyChanged("OptionalType");
             }
         }
-
 
         private DateTime _date;
         public DateTime Date
@@ -212,7 +208,6 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             }
         }
 
-        //ID för att ta bort
         private int _ackValueId;
         public string AckValueId
         {
@@ -241,60 +236,7 @@ namespace GUILayer.ViewModels.BasicDataViewModels
                 OnPropertyChanged("Check");
             }
         }
-
         #endregion
-
-        //  public class ComboBoxInsurance
-        //// {
-        //     public string InsuranceName { get; set; }
-        //     public string InsuranceType { get; set; }
-        // }
-
-        // public ObservableCollection<ComboBoxInsurance> AllInsuranceTypesList { get; set; }
-        // private void CreateComboBoxInsuranceList()
-        //  {
-        //    // Ny lista som skall fyllas 
-        //    List<ComboBoxInsurance> tempList = new List<ComboBoxInsurance>();
-
-        //    // Temp liostor
-        //    List<OtherPersonInsurance> OPInsuranceList = new List<OtherPersonInsurance>();
-        //    List<SAInsurance> SAInsuranceList = new List<SAInsurance>(); 
-        //    List<LifeInsurance> LifeInsuranceList = new List<LifeInsurance>(); 
-
-        //    // Fylla templistor
-        //    foreach (var i in Context.IController.GetAllOPI()) OPInsuranceList.Add(i);
-        //    foreach (var i in Context.IController.GetAllSAI()) SAInsuranceList.Add(i);  
-        //    foreach (var i in Context.IController.GetAllLIFE()) LifeInsuranceList.Add(i);  
-
-        //    // Loopa igenom OPInsurance
-        //    foreach (var item in OPInsuranceList) 
-        //    {
-        //        tempList.Add(new ComboBoxInsurance
-        //        {
-        //            InsuranceName = item.OPIName
-        //        });
-        //    }
-
-        //    // Loopa igenom SAInsurance
-        //    foreach (var item in SAInsuranceList)
-        //    {
-        //        tempList.Add(new ComboBoxInsurance
-        //        {
-        //            InsuranceName = $"Sjuk o olycksfalls försäkring {item.SAInsuranceType}"
-        //            //InsuranceType = item.SAInsuranceType
-        //        });
-        //    }
-
-        //    // Loopa igenom LifeInsurance
-        //    foreach (var item in LifeInsuranceList)
-        //    {
-        //        tempList.Add(new ComboBoxInsurance
-        //        {
-        //            InsuranceName = item.LifeName
-        //        });
-        //    }
-
-        //   AllInsuranceTypesList = new ObservableCollection<ComboBoxInsurance>(tempList);
     }
 }
 

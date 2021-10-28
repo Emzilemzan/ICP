@@ -1934,12 +1934,6 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
 
         #region methods for excel int/doubles. 
 
-        /// <summary>
-        /// method to get average for year for salesmen
-        /// </summary>
-        /// <param name="sm"></param>
-        /// <param name="year"></param>
-        /// <returns></returns>
         private double CountTotal(SalesMen sm, int year)
         {
             double a = CountMonthTotalSM(sm, 1, year);
@@ -1957,14 +1951,6 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             double avg = a + b + c + d + e + f + g + h + i + j + k + l;
             return avg;
         }
-
-        /// <summary>
-        /// counts months total. 
-        /// </summary>
-        /// <param name="sm"></param>
-        /// <param name="Month"></param>
-        /// <param name="year"></param>
-        /// <returns></returns>
         private double CountMonthTotalSM(SalesMen sm, int Month, int year)
         {
             double sum = 0;
@@ -1980,13 +1966,6 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             }
             return sum;
         }
-        /// <summary>
-        /// Create month ackvalue for child per salesmen. 
-        /// </summary>
-        /// <param name="sm"></param>
-        /// <param name="Month"></param>
-        /// <param name="year"></param>
-        /// <returns></returns>
         private double CreateSMAVC(SalesMen sm, int Month, int year)
         {
             double sum = 0;
@@ -2002,14 +1981,6 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             }
             return sum;
         }
-
-        /// <summary>
-        /// Create month ackvalue for life per salesmen. 
-        /// </summary>
-        /// <param name="sm"></param>
-        /// <param name="Month"></param>
-        /// <param name="year"></param>
-        /// <returns></returns>
         private double CreateLife(SalesMen sm, int Month, int year)
         {
             double sum = 0;
@@ -2025,14 +1996,6 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             }
             return sum;
         }
-
-        /// <summary>
-        /// Create month ackvalue for life per salesmen. 
-        /// </summary>
-        /// <param name="sm"></param>
-        /// <param name="Month"></param>
-        /// <param name="year"></param>
-        /// <returns></returns>
         private double CreateOP(SalesMen sm, int Month, int year)
         {
             double sum = 0;
@@ -2048,14 +2011,6 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             }
             return sum;
         }
-
-        /// <summary>
-        /// Create month ackvalue for life per salesmen. 
-        /// </summary>
-        /// <param name="sm"></param>
-        /// <param name="Month"></param>
-        /// <param name="year"></param>
-        /// <returns></returns>
         private double CreateCI(SalesMen sm, int Month, int year)
         {
             double sum = 0;
@@ -2071,14 +2026,6 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             }
             return sum;
         }
-
-        /// <summary>
-        /// Create month ackvalue for adult per salesmen. 
-        /// </summary>
-        /// <param name="sm"></param>
-        /// <param name="Month"></param>
-        /// <param name="year"></param>
-        /// <returns></returns>
         private double CreateSMAVA(SalesMen sm, int Month, int year)
         {
             double sum = 0;
@@ -2094,12 +2041,6 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             }
             return sum;
         }
-
-        /// <summary>
-        /// count number of insurances per month per SAA
-        /// </summary>
-        /// <param name="month"></param>
-        /// <returns></returns>
         private int UpdateASAC(int month)
         {
             List<Insurance> k = new List<Insurance>();
@@ -2114,12 +2055,6 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             int i = k.Count;
             return i;
         }
-
-        /// <summary>
-        /// count number of insurances per month per SAA
-        /// </summary>
-        /// <param name="month"></param>
-        /// <returns></returns>
         private int UpdateCSAC(int month)
         {
             List<Insurance> k = new List<Insurance>();
@@ -2134,12 +2069,6 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             int i = k.Count;
             return i;
         }
-
-        /// <summary>
-        /// count number of insurances per month per Life
-        /// </summary>
-        /// <param name="month"></param>
-        /// <returns></returns>
         private int UpdateLife(int month)
         {
             List<Insurance> k = new List<Insurance>();
@@ -2153,12 +2082,6 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             int i = k.Count;
             return i;
         }
-
-        /// <summary>
-        /// count number of insurances per month per CI
-        /// </summary>
-        /// <param name="month"></param>
-        /// <returns></returns>
         private int UpdateCI(int month)
         {
             List<Insurance> k = new List<Insurance>();
@@ -2172,12 +2095,6 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             int i = k.Count;
             return i;
         }
-
-        /// <summary>
-        /// count number of insurances per month per OP
-        /// </summary>
-        /// <param name="month"></param>
-        /// <returns></returns>
         private int UpdateOP(int month)
         {
             List<Insurance> k = new List<Insurance>();
@@ -2191,12 +2108,6 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             int i = k.Count;
             return i;
         }
-
-        /// <summary>
-        /// count number of insurances per month per OP
-        /// </summary>
-        /// <param name="month"></param>
-        /// <returns></returns>
         private int UpdateTotal(int month)
         {
             List<Insurance> k = new List<Insurance>();
@@ -2211,9 +2122,5 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
             return i;
         }
         #endregion
-
-
-
-
     }
 }

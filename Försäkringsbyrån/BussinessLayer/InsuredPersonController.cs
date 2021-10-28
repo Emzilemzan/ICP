@@ -34,8 +34,6 @@ namespace BussinessLayer
             return insuredPeople.OrderByDescending(i => i.InsuredId).ToList();
         }
 
-
-
         public void AddInsuredPerson(InsuredPerson insuredPerson)
         {
             BusinessController.Instance.Context.InsuredPersons.Add(insuredPerson);
@@ -46,16 +44,6 @@ namespace BussinessLayer
         {
             BusinessController.Instance.Context.InsuredPersons.Remove(insuredPerson);
             BusinessController.Instance.Save();
-        }
-
-        public void CheckExistingIP(string id, InsuredPerson p)
-        {
-            InsuredPerson x = BusinessController.Instance.Context.InsuredPersons.GetById(id);
-            if (x == null)
-            {
-                AddInsuredPerson(p);
-            }
-           
         }
         public void Edit(InsuredPerson sm)
         {

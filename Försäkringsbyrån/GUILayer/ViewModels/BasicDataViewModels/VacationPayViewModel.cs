@@ -14,7 +14,6 @@ namespace GUILayer.ViewModels.BasicDataViewModels
     public class VacationPayViewModel : BaseViewModel
     {
         public static VacationPayViewModel Instance = new VacationPayViewModel();
-
         public VacationPayViewModel()
         {
             VPays = UpdateVPay();

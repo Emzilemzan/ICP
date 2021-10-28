@@ -13,6 +13,9 @@ using System.Windows.Input;
 
 namespace GUILayer.ViewModels.BasicDataViewModels
 {
+    /// <summary>
+    /// Viewmodel for managing the basedata: BaseAmountTable --> for SAinsurance.
+    /// </summary>
     public class BaseAmountTableViewModel : BaseViewModel
     {
         public static readonly BaseAmountTableViewModel Instance = new BaseAmountTableViewModel();
@@ -26,12 +29,7 @@ namespace GUILayer.ViewModels.BasicDataViewModels
         #region commands
 
         private ICommand _addBtn;
-        public ICommand AddBaseAmountTableValue_Btn
-        {
-            get => _addBtn ?? (_addBtn = new RelayCommand(x => { AddBaseAmountTable(); CanCreate(); }));
-        }
-
-        public bool CanCreate() => true;
+        public ICommand AddBaseAmountTableValue_Btn => _addBtn ?? (_addBtn = new RelayCommand(x => { AddBaseAmountTable();}));
 
         private void AddBaseAmountTable()
         {
@@ -58,7 +56,6 @@ namespace GUILayer.ViewModels.BasicDataViewModels
                 MessageBox.Show("Inget fält får lämnas tomt!");
             }
         }
-
         public void EmptyAllChoices()
         {
             Check = true;
@@ -68,14 +65,11 @@ namespace GUILayer.ViewModels.BasicDataViewModels
             Date = DateTime.Now;
             BaseAmountId = string.Empty;
         }
-        //Method that removes baseamounttabel based on what id it has in database. 
-        //Needs a control here, if it exists in insurance you can't delete it. 
         private void RemoveBaseAmountTable()
         {
             if (Instance.BaseAmountId != null)
             {
                 MessageBoxResult result = MessageBox.Show("Vill du ta bort grunddatan?", "Varning", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-
                 if (result == MessageBoxResult.Yes)
                 {
                     Context.BDController.CheckExistingTable(Instance._baseAmountId);
@@ -84,7 +78,6 @@ namespace GUILayer.ViewModels.BasicDataViewModels
                     {
                         Tabels?.Add(t);
                     }
-                    
                 }
                 else
                 {
@@ -99,11 +92,9 @@ namespace GUILayer.ViewModels.BasicDataViewModels
         }
 
         private ICommand remove_Btn;
-        public ICommand RemoveBaseAmountTableValue_Btn
-        {
-            get => remove_Btn ?? (remove_Btn = new RelayCommand(x => { RemoveBaseAmountTable(); CanCreate(); }));
-        }
+        public ICommand RemoveBaseAmountTableValue_Btn => remove_Btn ?? (remove_Btn = new RelayCommand(x => { RemoveBaseAmountTable(); }));
         #endregion
+        #region Update
         private ObservableCollection<BaseAmountTabel> UpdateTabels()
         {
             ObservableCollection<BaseAmountTabel> x = new ObservableCollection<BaseAmountTabel>();
@@ -130,6 +121,7 @@ namespace GUILayer.ViewModels.BasicDataViewModels
 
             return SAInsuranceTypes;
         }
+        #endregion
         #region Properties
 
         public ObservableCollection<BaseAmountTabel> Tabels { get; set; }

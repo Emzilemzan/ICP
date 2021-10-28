@@ -16,7 +16,6 @@ namespace GUILayer.ViewModels
 
         private HomeViewModel()
         {
-          
         }
         public string Fullname => Context.CurrentUser.Firstname + " " + Context.CurrentUser.Lastname + "!";
     }

@@ -8,6 +8,9 @@ using System.Windows;
 
 namespace BussinessLayer
 {
+    /// <summary>
+    /// Manages useraccess. 
+    /// </summary>
     public class UserAccessController
     {
         public UserAccess GetUser(string username) => BusinessController.Instance.Context.Accesses.Find(x => x.Username == username).FirstOrDefault();

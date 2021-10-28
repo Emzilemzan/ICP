@@ -70,7 +70,7 @@ namespace GUILayer.ViewModels.CommissionViewModels
         }
 
         /// <summary>
-        /// method to create pdf document and open it when button is clicked. 
+        /// method to create excel document and open it when button is clicked. 
         /// </summary>
         private void ExportCommission(string month, SalesMen salesMen)
         {
@@ -164,232 +164,35 @@ namespace GUILayer.ViewModels.CommissionViewModels
         }
         #endregion
 
-        #region Count
-        private double CountCSumAck()
-        {
-            double sum = 0;
-            if (SelectedSalesMen.Insurances != null && SelectedMonth != null)
-            {
-                foreach (Insurance i in SelectedSalesMen.Insurances)
-                {
-                    if (i.InsuranceStatus == 0 && i.PayYear == Year && i.PayMonth == (Months.IndexOf(_month) + 1) % 12)
-                    {
-                        if (i.SAI != null)
-                        {
-                            if (i.SAI.SAID == 1)
-                                sum += i.AckValue + i.AckValue2 + i.AckValue3 + i.AckValue4;
-                        }
-                        else
-                        {
-                            sum = 0;
-                        }
-                    }
-                }
-            }
-            return sum;
-        }
-
-        private double CountASumAck()
-        {
-            double sum = 0;
-            if (SelectedSalesMen.Insurances != null && SelectedMonth != null)
-            {
-                foreach (Insurance i in SelectedSalesMen.Insurances)
-                {
-                    if (i.InsuranceStatus == 0 && i.PayYear == Year && i.PayMonth == (Months.IndexOf(_month) + 1) % 12)
-                    {
-                        if (i.SAI != null)
-                        {
-                            if (i.SAI.SAID == 2)
-                                sum += i.AckValue + i.AckValue2 + i.AckValue3 + i.AckValue4;
-                        }
-                        else
-                        {
-                            sum = 0;
-                        }
-                    }
-                }
-            }
-            return sum;
-        }
-
-
-        public double CountLSumAck()
-        {
-            double sum = 0;
-            if (SelectedSalesMen.Insurances != null && SelectedMonth != null)
-            {
-                foreach (Insurance i in SelectedSalesMen.Insurances)
-                {
-                    if (i.InsuranceStatus == 0 && i.PayYear == Year && i.PayMonth == (Months.IndexOf(_month) + 1) % 12)
-                    {
-                        if (i.LIFE != null)
-                            if(i.LIFE.LifeID == 1)
-                            { sum += i.AckValue + i.AckValue2 + i.AckValue3 + i.AckValue4; }
-                        else
-                        {
-                            sum = 0;
-                        }
-                    }
-                }
-            }
-            return sum;
-        }
-        public int CountOtherSumAck()
-        {
-            int? sum = 0;
-            int sum1;
-            if (SelectedSalesMen.Insurances != null && SelectedMonth != null)
-            {
-                foreach (Insurance i in SelectedSalesMen.Insurances)
-                {
-                    if (i.InsuranceStatus == 0 && i.PayYear == Year && i.PayMonth == (Months.IndexOf(_month) + 1) % 12)
-                    {
-                        if (i.PossibleComisson != null)
-                            sum += i.PossibleComisson;
-                        else
-                        {
-                            sum = 0;
-                        }
-                    }
-                }
-            }
-            sum1 = sum.Value;
-            return sum1;
-        }
-        private double CountProvOther()
-        {
-            double sum1;
-            double sum;
-            if (OtherCommission != null)
-            {
-                double? newsum = _otherCommission * (1 - (SelectedVPay.AdditionalPercentage / 100));
-                sum1 = newsum.Value;
-                sum = Math.Round(sum1);
-            }
-            else
-            {
-                sum = 0;
-            }
-            return sum;
-        }
-
-        private double CountVPay()
-        {
-            double sum;
-            double sum1;
-            if (SelectedVPay != null)
-            {
-                sum1 = (_provLiv + _provSO + _provOther) * (SelectedVPay.AdditionalPercentage / 100);
-                sum = Math.Round(sum1);
-            }
-            else
-            {
-                sum = 0;
-            }
-            return sum;
-        }
-
-        private double CountSumCom()
-        {
-            return _provLiv + _provSO + _provOther + _vPay;
-        }
-
-        private double LeavingTax()
-        {
-            double? sum1 = _sumCommission * (SelectedSalesMen.TaxRate / 100);
-            double sum = sum1.Value;
-            return Math.Round(sum);
-        }
-
-        private double CountToPay()
-        {
-            return _sumCommission - _taxes;
-        }
-
-        private double CountProvLiv()
-        {
-            double sum = _lSumAck * (1 - (SelectedVPay.AdditionalPercentage / 100));
-            return Math.Round(sum);
-        }
-
-        private double GetPermissionChild(double child)
-        {
-            double permission = 0;
-            List<ComissionShare> cs = new List<ComissionShare>();
-            foreach(ComissionShare c in Context.BDController.GetAllCommissionShares())
-            {
-                if(c.CalenderYear == Year)
-                {
-                    cs?.Add(c);
-                }
-            }
-            foreach(ComissionShare c in cs)
-            {
-                if(c.TotalMinAckValue <= child && c.TotalMaxAckValue >= child)
-                {
-                    permission = c.CommissionShareChildren;
-                }
-            }
-            return permission;
-        }
-
-        private double GetPermissionAdult(double adult)
-        {
-            double permission = 0;
-            List<ComissionShare> cs = new List<ComissionShare>();
-            foreach (ComissionShare c in Context.BDController.GetAllCommissionShares())
-            {
-                if (c.CalenderYear == Year)
-                {
-                    cs?.Add(c);
-                }
-            }
-            foreach (ComissionShare c in cs)
-            {
-                if (c.TotalMinAckValue <= adult && c.TotalMaxAckValue >= adult)
-                {
-                    permission = c.ComissionShareAdults;
-                }
-            }
-            return permission;
-        }
-
-        private double CountProvSo()
-        {
-            double pChild = GetPermissionChild(_cSumAck);
-            double pAdult = GetPermissionAdult(_aSumAck);
-            double sumChild = _cSumAck * pChild;
-            double sumAdult = _aSumAck * pAdult;
-            double sum = (sumChild + sumAdult) * (1 - (SelectedVPay.AdditionalPercentage / 100));
-            return Math.Round(sum);
-        }
-
+        #region Methods
+        /// <summary>
+        /// Method that counts all values that will be displayed. 
+        /// </summary>
         private void Count()
         {
-            _cSumAck = CountCSumAck();
+            _cSumAck = Context.CMController.CountCSumAck(SelectedSalesMen, Months, Year, SelectedMonth);
             OnPropertyChanged("CSumAck");
-            _aSumAck = CountASumAck();
+            _aSumAck = Context.CMController.CountASumAck(SelectedSalesMen, Months, Year, SelectedMonth);
             OnPropertyChanged("ASumAck");
             _sumAck = _cSumAck + _aSumAck;
             OnPropertyChanged("SumAck");
-            _lSumAck = CountLSumAck();
+            _lSumAck = Context.CMController.CountLSumAck(SelectedSalesMen, Months, Year, SelectedMonth);
             OnPropertyChanged("LSumAck");
-            _otherCommission = CountOtherSumAck();
+            _otherCommission = Context.CMController.CountOtherSumAck(SelectedSalesMen, Months, Year, SelectedMonth);
             OnPropertyChanged("OtherCommission");
-            _provSO = CountProvSo();
+            _provSO = Context.CMController.CountProvSo(_cSumAck, _aSumAck, SelectedVPay, Year);
             OnPropertyChanged("ProvSO");
-            _provLiv = CountProvLiv();
+            _provLiv = Context.CMController.CountProvLiv(_lSumAck, SelectedVPay);
             OnPropertyChanged("ProvLiv");
-            _provOther = CountProvOther();
+            _provOther = Context.CMController.CountProvOther(_otherCommission, SelectedVPay);
             OnPropertyChanged("ProvOther");
-            _vPay = CountVPay();
+            _vPay = Context.CMController.CountVPay(SelectedVPay, _provLiv, _provSO, _provOther);
             OnPropertyChanged("VPay");
-            _sumCommission = CountSumCom();
+            _sumCommission = _provLiv + _provSO + _provOther + _vPay;
             OnPropertyChanged("SumCommission");
-            _taxes = LeavingTax();
+            _taxes = Context.CMController.LeavingTax(_sumCommission, SelectedSalesMen);
             OnPropertyChanged("Taxes");
-            _toPay = CountToPay();
+            _toPay = _sumCommission - _taxes;
             OnPropertyChanged("ToPay");
         }
 

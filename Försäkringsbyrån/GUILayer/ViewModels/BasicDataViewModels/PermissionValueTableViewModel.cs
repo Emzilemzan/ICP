@@ -11,6 +11,9 @@ using System.Windows.Input;
 
 namespace GUILayer.ViewModels.BasicDataViewModels
 {
+    /// <summary>
+    /// Viewmodel for managing the basedata: CommissionsShare. Used for commission. 
+    /// </summary>
     public class PermissionValueTableViewModel : BaseViewModel
     {
         public static readonly PermissionValueTableViewModel Instance = new PermissionValueTableViewModel();

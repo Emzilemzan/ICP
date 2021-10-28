@@ -8,6 +8,9 @@ using System.Windows;
 
 namespace BussinessLayer
 {
+    /// <summary>
+    /// All basedatacontrollers. 
+    /// </summary>
     public class BasedataController
     {
         #region Controls for BaseAmountTabel

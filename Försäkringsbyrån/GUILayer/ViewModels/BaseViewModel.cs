@@ -11,7 +11,7 @@ using System.Windows.Controls;
 namespace GUILayer.ViewModels
 {
     /// <summary>
-    /// Main ViewModel that Creates the fundation for all viewModels
+    /// Base ViewModel that Creates the fundation for all viewModels
     /// </summary>
     public class BaseViewModel : INotifyPropertyChanged
     {

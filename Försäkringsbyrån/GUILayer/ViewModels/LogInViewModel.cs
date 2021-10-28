@@ -9,10 +9,6 @@ using System.Windows.Input;
 
 namespace GUILayer.ViewModels
 {
-    //..
-    /// <summary>
-    /// LogInViewModel for the loginview. 
-    /// </summary>
     public class LogInViewModel : BaseViewModel
     {
         public static readonly LogInViewModel Instance = new LogInViewModel();
@@ -21,11 +17,7 @@ namespace GUILayer.ViewModels
         {
             
         }
-
-        public ICommand LogInBtn => new RelayCommand(LogIn, CanLogIn);
-
-        public bool CanLogIn(object value) => true;
-
+        public ICommand LogInBtn => new RelayCommand(LogIn);
         private void LogIn(object value)
         {
             bool result = Context.UAController.ValidateEmployee(Username, Password);

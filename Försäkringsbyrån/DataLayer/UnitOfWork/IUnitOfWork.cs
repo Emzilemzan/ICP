@@ -10,10 +10,9 @@ namespace DataLayer.UnitOfWork
     /// <summary>
     /// interface for unitofwork class. 
     /// </summary>
-  public interface IUnitOfWork : IDisposable
+    public interface IUnitOfWork : IDisposable
     {
         IEmployeeRepository Employees { get; }
-      
         IInsuranceRepository Insurances { get; }
         IInsuredPersonRepository InsuredPersons { get; }
         ICompanyRepository Companies { get; }

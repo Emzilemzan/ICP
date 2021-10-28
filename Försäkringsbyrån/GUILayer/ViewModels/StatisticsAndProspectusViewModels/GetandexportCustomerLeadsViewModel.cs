@@ -15,23 +15,22 @@ using System.Windows.Input;
 
 namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
 {
-    //customerprospect
+    /// <summary>
+    /// customerprospect
+    /// </summary>
     public class GetandexportCustomerLeadsViewModel : BaseViewModel
     {
         public static readonly GetandexportCustomerLeadsViewModel Instance = new GetandexportCustomerLeadsViewModel();
-
         public GetandexportCustomerLeadsViewModel()
         {
             Update();
         }
-
+        #region commands
         public void Update()
         {
             Insurances = GetProspects();
         }
-
         public ObservableCollection<Insurance> Insurances { get; set; }
-
         private void ExportToCsv()
         {
             if (Insurances != null)
@@ -75,16 +74,15 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
                 Insurances.Clear();
                 Update();
             }
-
             else
             {
                 MessageBox.Show("De finns inga kundprospekt att hämta. ");
             }
         }
-
-
+        private ICommand exportProspects_Btn;
+        public ICommand ExportProspects_Btn => exportProspects_Btn ?? (exportProspects_Btn = new RelayCommand(x => { ExportToCsv(); }));
+        #endregion
         #region Methods to find customerprospects
-
         public ObservableCollection<Insurance> GetProspects()
         {
             ObservableCollection<Person> people = new ObservableCollection<Person>();
@@ -169,16 +167,15 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
                     }
                 }
             }
-
             var p4 = people2.Except(people3).ToList();
             foreach (var p in p4)
             {
                 foreach (var i in p.Insurances)
                 {
-                        if (i.InsuranceStatus == Status.Tecknad && i.Prospect == false)
-                        {
-                            insurances?.Add(i);
-                        }
+                    if (i.InsuranceStatus == Status.Tecknad && i.Prospect == false)
+                    {
+                        insurances?.Add(i);
+                    }
                 }
             }
             return insurances;
@@ -200,9 +197,7 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
                         {
                             if (i.TypeName == "Sjuk- och olycksfallsförsäkring för barn" && i.InsuranceStatus == Status.Tecknad)
                                 people2?.Add(p);
-
                         }
-
                     }
                 }
             }
@@ -216,7 +211,6 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
                     }
                 }
             }
-
             var p4 = people2.Except(people3).ToList();
             foreach (var p in p4)
             {
@@ -228,21 +222,9 @@ namespace GUILayer.ViewModels.StatisticsAndProspectusViewModels
                     }
                 }
             }
-
             return insurances;
         }
         #endregion
-
-        private ICommand exportProspects_Btn;
-        public ICommand ExportProspects_Btn
-        {
-            get => exportProspects_Btn ?? (exportProspects_Btn = new RelayCommand(x => { ExportToCsv(); }));
-        }
-
-
-
     }
-
-
 }
 

@@ -18,8 +18,6 @@ namespace BussinessLayer
             GetInsuranceTakerIA(insuranceTaker)?.ForEach(p => applications.Add(p));
             return applications.OrderByDescending(i => i.InsuranceNumber).ToList();
         }
-
-        public Insurance GetInsurance(string sn) => BusinessController.Instance.Context.Insurances.GetById(sn);
         public List<Insurance> GetInsuranceTakerIAC(Company insuranceTaker) => insuranceTaker.Insurances?.OrderByDescending(i => i.InsuranceNumber).ToList();
         public List<Insurance> GetInsuranceTakerIASC(Company insuranceTaker)
         {
@@ -38,15 +36,6 @@ namespace BussinessLayer
             BusinessController.Instance.Context.Insurances.Remove(insuranceApplication);
             BusinessController.Instance.Save();
         }
-
-        public List<Insurance> GetInsuranceTakerCI(Company insuranceTaker) => insuranceTaker.Insurances?.OrderByDescending(i => i.InsuranceNumber).ToList();
-        public List<Insurance> GetInsuranceTakerCias(Company insuranceTaker)
-        {
-            List<Insurance> applications = new List<Insurance>();
-            GetInsuranceTakerCI(insuranceTaker)?.ForEach(p => applications.Add(p));
-            return applications.OrderByDescending(i => i.InsuranceNumber).ToList();
-        }
-
         #endregion
 
         #region insurancetype
@@ -64,7 +53,6 @@ namespace BussinessLayer
         public IEnumerable<LifeInsurance> GetAllLIFE() => BusinessController.Instance.Context.LifeInsurances.GetAll();
 
         #endregion
-
         public void AddOptionalTypes(OptionalType i)
         {
             BusinessController.Instance.Context.OptionalTypes.Add(i);
