@@ -1,7 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
   <Class Name="Models.Models.AckValueVariable">
-    <Position X="0.5" Y="2.75" Width="1.5" />
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <AssociationLine Name="OptionalTypeId" Type="Models.Models.OptionalType">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="-0.168" Y="0.366" Height="0.182" Width="1.346" />
+      </MemberNameLabel>
+    </AssociationLine>
     <TypeIdentifier>
       <HashCode>EIAACAAAAAAAAAAAAAAAAAAgAAAAAAABAAAAAAAAAAA=</HashCode>
       <FileName>Models\AckValueVariable.cs</FileName>
@@ -39,14 +44,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Models.Models.Company">
-    <Position X="9.5" Y="5.5" Width="2.5" />
+    <Position X="9.75" Y="5.75" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAASAAAACAAAAAIJAAABABAAAAAIAAAAAIAgAAAABA=</HashCode>
       <FileName>Models\Company.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
-      <Property Name="InsuredPersons" />
       <Property Name="Insurances" />
+      <Property Name="InsuredPersons" />
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="Models.Models.CompanyInsurance">
@@ -68,6 +73,11 @@
         <Point X="12.75" Y="5.184" />
       </Path>
     </AssociationLine>
+    <AssociationLine Name="OptionalTypes" Type="Models.Models.OptionalType">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="-0.015" Y="0.199" Height="0.182" Width="1.207" />
+      </MemberNameLabel>
+    </AssociationLine>
     <TypeIdentifier>
       <HashCode>EIBhBAAACQkAIAAABAABRAJgCAFhBJggABAAIEAAAAA=</HashCode>
       <FileName>Models\Insurance.cs</FileName>
@@ -88,7 +98,7 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="Models.Models.InsuredPerson">
-    <Position X="5.5" Y="9.5" Width="1.5" />
+    <Position X="5.5" Y="9" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAABEAAAAAAAAAAIAACAAAAAAAAAAgAAAAAIAAAAAg=</HashCode>
       <FileName>Models\InsuredPerson.cs</FileName>
@@ -96,17 +106,40 @@
   </Class>
   <Class Name="Models.Models.LifeInsurance">
     <Position X="2.75" Y="4.25" Width="1.5" />
+    <AssociationLine Name="Amounts" Type="Models.Models.BaseAmount">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="-2.293" Y="0.102" Height="0.182" Width="2.17" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="Variables" Type="Models.Models.AckValueVariable">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-0.668" Y="0.116" />
+      </MemberNameLabel>
+    </AssociationLine>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAQQAABAAAAA=</HashCode>
       <FileName>Models\LifeInsurance.cs</FileName>
     </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Amounts" />
+      <Property Name="Variables" />
+    </ShowAsCollectionAssociation>
   </Class>
   <Class Name="Models.Models.OptionalType">
     <Position X="3" Y="2.25" Width="1.5" />
+    <AssociationLine Name="Variables" Type="Models.Models.AckValueVariable">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="0.11" Y="0.06" Height="0.182" Width="1.082" />
+      </MemberNameLabel>
+    </AssociationLine>
     <TypeIdentifier>
       <HashCode>EAAAAAAAAAAAAAAAgABAAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
       <FileName>Models\OptionalType.cs</FileName>
     </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Variables" />
+      <Property Name="Insurance" />
+    </ShowAsCollectionAssociation>
   </Class>
   <Class Name="Models.Models.OtherPersonInsurance">
     <Position X="2.75" Y="7.75" Width="1.5" />
@@ -116,14 +149,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Models.Models.Person">
-    <Position X="12.75" Y="5" Width="1.5" />
-    <AssociationLine Name="InsuredPersons" Type="Models.Models.InsuredPerson" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
-      <Path>
-        <Point X="13.5" Y="8.219" />
-        <Point X="13.5" Y="11.188" />
-        <Point X="7" Y="11.188" />
-      </Path>
-    </AssociationLine>
+    <Position X="12.75" Y="5" Width="3" />
     <TypeIdentifier>
       <HashCode>AAAAAEAQAAAAAAAJIAAgBABAEAAAAgCAAAAAAAAAADA=</HashCode>
       <FileName>Models\Person.cs</FileName>
@@ -139,20 +165,26 @@
       <HashCode>AAAABAAAABAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\SAInsurance.cs</FileName>
     </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Tabels" />
+    </ShowAsCollectionAssociation>
   </Class>
   <Class Name="Models.Models.UserAccess">
-    <Position X="13.5" Y="0.5" Width="2.25" />
+    <Position X="13" Y="0.5" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAIAEAAAAAAAAAJAUAABAAAAAAAAAADAAAAAAAgAAA=</HashCode>
       <FileName>Models\UserAccess.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Models.Models.SalesMen">
-    <Position X="10.75" Y="1" Width="1.5" />
+    <Position X="11.25" Y="1.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAEAAAAIAAACIAAAABCAAAAAAAAAAAAAAAAAAABA=</HashCode>
       <FileName>Models\SalesMen.cs</FileName>
     </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Insurances" />
+    </ShowAsCollectionAssociation>
   </Class>
   <Class Name="Models.Models.VacationPay">
     <Position X="16" Y="2.75" Width="1.5" />
@@ -162,7 +194,7 @@
     </TypeIdentifier>
   </Class>
   <Enum Name="Models.Models.Status">
-    <Position X="7.5" Y="0.5" Width="1.5" />
+    <Position X="7.5" Y="0.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
       <FileName>Models\Insurance.cs</FileName>
