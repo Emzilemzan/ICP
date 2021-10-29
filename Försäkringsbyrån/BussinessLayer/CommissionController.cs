@@ -80,6 +80,29 @@ namespace BussinessLayer
             }
             return sum;
         }
+
+        public double CountLsum(SalesMen sm, List<string> Months, int Year, string month)
+        {
+            double sum = 0;
+            if (sm.Insurances != null && month != null)
+            {
+                foreach (Insurance i in sm.Insurances)
+                {
+                    if (i.InsuranceStatus == 0 && i.PayYear == Year && i.PayMonth == (Months.IndexOf(month) + 1) % 12)
+                    {
+                        if (i.LIFE != null)
+                            if (i.LIFE.LifeID == 1)
+                            { sum += i.BaseAmountValue; }
+                            else
+                            {
+                                sum = 0;
+                            }
+                    }
+                }
+            }
+            return sum;
+        }
+
         public int CountOtherSumAck(SalesMen sm, List<string> Months, int Year, string month)
         {
             int? sum = 0;
@@ -139,9 +162,9 @@ namespace BussinessLayer
             double sum = sum1.Value;
             return Math.Round(sum);
         }
-        public double CountProvLiv(double _lSumAck, VacationPay SelectedVPay)
+        public double CountProvLiv(SalesMen sm, List<string> Months, int Year, string month, VacationPay SelectedVPay)
         {
-            double sum = _lSumAck * (1 - (SelectedVPay.AdditionalPercentage / 100));
+            double sum = CountLSumAck(sm, Months, Year, month) * (1 - (SelectedVPay.AdditionalPercentage / 100));
             return Math.Round(sum);
         }
 

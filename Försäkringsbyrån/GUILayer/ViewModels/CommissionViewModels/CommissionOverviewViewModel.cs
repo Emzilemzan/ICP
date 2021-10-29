@@ -134,7 +134,7 @@ namespace GUILayer.ViewModels.CommissionViewModels
             xlWorksheet.Cells[9, 4] = "Prov so: ";
             xlWorksheet.Cells[9, 5] = Instance.ProvSO;
 
-            xlWorksheet.Cells[11, 1] = "Liv summa ackvärde: ";
+            xlWorksheet.Cells[11, 1] = "Liv summa grundbelopp: ";
             xlWorksheet.Cells[11, 2] = Instance.LSumAck;
             xlWorksheet.Cells[11, 4] = "Prov liv: ";
             xlWorksheet.Cells[11, 5] = Instance.ProvLiv;
@@ -176,13 +176,13 @@ namespace GUILayer.ViewModels.CommissionViewModels
             OnPropertyChanged("ASumAck");
             _sumAck = _cSumAck + _aSumAck;
             OnPropertyChanged("SumAck");
-            _lSumAck = Context.CMController.CountLSumAck(SelectedSalesMen, Months, Year, SelectedMonth);
+            _lSumAck = Context.CMController.CountLsum(SelectedSalesMen, Months, Year, SelectedMonth);
             OnPropertyChanged("LSumAck");
             _otherCommission = Context.CMController.CountOtherSumAck(SelectedSalesMen, Months, Year, SelectedMonth);
             OnPropertyChanged("OtherCommission");
             _provSO = Context.CMController.CountProvSo(_cSumAck, _aSumAck, SelectedVPay, Year);
             OnPropertyChanged("ProvSO");
-            _provLiv = Context.CMController.CountProvLiv(_lSumAck, SelectedVPay);
+            _provLiv = Context.CMController.CountProvLiv(SelectedSalesMen, Months, Year, SelectedMonth, SelectedVPay);
             OnPropertyChanged("ProvLiv");
             _provOther = Context.CMController.CountProvOther(_otherCommission, SelectedVPay);
             OnPropertyChanged("ProvOther");

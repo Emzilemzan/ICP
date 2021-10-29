@@ -91,7 +91,7 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Label Grid.Column="0" Grid.Row="3" Content="Liv- Summa Ackvärde:" FontSize="15"/>
+                    <Label Grid.Column="0" Grid.Row="3" Content="Liv- Summa Grundbelopp:" FontSize="15"/>
                     <TextBox Grid.Row="3" Grid.Column="1" IsReadOnly="True" Text="{Binding LSumAck}"/>
                 </Grid>
             </StackPanel>
