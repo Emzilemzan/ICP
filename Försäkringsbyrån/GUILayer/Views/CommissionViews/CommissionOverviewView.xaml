@@ -181,7 +181,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Label Grid.Column="0" Grid.Row="3" Content="Prov so:" Margin="0,60,10,20" FontSize="15"/>
-                    <TextBox Grid.Row="3" Grid.Column="1" IsReadOnly="True" Margin="0,60,10,20"  Text="{Binding ProvSO}"/>
+                    <TextBox Grid.Row="3" IsReadOnly="True" Margin="175,60,-15,20"  Text="{Binding ProvSO}" Grid.ColumnSpan="2"/>
                 </Grid>
             </StackPanel>
             <StackPanel Grid.Column="2" Grid.Row="3" Grid.RowSpan="1">

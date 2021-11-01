@@ -27,10 +27,6 @@ namespace BussinessLayer
                             if (i.SAI.SAID == 1)
                                 sum += i.AckValue + i.AckValue2 + i.AckValue3 + i.AckValue4;
                         }
-                        else
-                        {
-                            sum = 0;
-                        }
                     }
                 }
             }
@@ -49,10 +45,6 @@ namespace BussinessLayer
                         {
                             if (i.SAI.SAID == 2)
                                 sum += i.AckValue + i.AckValue2 + i.AckValue3 + i.AckValue4;
-                        }
-                        else
-                        {
-                            sum = 0;
                         }
                     }
                 }
@@ -167,7 +159,15 @@ namespace BussinessLayer
             double sum = CountLSumAck(sm, Months, Year, month) * (1 - (SelectedVPay.AdditionalPercentage / 100));
             return Math.Round(sum);
         }
-
+        public double CountProvSo(double _cSumAck, double _aSumAck, VacationPay SelectedVPay, int year)
+        {
+            double pChild = GetPermissionChild(_cSumAck, year);
+            double pAdult = GetPermissionAdult(_aSumAck, year);
+            double sumChild = _cSumAck * pChild;
+            double sumAdult = _aSumAck * pAdult;
+            double sum = (sumChild + sumAdult) * (1 - (SelectedVPay.AdditionalPercentage / 100));
+            return Math.Round(sum);
+        }
         public double GetPermissionChild(double child, int Year)
         {
             double permission = 0;
@@ -208,15 +208,7 @@ namespace BussinessLayer
             }
             return permission;
         }
-        public double CountProvSo(double _cSumAck, double _aSumAck, VacationPay SelectedVPay, int year)
-        {
-            double pChild = GetPermissionChild(_cSumAck, year);
-            double pAdult = GetPermissionAdult(_aSumAck, year);
-            double sumChild = _cSumAck * pChild;
-            double sumAdult = _aSumAck * pAdult;
-            double sum = (sumChild + sumAdult) * (1 - (SelectedVPay.AdditionalPercentage / 100));
-            return Math.Round(sum);
-        }
+        
 
     }
 }

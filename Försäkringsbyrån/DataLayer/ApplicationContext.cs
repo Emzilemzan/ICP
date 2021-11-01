@@ -38,7 +38,7 @@ namespace DataLayer
         {   }
 
         /// <summary>
-        /// Resets our database
+        /// Resets our database, doesn't use this in every debug. 
         /// </summary>
         public void Reset()
         {

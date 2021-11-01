@@ -480,7 +480,6 @@ namespace GUILayer.ViewModels.CommissionViewModels
                 _provSO = 0;
                 if (double.TryParse(value, out _provSO))
                 {
-
                 }
                 OnPropertyChanged("ProvSO");
             }

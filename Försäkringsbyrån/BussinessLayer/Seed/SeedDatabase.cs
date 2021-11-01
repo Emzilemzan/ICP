@@ -28,7 +28,81 @@ namespace BussinessLayer.Seed
             GenerateCompanyTaker();
             GenerateInsuredPerson();
             GenerateInsurances();
-
+            GenerateVP();
+            GenerateCS();
+        }
+        private void GenerateVP()
+        {
+            List<VacationPay> avv = new List<VacationPay>
+            {
+                new VacationPay()
+                {
+                    AdditionalPercentage = 12,
+                    Year = 2021,
+                },
+            };
+            List<VacationPay> newList = new List<VacationPay>();
+            foreach (var i in BusinessController.Instance.BDController.GetAllVPays())
+            {
+                newList.Add(i);
+            }
+            if (newList.Count == 0)
+            {
+                foreach (var item in avv)
+                {
+                    BusinessController.Instance.BDController.AddVPay(item);
+                }
+            }
+        }
+        private void GenerateCS()
+        {
+            List<ComissionShare> avv = new List<ComissionShare>
+            {
+                new ComissionShare()
+                {
+                    CalenderYear = 2021,
+                    TotalMinAckValue = 1,
+                    TotalMaxAckValue = 599999,
+                    CommissionShareChildren = 0.013,
+                    ComissionShareAdults = 0.015,
+                },
+                new ComissionShare()
+                {
+                    CalenderYear = 2021,
+                    TotalMinAckValue = 600000,
+                    TotalMaxAckValue = 799999,
+                    CommissionShareChildren = 0.014,
+                    ComissionShareAdults = 0.016,
+                },
+                new ComissionShare()
+                {
+                    CalenderYear = 2021,
+                    TotalMinAckValue = 800000,
+                    TotalMaxAckValue = 999999,
+                    CommissionShareChildren = 0.016,
+                    ComissionShareAdults = 0.018,
+                },
+                new ComissionShare()
+                {
+                    CalenderYear = 2021,
+                    TotalMinAckValue = 1000000,
+                    TotalMaxAckValue = 5000000,
+                    CommissionShareChildren = 0.019,
+                    ComissionShareAdults = 0.02,
+                }
+            };
+            List<ComissionShare> newList = new List<ComissionShare>();
+            foreach (var i in BusinessController.Instance.BDController.GetAllCommissionShares())
+            {
+                newList.Add(i);
+            }
+            if (newList.Count == 0)
+            {
+                foreach (var item in avv)
+                {
+                    BusinessController.Instance.BDController.AddCommissionShare(item);
+                }
+            }
         }
 
         private void GenerateSM()
@@ -212,7 +286,6 @@ namespace BussinessLayer.Seed
         }
         private void GenerateBAT()
         {
-
             List<BaseAmountTabel> bat = new List<BaseAmountTabel>
             {
                 new BaseAmountTabel()
@@ -479,6 +552,21 @@ namespace BussinessLayer.Seed
             {
                 new Person()
                 {
+                    SocialSecurityNumber = "0003074441",
+                    City = "Ulricehamn",
+                    Firstname = "Emma",
+                    Lastname = "Gunnarsson",
+                    PostalCode = 52335,
+                    EmailOne = "emma.gson@hotmail.com",
+                    EmailTwo = "emma.gunnarsson543@gmail.com",
+                    StreetAddress = "Källgatan 10",
+                    DiallingCodeHome = "076",
+                    TelephoneNbrHome = "3377477",
+                    DiallingCodeWork = null,
+                    TelephoneNbrWork = null,
+                },
+                new Person()
+                {
                     SocialSecurityNumber = "8711306789",
                     City = "Jönköping",
                     Firstname = "Elin",
@@ -549,6 +637,51 @@ namespace BussinessLayer.Seed
                     StreetAddress = "Vagngatan 56",
                     DiallingCodeHome = "031",
                     TelephoneNbrHome = "777473",
+                    DiallingCodeWork = null,
+                    TelephoneNbrWork = null,
+                },
+                new Person()
+                {
+                    SocialSecurityNumber = "6912036770",
+                    City = "Gnosjö",
+                    Firstname = "Per",
+                    Lastname = "Eriksson",
+                    PostalCode = 33532,
+                    EmailOne = "pe@hotmail.com",
+                    EmailTwo = null,
+                    StreetAddress = "Slanggatan 13",
+                    DiallingCodeHome = "0370",
+                    TelephoneNbrHome = "91172",
+                    DiallingCodeWork = null,
+                    TelephoneNbrWork = null,
+                },
+                new Person()
+                {
+                    SocialSecurityNumber = "9609143212",
+                    City = "Limmared",
+                    Firstname = "Olof",
+                    Lastname = "Elmersson",
+                    PostalCode = 51440,
+                    EmailOne = "elmerssonOlof@hotmail.com",
+                    EmailTwo = null,
+                    StreetAddress = "Lammgatan 12",
+                    DiallingCodeHome = "073",
+                    TelephoneNbrHome = "5566219",
+                    DiallingCodeWork = null,
+                    TelephoneNbrWork = null,
+                },
+                new Person()
+                {
+                    SocialSecurityNumber = "9007129080",
+                    City = "Röshult",
+                    Firstname = "Wilma",
+                    Lastname = "Edlund",
+                    PostalCode = 52361,
+                    EmailOne = "Weddis@gmail.com",
+                    EmailTwo = null,
+                    StreetAddress = "Röshult 101",
+                    DiallingCodeHome = "0321",
+                    TelephoneNbrHome = "89642",
                     DiallingCodeWork = null,
                     TelephoneNbrWork = null,
                 }
@@ -729,6 +862,55 @@ namespace BussinessLayer.Seed
                     PersonType = "Vuxen",
                     PersonTaker = BusinessController.Instance.ITController.GetPerson(person2),
                 },
+                new InsuredPerson() //Id: 12
+                {
+                    FirstName = "Emma",
+                    LastName = "Gunnarsson",
+                    SocialSecurityNumberIP = "0003074441",
+                    PersonType = "Vuxen",
+                    PersonTaker = BusinessController.Instance.ITController.GetPerson(person6),
+                },
+                new InsuredPerson() //Id: 13
+                {
+                    FirstName = "Per",
+                    LastName = "Eriksson",
+                    SocialSecurityNumberIP = "6912036770",
+                    PersonType = "Vuxen",
+                    PersonTaker = BusinessController.Instance.ITController.GetPerson(person7),
+                },
+                new InsuredPerson() //Id: 14
+                {
+                    FirstName = "Emelie",
+                    LastName = "Hansson",
+                    SocialSecurityNumberIP = "0911302345",
+                    PersonType = "Barn",
+                    PersonTaker = BusinessController.Instance.ITController.GetPerson(person2),
+                },
+                new InsuredPerson() //Id: 15
+                {
+                    FirstName = "Henry",
+                    LastName = "Gunnarsson",
+                    SocialSecurityNumberIP = "2101023312",
+                    PersonType = "Barn",
+                    PersonTaker = BusinessController.Instance.ITController.GetPerson(person6),
+                },
+                new InsuredPerson() //Id: 16
+                {
+                    FirstName = "Wilma",
+                    LastName = "Edlund",
+                    SocialSecurityNumberIP = "9007129080",
+                    PersonType = "Vuxen",
+                    PersonTaker = BusinessController.Instance.ITController.GetPerson(person8),
+                },
+                new InsuredPerson() //Id: 17
+                {
+                    FirstName = "Olof",
+                    LastName = "Elmersson",
+                    SocialSecurityNumberIP = "9609143212",
+                    PersonType = "Vuxen",
+                    PersonTaker = BusinessController.Instance.ITController.GetPerson(person9),
+                },
+
             };
             List<InsuredPerson> NewList = new List<InsuredPerson>();
             foreach (var i in BusinessController.Instance.IPController.GetAllInsuredPersons())
@@ -748,6 +930,10 @@ namespace BussinessLayer.Seed
         private readonly string person3 = "7407016739";
         private readonly string person4 = "6511156744";
         private readonly string person5 = "6301134514";
+        private readonly string person6 = "0003074441";
+        private readonly string person7 = "6912036770";
+        private readonly string person8 = "9007129080";
+        private readonly string person9 = "9609143212";
 
         private readonly string company1 = "5567893531";
         private readonly string company2 = "5563260701";
@@ -798,7 +984,28 @@ namespace BussinessLayer.Seed
                 InsuranceStatus = Status.Otecknad,
                 CompanyInsuranceType = "Kombinerad företagsförsäkring",
             });
-
+            insurances.Add(new Insurance()
+            {
+                SerialNumber = "FF3",
+                AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm3),
+                TakerNbr = "5569235848",
+                TypeName = "Företagsförsäkring",
+                COI = BusinessController.Instance.IController.GetCI(1),
+                PaymentForm = "Helår",
+                InsuranceCompany = "Trygg hansa",
+                CompanyTaker = BusinessController.Instance.ITController.GetCompany(company4),
+                EndDate = DateTime.Today.AddYears(1).AddDays(1),
+                StartDate = DateTime.Today.AddDays(1),
+                Notes = null,
+                Premie = 7674,
+                InsuranceStatus = Status.Tecknad,
+                CompanyInsuranceType = "Fastighet",
+                Prospect = false,
+                PayMonth = 11,
+                PayYear = 2021,
+                InsuranceNumber = "FG65",
+                PossibleComisson = 1200,
+            }) ;
             insurances.Add(new Insurance()
             {
                 SerialNumber = "LIV1",
@@ -831,8 +1038,48 @@ namespace BussinessLayer.Seed
             });
             insurances.Add(new Insurance()
             {
+                SerialNumber = "LIV3",
+                PersonTaker = BusinessController.Instance.ITController.GetPerson(person6),
+                TakerNbr = "0003074441",
+                TypeName = "Livförsäkring för vuxen",
+                PaymentForm = "Månad",
+                InsuranceStatus = Status.Tecknad,
+                DeliveryDate = DateTime.Today,
+                AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm3),
+                InsuredID = BusinessController.Instance.IPController.GetIPerson(12),
+                LIFE = BusinessController.Instance.IController.GetLIFE(1),
+                BaseAmountValue = 400000,
+                AckValue4 = 2000,
+                Prospect = false,
+                PayMonth = 11, 
+                PayYear = 2021,
+                InsuranceNumber = "FX45W",
+                PossibleBaseAmount = 400000,
+            });
+            insurances.Add(new Insurance()
+            {
+                SerialNumber = "LIV4",
+                PersonTaker = BusinessController.Instance.ITController.GetPerson(person7),
+                TakerNbr = "6912036770",
+                TypeName = "Livförsäkring för vuxen",
+                PaymentForm = "Halvår",
+                InsuranceStatus = Status.Tecknad,
+                DeliveryDate = DateTime.Today.AddDays(2),
+                AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm3),
+                InsuredID = BusinessController.Instance.IPController.GetIPerson(13),
+                LIFE = BusinessController.Instance.IController.GetLIFE(1),
+                BaseAmountValue = 300000,
+                AckValue4 = 1500,
+                Prospect = false,
+                PayMonth = 11,
+                PayYear = 2021,
+                InsuranceNumber = "F249R",
+                PossibleBaseAmount = 300000,
+            }) ;
+            insurances.Add(new Insurance()
+            {
                 SerialNumber = "ÖPFV1",
-                AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm1),
+                AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm3),
                 TakerNbr = "5567893531",
                 TypeName = "Övrig personförsäkring för vuxen",
                 OPI = BusinessController.Instance.IController.GetOPI(1),
@@ -842,7 +1089,12 @@ namespace BussinessLayer.Seed
                 DeliveryDate = DateTime.Today,
                 Premie = 789,
                 Table = "RT23H6",
-                InsuranceStatus = Status.Otecknad,
+                InsuranceStatus = Status.Tecknad,
+                Prospect = false,
+                PayMonth = 11,
+                PayYear = 2021,
+                InsuranceNumber = "TY524R0",
+                PossibleComisson = 2000,
             });
             insurances.Add(new Insurance()
             {
@@ -891,6 +1143,26 @@ namespace BussinessLayer.Seed
             });
             insurances.Add(new Insurance()
             {
+                SerialNumber = "ÖPFV5",
+                PersonTaker = BusinessController.Instance.ITController.GetPerson(person7),
+                TakerNbr = "6912036770",
+                TypeName = "Övrig personförsäkring för vuxen",
+                PaymentForm = "Månad",
+                InsuranceStatus = Status.Tecknad,
+                DeliveryDate = DateTime.Today,
+                AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm3),
+                InsuredID = BusinessController.Instance.IPController.GetIPerson(13),
+                Table = "5ER3T",
+                Premie = 102,
+                OPI = BusinessController.Instance.IController.GetOPI(1),
+                Prospect = false,
+                PayMonth = 11,
+                PayYear = 2021,
+                InsuranceNumber = "TB52710",
+                PossibleComisson = 1480,
+            });
+            insurances.Add(new Insurance()
+            {
                 SAI = BusinessController.Instance.IController.GetSA(1),
                 SerialNumber = "SOB1",
                 PersonTaker = BusinessController.Instance.ITController.GetPerson(person4),
@@ -930,8 +1202,62 @@ namespace BussinessLayer.Seed
                 AckValue2 = 0,
                 BaseAmountValue3 = 0,
                 AckValue3 = 0,
+                BaseAmountValue4 = 900000,
+                AckValue4 = 12600,
+            });
+            insurances.Add(new Insurance()
+            {
+                SAI = BusinessController.Instance.IController.GetSA(1),
+                SerialNumber = "SOB3",
+                PersonTaker = BusinessController.Instance.ITController.GetPerson(person2),
+                TakerNbr = "7605206729",
+                TypeName = "Sjuk- och olycksfallsförsäkring för barn",
+                PaymentForm = "Helår",
+                InsuranceStatus = Status.Tecknad,
+                DeliveryDate = DateTime.Today,
+                AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm3),
+                InsuredID = BusinessController.Instance.IPController.GetIPerson(14),
+                OptionalTypes = UpdateOt(),
+                BaseAmountValue = 0,
+                AckValue = 0,
+                BaseAmountValue2 = 0,
+                AckValue2 = 0,
+                BaseAmountValue3 = 0,
+                AckValue3 = 0,
                 BaseAmountValue4 = 1100000,
                 AckValue4 = 14200,
+                Prospect = false,
+                PayMonth = 11,
+                PayYear = 2021,
+                InsuranceNumber = "TB5260",
+                PossibleBaseAmount = 1100000,
+            });
+            insurances.Add(new Insurance()
+            {
+                SAI = BusinessController.Instance.IController.GetSA(1),
+                SerialNumber = "SOB4",
+                PersonTaker = BusinessController.Instance.ITController.GetPerson(person6),
+                TakerNbr = "0003074441",
+                TypeName = "Sjuk- och olycksfallsförsäkring för barn",
+                PaymentForm = "Månad",
+                InsuranceStatus = Status.Tecknad,
+                DeliveryDate = DateTime.Today,
+                AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm3),
+                InsuredID = BusinessController.Instance.IPController.GetIPerson(15),
+                OptionalTypes = UpdateOt(),
+                BaseAmountValue = 0,
+                AckValue = 0,
+                BaseAmountValue2 = 0,
+                AckValue2 = 0,
+                BaseAmountValue3 = 0,
+                AckValue3 = 0,
+                BaseAmountValue4 = 1300000,
+                AckValue4 = 15800,
+                Prospect = false,
+                PayMonth = 11,
+                PayYear = 2021,
+                InsuranceNumber = "78RE",
+                PossibleBaseAmount = 1300000,
             });
             insurances.Add(new Insurance()
             {
@@ -974,8 +1300,8 @@ namespace BussinessLayer.Seed
                 AckValue2 = 0,
                 BaseAmountValue3 = 0,
                 AckValue3 = 0,
-                BaseAmountValue4 = 700000,
-                AckValue4 = 11000,
+                BaseAmountValue4 = 300000,
+                AckValue4 = 14200,
             });
             insurances.Add(new Insurance()
             {
@@ -996,8 +1322,62 @@ namespace BussinessLayer.Seed
                 AckValue2 = 0,
                 BaseAmountValue3 = 0,
                 AckValue3 = 0,
-                BaseAmountValue4 = 700000,
-                AckValue4 = 11000,
+                BaseAmountValue4 = 300000,
+                AckValue4 = 14200,
+            });
+            insurances.Add(new Insurance()
+            {
+                SAI = BusinessController.Instance.IController.GetSA(2),
+                SerialNumber = "SOV4",
+                PersonTaker = BusinessController.Instance.ITController.GetPerson(person9),
+                TakerNbr = "9609143212",
+                TypeName = "Sjuk- och olycksfallsförsäkring för vuxen",
+                PaymentForm = "Kvartal",
+                InsuranceStatus = Status.Tecknad,
+                DeliveryDate = DateTime.Today,
+                AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm3),
+                InsuredID = BusinessController.Instance.IPController.GetIPerson(17),
+                OptionalTypes = UpdateOt(),
+                BaseAmountValue = 0,
+                AckValue = 0,
+                BaseAmountValue2 = 0,
+                AckValue2 = 0,
+                BaseAmountValue3 = 0,
+                AckValue3 = 0,
+                BaseAmountValue4 = 400000,
+                AckValue4 = 16900,
+                Prospect = false,
+                PayMonth = 11,
+                PayYear = 2021,
+                InsuranceNumber = "Y7W3",
+                PossibleBaseAmount = 400000,
+            });
+            insurances.Add(new Insurance()
+            {
+                SAI = BusinessController.Instance.IController.GetSA(2),
+                SerialNumber = "SOV5",
+                PersonTaker = BusinessController.Instance.ITController.GetPerson(person8),
+                TakerNbr = "9007129080",
+                TypeName = "Sjuk- och olycksfallsförsäkring för vuxen",
+                PaymentForm = "Halvår",
+                InsuranceStatus = Status.Tecknad,
+                DeliveryDate = DateTime.Today,
+                AgentNo = BusinessController.Instance.SMController.GetSalesMen(sm3),
+                InsuredID = BusinessController.Instance.IPController.GetIPerson(16),
+                OptionalTypes = UpdateOt(),
+                BaseAmountValue = 0,
+                AckValue = 0,
+                BaseAmountValue2 = 0,
+                AckValue2 = 0,
+                BaseAmountValue3 = 0,
+                AckValue3 = 0,
+                BaseAmountValue4 = 500000,
+                AckValue4 = 19600,
+                Prospect = false,
+                PayMonth = 11,
+                PayYear = 2021,
+                InsuranceNumber = "78RE",
+                PossibleBaseAmount = 500000,
             });
             List<Insurance> NewList = new List<Insurance>();
             foreach (var i in BusinessController.Instance.IController.GetAllInsurances())
