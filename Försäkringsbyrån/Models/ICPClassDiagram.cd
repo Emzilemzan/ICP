@@ -50,8 +50,8 @@
       <FileName>Models\Company.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
-      <Property Name="Insurances" />
       <Property Name="InsuredPersons" />
+      <Property Name="Insurances" />
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="Models.Models.CompanyInsurance">
@@ -63,6 +63,18 @@
   </Class>
   <Class Name="Models.Models.Insurance">
     <Position X="5.25" Y="2.5" Width="3" />
+    <AssociationLine Name="OptionalTypes" Type="Models.Models.OptionalType">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="-0.084" Y="0.06" Height="0.182" Width="1.207" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="OPI" Type="Models.Models.OtherPersonInsurance" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="6" Y="8.411" />
+        <Point X="6" Y="8.719" />
+        <Point X="4.5" Y="8.719" />
+      </Path>
+    </AssociationLine>
     <AssociationLine Name="PersonTaker" Type="Models.Models.Person" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
         <Point X="8.25" Y="5.062" />
@@ -72,11 +84,6 @@
         <Point X="11.265" Y="5.184" />
         <Point X="12.75" Y="5.184" />
       </Path>
-    </AssociationLine>
-    <AssociationLine Name="OptionalTypes" Type="Models.Models.OptionalType">
-      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
-        <Position X="-0.015" Y="0.199" Height="0.182" Width="1.207" />
-      </MemberNameLabel>
     </AssociationLine>
     <TypeIdentifier>
       <HashCode>EIBhBAAACQkAIAAABAABRAJgCAFhBJggABAAIEAAAAA=</HashCode>
@@ -129,7 +136,7 @@
     <Position X="3" Y="2.25" Width="1.5" />
     <AssociationLine Name="Variables" Type="Models.Models.AckValueVariable">
       <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
-        <Position X="0.11" Y="0.06" Height="0.182" Width="1.082" />
+        <Position X="0.096" Y="-0.322" Height="0.182" Width="1.082" />
       </MemberNameLabel>
     </AssociationLine>
     <TypeIdentifier>
@@ -142,7 +149,7 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="Models.Models.OtherPersonInsurance">
-    <Position X="2.75" Y="7.75" Width="1.5" />
+    <Position X="3" Y="8.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAgAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\OtherPersonInsurance.cs</FileName>

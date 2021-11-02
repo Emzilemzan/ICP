@@ -104,7 +104,6 @@ namespace BussinessLayer.Seed
                 }
             }
         }
-
         private void GenerateSM()
         {
             List<SalesMen> salesMens = new List<SalesMen>
@@ -944,7 +943,6 @@ namespace BussinessLayer.Seed
         private readonly int sm2 = 2264;
         private readonly int sm3 = 5836;
         private readonly int sm4 = 1153;
-
         private void GenerateInsurances()
         {
             List<Insurance> insurances = new List<Insurance>();
